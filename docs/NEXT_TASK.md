@@ -1,5 +1,23 @@
 # Next task / کار بعدی
 
+Local offline-bundle follow-up, 2026-09-27 — The candidate and its locked dependencies now install
+offline in a fresh Windows virtualenv. Linux-targeted wheels are hash-matched and resolve without
+an index, but an actual Ubuntu 24.04 install has not run; WSL2 currently has no distro. Keep the
+Linux wheelhouse private and verify it in an isolated Ubuntu environment before import. The first
+serving-host action remains gated on the approved change ID/window, rollback owner and current
+preflight. After guarded promotion, repeat the bilingual semantic corpus and exact-release
+WAN/restart/rollback gates. The private SBOM lacks license fields, and independent recovery,
+certificate, notification, network, release-integrity and named approval gates remain unpassed.
+
+پیگیری بستهٔ آفلاینِ محلی، ۵ مهر ۱۴۰۵ — برنامه و وابستگی‌های قفل‌شده در محیط تازهٔ Windows به‌صورت
+آفلاین نصب شدند. wheelهای لینوکس با هش‌های قفل یکسان‌اند و بدون فهرست بسته‌ها حل می‌شوند، اما نصب
+واقعی روی Ubuntu 24.04 هنوز انجام نشده و WSL2 فعلاً توزیعی ندارد. wheelhouse لینوکس خصوصی بماند
+و پیش از انتقال در محیط جداگانهٔ Ubuntu آزموده شود. نخستین اقدام روی سرور در حال خدمت همچنان به
+شناسه و پنجرهٔ تغییر مصوب، مسئول بازگشت و پیش‌بررسیِ تازه وابسته است. پس از استقرار محافظت‌شده،
+مجموعهٔ معناییِ دوزبانه و آزمون‌های WAN/شروع دوباره/بازگشتِ همان انتشار تکرار شوند. SBOM خصوصی
+دادهٔ مجوز ندارد و دروازه‌های بازیابی مستقل، گواهی، اعلان، شبکه، تمامیت انتشار و تأیید نام‌دار
+همچنان بازند.
+
 Source-only qualification follow-up, 2026-09-27 — The corrected application wheel built offline
 from `42b35d8`, but this desktop cannot install it in a fresh offline environment without a
 complete dependency wheelhouse. Optional literal expectations now catch the four known failures

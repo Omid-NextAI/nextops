@@ -17,6 +17,12 @@ review as mandatory. An offline recheck of the saved six-case report passed two 
 flagged the four known failures without contacting a server. A local application wheel built
 offline; a fresh desktop install could not complete without missing dependency wheels.
 
+Connected provisioning subsequently staged 25 hash-matched Linux wheels and 25 Windows wheels
+from the unchanged runtime lock. The Linux set resolved with no index; a fresh Windows Python
+3.12 environment installed the candidate and dependencies offline, passed `pip check` and imported
+the API. The private CycloneDX SBOM has 25 components but no license entries. Ubuntu installation,
+license/signature review and live release acceptance remain untested.
+
 ### فارسی
 
 آزمون تازهٔ معناییِ فارسی و انگلیسی در مسیر خصوصی، دو تشخیص نادرستِ پرسش «فقط فایل» و دو پاسخ
@@ -30,6 +36,12 @@ offline; a fresh desktop install could not complete without missing dependency w
 بازبینی انسانی همچنان الزامی است. بازسنجی آفلاینِ گزارش شش‌موردیِ پیشین، دو سلام موفق و چهار شکست
 شناخته‌شده را بدون تماس تازه با سرور ثبت کرد. wheel برنامه آفلاین ساخته شد، اما نصب تازه در میزکار
 بدون wheel وابستگی‌های غایب کامل نشد.
+
+در آماده‌سازیِ متصلِ بعدی، از قفلِ تغییرنیافتهٔ اجرا، ۲۵ wheel لینوکس و ۲۵ wheel ویندوز با هش
+تأییدشده فراهم شد. مجموعهٔ لینوکس بدون فهرست بسته‌ها حل شد و در محیط تازهٔ پایتون ۳٫۱۲ روی
+Windows، برنامه و وابستگی‌ها آفلاین نصب شدند؛ `pip check` و واردکردن API موفق بود. SBOM خصوصی
+CycloneDX دارای ۲۵ جزء است، اما دادهٔ مجوز ندارد. نصب روی Ubuntu، بررسی مجوز و امضا و پذیرش زندهٔ
+انتشار هنوز انجام نشده‌اند.
 
 ### English — earlier controlled increments
 
