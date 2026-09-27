@@ -1,5 +1,17 @@
 # Project state / وضعیت پروژه
 
+Semantic capture guard, 2026-09-27 — Source-only live-review tooling now exits nonzero when any
+case lacks an automatic expectation or an answer merely echoes a longer question, while retaining
+the private report and logout attempt. Focused boundary tests pass. This does not rerun the serving
+endpoint, verify its release identity, judge answer truth or change the failed current-app semantic
+gate. The corrected application candidate remains undeployed.
+
+کنترل گردآوری پاسخ، ۵ مهر ۱۴۰۵ — ابزارِ فقط‌درکدِ بازبینی زنده اکنون اگر حتی یک پرسش انتظارِ
+خودکار نداشته باشد یا پاسخ بلند فقط همان پرسش را تکرار کند، با خطا پایان می‌یابد؛ گزارش خصوصی و
+تلاش برای خروج از نشست همچنان حفظ می‌شوند. آزمون‌های مرزیِ متمرکز موفق‌اند. این تغییر مسیرِ زندهٔ
+برنامه را دوباره نمی‌آزماید، شناسهٔ انتشار یا درستی پاسخ را اثبات نمی‌کند و شکست معیار معناییِ
+انتشار جاری را تغییر نمی‌دهد. برنامهٔ اصلاح‌شده هنوز مستقر نشده است.
+
 Runtime SBOM evidence, 2026-09-27 — A source-only offline checker now verifies each staged
 Python wheel's filename, package identity and SHA-256 against `uv.lock`, requires a bundled
 license file and reviewable wheel `METADATA` declaration, and matches wheels one-to-one with

@@ -145,6 +145,16 @@ def test_semantic_review_flags_bounded_response_mismatches_without_claiming_trut
     }
     assert module.check_case_expectations(_case(), result)["status"] == "not_configured"
     assert module.check_case_expectations(case, {"status": 503})["failures"] == ["http_status"]
+    echo = _case(required_answer_fragment="Only show system files")
+    assert module.check_case_expectations(
+        echo, {"status": 200, "body": {"assistant": {"answer": echo["question"]}}}
+    ) == {"status": "failed", "failures": ["prompt_echo"]}
+    assert (
+        module.check_case_expectations(
+            _case(), {"status": 200, "body": {"assistant": {"answer": "Only show system files."}}}
+        )["status"]
+        == "failed"
+    )
     greeting = _case(
         mode="general",
         target_id="",
@@ -176,10 +186,10 @@ def test_semantic_review_flags_bounded_response_mismatches_without_claiming_trut
 
 @pytest.mark.parametrize(
     ("expected_focus", "expected_exit"),
-    [("file_listing", 0), ("filesystems", 1)],
+    [("file_listing", 0), ("filesystems", 1), (None, 1)],
 )
 def test_semantic_review_captures_an_authenticated_case_and_logs_out(
-    expected_focus: str,
+    expected_focus: str | None,
     expected_exit: int,
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -192,9 +202,10 @@ def test_semantic_review_captures_an_authenticated_case_and_logs_out(
     output = tmp_path / "report.json"
     endpoint.write_text("url: https://nextops.local\n", encoding="utf-8")
     login.write_text("username: reviewer\npassword: " + "x" * 32 + "\n", encoding="utf-8")
-    corpus.write_text(
-        json.dumps({"cases": [_case(expected_answer_focus=expected_focus)]}), encoding="utf-8"
+    expectation: dict[str, str] = (
+        {"expected_answer_focus": expected_focus} if expected_focus is not None else {}
     )
+    corpus.write_text(json.dumps({"cases": [_case(**expectation)]}), encoding="utf-8")
     if os.name == "posix":
         for path in (endpoint, login, corpus):
             path.chmod(0o600)
@@ -260,12 +271,15 @@ def test_semantic_review_captures_an_authenticated_case_and_logs_out(
     report = json.loads(output.read_text(encoding="utf-8"))
     assert report["manual_semantic_review_required"] is True
     assert report["acceptance_claimed"] is False
-    assert report["automatic_expectations"] == ("passed" if expected_exit == 0 else "failed")
-    assert report["cases"][0]["automatic_checks"] == (
-        {"status": "passed", "failures": []}
-        if expected_exit == 0
-        else {"status": "failed", "failures": ["answer_focus"]}
-    )
+    if expected_focus is None:
+        expected_checks = {"status": "not_configured", "failures": []}
+    elif expected_exit == 0:
+        expected_checks = {"status": "passed", "failures": []}
+    else:
+        expected_checks = {"status": "failed", "failures": ["answer_focus"]}
+    assert report["automatic_expectations"] == expected_checks["status"]
+    assert report["cases"][0]["automatic_checks"] == expected_checks
+    assert report["release_identity_verified_by_this_script"] is False
     assert report["cases"][0]["result"]["body"]["assistant"]["answer"] == "Only system files."
     assert "t" * 40 not in output.read_text(encoding="utf-8")
     assert "Only system files." not in capsys.readouterr().out

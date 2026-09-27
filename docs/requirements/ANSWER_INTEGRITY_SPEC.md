@@ -82,6 +82,11 @@ warning.
    Fail the capture command when a configured focus, integrity label, limitation or answer-fragment
    check fails, while retaining the complete private report and server-side logout attempt.
    These checks do not replace human semantic review or independently prove release identity.
+7. Fail the capture command when any case lacks a configured expectation, even if all HTTP requests
+   succeed. Flag an answer that only repeats a longer question, including when the repetition
+   satisfies a configured answer fragment. Preserve the report and logout attempt in both cases.
+   A zero exit means only that the configured automatic checks passed; release identity, factual
+   relevance and human acceptance remain separate.
 
 ## Acceptance criteria
 

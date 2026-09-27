@@ -10,7 +10,17 @@ not been independently reviewed. The active next task and release manifest ident
 Owner clarification: the owner tested ESXi VM snapshot restoration only. The test report was not
 reviewed here and does not close the independent PostgreSQL/WAL/PITR or isolated-restore rows.
 
+Answer-quality trace (section 25, 2026-09-27): the private live-capture source now requires at
+least one configured automatic expectation per case for a successful command exit and flags a
+longer question echoed as its answer. This source test does not repair the failed serving-release
+semantic gate, verify backend identity or replace held-out human review.
+
 منبع: پیوست اولیهٔ پرامپت. هر ۵۱ بخش حفظ شده است. مسیرها محل برنامه‌ریزی‌شده یا شروع‌شده‌اند. `P` یعنی برنامه‌ریزی‌شده، `D` یعنی مستندات آماده، `A` یعنی دروازهٔ مستندات با پذیرش مالک و بدون ادعای runtime، و `I` یعنی یک برش پیاده‌سازی آزموده وجود دارد ولی نیاز کامل نشده است. شمارهٔ مرحله بر اساس نقشهٔ راه جدید است.
+
+ردیابی کیفیت پاسخ (بخش ۲۵، ۵ مهر ۱۴۰۵): فرمانِ گردآوری زنده برای خروج موفق باید برای هر پرسش
+دست‌کم یک انتظارِ خودکار داشته باشد و تکرارِ پرسش بلند به‌عنوان پاسخ را نیز خطا می‌داند. این
+آزمونِ کد، شکست معیار معناییِ انتشار مستقر را برطرف نمی‌کند، شناسهٔ کدِ پشت سرویس را تأیید
+نمی‌کند و جای بازبینی انسانیِ پرسش‌های کنارگذاشته‌شده را نمی‌گیرد.
 
 استثنای تحویل جاری (۴ مهر ۱۴۰۵): مالک بازیابی مستقل را از صف کار تحویل محلی به تعویق انداخته و از
 snapshot روزانهٔ ESXi خبر داده است. نیازهای پشتیبان و بازیابی و بحران در جدول همچنان قابل ردیابی و

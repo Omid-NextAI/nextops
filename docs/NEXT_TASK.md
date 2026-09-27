@@ -1,5 +1,20 @@
 # Next task / کار بعدی
 
+Semantic capture follow-up, 2026-09-27 — The source-only review command now fails closed for
+unconfigured cases and answers that echo longer questions; boundary tests passed. This is neither
+a new live run nor release-identity proof. Continue with an approved serving-host change window
+and verified rollback access, promote the corrected immutable application, then rerun a fully
+configured held-out
+bilingual corpus with human evidence comparison and exact-release offline/restart/rollback gates.
+Do not change the failed current-app gate or claim production acceptance from the source check.
+
+پیگیری گردآوری پاسخ، ۵ مهر ۱۴۰۵ — فرمانِ بازبینیِ فقط‌درکد اکنون پرسشِ بدون انتظارِ تعریف‌شده و
+پاسخی را که تنها تکرار پرسش بلند است، ناموفق می‌داند؛ آزمون‌های مرزی موفق‌اند. این نه آزمون زندهٔ
+تازه است و نه اثباتِ شناسهٔ انتشار. پس از ثبت پنجرهٔ مصوب و آزمودن دسترسیِ بازگشت، برنامهٔ اصلاح‌شده
+به‌شکل تغییرناپذیر مستقر و سپس پرسش‌های کنارگذاشته‌شدهٔ دوزبانه با انتظارهای کامل، سنجش انسانیِ
+شواهد و آزمون‌های آفلاین، شروع دوباره و بازگشتِ همان انتشار اجرا شوند. شکست معیار برنامهٔ جاری یا
+وضعیت پذیرش تولید با این آزمون کد تغییر نمی‌کند.
+
 Supply-chain follow-up, 2026-09-27 — The private derived runtime SBOM now carries wheel
 hashes and unreviewed upstream license declarations for all 25 staged packages, with schema
 validation. Obtain the company project-license decision and named legal/security review of
