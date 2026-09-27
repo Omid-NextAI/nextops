@@ -67,6 +67,16 @@ source files matched byte-for-byte. A fresh offline install on this Windows desk
 the local cache lacks required dependency wheels. This does not test or disprove the previously
 hashed Linux wheelhouse on the app host, and the wheel is not a complete, signed, deployable bundle.
 
+Connected provisioning later staged the unchanged production lock into a private, hash-pinned
+25-wheel Linux set and a separate 25-wheel Windows set. Every downloaded wheel matched its entry
+and SHA-256 in `uv.lock`; the Linux set resolved again with `--no-index`. In a fresh Windows Python
+3.12 virtualenv, hash-checked dependencies and the source-matched application wheel installed with
+the index disabled; `pip check`, API imports and bundled UI-asset presence passed. This supersedes
+the earlier desktop-cache failure, but WSL2 has no installed Linux distro, so no real Ubuntu
+offline install was run. The private CycloneDX 1.5 SBOM lists 25 components but no licenses; its
+exporter is experimental. Neither this staging nor the Windows test qualifies the Linux bundle,
+license policy, release signature, serving release or production gate.
+
 The owner clarified that an ESXi VM snapshot restore was tested by the owner. The dated result is
 not reviewed here, and that test does not satisfy independent backup/WAL/PITR or isolated database
 restore. This does not alter the next answer-quality checkpoint.

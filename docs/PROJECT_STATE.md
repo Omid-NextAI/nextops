@@ -1,5 +1,24 @@
 # Project state / وضعیت پروژه
 
+Provisioning-only dependency checkpoint, 2026-09-27 — The unchanged production lock exported
+hash-pinned requirements and a private CycloneDX 1.5 SBOM with 25 components; the SBOM contains no
+license entries. Twenty-five Linux-targeted wheels matched their `uv.lock` hashes and resolved
+again with the package index disabled. A separate 25-wheel Windows set installed with hash checks
+into a fresh Python 3.12 virtualenv alongside the source-matched application wheel; `pip check`,
+API imports and the bundled UI asset passed offline. WSL2 has no installed Linux distribution, so
+an actual Ubuntu offline install is **not run**. No serving host changed, and license, signing,
+live answer quality and production acceptance remain open. The earlier desktop-cache failure below
+preceded this deliberate wheelhouse staging.
+
+گام آماده‌سازیِ وابستگی، ۵ مهر ۱۴۰۵ — از قفلِ تغییرنیافتهٔ محیط اجرا، فهرست وابستگی‌های دارای هش
+و SBOM خصوصیِ CycloneDX 1.5 با ۲۵ جزء ساخته شد؛ SBOM دادهٔ مجوز ندارد. ۲۵ wheel ویژهٔ لینوکس
+با هش‌های `uv.lock` یکسان بودند و بدون دسترسی به فهرست بسته‌ها دوباره حل شدند. مجموعهٔ جداگانهٔ
+۲۵تاییِ Windows نیز با کنترل هش، همراه wheel برنامه در محیط تازهٔ پایتون ۳٫۱۲ به‌صورت آفلاین نصب
+شد؛ `pip check`، واردکردن ماژول‌های API و وجود فایل رابط موفق بودند. WSL2 توزیع لینوکسیِ نصب‌شده
+ندارد؛ بنابراین نصب واقعی روی Ubuntu **انجام نشده است**. سرور در حال خدمت تغییر نکرده و بررسی
+مجوز، امضا، کیفیت پاسخ زنده و پذیرش تولید بازند. شکستِ حافظهٔ محلیِ میزکار در یادداشت پایین،
+پیش از آماده‌سازیِ این wheelhouse رخ داده بود.
+
 Source-only qualification checkpoint, 2026-09-27 — An offline-built pure-Python application wheel
 from `42b35d8` matched the corrected source files byte-for-byte. A fresh offline install on this
 Windows desktop failed because its local dependency cache is incomplete; the Linux wheelhouse and
