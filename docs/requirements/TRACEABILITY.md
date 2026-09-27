@@ -15,12 +15,24 @@ least one configured automatic expectation per case for a successful command exi
 longer question echoed as its answer. This source test does not repair the failed serving-release
 semantic gate, verify backend identity or replace held-out human review.
 
+Release-correlation trace (sections 25 and 44, 2026-09-27): source-only code computes a bounded
+package-source/local-asset digest at application start and returns it only with successful
+authenticated answer responses. The private capture compares it to an offline candidate-wheel
+digest and fails on mismatch. This identifies code bytes, not a signed full release, and remains
+unobserved on the serving host; the failed semantic and unrun exact-release gates do not change.
+
 منبع: پیوست اولیهٔ پرامپت. هر ۵۱ بخش حفظ شده است. مسیرها محل برنامه‌ریزی‌شده یا شروع‌شده‌اند. `P` یعنی برنامه‌ریزی‌شده، `D` یعنی مستندات آماده، `A` یعنی دروازهٔ مستندات با پذیرش مالک و بدون ادعای runtime، و `I` یعنی یک برش پیاده‌سازی آزموده وجود دارد ولی نیاز کامل نشده است. شمارهٔ مرحله بر اساس نقشهٔ راه جدید است.
 
 ردیابی کیفیت پاسخ (بخش ۲۵، ۵ مهر ۱۴۰۵): فرمانِ گردآوری زنده برای خروج موفق باید برای هر پرسش
 دست‌کم یک انتظارِ خودکار داشته باشد و تکرارِ پرسش بلند به‌عنوان پاسخ را نیز خطا می‌داند. این
 آزمونِ کد، شکست معیار معناییِ انتشار مستقر را برطرف نمی‌کند، شناسهٔ کدِ پشت سرویس را تأیید
 نمی‌کند و جای بازبینی انسانیِ پرسش‌های کنارگذاشته‌شده را نمی‌گیرد.
+
+ردیابیِ هم‌بستگی انتشار (بخش‌های ۲۵ و ۴۴، ۵ مهر ۱۴۰۵): کدِ هنوز مستقرنشده هنگام آغاز برنامه
+هش محدودِ کد بسته و فایل‌های محلیِ رابط را محاسبه و فقط همراه پاسخ موفقِ احرازهویت‌شده برمی‌گرداند.
+ابزار خصوصی، آن را با هش wheel آفلاینِ نامزد تطبیق می‌دهد و ناسازگاری را خطا می‌داند. این
+شناسهٔ بایت‌های کد است، نه امضای کل انتشار؛ هنوز روی سرور دیده نشده و شکستِ معیار معنایی و
+آزمون‌نشدن معیارهای وابسته به نسخه را تغییر نمی‌دهد.
 
 استثنای تحویل جاری (۴ مهر ۱۴۰۵): مالک بازیابی مستقل را از صف کار تحویل محلی به تعویق انداخته و از
 snapshot روزانهٔ ESXi خبر داده است. نیازهای پشتیبان و بازیابی و بحران در جدول همچنان قابل ردیابی و

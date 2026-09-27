@@ -1,5 +1,22 @@
 # Project state / وضعیت پروژه
 
+Answer-code correlation, 2026-09-27 — Source-only application code now computes a bounded
+SHA-256 over its installed NextOps package source and local UI assets at startup and places it on
+successful authenticated answer responses. The private semantic-capture tool requires a matching
+expected digest, which can be derived offline from a separately hash-verified wheel. Focused
+API, wheel/tree-equivalence and mismatch tests pass; an offline desktop wheel matched the source
+tree. This is not an artifact signature, full release/host attestation, live run, semantic pass or
+change to the failed serving-release gate. The app candidate must be rebuilt and deployed under
+the approved guard before this correlation can be observed on a serving host.
+
+هم‌بستگی کدِ پاسخ، ۵ مهر ۱۴۰۵ — در کدِ هنوز مستقرنشده، هنگام آغاز برنامه هش SHA-256 محدود از
+کد بستهٔ نصب‌شدهٔ NextOps و فایل‌های محلیِ رابط محاسبه و به پاسخ موفقِ احرازهویت‌شده افزوده می‌شود.
+ابزار خصوصیِ گردآوری پاسخ، هش مورد انتظارِ به‌دست‌آمده از wheel جداگانه تأییدشده را می‌سنجد.
+آزمون‌های متمرکز API، برابریِ wheel و درخت کد، و ناسازگاری هش موفق‌اند؛ wheel آفلاینِ میزکار نیز
+با درخت کد یکسان بود. این نه امضای انتشار یا گواهِ کاملِ نسخه و میزبان است، نه آزمون زنده یا
+موفقیت معنایی؛ شکست معیار برنامهٔ مستقر تغییر نمی‌کند. نامزد باید پس از ساخت دوباره، تنها در
+پنجرهٔ مصوب و با محافظ بازگشت مستقر شود تا این هم‌بستگی روی سرور دیده شود.
+
 Semantic capture guard, 2026-09-27 — Source-only live-review tooling now exits nonzero when any
 case lacks an automatic expectation or an answer merely echoes a longer question, while retaining
 the private report and logout attempt. Focused boundary tests pass. This does not rerun the serving

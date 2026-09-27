@@ -35,6 +35,12 @@ automatic expectation or a longer question is returned unchanged as its answer. 
 the protected report and attempts logout. This source-only guard does not establish backend release
 identity or repair the serving release's failed answer-quality gate.
 
+An undeployed source increment correlates each successful authenticated answer with a bounded
+digest of the application package code and local assets. The private reviewer compares it to a
+digest derived offline from a separately verified wheel and fails on omission or mismatch. Local
+wheel/source equivalence passed; this is not offline signing, full-release attestation or live
+semantic acceptance.
+
 ### فارسی
 
 آزمون تازهٔ معناییِ فارسی و انگلیسی در مسیر خصوصی، دو تشخیص نادرستِ پرسش «فقط فایل» و دو پاسخ
@@ -66,6 +72,11 @@ CycloneDX دارای ۲۵ جزء است، اما دادهٔ مجوز ندارد.
 بلند را بی‌تغییر تکرار کند، با خطا پایان می‌یابد؛ گزارشِ محافظت‌شده و تلاش برای خروج از نشست حفظ
 می‌شوند. این کنترلِ فقط‌درکد، شناسهٔ انتشارِ پشت سرویس را ثابت نمی‌کند و شکستِ معیار کیفیت پاسخِ
 انتشار مستقر را برطرف نمی‌سازد.
+
+در اصلاحی که هنوز مستقر نشده، همراه هر پاسخ موفقِ احرازهویت‌شده هش محدودِ کدِ بستهٔ برنامه و
+فایل‌های محلیِ رابط فرستاده می‌شود. ابزار خصوصی آن را با هش محاسبه‌شده به‌صورت آفلاین از wheel
+جداگانه تأییدشده می‌سنجد و نبود یا ناسازگاری را رد می‌کند. برابریِ wheel و کد در میزکار موفق
+بود؛ این نه امضای آفلاین است، نه گواهِ کل انتشار یا پذیرش معناییِ زنده.
 
 ### English — earlier controlled increments
 

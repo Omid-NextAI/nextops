@@ -7,7 +7,8 @@ from uuid import UUID, uuid4
 import pytest
 from fastapi.testclient import TestClient
 
-from nextops.api.app import create_app
+from nextops.api.app import APP_CODE_SHA256, create_app
+from nextops.api.release_identity import HEADER_NAME
 from nextops.application.errors import ApplicationError
 from nextops.contracts.assistant import AssistantRequest, AssistantResponse
 from nextops.contracts.durable import (
@@ -562,7 +563,9 @@ def test_assistant_requires_local_session_and_labels_model_only_output() -> None
     )
 
     assert unauthenticated.status_code == 401
+    assert HEADER_NAME not in unauthenticated.headers
     assert response.status_code == 200
+    assert response.headers[HEADER_NAME] == APP_CODE_SHA256
     assert response.json()["evidence_mode"] == "model_only"
     assert response.json()["live_monitoring_data"] is False
     assert response.json()["integrity_status"] == "model_unverified"
@@ -714,7 +717,9 @@ def test_investigation_requires_session_and_returns_exact_live_evidence() -> Non
     )
 
     assert unauthenticated.status_code == 401
+    assert HEADER_NAME not in unauthenticated.headers
     assert response.status_code == 200
+    assert response.headers[HEADER_NAME] == APP_CODE_SHA256
     body = response.json()
     assert body["evidence_mode"] == "live_zabbix"
     assert body["live_monitoring_data"] is True
@@ -781,6 +786,7 @@ def test_monitoring_does_not_invent_multi_host_availability(
     )
 
     assert response.status_code == 200
+    assert response.headers[HEADER_NAME] == APP_CODE_SHA256
     body = response.json()
     assert body["assistant"]["integrity_status"] == "deterministic_focus"
     assert "host_inventory_unavailable" in body["assistant"]["limitations"]
@@ -901,6 +907,7 @@ def test_phase2_incident_investigation_is_target_scoped_and_evidence_linked() ->
     assert targets.status_code == 200
     assert targets.json()["targets"] == ["app", "ai", "connector", "zabbix"]
     assert response.status_code == 200
+    assert response.headers[HEADER_NAME] == APP_CODE_SHA256
     body = response.json()
     assert body["evidence_mode"] == "live_zabbix_linux"
     assert body["assistant"]["evidence_mode"] == "live_zabbix_linux"

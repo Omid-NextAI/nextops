@@ -26,6 +26,7 @@ from urllib.request import (
 
 MAX_CASES = 12
 MAX_RESPONSE_BYTES = 1_048_576
+CODE_DIGEST_HEADER = "X-NextOps-App-Code-SHA256"
 ROUTES = {
     "general": "/api/v1/assistant/generate",
     "monitoring": "/api/v1/investigate",
@@ -274,11 +275,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--corpus", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--expected-release", required=True)
+    parser.add_argument("--expected-app-code-sha256", required=True)
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
+    if re.fullmatch(r"[0-9a-f]{64}", args.expected_app_code_sha256) is None:
+        raise ValueError("expected application code SHA-256 must be lowercase hexadecimal")
     validate_report_location(args.output)
     endpoint = fields(read_private_text(args.endpoint_file, max_bytes=4_096)).get("url", "")
     origin = validate_private_https_origin(endpoint)
@@ -305,9 +309,13 @@ def main() -> int:
             with opener.open(request, timeout=120) as response:
                 status = response.status
                 raw = response.read(MAX_RESPONSE_BYTES + 1)
+                observed_digest = response.headers.get(CODE_DIGEST_HEADER, "")
         except HTTPError as error:
             status = error.code
             raw = error.read(MAX_RESPONSE_BYTES + 1)
+            observed_digest = (
+                error.headers.get(CODE_DIGEST_HEADER, "") if error.headers is not None else ""
+            )
         except (URLError, TimeoutError, OSError):
             return {"status": 0, "error": "transport_failure"}
         if len(raw) > MAX_RESPONSE_BYTES:
@@ -316,16 +324,24 @@ def main() -> int:
             body: Any = json.loads(raw) if raw else None
         except (UnicodeDecodeError, json.JSONDecodeError):
             body = None
+        normalized_digest = observed_digest.strip().casefold()
         return {
             "status": status,
             "elapsed_ms": round((time.monotonic() - started) * 1_000),
             "body": body,
+            "app_code_sha256": (
+                normalized_digest
+                if re.fullmatch(r"[0-9a-f]{64}", normalized_digest) is not None
+                else ""
+            ),
         }
 
     report: dict[str, Any] = {
         "started_at": datetime.now(UTC).isoformat(),
         "expected_release_owner_assertion": args.expected_release,
+        "expected_app_code_sha256": args.expected_app_code_sha256,
         "release_identity_verified_by_this_script": False,
+        "application_code_digest_matched": False,
         "manual_semantic_review_required": True,
         "acceptance_claimed": False,
         "automatic_expectations": "not_run",
@@ -360,13 +376,20 @@ def main() -> int:
                         {
                             "case": case,
                             "result": result,
+                            "code_digest_match": (
+                                result.get("app_code_sha256") == args.expected_app_code_sha256
+                            ),
                             "automatic_checks": check_case_expectations(case, result),
                         }
                     )
                 checks = [item["automatic_checks"]["status"] for item in report["cases"]]
                 report["automatic_expectations"] = summarize_expectations(checks)
+                report["application_code_digest_matched"] = all(
+                    item["code_digest_match"] for item in report["cases"]
+                )
                 completed = all(item["result"].get("status") == 200 for item in report["cases"])
                 completed = completed and report["automatic_expectations"] == "passed"
+                completed = completed and report["application_code_digest_matched"]
     finally:
         if token:
             report["logout_status"] = call("/api/v1/logout", {}, token).get("status")

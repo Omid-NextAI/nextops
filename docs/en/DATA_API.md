@@ -91,6 +91,13 @@ only relevant metadata and approved mount observations; displayed focused answer
 The existing read scopes and connector capabilities are unchanged. Release-specific browser/API
 checks passed; full held-out semantic review and exact-release rollback remain open.
 
+An undeployed source increment adds `X-NextOps-App-Code-SHA256` to successful authenticated
+responses from the three answer routes only. It hashes the installed NextOps package source and
+local UI assets at process startup; unauthenticated responses do not receive the header. The
+private reviewer compares it with the same bounded digest computed from a reviewed wheel. It does
+not identify dependencies, migrations, model files or host state, and it is not an artifact
+signature or production acceptance result.
+
 ## Persistence model
 
 PostgreSQL is authoritative. Separate business data from the databases NextOps manages. Define stable IDs, foreign keys, unique constraints, indexes, retention and permission rules for each record group.

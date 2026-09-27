@@ -112,6 +112,19 @@ def test_semantic_review_redirects_are_rejected() -> None:
     assert module.NoRedirect().redirect_request(None, None, None, None, None) is None
 
 
+def test_semantic_review_rejects_invalid_expected_code_digest_before_network(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _module()
+    monkeypatch.setattr(
+        module,
+        "parse_args",
+        lambda: argparse.Namespace(expected_app_code_sha256="not-a-digest"),
+    )
+    with pytest.raises(ValueError, match="SHA-256"):
+        module.main()
+
+
 def test_semantic_review_flags_bounded_response_mismatches_without_claiming_truth() -> None:
     module = _module()
     case = _case(
@@ -185,11 +198,18 @@ def test_semantic_review_flags_bounded_response_mismatches_without_claiming_trut
 
 
 @pytest.mark.parametrize(
-    ("expected_focus", "expected_exit"),
-    [("file_listing", 0), ("filesystems", 1), (None, 1)],
+    ("expected_focus", "observed_digest", "expected_exit"),
+    [
+        ("file_listing", "a" * 64, 0),
+        ("filesystems", "a" * 64, 1),
+        (None, "a" * 64, 1),
+        ("file_listing", "b" * 64, 1),
+        ("file_listing", "", 1),
+    ],
 )
 def test_semantic_review_captures_an_authenticated_case_and_logs_out(
     expected_focus: str | None,
+    observed_digest: str,
     expected_exit: int,
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -213,9 +233,12 @@ def test_semantic_review_captures_an_authenticated_case_and_logs_out(
     requests: list[tuple[str, dict[str, str], str | None]] = []
 
     class FakeResponse:
-        def __init__(self, status: int, body: dict[str, Any] | None) -> None:
+        def __init__(
+            self, status: int, body: dict[str, Any] | None, headers: dict[str, str] | None = None
+        ) -> None:
             self.status = status
             self.body = json.dumps(body).encode() if body is not None else b""
+            self.headers = headers or {}
 
         def __enter__(self) -> FakeResponse:
             return self
@@ -243,6 +266,7 @@ def test_semantic_review_captures_an_authenticated_case_and_logs_out(
                     "answer_focus": "file_listing",
                     "evidence": [],
                 },
+                {module.CODE_DIGEST_HEADER: observed_digest} if observed_digest else {},
             )
 
     monkeypatch.setattr(
@@ -255,6 +279,7 @@ def test_semantic_review_captures_an_authenticated_case_and_logs_out(
             corpus=corpus,
             output=output,
             expected_release="nextops-0.1.0-01755d1",
+            expected_app_code_sha256="a" * 64,
         ),
     )
     monkeypatch.setattr(module.ssl, "create_default_context", lambda **_kwargs: object())
@@ -273,12 +298,15 @@ def test_semantic_review_captures_an_authenticated_case_and_logs_out(
     assert report["acceptance_claimed"] is False
     if expected_focus is None:
         expected_checks = {"status": "not_configured", "failures": []}
-    elif expected_exit == 0:
+    elif expected_focus == "file_listing":
         expected_checks = {"status": "passed", "failures": []}
     else:
         expected_checks = {"status": "failed", "failures": ["answer_focus"]}
     assert report["automatic_expectations"] == expected_checks["status"]
     assert report["cases"][0]["automatic_checks"] == expected_checks
+    assert report["application_code_digest_matched"] is (observed_digest == "a" * 64)
+    assert report["cases"][0]["code_digest_match"] is (observed_digest == "a" * 64)
+    assert report["expected_app_code_sha256"] == "a" * 64
     assert report["release_identity_verified_by_this_script"] is False
     assert report["cases"][0]["result"]["body"]["assistant"]["answer"] == "Only system files."
     assert "t" * 40 not in output.read_text(encoding="utf-8")

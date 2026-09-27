@@ -1,5 +1,23 @@
 # Next task / کار بعدی
 
+Answer-code correlation follow-up, 2026-09-27 — The undeployed source can now compare answer
+response code bytes to a reviewed wheel digest, and local equivalence/negative tests pass. Rebuild
+the immutable candidate from reviewed source and independently verify its whole-wheel SHA-256;
+record the expected code digest privately. The first serving-host action still requires an
+approved change record/window, rollback owner/access and fresh preflight. Only after guarded
+promotion, rerun the fully configured bilingual corpus and compare each answer with evidence,
+confirm the per-response digest, and complete exact-release WAN/restart/rollback gates. Offline
+signing, independent recovery and the other production approvals remain separate and unpassed.
+
+پیگیری هم‌بستگی کدِ پاسخ، ۵ مهر ۱۴۰۵ — کدِ هنوز مستقرنشده می‌تواند هش کدِ همراه پاسخ را با هش
+wheel بازبینی‌شده بسنجد و آزمون برابری و شکستِ محلی موفق‌اند. نامزد تغییرناپذیر باید از کد
+بازبینی‌شده دوباره ساخته و SHA-256 کل wheel مستقلاً تأیید شود؛ هش مورد انتظارِ کد نیز خصوصی ثبت
+شود. نخستین اقدام روی سرور همچنان به ثبت تغییر و پنجرهٔ مصوب، مسئول و دسترسیِ بازگشت، و
+پیش‌بررسی تازه وابسته است. تنها پس از استقرار محافظت‌شده، مجموعهٔ دوزبانه با انتظارهای کامل
+دوباره اجرا، هر پاسخ با شاهدش سنجیده، هش هر پاسخ تطبیق، و معیارهای قطع WAN، شروع دوباره و
+بازگشتِ همان انتشار آزموده شوند. امضای آفلاین، بازیابی مستقل و دیگر تصویب‌های تولید جداگانه
+باز و ناموفق‌اند.
+
 Semantic capture follow-up, 2026-09-27 — The source-only review command now fails closed for
 unconfigured cases and answers that echo longer questions; boundary tests passed. This is neither
 a new live run nor release-identity proof. Continue with an approved serving-host change window
