@@ -1,5 +1,25 @@
 # Project state / وضعیت پروژه
 
+Ubuntu candidate qualification, 2026-09-27 — From merged `main` commit `d973785`, an unsigned
+`nextops-0.1.0-d973785` candidate wheel was built without a package index. PowerShell and Ubuntu
+agreed on its whole-wheel SHA-256; the wheel and its fresh Ubuntu 24.04.5 installation produced
+the same application-code digest. The unchanged 25-wheel Linux set revalidated against `uv.lock`
+and a fresh WSL2 Python 3.12.3 venv installed its 24 applicable packages with `--no-index` and
+`--require-hashes`; the app wheel installed with `--no-index --no-deps`. `pip check` and API/native
+imports passed. The detailed record and artifacts are private. WAN was not disconnected, and no
+serving host, database, model, browser answer, rollback or production gate was tested. The current
+serving application's failed semantic gate and all other release statuses are unchanged.
+
+صلاحیت‌سنجی نامزد در Ubuntu، ۵ مهر ۱۴۰۵ — از commit ادغام‌شدهٔ `d973785` در شاخهٔ اصلی، wheel
+نامزدِ بدون امضای `nextops-0.1.0-d973785` بی‌نیاز از فهرست بسته‌ها ساخته شد. هش SHA-256 کل
+wheel در Windows و Ubuntu یکسان بود و هش کدِ برنامه نیز میان wheel و نصب تازهٔ Ubuntu 24.04.5
+تطبیق داشت. مجموعهٔ تغییرنیافتهٔ ۲۵ wheel لینوکسی دوباره با `uv.lock` سنجیده شد؛ ۲۴ بستهٔ
+قابل‌اعمال در محیط تازهٔ Python 3.12.3 روی WSL2 با `--no-index` و `--require-hashes`، و wheel
+برنامه با `--no-index --no-deps` نصب شدند. `pip check` و واردکردن API و ماژول‌های بومی موفق
+بود. رکورد و فایل‌ها خصوصی‌اند. WAN قطع نشده و هیچ سرورِ در حال خدمت، پایگاه داده، مدل، پاسخ
+مرورگر، بازگشت یا معیار تولید آزموده نشده است. شکستِ معیار معناییِ برنامهٔ مستقر و دیگر وضعیت‌های
+انتشار تغییری ندارند.
+
 Answer-code correlation, 2026-09-27 — Source-only application code now computes a bounded
 SHA-256 over its installed NextOps package source and local UI assets at startup and places it on
 successful authenticated answer responses. The private semantic-capture tool requires a matching

@@ -41,6 +41,12 @@ digest derived offline from a separately verified wheel and fails on omission or
 wheel/source equivalence passed; this is not offline signing, full-release attestation or live
 semantic acceptance.
 
+An unsigned candidate wheel from merged commit `d973785` was independently hashed in Windows
+and Ubuntu and installed with the unchanged hash-locked Linux dependencies in a fresh Ubuntu
+24.04.5 desktop venv without a package index. `pip check`, native/API imports and wheel-to-installed
+code-digest equality passed. This qualifies local packaging only; deployment and production gates
+remain open.
+
 ### فارسی
 
 آزمون تازهٔ معناییِ فارسی و انگلیسی در مسیر خصوصی، دو تشخیص نادرستِ پرسش «فقط فایل» و دو پاسخ
@@ -77,6 +83,11 @@ CycloneDX دارای ۲۵ جزء است، اما دادهٔ مجوز ندارد.
 فایل‌های محلیِ رابط فرستاده می‌شود. ابزار خصوصی آن را با هش محاسبه‌شده به‌صورت آفلاین از wheel
 جداگانه تأییدشده می‌سنجد و نبود یا ناسازگاری را رد می‌کند. برابریِ wheel و کد در میزکار موفق
 بود؛ این نه امضای آفلاین است، نه گواهِ کل انتشار یا پذیرش معناییِ زنده.
+
+wheel نامزدِ بدون امضا از commit ادغام‌شدهٔ `d973785` در Windows و Ubuntu مستقلاً هش شد و
+همراه با وابستگی‌های قفل‌شدهٔ Linux در محیط تازهٔ Ubuntu 24.04.5 میزکار، بدون فهرست بسته‌ها
+نصب شد. `pip check`، واردکردن API و ماژول‌های بومی و برابری هش کدِ wheel و نصب موفق بودند.
+این فقط بسته‌بندی محلی را تأیید می‌کند؛ استقرار و معیارهای تولید همچنان بازند.
 
 ### English — earlier controlled increments
 

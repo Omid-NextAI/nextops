@@ -55,6 +55,19 @@ The code digest does not cover dependencies, migrations, runtime/model, release 
 host integrity; `release_identity_verified_by_this_script` remains false and a human still checks
 the exact promotion record and every answer against its evidence.
 
+On 2026-09-27, a new candidate wheel was built offline from merged commit `d973785`. Windows
+`Get-FileHash` and Ubuntu `sha256sum` independently agreed on its full SHA-256
+`80fe318f838c8395c6ca29f6f0e6a806f6884b81df5a5c72cae719c2d9ed7b40`. The offline
+wheel digest and the digest of the package installed in a fresh Ubuntu 24.04.5 WSL2 venv both
+equaled `213b3fad8859d7afc005b189a568306f9c51443531c3232d86e966721fa84e46`. The
+unchanged 25 Linux wheels were rechecked against `uv.lock` by the private SBOM tool; the 24
+Linux-applicable locked dependencies installed with `--no-index --require-hashes`, followed by
+the candidate app wheel with `--no-index --no-deps`. `pip check` and imports of the app API,
+`psycopg`, `pydantic_core` and `greenlet` passed. The candidate and detailed command/evidence
+record remain outside Git. This is a desktop package/install check: WAN was not disconnected, no
+model or database service was started, and the serving release and its failed answer-quality
+gate did not change. The wheel is unsigned and not approved for promotion.
+
 `scripts/evaluate_live_app_semantics.py` captures at most twelve fresh questions against the
 authenticated private HTTPS application endpoint. It accepts a protected endpoint reference,
 login file, local CA certificate, and a private JSON corpus with `id`, `mode` (`general`,

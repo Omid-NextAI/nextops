@@ -21,6 +21,12 @@ authenticated answer responses. The private capture compares it to an offline ca
 digest and fails on mismatch. This identifies code bytes, not a signed full release, and remains
 unobserved on the serving host; the failed semantic and unrun exact-release gates do not change.
 
+Packaging trace (sections 21, 25 and 44, 2026-09-27): merged commit `d973785` produced a private,
+unsigned wheel whose whole-file SHA-256 agreed between Windows and Ubuntu. A fresh Ubuntu 24.04.5
+desktop venv installed the unchanged hash-locked Linux dependencies and candidate wheel with the
+package index disabled; package checks/imports and wheel-to-installed code-digest equality passed.
+This is not serving-host deployment, live AI/evidence acceptance or release signing.
+
 منبع: پیوست اولیهٔ پرامپت. هر ۵۱ بخش حفظ شده است. مسیرها محل برنامه‌ریزی‌شده یا شروع‌شده‌اند. `P` یعنی برنامه‌ریزی‌شده، `D` یعنی مستندات آماده، `A` یعنی دروازهٔ مستندات با پذیرش مالک و بدون ادعای runtime، و `I` یعنی یک برش پیاده‌سازی آزموده وجود دارد ولی نیاز کامل نشده است. شمارهٔ مرحله بر اساس نقشهٔ راه جدید است.
 
 ردیابی کیفیت پاسخ (بخش ۲۵، ۵ مهر ۱۴۰۵): فرمانِ گردآوری زنده برای خروج موفق باید برای هر پرسش
@@ -33,6 +39,12 @@ unobserved on the serving host; the failed semantic and unrun exact-release gate
 ابزار خصوصی، آن را با هش wheel آفلاینِ نامزد تطبیق می‌دهد و ناسازگاری را خطا می‌داند. این
 شناسهٔ بایت‌های کد است، نه امضای کل انتشار؛ هنوز روی سرور دیده نشده و شکستِ معیار معنایی و
 آزمون‌نشدن معیارهای وابسته به نسخه را تغییر نمی‌دهد.
+
+ردیابی بسته‌بندی (بخش‌های ۲۱، ۲۵ و ۴۴، ۵ مهر ۱۴۰۵): از commit ادغام‌شدهٔ `d973785` یک wheel
+خصوصی و بدون امضا ساخته شد که هش کل آن در Windows و Ubuntu یکسان بود. در محیط تازهٔ Ubuntu
+24.04.5 میزکار، وابستگی‌های لینوکسیِ قفل‌شده و wheel نامزد بدون دسترسی به فهرست بسته‌ها نصب
+شدند؛ بررسی بسته‌ها، واردکردن ماژول‌ها و برابری هش کدِ wheel و نصب موفق بود. این کار استقرار روی
+سرور، پذیرش پاسخ و شاهدِ زنده یا امضای انتشار نیست.
 
 استثنای تحویل جاری (۴ مهر ۱۴۰۵): مالک بازیابی مستقل را از صف کار تحویل محلی به تعویق انداخته و از
 snapshot روزانهٔ ESXi خبر داده است. نیازهای پشتیبان و بازیابی و بحران در جدول همچنان قابل ردیابی و
