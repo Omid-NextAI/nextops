@@ -11,6 +11,12 @@ explicit exclusions, refuses unsupported host-inventory reachability, and makes 
 the browser default while retaining full evidence on explicit reveal. API/browser regressions pass;
 the candidate is not deployed or production-qualified.
 
+The private semantic-capture tool now accepts bounded per-case focus, integrity, limitation and
+literal-answer expectations, fails after logout when a configured check fails, and preserves human
+review as mandatory. An offline recheck of the saved six-case report passed two greetings and
+flagged the four known failures without contacting a server. A local application wheel built
+offline; a fresh desktop install could not complete without missing dependency wheels.
+
 ### فارسی
 
 آزمون تازهٔ معناییِ فارسی و انگلیسی در مسیر خصوصی، دو تشخیص نادرستِ پرسش «فقط فایل» و دو پاسخ
@@ -18,6 +24,12 @@ the candidate is not deployed or production-qualified.
 ناموفق است. اصلاح موجود در کد، عبارت حذفی را درست می‌فهمد، دربارهٔ دسترسی‌پذیریِ فهرست میزبان‌ها
 ادعای بی‌شاهد نمی‌کند و شواهد مرتبط را ابتدا نشان می‌دهد؛ شواهد کامل با بازکردن صریح بخش جزئیات
 در دسترس‌اند. آزمون‌های API و مرورگر موفق‌اند، ولی این اصلاح هنوز مستقر یا برای تولید پذیرفته نیست.
+
+ابزار خصوصیِ گردآوری پاسخ اکنون انتظارهای محدودِ هر مورد را برای تمرکز، وضعیت صحت، کد محدودیت و
+عبارت‌های لازم یا ممنوع می‌پذیرد و پس از خروج از نشست، شکستِ هر انتظار تعریف‌شده را خطا می‌داند؛
+بازبینی انسانی همچنان الزامی است. بازسنجی آفلاینِ گزارش شش‌موردیِ پیشین، دو سلام موفق و چهار شکست
+شناخته‌شده را بدون تماس تازه با سرور ثبت کرد. wheel برنامه آفلاین ساخته شد، اما نصب تازه در میزکار
+بدون wheel وابستگی‌های غایب کامل نشد.
 
 ### English — earlier controlled increments
 

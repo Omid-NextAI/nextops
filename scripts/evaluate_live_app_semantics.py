@@ -31,6 +31,20 @@ ROUTES = {
     "monitoring": "/api/v1/investigate",
     "incident": "/api/v1/incidents/investigate",
 }
+EXPECTATION_FIELDS = {
+    "expected_answer_focus",
+    "expected_integrity_status",
+    "required_limitation",
+    "required_answer_fragment",
+    "forbidden_answer_fragment",
+}
+INTEGRITY_STATUSES = {
+    "model_unverified",
+    "scope_redirect",
+    "evidence_bounded",
+    "deterministic_fallback",
+    "deterministic_focus",
+}
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -99,6 +113,8 @@ def validate_cases(data: Any) -> list[dict[str, str]]:
     for item in raw_cases:
         if not isinstance(item, dict):
             raise ValueError("every case must be a mapping")
+        if set(item) - ({"id", "mode", "locale", "question", "target_id"} | EXPECTATION_FIELDS):
+            raise ValueError("case contains an unknown field")
         case_id, mode, locale, question = (
             item.get("id"),
             item.get("mode"),
@@ -123,6 +139,26 @@ def validate_cases(data: Any) -> list[dict[str, str]]:
                 raise ValueError("incident case requires a bounded target ID")
         elif target_id:
             raise ValueError("only incident cases may specify a target ID")
+        expectations = {key: item[key] for key in EXPECTATION_FIELDS if key in item}
+        for key, value in expectations.items():
+            if not isinstance(value, str) or not 1 <= len(value.strip()) <= 160:
+                raise ValueError(f"{key} must be bounded nonempty text")
+        if "expected_answer_focus" in expectations and (
+            mode != "incident"
+            or expectations["expected_answer_focus"]
+            not in ("overview", "filesystems", "file_listing")
+        ):
+            raise ValueError("expected answer focus requires an incident case and known focus")
+        if (
+            "expected_integrity_status" in expectations
+            and expectations["expected_integrity_status"] not in INTEGRITY_STATUSES
+        ):
+            raise ValueError("expected integrity status is unknown")
+        if (
+            "required_limitation" in expectations
+            and re.fullmatch(r"[a-z][a-z0-9_]{0,63}", expectations["required_limitation"]) is None
+        ):
+            raise ValueError("required limitation has an invalid identifier")
         cases.append(
             {
                 "id": case_id,
@@ -130,11 +166,68 @@ def validate_cases(data: Any) -> list[dict[str, str]]:
                 "locale": locale,
                 "question": question,
                 "target_id": target_id,
+                **expectations,
             }
         )
     if len({case["id"] for case in cases}) != len(cases):
         raise ValueError("case IDs must be unique")
     return cases
+
+
+def check_case_expectations(case: dict[str, str], result: dict[str, Any]) -> dict[str, Any]:
+    """Check explicit response invariants without claiming semantic correctness."""
+
+    configured = EXPECTATION_FIELDS.intersection(case)
+    if not configured:
+        return {"status": "not_configured", "failures": []}
+    failures: list[str] = []
+    if result.get("status") != 200:
+        return {"status": "failed", "failures": ["http_status"]}
+    body = result.get("body")
+    if not isinstance(body, dict):
+        return {"status": "failed", "failures": ["response_shape"]}
+    assistant = body if case["mode"] == "general" else body.get("assistant")
+    if not isinstance(assistant, dict) or not isinstance(assistant.get("answer"), str):
+        return {"status": "failed", "failures": ["response_shape"]}
+    answer = assistant["answer"].casefold()
+    if (
+        "expected_answer_focus" in configured
+        and body.get("answer_focus") != case["expected_answer_focus"]
+    ):
+        failures.append("answer_focus")
+    if (
+        "expected_integrity_status" in configured
+        and assistant.get("integrity_status") != case["expected_integrity_status"]
+    ):
+        failures.append("integrity_status")
+    limitations = assistant.get("limitations")
+    if "required_limitation" in configured and (
+        not isinstance(limitations, list) or case["required_limitation"] not in limitations
+    ):
+        failures.append("required_limitation")
+    if (
+        "required_answer_fragment" in configured
+        and case["required_answer_fragment"].casefold() not in answer
+    ):
+        failures.append("required_answer_fragment")
+    if (
+        "forbidden_answer_fragment" in configured
+        and case["forbidden_answer_fragment"].casefold() in answer
+    ):
+        failures.append("forbidden_answer_fragment")
+    return {"status": "failed" if failures else "passed", "failures": failures}
+
+
+def summarize_expectations(statuses: list[str]) -> str:
+    """Keep unconfigured cases visible instead of implying a complete check pass."""
+
+    if "failed" in statuses:
+        return "failed"
+    if "not_configured" not in statuses:
+        return "passed"
+    if "passed" in statuses:
+        return "partial"
+    return "not_configured"
 
 
 def validate_report_location(path: Path) -> None:
@@ -232,6 +325,7 @@ def main() -> int:
         "release_identity_verified_by_this_script": False,
         "manual_semantic_review_required": True,
         "acceptance_claimed": False,
+        "automatic_expectations": "not_run",
         "cases": [],
         "logout_status": "not_run",
     }
@@ -259,8 +353,17 @@ def main() -> int:
                     if case["mode"] == "incident":
                         payload["target_id"] = case["target_id"]
                     result = call(ROUTES[case["mode"]], payload, token)
-                    report["cases"].append({"case": case, "result": result})
+                    report["cases"].append(
+                        {
+                            "case": case,
+                            "result": result,
+                            "automatic_checks": check_case_expectations(case, result),
+                        }
+                    )
+                checks = [item["automatic_checks"]["status"] for item in report["cases"]]
+                report["automatic_expectations"] = summarize_expectations(checks)
                 completed = all(item["result"].get("status") == 200 for item in report["cases"])
+                completed = completed and report["automatic_expectations"] != "failed"
     finally:
         if token:
             report["logout_status"] = call("/api/v1/logout", {}, token).get("status")

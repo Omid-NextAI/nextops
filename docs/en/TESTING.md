@@ -17,9 +17,10 @@ WAL/PITR and production acceptance remain open. Source: master specification sec
 The release manifest's broad `acceptance_gates` retain dated controlled-campaign evidence. They do
 not automatically transfer to a newer application revision. Schema v2 adds a required
 `current_application_qualification` block whose release and source commit must match the deployed
-application. On `nextops-0.1.0-01755d1`, bounded live functionality passed, while the full held-out
-bilingual semantic review, exact-release rollback, server-side WAN isolation and VM reboot/cold
-start are `not_run`. The validator rejects a missing gate or mismatched identity. This is evidence
+application. On `nextops-0.1.0-01755d1`, bounded live functionality passed, but the expanded
+synthetic bilingual semantic gate is now `failed`; the owner's exact held-out mismatch has not been
+reviewed. Exact-release rollback, server-side WAN isolation and VM reboot/cold start remain
+`not_run`. The validator rejects a missing gate or mismatched identity. This is evidence
 bookkeeping, not a new live test or production acceptance.
 
 The release-status validator also rejects a production-pass flag unless deployment status,
@@ -46,6 +47,12 @@ owner's exact redacted mismatch or the complete held-out corpus.
 authenticated private HTTPS application endpoint. It accepts a protected endpoint reference,
 login file, local CA certificate, and a private JSON corpus with `id`, `mode` (`general`,
 `monitoring`, or `incident`), `locale`, `question`, and an approved `target_id` for incident cases.
+Cases may also set bounded literal expectations for answer focus, integrity status, one required
+limitation, and required or forbidden answer fragments. Unknown expectation names are rejected.
+The report records pass/fail codes without printing the answer, and a failed configured check makes
+the command fail after logout. An offline recheck of the earlier private report with these checks
+passed both greetings and failed the two host-inventory and two file-only cases; no new server
+request was sent for that recheck.
 It disables proxies and redirects, verifies TLS, bounds response size and time, records answers
 with their returned evidence in a new private report, and attempts server-side logout. The script
 prints no token or answer to the terminal. It does not verify the asserted release identity itself,
@@ -54,6 +61,11 @@ with the question, source/time/scope evidence and known limits. Keep prompts and
 Git; the tool refuses a report path inside this repository. Protect the input and output directory
 with local filesystem access controls, and use an authorized test account and window. Do not run
 it as a load test.
+
+A pure-Python application wheel was built offline from source commit `42b35d8` and its corrected
+source files matched byte-for-byte. A fresh offline install on this Windows desktop failed because
+the local cache lacks required dependency wheels. This does not test or disprove the previously
+hashed Linux wheelhouse on the app host, and the wheel is not a complete, signed, deployable bundle.
 
 The owner clarified that an ESXi VM snapshot restore was tested by the owner. The dated result is
 not reviewed here, and that test does not satisfy independent backup/WAL/PITR or isolated database

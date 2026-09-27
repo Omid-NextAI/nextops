@@ -78,6 +78,10 @@ warning.
    deterministic lexical safety gates while retaining manual semantic review.
 5. Run source checks, PostgreSQL integration CI, live loopback model qualification and live browser/API
    acceptance for the exact deployed revision.
+6. Allow bounded, literal per-case response expectations in the private live semantic corpus.
+   Fail the capture command when a configured focus, integrity label, limitation or answer-fragment
+   check fails, while retaining the complete private report and server-side logout attempt.
+   These checks do not replace human semantic review or independently prove release identity.
 
 ## Acceptance criteria
 
