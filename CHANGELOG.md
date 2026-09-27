@@ -23,6 +23,13 @@ from the unchanged runtime lock. The Linux set resolved with no index; a fresh W
 the API. The private CycloneDX SBOM has 25 components but no license entries. Ubuntu installation,
 license/signature review and live release acceptance remain untested.
 
+Subsequently, a checksum-matched Ubuntu 24.04.5 WSL2 desktop lab installed the candidate and
+its Linux dependencies without a package index; dependency and native-import checks passed.
+An offline SBOM enrichment tool now cross-checks staged wheels against `uv.lock` and adds
+source-labeled license declarations and wheel hashes to a private CycloneDX 1.5 report.
+Its nine boundary tests and schema validation passed. Legal approval, signing, serving-host
+promotion and production gates remain open.
+
 ### فارسی
 
 آزمون تازهٔ معناییِ فارسی و انگلیسی در مسیر خصوصی، دو تشخیص نادرستِ پرسش «فقط فایل» و دو پاسخ
@@ -42,6 +49,13 @@ license/signature review and live release acceptance remain untested.
 Windows، برنامه و وابستگی‌ها آفلاین نصب شدند؛ `pip check` و واردکردن API موفق بود. SBOM خصوصی
 CycloneDX دارای ۲۵ جزء است، اما دادهٔ مجوز ندارد. نصب روی Ubuntu، بررسی مجوز و امضا و پذیرش زندهٔ
 انتشار هنوز انجام نشده‌اند.
+
+سپس تصویر Ubuntu 24.04.5 با هش تأییدشده در آزمایشگاه WSL2 میزکار نصب شد. برنامهٔ نامزد
+و وابستگی‌های Linux بدون فهرست بسته‌ها نصب شدند و بررسی وابستگی و واردکردن ماژول‌های
+بومی موفق بود. ابزار آفلاینِ تازه، wheelهای آماده را با `uv.lock` تطبیق می‌دهد و
+هش آن‌ها و مجوزهای اعلام‌شده با ذکر منبع را به گزارش خصوصی CycloneDX 1.5 می‌افزاید.
+نُه آزمون مرزی و اعتبارسنجی طرح‌واره موفق بودند؛ تأیید حقوقی، امضا، استقرار روی
+سرور و معیارهای تولید همچنان بازند.
 
 ### English — earlier controlled increments
 

@@ -96,6 +96,18 @@ skipped by its Windows-only marker. The candidate application wheel installed wi
 `pydantic_core` and `greenlet` passed. This verifies the Ubuntu package-install/import
 boundary only; no service, database, server-side WAN, live answer or rollback gate ran.
 
+`scripts/enrich_runtime_sbom.py` is an offline, source-only evidence step for a private
+CycloneDX 1.5 runtime SBOM. With `--sbom`, `--wheelhouse`, `--lock` and a new `--output`
+outside the repository, it fails on a hash/identity mismatch, missing wheel or component,
+missing bundled license text, unreviewable declaration, or attempt to overwrite existing
+license/hash fields. It reads but never extracts wheel contents, makes no network request,
+and labels each declaration as unreviewed wheel `METADATA`. The private 25-component
+derived SBOM passed the official CycloneDX 1.5 JSON schema and the tool's nine boundary
+tests passed. Its hash fields describe staged wheel archives, not installed files.
+The resulting declarations still require named legal/security approval; the NextOps
+project license, model/runtime license review, vulnerability findings and offline
+signature trust remain separate gates.
+
 The owner clarified that an ESXi VM snapshot restore was tested by the owner. The dated result is
 not reviewed here, and that test does not satisfy independent backup/WAL/PITR or isolated database
 restore. This does not alter the next answer-quality checkpoint.

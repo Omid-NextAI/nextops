@@ -1,5 +1,22 @@
 # Project state / وضعیت پروژه
 
+Runtime SBOM evidence, 2026-09-27 — A source-only offline checker now verifies each staged
+Python wheel's filename, package identity and SHA-256 against `uv.lock`, requires a bundled
+license file and reviewable wheel `METADATA` declaration, and matches wheels one-to-one with
+CycloneDX 1.5 components. It produced a private derived SBOM with hashes and source-labeled
+license declarations for all 25 staged wheels; the derived file passed the CycloneDX 1.5 JSON
+schema. Nine boundary tests passed. This resolves the missing license *fields* in that private
+SBOM, not the company project-license choice, third-party legal approval, vulnerability review,
+artifact signing, serving-host release identity or production acceptance.
+
+شاهد مجوز در SBOM اجرا، ۵ مهر ۱۴۰۵ — ابزار آفلاینِ تازه در کد، نام و هویت و هش SHA-256 هر
+wheel پایتون را با `uv.lock` می‌سنجد، وجود متن مجوز و اظهار آن در `METADATA` بسته را
+الزامی می‌داند و هر wheel را به یک جزء CycloneDX 1.5 پیوند می‌دهد. SBOM مشتق‌شدهٔ
+خصوصی برای هر ۲۵ بسته، هش و مجوزِ اعلام‌شده همراه با منبع آن را ثبت کرد و اعتبارسنجی
+طرح‌وارهٔ CycloneDX 1.5 نیز موفق بود. نُه آزمون مرزی گذشت. این کار فقط جای خالیِ
+دادهٔ مجوز در آن SBOM خصوصی را برطرف می‌کند؛ انتخاب مجوز خودِ پروژه، تأیید حقوقی
+وابستگی‌ها، بررسی آسیب‌پذیری، امضای فایل، شناسهٔ انتشار مستقر و پذیرش تولید همچنان بازند.
+
 Ubuntu lab qualification, 2026-09-27 — After the failed WSL network-install routes recorded
 below, a Canonical Ubuntu 24.04.5 WSL image was downloaded over HTTPS, matched its published
 SHA-256, and installed as an isolated desktop WSL2 distro. Python 3.12.3 in a fresh virtualenv
