@@ -85,6 +85,17 @@ each: MIT 13, BSD-3-Clause 6, LGPL-3.0-only 2, Apache-2.0 1, MIT AND PSF-2.0 1,
 MIT-0 1 and PSF-2.0 1. These are package metadata, not legal approval or populated SBOM licenses.
 No Ubuntu installation, license decision or serving-host test followed.
 
+Later the same day, the direct Canonical Ubuntu 24.04.5 WSL image (388,975,696 bytes) matched
+the published SHA-256
+`bb415d824822c4b878125729af451a5d18fb13d1cf5cbed9a7393ad64ac6039e` and installed
+as WSL2. Its Python 3.12.3 lacked pip/ensurepip, so a separately hash-matched pip 25.0.1 wheel
+bootstrapped only the lab virtualenv. The 24 Linux-applicable locked wheels installed from the
+private set with `--isolated --no-index --require-hashes --only-binary=:all:`; `tzdata` was
+skipped by its Windows-only marker. The candidate application wheel installed with
+`--no-index --no-deps`. `pip check` and imports of the NextOps API, psycopg binary,
+`pydantic_core` and `greenlet` passed. This verifies the Ubuntu package-install/import
+boundary only; no service, database, server-side WAN, live answer or rollback gate ran.
+
 The owner clarified that an ESXi VM snapshot restore was tested by the owner. The dated result is
 not reviewed here, and that test does not satisfy independent backup/WAL/PITR or isolated database
 restore. This does not alter the next answer-quality checkpoint.

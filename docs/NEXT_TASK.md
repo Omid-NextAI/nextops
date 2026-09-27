@@ -1,5 +1,23 @@
 # Next task / کار بعدی
 
+Ubuntu desktop-lab gate passed, 2026-09-27 — The corrected application and locked Linux
+dependencies installed with the package index disabled in a fresh Ubuntu 24.04.5 WSL2 virtualenv;
+dependency and native-import checks passed. The earlier WSL download failure below was resolved
+through a checksum-matched official image. The first serving-host action is still an approved
+change record/window, verified rollback access and fresh preflight before guarded promotion.
+Then rerun held-out bilingual semantics and exact-release WAN/restart/rollback gates. Project
+licensing/legal approval, SBOM license enrichment, signing, independent recovery, certificate,
+notification, host-network policy and named production sign-off remain open.
+
+دروازهٔ آزمایشگاه Ubuntu میزکار، ۵ مهر ۱۴۰۵ — برنامهٔ اصلاح‌شده و وابستگی‌های قفل‌شدهٔ
+Linux در محیط مجازی تازهٔ Ubuntu 24.04.5 روی WSL2 و بدون دسترسی به فهرست بسته‌ها نصب شدند؛
+بررسی وابستگی‌ها و واردکردن ماژول‌های بومی موفق بود. شکستِ پیشینِ دریافت WSL در بند پایین
+با تصویر رسمیِ دارای هش تطبیق‌داده‌شده برطرف شد. نخستین اقدام روی سرور همچنان به ثبت
+تغییر و پنجرهٔ مصوب، دسترسیِ آزموده‌شده برای بازگشت و پیش‌بررسی تازه وابسته است. پس از
+استقرار محافظت‌شده، کیفیت معناییِ دوزبانه و آزمون‌های قطع WAN، شروع دوباره و بازگشتِ
+همان انتشار تکرار شوند. مجوز و تأیید حقوقی پروژه، تکمیل دادهٔ مجوز در SBOM، امضا،
+بازیابی مستقل، گواهی، اعلان، سیاست شبکهٔ میزبان و تأیید نام‌دار تولید همچنان بازند.
+
 Desktop lab follow-up, 2026-09-27 — Obtain an isolated Ubuntu 24.04 environment through an
 approved distribution source/proxy before claiming a real Linux offline install. Both WSL2
 distribution-install routes failed before installation with `0x80072f78`, and no local Docker
