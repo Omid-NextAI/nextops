@@ -114,6 +114,13 @@ capabilities:
       - tests/unit/test_live_app_semantics.py
       - docs/en/TESTING.md
       - docs/fa/TESTING.md
+  - id: runtime_sbom_license_evidence
+    status: implemented_unaccepted
+    evidence:
+      - scripts/enrich_runtime_sbom.py
+      - tests/unit/test_runtime_sbom_licenses.py
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
   - id: zabbix_evidence_investigation
     status: accepted_controlled
     evidence:

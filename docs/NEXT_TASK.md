@@ -1,5 +1,23 @@
 # Next task / کار بعدی
 
+Supply-chain follow-up, 2026-09-27 — The private derived runtime SBOM now carries wheel
+hashes and unreviewed upstream license declarations for all 25 staged packages, with schema
+validation. Obtain the company project-license decision and named legal/security review of
+the declared third-party licenses, then establish an approved offline signing trust path.
+This source-only evidence does not lift the first serving-host hold: a recorded change
+window, rollback owner/access and fresh preflight are still needed before guarded promotion
+and exact-release semantic/WAN/restart/rollback qualification. Independent recovery,
+certificate, notification, host-network policy and production sign-off remain open.
+
+پیگیری زنجیرهٔ تأمین، ۵ مهر ۱۴۰۵ — SBOM مشتق‌شده و خصوصی اکنون برای هر ۲۵ بستهٔ آماده،
+هش wheel و مجوز اعلام‌شدهٔ ناشر را با برچسب «بازبینی‌نشده» دارد و طرح‌وارهٔ آن نیز
+اعتبارسنجی شد. گام بعد، تصمیم مصوب دربارهٔ مجوز خود پروژه، بازبینی نام‌دارِ حقوقی و
+امنیتیِ مجوز وابستگی‌ها و مسیر اعتمادِ امضای قابل‌بررسی به‌صورت آفلاین است. این شاهدِ
+فقط‌درکد، توقفِ نخستین اقدام روی سرور را برنمی‌دارد: پیش از استقرار محافظت‌شده و
+سنجش معنایی، قطع WAN، شروع دوباره و بازگشتِ همان انتشار، پنجرهٔ تغییر، مسئول و
+دسترسیِ بازگشت و پیش‌بررسی تازه باید ثبت شوند. بازیابی مستقل، گواهی، اعلان، سیاست
+شبکهٔ میزبان و تأیید تولید همچنان بازند.
+
 Ubuntu desktop-lab gate passed, 2026-09-27 — The corrected application and locked Linux
 dependencies installed with the package index disabled in a fresh Ubuntu 24.04.5 WSL2 virtualenv;
 dependency and native-import checks passed. The earlier WSL download failure below was resolved

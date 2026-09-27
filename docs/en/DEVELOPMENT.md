@@ -9,21 +9,21 @@ automation; complete deployment automation is not configured.** Source: master s
 
 Read [AGENTS.md](../../AGENTS.md), the master specification, project state and next task. Inspect Git status, instructions, tracked files, manifests, locks, tests, migrations and deployment definitions. Preserve dirty changes and existing implementations. Review scripts before running them in an isolated environment without production credentials. Do not use destructive reset/clean, overwrite work or rewrite history.
 
-Stage 1A now contains typed contracts and deterministic policy plus a runnable local API,
-PostgreSQL/Alembic schema, local identity, durable runs/leases, append-restricted audit,
-and an explicit bilingual fixture result. Stage 1B adds the authenticated loopback inference
-boundary and bounded scheduler. Four guarded scripts implement the authenticated offline Ubuntu
-package layer. All four role servers are now package-prepared, and the pinned runtime and model have
-bounded authenticated loopback smoke evidence. The repository still has no browser UI, live
-connector, production service definition, offline application release, or deployment acceptance;
-do not treat source tests, package preparation, or an AI smoke test as a deployed-application pass.
-Phase 0 architecture was accepted on 2026-09-21, while every further infrastructure operation and
-acceptance gate remains separately controlled.
+The repository now has typed policy/application boundaries, local identity, durable
+PostgreSQL state and audit, a bounded local CPU inference path, a bilingual browser UI,
+and read-only Zabbix/Linux connectors. Controlled releases serve user testing on the four
+existing role guests; the exact identities and gate results are in the
+[release manifest](../status/current-release.yaml). The current serving application fails
+its expanded answer-quality gate, and the corrected source candidate is not deployed.
+Guarded Ubuntu package-layer scripts and desktop offline-bundle checks exist, but they do
+not grant another serving-host change or production acceptance. Phase 0 architecture was
+accepted on 2026-09-21; later infrastructure operations and acceptance gates remain
+separately controlled.
 
 For the current Python slice, install the generated lock with
 `uv sync --extra dev --frozen`, then run `uv run ruff format --check packages migrations
 tests scripts deploy/installers`, `uv run ruff check packages migrations tests scripts
-deploy/installers`, `uv run mypy packages tests deploy/installers`, and `uv run pytest`.
+deploy/installers`, `uv run mypy packages tests scripts deploy/installers`, and `uv run pytest`.
 Real database acceptance additionally requires an isolated PostgreSQL URL in
 `NEXTOPS_TEST_DATABASE_URL`; a skipped database suite is not a pass. Regenerate `uv.lock`
 only with reviewed dependency changes and run the pinned dependency audit before release
@@ -39,13 +39,14 @@ Create source directories, manifests and locks when the corresponding implementa
 
 Use short-lived branches, small commits, clear acceptance criteria and pull requests. Link each feature to an original requirement and phase. Update both language guides, project state, next task and traceability with each delivered increment. CODEOWNERS and templates support review; they do not prove branch protection is enabled. Protected main and review rules must be explicitly configured and verified when available.
 
-The pinned workflow in `.github/workflows/ci.yml` runs formatting/lint/types, unit and API
-contracts, documentation/dossier/inference/installer validation, Bash syntax and executable-mode
-gates, package build, dependency audit, full-history secret scanning, and
-migrations/roles/identity/idempotency/lease/audit tests against an ephemeral PostgreSQL service.
-It has read-only default permissions and no infrastructure credential or management-network
-route. Frontend build/browser checks, release manifests, SBOM/signing, hardware/lab tests, real
-package application, and branch-protection settings remain future or separately verified work.
+The pinned workflow in `.github/workflows/ci.yml` runs formatting, lint, types,
+unit/API and browser cases, documentation/dossier/inference/installer/release-status
+validation, package build, dependency audit, full-history secret scanning, and
+PostgreSQL 16/17 integration tests. It has read-only default permissions and no
+infrastructure credential or management-network route. The private wheel-backed
+SBOM enrichment is an offline local evidence step, not hosted CI or legal approval;
+offline signing, hardware/lab acceptance, serving-host package application and
+branch-protection verification remain separate.
 
 Untrusted pull-request code must run in disposable isolated workers with no production secrets or management-LAN access. Never attach a privileged persistent G10 runner to arbitrary PR execution. Do not execute an untrusted checkout under `pull_request_target` with secrets. Trusted hardware tests need a separate authorized and resource-limited workflow.
 
