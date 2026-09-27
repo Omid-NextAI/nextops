@@ -1,8 +1,9 @@
 # Answer integrity specification
 
 Status: the focused app increment is deployed for controlled user testing on release
-`nextops-0.1.0-01755d1`; bounded live API/browser checks passed, while the full held-out semantic
-review is partial. Qualification remains revision-specific and is not a guarantee that model-only
+`nextops-0.1.0-01755d1`; earlier bounded live API/browser checks passed, but a fresh synthetic
+semantic probe failed and the full held-out review remains unfinished. A source-only correction
+is not yet deployed. Qualification remains revision-specific and is not a guarantee that model-only
 text is always true.
 
 ## Problem
@@ -42,6 +43,14 @@ an operation, and must preserve stale/partial qualifiers even when generated pro
   Allowlisted mount capacity is not a list of system file names or contents. Until semantic model
   qualification, focused file/filesystem answers use typed deterministic text, keep partial markers
   and retain the complete authorized evidence and audit separately.
+- Explicit English/Persian exclusions such as “do not include CPU” or “دادهٔ CPU را اضافه نکن”
+  must not turn a file-only request into an overview. Mixed affirmative requests remain overview.
+- A single-host Zabbix summary does not contain authorized host-inventory reachability states.
+  Questions asking which hosts are available or unavailable must state this scope limitation,
+  not infer host reachability from enabled status, active problems or generic metric counts.
+- The browser initially shows only the requested filesystem evidence or an explicit notice that
+  file names/content were not collected. Complete authorized evidence remains accessible through
+  an explicit secondary reveal and in the audited response.
 
 ## Non-goals
 

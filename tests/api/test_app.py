@@ -528,6 +528,8 @@ def test_panel_is_local_bilingual_and_sets_browser_security_headers() -> None:
     assert '"/api/v1/logout"' in javascript.text
     assert '"/api/v1/incidents/investigate"' in javascript.text
     assert "بدون افزودن وضعیت Zabbix" in javascript.text
+    assert "host_inventory_unavailable" in javascript.text
+    assert "hostInventoryLimitNotice" in javascript.text
     assert 'id="runId"' in response.text
     assert 'id="evidenceReference"' in response.text
     assert 'id="auditEventId"' in response.text
@@ -753,6 +755,69 @@ def test_monitoring_answer_passes_when_source_and_boundaries_are_explicit() -> N
     assert assistant["answer"].startswith("Zabbix collected")
 
 
+@pytest.mark.parametrize(
+    ("question", "locale", "expected"),
+    [
+        (
+            "Which authorized Zabbix hosts are currently unavailable?",
+            "en",
+            "cannot identify which hosts",
+        ),
+        (
+            "کدام میزبان‌های مجاز زبیکس اکنون در دسترس نیستند؟",
+            "fa",
+            "نمی‌توانم بگویم کدام",
+        ),
+    ],
+)
+def test_monitoring_does_not_invent_multi_host_availability(
+    question: str, locale: str, expected: str
+) -> None:
+    client = TestClient(create_app(FakeService(), FakeInferenceGateway(), FakeMonitoringGateway()))
+    response = client.post(
+        "/api/v1/investigate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={"locale": locale, "question": question},
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["assistant"]["integrity_status"] == "deterministic_focus"
+    assert "host_inventory_unavailable" in body["assistant"]["limitations"]
+    assert expected in body["assistant"]["answer"]
+    assert "Zabbix server" in body["assistant"]["answer"]
+    assert body["evidence_reference"] == f"run-evidence:{RUN_ID}"
+    assert body["audit_event_id"] == "60000000-0000-4000-8000-000000000001"
+
+
+def test_monitoring_host_inventory_limit_preserves_partial_and_stale_qualifiers() -> None:
+    class PartialGateway(FakeMonitoringGateway):
+        async def summary(self) -> MonitoringSummary:
+            summary = await super().summary()
+            return summary.model_copy(
+                update={
+                    "metrics": (summary.metrics[0].model_copy(update={"stale": True}),),
+                    "is_partial": True,
+                    "partial_reasons": ("metrics_truncated",),
+                }
+            )
+
+    client = TestClient(create_app(FakeService(), FakeInferenceGateway(), PartialGateway()))
+    response = client.post(
+        "/api/v1/investigate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={"locale": "en", "question": "Which hosts are unavailable?"},
+    )
+
+    assert response.status_code == 200
+    assistant = response.json()["assistant"]
+    assert assistant["integrity_status"] == "deterministic_focus"
+    assert "Evidence is partial" in assistant["answer"]
+    assert "metrics are stale" in assistant["answer"]
+    assert "partial_evidence" in assistant["limitations"]
+    assert "stale_evidence" in assistant["limitations"]
+
+
 def test_monitoring_answer_with_length_finish_falls_back_despite_source_words() -> None:
     inference = FakeInferenceGateway(
         "Zabbix evidence is partial, and the current observation shows",
@@ -944,6 +1009,47 @@ def test_incident_multi_topic_question_keeps_overview() -> None:
 
 
 @pytest.mark.parametrize(
+    ("question", "locale"),
+    [
+        (
+            "Show only system file and filesystem evidence for this host. "
+            "Do not include CPU, memory, or unrelated Zabbix data.",
+            "en",
+        ),
+        (
+            "فقط شواهد فایل‌های سیستمی و فایل‌سیستم همین میزبان را نشان بده. "
+            "دادهٔ CPU، حافظه یا زبیکسِ نامرتبط را اضافه نکن.",
+            "fa",
+        ),
+    ],
+)
+def test_live_file_only_exclusions_keep_incident_answer_focused(question: str, locale: str) -> None:
+    inference = FakeInferenceGateway()
+    client = TestClient(
+        create_app(
+            FakeService(),
+            inference,
+            FakeMonitoringGateway(),
+            incident_target_ids=("app",),
+        )
+    )
+    response = client.post(
+        "/api/v1/incidents/investigate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={"target_id": "app", "locale": locale, "question": question},
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["answer_focus"] == "filesystems"
+    assert body["assistant"]["integrity_status"] == "deterministic_focus"
+    assert "nextops-app.service" not in body["assistant"]["answer"]
+    assert "load 0.1" not in body["assistant"]["answer"]
+    assert inference.last_request is not None
+    assert "CPU idle time" not in inference.last_request.question
+
+
+@pytest.mark.parametrize(
     ("question", "expected_focus"),
     [
         ("Only show filesystems, no services.", "filesystems"),
@@ -951,6 +1057,13 @@ def test_incident_multi_topic_question_keeps_overview() -> None:
         ("Show filesystem usage and services.", "overview"),
         ("Show system files and CPU too.", "file_listing"),
         ("Only showing system files.", "file_listing"),
+        ("Show filesystem usage. Do not include CPU or memory.", "filesystems"),
+        ("Show filesystem usage and Zabbix host status.", "overview"),
+        ("Do not show files. Show CPU load.", "overview"),
+        ("فقط فایل‌سیستم را نشان بده، دادهٔ CPU را اضافه نکن", "filesystems"),
+        ("فایل‌سیستم را نشان بده و CPU را اضافه نکن", "filesystems"),
+        ("CPU را نشان بده و فایل‌سیستم را هم نشان بده", "overview"),
+        ("فایل‌سیستم و وضعیت زبیکس را نشان بده", "overview"),
     ],
 )
 def test_incident_focus_handles_exclusions_and_mixed_scope(

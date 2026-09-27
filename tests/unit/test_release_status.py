@@ -66,6 +66,18 @@ def test_current_app_qualification_is_bound_to_serving_release() -> None:
     )
 
 
+def test_live_semantic_failure_is_not_recorded_as_production_acceptance() -> None:
+    status = _manifest()
+    current_gates = {
+        gate["id"]: gate["status"] for gate in status["current_application_qualification"]["gates"]
+    }
+    release_gates = {gate["id"]: gate["status"] for gate in status["acceptance_gates"]}
+
+    assert current_gates["current_app_held_out_answer_semantics"] == "failed"
+    assert release_gates["answer_integrity_live"] == "failed"
+    assert release_gates["production_acceptance"] == "not_run"
+
+
 def test_current_app_qualification_requires_all_revision_sensitive_gates() -> None:
     module = _status_module()
     status = _manifest()

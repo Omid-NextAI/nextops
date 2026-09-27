@@ -4,6 +4,23 @@
 
 ### English
 
+Fresh private-path bilingual semantic capture exposed two file-only incident misroutes and two
+multi-host availability answers that did not state the connector's single-host scope. The
+serving endpoint now has a failed expanded answer-quality gate. A source-only candidate handles
+explicit exclusions, refuses unsupported host-inventory reachability, and makes focused evidence
+the browser default while retaining full evidence on explicit reveal. API/browser regressions pass;
+the candidate is not deployed or production-qualified.
+
+### فارسی
+
+آزمون تازهٔ معناییِ فارسی و انگلیسی در مسیر خصوصی، دو تشخیص نادرستِ پرسش «فقط فایل» و دو پاسخ
+بی‌توضیح دربارهٔ محدودیت دامنهٔ تک‌میزبانی را آشکار کرد. معیار گسترش‌یافتهٔ کیفیت پاسخِ مسیر مستقر
+ناموفق است. اصلاح موجود در کد، عبارت حذفی را درست می‌فهمد، دربارهٔ دسترسی‌پذیریِ فهرست میزبان‌ها
+ادعای بی‌شاهد نمی‌کند و شواهد مرتبط را ابتدا نشان می‌دهد؛ شواهد کامل با بازکردن صریح بخش جزئیات
+در دسترس‌اند. آزمون‌های API و مرورگر موفق‌اند، ولی این اصلاح هنوز مستقر یا برای تولید پذیرفته نیست.
+
+### English — earlier controlled increments
+
 Promoted the cumulative answer-completion and focused-UI work through PR #10 (all five CI jobs
 passed). Immutable application release `nextops-0.1.0-01755d1` now serves controlled user testing;
 AI API, connector, CPU runtime/model, database schema and Zabbix did not change. The release was

@@ -19,6 +19,8 @@ from fastapi.staticfiles import StaticFiles
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import Page, expect, sync_playwright
 
+from nextops.api.incident_focus import incident_focus
+
 pytestmark = pytest.mark.browser
 STATIC = Path(__file__).resolve().parents[2] / "packages" / "nextops" / "api" / "static"
 NOW = "2026-09-23T10:00:00Z"
@@ -143,12 +145,16 @@ def _incident_response(locale: str, target_id: str, question: str = "") -> dict[
         "partial_reasons": [],
     }
     run_id = str(uuid4())
-    focus = "file_listing" if "system files" in question else "overview"
+    focus = incident_focus(question)
     assistant = _assistant(locale)
     if focus == "file_listing":
         assistant["answer"] = "The read-only collector cannot list system file names or contents."
         assistant["integrity_status"] = "deterministic_focus"
         assistant["limitations"] = ["read_only_no_action_performed", "file_listing_unavailable"]
+    elif focus == "filesystems":
+        assistant["answer"] = "Approved filesystem capacity only; no system file names or contents."
+        assistant["integrity_status"] = "deterministic_focus"
+        assistant["limitations"] = ["read_only_no_action_performed"]
     return {
         "assistant": assistant,
         "evidence": evidence,
@@ -209,6 +215,34 @@ def _fixture_app() -> FastAPI:
     @app.get("/api/v1/monitoring/summary")
     async def summary() -> dict[str, Any]:
         return _summary()
+
+    @app.post("/api/v1/investigate")
+    async def investigate(request: Request) -> dict[str, Any]:
+        payload = await request.json()
+        assistant = _assistant(str(payload["locale"]))
+        assistant["answer"] = (
+            "این نمای زبیکس وضعیت دسترسیِ همهٔ میزبانان را ندارد."
+            if payload["locale"] == "fa"
+            else "This Zabbix view cannot identify unavailable hosts."
+        )
+        assistant["evidence_mode"] = "live_zabbix"
+        assistant["live_monitoring_data"] = True
+        assistant["integrity_status"] = "deterministic_focus"
+        assistant["limitations"] = [
+            "read_only_no_action_performed",
+            "host_inventory_unavailable",
+        ]
+        run_id = str(uuid4())
+        return {
+            "assistant": assistant,
+            "evidence": _summary(),
+            "run_id": run_id,
+            "evidence_reference": f"run-evidence:{run_id}",
+            "evidence_sha256": "a" * 64,
+            "audit_event_id": str(uuid4()),
+            "evidence_mode": "live_zabbix",
+            "live_monitoring_data": True,
+        }
 
     @app.get("/api/v1/incidents/targets")
     async def targets() -> dict[str, list[str]]:
@@ -313,7 +347,7 @@ def test_phase2_panel_supports_incident_evidence_and_persian_rtl(
         expect(page.locator("#askedQuestion")).to_have_text(
             "Explain the current application condition."
         )
-        page.locator("#evidenceDetails summary").click()
+        page.locator("#evidenceDetails > summary").click()
         expect(page.get_by_text("nextops-app.service")).to_be_visible()
         expect(page.get_by_text("CPU pressure observed")).to_be_visible()
         assert app.state.incident_requests[-1]["target_id"] == "app"
@@ -366,8 +400,67 @@ def test_file_request_is_honest_and_does_not_open_a_data_dump(
         assert page.locator("#askedQuestion").get_attribute("dir") == "auto"
         assert page.locator("#evidenceDetails").evaluate("element => element.open") is False
         expect(page.get_by_text("nextops-app.service")).to_be_hidden()
-        page.locator("#evidenceDetails summary").click()
+        page.locator("#evidenceDetails > summary").click()
+        expect(page.get_by_text("No system file names or contents were collected")).to_be_visible()
+        expect(page.get_by_role("heading", name="Filesystems")).to_be_hidden()
+        expect(page.get_by_text("nextops-app.service")).to_be_hidden()
+        page.get_by_text("Show complete authorized evidence").click()
         expect(page.get_by_text("nextops-app.service")).to_be_visible()
         page.set_viewport_size({"width": 375, "height": 812})
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth") is True
+        browser.close()
+
+
+def test_file_only_question_hides_unrelated_evidence_until_explicit_expand(
+    browser_server: tuple[str, FastAPI],
+) -> None:
+    base_url, _ = browser_server
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        _login(page, base_url)
+        page.get_by_role("button", name="Incident investigation").click()
+        page.get_by_label("Investigation target").select_option("app")
+        page.get_by_label("Question").fill(
+            "Show only system file and filesystem evidence for this host. "
+            "Do not include CPU, memory, or unrelated Zabbix data."
+        )
+        page.get_by_role("button", name="Ask assistant").click()
+
+        expect(page.locator("#answer")).to_contain_text("Approved filesystem capacity only")
+        expect(page.locator("#evidenceBrief")).to_contain_text("Approved filesystem mounts only")
+        page.locator("#evidenceDetails > summary").click()
+        expect(page.get_by_role("heading", name="Filesystems")).to_be_visible()
+        expect(page.get_by_text("nextops-app.service")).to_be_hidden()
+        expect(page.locator("#metricList").get_by_text("CPU idle time")).to_be_hidden()
+        expect(page.locator(".complete-evidence").get_by_text("CPU idle time")).to_be_hidden()
+        page.get_by_text("Show complete authorized evidence").click()
+        expect(page.get_by_text("nextops-app.service")).to_be_visible()
+        expect(page.locator(".complete-evidence").get_by_text("CPU idle time")).to_be_visible()
+        browser.close()
+
+
+def test_monitoring_host_inventory_limit_is_explained_in_browser(
+    browser_server: tuple[str, FastAPI],
+) -> None:
+    base_url, _ = browser_server
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        _login(page, base_url)
+        page.get_by_role("button", name="Live monitoring").click()
+        page.get_by_label("Question").fill(
+            "Which authorized Zabbix hosts are currently unavailable?"
+        )
+        page.get_by_role("button", name="Ask assistant").click()
+
+        expect(page.locator("#answer")).to_contain_text("cannot identify unavailable hosts")
+        expect(page.locator("#integrityNotice")).to_contain_text(
+            "does not contain reachability states"
+        )
+        expect(page.locator("#evidenceBrief")).to_contain_text("Zabbix monitoring")
+        page.locator("#languageButton").click()
+        expect(page.locator("#integrityNotice")).to_contain_text(
+            "وضعیت دسترسیِ فهرست میزبان‌های مجاز"
+        )
         browser.close()

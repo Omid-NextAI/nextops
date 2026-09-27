@@ -68,6 +68,15 @@ _SYSTEM_FILE_REQUEST = re.compile(
     r"(?:فایل|فایل[‌ ]?سیستم).{0,60}(?:نشان\s*بده|نمایش\s*بده|فهرست\s*کن))",
     re.IGNORECASE,
 )
+_MULTI_HOST_QUESTION = re.compile(
+    r"(?:\b(?:hosts|servers|vms)\b|میزبان[‌ ]?های?|سرور[‌ ]?های?)",
+    re.IGNORECASE,
+)
+_HOST_AVAILABILITY_QUESTION = re.compile(
+    r"(?:\b(?:unavailable|available|offline|online|unreachable|down)\b|"
+    r"در\s*دسترس|خارج\s*از\s*دسترس|قطع|خاموش)",
+    re.IGNORECASE,
+)
 
 
 def assure_general_answer(
@@ -157,6 +166,41 @@ def assure_monitoring_answer(
 
     is_stale = any(metric.stale for metric in evidence.metrics)
     limitations = _evidence_limitations(is_partial=evidence.is_partial, is_stale=is_stale)
+    if _MULTI_HOST_QUESTION.search(request.question) and _HOST_AVAILABILITY_QUESTION.search(
+        request.question
+    ):
+        qualifier = (
+            (" شاهد ناقص است." if request.locale == "fa" else " Evidence is partial.")
+            if evidence.is_partial
+            else ""
+        )
+        if is_stale:
+            qualifier += (
+                " برخی سنجه‌ها قدیمی‌اند و وضعیت کنونی آن‌ها نامعلوم است."
+                if request.locale == "fa"
+                else " Some metrics are stale and their current state is unknown."
+            )
+        answer = (
+            f"نمای زبیکس در {_timestamp(evidence.collected_at)} فقط میزبان پیکربندی‌شدهٔ "
+            f"{evidence.host} را "
+            "پوشش می‌دهد و وضعیت دسترسیِ فهرست میزبان‌های مجاز را ندارد. بنابراین نمی‌توانم "
+            f"بگویم کدام میزبان‌ها در دسترس‌اند یا نیستند.{qualifier} هیچ تغییری انجام نشد."
+            if request.locale == "fa"
+            else f"The Zabbix snapshot at {_timestamp(evidence.collected_at)} covers only "
+            f"configured host {evidence.host} and has no reachability states for the authorized "
+            "host inventory. I cannot "
+            f"identify which hosts are available or unavailable.{qualifier} "
+            "No change was performed."
+        )
+        return assistant.model_copy(
+            update={
+                "answer": answer,
+                "evidence_mode": "live_zabbix",
+                "live_monitoring_data": True,
+                "integrity_status": "deterministic_focus",
+                "limitations": (*limitations, "host_inventory_unavailable"),
+            }
+        )
     if _SYSTEM_FILE_REQUEST.search(request.question):
         if request.locale == "fa":
             qualification = (

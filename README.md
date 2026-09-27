@@ -7,6 +7,11 @@
 Owner update (2026-09-26): the owner tested an ESXi VM snapshot restore. Its dated result has
 not been reviewed here; independent database backup and restore gates remain unpassed.
 
+Current answer-quality finding (2026-09-26): a fresh six-question live probe found two file-only
+requests misrouted as overviews and two multi-host availability requests answered only with
+generic counts. The current serving endpoint fails the expanded semantic gate. A source fix is
+tested locally but not deployed; earlier bounded pass claims below apply only to their named cases.
+
 > **Status: controlled bilingual user testing is live across four Ubuntu 24.04 guests; production is not accepted.** Application release `nextops-0.1.0-01755d1` is live with focused file/filesystem answers and the simplified panel; AI API and connector remain at `nextops-0.1.0-cdde129`. Fresh API and browser checks passed for bounded English/Persian examples, evidence and audit linkage, RTL/mobile layout and browser WAN denial; they do not establish general answer relevance. Earlier service restart, rollback, serial VM reboot and dependency-recovery evidence remains historical; an exact-release rollback drill and full held-out semantic corpus have not run. Host-wide public IPv4 is currently reachable, while app/AI/model units are loopback-restricted and the connector process is limited to the approved LAN. The owner reports daily ESXi snapshots and has deferred independent backup/PITR and isolated restore from the current local delivery; these remain unverified risks, not passed gates. Certificate rotation and operator notification, project licensing, release-integrity approval and final human sign-off remain open. See the [release status](docs/status/current-release.yaml), [current project state](docs/PROJECT_STATE.md) and [production blocker runbook](docs/en/PRODUCTION_BLOCKERS_RUNBOOK.md).
 
 ## What NextOps is intended to do
