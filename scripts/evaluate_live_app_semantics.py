@@ -175,11 +175,9 @@ def validate_cases(data: Any) -> list[dict[str, str]]:
 
 
 def check_case_expectations(case: dict[str, str], result: dict[str, Any]) -> dict[str, Any]:
-    """Check explicit response invariants without claiming semantic correctness."""
+    """Check bounded response invariants without claiming semantic correctness."""
 
     configured = EXPECTATION_FIELDS.intersection(case)
-    if not configured:
-        return {"status": "not_configured", "failures": []}
     failures: list[str] = []
     if result.get("status") != 200:
         return {"status": "failed", "failures": ["http_status"]}
@@ -190,6 +188,9 @@ def check_case_expectations(case: dict[str, str], result: dict[str, Any]) -> dic
     if not isinstance(assistant, dict) or not isinstance(assistant.get("answer"), str):
         return {"status": "failed", "failures": ["response_shape"]}
     answer = assistant["answer"].casefold()
+    question = case["question"].strip()
+    if len(question) >= 12 and answer.strip() == question.casefold():
+        failures.append("prompt_echo")
     if (
         "expected_answer_focus" in configured
         and body.get("answer_focus") != case["expected_answer_focus"]
@@ -215,7 +216,9 @@ def check_case_expectations(case: dict[str, str], result: dict[str, Any]) -> dic
         and case["forbidden_answer_fragment"].casefold() in answer
     ):
         failures.append("forbidden_answer_fragment")
-    return {"status": "failed" if failures else "passed", "failures": failures}
+    if failures:
+        return {"status": "failed", "failures": failures}
+    return {"status": "passed" if configured else "not_configured", "failures": []}
 
 
 def summarize_expectations(statuses: list[str]) -> str:
@@ -363,7 +366,7 @@ def main() -> int:
                 checks = [item["automatic_checks"]["status"] for item in report["cases"]]
                 report["automatic_expectations"] = summarize_expectations(checks)
                 completed = all(item["result"].get("status") == 200 for item in report["cases"])
-                completed = completed and report["automatic_expectations"] != "failed"
+                completed = completed and report["automatic_expectations"] == "passed"
     finally:
         if token:
             report["logout_status"] = call("/api/v1/logout", {}, token).get("status")

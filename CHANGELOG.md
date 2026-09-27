@@ -30,6 +30,11 @@ source-labeled license declarations and wheel hashes to a private CycloneDX 1.5 
 Its nine boundary tests and schema validation passed. Legal approval, signing, serving-host
 promotion and production gates remain open.
 
+The private live semantic-capture command now exits nonzero if any case has no configured
+automatic expectation or a longer question is returned unchanged as its answer. It still writes
+the protected report and attempts logout. This source-only guard does not establish backend release
+identity or repair the serving release's failed answer-quality gate.
+
 ### فارسی
 
 آزمون تازهٔ معناییِ فارسی و انگلیسی در مسیر خصوصی، دو تشخیص نادرستِ پرسش «فقط فایل» و دو پاسخ
@@ -56,6 +61,11 @@ CycloneDX دارای ۲۵ جزء است، اما دادهٔ مجوز ندارد.
 هش آن‌ها و مجوزهای اعلام‌شده با ذکر منبع را به گزارش خصوصی CycloneDX 1.5 می‌افزاید.
 نُه آزمون مرزی و اعتبارسنجی طرح‌واره موفق بودند؛ تأیید حقوقی، امضا، استقرار روی
 سرور و معیارهای تولید همچنان بازند.
+
+فرمانِ خصوصیِ گردآوری پاسخ اکنون اگر حتی یک پرسش انتظارِ خودکار نداشته باشد یا پاسخْ همان پرسشِ
+بلند را بی‌تغییر تکرار کند، با خطا پایان می‌یابد؛ گزارشِ محافظت‌شده و تلاش برای خروج از نشست حفظ
+می‌شوند. این کنترلِ فقط‌درکد، شناسهٔ انتشارِ پشت سرویس را ثابت نمی‌کند و شکستِ معیار کیفیت پاسخِ
+انتشار مستقر را برطرف نمی‌سازد.
 
 ### English — earlier controlled increments
 

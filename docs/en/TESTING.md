@@ -50,8 +50,12 @@ login file, local CA certificate, and a private JSON corpus with `id`, `mode` (`
 Cases may also set bounded literal expectations for answer focus, integrity status, one required
 limitation, and required or forbidden answer fragments. Unknown expectation names are rejected.
 The report records pass/fail codes without printing the answer, and a failed configured check makes
-the command fail after logout. An offline recheck of the earlier private report with these checks
-passed both greetings and failed the two host-inventory and two file-only cases; no new server
+the command fail after logout. The capture command now also exits nonzero if any case has no
+configured expectation, or if the answer merely repeats a longer question; in either case it
+preserves the report and attempts logout. A zero exit only covers these automatic checks and HTTP
+completion, not answer truth, semantic relevance or backend release identity. An offline recheck of
+the earlier private report passed both greetings and failed the two host-inventory and two file-only
+cases with configured checks; no new server
 request was sent for that recheck.
 It disables proxies and redirects, verifies TLS, bounds response size and time, records answers
 with their returned evidence in a new private report, and attempts server-side logout. The script
