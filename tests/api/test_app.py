@@ -540,6 +540,8 @@ def test_panel_is_local_bilingual_and_sets_browser_security_headers() -> None:
     assert "result.evidence_reference" in javascript.text
     assert "assistant.integrity_status" in javascript.text
     assert "راستی‌آزمایی" in javascript.text
+    assert "generalFallbackIntegrityNotice" in javascript.text
+    assert "does not report live infrastructure status" in javascript.text
     assert "https://" not in response.text
     assert "https://" not in javascript.text
     assert "https://" not in stylesheet.text
@@ -597,6 +599,59 @@ def test_general_mode_redirects_current_infrastructure_status_to_live_evidence()
     assert body["live_monitoring_data"] is False
     assert "cannot verify the current infrastructure state" in body["answer"]
     assert body["limitations"] == ["no_live_evidence", "read_only_no_action_performed"]
+
+
+@pytest.mark.parametrize(
+    ("locale", "question", "unrelated_answer", "expected_greeting"),
+    [
+        ("en", "Hi", "Zabbix reports 3 active problems and CPU at 95%.", "Hello"),
+        ("en", "Hi", "Hello! The server is down.", "Hello"),
+        ("en", "Hi", "The capital of France is Paris.", "Hello"),
+        ("fa", "سلام!", "زبیکس اکنون ۳ مشکل فعال دارد و مصرف CPU بالاست.", "سلام"),
+        ("fa", "سلام", "سلام! سرور خاموش است.", "سلام"),
+    ],
+)
+def test_general_greeting_rejects_unrelated_model_answer(
+    locale: str, question: str, unrelated_answer: str, expected_greeting: str
+) -> None:
+    client = TestClient(create_app(FakeService(), FakeInferenceGateway(unrelated_answer)))
+
+    response = client.post(
+        "/api/v1/assistant/generate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={"locale": locale, "question": question},
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["integrity_status"] == "deterministic_fallback"
+    assert body["evidence_mode"] == "model_only"
+    assert body["live_monitoring_data"] is False
+    assert body["limitations"] == ["no_live_evidence", "model_output_may_be_incorrect"]
+    assert expected_greeting in body["answer"]
+    assert "Zabbix" not in body["answer"]
+    assert "زبیکس" not in body["answer"]
+    assert "CPU" not in body["answer"]
+
+
+@pytest.mark.parametrize(
+    ("locale", "question", "greeting"),
+    [("en", "Hi", "Hello! How can I help?"), ("fa", "سلام", "سلام! چطور می‌توانم کمک کنم؟")],
+)
+def test_general_greeting_keeps_short_relevant_model_answer(
+    locale: str, question: str, greeting: str
+) -> None:
+    client = TestClient(create_app(FakeService(), FakeInferenceGateway(greeting)))
+
+    response = client.post(
+        "/api/v1/assistant/generate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={"locale": locale, "question": question},
+    )
+
+    assert response.status_code == 200
+    assert response.json()["answer"] == greeting
+    assert response.json()["integrity_status"] == "model_unverified"
 
 
 @pytest.mark.parametrize("route", ["/api/v1/assistant/generate", "/api/v1/investigate"])

@@ -1,5 +1,18 @@
 # Project state / وضعیت پروژه
 
+Greeting relevance source guard, 2026-09-27 — The undeployed application source now replaces an
+unrelated model response to a greeting-only English/Persian general question with a short localized
+greeting. A relevant short model greeting is retained, and the browser fallback notice no longer
+suggests that general mode retrieved live evidence. API and local browser fixtures pass. This does not
+qualify arbitrary answer relevance or truth, change the serving application's failed semantic
+gate, or authorize deployment.
+
+کنترل ارتباطِ پاسخ به سلام، ۵ مهر ۱۴۰۵ — کدِ هنوز مستقرنشدهٔ برنامه، پاسخ نامرتبط مدل به پرسش
+عمومیِ محدود به سلام را در فارسی و انگلیسی با سلامی کوتاه و متناسب جایگزین می‌کند. سلام کوتاه و
+مرتبطِ خود مدل حفظ می‌شود و اعلانِ پاسخ جایگزین در رابط، دریافت شاهد زنده را القا نمی‌کند.
+آزمون‌های API و مرورگرِ محلی با دادهٔ آزمایشی موفق‌اند. این کنترل، درستی یا ارتباط همهٔ پاسخ‌ها را
+تأیید نمی‌کند، شکست معیار معناییِ برنامهٔ مستقر را تغییر نمی‌دهد و مجوز استقرار نیست.
+
 Ubuntu candidate qualification, 2026-09-27 — From merged `main` commit `d973785`, an unsigned
 `nextops-0.1.0-d973785` candidate wheel was built without a package index. PowerShell and Ubuntu
 agreed on its whole-wheel SHA-256; the wheel and its fresh Ubuntu 24.04.5 installation produced

@@ -1,5 +1,19 @@
 # Next task / کار بعدی
 
+Greeting relevance follow-up, 2026-09-27 — The source-only bilingual greeting guard and UI
+notice pass API and local browser fixtures. Keep the serving-app semantic gate `failed`; this is not a live
+model or browser acceptance. In the next authorized serving-host change window, rebuild and verify
+the candidate artifact, confirm its per-response code digest, and include fresh greeting-only and
+held-out question/evidence comparisons in the bilingual live review. The previously listed
+rollback, WAN and other exact-release gates remain required or explicitly deferred, not passed.
+
+پیگیریِ ارتباط پاسخ به سلام، ۵ مهر ۱۴۰۵ — کنترلِ دوزبانهٔ سلام و اعلان رابط که هنوز فقط در کد
+هستند، آزمون‌های API و مرورگرِ محلی را با دادهٔ آزمایشی گذرانده‌اند. معیار معناییِ برنامهٔ مستقر همچنان
+`failed` است؛ این نتیجه آزمون زندهٔ مدل یا مرورگر نیست. در پنجرهٔ مجازِ بعدی، فایل نامزد دوباره
+ساخته و تأیید، هش کدِ همراه هر پاسخ سنجیده، و سلام‌های تازه و پرسش‌های کنارگذاشته‌شده با شواهدشان
+در بازبینی دوزبانه مقایسه شوند. معیارهای بازگشت، قطع WAN و دیگر آزمون‌های همان انتشار همچنان
+الزامی یا صریحاً به‌تعویق‌افتاده‌اند، نه موفق.
+
 Ubuntu candidate follow-up, 2026-09-27 — The merged `d973785` candidate wheel has a private
 whole-artifact SHA-256, a matching wheel/installed-code digest, and a passing fresh Ubuntu 24.04.5
 offline-index install/import check. This closes the desktop packaging checkpoint only. The first
