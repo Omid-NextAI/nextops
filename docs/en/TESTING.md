@@ -43,6 +43,18 @@ failure disqualifies the current serving endpoint; a source-only fix requires gu
 and another live run before any acceptance claim. These six synthetic cases do not replace the
 owner's exact redacted mismatch or the complete held-out corpus.
 
+An undeployed source increment now computes `nextops_app_code_sha256` offline from a candidate
+wheel using `uv run python scripts/compute_app_code_digest.py <wheel>`. The wheel's full SHA-256
+must be separately checked against the approved private release record. On a future installed
+candidate, each successful authenticated answer response carries the matching
+`X-NextOps-App-Code-SHA256` header. Supply its expected digest to the private capture command as
+`--expected-app-code-sha256`; missing or mismatched headers make the command fail after retaining
+the report and attempting logout. A real offline-built wheel matched the current source package
+tree in the desktop lab. The serving release predates this header, so this is not a live pass.
+The code digest does not cover dependencies, migrations, runtime/model, release signatures or
+host integrity; `release_identity_verified_by_this_script` remains false and a human still checks
+the exact promotion record and every answer against its evidence.
+
 `scripts/evaluate_live_app_semantics.py` captures at most twelve fresh questions against the
 authenticated private HTTPS application endpoint. It accepts a protected endpoint reference,
 login file, local CA certificate, and a private JSON corpus with `id`, `mode` (`general`,

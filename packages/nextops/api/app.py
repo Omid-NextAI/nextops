@@ -21,6 +21,7 @@ from nextops.api.answer_integrity import (
 from nextops.api.incident_focus import IncidentFocus, incident_focus
 from nextops.api.inference_gateway import InferenceGateway, LoopbackInferenceGateway
 from nextops.api.monitoring_gateway import LoopbackMonitoringGateway, MonitoringGateway
+from nextops.api.release_identity import HEADER_NAME, installed_code_digest
 from nextops.application.errors import ApplicationError
 from nextops.application.service import DurableAppService
 from nextops.configuration import AppSettings
@@ -147,6 +148,10 @@ STATUS_BY_ERROR = {
 
 INVESTIGATION_MAX_OUTPUT_TOKENS = 128
 GENERAL_ASSISTANT_MAX_OUTPUT_TOKENS = 128
+ANSWER_PATHS = frozenset(
+    {"/api/v1/assistant/generate", "/api/v1/investigate", "/api/v1/incidents/investigate"}
+)
+APP_CODE_SHA256 = installed_code_digest(Path(__file__).resolve().parents[1])
 
 
 def create_app(
@@ -174,6 +179,8 @@ def create_app(
         request.state.correlation_id = correlation_id
         response = await call_next(request)
         response.headers["X-Correlation-ID"] = str(correlation_id)
+        if request.url.path in ANSWER_PATHS and response.status_code == 200:
+            response.headers[HEADER_NAME] = APP_CODE_SHA256
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["Referrer-Policy"] = "no-referrer"
         response.headers["X-Frame-Options"] = "DENY"

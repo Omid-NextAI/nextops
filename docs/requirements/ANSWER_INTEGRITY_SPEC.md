@@ -87,6 +87,11 @@ warning.
    satisfies a configured answer fragment. Preserve the report and logout attempt in both cases.
    A zero exit means only that the configured automatic checks passed; release identity, factual
    relevance and human acceptance remain separate.
+8. Bind successful authenticated answer responses to a bounded SHA-256 digest of the application
+   package code and locally served assets. Derive the expected digest offline from the separately
+   hash-verified candidate wheel and fail the private live capture when a response omits or differs
+   from it. This is source-byte correlation, not a signature, host attestation, dependency/model
+   identity, proof of semantic correctness, or permission to mark an exact-release gate passed.
 
 ## Acceptance criteria
 
