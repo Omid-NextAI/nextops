@@ -47,6 +47,11 @@ and Ubuntu and installed with the unchanged hash-locked Linux dependencies in a 
 code-digest equality passed. This qualifies local packaging only; deployment and production gates
 remain open.
 
+The paired server-start checklists and deployment-dossier guide now distinguish the four existing
+controlled guests from the original rebuild sequence. They direct an application promotion to an
+approved change record, fresh preflight and rollback guard, and make OS-package checks conditional
+on an actual package change. This corrects operator guidance only; no host or acceptance gate changed.
+
 ### فارسی
 
 آزمون تازهٔ معناییِ فارسی و انگلیسی در مسیر خصوصی، دو تشخیص نادرستِ پرسش «فقط فایل» و دو پاسخ
@@ -88,6 +93,11 @@ wheel نامزدِ بدون امضا از commit ادغام‌شدهٔ `d973785`
 همراه با وابستگی‌های قفل‌شدهٔ Linux در محیط تازهٔ Ubuntu 24.04.5 میزکار، بدون فهرست بسته‌ها
 نصب شد. `pip check`، واردکردن API و ماژول‌های بومی و برابری هش کدِ wheel و نصب موفق بودند.
 این فقط بسته‌بندی محلی را تأیید می‌کند؛ استقرار و معیارهای تولید همچنان بازند.
+
+چک‌لیست‌های دوزبانهٔ شروع سرورها و راهنمای پرونده‌های استقرار اکنون چهار مهمانِ کنترل‌شدهٔ موجود
+را از ترتیب قدیمیِ بازسازی جدا می‌کنند. برای ارتقای برنامه، رکورد تغییر مصوب، پیش‌بررسی تازه و
+محافظ بازگشت را لازم می‌دانند و بررسی بستهٔ سیستم‌عامل را فقط به تغییرِ شامل بسته محدود می‌کنند.
+این اصلاح فقط راهنمای اجراست؛ هیچ سرور یا معیار پذیرشی تغییر نکرده است.
 
 ### English — earlier controlled increments
 
