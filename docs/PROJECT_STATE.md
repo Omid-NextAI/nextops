@@ -1,5 +1,45 @@
 # Project state / وضعیت پروژه
 
+Ubuntu lab qualification, 2026-09-27 — After the failed WSL network-install routes recorded
+below, a Canonical Ubuntu 24.04.5 WSL image was downloaded over HTTPS, matched its published
+SHA-256, and installed as an isolated desktop WSL2 distro. Python 3.12.3 in a fresh virtualenv
+installed the pinned Linux requirements from the private wheelhouse using `--no-index`,
+`--require-hashes` and binary-only resolution; the application candidate wheel installed
+without an index. `pip check` and imports of the API and native dependencies passed. The
+minimal image needed a separately hash-verified, lab-only pip bootstrap wheel. This closes the
+desktop Ubuntu package-install/import check, **not** server WAN isolation, service behavior,
+live answer quality, release integrity, rollback, or production acceptance. The serving hosts
+and release manifest are unchanged.
+
+احراز بسته در آزمایشگاه Ubuntu، ۵ مهر ۱۴۰۵ — پس از شکست روش‌های دریافتِ WSL که در بند
+بعد ثبت شده‌اند، تصویر Ubuntu 24.04.5 از وبگاه رسمی Canonical دریافت شد؛ هش SHA-256 آن با
+مقدار منتشرشده یکسان بود و در محیط جداگانهٔ WSL2 روی میزکار نصب شد. پایتون ۳٫۱۲٫۳ در
+محیط مجازی تازه، وابستگی‌های قفل‌شدهٔ Linux را فقط از wheelhouse خصوصی، با
+`--no-index`، `--require-hashes` و محدودیت بستهٔ باینری نصب کرد؛ wheel نامزدِ برنامه
+نیز بدون فهرست بسته‌ها نصب شد. `pip check` و واردکردن API و وابستگی‌های بومی موفق بودند.
+این تصویر کمینه برای آماده‌سازی آزمایشگاه به wheel جداگانه و کنترل‌شدهٔ pip نیاز داشت.
+نتیجه فقط نصب و واردکردن بسته روی Ubuntu میزکار را تأیید می‌کند، نه قطع WAN سمت سرور،
+کارکرد سرویس، کیفیت پاسخ زنده، تمامیت انتشار، بازگشت یا پذیرش تولید. سرورهای در حال خدمت
+و مانیفست انتشار تغییری نکرده‌اند.
+
+Desktop qualification follow-up, 2026-09-27 — Both standard and web-download attempts to install
+Ubuntu 24.04 under WSL2 failed before installation with `Wsl/InstallDistro/0x80072f78`; no Linux
+runtime test occurred. The Docker client has no reachable local daemon. Private inspection of the
+25 staged Linux wheels found a license declaration and bundled license file in every wheel,
+including two declaring `LGPL-3.0-only`. This is upstream metadata, not a legal review: the
+CycloneDX export still has no license entries, the repository has no approved project license,
+and the named legal/security decision is absent. Serving release, acceptance gates and host state
+are unchanged.
+
+پیگیریِ آزمون میزکار، ۵ مهر ۱۴۰۵ — نصب Ubuntu 24.04 در WSL2، هم از مسیر معمول و هم از مسیر
+دریافت مستقیم، پیش از نصب با خطای `Wsl/InstallDistro/0x80072f78` متوقف شد؛ پس هیچ آزمونی در
+محیط Linux انجام نشد. ابزار Docker نیز به سرویس محلیِ آن دسترسی ندارد. بررسی خصوصیِ ۲۵
+wheel لینوکس نشان داد همهٔ آن‌ها اظهارنامه و فایل مجوز دارند و مجوز دو بسته
+`LGPL-3.0-only` است. این‌ها صرفاً داده‌های منتشرکنندگان بسته‌اند، نه بازبینی حقوقی:
+SBOM تولیدشده هنوز اطلاعات مجوز ندارد، مجوز مصوبِ خود پروژه در مخزن ثبت نشده و تصمیم
+مسئولان حقوقی و امنیتی نیز ارائه نشده است. انتشار در حال خدمت، معیارهای پذیرش و وضعیت
+سرورها تغییری نکرده‌اند.
+
 Provisioning-only dependency checkpoint, 2026-09-27 — The unchanged production lock exported
 hash-pinned requirements and a private CycloneDX 1.5 SBOM with 25 components; the SBOM contains no
 license entries. Twenty-five Linux-targeted wheels matched their `uv.lock` hashes and resolved

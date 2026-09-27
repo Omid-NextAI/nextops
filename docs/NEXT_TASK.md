@@ -1,5 +1,37 @@
 # Next task / کار بعدی
 
+Ubuntu desktop-lab gate passed, 2026-09-27 — The corrected application and locked Linux
+dependencies installed with the package index disabled in a fresh Ubuntu 24.04.5 WSL2 virtualenv;
+dependency and native-import checks passed. The earlier WSL download failure below was resolved
+through a checksum-matched official image. The first serving-host action is still an approved
+change record/window, verified rollback access and fresh preflight before guarded promotion.
+Then rerun held-out bilingual semantics and exact-release WAN/restart/rollback gates. Project
+licensing/legal approval, SBOM license enrichment, signing, independent recovery, certificate,
+notification, host-network policy and named production sign-off remain open.
+
+دروازهٔ آزمایشگاه Ubuntu میزکار، ۵ مهر ۱۴۰۵ — برنامهٔ اصلاح‌شده و وابستگی‌های قفل‌شدهٔ
+Linux در محیط مجازی تازهٔ Ubuntu 24.04.5 روی WSL2 و بدون دسترسی به فهرست بسته‌ها نصب شدند؛
+بررسی وابستگی‌ها و واردکردن ماژول‌های بومی موفق بود. شکستِ پیشینِ دریافت WSL در بند پایین
+با تصویر رسمیِ دارای هش تطبیق‌داده‌شده برطرف شد. نخستین اقدام روی سرور همچنان به ثبت
+تغییر و پنجرهٔ مصوب، دسترسیِ آزموده‌شده برای بازگشت و پیش‌بررسی تازه وابسته است. پس از
+استقرار محافظت‌شده، کیفیت معناییِ دوزبانه و آزمون‌های قطع WAN، شروع دوباره و بازگشتِ
+همان انتشار تکرار شوند. مجوز و تأیید حقوقی پروژه، تکمیل دادهٔ مجوز در SBOM، امضا،
+بازیابی مستقل، گواهی، اعلان، سیاست شبکهٔ میزبان و تأیید نام‌دار تولید همچنان بازند.
+
+Desktop lab follow-up, 2026-09-27 — Obtain an isolated Ubuntu 24.04 environment through an
+approved distribution source/proxy before claiming a real Linux offline install. Both WSL2
+distribution-install routes failed before installation with `0x80072f78`, and no local Docker
+daemon is available. The 25 Linux wheels carry upstream license declarations and files, but
+their inventory is not a legal approval and the generated SBOM has no license fields. Keep the
+serving-host promotion hold and every failed, partial or unrun release gate unchanged.
+
+پیگیری آزمایشگاه میزکار، ۵ مهر ۱۴۰۵ — پیش از ادعای نصب آفلاینِ واقعی در Linux، محیط جداگانهٔ
+Ubuntu 24.04 باید از منبع و مسیر دریافتِ مجاز فراهم شود. هر دو روش نصب توزیع در WSL2 پیش از
+نصب با خطای `0x80072f78` پایان یافت و سرویس محلی Docker نیز در دسترس نیست. هر ۲۵ wheel
+لینوکس اظهارنامه و فایل مجوز دارند، اما این فهرست تأیید حقوقی نیست و SBOM تولیدشده هنوز
+دادهٔ مجوز ندارد. توقف استقرار روی سرور و وضعیت همهٔ معیارهای ناموفق، ناقص یا اجرا‌نشده
+بدون تغییر باقی می‌ماند.
+
 Local offline-bundle follow-up, 2026-09-27 — The candidate and its locked dependencies now install
 offline in a fresh Windows virtualenv. Linux-targeted wheels are hash-matched and resolve without
 an index, but an actual Ubuntu 24.04 install has not run; WSL2 currently has no distro. Keep the
