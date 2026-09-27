@@ -37,8 +37,10 @@ const translations = {
     modelIntegrityNotice: "Model-generated text has no live evidence; verify important facts independently.",
     evidenceIntegrityNotice: "This answer passed bounded source checks, not a factual or relevance review. Verify it against the evidence below.",
     fallbackIntegrityNotice: "The generated answer was incomplete or failed a required check. The evidence-only summary below may not answer your full question.",
-    focusedIntegrityNotice: "This is a deterministic summary of the approved read-only observations, not a verified model explanation or a file listing.",
+    focusedIntegrityNotice: "This is a deterministic, scope-limited summary of approved read-only observations, not a verified model explanation.",
     fileLimitNotice: "System file names and contents are outside the current read-only collector scope. Incident mode can show approved mount capacity only.",
+    hostInventoryLimitNotice: "This Zabbix view does not contain reachability states for the authorized host inventory; it cannot identify unavailable hosts.",
+    fileListingNotCollected: "No system file names or contents were collected. The complete authorized evidence is available below if you need other diagnostics.",
     redirectIntegrityNotice: "The question requires live evidence and was not answered from model memory. Choose a live evidence mode.",
     source: "Source", host: "Host", collected: "Collected", problems: "Active problems", coverage: "Evidence coverage",
     complete: "Complete", partial: "Partial (bounded)", stale: "stale",
@@ -53,7 +55,7 @@ const translations = {
     overloadedError: "The local model is busy. Please wait a moment and try again.", dependencyError: "A local service is temporarily unavailable. Please try again.",
     sessionExpired: "Your session expired. Please sign in again.",
     working: "Generating locally…",
-    howEvidenceWorks: "How evidence works", youAsked: "You asked", showEvidence: "View evidence and request details",
+    howEvidenceWorks: "How evidence works", youAsked: "You asked", showEvidence: "View evidence and request details", showCompleteEvidence: "Show complete authorized evidence",
     sourceBrief: "Source", collectedBrief: "Collected", linuxCollected: "Linux collected", zabbixCollected: "Zabbix collected", scopeBrief: "Scope", filesystemScope: "Approved filesystem mounts only", fileScope: "File names and contents unavailable", incidentScope: "Approved incident target", monitoringScope: "Zabbix monitoring", keyboardHint: " · Enter to send · Shift+Enter for a new line"
   },
   fa: {
@@ -92,8 +94,10 @@ const translations = {
     modelIntegrityNotice: "این متن را مدل و بدون شاهد زنده تولید کرده است؛ اطلاعات مهم را به‌طور مستقل راستی‌آزمایی کنید.",
     evidenceIntegrityNotice: "این پاسخ فقط کنترل‌های محدودِ منبع را گذرانده است، نه بررسی درستی یا ارتباط با پرسش؛ آن را با شواهد زیر تطبیق دهید.",
     fallbackIntegrityNotice: "پاسخ تولیدشده ناتمام بود یا یکی از کنترل‌های لازم را نگذرانده است. خلاصهٔ مبتنی بر شواهد ممکن است به همهٔ بخش‌های پرسش شما پاسخ ندهد.",
-    focusedIntegrityNotice: "این متن، خلاصهٔ قطعیِ مشاهدات فقط‌خواندنیِ مجاز است؛ نه توضیح راستی‌آزمایی‌شدهٔ مدل یا فهرست فایل‌ها.",
+    focusedIntegrityNotice: "این متن، خلاصه‌ای محدود به دامنهٔ مشاهدات فقط‌خواندنیِ مجاز است؛ نه توضیح راستی‌آزمایی‌شدهٔ مدل.",
     fileLimitNotice: "نام و محتوای فایل‌های سیستم در دامنهٔ گردآورندهٔ فقط‌خواندنیِ کنونی نیستند. حالت بررسی رخداد فقط ظرفیت نقاط اتصالِ مجاز را نشان می‌دهد.",
+    hostInventoryLimitNotice: "این نمای زبیکس وضعیت دسترسیِ فهرست میزبان‌های مجاز را ندارد و نمی‌تواند میزبان‌های خارج از دسترس را مشخص کند.",
+    fileListingNotCollected: "نام یا محتوای فایل‌های سیستم گردآوری نشده است. اگر به داده‌های تشخیصی دیگر نیاز دارید، می‌توانید شواهد کاملِ مجاز را در بخش پایین باز کنید.",
     redirectIntegrityNotice: "این پرسش به شاهد زنده نیاز دارد و از حافظهٔ مدل پاسخ داده نشد؛ یکی از حالت‌های دارای شاهد زنده را انتخاب کنید.",
     source: "منبع", host: "میزبان", collected: "زمان گردآوری", problems: "مسائل فعال", coverage: "پوشش شواهد",
     complete: "کامل", partial: "جزئی (محدودشده)", stale: "قدیمی",
@@ -108,7 +112,7 @@ const translations = {
     overloadedError: "مدل محلی در حال پردازش درخواست دیگری است. لطفاً کمی بعد دوباره تلاش کنید.", dependencyError: "یکی از سرویس‌های داخلی موقتاً در دسترس نیست. لطفاً دوباره تلاش کنید.",
     sessionExpired: "نشست شما پایان یافته است. دوباره وارد شوید.",
     working: "در حال تولید پاسخ در محیط داخلی…",
-    howEvidenceWorks: "شیوهٔ استفاده از شواهد", youAsked: "پرسش شما", showEvidence: "نمایش شواهد و جزئیات درخواست",
+    howEvidenceWorks: "شیوهٔ استفاده از شواهد", youAsked: "پرسش شما", showEvidence: "نمایش شواهد و جزئیات درخواست", showCompleteEvidence: "نمایش همهٔ شواهد مجاز",
     sourceBrief: "منبع", collectedBrief: "زمان گردآوری", linuxCollected: "زمان گردآوری Linux", zabbixCollected: "زمان گردآوری Zabbix", scopeBrief: "دامنه", filesystemScope: "فقط نقاط اتصال فایل‌سیستمِ مجاز", fileScope: "نام و محتوای فایل‌ها در دسترس نیست", incidentScope: "میزبان مجازِ بررسی", monitoringScope: "پایش Zabbix", keyboardHint: " · Enter برای ارسال · Shift+Enter برای سطر تازه"
   }
 };
@@ -153,7 +157,7 @@ function applyLanguage(language) {
     item.setAttribute("aria-pressed", item.dataset.locale === language ? "true" : "false");
   });
   if (state.lastEvidence) {
-    if (state.lastEvidence.incident) renderIncidentEvidence(state.lastEvidence.evidence);
+    if (state.lastEvidence.incident) renderIncidentEvidence(state.lastEvidence.evidence, state.lastEvidence.focus);
     else renderEvidence(state.lastEvidence.evidence);
     updateEvidenceBrief();
   }
@@ -295,6 +299,7 @@ function renderEvidence(evidence) {
   byId("evidenceCoverage").textContent = translations[state.language][evidence.is_partial ? "partial" : "complete"];
   byId("evidenceCoverage").title = evidence.partial_reasons.join(", ");
   const list = byId("metricList");
+  list.classList.remove("hidden");
   list.replaceChildren();
   byId("incidentDetail").classList.add("hidden");
   byId("incidentDetail").replaceChildren();
@@ -358,7 +363,7 @@ function evidenceSection(titleText, rows) {
   return section;
 }
 
-function renderIncidentEvidence(evidence) {
+function renderIncidentEvidence(evidence, focus = "overview") {
   const locale = state.language === "fa" ? "fa-IR" : "en-GB";
   renderEvidence(evidence.zabbix.summary);
   byId("evidenceSource").textContent = `Zabbix ${evidence.zabbix.source_version} + Linux ${evidence.linux.collector_version}`;
@@ -409,7 +414,26 @@ function renderIncidentEvidence(evidence) {
       detail: new Date(entry.observed_at).toLocaleString(locale)
     })))
   );
-  detail.replaceChildren(stats, sections);
+  if (focus === "overview") {
+    detail.replaceChildren(stats, sections);
+  } else {
+    const complete = document.createElement("details");
+    complete.className = "complete-evidence";
+    const summary = document.createElement("summary");
+    summary.dataset.i18n = "showCompleteEvidence";
+    summary.textContent = translations[state.language].showCompleteEvidence;
+    const allMetrics = byId("metricList").cloneNode(true);
+    allMetrics.removeAttribute("id");
+    complete.append(summary, allMetrics, stats, sections);
+    const focused = focus === "file_listing" ? document.createElement("p") : sections.firstElementChild.cloneNode(true);
+    if (focus === "file_listing") {
+      focused.className = "empty-evidence";
+      focused.dataset.i18n = "fileListingNotCollected";
+      focused.textContent = translations[state.language].fileListingNotCollected;
+    }
+    detail.replaceChildren(focused, complete);
+    byId("metricList").classList.add("hidden");
+  }
   if (evidence.partial_reasons.length > 0) {
     const warning = document.createElement("p");
     warning.className = "partial-warning";
@@ -517,7 +541,7 @@ byId("assistantForm").addEventListener("submit", async event => {
       deterministic_focus: "focusedIntegrityNotice",
       scope_redirect: "redirectIntegrityNotice"
     };
-    const integrityKey = assistant.limitations?.includes("file_listing_unavailable") ? "fileLimitNotice" : integrityKeys[assistant.integrity_status] || "modelIntegrityNotice";
+    const integrityKey = assistant.limitations?.includes("file_listing_unavailable") ? "fileLimitNotice" : assistant.limitations?.includes("host_inventory_unavailable") ? "hostInventoryLimitNotice" : integrityKeys[assistant.integrity_status] || "modelIntegrityNotice";
     byId("integrityNotice").dataset.i18n = integrityKey;
     byId("integrityNotice").textContent = translations[state.language][integrityKey];
     byId("integrityNotice").classList.toggle("fallback", ["deterministic_fallback", "deterministic_focus"].includes(assistant.integrity_status));
@@ -532,7 +556,7 @@ byId("assistantForm").addEventListener("submit", async event => {
     byId("evidenceDetails").open = false;
     document.querySelectorAll(".monitoring-meta").forEach(node => node.classList.toggle("hidden", !evidenceBacked));
     if (evidenceBacked) {
-      if (incident) renderIncidentEvidence(result.evidence);
+      if (incident) renderIncidentEvidence(result.evidence, result.answer_focus || "overview");
       else renderEvidence(result.evidence);
       state.lastEvidence = { evidence: result.evidence, incident, focus: result.answer_focus || "overview" };
       updateEvidenceBrief();

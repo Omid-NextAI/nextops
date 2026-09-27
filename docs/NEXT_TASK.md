@@ -1,5 +1,28 @@
 # Next task / کار بعدی
 
+Live answer-quality finding, 2026-09-26 — Six fresh, sequential, authenticated bilingual questions
+completed over the private application path with successful logout. Brief general greetings did not
+introduce monitoring status. Both multi-host availability questions received a generic evidence
+fallback rather than a scoped answer, and both file-only incident questions were classified as
+`overview`, exposing unrelated context. The current serving application therefore fails the
+expanded semantic gate. A source-only candidate now corrects explicit exclusion clauses, refuses
+to invent host-inventory reachability, and keeps unrelated detail behind an explicit reveal;
+focused API/browser tests pass, but it is **not deployed or live-qualified**. Next: obtain a
+recorded change window and rollback owner, promote a verified immutable candidate under a guard,
+repeat the six live cases and the owner's exact redacted mismatch, then perform the remaining
+exact-release offline/rollback/cold-start gates. No recovery claim or production sign-off follows.
+
+یافتهٔ زندهٔ کیفیت پاسخ، ۴ مهر ۱۴۰۵ — شش پرسش تازه و پیاپیِ فارسی/انگلیسی از مسیر خصوصی و
+احرازهویت‌شدهٔ برنامه پاسخ HTTP موفق گرفتند و نشست نیز لغو شد. سلام‌های کوتاه، وضعیت پایش را
+بی‌دلیل وارد پاسخ نکردند؛ اما پرسش‌های فهرست میزبان‌های خارج از دسترس فقط خلاصه‌ای کلی گرفتند و
+هر دو پرسش «فقط فایل» به‌اشتباه `overview` تشخیص داده شدند و دادهٔ نامرتبط نشان دادند. در نتیجه
+انتشار مستقر، معیار گسترش‌یافتهٔ ارتباط پاسخ را نمی‌گذراند. اصلاح فعلاً فقط در کد است: عبارت‌های
+حذفی را درست تشخیص می‌دهد، دربارهٔ دسترسی‌پذیری فهرست میزبان‌ها ادعای بی‌شاهد نمی‌کند و جزئیات
+نامرتبط را پشت درخواست صریح کاربر می‌گذارد. آزمون‌های API و مرورگرِ این اصلاح موفق‌اند، اما هنوز
+مستقر و زنده‌آزمایی نشده است. گام بعد، ثبت پنجرهٔ تغییر و مسئول بازگشت، استقرار محافظت‌شدهٔ
+انتشار تغییرناپذیر، تکرار شش پرسش و نمونهٔ دقیقِ پالایش‌شدهٔ مالک، و سپس آزمون‌های آفلاین،
+بازگشت و شروع سردِ همان انتشار است. این یافته پذیرش بازیابی یا تولید نیست.
+
 Source-only checkpoint, 2026-09-26 — The bounded private HTTPS semantic-capture tool and its
 boundary tests are now in the repository; local tests and checks pass. It has **not** been run
 against the serving application and does not judge answer relevance or establish release identity.

@@ -1,5 +1,24 @@
 # Project state / وضعیت پروژه
 
+New live semantic checkpoint, 2026-09-26 — A private, TLS-verified, authenticated six-case run
+completed with six HTTP 200 responses and server-side logout 204. English/Persian greetings were
+brief without monitoring terms. English/Persian multi-host availability questions fell back to
+generic Zabbix counts rather than explaining that the connector does not return host-inventory
+reachability. English/Persian file-only incident questions were misclassified as `overview` and
+included unrelated context. This is a real serving-endpoint failure; the capture tool did not
+independently prove the backend release identity. The release manifest now fails the expanded
+answer-quality gate. A source-only repair with API and browser regressions is under review and has
+not changed the deployed application. Full production acceptance remains unavailable.
+
+گام تازهٔ سنجش معناییِ زنده، ۴ مهر ۱۴۰۵ — آزمون خصوصیِ دارای TLS و احراز هویت با شش پرسش،
+شش پاسخ HTTP 200 و خروج سمت سرور با کد 204 پایان یافت. سلام‌های فارسی و انگلیسی کوتاه بودند و
+اصطلاح پایش را وارد پاسخ نکردند. پرسش‌های دسترسی‌پذیری چند میزبان به‌جای توضیح محدودیت دامنهٔ
+اتصال‌دهنده، شمارش کلی زبیکس را برگرداندند. هر دو پرسش «فقط فایل» در حالت بررسی رخداد به‌اشتباه
+`overview` تشخیص داده شدند و اطلاعات نامرتبط آوردند. این نقص در مسیر زنده مشاهده شده است؛ ابزار
+گردآوری، شناسهٔ کدِ پشت سرویس را مستقلاً ثابت نمی‌کند. معیار گسترش‌یافتهٔ کیفیت پاسخ در مانیفست
+ناموفق ثبت شد. اصلاحی با آزمون‌های API و مرورگر فعلاً فقط در کد است و برنامهٔ مستقر را تغییر
+نداده است. پذیرش کامل تولید همچنان ممکن نیست.
+
 Source-only semantic-review checkpoint, 2026-09-26 — A bounded capture tool now records fresh
 authenticated questions and responses to a private report for manual English/Persian relevance
 and evidence review. Its tests, full local suite, lint, types, release and documentation checks

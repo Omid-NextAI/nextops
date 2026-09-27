@@ -49,6 +49,7 @@ class AssistantResponse(FrozenContract):
             "stale_evidence",
             "partial_evidence",
             "file_listing_unavailable",
+            "host_inventory_unavailable",
         ],
         ...,
     ] = Field(

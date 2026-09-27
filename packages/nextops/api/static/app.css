@@ -420,6 +420,9 @@ html[dir="rtl"] .trust-row > span { padding: 14px 38px 14px 14px; }
 .evidence-brief bdi, .evidence-brief strong { font-weight: 700; }
 .evidence-details summary { padding: 10px 0; color: var(--brand-teal-dark); font-size: 13px; font-weight: 750; cursor: pointer; }
 .evidence-details[open] summary { margin-bottom: 8px; }
+.complete-evidence { margin-top: 16px; border-top: 1px solid var(--line); }
+.complete-evidence > summary { min-height: 44px; display: flex; align-items: center; }
+.complete-evidence[open] > .metric-list { margin-bottom: 14px; }
 html[dir="rtl"] .user-message { border-radius: 18px 18px 18px 4px; }
 @media (max-width: 680px) {
   .workspace { padding-top: 22px; }

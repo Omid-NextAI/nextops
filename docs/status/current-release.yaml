@@ -60,9 +60,11 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/fa/TESTING.md
     - id: current_app_held_out_answer_semantics
-      status: not_run
+      status: failed
       evidence:
         - docs/en/AI_INTEGRITY.md
+        - docs/en/TESTING.md
+        - docs/fa/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_exact_release_rollback
       status: not_run
@@ -332,13 +334,13 @@ acceptance_gates:
       - docs/en/OPERATIONS.md
       - docs/en/TESTING.md
   - id: answer_integrity_live
-    status: partial
+    status: failed
     evidence:
       - docs/requirements/ANSWER_INTEGRITY_SPEC.md
       - docs/en/AI_INTEGRITY.md
       - docs/en/TESTING.md
   - id: focused_app_live_qualification
-    status: passed
+    status: failed
     evidence:
       - docs/en/TESTING.md
       - docs/fa/TESTING.md

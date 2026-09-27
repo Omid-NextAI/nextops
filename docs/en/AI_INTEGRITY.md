@@ -1,8 +1,16 @@
 # AI answer integrity
 
-**Status: accepted for controlled user testing; acceptance is release-specific.** NextOps cannot
+**Status: controlled user testing, with a new live answer-quality failure.** NextOps cannot
 guarantee that a generative model will never be wrong. It instead prevents the most dangerous
 category error: presenting unsupported model text as live operational fact.
+
+On 2026-09-26, six private-path synthetic questions found that the serving app misclassified two
+English/Persian file-only requests as `overview` and gave two multi-host availability questions
+generic Zabbix counts despite having no host-inventory reachability data. A source-only candidate
+now treats explicit exclusions as exclusions, states the missing host-inventory scope, and makes
+focused evidence the default browser detail. Full authorized evidence remains available on
+explicit expansion and in the audited API response. API/browser fixtures pass; this candidate is
+not deployed or live-qualified. The serving release's expanded semantic gate is `failed`.
 
 ## Answer-completion correction and controlled promotion — 2026-09-26
 

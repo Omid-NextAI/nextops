@@ -4,6 +4,10 @@
 
 Updated: 2026-09-26
 
+Current quality correction: a six-case live semantic probe found two file-only misroutes and two
+multi-host scope mismatches on the serving endpoint. The expanded answer-quality gate is failed;
+a locally tested source repair is not deployed. Earlier bounded browser passes remain historical.
+
 Owner clarification: an ESXi VM snapshot restore was tested by the owner; its dated result was
 not reviewed here. This does not qualify independent PostgreSQL backup, WAL/PITR or isolated
 restore. Non-recovery work remains the active delivery sequence.

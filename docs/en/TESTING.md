@@ -31,6 +31,17 @@ and approvals. The checked-in profile remains blocked.
 
 ## Exact-release semantic capture — source tooling, not acceptance
 
+A six-case synthetic bilingual run against the private serving endpoint on 2026-09-26 returned
+six HTTP 200 responses and logout 204. General greetings were short without monitoring content.
+The two multi-host availability questions received generic Zabbix fallbacks rather than a useful
+scope limitation; the two file-only incident questions were classified as `overview` and included
+unrelated context. Response times ranged from about 6 to 49 seconds. The full report, questions,
+answers and operational evidence remain in the protected local qualification directory, not Git.
+The capture tool did not independently verify backend release identity. This observed semantic
+failure disqualifies the current serving endpoint; a source-only fix requires guarded deployment
+and another live run before any acceptance claim. These six synthetic cases do not replace the
+owner's exact redacted mismatch or the complete held-out corpus.
+
 `scripts/evaluate_live_app_semantics.py` captures at most twelve fresh questions against the
 authenticated private HTTPS application endpoint. It accepts a protected endpoint reference,
 login file, local CA certificate, and a private JSON corpus with `id`, `mode` (`general`,
