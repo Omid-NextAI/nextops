@@ -7,8 +7,10 @@ generic Zabbix counts rather than explaining that the connector does not return 
 reachability. English/Persian file-only incident questions were misclassified as `overview` and
 included unrelated context. This is a real serving-endpoint failure; the capture tool did not
 independently prove the backend release identity. The release manifest now fails the expanded
-answer-quality gate. A source-only repair with API and browser regressions is under review and has
-not changed the deployed application. Full production acceptance remains unavailable.
+answer-quality gate. The source-only repair was merged to `main` in PR #18 after all five CI jobs
+passed; it has not changed the deployed application or passed a new live qualification. Full
+production acceptance remains unavailable. Entries below are historical checkpoints, not newer
+serving-release results.
 
 گام تازهٔ سنجش معناییِ زنده، ۴ مهر ۱۴۰۵ — آزمون خصوصیِ دارای TLS و احراز هویت با شش پرسش،
 شش پاسخ HTTP 200 و خروج سمت سرور با کد 204 پایان یافت. سلام‌های فارسی و انگلیسی کوتاه بودند و
@@ -16,8 +18,9 @@ not changed the deployed application. Full production acceptance remains unavail
 اتصال‌دهنده، شمارش کلی زبیکس را برگرداندند. هر دو پرسش «فقط فایل» در حالت بررسی رخداد به‌اشتباه
 `overview` تشخیص داده شدند و اطلاعات نامرتبط آوردند. این نقص در مسیر زنده مشاهده شده است؛ ابزار
 گردآوری، شناسهٔ کدِ پشت سرویس را مستقلاً ثابت نمی‌کند. معیار گسترش‌یافتهٔ کیفیت پاسخ در مانیفست
-ناموفق ثبت شد. اصلاحی با آزمون‌های API و مرورگر فعلاً فقط در کد است و برنامهٔ مستقر را تغییر
-نداده است. پذیرش کامل تولید همچنان ممکن نیست.
+ناموفق ثبت شد. اصلاح کد پس از موفقیت هر پنج کار CI با درخواست ادغام شمارهٔ ۱۸ وارد شاخهٔ اصلی
+شد؛ برنامهٔ مستقر تغییر نکرده و ارزیابی زندهٔ انتشار تازه نیز انجام نشده است. پذیرش کامل تولید
+همچنان ممکن نیست. بندهای بعدی گام‌های تاریخی‌اند، نه نتیجهٔ تازه‌ترِ انتشار در حال خدمت.
 
 Source-only semantic-review checkpoint, 2026-09-26 — A bounded capture tool now records fresh
 authenticated questions and responses to a private report for manual English/Persian relevance
