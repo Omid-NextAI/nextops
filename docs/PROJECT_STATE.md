@@ -1,5 +1,23 @@
 # Project state / وضعیت پروژه
 
+Desktop qualification follow-up, 2026-09-27 — Both standard and web-download attempts to install
+Ubuntu 24.04 under WSL2 failed before installation with `Wsl/InstallDistro/0x80072f78`; no Linux
+runtime test occurred. The Docker client has no reachable local daemon. Private inspection of the
+25 staged Linux wheels found a license declaration and bundled license file in every wheel,
+including two declaring `LGPL-3.0-only`. This is upstream metadata, not a legal review: the
+CycloneDX export still has no license entries, the repository has no approved project license,
+and the named legal/security decision is absent. Serving release, acceptance gates and host state
+are unchanged.
+
+پیگیریِ آزمون میزکار، ۵ مهر ۱۴۰۵ — نصب Ubuntu 24.04 در WSL2، هم از مسیر معمول و هم از مسیر
+دریافت مستقیم، پیش از نصب با خطای `Wsl/InstallDistro/0x80072f78` متوقف شد؛ پس هیچ آزمونی در
+محیط Linux انجام نشد. ابزار Docker نیز به سرویس محلیِ آن دسترسی ندارد. بررسی خصوصیِ ۲۵
+wheel لینوکس نشان داد همهٔ آن‌ها اظهارنامه و فایل مجوز دارند و مجوز دو بسته
+`LGPL-3.0-only` است. این‌ها صرفاً داده‌های منتشرکنندگان بسته‌اند، نه بازبینی حقوقی:
+SBOM تولیدشده هنوز اطلاعات مجوز ندارد، مجوز مصوبِ خود پروژه در مخزن ثبت نشده و تصمیم
+مسئولان حقوقی و امنیتی نیز ارائه نشده است. انتشار در حال خدمت، معیارهای پذیرش و وضعیت
+سرورها تغییری نکرده‌اند.
+
 Provisioning-only dependency checkpoint, 2026-09-27 — The unchanged production lock exported
 hash-pinned requirements and a private CycloneDX 1.5 SBOM with 25 components; the SBOM contains no
 license entries. Twenty-five Linux-targeted wheels matched their `uv.lock` hashes and resolved

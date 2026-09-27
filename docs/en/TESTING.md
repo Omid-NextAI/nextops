@@ -77,6 +77,14 @@ offline install was run. The private CycloneDX 1.5 SBOM lists 25 components but 
 exporter is experimental. Neither this staging nor the Windows test qualifies the Linux bundle,
 license policy, release signature, serving release or production gate.
 
+On 2026-09-27, both the standard WSL2 Ubuntu 24.04 distribution install and its web-download
+variant failed before installation with `Wsl/InstallDistro/0x80072f78` (invalid or unrecognized
+server response); WSL still has no distro. The Docker client also lacked a reachable local daemon.
+Private inspection of the 25 Linux wheels found a declared license and bundled license file in
+each: MIT 13, BSD-3-Clause 6, LGPL-3.0-only 2, Apache-2.0 1, MIT AND PSF-2.0 1,
+MIT-0 1 and PSF-2.0 1. These are package metadata, not legal approval or populated SBOM licenses.
+No Ubuntu installation, license decision or serving-host test followed.
+
 The owner clarified that an ESXi VM snapshot restore was tested by the owner. The dated result is
 not reviewed here, and that test does not satisfy independent backup/WAL/PITR or isolated database
 restore. This does not alter the next answer-quality checkpoint.
