@@ -40,6 +40,19 @@ def test_semantic_review_corpus_is_bounded_and_requires_explicit_routes() -> Non
     module = _module()
     assert module.validate_cases({"cases": [_case()]})[0]["target_id"] == "app"
     assert (
+        module.validate_cases(
+            {
+                "cases": [
+                    _case(
+                        expected_answer_focus="filesystems",
+                        required_limitation="read_only_no_action_performed",
+                    )
+                ]
+            }
+        )[0]["expected_answer_focus"]
+        == "filesystems"
+    )
+    assert (
         module.validate_cases({"cases": [_case(mode="general", target_id="")]})[0]["mode"]
         == "general"
     )
@@ -51,6 +64,12 @@ def test_semantic_review_corpus_is_bounded_and_requires_explicit_routes() -> Non
         {"cases": [_case(target_id="../app")]},
         {"cases": [{**_case(), "target_id": None}]},
         {"cases": [_case(question=" ")]},
+        {"cases": [_case(expected_answer_focus="unknown")]},
+        {"cases": [_case(mode="general", target_id="", expected_answer_focus="filesystems")]},
+        {"cases": [_case(expected_integrity_status="unknown")]},
+        {"cases": [_case(required_limitation="bad value")]},
+        {"cases": [_case(required_answer_fragment="x" * 161)]},
+        {"cases": [{**_case(), "unexpected": "ignored"}]},
         {"cases": [_case()] * 13},
     )
     for invalid in invalid_cases:
@@ -93,8 +112,78 @@ def test_semantic_review_redirects_are_rejected() -> None:
     assert module.NoRedirect().redirect_request(None, None, None, None, None) is None
 
 
+def test_semantic_review_flags_bounded_response_mismatches_without_claiming_truth() -> None:
+    module = _module()
+    case = _case(
+        expected_answer_focus="filesystems",
+        expected_integrity_status="deterministic_focus",
+        required_limitation="file_listing_unavailable",
+        required_answer_fragment="filesystem",
+        forbidden_answer_fragment="CPU idle time",
+    )
+    result = {
+        "status": 200,
+        "body": {
+            "answer_focus": "overview",
+            "assistant": {
+                "answer": "Generic CPU idle time",
+                "integrity_status": "deterministic_fallback",
+                "limitations": [],
+            },
+        },
+    }
+    checks = module.check_case_expectations(case, result)
+    assert checks == {
+        "status": "failed",
+        "failures": [
+            "answer_focus",
+            "integrity_status",
+            "required_limitation",
+            "required_answer_fragment",
+            "forbidden_answer_fragment",
+        ],
+    }
+    assert module.check_case_expectations(_case(), result)["status"] == "not_configured"
+    assert module.check_case_expectations(case, {"status": 503})["failures"] == ["http_status"]
+    greeting = _case(
+        mode="general",
+        target_id="",
+        forbidden_answer_fragment="Zabbix",
+    )
+    assert (
+        module.check_case_expectations(greeting, {"status": 200, "body": {"answer": "Hello!"}})[
+            "status"
+        ]
+        == "passed"
+    )
+    persian = _case(
+        mode="general",
+        target_id="",
+        locale="fa",
+        forbidden_answer_fragment="زبیکس",
+    )
+    assert (
+        module.check_case_expectations(persian, {"status": 200, "body": {"answer": "سلام!"}})[
+            "status"
+        ]
+        == "passed"
+    )
+    assert module.summarize_expectations(["passed", "passed"]) == "passed"
+    assert module.summarize_expectations(["passed", "not_configured"]) == "partial"
+    assert module.summarize_expectations(["not_configured"]) == "not_configured"
+    assert module.summarize_expectations(["passed", "failed"]) == "failed"
+
+
+@pytest.mark.parametrize(
+    ("expected_focus", "expected_exit"),
+    [("file_listing", 0), ("filesystems", 1)],
+)
 def test_semantic_review_captures_an_authenticated_case_and_logs_out(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+    expected_focus: str,
+    expected_exit: int,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
 ) -> None:
     module = _module()
     endpoint = tmp_path / "endpoint.txt"
@@ -103,7 +192,9 @@ def test_semantic_review_captures_an_authenticated_case_and_logs_out(
     output = tmp_path / "report.json"
     endpoint.write_text("url: https://nextops.local\n", encoding="utf-8")
     login.write_text("username: reviewer\npassword: " + "x" * 32 + "\n", encoding="utf-8")
-    corpus.write_text(json.dumps({"cases": [_case()]}), encoding="utf-8")
+    corpus.write_text(
+        json.dumps({"cases": [_case(expected_answer_focus=expected_focus)]}), encoding="utf-8"
+    )
     if os.name == "posix":
         for path in (endpoint, login, corpus):
             path.chmod(0o600)
@@ -134,7 +225,14 @@ def test_semantic_review_captures_an_authenticated_case_and_logs_out(
                 return FakeResponse(200, {"session": {"access_token": "t" * 40}})
             if request.full_url.endswith("/logout"):
                 return FakeResponse(204, None)
-            return FakeResponse(200, {"answer": "Only system files.", "evidence": []})
+            return FakeResponse(
+                200,
+                {
+                    "assistant": {"answer": "Only system files."},
+                    "answer_focus": "file_listing",
+                    "evidence": [],
+                },
+            )
 
     monkeypatch.setattr(
         module,
@@ -151,7 +249,7 @@ def test_semantic_review_captures_an_authenticated_case_and_logs_out(
     monkeypatch.setattr(module.ssl, "create_default_context", lambda **_kwargs: object())
     monkeypatch.setattr(module, "build_opener", lambda *_args: FakeOpener())
 
-    assert module.main() == 0
+    assert module.main() == expected_exit
     assert [entry[0].rsplit("/", 1)[-1] for entry in requests] == [
         "login",
         "investigate",
@@ -162,6 +260,12 @@ def test_semantic_review_captures_an_authenticated_case_and_logs_out(
     report = json.loads(output.read_text(encoding="utf-8"))
     assert report["manual_semantic_review_required"] is True
     assert report["acceptance_claimed"] is False
-    assert report["cases"][0]["result"]["body"]["answer"] == "Only system files."
+    assert report["automatic_expectations"] == ("passed" if expected_exit == 0 else "failed")
+    assert report["cases"][0]["automatic_checks"] == (
+        {"status": "passed", "failures": []}
+        if expected_exit == 0
+        else {"status": "failed", "failures": ["answer_focus"]}
+    )
+    assert report["cases"][0]["result"]["body"]["assistant"]["answer"] == "Only system files."
     assert "t" * 40 not in output.read_text(encoding="utf-8")
     assert "Only system files." not in capsys.readouterr().out

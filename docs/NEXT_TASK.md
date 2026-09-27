@@ -1,5 +1,22 @@
 # Next task / کار بعدی
 
+Source-only qualification follow-up, 2026-09-27 — The corrected application wheel built offline
+from `42b35d8`, but this desktop cannot install it in a fresh offline environment without a
+complete dependency wheelhouse. Optional literal expectations now catch the four known failures
+in the earlier private report without another server request; human review and exact serving
+release identity remain unproven. First external action is still an approved change record with
+window and rollback owner, followed by complete offline-bundle verification, guarded promotion,
+fresh bilingual semantic review and exact-release offline/rollback/cold-start tests. The local
+build and deterministic checks do not change the failed serving-release gate.
+
+پیگیریِ فقط‌درکد، ۵ مهر ۱۴۰۵ — wheel اصلاح‌شده از کد `42b35d8` آفلاین ساخته شد، اما این میزکار
+بدون مجموعهٔ کامل wheel وابستگی‌ها نمی‌تواند آن را در محیط تازه آفلاین نصب کند. انتظارهای واژگانیِ
+اختیاری، چهار شکست شناخته‌شدهٔ گزارش خصوصیِ پیشین را بی‌درخواست تازه از سرور آشکار کردند؛
+بازبینی انسانی و شناسهٔ دقیقِ کدِ در حال خدمت هنوز اثبات نشده‌اند. اقدام بیرونیِ نخست همچنان ثبت
+تغییرِ مصوب با پنجره و مسئول بازگشت، سپس تأیید بستهٔ کامل آفلاین، استقرار محافظت‌شده، سنجش معنایی
+تازهٔ دوزبانه و آزمون آفلاین/بازگشت/شروع سردِ همان انتشار است. ساخت محلی و کنترل قطعی، شکستِ
+معیار انتشار مستقر را تغییر نمی‌دهند.
+
 Live answer-quality finding, 2026-09-26 — Six fresh, sequential, authenticated bilingual questions
 completed over the private application path with successful logout. Brief general greetings did not
 introduce monitoring status. Both multi-host availability questions received a generic evidence

@@ -1,5 +1,21 @@
 # Project state / وضعیت پروژه
 
+Source-only qualification checkpoint, 2026-09-27 — An offline-built pure-Python application wheel
+from `42b35d8` matched the corrected source files byte-for-byte. A fresh offline install on this
+Windows desktop failed because its local dependency cache is incomplete; the Linux wheelhouse and
+serving hosts were not tested or changed. The semantic-capture tool now supports bounded explicit
+expectations. Rechecking the prior private six-case report without a new server request passed two
+greetings and failed the same four host-inventory/file-focus cases. This adds no live acceptance;
+the serving release's semantic gate remains `failed` and the candidate is not deployed.
+
+گام سنجشِ فقط‌درکد، ۵ مهر ۱۴۰۵ — wheel خالص پایتون از کد `42b35d8` بدون اتصال اینترنت ساخته شد و
+فایل‌های اصلاح‌شدهٔ درون آن با منبع یکسان بودند. نصب آفلاین در محیط تازهٔ همین میزکار Windows
+به‌دلیل کامل‌نبودن حافظهٔ محلیِ وابستگی‌ها شکست خورد؛ wheelhouse لینوکسی و سرورهای در حال خدمت
+آزموده یا تغییر داده نشدند. ابزار گردآوری پاسخ اکنون انتظارهای صریح و محدود را می‌سنجد. بازبینی
+آفلاینِ گزارش خصوصیِ شش‌موردیِ پیشین، دو سلام را موفق و همان چهار موردِ فهرست میزبان و تمرکز فایل
+را ناموفق نشان داد، بی‌آنکه درخواست تازه‌ای به سرور برود. این کار پذیرش زنده نیست؛ معیار معناییِ
+انتشار مستقر همچنان `failed` است و اصلاح هنوز مستقر نشده است.
+
 New live semantic checkpoint, 2026-09-26 — A private, TLS-verified, authenticated six-case run
 completed with six HTTP 200 responses and server-side logout 204. English/Persian greetings were
 brief without monitoring terms. English/Persian multi-host availability questions fell back to
