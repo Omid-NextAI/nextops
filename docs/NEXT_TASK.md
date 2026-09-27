@@ -1,5 +1,24 @@
 # Next task / کار بعدی
 
+Ubuntu candidate follow-up, 2026-09-27 — The merged `d973785` candidate wheel has a private
+whole-artifact SHA-256, a matching wheel/installed-code digest, and a passing fresh Ubuntu 24.04.5
+offline-index install/import check. This closes the desktop packaging checkpoint only. The first
+serving-host action remains an approved change ID/window, named rollback owner, verified rollback
+access and fresh preflight; then guarded promotion and exact-code-digest, held-out bilingual
+answer/evidence, WAN isolation, restart and rollback qualification. No new serving-host mutation
+is authorized by the lab pass. The company license/legal review, offline signing trust, independent
+backup/isolated restore, certificates, notification, network policy and named production sign-off
+remain open.
+
+پیگیری نامزد Ubuntu، ۵ مهر ۱۴۰۵ — wheel نامزدِ commit ادغام‌شدهٔ `d973785` اکنون هش خصوصیِ کل
+فایل، تطبیق هش کد میان wheel و نصب، و نتیجهٔ موفقِ نصب و واردکردن ماژول‌ها در محیط تازهٔ Ubuntu
+24.04.5 بدون فهرست بسته‌ها دارد. این فقط گام بسته‌بندی میزکار را می‌بندد. نخستین اقدام روی سرور
+همچنان به شناسه و پنجرهٔ تغییر مصوب، مسئول نام‌دارِ بازگشت، دسترسیِ آزموده‌شده برای بازگشت و
+پیش‌بررسی تازه وابسته است. سپس استقرار محافظت‌شده و تطبیق هش کدِ همان انتشار، سنجش انسانیِ
+پاسخ و شاهدِ پرسش‌های کنارگذاشته‌شدهٔ دوزبانه، قطع WAN، شروع دوباره و بازگشت انجام شود. موفقیت
+آزمایشگاه اجازهٔ تغییر تازه روی سرور نمی‌دهد. مجوز پروژه و بازبینی حقوقی، اعتمادِ امضای آفلاین،
+پشتیبان مستقل و بازیابی ایزوله، گواهی، اعلان، سیاست شبکه و تأیید نام‌دار تولید همچنان بازند.
+
 Answer-code correlation follow-up, 2026-09-27 — The undeployed source can now compare answer
 response code bytes to a reviewed wheel digest, and local equivalence/negative tests pass. Rebuild
 the immutable candidate from reviewed source and independently verify its whole-wheel SHA-256;
