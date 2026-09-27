@@ -2,8 +2,9 @@
 
 [فارسی](../fa/DEPLOYMENT_DOSSIERS.md) · [Index](INDEX.md) · [Server plan](SERVER_PLAN.md) · [Storage gate](../STORAGE_PLAN.md)
 
-For the exact first actions, provisioning order, read-only guest commands, and installation
-holds, use the [server start checklist](SERVER_START_CHECKLIST.md) before opening a change.
+For the current controlled deployment's first approved-change actions, read-only guest checks and
+installation holds, use the [server start checklist](SERVER_START_CHECKLIST.md). The original VM
+creation order is retained in the [server plan](SERVER_PLAN.md) for a separately authorized rebuild.
 
 **Status: deployer handoff contract with guarded OS-package installers, not a complete product installer or deployment authorization.** The four YAML dossiers retain the accepted sizing, boundaries, dependencies, paths, command templates and private-input references. The matching scripts cover only the authenticated offline package layer. A separate controlled deployment now has passed the runtime gates recorded in the [release status](../status/current-release.yaml); those observations do not turn these package installers into complete product installers.
 
@@ -71,6 +72,10 @@ A successful parse or schema check proves structure only. It does not verify pri
 
 ## Safe deployment workflow
 
+The sequence below applies to a separately authorized new or rebuilt guest. The four controlled
+guests already exist; an application-release promotion must follow the current checklist and its
+exact change record, not recreate these VMs or replay package-layer installation.
+
 1. **Reconcile reality.** Determine whether each VM or a suitable Zabbix instance already exists. Never subtract or create it twice. Refresh host and DS-C evidence at the approved change window.
 2. **Close required inputs.** A server cannot advance while any input required for its next phase is `missing`, `pending_authorization`, or `not_run`.
 3. **Lock artifacts.** Record immutable versions, checksums/signatures, licenses, transitive dependencies, build flags, and one compatible rollback set. Prepare a complete offline bundle with no production credentials.
@@ -82,6 +87,10 @@ A successful parse or schema check proves structure only. It does not verify pri
 9. **Promote or roll back.** Promotion requires the dossier gates plus ZBX/OFF cases applicable to the milestone. Roll back on the listed triggers; reconcile unknown outcomes instead of retrying blindly.
 
 ## Server-specific stop conditions
+
+These dossier holds apply to a new or rebuilt guest. For an existing guest, preserve its accepted
+boundaries and use the current release manifest and server-start checklist to identify the next
+unpassed gate; do not interpret the build-time holds below as evidence that a service is absent.
 
 ### `nextops-app`
 
