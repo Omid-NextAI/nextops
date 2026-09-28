@@ -1,5 +1,19 @@
 # Project state / وضعیت پروژه
 
+Merged greeting candidate, 2026-09-28 — PR #28 passed all five hosted CI jobs and merged at
+`b868e3e`. A new unsigned wheel built without a package index matched its whole-file hash between
+Windows and Ubuntu. Its code digest matched the source tree, wheel and fresh Ubuntu 24.04.5
+installation. Hash-locked dependencies, `pip check`, API/native imports and ten synthetic
+installed-answer checks passed. No live model generation, serving-host operation, WAN isolation
+or production gate ran; the serving application's failed semantic gate is unchanged.
+
+نامزد ادغام‌شدهٔ اصلاح سلام، ۶ مهر ۱۴۰۵ — هر پنج کار CI در PR شمارهٔ ۲۸ موفق شد و تغییر در
+`b868e3e` ادغام شد. wheel تازه و بدون امضا، بی‌نیاز از فهرست بسته‌ها ساخته شد و هش کل فایل
+در Windows و Ubuntu یکسان بود. هش کد نیز میان درخت منبع، wheel و نصب تازهٔ Ubuntu 24.04.5
+تطبیق داشت. نصب وابستگی‌های دارای هش، `pip check`، واردکردن API و ماژول‌های بومی و ده آزمون
+ساختگیِ پاسخ در بستهٔ نصب‌شده موفق بود. تولید زندهٔ مدل، عملیات سرور، قطع WAN یا معیار تولید
+اجرا نشد؛ شکست معیار معناییِ برنامهٔ مستقر تغییری ندارد.
+
 Greeting relevance source guard, 2026-09-27 — The undeployed application source now replaces an
 unrelated model response to a greeting-only English/Persian general question with a short localized
 greeting. A relevant short model greeting is retained, and the browser fallback notice no longer

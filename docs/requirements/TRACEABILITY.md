@@ -21,6 +21,11 @@ shows a labelled local fallback without live-status claims; a local browser fixt
 notice. Deployment and live semantic review
 remain open.
 
+Merged-package trace (sections 21, 25 and 44, 2026-09-28): `b868e3e` passed source CI and its
+unsigned wheel installed with hash-locked dependencies in fresh Ubuntu without a package index.
+Whole-wheel hashes agreed between Windows and Ubuntu; source/wheel/installed code digests matched.
+Ten synthetic installed-answer checks passed, not live model or serving-release acceptance.
+
 Release-correlation trace (sections 25 and 44, 2026-09-27): source-only code computes a bounded
 package-source/local-asset digest at application start and returns it only with successful
 authenticated answer responses. The private capture compares it to an offline candidate-wheel
@@ -45,6 +50,11 @@ This is not serving-host deployment, live AI/evidence acceptance or release sign
 جایگزینی محلی و دارای برچسب نشان می‌دهد و آزمون مرورگرِ محلی نیز اعلان آن را بررسی می‌کند،
 بی‌آنکه وضعیت زنده ادعا شود؛ استقرار و بازبینی معناییِ
 زنده هنوز باقی است.
+
+ردیابی بستهٔ ادغام‌شده (بخش‌های ۲۱، ۲۵ و ۴۴، ۶ مهر ۱۴۰۵): کدِ `b868e3e`، آزمون CI را گذراند
+و wheel بدون امضای آن همراه وابستگی‌های دارای هش، در Ubuntu تازه بدون فهرست بسته‌ها نصب شد.
+هش کل wheel در Windows و Ubuntu یکسان و هش کدِ منبع، wheel و نصب نیز منطبق بود. ده آزمون
+ساختگیِ پاسخ در بستهٔ نصب‌شده موفق بود؛ این نتیجه پذیرش مدل زنده یا انتشارِ در حال خدمت نیست.
 
 ردیابیِ هم‌بستگی انتشار (بخش‌های ۲۵ و ۴۴، ۵ مهر ۱۴۰۵): کدِ هنوز مستقرنشده هنگام آغاز برنامه
 هش محدودِ کد بسته و فایل‌های محلیِ رابط را محاسبه و فقط همراه پاسخ موفقِ احرازهویت‌شده برمی‌گرداند.

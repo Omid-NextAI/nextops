@@ -1,5 +1,19 @@
 # Next task / کار بعدی
 
+Merged-candidate follow-up, 2026-09-28 — The `b868e3e` unsigned wheel and its fresh Ubuntu
+package-boundary checks pass; private hashes and the exact commands are recorded. Do not rebuild
+it unless source changes. The next serving checkpoint remains an approved change ID/window,
+named rollback owner, verified rollback access and fresh preflight. After guarded promotion,
+verify the response code digest and run held-out bilingual answer/evidence review plus the
+exact-release offline/restart/rollback gates. Signing, recovery and other owner gates remain open.
+
+پیگیری نامزد ادغام‌شده، ۶ مهر ۱۴۰۵ — wheel بدون امضای `b868e3e` و آزمون مرز بسته در نصب
+تازهٔ Ubuntu موفق‌اند؛ هش‌ها و فرمان‌های دقیق در رکورد خصوصی ثبت شده‌اند. تا تغییر کد، ساخت
+دوباره لازم نیست. گام بعد روی سرور همچنان شناسه و پنجرهٔ تغییر مصوب، مسئول نام‌دارِ بازگشت،
+دسترسی آزموده‌شدهٔ بازگشت و پیش‌بررسی تازه است. پس از استقرار محافظت‌شده، هش کدِ پاسخ تطبیق
+داده شود و پاسخ‌های دوزبانهٔ کنارگذاشته‌شده با شواهدشان، همراه معیارهای آفلاین، شروع دوباره و
+بازگشتِ همان انتشار سنجیده شوند. امضا، بازیابی و دیگر معیارهای وابسته به مالک همچنان بازند.
+
 Greeting relevance follow-up, 2026-09-27 — The source-only bilingual greeting guard and UI
 notice pass API and local browser fixtures. Keep the serving-app semantic gate `failed`; this is not a live
 model or browser acceptance. In the next authorized serving-host change window, rebuild and verify

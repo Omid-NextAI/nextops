@@ -68,6 +68,20 @@ record remain outside Git. This is a desktop package/install check: WAN was not 
 model or database service was started, and the serving release and its failed answer-quality
 gate did not change. The wheel is unsigned and not approved for promotion.
 
+On 2026-09-28, PR #28 passed all five hosted CI jobs and merged at `b868e3e`. Its new wheel
+built with `uv build --offline --no-sources --wheel`; Windows and Ubuntu independently matched
+whole-wheel SHA-256 `dba186458c7b12ea56bfed7e8dde4be761cd5d792feabb34be0543bbf0e6991d`.
+The source tree, wheel, fresh Ubuntu 24.04.5 installed package and API startup digest all matched
+`c8a3b566ba501dd15c904555f00f5589499f746655d489840502c3d94599ebd5`. The unchanged Linux
+wheel set revalidated against `uv.lock`; 24 applicable packages and the app installed without
+an index, and `pip check` plus API/native imports passed. Ten synthetic installed-package cases
+covered rejected unrelated greetings, retained bilingual greetings, greeting-plus-status redirects
+and truncated output; both bundled fallback notices were present. The private runner and record
+remain outside Git. WSL reported an unmirrored localhost proxy under NAT; networking was not
+changed or WAN-disconnected. No serving-host transfer, service, database, model generation,
+browser answer, rollback or production gate ran. The wheel remains unsigned and unapproved for
+promotion; the serving semantic gate remains `failed`.
+
 `scripts/evaluate_live_app_semantics.py` captures at most twelve fresh questions against the
 authenticated private HTTPS application endpoint. It accepts a protected endpoint reference,
 login file, local CA certificate, and a private JSON corpus with `id`, `mode` (`general`,
