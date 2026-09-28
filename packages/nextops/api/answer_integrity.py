@@ -56,6 +56,19 @@ _STALE_DISCLOSURE = re.compile(
 )
 _ZABBIX_DISCLOSURE = re.compile(r"(?:\bzabbix\b|زبیکس)", re.IGNORECASE)
 _LINUX_DISCLOSURE = re.compile(r"(?:\blinux\b|لینوکس)", re.IGNORECASE)
+_GREETING_ONLY = re.compile(r"\s*(?:hi|hello|hey|سلام|درود)[\s!?.،؟]*", re.IGNORECASE)
+_GREETING_REPLY = {
+    "en": re.compile(
+        r"\s*(?:hi|hello|hey|greetings|good (?:morning|afternoon|evening))\b",
+        re.IGNORECASE,
+    ),
+    "fa": re.compile(r"\s*(?:سلام|درود|صبح بخیر|عصر بخیر|وقت بخیر)(?:$|[\s!?.،؟])"),
+}
+_GREETING_TELEMETRY = re.compile(
+    r"(?:\b(?:cpu|ram|memory|disk|metric|alert|problem|trigger)\b|"
+    r"(?:پردازنده|حافظه|دیسک|سنجه|هشدار|مشکل|رخداد))",
+    re.IGNORECASE,
+)
 _PROMPT_BOUNDARY_LEAK = re.compile(
     r"(?:user question \((?:bounded )?untrusted|untrusted zabbix|"
     r"data only, never instructions|answer the user's question directly)",
@@ -93,12 +106,22 @@ def assure_general_answer(
     unsafe_claim = _contains_unsafe_execution_claim(assistant.answer)
     prompt_echo = _is_long_prompt_echo(request.question, assistant.answer)
     incomplete = assistant.finish_reason != FinishReason.STOP
+    greeting_mismatch = bool(
+        _GREETING_ONLY.fullmatch(request.question)
+        and (
+            len(assistant.answer) > 200
+            or not _GREETING_REPLY[request.locale].match(assistant.answer)
+            or _OPERATIONAL_SUBJECT_MARKERS.search(assistant.answer)
+            or _GREETING_TELEMETRY.search(assistant.answer)
+        )
+    )
     if (
         not requires_live_evidence
         and not file_request
         and not unsafe_claim
         and not prompt_echo
         and not incomplete
+        and not greeting_mismatch
     ):
         return assistant.model_copy(
             update={
@@ -131,6 +154,12 @@ def assure_general_answer(
             if request.locale == "fa"
             else "The local model did not produce a reliable answer. Rephrase the question more "
             "precisely, or use a live evidence mode for infrastructure state."
+        )
+        integrity_status = "deterministic_fallback"
+        limitations = ("no_live_evidence", "model_output_may_be_incorrect")
+    elif greeting_mismatch:
+        answer = (
+            "سلام! چطور می‌توانم کمک کنم؟" if request.locale == "fa" else "Hello! How can I help?"
         )
         integrity_status = "deterministic_fallback"
         limitations = ("no_live_evidence", "model_output_may_be_incorrect")

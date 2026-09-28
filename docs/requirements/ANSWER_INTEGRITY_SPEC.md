@@ -27,6 +27,9 @@ an operation, and must preserve stale/partial qualifiers even when generated pro
   only from typed evidence. Untrusted names are not copied into this fallback.
 - A long general-mode prompt echo is replaced with a deterministic retry notice; short natural
   greetings such as `Hi` and `سلام` remain valid answers.
+- For a greeting-only general question, reject a model reply that does not begin with a short
+  greeting in the selected language or introduces unrequested operational subjects or telemetry.
+  Show a localized greeting as a deterministic fallback, without implying live status was checked.
 - A model completion stopped by the output-token limit is incomplete, even if it contains the
   expected source words. It must not receive `evidence_bounded`; a live route uses a clearly
   limited evidence-only fallback, and general mode asks for a narrower question.
@@ -96,6 +99,9 @@ warning.
 ## Acceptance criteria
 
 - `Hi` and `سلام` remain short greetings and do not introduce Zabbix state.
+- Unrelated model replies to greeting-only questions are replaced in English and Persian; a short
+  relevant model greeting remains model-labelled and a genuine status question is not mistaken for
+  a greeting-only request.
 - General mode does not answer a current infrastructure-status question as fact.
 - A generated claim that NextOps restarted, fixed, deployed or changed infrastructure is never
   returned to the user.
@@ -114,8 +120,9 @@ warning.
 
 ## Tests and evidence
 
-Unit/API tests cover contract consistency, scope redirect, false execution claims, evidence-bounded
-acceptance, stale/partial fallback and prompt-injection containment. The existing private live
+Unit/API tests cover contract consistency, scope redirect, false execution claims, greeting-only
+relevance, evidence-bounded acceptance, stale/partial fallback and prompt-injection containment.
+The existing private live
 evaluation report remains outside Git because deployment evidence may contain operational metadata.
 Passing tests qualify only the named cases and revision.
 

@@ -12,6 +12,14 @@ focused evidence the default browser detail. Full authorized evidence remains av
 explicit expansion and in the audited API response. API/browser fixtures pass; this candidate is
 not deployed or live-qualified. The serving release's expanded semantic gate is `failed`.
 
+A further source-only guard now checks greeting-only general questions. If the model replies with
+unrelated text or introduces operational status or telemetry, the application shows a short local
+greeting instead and labels it `deterministic_fallback`; a relevant short model greeting remains
+`model_unverified`. The browser uses a general-mode notice that does not imply evidence was
+retrieved. API and local browser fixture tests pass, but this change is not deployed or live-qualified and does not
+repair the serving release's failed semantic gate. It is a narrow intent check, not a general
+factual or relevance verifier.
+
 ## Answer-completion correction and controlled promotion — 2026-09-26
 
 A fresh live browser review exposed a 128-token incident answer that appeared unfinished while the

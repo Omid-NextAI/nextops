@@ -212,6 +212,17 @@ def _fixture_app() -> FastAPI:
             "queued_requests": 0,
         }
 
+    @app.post("/api/v1/assistant/generate")
+    async def general(request: Request) -> dict[str, Any]:
+        payload = await request.json()
+        assistant = _assistant(str(payload["locale"]))
+        assistant["answer"] = (
+            "سلام! چطور می‌توانم کمک کنم؟" if payload["locale"] == "fa" else "Hello! How can I help?"
+        )
+        assistant["integrity_status"] = "deterministic_fallback"
+        assistant["limitations"] = ["no_live_evidence", "model_output_may_be_incorrect"]
+        return assistant
+
     @app.get("/api/v1/monitoring/summary")
     async def summary() -> dict[str, Any]:
         return _summary()
@@ -373,6 +384,29 @@ def test_phase2_panel_supports_incident_evidence_and_persian_rtl(
         expect(page.get_by_role("button", name="ورود امن")).to_be_visible()
         assert page.evaluate("sessionStorage.getItem('nextops-session')") is None
         assert app.state.logout_requests == 1
+        browser.close()
+
+
+def test_general_fallback_notice_does_not_imply_live_evidence(
+    browser_server: tuple[str, FastAPI],
+) -> None:
+    base_url, _ = browser_server
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        _login(page, base_url)
+        page.get_by_label("Question").fill("Hi")
+        page.get_by_role("button", name="Ask assistant").click()
+
+        expect(page.locator("#answer")).to_have_text("Hello! How can I help?")
+        expect(page.locator("#integrityNotice")).to_contain_text(
+            "does not report live infrastructure status"
+        )
+        expect(page.locator("#evidencePanel")).to_be_hidden()
+        page.locator("#languageButton").click()
+        expect(page.locator("#integrityNotice")).to_contain_text(
+            "گزارشی از وضعیت زندهٔ زیرساخت نیست"
+        )
         browser.close()
 
 

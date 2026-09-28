@@ -15,6 +15,12 @@ least one configured automatic expectation per case for a successful command exi
 longer question echoed as its answer. This source test does not repair the failed serving-release
 semantic gate, verify backend identity or replace held-out human review.
 
+Greeting-relevance trace (section 25, 2026-09-27): source-only API fixtures now reject unrelated
+operational or non-greeting replies to greeting-only English/Persian questions. The application
+shows a labelled local fallback without live-status claims; a local browser fixture confirms the
+notice. Deployment and live semantic review
+remain open.
+
 Release-correlation trace (sections 25 and 44, 2026-09-27): source-only code computes a bounded
 package-source/local-asset digest at application start and returns it only with successful
 authenticated answer responses. The private capture compares it to an offline candidate-wheel
@@ -33,6 +39,12 @@ This is not serving-host deployment, live AI/evidence acceptance or release sign
 دست‌کم یک انتظارِ خودکار داشته باشد و تکرارِ پرسش بلند به‌عنوان پاسخ را نیز خطا می‌داند. این
 آزمونِ کد، شکست معیار معناییِ انتشار مستقر را برطرف نمی‌کند، شناسهٔ کدِ پشت سرویس را تأیید
 نمی‌کند و جای بازبینی انسانیِ پرسش‌های کنارگذاشته‌شده را نمی‌گیرد.
+
+ردیابیِ پاسخ به سلام (بخش ۲۵، ۵ مهر ۱۴۰۵): آزمون‌های API با دادهٔ آزمایشی اکنون پاسخِ عملیاتیِ
+ناخواسته یا پاسخِ غیرسلام به پرسشِ محدود به سلام را در فارسی و انگلیسی رد می‌کنند. برنامه
+جایگزینی محلی و دارای برچسب نشان می‌دهد و آزمون مرورگرِ محلی نیز اعلان آن را بررسی می‌کند،
+بی‌آنکه وضعیت زنده ادعا شود؛ استقرار و بازبینی معناییِ
+زنده هنوز باقی است.
 
 ردیابیِ هم‌بستگی انتشار (بخش‌های ۲۵ و ۴۴، ۵ مهر ۱۴۰۵): کدِ هنوز مستقرنشده هنگام آغاز برنامه
 هش محدودِ کد بسته و فایل‌های محلیِ رابط را محاسبه و فقط همراه پاسخ موفقِ احرازهویت‌شده برمی‌گرداند.
@@ -81,7 +93,7 @@ snapshot روزانهٔ ESXi خبر داده است. نیازهای پشتیبا
 | 23 | Incident correlation / هم‌بستگی رخداد | `knowledge`, `application` | 2,6 | Time-windowed cross-source evidence / شواهد چندمنبعی زمان‌مند | P |
 | 24 | RCA / تحلیل علت ریشه‌ای | `knowledge`, `application` | 2,6 | Hypotheses versus verified causes / تفکیک فرضیه و علت تأییدشده | P |
 | 25 | LLM abstraction / رابط مدل | `packages/nextops/inference`, `packages/nextops/api/answer_integrity.py`, `scripts/evaluate_live_app_semantics.py` | 1–2 | Pinned local CPU model and bounded scheduler remain deployed; the six-case live semantic probe failed on file focus and multi-host scope. Optional literal checks reproduce four failures from the saved report without new server access; source repair is not deployed and held-out human review remains / مدل محلی و صف محدود مستقرند؛ سنجش زندهٔ شش‌موردی در تمرکز فایل و دامنهٔ چند میزبان شکست خورد. کنترل واژگانیِ اختیاری چهار شکست گزارش پیشین را بی‌دسترسی تازه به سرور بازتولید می‌کند؛ اصلاح مستقر نشده و بازبینی انسانیِ مستقل باقی است | I |
-| 26 | Offline mode / حالت آفلاین | `deploy/server-dependencies`, `deploy/inference`, `scripts` | 1,2,8 | Earlier Internet-blocked cold start passed. Locked dependencies now stage as hash-matched Linux wheels and install with the candidate offline on Windows, but Ubuntu installation, current-app server-side WAN/reboot and permanent host egress remain unqualified / شروع سردِ بدون اینترنت در کارزار پیشین موفق بود. وابستگی‌های قفل‌شده به‌صورت wheel لینوکسِ دارای هش آماده و همراه برنامه روی Windows آفلاین نصب شدند، اما نصب Ubuntu، آزمون WAN و راه‌اندازیِ انتشار جاری در سمت سرور و سیاست دائمی خروج میزبان هنوز پذیرفته نیستند | I |
+| 26 | Offline mode / حالت آفلاین | `deploy/server-dependencies`, `deploy/inference`, `scripts` | 1,2,8 | Earlier Internet-blocked cold start passed. Hash-locked Linux wheels and the candidate installed in a fresh Ubuntu 24.04.5 desktop lab with the index disabled; current-app server-side WAN/reboot and permanent host egress remain unqualified / شروع سردِ بدون اینترنت در کارزار پیشین موفق بود. wheelهای لینوکسیِ دارای هش و نامزد برنامه در آزمایشگاه تازهٔ Ubuntu 24.04.5 میزکار، بدون فهرست بسته‌ها نصب شدند؛ آزمون WAN و راه‌اندازیِ انتشار جاری در سرور و سیاست دائمی خروج میزبان هنوز پذیرفته نیستند | I |
 | 27 | Memory / حافظه | `knowledge` | 6 | Scoped, fresh conversation/incident memory / حافظهٔ محدود و تازه | P |
 | 28 | Database abstraction / رابط پایگاه داده | `packages/nextops/persistence`, `migrations` | 1 | Baseline, roles and durability tested on real PostgreSQL; production lock/backup and alternatives remain / migration و role آزموده؛ تولید و جایگزین باقی است | I |
 | 29 | API / رابط برنامه | `packages/nextops/api`, `packages/nextops/inference`, `contracts` | 1–2 | Authenticated app and inference routes, correlation, safe readiness and structured errors tested; later domains remain / مسیر برنامه و inference و خطای ساخت‌یافته آزموده؛ دامنه‌های بعدی باقی است | I |

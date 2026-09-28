@@ -37,6 +37,7 @@ const translations = {
     modelIntegrityNotice: "Model-generated text has no live evidence; verify important facts independently.",
     evidenceIntegrityNotice: "This answer passed bounded source checks, not a factual or relevance review. Verify it against the evidence below.",
     fallbackIntegrityNotice: "The generated answer was incomplete or failed a required check. The evidence-only summary below may not answer your full question.",
+    generalFallbackIntegrityNotice: "The model reply failed a required check. The displayed local fallback does not report live infrastructure status.",
     focusedIntegrityNotice: "This is a deterministic, scope-limited summary of approved read-only observations, not a verified model explanation.",
     fileLimitNotice: "System file names and contents are outside the current read-only collector scope. Incident mode can show approved mount capacity only.",
     hostInventoryLimitNotice: "This Zabbix view does not contain reachability states for the authorized host inventory; it cannot identify unavailable hosts.",
@@ -94,6 +95,7 @@ const translations = {
     modelIntegrityNotice: "این متن را مدل و بدون شاهد زنده تولید کرده است؛ اطلاعات مهم را به‌طور مستقل راستی‌آزمایی کنید.",
     evidenceIntegrityNotice: "این پاسخ فقط کنترل‌های محدودِ منبع را گذرانده است، نه بررسی درستی یا ارتباط با پرسش؛ آن را با شواهد زیر تطبیق دهید.",
     fallbackIntegrityNotice: "پاسخ تولیدشده ناتمام بود یا یکی از کنترل‌های لازم را نگذرانده است. خلاصهٔ مبتنی بر شواهد ممکن است به همهٔ بخش‌های پرسش شما پاسخ ندهد.",
+    generalFallbackIntegrityNotice: "پاسخ مدل یکی از کنترل‌های لازم را نگذرانده است. متن جایگزینِ داخلی، گزارشی از وضعیت زندهٔ زیرساخت نیست.",
     focusedIntegrityNotice: "این متن، خلاصه‌ای محدود به دامنهٔ مشاهدات فقط‌خواندنیِ مجاز است؛ نه توضیح راستی‌آزمایی‌شدهٔ مدل.",
     fileLimitNotice: "نام و محتوای فایل‌های سیستم در دامنهٔ گردآورندهٔ فقط‌خواندنیِ کنونی نیستند. حالت بررسی رخداد فقط ظرفیت نقاط اتصالِ مجاز را نشان می‌دهد.",
     hostInventoryLimitNotice: "این نمای زبیکس وضعیت دسترسیِ فهرست میزبان‌های مجاز را ندارد و نمی‌تواند میزبان‌های خارج از دسترس را مشخص کند.",
@@ -541,7 +543,10 @@ byId("assistantForm").addEventListener("submit", async event => {
       deterministic_focus: "focusedIntegrityNotice",
       scope_redirect: "redirectIntegrityNotice"
     };
-    const integrityKey = assistant.limitations?.includes("file_listing_unavailable") ? "fileLimitNotice" : assistant.limitations?.includes("host_inventory_unavailable") ? "hostInventoryLimitNotice" : integrityKeys[assistant.integrity_status] || "modelIntegrityNotice";
+    let integrityKey = integrityKeys[assistant.integrity_status] || "modelIntegrityNotice";
+    if (!evidenceBacked && assistant.integrity_status === "deterministic_fallback") integrityKey = "generalFallbackIntegrityNotice";
+    if (assistant.limitations?.includes("host_inventory_unavailable")) integrityKey = "hostInventoryLimitNotice";
+    if (assistant.limitations?.includes("file_listing_unavailable")) integrityKey = "fileLimitNotice";
     byId("integrityNotice").dataset.i18n = integrityKey;
     byId("integrityNotice").textContent = translations[state.language][integrityKey];
     byId("integrityNotice").classList.toggle("fallback", ["deterministic_fallback", "deterministic_focus"].includes(assistant.integrity_status));
