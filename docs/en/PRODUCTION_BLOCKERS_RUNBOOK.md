@@ -2,7 +2,7 @@
 
 [فارسی](../fa/PRODUCTION_BLOCKERS_RUNBOOK.md) · [Recovery contract](../../deploy/recovery/README.md) · [Current status](../status/current-release.yaml)
 
-**Status: owner action required; this document does not close any gate.** Updated: 2026-09-26.
+**Status: owner action required; this document does not close any gate.** Updated: 2026-09-28.
 
 Current delivery sequence: the owner reports daily ESXi snapshots of all four servers and has
 deferred independent recovery work for this local deployment. Sections 3–4 below are retained as
@@ -40,11 +40,13 @@ an expected value is missing or different; do not substitute a guessed path or d
 | Certificate operator delivery | Partial | Choose a LAN-local notification route and named primary/backup recipients | Configure Zabbix media, user media, trigger action and recovery messages | Test and real controlled problem/recovery reach both recipients |
 | Certificate rotation/rollback | Not run | Supply two CA-signed replacement pairs and approve a maintenance window | Stage, verify, rotate, test and roll back each frontend under a guard | Both rotation and rollback pass with ordinary TLS validation |
 | Dependency/license/SBOM/release integrity | Open | Name the legal/security approver and approve the acceptance policy | Generate/review SBOMs, license inventory, vulnerability evidence and offline verification material | No unapproved dependency/license or unresolved release-integrity finding |
+| Repository merge enforcement | Absent on 2026-09-28 | Approve the repository policy, name an independent eligible reviewer and have an authorized administrator configure it | Recheck effective protection, trusted CI sources and an approved non-serving denied-merge test; follow [development handoff](DEVELOPMENT.md#verified-repository-policy-gap-and-owner-setup) | Missing approval or failed required CI prevents merge, including administrator bypass |
 | Host network policy | Partial | Approve management SSH source ranges and DNS/time/maintenance-proxy egress routes | Apply guarded host-wide allowlists and repeat fresh offline and maintenance checks; preserve the accepted connector-only boundary | Authorized LAN/proxy operations work while direct public egress and unapproved SSH sources are denied |
 | Final production decision | Not run | Name the production approver and sign the bounded accepted profile | Re-run all production gates and publish only sanitized results | No required gate is failed, partial or not run |
 
 The first four IDs are the exact machine-readable blockers in
-`deploy/recovery/recovery-profile.yaml`. The other five are explicit current project-state gates.
+`deploy/recovery/recovery-profile.yaml`. The other six are current project-state gates or named
+subchecks of the release-integrity gate. Repository policy is not deployment permission.
 
 ## 2. Create the private owner record
 

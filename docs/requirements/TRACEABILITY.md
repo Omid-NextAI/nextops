@@ -1,5 +1,15 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Repository-policy trace (active prompt section 8, 2026-09-28): read-only GitHub branch and
+ruleset results confirm absent merge enforcement despite five successful trusted CI checks.
+The paired development/runbook handoff covers administrator setup and denied-merge verification;
+no setting changed and `release_supply_chain_review` remains partial.
+
+ردیابی سیاست مخزن (بخش ۸ پرامپت فعال، ۶ مهر ۱۴۰۵): دادهٔ فقط‌خواندنی شاخه و rulesetهای GitHub،
+نبود الزام ادغام را با وجود پنج کنترل موفق و معتبرِ CI تأیید کرد. راهنمای دوزبانهٔ توسعه و موانع،
+تنظیم توسط مدیر و آزمون رد ادغام را مشخص می‌کند؛ تنظیمی تغییر نکرد و `release_supply_chain_review`
+همچنان ناقص است.
+
 Source: [master prompt, original Appendix A](NEXTOPS_MASTER_PROMPT.md). All 51 original sections are retained. Paths below are planned or now-started implementation locations. `P` = planned; `D` = documentation drafted; `A` = owner-accepted documentation gate, not runtime implementation; `I` = a tested implementation slice exists but the full requirement is incomplete. Phase numbers follow the revised roadmap, not the original fourteen-phase order.
 
 Current delivery exception (2026-09-26): the owner deferred independent recovery from the local
