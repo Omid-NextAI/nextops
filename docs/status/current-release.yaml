@@ -372,6 +372,8 @@ acceptance_gates:
   - id: release_supply_chain_review
     status: partial
     evidence:
+      - docs/en/DEVELOPMENT.md
+      - docs/fa/DEVELOPMENT.md
       - docs/PROJECT_STATE.md
       - docs/en/TESTING.md
       - docs/fa/TESTING.md

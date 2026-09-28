@@ -1,5 +1,17 @@
 # Project state / وضعیت پروژه
 
+Repository enforcement audit, 2026-09-28 — At `de52e43`, GitHub's read-only branch metadata
+reported `main` unprotected and required status checks off; the repository/inherited ruleset
+list was empty. All five check runs succeeded from GitHub Actions app `15368`, but are not
+required for merge. The paired development guide and blocker runbook now specify the owner
+handoff. No administration setting or serving host changed; release-integrity review stays partial.
+
+ممیزی الزامِ ادغام در مخزن، ۶ مهر ۱۴۰۵ — در `de52e43`، دادهٔ فقط‌خواندنی GitHub، شاخهٔ `main`
+را بدون حفاظت و الزام کنترل وضعیت را غیرفعال نشان داد؛ فهرست rulesetهای مخزن و قواعد
+به‌ارث‌رسیده خالی بود. هر پنج کنترل از GitHub Actions با شناسهٔ `15368` موفق‌اند، ولی شرط ادغام
+نیستند. راهنمای توسعهٔ دوزبانه و راهنمای موانع اکنون اقدام لازمِ مالک را مشخص می‌کنند. تنظیم
+مدیریتی یا سروری تغییر نکرد؛ بازبینی یکپارچگی انتشار همچنان ناقص است.
+
 Merged greeting candidate, 2026-09-28 — PR #28 passed all five hosted CI jobs and merged at
 `b868e3e`. A new unsigned wheel built without a package index matched its whole-file hash between
 Windows and Ubuntu. Its code digest matched the source tree, wheel and fresh Ubuntu 24.04.5

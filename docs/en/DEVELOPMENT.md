@@ -46,9 +46,43 @@ PostgreSQL 16/17 integration tests. It has read-only default permissions and no
 infrastructure credential or management-network route. The private wheel-backed
 SBOM enrichment is an offline local evidence step, not hosted CI or legal approval;
 offline signing, hardware/lab acceptance, serving-host package application and
-branch-protection verification remain separate.
+branch-protection enforcement remain separate.
 
 Untrusted pull-request code must run in disposable isolated workers with no production secrets or management-LAN access. Never attach a privileged persistent G10 runner to arbitrary PR execution. Do not execute an untrusted checkout under `pull_request_target` with secrets. Trusted hardware tests need a separate authorized and resource-limited workflow.
+
+## Verified repository-policy gap and owner setup
+
+Read-only GitHub checks on 2026-09-28 at `de52e43` reported `main` as unprotected, status-check
+enforcement off, and no repository or inherited rulesets. All five CI checks passed, but their
+success does not enforce a merge policy. This is an open part of `release_supply_chain_review`.
+The connected GitHub installation excludes administration access; no settings were changed.
+
+The owner must approve the policy and name an eligible independent reviewer first. Current
+`CODEOWNERS` names only `AmirMo10`; do not create an unfulfillable code-owner approval gate.
+An authorized repository administrator can use Settings → Branches to create a classic protection
+rule matching `main`. See the [GitHub setup guide](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule).
+Proposed NextOps policy, not an approval:
+
+- Require a PR, an independent approval, review again after new commits, and code-owner approval
+  after reviewer eligibility is established.
+- Require an up-to-date branch and these five checks from GitHub Actions: `Quality and unit tests`,
+  `PostgreSQL 16 integration`, `PostgreSQL 17 integration`, `Browser acceptance`, `Secret scan`.
+  The observed check source was `github-actions`, app ID `15368`; recheck it when configuring.
+- Apply the restrictions to administrators; do not permit bypass, force pushes or branch deletion.
+
+With an already approved and authenticated GitHub CLI, the owner can inspect settings read-only:
+
+```powershell
+gh api repos/Omid-NextAI/nextops/branches/main --jq '{protected: .protected}'
+gh api 'repos/Omid-NextAI/nextops/rulesets?includes_parents=true'
+gh api repos/Omid-NextAI/nextops/branches/main/protection
+```
+
+The last endpoint needs repository administration read permission; a permission error is not
+evidence of absent protection. See the [REST permission reference](https://docs.github.com/en/rest/branches/branch-protection#get-branch-protection).
+Keep tokens out of commands, Git and chat. Acceptance needs effective-setting review and an approved
+non-serving PR test proving that missing review or failed checks prevent merge. Do not test by
+writing directly to `main`. Repository enforcement does not sign artifacts or authorize deployment.
 
 ## Release and deployment
 

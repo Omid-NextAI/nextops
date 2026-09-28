@@ -1,5 +1,18 @@
 # Next task / کار بعدی
 
+Repository-policy handoff, 2026-09-28 — Merge enforcement is confirmed absent, not merely
+unverified. The owner must approve the policy, arrange an independent eligible reviewer and
+use repository administration to configure the controls in the paired development guide.
+Recheck effective rules and denied-merge behavior before closing this release-integrity subcheck.
+No settings or serving change is authorized by this record. The qualified candidate remains
+available; its next serving step still needs a change window and named rollback owner/access.
+
+اقدام لازم برای سیاست مخزن، ۶ مهر ۱۴۰۵ — نبودِ الزام ادغام تأیید شده است، نه صرفاً بررسی‌نشده.
+مالک باید سیاست را تصویب، بازبین مستقلِ واجد شرایط تعیین و کنترل‌های راهنمای توسعهٔ دوزبانه را
+با اختیار مدیریتی مخزن تنظیم کند. پیش از بستن این کنترلِ یکپارچگی انتشار، قواعد مؤثر و ردِ
+ادغامِ نامجاز سنجیده شوند. این رکورد مجوز تغییر تنظیمات یا سرور نیست. نامزد آزموده‌شده موجود
+است؛ گام بعدی آن روی سرور همچنان پنجرهٔ تغییر و مسئول و دسترسیِ بازگشت لازم دارد.
+
 Merged-candidate follow-up, 2026-09-28 — The `b868e3e` unsigned wheel and its fresh Ubuntu
 package-boundary checks pass; private hashes and the exact commands are recorded. Do not rebuild
 it unless source changes. The next serving checkpoint remains an approved change ID/window,
