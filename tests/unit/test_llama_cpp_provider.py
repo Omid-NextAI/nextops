@@ -128,6 +128,41 @@ def test_provider_rejects_wrong_model_and_reports_safe_readiness() -> None:
     asyncio.run(scenario())
 
 
+@pytest.mark.parametrize("locale", ["en", "fa"])
+def test_general_purpose_does_not_use_evidence_only_instructions(locale: str) -> None:
+    async def scenario() -> None:
+        transport = StubTransport()
+        request = _request().model_copy(update={"purpose": "general", "locale": locale})
+        await LlamaCppProvider(_settings(), transport).generate(request)
+        prompt = transport.last_payload["messages"][0]["content"]
+        assert f"requested {locale} locale" in prompt
+        assert "Answer the user's actual question first" in prompt
+        assert "Explain general knowledge" in prompt
+        assert "no live system evidence" in prompt
+        assert "Restate each material observed event" not in prompt
+        assert "Never invent identifiers, numbers" not in prompt
+        assert "tools" not in transport.last_payload
+
+    asyncio.run(scenario())
+
+
+def test_larger_model_identity_is_exact_and_not_relabelled_as_baseline() -> None:
+    async def scenario() -> None:
+        transport = StubTransport()
+        settings = _settings().model_copy(update={"model_id": "nextops-qwen3-14b-q4-k-m"})
+        transport.generation["model"] = settings.model_id
+        provider = LlamaCppProvider(settings, transport)
+        result = await provider.generate(_request())
+        assert result.model_id == settings.model_id
+        assert (await provider.readiness()).model_id == settings.model_id
+        assert transport.last_payload["model"] == settings.model_id
+        transport.generation["model"] = "nextops-qwen3-8b-q4-k-m"
+        with pytest.raises(ApplicationError, match=r"inference\.provider_response_invalid"):
+            await provider.generate(_request())
+
+    asyncio.run(scenario())
+
+
 def test_provider_rejects_malformed_completion_without_raw_details() -> None:
     async def scenario() -> None:
         transport = StubTransport()

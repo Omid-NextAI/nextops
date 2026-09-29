@@ -2,7 +2,13 @@
 
 [فارسی](../fa/PRODUCTION_BLOCKERS_RUNBOOK.md) · [Recovery contract](../../deploy/recovery/README.md) · [Current status](../status/current-release.yaml)
 
-**Status: owner action required; this document does not close any gate.** Updated: 2026-09-28.
+**Status: remaining acceptance work; not a prerequisite form for development.** Updated: 2026-09-29.
+
+The owner retired the all-at-once decision form on 2026-09-29. Continued source development,
+local tests and bounded AI candidate evaluation do not wait for unrelated recovery, SMTP,
+license or certificate inputs. Request a missing decision only when the next concrete operation
+actually depends on it. This removes paperwork, not authentication, audit, artifact verification,
+rollback checks or the obligation to report failed/not-run production tests accurately.
 
 Current delivery sequence: the owner reports daily ESXi snapshots of all four servers and has
 deferred independent recovery work for this local deployment. Sections 3–4 below are retained as
@@ -48,65 +54,18 @@ The first four IDs are the exact machine-readable blockers in
 `deploy/recovery/recovery-profile.yaml`. The other six are current project-state gates or named
 subchecks of the release-integrity gate. Repository policy is not deployment permission.
 
-## 2. Create the private owner record
+## 2. Record only the next operation
 
-Run this on the Windows development desktop. It creates a private location outside the repository.
+There is no mandatory owner questionnaire or decision file. Engineering generates a change ID,
+records the applicable owner instruction, resolves observable settings through scoped preflight,
+and stores exact commands/results outside Git. Do not ask the owner to re-enter known values.
 
-```powershell
-$QualificationDir = Join-Path $HOME '.nextops\production-qualification'
-New-Item -ItemType Directory -Force -Path $QualificationDir | Out-Null
-$DecisionFile = Join-Path $QualificationDir 'owner-decisions.txt'
-New-Item -ItemType File -Force -Path $DecisionFile | Out-Null
-notepad $DecisionFile
-```
-
-Place this template in that file and replace every `REQUIRED` value. The recommended policy is a
-starting point, not an inferred business approval.
-
-```text
-change_id=REQUIRED
-owner_approver=REQUIRED
-recovery_operator=REQUIRED
-rollback_owner=REQUIRED
-maintenance_window=REQUIRED
-management_ssh_source_ranges=REQUIRED_PRIVATE_RECORD
-host_dns_time_proxy_egress_routes=REQUIRED_PRIVATE_RECORD
-
-destination_id=REQUIRED_NON_SECRET_ALIAS
-destination_type=dedicated_physical_or_separate_hypervisor
-independent_from_serving_guest=yes
-independent_from_serving_datastore=yes
-independent_from_serving_hypervisor=yes
-
-rpo_minutes=15
-rto_minutes=240
-full_backups_to_keep=4
-differential_backups_to_keep=14
-wal_days_to_keep=14
-file_snapshots_to_keep=30
-restore_test_cadence=quarterly
-
-key_custodian_primary=REQUIRED
-key_custodian_secondary=REQUIRED_DIFFERENT_PERSON
-offline_recovery_copy_location=REQUIRED_PRIVATE_REFERENCE
-
-notification_type=internal_smtp_or_approved_lan_route
-notification_owner_primary=REQUIRED
-notification_owner_backup=REQUIRED
-notification_recipient_primary=REQUIRED_PRIVATE_REFERENCE
-notification_recipient_backup=REQUIRED_PRIVATE_REFERENCE
-
-certificate_issuer=REQUIRED_PRIVATE_REFERENCE
-certificate_change_window=REQUIRED
-certificate_rollback_owner=REQUIRED
-
-license_approver=REQUIRED
-security_approver=REQUIRED
-production_approver=REQUIRED
-```
-
-Do not paste this file into chat. Send only the non-secret decisions and tell the engineering agent
-that the private record is complete.
+For a serving change, verify the exact target and candidate, available access, last-known-good
+artifacts, compatibility and a bounded rollback before changing anything. An explicit approval
+in the task can be recorded directly; do not invent approval for unrelated firewall changes,
+reboots, destructive storage work or unbounded load. Ask only for a genuinely missing decision
+needed by that operation. Future production sign-off and currently deferred recovery remain
+separate from ongoing AI bug fixes and model comparison.
 
 ## 3. Provision the independent recovery destination
 

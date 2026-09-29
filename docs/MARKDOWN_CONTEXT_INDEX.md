@@ -1,6 +1,6 @@
 # NextOps Markdown context index
 
-Updated: 2026-09-26
+Updated: 2026-09-29
 
 This is the durable inventory and routing map for project-owned Markdown. It lets an agent remember
 that every document exists without flooding each task with every file. The documentation validator
@@ -89,7 +89,7 @@ Markdown file is added, renamed, or removed.
 - `docs/en/PHASE_0_REPORT.md` — Dated English Phase 0 evidence and decision report.
 - `docs/en/PHASE_2_COMPLETION_SPEC.md` — English bounded specification for completing the Linux/Zabbix incident phase.
 - `docs/en/PHASE_2_OPERATIONS.md` — English deployment, acceptance, and rollback guide for the Phase 2 forced-command connector.
-- `docs/en/PRODUCTION_BLOCKERS_RUNBOOK.md` — English owner-action runbook for closing recovery, certificate, supply-chain, and production gates.
+- `docs/en/PRODUCTION_BLOCKERS_RUNBOOK.md` — English remaining-acceptance runbook; unrelated owner inputs do not block ongoing development.
 - `docs/en/PROJECT_STATUS_BRIEF.md` — Presentation-ready English summary of verified progress and remaining delivery gates.
 - `docs/en/ROADMAP.md` — English phased roadmap and acceptance gates.
 - `docs/en/SECURITY.md` — English identity, policy, approval, and threat controls.
@@ -125,7 +125,7 @@ Markdown file is added, renamed, or removed.
 - `docs/fa/PHASE_0_REPORT.md` — Dated Persian Phase 0 evidence and decision report.
 - `docs/fa/PHASE_2_COMPLETION_SPEC.md` — Persian bounded specification for completing the Linux/Zabbix incident phase.
 - `docs/fa/PHASE_2_OPERATIONS.md` — Persian deployment, acceptance, and rollback guide for the Phase 2 forced-command connector.
-- `docs/fa/PRODUCTION_BLOCKERS_RUNBOOK.md` — Persian owner-action runbook for closing recovery, certificate, supply-chain, and production gates.
+- `docs/fa/PRODUCTION_BLOCKERS_RUNBOOK.md` — Persian remaining-acceptance runbook; unrelated owner inputs do not block ongoing development.
 - `docs/fa/PROJECT_STATUS_BRIEF.md` — Presentation-ready native-Persian summary of verified progress and remaining delivery gates.
 - `docs/fa/ROADMAP.md` — Persian phased roadmap and acceptance gates.
 - `docs/fa/SECURITY.md` — Persian identity, policy, approval, and threat controls.

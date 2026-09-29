@@ -15,6 +15,7 @@ def _base_environment(monkeypatch: pytest.MonkeyPatch) -> None:
         "NEXTOPS_INFERENCE_SERVICE_SECRET",
         "NEXTOPS_INFERENCE_SERVICE_SECRET_FILE",
         "CREDENTIALS_DIRECTORY",
+        "NEXTOPS_MODEL_ID",
     ):
         monkeypatch.delenv(name, raising=False)
 
@@ -73,3 +74,19 @@ def test_runtime_settings_reject_multiline_secret(
 
     with pytest.raises(ValueError, match="one non-empty line"):
         LlamaCppSettings.from_environment()
+
+
+@pytest.mark.parametrize("model_id", ["nextops-qwen3-14b-q4-k-m", "remote-model"])
+def test_model_environment_is_explicitly_allowlisted(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, model_id: str
+) -> None:
+    _base_environment(monkeypatch)
+    _write_secret(tmp_path / "llama-api-key", "provider-secret-00000000000000000")
+    _write_secret(tmp_path / "inference-service-secret", "service-secret-000000000000000000")
+    monkeypatch.setenv("CREDENTIALS_DIRECTORY", str(tmp_path))
+    monkeypatch.setenv("NEXTOPS_MODEL_ID", model_id)
+    if model_id == "remote-model":
+        with pytest.raises(ValueError):
+            LlamaCppSettings.from_environment()
+    else:
+        assert LlamaCppSettings.from_environment().model_id == model_id

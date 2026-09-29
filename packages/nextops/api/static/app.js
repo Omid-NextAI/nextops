@@ -523,7 +523,7 @@ byId("assistantForm").addEventListener("submit", async event => {
     const incident = state.answerMode === "incident";
     if (incident && !byId("incidentTarget").value) throw new Error("incident.target_missing");
     const path = incident ? "/api/v1/incidents/investigate" : monitoring ? "/api/v1/investigate" : "/api/v1/assistant/generate";
-    const payload = { locale: state.answerLocale, question: byId("question").value, max_output_tokens: 128 };
+    const payload = { locale: state.answerLocale, question: byId("question").value, max_output_tokens: 384 };
     if (incident) payload.target_id = byId("incidentTarget").value;
     const result = await api(path, { method: "POST", body: JSON.stringify(payload) });
     const evidenceBacked = monitoring || incident;

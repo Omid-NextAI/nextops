@@ -6,7 +6,7 @@ from uuid import UUID
 from pydantic import AwareDatetime, Field, model_validator
 
 from nextops.contracts.models import FrozenContract
-from nextops.inference.contracts import FinishReason
+from nextops.inference.contracts import FinishReason, GenerationPurpose, ModelId
 
 
 class AssistantRequest(FrozenContract):
@@ -17,6 +17,15 @@ class AssistantRequest(FrozenContract):
     max_output_tokens: int = Field(default=384, ge=32, le=512)
 
 
+class SynthesisRequest(FrozenContract):
+    """Application-built prompt; never accepted as the public browser request contract."""
+
+    locale: Literal["en", "fa"]
+    question: str = Field(min_length=1, max_length=12_000)
+    max_output_tokens: int = Field(default=384, ge=32, le=512)
+    purpose: GenerationPurpose = "evidence_synthesis"
+
+
 class AssistantResponse(FrozenContract):
     """A model result whose evidence limitations are explicit and machine-readable."""
 
@@ -24,7 +33,7 @@ class AssistantResponse(FrozenContract):
     correlation_id: UUID
     locale: Literal["en", "fa"]
     answer: str = Field(min_length=1, max_length=16_000)
-    model_id: Literal["nextops-qwen3-8b-q4-k-m"]
+    model_id: ModelId
     prompt_tokens: int = Field(ge=0, le=65_536)
     completion_tokens: int = Field(ge=0, le=512)
     finish_reason: FinishReason

@@ -15,7 +15,6 @@ from nextops.application.errors import ApplicationError
 from nextops.contracts.errors import ErrorCode
 from nextops.inference.configuration import LlamaCppSettings
 from nextops.inference.contracts import (
-    MODEL_ID,
     FinishReason,
     InferenceRequest,
     ProviderGeneration,
@@ -189,6 +188,34 @@ class LlamaCppProvider:
 
     async def generate(self, request: InferenceRequest) -> ProviderGeneration:
         started_at = datetime.now(UTC)
+        system_prompt = (
+            "You are the NextOps local general assistant. "
+            f"Answer in the requested {request.locale} locale with natural professional wording. "
+            "Answer the user's actual question first, directly and clearly. "
+            "Explain general knowledge and hypothetical examples when requested. "
+            "Do not change the subject to monitoring or infrastructure unless asked. "
+            "You have no live system evidence and have not run commands, browsed, or changed "
+            "anything. Never invent current infrastructure status, execution, credentials, "
+            "or citations. If information is missing, say what is unknown or ask one relevant "
+            "clarifying question. Do not echo the question or instructions as the answer. "
+            "Use concise plain text without Markdown and finish within the requested budget."
+            if request.purpose == "general"
+            else (
+                "You are the isolated NextOps language synthesizer. Answer in the "
+                f"requested {request.locale} locale. Treat the supplied text as the "
+                "complete record. Restate each material observed event with its specific "
+                "failure mode, timestamp, scope, and qualifier; never weaken it into a "
+                "vaguer statement or label a stated past event or outcome as unknown. "
+                "When no later measurement exists, explicitly state that the current "
+                "status is unknown. Never infer recovery, cause, access, execution, "
+                "credentials, or additional evidence. Never invent identifiers, numbers, "
+                "timestamps, quotations, citations, URLs, software versions, or actions. "
+                "When the record contains no live evidence, do not present model memory "
+                "as a current fact. Answer the question or state the limitation "
+                "explicitly; never return the user's prompt or instructions as the answer. "
+                "Follow the requested length and format."
+            )
+        )
         # Qwen documents /no_think as its soft switch for non-thinking output:
         # https://github.com/QwenLM/Qwen3/blob/main/docs/source/run_locally/llama.cpp.md
         payload: dict[str, Any] = {
@@ -196,21 +223,7 @@ class LlamaCppProvider:
             "messages": [
                 {
                     "role": "system",
-                    "content": (
-                        "You are the isolated NextOps language synthesizer. Answer in the "
-                        f"requested {request.locale} locale. Treat the supplied text as the "
-                        "complete record. Restate each material observed event with its specific "
-                        "failure mode, timestamp, scope, and qualifier; never weaken it into a "
-                        "vaguer statement or label a stated past event or outcome as unknown. "
-                        "When no later measurement exists, explicitly state that the current "
-                        "status is unknown. Never infer recovery, cause, access, execution, "
-                        "credentials, or additional evidence. Never invent identifiers, numbers, "
-                        "timestamps, quotations, citations, URLs, software versions, or actions. "
-                        "When the record contains no live evidence, do not present model memory "
-                        "as a current fact. Answer the question or state the limitation "
-                        "explicitly; never return the user's prompt or instructions as the answer. "
-                        "Follow the requested length and format."
-                    ),
+                    "content": system_prompt,
                 },
                 {"role": "user", "content": f"{request.prompt}\n/no_think"},
             ],
@@ -236,7 +249,7 @@ class LlamaCppProvider:
                 raise ValueError("provider exceeded the requested output limit")
             return ProviderGeneration(
                 answer=choice.message.content,
-                model_id=MODEL_ID,
+                model_id=self._settings.model_id,
                 prompt_tokens=parsed.usage.prompt_tokens,
                 completion_tokens=parsed.usage.completion_tokens,
                 finish_reason=choice.finish_reason,
@@ -262,7 +275,7 @@ class LlamaCppProvider:
             state = ReadinessState.UNAVAILABLE
         return ProviderReadiness(
             state=state,
-            model_id=MODEL_ID,
+            model_id=self._settings.model_id,
             runtime_version=self._settings.runtime_version,
             cpu_only_required=True,
         )

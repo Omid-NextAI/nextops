@@ -14,6 +14,19 @@ WAL/PITR and production acceptance remain open. Source: master specification sec
 
 ## Exact application-release qualification — manifest contract
 
+### Clarity candidate repository checks — 2026-09-29
+
+On the Windows desktop, `uv run --offline pytest -m "not integration and not browser" -q`
+passed 252 tests with two POSIX-only skips. Strict types covered 92 files; lint and formatting
+passed. The five existing Playwright browser fixture tests passed with provisioned local browsers;
+this is not serving-browser or actual WAN isolation. UTF-8 documentation validation passed for
+120 Markdown files and 36 language pairs; release and both inference metadata checks passed.
+No dependency lock changed. Regression cases cover full question tails in all three routes,
+forged public purpose/model controls, separate general/evidence instructions, exact larger-model
+identity and source pinning. Eight serial synthetic 8B loopback generations completed, but Persian
+wording and evidence-source omissions remain findings, not a quality pass. The serving release
+and its failed semantic gate are unchanged at this source checkpoint.
+
 The release manifest's broad `acceptance_gates` retain dated controlled-campaign evidence. They do
 not automatically transfer to a newer application revision. Schema v2 adds a required
 `current_application_qualification` block whose release and source commit must match the deployed

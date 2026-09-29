@@ -1,5 +1,20 @@
 # Prompt version history / تاریخچهٔ نسخه‌های پرامپت
 
+## Owner development-workflow amendment — 2026-09-29
+
+The owner explicitly removes the all-at-once private decision form and its prerequisite procedure
+and requests continued development toward a usable live deployment and clearer answers from a
+larger CPU-local candidate. Only inputs actually needed by the next operation may block it.
+Engineering may record the explicit task authorization directly and generate its own change ID.
+This does not waive tested authorization, audit, verified artifacts, bounded resources or rollback,
+and it does not turn a failed or unrun acceptance gate into a pass. Recovery stays owner-deferred.
+
+مالک صریحاً فرم خصوصیِ یک‌جای تصمیم‌ها و روندِ پیش‌شرط آن را حذف کرده و ادامهٔ توسعه برای استقرار
+زندهٔ قابل‌استفاده و پاسخ روشن‌تر با مدل بزرگ‌ترِ محلیِ CPU را خواسته است. فقط ورودی لازمِ عملیات
+بعدی می‌تواند مانع همان عملیات باشد. عامل مهندسی اجازهٔ صریحِ کار را مستقیم ثبت و شناسهٔ تغییر
+را خودش تولید می‌کند. احراز مجوز، ممیزی، فایل تأییدشده، منابع محدود و امکان بازگشت حذف نمی‌شوند
+و آزمون ناموفق یا اجرا‌نشده موفق شمرده نمی‌شود. بازیابی همچنان به دستور مالک به تعویق افتاده است.
+
 ## Owner clarification of the recovery claim — 2026-09-26
 
 The owner clarified that the verification was restoration from an ESXi VM snapshot only. It does

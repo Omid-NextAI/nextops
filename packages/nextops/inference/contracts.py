@@ -12,6 +12,8 @@ from pydantic import AwareDatetime, Field, model_validator
 from nextops.contracts.models import FrozenContract
 
 MODEL_ID = "nextops-qwen3-8b-q4-k-m"
+ModelId = Literal["nextops-qwen3-8b-q4-k-m", "nextops-qwen3-14b-q4-k-m"]
+GenerationPurpose = Literal["general", "evidence_synthesis"]
 
 
 class FinishReason(StrEnum):
@@ -37,6 +39,7 @@ class InferenceRequest(FrozenContract):
     correlation_id: UUID
     locale: Literal["en", "fa"]
     prompt: str = Field(min_length=1, max_length=12_000)
+    purpose: GenerationPurpose = "evidence_synthesis"
     max_output_tokens: int = Field(default=512, ge=1, le=1_024)
     temperature: float = Field(default=0.7, ge=0.0, le=2.0)
 
@@ -45,7 +48,7 @@ class ProviderGeneration(FrozenContract):
     """Validated provider result before request metadata is attached."""
 
     answer: str = Field(min_length=1, max_length=16_000)
-    model_id: Literal["nextops-qwen3-8b-q4-k-m"]
+    model_id: ModelId
     prompt_tokens: int = Field(ge=0, le=65_536)
     completion_tokens: int = Field(ge=0, le=1_024)
     finish_reason: FinishReason
@@ -73,7 +76,7 @@ class ProviderReadiness(FrozenContract):
     """Provider status without paths, secrets, prompts, or raw errors."""
 
     state: ReadinessState
-    model_id: Literal["nextops-qwen3-8b-q4-k-m"]
+    model_id: ModelId
     runtime_version: str = Field(pattern=r"^v[0-9]+\.[0-9]+\.[0-9]+$")
     cpu_only_required: Literal[True]
 

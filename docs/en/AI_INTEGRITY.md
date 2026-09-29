@@ -4,6 +4,21 @@
 guarantee that a generative model will never be wrong. It instead prevents the most dangerous
 category error: presenting unsupported model text as live operational fact.
 
+## Clarity repair — 2026-09-29
+
+The development candidate separates ordinary Q&A from the evidence-only synthesizer prompt,
+preserves all 4,000 accepted question characters instead of clipping at 800/1,200, and raises the
+UI/application answer ceiling from 128 to 384 tokens without expanding concurrency. A typed
+12,000-character internal prompt is distinct from the public question. Clients cannot select a
+provider or override synthesis purpose. Truncated answers still fail closed, and the exact serving
+release's failed semantic gate is not repaired by source tests alone.
+
+The official 14B Q4_K_M candidate has a separate pinned artifact record. Its model identity is
+allowlisted explicitly rather than reported as 8B. Downloads are provisioning-only; no runtime
+resolver, remote model fallback or new target credential is introduced. Compare measured bilingual
+answers and CPU latency before choosing the larger model. Deployment must update inference before
+the application, and rollback must reverse that order. See the [bounded specification](../requirements/ANSWER_INTEGRITY_SPEC.md).
+
 On 2026-09-26, six private-path synthetic questions found that the serving app misclassified two
 English/Persian file-only requests as `overview` and gave two multi-host availability questions
 generic Zabbix counts despite having no host-inventory reachability data. A source-only candidate

@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import os
-from typing import Literal, Self
+from typing import Literal, Self, cast
 from urllib.parse import urlsplit
 
 from pydantic import BaseModel, ConfigDict, Field, SecretStr, model_validator
 
+from nextops.inference.contracts import ModelId
 from nextops.security.deployment_credentials import deployment_secret
 
 
@@ -19,7 +20,7 @@ class LlamaCppSettings(BaseModel):
     base_url: str
     provider_api_key: SecretStr = Field(min_length=32, max_length=512)
     service_auth_secret: SecretStr = Field(min_length=32, max_length=512)
-    model_id: Literal["nextops-qwen3-8b-q4-k-m"] = "nextops-qwen3-8b-q4-k-m"
+    model_id: ModelId = "nextops-qwen3-8b-q4-k-m"
     runtime_version: Literal["v0.4.1"] = "v0.4.1"
     request_timeout_seconds: float = Field(default=120.0, ge=1.0, le=600.0)
     queue_timeout_seconds: float = Field(default=5.0, ge=0.01, le=60.0)
@@ -52,6 +53,7 @@ class LlamaCppSettings(BaseModel):
 
         return cls(
             base_url=os.environ.get("NEXTOPS_LLAMA_BASE_URL", ""),
+            model_id=cast(ModelId, os.environ.get("NEXTOPS_MODEL_ID", "nextops-qwen3-8b-q4-k-m")),
             provider_api_key=deployment_secret(
                 value_variable="NEXTOPS_LLAMA_API_KEY",
                 file_variable="NEXTOPS_LLAMA_API_KEY_FILE",
