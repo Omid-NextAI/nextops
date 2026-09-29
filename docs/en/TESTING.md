@@ -1,5 +1,36 @@
 # Testing, model evaluation and release evidence
 
+## Selected 35B controlled qualification — 2026-09-29
+
+App/API source 95c6e501a89f148c9a9bf802f48f05555c2c6400, exact offline wheel SHA-256
+0cde8bdeb2cb2cde1500aeb6c95d6ef995817827c40b54c9d467346e9433992b and installed code digest
+4f29d2d2bab31f5d20f7703f87aea07b7fe3dc8b8920dfd61a39f7e8fe16f67e passed fresh Ubuntu
+offline-index/native imports/mode/assets qualification. PR39 passed all five CI jobs, including
+PG16/17, browser and secret scan. Twelve fresh API cases passed HTTP 200, `stop`, positive
+generation tokens, exact code/model and logout 204, at 12.7–93.6s. Direct EN/FA RAM/SSD and
+arithmetic review was correct. Canonical CPU-idle focus preserved exact value, source, both times
+and partial limitations; filesystem focus was complete without claiming file names/contents.
+Twelve fresh strict Edge cases passed TLS, login/logout, locale RTL/LTR, local assets, matching
+answers/model/code, `stop`, provenance and collapsed unrelated evidence. A private screenshot was
+visually reviewed; this is not comprehensive accessibility or independent language acceptance.
+
+Four bounded PostgreSQL `READ ONLY` checks matched stored response, scope/actor/correlation, model,
+integrity/limitations, completion audit and canonical evidence SHA. Exact model rollback to 8B
+then app/API rollback to 8d1f1d2 each passed fresh EN/FA generation, code/model identity and logout.
+Re-promotion passed six more fresh API cases in 21.3–94.3s and four more durable audit/hash checks.
+All task-specific timers were stopped only after success. Current units are enabled/active with
+no failed units; original 8B/source artifacts and protected rollback helpers remain. VM, runtime,
+resources, queue, 384-token/120-second bounds, credentials, connector and database were not changed.
+Local final tests: 333 passed, two POSIX skips, sixteen integration/browser deselections.
+
+Preserve the first 35B Persian-label semantic failure, raw collection-time omissions and rejected
+14B/32B/30B cases. Full independent quality is partial; current-release server-WAN and full-VM
+cold start are not run. Runtime restarts in this drill are not full offline/VM acceptance. Cgroup
+peak 18,039,701,504 bytes over the second trial is not total model RAM; the earlier point process
+RSS was about 35.4 GiB. Neither is a sustained load/NUMA benchmark or production sign-off.
+Metadata architecture/template/quantization/context and unverified conversion lineage are
+validated separately; six negative/missing-field fixtures fail closed. Older records follow.
+
 ## Latest 35B trial and CPU repair — 2026-09-29
 
 Protected import and fourteen matched raw completions passed; collection-time omissions remain

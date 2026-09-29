@@ -7,7 +7,7 @@
 Owner update (2026-09-26): the owner tested an ESXi VM snapshot restore. Its dated result has
 not been reviewed here; independent database backup and restore gates remain unpassed.
 
-Answer-quality update (2026-09-29): the guarded clarity repair passed twelve fresh authenticated
+Earlier answer-quality checkpoint (2026-09-29): the guarded clarity repair passed twelve fresh authenticated
 English/Persian API cases, including the four file-focus and host-scope failures observed on
 2026-09-26. This is a bounded regression pass, not a complete held-out semantic qualification.
 The 14B CPU model was imported and rejected after matched bilingual factual/arithmetic and
@@ -18,10 +18,10 @@ qualifiers and Persian wording failed later review. Its corrected timed app tria
 direction but rejected selection for Persian technical errors and repeat length-limited raw
 investigation. The baseline 8B also hit that raw Persian filesystem limit; the complete focused
 application answer and raw model completion are separate. Exact model/source rollback passed.
-Only the verified RTL source fix is now live as 8d1f1d2 with 8B. Qwen3.5-35B-A3B provisioning and
-source-only non-thinking compatibility are in progress, not accepted model selection.
+At that checkpoint, only the RTL source repair was live as 8d1f1d2/8B; 35B was being provisioned.
+The current controlled 35B selection is recorded below; earlier failures remain preserved.
 
-> **Status: controlled bilingual user testing is live; production is not accepted.** Application and AI API are `nextops-0.1.0-8d1f1d2`; connector remains `nextops-0.1.0-cdde129`. General/evidence instructions are separated, full accepted questions are retained, and answers have a bounded 384-token ceiling. The serving model remains CPU-only 8B; current bounded functionality and held-out semantic gates are partial. Exact-release evidence is recorded in the [release status](docs/status/current-release.yaml), [testing guide](docs/en/TESTING.md) and [project state](docs/PROJECT_STATE.md). Earlier WAN/reboot evidence does not transfer automatically. The retired owner questionnaire no longer blocks development. Recovery remains owner-deferred and unqualified; certificate, notification, licensing, release-integrity and final production gates remain open. Management-shell public egress is not permanently denied, despite restricted service boundaries. See the [production runbook](docs/en/PRODUCTION_BLOCKERS_RUNBOOK.md).
+> **Status: controlled bilingual user testing is live; production is not accepted.** App/AI API are `nextops-0.1.0-95c6e50`; connector remains `nextops-0.1.0-cdde129`. The selected CPU-only model is Qwen3.5-35B-A3B Q4_K_M. Twelve API and twelve strict browser cases, eight read-only audit/hash pairs, exact 8B/app/API rollback and six final re-promotion checks passed. Sample API latency was 12.7–94.3 seconds; VM/runtime/resource/queue/deadline limits did not change. Source/time/partial/stale evidence and transparent deterministic CPU/file focus remain mandatory; model-only text can still be wrong. Full held-out quality is partial, and current-release server-WAN/VM cold-start gates are not run. Consult [release status](docs/status/current-release.yaml), [testing](docs/en/TESTING.md) and [project state](docs/PROJECT_STATE.md). Recovery stays owner-deferred and unqualified; certificate, notification, licensing, release-integrity and final production gates remain open. The retired owner form does not block development. Restricted services do not imply permanent management-shell WAN denial. See the [production runbook](docs/en/PRODUCTION_BLOCKERS_RUNBOOK.md).
 
 ## What NextOps is intended to do
 

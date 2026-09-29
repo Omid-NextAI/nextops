@@ -6,7 +6,18 @@
 
 ## Current larger-model qualification — 2026-09-29
 
-Latest continuation: protected 35B import passed; fourteen CPU samples stopped in 13.5–64.5s.
+Selected controlled profile: pinned Bartowski 35B-A3B Q4_K_M, protected immutable bytes, source
+95c6e50 and unchanged llama.cpp b29c606e. Twelve API cases completed in 12.7–93.6s; twelve browser
+cases and exact model/source rollback passed. Six final re-promotion confirmations and four
+additional audit/hash pairs passed; their latency was 21.3–94.3s. Original 8B/source rollback is protected. GGUF architecture qwen35moe and template
+SHA are recorded with trusted `enable_thinking=false` and configured context 8192. Its base-model
+metadata names Qwen3.5-35B-A3B-Base; the upstream instruct reference is not verified conversion
+lineage. Do not infer lineage or enlarge context to the native limit. VM/resources/one slot/queue/
+384 tokens/120 seconds remain unchanged; no projector/MTP/GPU is enabled. Raw/full quality and
+sustained load/NUMA/WAN/VM/production acceptance remain partial or not run. Older checkpoints:
+
+
+Earlier continuation: protected 35B import passed; fourteen CPU samples stopped in 13.5–64.5s.
 The first bb81109 guarded trial completed twelve API cases, but Persian CPU-idle labeling failed.
 Exact rollback restored 8d1f1d2/8B; 35B is protected, not selected. Point process RSS was about
 35.4 GiB; cgroup peak is not total resident RAM. VM/runtime/threads/context/queues/tokens/deadlines

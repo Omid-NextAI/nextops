@@ -1,5 +1,27 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Controlled 35B selection — 2026-09-29 / انتخاب کنترل‌شدهٔ 35B — ۷ مهر ۱۴۰۵
+
+Select protected pinned Qwen3.5-35B-A3B Q4_K_M with app/API 95c6e50 after exact offline packaging,
+five CI jobs, twelve fresh API and twelve strict browser checks, eight bounded durable audit/hash
+pairs, exact 8B/app/API rollback and six final re-promotion confirmations. VM/runtime/resources,
+authorization/credentials, queues and 384-token/120-second limits are unchanged. No training, GPU,
+cloud or runtime downloads. Record artifact architecture, quantization, template hash, configured
+context and non-thinking mode; preserve unverified conversion lineage and prior failed trials.
+Sample API latency is 12.7–94.3s. Bilingual/held-out quality stays partial; current-release WAN/VM
+gates are not run and production is unaccepted. Correct stale active-release/token-limit guide
+claims without rewriting dated evidence. Original protected 8B/source rollback remains available.
+
+Qwen3.5 با 35B-A3B و Q4_K_M تثبیت‌شده و محافظت‌شده، همراه برنامه/API نسخهٔ 95c6e50 انتخاب
+شد؛ بستهٔ دقیق آفلاین، پنج کنترل CI، دوازده آزمون تازهٔ API و دوازده مورد سخت‌گیرانهٔ مرورگر،
+هشت تطبیق محدودِ ممیزی و هش، بازگشت دقیق 8B و برنامه/API و شش تأیید نهاییِ استقرار مجدد
+موفق‌اند. ماشین، محیط اجرا، منابع، مجوز و اطلاعات ورود، صف و سقف ۳۸۴ توکن و ۱۲۰ ثانیه ثابت‌اند.
+آموزش، GPU، ابر یا دریافت اینترنتی هنگام اجرا اضافه نشد. معماری، کوانتیزه، هش قالب، context
+مصوب و حالت بدون تفکر ثبت و زنجیرهٔ تبدیلِ تأییدنشده و شکست‌های پیشین حفظ شدند. تأخیر نمونهٔ
+API، ۱۲٫۷ تا ۹۴٫۳ ثانیه است. کیفیت دوزبانه و مستقل ناقص، معیار WAN و VM همین انتشار اجرا‌نشده
+و تولید نپذیرفته است. ادعای قدیمیِ نسخهٔ فعال و سقف توکن اصلاح شد، بدون بازنویسی شواهد تاریخ‌دار.
+مدل 8B و کد اصلیِ محافظت‌شده برای بازگشت در دسترس‌اند.
+
 ## CPU metric semantics — 2026-09-29 / معنای سنجهٔ CPU — ۷ مهر ۱۴۰۵
 
 Preserve the first 35B-A3B guarded trial's Persian idle-label failure despite twelve completed

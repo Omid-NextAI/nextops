@@ -6,6 +6,15 @@ category error: presenting unsupported model text as live operational fact.
 
 ## Current 35B semantic repair — 2026-09-29
 
+Latest controlled selection: 95c6e50/35B passed twelve fresh API and twelve strict browser cases
+plus four durable audit/hash checks. The corrected CPU-only measurement answer is transparently
+application-owned, preserving exact idle meaning and provenance; it is not proof that raw model
+labels are correct. EN/FA RAM/SSD and arithmetic were correct in both paths. Exact 8B/app/API
+rollback passed, followed by six final confirmations and four more audit/hash checks after re-promotion. Keep the first 35B
+Persian-label failure and raw collection-time omissions. Full independent semantics remain partial;
+no training or universal truth guarantee is claimed. Source identity/limits are unchanged below.
+
+
 Protected 35B import passed; all fourteen raw comparison responses completed, but collection-time
 omissions remain a raw-provenance failure. The first exact bb81109/35B guarded trial completed
 twelve API requests, including both filesystem cases, yet mislabeled CPU idle in Persian. Semantic
