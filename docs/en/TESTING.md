@@ -2,6 +2,9 @@
 
 ## Answer-depth source candidate — 2026-09-29
 
+Draft PR46 CI run 36612675877 passed all five jobs: quality/unit, browser, PostgreSQL 16/17
+integration and secret scan. This is not exact offline-package or live-release qualification.
+
 The source-only candidate changes the general request default and browser budget to 512 output
 tokens; monitoring and incidents stay at 384. It reuses the selected CPU-only 35B, 120-second
 deadline, one active/two queued slots and existing authenticated Zabbix/Linux collectors. Topic

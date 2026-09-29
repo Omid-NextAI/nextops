@@ -9,8 +9,9 @@ question, preserving the full stored evidence and audit. Two sequential 512-toke
 probes first ended at the ceiling; a focused prompt then completed EN/FA samples in 48.9/32.6s,
 and a calibrated prompt in 57.7/29.0s. Manual review still found overconfident DNS/restart and
 traceroute/firewall interpretations. These samples are **not** semantic acceptance or deployed
-source qualification; app/API 862d311 remains serving. No new device access, retrieval, training,
-model artifact or production claim follows.
+source qualification. Draft PR46's CI run 36612675877 passed all five jobs; exact offline-package
+and live candidate gates are unrun. App/API 862d311 remains serving. No new device access,
+retrieval, training, model artifact or production claim follows.
 
 نامزد کد، ۷ مهر ۱۴۰۵ — مالک پاسخ کامل‌ترِ مدل محلی در سقف محدود و شاهد زندهٔ مرتبط‌تر خواسته
 است. نامزد، فقط سقف خروجیِ حالت عمومی را از ۳۸۴ به حداکثر فعلیِ قرارداد، یعنی ۵۱۲ توکن،
@@ -21,6 +22,8 @@ model artifact or production claim follows.
 نمونه‌های فارسی و انگلیسی را در ۳۲٫۶ و ۴۸٫۹ ثانیه و دستور دقیق‌تر در ۲۹٫۰ و ۵۷٫۷ ثانیه
 تمام کرد. بازبینی انسانی هنوز تفسیر بیش‌ازحد قطعیِ DNS، راه‌اندازی سرویس، traceroute و
 فایروال را یافت. این نمونه‌ها پذیرش معنایی یا استقرار کد نیستند؛ 862d311 همچنان مستقر است.
+پنج کنترل CI اجرای 36612675877 برای PR46 پیش‌نویس موفق‌اند، ولی بستهٔ دقیقِ آفلاین و معیار
+زندهٔ نامزد هنوز اجرا نشده‌اند.
 دسترسی تازه به تجهیزات، بازیابی سند، آموزش، فایل مدل تازه یا ادعای تولید اضافه نشده است.
 
 Current controlled workspace, 2026-09-29 — app/API 862d311 serves the unchanged CPU-only 35B model.

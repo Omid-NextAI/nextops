@@ -4,8 +4,9 @@ Current bounded candidate, 2026-09-29 — Complete independent held-out EN/FA se
 the 512-token **general-only** answer-depth and topic-selected, already-authorized live incident
 evidence. Local fixture tests and direct native-model probes do not qualify the source release.
 Review unsupported diagnosis, DNS/TCP stages, unit/path assumptions, traceroute and firewall-log
-scope; require complete answers within 120 seconds, no invented live facts, exact offline package,
-locked CI, guarded APP/AI promotion, fresh browser/API/evidence/audit and exact rollback before
+scope. Draft PR46 passed five CI jobs in run 36612675877. Require complete answers within 120
+seconds, no invented live facts, exact offline package, guarded APP/AI promotion, fresh
+browser/API/evidence/audit and exact rollback before
 changing the serving 862d311/35B identity. If quality fails, leave 384-token serving settings and
 the existing source in place. Keep full canonical evidence, scoped authorization, model/VM/runtime,
 one active/two queued and recovery disposition unchanged. Do not count browser-WAN denial as the
@@ -15,8 +16,9 @@ unrun server-WAN or VM cold-start gate; production remains unaccepted.
 انگلیسی برای سقف ۵۱۲ توکنِ **فقط حالت عمومی** و انتخاب شاهد زندهٔ موجود و مجاز بر پایهٔ پرسش
 تکمیل شود. آزمون ساختگی و نمونهٔ مستقیم مدل، انتشار کد را تأیید نمی‌کنند. نتیجه‌گیریِ بی‌شاهد،
 تمایز DNS و TCP، فرض نام سرویس و مسیر فایل، حدود traceroute و گزارش فایروال بررسی شوند.
-پیش از تغییر نسخهٔ مستقرِ 862d311 و 35B، پاسخ کامل زیر ۱۲۰ ثانیه، نبود واقعیت زندهٔ ساختگی،
-بستهٔ دقیق آفلاین، CI قفل‌شده، ارتقای محافظت‌شدهٔ برنامه/API، آزمون تازهٔ مرورگر و شاهد و ممیزی
+پنج کنترل CI پیش‌نویس PR46 در اجرای 36612675877 موفق‌اند. پیش از تغییر نسخهٔ مستقرِ 862d311
+و 35B، پاسخ کامل زیر ۱۲۰ ثانیه، نبود واقعیت زندهٔ ساختگی، بستهٔ دقیق آفلاین، ارتقای
+محافظت‌شدهٔ برنامه/API، آزمون تازهٔ مرورگر و شاهد و ممیزی
 و بازگشت دقیق لازم‌اند. در صورت رد کیفی، سقف ۳۸۴ توکن و کد مستقر حفظ شوند. شاهد کامل، مجوز
 محدود، مدل و VM و محیط اجرا، یک فعال و دو منتظر و وضعیت بازیابی تغییر نکنند. قطع WAN مرورگر
 به‌جای معیار اجرا‌نشدهٔ WAN سرور یا شروع سرد VM محسوب نشود؛ تولید پذیرفته نشده است.
