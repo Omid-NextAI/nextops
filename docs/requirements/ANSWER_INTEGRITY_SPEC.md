@@ -3,8 +3,10 @@
 Status: corrected app/API `nextops-0.1.0-c4351fd` serves controlled user testing with 8B.
 Named live regressions and app/API rollback passed; full held-out semantics remain partial.
 Matched 14B development review failed. Verified 32B import failed its Persian evidence deadline,
-with semantic review partial. Pinned 30B-A3B provisioning and source identity support are underway,
-not selected or deployed. Qualification remains revision-specific and is not a
+with semantic review partial. 30B-A3B import/deadline checks passed, but raw qualifiers and Persian
+terminology remain partial. Its guarded trial exposed Latin-prefix Persian LTR rendering;
+exact rollback restored c4351fd/8B. The response-locale repair passed local browser fixtures and
+awaits serving requalification. Qualification remains revision-specific and is not a
 guarantee that model-only text is always true.
 
 ## Problem
@@ -27,6 +29,14 @@ model memory as live infrastructure evidence, must never imply that a read-only 
 an operation, and must preserve stale/partial qualifiers even when generated prose fails.
 
 ## Requirements
+
+- Render each assistant answer using its validated response locale: Persian RTL, English LTR,
+  independent of interface language and the answer's first character. A Latin technical prefix
+  does not make a Persian answer English; retain bidirectional isolation of identifiers.
+
+جهت هر پاسخ از زبان معتبر همان پاسخ تعیین شود: فارسی RTL و انگلیسی LTR، مستقل از زبان رابط
+و نویسهٔ نخست. واژهٔ فنیِ لاتین در ابتدای پاسخ، آن را انگلیسی نمی‌کند؛ جداسازی شناسه‌های فنی
+حفظ شود.
 
 - Application-owned generation purpose separates ordinary Q&A from evidence synthesis. Browser
   requests cannot choose provider identity, system instructions or synthesis purpose.

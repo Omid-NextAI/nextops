@@ -6,7 +6,14 @@ category error: presenting unsupported model text as live operational fact.
 
 ## Larger-model comparison — 2026-09-29
 
-Fourteen matched bilingual cases completed at 384 tokens on both 8B and 14B. Semantic review
+30B-A3B passed import/deadline checks, but raw qualifiers and Persian terminology remain partial.
+Unchanged application assurance replay retained typed provenance and replaced incomplete evidence
+prose. Its timed app trial exposed Latin-prefix Persian LTR rendering and was rolled back to
+c4351fd/8B with fresh generation. A response-locale direction fix passed seven local browser
+fixtures; live requalification is next. Model-only text remains explicitly unverified. Raw-model,
+application-guard, browser and independent semantic results must not be conflated.
+
+Earlier observations: fourteen matched bilingual cases completed at 384 tokens on both 8B and 14B. Semantic review
 rejected 14B for incorrect Persian RAM and arithmetic answers and missing/weakened evidence
 qualifiers. 8B also failed some source/stale cases. These are development observations, not
 independent held-out acceptance. No model gained a tool or credential. The serving 8B remains

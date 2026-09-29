@@ -15,10 +15,10 @@
   "max_active_requests": 1,
   "max_queued_requests": 2,
   "qualification": {
-    "artifact_import": "not_run",
-    "bilingual_quality": "not_run",
-    "latency_resource_comparison": "not_run",
+    "artifact_import": "passed",
+    "bilingual_quality": "partial",
+    "latency_resource_comparison": "passed",
     "offline_cold_start": "not_run",
-    "runtime_model_rollback": "not_run"
+    "runtime_model_rollback": "passed"
   }
 }

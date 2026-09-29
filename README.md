@@ -13,8 +13,11 @@ English/Persian API cases, including the four file-focus and host-scope failures
 The 14B CPU model was imported and rejected after matched bilingual factual/arithmetic and
 evidence-qualifier findings. The verified 32B import completed eleven answers, but a Persian
 stale-evidence question exceeded the 120-second timeout. It was not selected. Official pinned
-30B-A3B provisioning and source-only identity support are underway; selection remains gated by
-quality, latency and rollback tests. The serving model remains 8B.
+30B-A3B import and fourteen matched completions passed, at 1.3–23.7 seconds; raw evidence
+qualifiers and Persian wording remain partial. Its timed app trial returned twelve authenticated
+responses, but browser review exposed Latin-prefix Persian answers rendering LTR. Exact rollback
+restored c4351fd/8B with fresh generation. The response-locale direction repair passed seven local
+browser fixtures; serving-path requalification is next. The serving model remains 8B.
 
 > **Status: controlled bilingual user testing is live; production is not accepted.** Application and AI API are `nextops-0.1.0-c4351fd`; connector remains `nextops-0.1.0-cdde129`. General/evidence instructions are separated, full accepted questions are retained, and answers have a bounded 384-token ceiling. The serving model remains CPU-only 8B. Exact-release evidence is recorded in the [release status](docs/status/current-release.yaml), [testing guide](docs/en/TESTING.md) and [project state](docs/PROJECT_STATE.md). Earlier WAN/reboot evidence does not transfer automatically. The retired owner questionnaire no longer blocks development. Recovery remains owner-deferred and unqualified; certificate, notification, licensing, release-integrity and final production gates remain open. Management-shell public egress is not permanently denied, despite restricted service boundaries. See the [production runbook](docs/en/PRODUCTION_BLOCKERS_RUNBOOK.md).
 

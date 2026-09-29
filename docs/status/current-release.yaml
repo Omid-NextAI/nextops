@@ -17,7 +17,7 @@ snapshot_restore_owner_attestation:
 repository:
   remote: Omid-NextAI/nextops
   branch: main
-  inspected_baseline_commit: 8e0b48d0d0269e1ad0e5388dc40ef3662b1842d0
+  inspected_baseline_commit: 505aa94d9b283554fc8e74601c9440dbe72bff4d
 components:
   application:
     release: nextops-0.1.0-c4351fd
@@ -205,13 +205,13 @@ acceptance_gates:
       - docs/en/CPU_AI.md
       - docs/NEXT_TASK.md
   - id: model30a3b_bounded_qualification
-    status: not_run
+    status: partial
     evidence:
       - deploy/inference/qwen3-30b-a3b-q4-k-m.candidate.json
       - docs/en/CPU_AI.md
       - docs/fa/CPU_AI.md
   - id: model30a3b_guarded_selection
-    status: not_run
+    status: partial
     evidence:
       - docs/en/CPU_AI.md
       - docs/NEXT_TASK.md

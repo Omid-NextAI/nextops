@@ -1,6 +1,20 @@
 # Next task / کار بعدی
 
-Active larger-model step, 2026-09-29 — Complete pinned 30B-A3B provisioning, protected import and
+Current unfinished checkpoint, 2026-09-29 — Qualify the response-locale RTL/LTR repair as an
+exact offline-installed package, then repeat the timed 30B-A3B app trial. Artifact/deadline checks
+passed; raw qualifier/Persian review remains partial. Keep deterministic assurance, typed
+provenance and the model-only warning. Require fresh EN/FA API/browser, unchanged security/resource
+limits and exact rollback. c4351fd/8B was restored with fresh generation after Latin-prefix Persian
+LTR rendering failed the first trial. Seven local browser fixtures pass, not live/WAN/VM gates.
+
+نخستین گام ناتمام، ۷ مهر ۱۴۰۵ — اصلاح RTL/LTR بر پایهٔ زبان پاسخ، با بستهٔ دقیق و نصب آفلاین
+تأیید و سپس آزمون موقت 30B-A3B در برنامه تکرار شود. فایل و مهلت تأیید شدند؛ قیدهای متن مدل و
+نگارش فارسی هنوز کاملاً پذیرفته نیستند. کنترل قطعی، انتساب شاهد نوع‌دار و هشدار خطای مدل حفظ
+شوند. API و مرورگر با پرسش تازهٔ فارسی و انگلیسی، حدود ثابت امنیت و منابع و بازگشت دقیق
+آزموده شوند. پس از شکستِ نمایش LTR پاسخ فارسی با واژهٔ لاتین در ابتدا، c4351fd و 8B با تولید
+تازه برگردانده شدند. هفت آزمون محلی مرورگر موفق‌اند؛ این نتیجه، پذیرش زنده یا WAN یا reboot نیست.
+
+Earlier larger-model step, 2026-09-29 — Complete pinned 30B-A3B provisioning, protected import and
 the same bilingual CPU comparison. 32B import passed but Persian stale evidence exceeded 120
 seconds; it must not be selected. 14B failed factual review. Retain c4351fd/8B until a candidate
 passes quality and deadline gates. Before a larger-model switch, qualify source identity through
@@ -8,7 +22,7 @@ both app/API boundaries, install an exact timed rollback, test fresh browser/API
 restart/rollback/re-promotion. Do not change the VM, runtime, concurrency or deadline, teach test
 answers, or claim held-out/WAN/reboot/recovery/production acceptance from development samples.
 
-گام فعالِ مدل بزرگ‌تر، ۷ مهر ۱۴۰۵ — آماده‌سازی 30B-A3B تثبیت‌شده، ورودِ محافظت‌شده و همان
+گام پیشینِ مدل بزرگ‌تر، ۷ مهر ۱۴۰۵ — آماده‌سازی 30B-A3B تثبیت‌شده، ورودِ محافظت‌شده و همان
 مقایسهٔ دوزبانه روی CPU تکمیل شوند. ورودِ 32B موفق بود، اما پرسش فارسیِ شاهد قدیمی از ۱۲۰
 ثانیه گذشت؛ این مدل انتخاب نشود. 14B نیز بازبینی واقعیت را نگذرانده است. تا موفقیت کیفیت و
 مهلت، c4351fd/8B حفظ شود. پیش از تغییر مدل، شناسه در هر دو مرز برنامه/API آزموده، بازگشتِ

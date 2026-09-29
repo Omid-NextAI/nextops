@@ -14,6 +14,31 @@ WAL/PITR and production acceptance remain open. Source: master specification sec
 
 ## Matched larger-model development review — 2026-09-29
 
+Latest 30B-A3B trial: exact desktop/server size/hash import passed. Fourteen identical CPU
+questions completed with `stop`, 1.337–23.659 seconds; raw qualifier and Persian terminology review
+remains partial. Transient cgroup peak was 15,250,866,176 bytes and CPU use 2,152,362,987,000 ns,
+not total model RAM or sustained capacity. The temporary loopback unit stopped and its port closed.
+Replay of actual outputs through unchanged application assurance preserved typed source/time/scope
+and replaced both partial-evidence answers; this is a local replay, not live audit or human acceptance.
+
+The guarded 3deba0d/30B-A3B trial returned twelve fresh authenticated HTTP 200 responses, all `stop`,
+about 1.8–42.7 seconds, with exact code/model identity. Greetings, power-loss retention, arithmetic,
+unknown live state, monitoring and filesystem focus were covered. The first corpus's Persian source
+fragment incorrectly expected «زبیکس» where the application displayed canonical `Zabbix`; the
+failed report is preserved and the expectation corrected, not counted as a pass. Persian wording
+and terminology still need review. The browser failed after three successful cases; a fresh probe
+confirmed a Persian answer beginning `SSD` rendered LTR. Test sessions were revoked after failure.
+
+Exact model rollback restored 8B with two new bilingual app questions; app/API rollback then restored
+c4351fd with two further questions, matching the old code digest, model identity and logout 204.
+All first-trial rollback timers were stopped. The response-locale direction repair passed seven
+isolated browser fixtures, including Latin-prefix Persian and Persian-prefix English, independent
+UI/answer locales, 375px and landscape/reduced-motion checks. Those fixtures are not a new live
+deployment. Prompts, dependency locks, runtime, VM resources, deadlines and queue limits are unchanged.
+Full held-out, server-WAN, VM reboot and production gates remain partial/not run.
+
+The earlier 8B/14B and 32B observations below remain historical evidence.
+
 The existing serving app/API and 8B model did not change. Fourteen identical bilingual cases per
 model used actual corrected general/monitoring prompt builders, 384 tokens, 16 threads and one
 slot. All 28 generations completed with `stop`; 8B took 1.5–21.1 seconds and 14B 4.1–53.6 seconds.
