@@ -1,5 +1,20 @@
 # Testing, model evaluation and release evidence
 
+## NOC/SOC qualification follow-up — 2026-09-29
+
+PR41's five CI jobs passed and exact wheel 7ecd7ac passed a fresh offline Ubuntu install, native
+imports, digest, closed context contracts and locally bundled assets. Guarded app/API promotion
+preserved 35B/CPU/resources. The first fresh DNS answer completed, but semantic review rejected an
+overly absolute diagnostic conclusion. The browser harness also stopped before completing its
+first case; clipboard completion waiting is being made explicit. A separate rollback harness
+mistakenly expected context from the old independent-question UI; that failed report is preserved.
+Exact app-then-API rollback to 95c6e50/35B passed two fresh EN/FA DNS answers, code/model identity,
+TLS and logout. Only this change's guards were stopped after rollback. New generic guidance keeps
+alternative causes open, distinguishes check scope from overall health, and bounds diagnostic
+commands. Tests now cover both locales at exactly 6,000 serialized context characters plus the
+complete 4,000-character question. This is a source follow-up, not a successful live NOC/SOC release;
+repeat exact package/CI/live qualification before promotion. Do not erase rejected reports.
+
 ## NOC/SOC workspace source candidate — 2026-09-29
 
 `pytest -m "not integration and not browser" -q`: 357 passed, two Windows/POSIX skips, 21
