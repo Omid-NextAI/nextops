@@ -1,5 +1,17 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## CPU-efficient larger-model candidate — 2026-09-29 / نامزد کم‌هزینه‌تر روی CPU — ۷ مهر ۱۴۰۵
+
+Verified 32B import passed; eleven answers completed, but Persian stale evidence exceeded the
+120-second deadline. Record failed latency and partial quality without switching serving 8B.
+Pin official 30B-A3B Q4_K_M for the same bounded comparison and allowlist only its exact typed
+identity. No runtime/dependency/VM/deadline/queue change or remote fallback is introduced.
+
+ورودِ تأییدشدهٔ 32B موفق و یازده پاسخ کامل شدند، اما پرسش فارسیِ شاهد قدیمی از مهلت ۱۲۰ ثانیه
+گذشت. تأخیر ناموفق و کیفیت ناقص ثبت شدند؛ مدل مستقر 8B تغییر نکرد. 30B-A3B رسمی با Q4_K_M
+برای همان مقایسهٔ محدود تثبیت و فقط شناسهٔ دقیق آن در کد پذیرفته می‌شود. محیط اجرا، وابستگی،
+ماشین، مهلت و صف تغییر نمی‌کنند و جایگزین خارجی افزوده نمی‌شود.
+
 ## Larger CPU model qualification — 2026-09-29
 
 Matched fourteen-case-per-model English/Persian review completed all 28 generations at 384 tokens,

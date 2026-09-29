@@ -1,13 +1,29 @@
 # Project state / وضعیت پروژه
 
-Larger-model checkpoint, 2026-09-29 — Fourteen matched bilingual cases per model completed with
+Current larger-model checkpoint, 2026-09-29 — The pinned 32B desktop/server import passed. Eleven
+same-budget answers completed in 9.9–97.6 seconds, including correct RAM/arithmetic and English
+stale qualifiers; Persian stale evidence exceeded the 120-second deadline. Testing stopped before
+injection cases; latency failed, semantic review remains partial, and 32B was not selected. Its
+temporary unit stopped; c4351fd/8B remains live. Official pinned 30B-A3B provisioning and explicit
+source compatibility are next. Its 30.5B total/3.3B active parameters motivate measurement, not
+an accuracy/speed claim. Preserve the existing runtime, resources, policy, audit and rollback.
+
+گام جاریِ مدل بزرگ‌تر، ۷ مهر ۱۴۰۵ — ورودِ تثبیت‌شدهٔ 32B در میزکار و سرور تأیید شد. یازده پاسخ
+با همان سقف، در ۹٫۹ تا ۹۷٫۶ ثانیه کامل شدند؛ RAM، محاسبه و قید شاهد قدیمیِ انگلیسی درست بودند.
+پرسش فارسیِ شاهد قدیمی از مهلت ۱۲۰ ثانیه گذشت و آزمون پیش از موارد تزریق متوقف شد. تأخیر
+ناموفق و بازبینی معنایی ناقص است؛ 32B انتخاب نشد و سرویس موقت متوقف شد. c4351fd/8B زنده ماند.
+آماده‌سازی 30B-A3B رسمی و پشتیبانی صریحِ شناسه در کد، گام بعدی است. ۳۰٫۵ میلیارد پارامتر کل و
+۳٫۳ میلیارد پارامتر فعال، دلیل اندازه‌گیری‌اند، نه ادعای درستی یا سرعت. محیط اجرا، منابع، سیاست،
+ممیزی و امکان بازگشت حفظ شوند.
+
+Earlier larger-model checkpoint, 2026-09-29 — Fourteen matched bilingual cases per model completed with
 the corrected app prompts at 384 tokens. Semantic review rejected 14B: incorrect Persian RAM and
 50/200 arithmetic, plus source/time/stale omissions. Baseline 8B also failed some stale/source
 cases. Serving c4351fd/8B and its safeguards remain unchanged. Official 32B Q4_K_M is pinned and
 being provisioned; source-only identity support and protected selection profiles are development
 aids, not deployment or acceptance. No runtime, dependency, VM, database or connector change ran.
 
-گام مدل بزرگ‌تر، ۷ مهر ۱۴۰۵ — چهارده موردِ همسان دوزبانه برای هر مدل، با دستورهای اصلاح‌شدهٔ
+گام پیشینِ مدل بزرگ‌تر، ۷ مهر ۱۴۰۵ — چهارده موردِ همسان دوزبانه برای هر مدل، با دستورهای اصلاح‌شدهٔ
 برنامه و سقف ۳۸۴ توکن کامل شدند. بازبینی معنایی، 14B را به‌دلیل پاسخ نادرستِ فارسی دربارهٔ RAM
 و محاسبهٔ ۵۰ تقسیم بر ۲۰۰ و حذفِ منبع، زمان یا قید شاهد قدیمی رد کرد. 8B نیز بعضی مواردِ منبع
 و شاهد قدیمی را نگذرانده است. انتشار مستقر c4351fd/8B و کنترل‌های آن تغییر نکرده‌اند. مدل رسمیِ

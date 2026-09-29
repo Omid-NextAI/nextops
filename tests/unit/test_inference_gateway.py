@@ -49,7 +49,10 @@ class CapturingTransport:
 
 
 @pytest.mark.parametrize("purpose", ["general", "evidence_synthesis"])
-@pytest.mark.parametrize("model_id", ["nextops-qwen3-14b-q4-k-m", "nextops-qwen3-32b-q4-k-m"])
+@pytest.mark.parametrize(
+    "model_id",
+    ["nextops-qwen3-14b-q4-k-m", "nextops-qwen3-32b-q4-k-m", "nextops-qwen3-30b-a3b-q4-k-m"],
+)
 def test_gateway_serializes_trusted_purpose_and_preserves_exact_model(
     purpose: GenerationPurpose,
     model_id: ModelId,

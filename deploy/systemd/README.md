@@ -13,6 +13,16 @@ the key root-only and connect failure state to an approved local alert before pr
 
 ## Explicit larger-model profiles / پروفایل صریح مدل بزرگ‌تر
 
+`model-profiles/qwen3-30b-a3b-*` uses the same exact-command and required-identity-file pattern.
+It is a reviewed source profile, not authorization to select an unqualified model. 32B failed
+its Persian evidence deadline; 30B-A3B needs protected import, bilingual/deadline tests, compatible
+app/API code, guarded selection and rollback. Do not install a failed candidate to bypass a gate.
+
+فایل‌های `model-profiles/qwen3-30b-a3b-*` همان الگوی فرمان دقیق و فایلِ الزامیِ شناسه را دارند.
+این پروفایلِ کد، مجوز انتخاب مدلِ آزمون‌نشده نیست. 32B مهلت پرسش فارسیِ شاهد را نگذرانده است؛
+30B-A3B به ورود محافظت‌شده، آزمون دوزبانه و مهلت، کد سازگار برنامه/API، انتخاب محافظت‌شده و
+بازگشت نیاز دارد. نصب نامزد ناموفق نباید معیار پذیرش را دور بزند.
+
 `model-profiles/qwen3-14b-runtime.conf` changes only the immutable current filename/alias and
 resets the matching systemd condition. The tested command preserves every other base flag and
 inherits authentication, CPU/memory limits, one slot and loopback-only denial policy. The API

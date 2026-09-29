@@ -18,6 +18,7 @@ SCHEMA = ROOT / "docs/status/release-status.schema.json"
 INFERENCE_MANIFEST = ROOT / "deploy/inference/qwen3-8b-q4-k-m.yaml"
 LARGER_MODEL_MANIFEST = ROOT / "deploy/inference/qwen3-14b-q4-k-m.candidate.json"
 LARGER_32B_MODEL_MANIFEST = ROOT / "deploy/inference/qwen3-32b-q4-k-m.candidate.json"
+LARGER_MOE_MODEL_MANIFEST = ROOT / "deploy/inference/qwen3-30b-a3b-q4-k-m.candidate.json"
 RECOVERY_VALIDATOR = ROOT / "scripts/check_recovery_profile.py"
 REQUIRED_CURRENT_APP_GATES = frozenset(
     {
@@ -207,11 +208,11 @@ def main() -> int:
             errors.append("runtime source commit differs from the inference artifact manifest")
         if runtime.get("binary_sha256") != inference.get("runtime", {}).get("binary_sha256"):
             errors.append("runtime SHA-256 differs from the inference artifact manifest")
-        larger_path = (
-            LARGER_32B_MODEL_MANIFEST
-            if model.get("identifier") == "nextops-qwen3-32b-q4-k-m"
-            else LARGER_MODEL_MANIFEST
-        )
+        larger_path = {
+            "nextops-qwen3-14b-q4-k-m": LARGER_MODEL_MANIFEST,
+            "nextops-qwen3-32b-q4-k-m": LARGER_32B_MODEL_MANIFEST,
+            "nextops-qwen3-30b-a3b-q4-k-m": LARGER_MOE_MODEL_MANIFEST,
+        }.get(model.get("identifier"), LARGER_MODEL_MANIFEST)
         larger_model = json.loads(larger_path.read_text(encoding="utf-8"))
         errors.extend(model_identity_errors(model, inference.get("model", {}), larger_model))
 

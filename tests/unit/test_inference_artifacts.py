@@ -13,39 +13,47 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = REPOSITORY_ROOT / "deploy" / "inference" / "qwen3-8b-q4-k-m.yaml"
 
 
-def test_larger_runtime_profile_changes_identity_without_weakening_the_base_unit() -> None:
+@pytest.mark.parametrize("size,filename", [("14b", "14B"), ("30b-a3b", "30B-A3B")])
+def test_larger_runtime_profile_changes_identity_without_weakening_the_base_unit(
+    size: str, filename: str
+) -> None:
     directory = REPOSITORY_ROOT / "deploy" / "systemd"
     original = (directory / "nextops-llama.service").read_text("utf-8")
-    profile = (directory / "model-profiles" / "qwen3-14b-runtime.conf").read_text("utf-8")
+    profile = (directory / "model-profiles" / f"qwen3-{size}-runtime.conf").read_text("utf-8")
     base_command = original.split("ExecStart=", 1)[1].split("\nRestart=", 1)[0].strip()
-    expected = base_command.replace("Qwen3-8B-Q4_K_M.gguf", "Qwen3-14B-Q4_K_M.gguf").replace(
-        "nextops-qwen3-8b-q4-k-m", "nextops-qwen3-14b-q4-k-m"
-    )
+    expected = base_command.replace(
+        "Qwen3-8B-Q4_K_M.gguf", f"Qwen3-{filename}-Q4_K_M.gguf"
+    ).replace("nextops-qwen3-8b-q4-k-m", f"nextops-qwen3-{size}-q4-k-m")
     assert profile.split("ExecStart=\nExecStart=", 1)[1].strip() == expected
     assert "ConditionPathExists=\nConditionPathExists=" in profile
-    assert "ConditionPathExists=/srv/nextops/models/current/Qwen3-14B-Q4_K_M.gguf" in profile
+    assert (
+        f"ConditionPathExists=/srv/nextops/models/current/Qwen3-{filename}-Q4_K_M.gguf" in profile
+    )
     directives = [line for line in profile.splitlines() if "=" in line and not line.startswith("#")]
     assert len(directives) == 4
 
 
-def test_larger_api_profile_requires_a_separate_exact_identity_file() -> None:
+@pytest.mark.parametrize("size", ["14b", "30b-a3b"])
+def test_larger_api_profile_requires_a_separate_exact_identity_file(size: str) -> None:
     directory = REPOSITORY_ROOT / "deploy" / "systemd" / "model-profiles"
-    profile = (directory / "qwen3-14b-api.conf").read_text("utf-8")
+    profile = (directory / f"qwen3-{size}-api.conf").read_text("utf-8")
     assert "EnvironmentFile=/etc/nextops/model-selection.env" in profile
     assert "EnvironmentFile=-" not in profile
-    assert (directory / "qwen3-14b.env").read_text("utf-8").strip() == (
-        "NEXTOPS_MODEL_ID=nextops-qwen3-14b-q4-k-m"
+    assert (directory / f"qwen3-{size}.env").read_text("utf-8").strip() == (
+        f"NEXTOPS_MODEL_ID=nextops-qwen3-{size}-q4-k-m"
     )
     assert "Environment=" not in profile
 
 
-@pytest.mark.parametrize("size", ["14b", "32b"])
+@pytest.mark.parametrize("size", ["14b", "32b", "30b-a3b"])
 def test_larger_candidate_is_pinned_without_runtime_download_or_acceptance_claim(size: str) -> None:
     directory = MANIFEST.parent
     candidate = json.loads((directory / f"qwen3-{size}-q4-k-m.candidate.json").read_text("utf-8"))
-    schema_name = (
-        "model-candidate.schema.json" if size == "14b" else "model-32b-candidate.schema.json"
-    )
+    schema_name = {
+        "14b": "model-candidate.schema.json",
+        "32b": "model-32b-candidate.schema.json",
+        "30b-a3b": "model-30b-a3b-candidate.schema.json",
+    }[size]
     schema = json.loads((directory / schema_name).read_text("utf-8"))
     validator = Draft202012Validator(schema)
     assert not list(validator.iter_errors(candidate))

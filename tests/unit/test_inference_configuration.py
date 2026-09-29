@@ -77,7 +77,13 @@ def test_runtime_settings_reject_multiline_secret(
 
 
 @pytest.mark.parametrize(
-    "model_id", ["nextops-qwen3-14b-q4-k-m", "nextops-qwen3-32b-q4-k-m", "remote-model"]
+    "model_id",
+    [
+        "nextops-qwen3-14b-q4-k-m",
+        "nextops-qwen3-32b-q4-k-m",
+        "nextops-qwen3-30b-a3b-q4-k-m",
+        "remote-model",
+    ],
 )
 def test_model_environment_is_explicitly_allowlisted(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path, model_id: str

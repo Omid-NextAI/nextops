@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NextOps explicitly provisioned 30B-A3B CPU model candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "model_id", "source_repository", "source_revision", "filename", "size_bytes", "sha256", "license", "native_context_tokens", "runtime_commit", "cpu_only_required", "runtime_download_allowed", "max_active_requests", "max_queued_requests", "qualification"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "status": {"enum": ["pinned_candidate_not_live_qualified", "controlled_selected_not_production_accepted"]},
+    "model_id": {"const": "nextops-qwen3-30b-a3b-q4-k-m"},
+    "source_repository": {"const": "https://huggingface.co/Qwen/Qwen3-30B-A3B-GGUF"},
+    "source_revision": {"const": "e4d4bafdfb96a411a163846265362aceb0b9c63a"},
+    "filename": {"const": "Qwen3-30B-A3B-Q4_K_M.gguf"},
+    "size_bytes": {"const": 18556685824},
+    "sha256": {"const": "0d003f6662faee786ed5da3e31b29c978de5ae5d275c8794c606a7f3c01aa8f5"},
+    "license": {"const": "Apache-2.0"},
+    "native_context_tokens": {"const": 32768},
+    "runtime_commit": {"const": "b29c606e28a01b1bc8c1351026a0fa6e616bf6c4"},
+    "cpu_only_required": {"const": true},
+    "runtime_download_allowed": {"const": false},
+    "max_active_requests": {"const": 1},
+    "max_queued_requests": {"const": 2},
+    "qualification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_import", "bilingual_quality", "latency_resource_comparison", "offline_cold_start", "runtime_model_rollback"],
+      "properties": {
+        "artifact_import": {"enum": ["not_run", "partial", "failed", "passed"]},
+        "bilingual_quality": {"enum": ["not_run", "partial", "failed", "passed"]},
+        "latency_resource_comparison": {"enum": ["not_run", "partial", "failed", "passed"]},
+        "offline_cold_start": {"enum": ["not_run", "partial", "failed", "passed"]},
+        "runtime_model_rollback": {"enum": ["not_run", "partial", "failed", "passed"]}
+      }
+    }
+  }
+}
