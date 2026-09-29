@@ -1,6 +1,31 @@
 # Project state / وضعیت پروژه
 
-Current trial checkpoint, 2026-09-29 — 30B-A3B import passed; fourteen matched CPU responses
+Current checkpoint, 2026-09-29 — The corrected 8d1f1d2/30B-A3B trial fixed answer direction but
+rejected larger-model selection: incorrect Persian technical terminology and repeated raw
+filesystem generation at the 384-token ceiling. Twelve API requests completed; eleven strict
+browser cases passed before the final raw `length` failure. Four read-only database checks matched
+durable runs/audit/scope/model/integrity and evidence hashes. Exact model/source rollback restored
+fresh EN/FA generation. Only the verified RTL source repair was re-promoted as 8d1f1d2 with original
+8B. Its twelve fresh API requests passed literal/code checks; strict browser again failed raw
+Persian filesystem completion after eleven cases. A separate display-only check passed for the
+complete application-owned focused answer; this is not a raw-model pass. Controlled testing,
+not production acceptance, remains live. 35B-A3B Qwen3.5 artifact provisioning and source-only
+non-thinking/identity compatibility are next; no serving selection, runtime/VM/dependency change
+or held-out/WAN/VM-reboot acceptance is inferred.
+
+گام جاری، ۷ مهر ۱۴۰۵ — آزمون اصلاح‌شدهٔ 8d1f1d2 و 30B-A3B جهت پاسخ را درست کرد، اما انتخاب
+مدل بزرگ‌تر به‌دلیل اصطلاحات فنی نادرستِ فارسی و رسیدن مکرر تولید خامِ فایل‌سیستم به سقف ۳۸۴
+توکن رد شد. دوازده درخواست API کامل شدند؛ مرورگر یازده مورد را گذراند و در مورد آخر، شرط
+کامل‌شدن متن خام با `length` شکست خورد. چهار بررسی فقط‌خواندنی پایگاه، اجرای ماندگار، ممیزی،
+دامنه، مدل، قیدهای صحت و هش شاهد را تطبیق دادند. بازگشت دقیق مدل و کد، تولید تازهٔ فارسی و
+انگلیسی را برگرداند. فقط اصلاح آزموده‌شدهٔ جهت پاسخ در 8d1f1d2، با مدل اصلی 8B دوباره مستقر
+شد. دوازده پرسش تازهٔ آن، بررسی لفظی و هش را گذراندند؛ مرورگر پس از یازده مورد، همان ناتمامی
+خامِ فارسی را ثبت کرد. آزمون مستقلِ نمایش، پاسخ کامل و متمرکزِ ساخته‌شده توسط برنامه را تأیید
+کرد؛ این موفقیتِ متن خام مدل نیست. آزمون کنترل‌شده زنده است، نه پذیرش تولید. آماده‌سازی فایل
+Qwen3.5 با 35B-A3B و پشتیبانیِ شناسه و حالت بدون تفکر فقط در کد، گام بعد است؛ انتخاب زنده،
+تغییر محیط اجرا یا VM یا وابستگی و پذیرش کیفیت مستقل، WAN یا reboot نتیجه گرفته نشود.
+
+Earlier trial checkpoint, 2026-09-29 — 30B-A3B import passed; fourteen matched CPU responses
 completed in 1.3–23.7 seconds. Raw source/collection/partial qualifiers and Persian terminology
 remain partial. Replaying actual outputs through unchanged assurance preserved typed evidence and
 replaced both partial responses. A timed 3deba0d/30B-A3B trial returned twelve HTTP 200 responses
@@ -11,7 +36,7 @@ rollback restored c4351fd/8B with fresh EN/FA generation. The response-locale fi
 isolated browser fixtures, not a new deployment. Requalification is next; raw outputs stay private
 and production, held-out, WAN and VM reboot gates are not inferred.
 
-گام جاریِ آزمون، ۷ مهر ۱۴۰۵ — ورودِ 30B-A3B تأیید و چهارده پاسخ همسانِ CPU در ۱٫۳ تا ۲۳٫۷
+گام پیشینِ آزمون، ۷ مهر ۱۴۰۵ — ورودِ 30B-A3B تأیید و چهارده پاسخ همسانِ CPU در ۱٫۳ تا ۲۳٫۷
 ثانیه کامل شدند. منبع، زمان گردآوری و قید ناقص‌بودن در متن مدل و اصطلاحات فارسی هنوز کاملاً
 پذیرفته نیستند. بازپخش خروجی واقعی با کنترل قطعیِ بدون تغییر، شاهد نوع‌دار را حفظ و هر دو پاسخ
 شاهد ناقص را جایگزین کرد. آزمون موقتِ 3deba0d و 30B-A3B دوازده پاسخ HTTP 200 با شناسهٔ درست

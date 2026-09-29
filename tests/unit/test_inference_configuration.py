@@ -82,6 +82,7 @@ def test_runtime_settings_reject_multiline_secret(
         "nextops-qwen3-14b-q4-k-m",
         "nextops-qwen3-32b-q4-k-m",
         "nextops-qwen3-30b-a3b-q4-k-m",
+        "nextops-qwen3-5-35b-a3b-q4-k-m",
         "remote-model",
     ],
 )

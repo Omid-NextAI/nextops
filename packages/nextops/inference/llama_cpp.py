@@ -216,7 +216,7 @@ class LlamaCppProvider:
                 "Follow the requested length and format."
             )
         )
-        # Qwen documents /no_think as its soft switch for non-thinking output:
+        # Qwen3 documents /no_think as its soft switch for non-thinking output:
         # https://github.com/QwenLM/Qwen3/blob/main/docs/source/run_locally/llama.cpp.md
         payload: dict[str, Any] = {
             "model": self._settings.model_id,
@@ -233,6 +233,11 @@ class LlamaCppProvider:
             "presence_penalty": 0.0,
             "stream": False,
         }
+        if self._settings.model_id == "nextops-qwen3-5-35b-a3b-q4-k-m":
+            # Qwen3.5 requires the trusted hard switch, not Qwen3's soft suffix.
+            # https://huggingface.co/Qwen/Qwen3.5-35B-A3B#instruct-or-non-thinking-mode
+            payload["messages"][-1]["content"] = request.prompt
+            payload["chat_template_kwargs"] = {"enable_thinking": False}
         raw = await self._transport.post_json(
             "/v1/chat/completions",
             payload,

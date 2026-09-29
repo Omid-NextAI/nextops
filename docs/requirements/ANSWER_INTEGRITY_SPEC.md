@@ -1,12 +1,13 @@
 # Answer integrity specification
 
-Status: corrected app/API `nextops-0.1.0-c4351fd` serves controlled user testing with 8B.
-Named live regressions and app/API rollback passed; full held-out semantics remain partial.
+Status: RTL-corrected app/API `nextops-0.1.0-8d1f1d2` serves controlled user testing with 8B.
+Named live regressions and exact app/API/model rollback passed; full held-out semantics remain partial.
 Matched 14B development review failed. Verified 32B import failed its Persian evidence deadline,
-with semantic review partial. 30B-A3B import/deadline checks passed, but raw qualifiers and Persian
-terminology remain partial. Its guarded trial exposed Latin-prefix Persian LTR rendering;
-exact rollback restored c4351fd/8B. The response-locale repair passed local browser fixtures and
-awaits serving requalification. Qualification remains revision-specific and is not a
+with semantic review partial. 30B-A3B import/deadline checks passed, but later Persian technical
+review failed. Its corrected guarded trial fixed direction but failed raw Persian filesystem
+completion; the baseline 8B likewise reached that ceiling. Keep strict failures separate from the
+complete application-owned focused display. Qwen3.5-35B-A3B is pinned for provisioning and tested
+source-only non-thinking compatibility, not selected. Qualification remains revision-specific and is not a
 guarantee that model-only text is always true.
 
 ## Problem
@@ -19,9 +20,26 @@ selection. Pin complete artifacts outside Git; missing/corrupt bytes fail withou
 Retain exact 8B rollback. No retrieval, training, GPU, VM allocation or runtime migration belongs
 to this bounded upgrade. Record failures and maintain paired guides and release identity; full
 held-out/offline/production gates remain separate. After 14B factual failures and a 32B deadline
-failure, evaluate official 30B-A3B behind the same runtime/interface. Its sparse active parameters
-may reduce CPU cost; measured outcomes, not total parameter count, authorize selection. Do not
+failure and 30B-A3B Persian technical errors, evaluate Qwen3.5-35B-A3B behind the same runtime/interface.
+Pin its quantizer separately from upstream; a reference revision is not verified conversion lineage.
+Require the trusted non-thinking parameter, preserving all older provider payloads. Its sparse active
+parameters motivate measurement; outcomes, not total parameter count, authorize selection. Do not
 teach the model answers to the acceptance corpus or loosen deadlines to hide failure.
+
+Implementation/acceptance sequence: verify/import exact artifact; test closed model identity and
+non-thinking controls across gateway/HTTP/scheduler/provider; run the same bounded bilingual
+comparison; qualify exact offline package/CI; guarded timed app trial; fresh browser/API/durable
+audit and evidence hashes; exact 8B/source rollback before any re-promotion. Investigate focused
+prompt scope if unused raw prose hits the output limit; do not mark that raw generation complete.
+Document paired guides, release identity and failed/not-run gates, keeping raw evidence private.
+
+ترتیب اجرا و پذیرش: تطبیق فایل و ورود محافظت‌شده، آزمون شناسه و حالت بدون تفکر در مرزهای
+درگاه/HTTP/زمان‌بند/مدل، مقایسهٔ محدود و همسان دوزبانه، تأیید بستهٔ دقیقِ آفلاین و CI، آزمون
+زمان‌دار برنامه، مرورگر و API تازه و تطبیق ممیزی و هش شاهد، سپس بازگشت دقیق 8B و کد پیش از
+استقرار مجدد. نسخهٔ سازندهٔ کوانتیزه جدا از مدل اصلی ثبت شود؛ نسخهٔ مرجع، زنجیرهٔ تبدیل
+تأییدشده نیست. اگر متن خامِ استفاده‌نشده به سقف رسید، دامنهٔ دستور بررسی شود؛ تولید کامل
+اعلام نشود. راهنمای دوزبانه، شناسهٔ انتشار و معیارهای ناموفق یا اجرا‌نشده به‌روز و شاهد خام
+خصوصی نگه‌داری شوند. مهلت، صف، منابع و کنترل‌های قطعی برای پنهان‌کردن شکست تغییر نکنند.
 
 A small local language model can produce fluent text that is irrelevant, unsupported, stale or
 wrong. Prompt instructions alone are not a security or truth boundary. NextOps must never present

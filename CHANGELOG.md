@@ -1,5 +1,27 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Rejected larger trial and Qwen3.5 compatibility — 2026-09-29 / رد آزمون بزرگ‌تر و سازگاری Qwen3.5 — ۷ مهر ۱۴۰۵
+
+Corrected 30B-A3B trial fixed direction but rejected selection for Persian technical errors and
+repeat raw filesystem truncation. Preserve strict failed browser reports; baseline 8B reproduced
+the same raw ceiling, while a separate application-focus display passed. Exact model/source
+rollback and fresh EN/FA generation passed. Only RTL source 8d1f1d2 is live with original 8B;
+bounded functionality and full semantics remain partial. Pin Bartowski's Qwen3.5-35B-A3B Q4_K_M
+artifact separately from its upstream reference, without fabricated conversion lineage. Add a
+closed identity and trusted non-thinking parameter only for this family; older payloads and
+security/resource/dependency/runtime boundaries are unchanged. Provisioning and source fixtures
+are not live model or production acceptance.
+
+آزمون اصلاح‌شدهٔ 30B-A3B جهت پاسخ را درست کرد، اما انتخاب به‌دلیل خطای فنی فارسی و ناتمامی
+مکرر متن خامِ فایل‌سیستم رد شد. گزارش‌های ناموفقِ سخت‌گیرانهٔ مرورگر حفظ شده‌اند؛ خط مبنای 8B
+نیز به همان سقف خام رسید، در حالی که آزمون جداگانهٔ نمایش پاسخ متمرکزِ برنامه موفق بود.
+بازگشت دقیق مدل و کد و تولید تازهٔ فارسی و انگلیسی تأیید شدند. فقط کد RTL در 8d1f1d2، با
+مدل اصلی 8B زنده است؛ کارکرد محدود و پذیرش کاملِ معنایی ناقص‌اند. فایل Qwen3.5 با 35B-A3B و
+Q4_K_M ساختهٔ Bartowski، جدا از نسخهٔ مرجعِ مدل اصلی تثبیت شد، بدون ادعای زنجیرهٔ تبدیل
+تأییدشده. شناسهٔ محدود و پارامتر معتبرِ حالت بدون تفکر فقط برای این خانواده اضافه شدند؛
+درخواست مدل‌های قبلی و مرزهای امنیت، منابع، وابستگی و محیط اجرا ثابت‌اند. آماده‌سازی و دادهٔ
+آزمون کد، پذیرش مدل زنده یا تولید نیستند.
+
 ## Larger-model trial and answer direction — 2026-09-29 / آزمون مدل بزرگ‌تر و جهت پاسخ — ۷ مهر ۱۴۰۵
 
 30B-A3B import and fourteen CPU completions passed the deadline; raw qualifiers and Persian

@@ -33,7 +33,7 @@ def test_larger_runtime_profile_changes_identity_without_weakening_the_base_unit
     assert len(directives) == 4
 
 
-@pytest.mark.parametrize("size", ["14b", "30b-a3b"])
+@pytest.mark.parametrize("size", ["14b", "30b-a3b", "5-35b-a3b"])
 def test_larger_api_profile_requires_a_separate_exact_identity_file(size: str) -> None:
     directory = REPOSITORY_ROOT / "deploy" / "systemd" / "model-profiles"
     profile = (directory / f"qwen3-{size}-api.conf").read_text("utf-8")
@@ -45,7 +45,7 @@ def test_larger_api_profile_requires_a_separate_exact_identity_file(size: str) -
     assert "Environment=" not in profile
 
 
-@pytest.mark.parametrize("size", ["14b", "32b", "30b-a3b"])
+@pytest.mark.parametrize("size", ["14b", "32b", "30b-a3b", "5-35b-a3b"])
 def test_larger_candidate_is_pinned_without_runtime_download_or_acceptance_claim(size: str) -> None:
     directory = MANIFEST.parent
     candidate = json.loads((directory / f"qwen3-{size}-q4-k-m.candidate.json").read_text("utf-8"))
@@ -53,6 +53,7 @@ def test_larger_candidate_is_pinned_without_runtime_download_or_acceptance_claim
         "14b": "model-candidate.schema.json",
         "32b": "model-32b-candidate.schema.json",
         "30b-a3b": "model-30b-a3b-candidate.schema.json",
+        "5-35b-a3b": "model-35b-a3b-candidate.schema.json",
     }[size]
     schema = json.loads((directory / schema_name).read_text("utf-8"))
     validator = Draft202012Validator(schema)
@@ -71,6 +72,35 @@ def test_larger_candidate_is_pinned_without_runtime_download_or_acceptance_claim
         ("source_repository", "https://unapproved.invalid/model"),
     ):
         assert list(validator.iter_errors({**candidate, field: value}))
+
+
+def test_qwen35_profile_preserves_base_limits_and_does_not_enable_vision_or_mtp() -> None:
+    directory = REPOSITORY_ROOT / "deploy" / "systemd"
+    original = (directory / "nextops-llama.service").read_text("utf-8")
+    profile = (directory / "model-profiles" / "qwen3-5-35b-a3b-runtime.conf").read_text("utf-8")
+    base_command = original.split("ExecStart=", 1)[1].split("\nRestart=", 1)[0].strip()
+    expected = base_command.replace(
+        "Qwen3-8B-Q4_K_M.gguf", "Qwen_Qwen3.5-35B-A3B-Q4_K_M.gguf"
+    ).replace("nextops-qwen3-8b-q4-k-m", "nextops-qwen3-5-35b-a3b-q4-k-m")
+    expected += " \\\n    --chat-template-kwargs '{\"enable_thinking\":false}'"
+    assert profile.split("ExecStart=\nExecStart=", 1)[1].strip() == expected
+    assert (
+        "ConditionPathExists=/srv/nextops/models/current/Qwen_Qwen3.5-35B-A3B-Q4_K_M.gguf"
+        in profile
+    )
+    directives = [line for line in profile.splitlines() if "=" in line and not line.startswith("#")]
+    assert len(directives) == 4
+    assert "--mmproj" not in profile and "--spec-type" not in profile
+
+
+def test_qwen35_quantizer_reference_is_not_claimed_as_verified_conversion_lineage() -> None:
+    directory = MANIFEST.parent
+    candidate = json.loads((directory / "qwen3-5-35b-a3b-q4-k-m.candidate.json").read_text("utf-8"))
+    schema = json.loads((directory / "model-35b-a3b-candidate.schema.json").read_text("utf-8"))
+    validator = Draft202012Validator(schema)
+    assert candidate["quantized_by"] == "bartowski"
+    assert candidate["conversion_source_revision_verified"] is False
+    assert list(validator.iter_errors({**candidate, "conversion_source_revision_verified": True}))
 
 
 def test_selected_artifact_manifest_is_human_readable_and_schema_valid() -> None:

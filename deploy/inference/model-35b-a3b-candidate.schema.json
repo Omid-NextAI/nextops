@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NextOps explicitly provisioned Qwen3.5-35B-A3B CPU model candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "model_id", "source_repository", "source_revision", "quantized_by", "quantizer_runtime_tag", "upstream_repository", "upstream_reference_revision", "conversion_source_revision_verified", "filename", "size_bytes", "sha256", "license", "native_context_tokens", "runtime_commit", "cpu_only_required", "runtime_download_allowed", "max_active_requests", "max_queued_requests", "qualification"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "status": {"enum": ["pinned_candidate_not_live_qualified", "controlled_selected_not_production_accepted"]},
+    "model_id": {"const": "nextops-qwen3-5-35b-a3b-q4-k-m"},
+    "source_repository": {"const": "https://huggingface.co/bartowski/Qwen_Qwen3.5-35B-A3B-GGUF"},
+    "source_revision": {"const": "3d2a22d4eb631b9c8fd2be94599dc2fd84b4a595"},
+    "quantized_by": {"const": "bartowski"},
+    "quantizer_runtime_tag": {"const": "b9222"},
+    "upstream_repository": {"const": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B"},
+    "upstream_reference_revision": {"const": "59d61f3ce65a6d9863b86d2e96597125219dc754"},
+    "conversion_source_revision_verified": {"const": false},
+    "filename": {"const": "Qwen_Qwen3.5-35B-A3B-Q4_K_M.gguf"},
+    "size_bytes": {"const": 22285080384},
+    "sha256": {"const": "2f2df1e8b2e92b642c1850ea1734b341cc8ca5098c42cc0a8b8c436a8d4751ab"},
+    "license": {"const": "Apache-2.0"},
+    "native_context_tokens": {"const": 262144},
+    "runtime_commit": {"const": "b29c606e28a01b1bc8c1351026a0fa6e616bf6c4"},
+    "cpu_only_required": {"const": true},
+    "runtime_download_allowed": {"const": false},
+    "max_active_requests": {"const": 1},
+    "max_queued_requests": {"const": 2},
+    "qualification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_import", "bilingual_quality", "latency_resource_comparison", "offline_cold_start", "runtime_model_rollback"],
+      "properties": {
+        "artifact_import": {"enum": ["not_run", "partial", "failed", "passed"]},
+        "bilingual_quality": {"enum": ["not_run", "partial", "failed", "passed"]},
+        "latency_resource_comparison": {"enum": ["not_run", "partial", "failed", "passed"]},
+        "offline_cold_start": {"enum": ["not_run", "partial", "failed", "passed"]},
+        "runtime_model_rollback": {"enum": ["not_run", "partial", "failed", "passed"]}
+      }
+    }
+  }
+}

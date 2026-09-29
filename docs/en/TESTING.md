@@ -14,7 +14,35 @@ WAL/PITR and production acceptance remain open. Source: master specification sec
 
 ## Matched larger-model development review — 2026-09-29
 
-Latest 30B-A3B trial: exact desktop/server size/hash import passed. Fourteen identical CPU
+Current larger-model result, 2026-09-29: exact 8d1f1d2 wheel SHA-256
+`a8c0ecd943710cd3c35ea03f83954fc9b007d820ba1a294852d1ab5a164e86be` was installed offline;
+serving code SHA-256 is `4ab8e9e5ba205b0bf2bbe18fbd570b0cd0e7f00f030c43e7b440055812f55fae`.
+The corrected 30B-A3B trial returned twelve HTTP 200 responses in 2.1–38.9 seconds with exact
+identity and logout 204; eleven raw generations stopped, the Persian filesystem case was `length`.
+Strict browser review passed eleven cases including Latin-prefix Persian RTL, then failed that
+raw completion. Both reports are retained. Incorrect Persian technical terminology also rejected
+selection: core persistence/math were correct, but SSD was called main memory and unfamiliar
+technical phrasing recurred. No final larger-model selection ran.
+
+Four bounded PostgreSQL `READ ONLY` checks independently matched stored runs, completion audits,
+scope/actor/correlation, model/integrity/limitations and canonical evidence hashes. Exact model
+rollback restored fresh EN/FA generation; exact app/API rollback to c4351fd restored two further
+questions, each with correct code/model and logout 204. Only the RTL source fix was re-promoted
+as 8d1f1d2 with original 8B. Twelve fresh API literal/code checks passed in 1.6–64.5 seconds,
+again eleven raw `stop` and final Persian filesystem `length`; the strict browser repeated that
+failure after eleven cases. A separate one-case **display-only** browser check passed the complete
+application-owned focused answer, RTL, collapsed unrelated evidence, TLS/local assets and logout;
+it explicitly does not claim raw completion. Four more read-only audit/hash pairs matched. Only
+own source rollback timers were disarmed; the failed model remains protected, not selected.
+
+Qwen3.5-35B-A3B provisioning and source-only typed identity/non-thinking compatibility are in
+progress. Local unit/API fixtures: 290 passed, two POSIX-only skips, sixteen integration/browser
+deselections; no new live candidate or production pass follows from them. Preserve 384 tokens,
+120 seconds, one-active/two-queued, CPU/resource/credential/network controls. The shared raw
+filesystem ceiling needs bounded prompt-scope review. Held-out, exact-release server WAN and VM
+reboot/cold-start gates remain partial/not_run. Earlier records below are historical.
+
+Earlier matched 30B-A3B trial: exact desktop/server size/hash import passed. Fourteen identical CPU
 questions completed with `stop`, 1.337–23.659 seconds; raw qualifier and Persian terminology review
 remains partial. Transient cgroup peak was 15,250,866,176 bytes and CPU use 2,152,362,987,000 ns,
 not total model RAM or sustained capacity. The temporary loopback unit stopped and its port closed.
