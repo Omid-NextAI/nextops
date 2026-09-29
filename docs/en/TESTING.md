@@ -12,6 +12,26 @@ logical isolated restores of both PostgreSQL 16 databases. Independent off-datas
 WAL/PITR and production acceptance remain open. Source: master specification sections 10–14 and
 21–23.
 
+## Matched larger-model development review — 2026-09-29
+
+The existing serving app/API and 8B model did not change. Fourteen identical bilingual cases per
+model used actual corrected general/monitoring prompt builders, 384 tokens, 16 threads and one
+slot. All 28 generations completed with `stop`; 8B took 1.5–21.1 seconds and 14B 4.1–53.6 seconds.
+There were no transport errors. A temporary loopback-only CPU unit had a 32-GiB ceiling and a
+15-minute expiry and was stopped after capture. Its 8.54-GB cgroup peak is not total model RAM.
+
+Agent semantic review rejected 14B: Persian RAM was described as flash memory, Persian 50/200
+returned 50%, stale/source qualifiers were weakened or missing, and one injected-name answer
+omitted source/collection time. No execution tool or target credential was exposed. Baseline 8B
+also failed stale/source review; existing deterministic live controls remain required. The corpus
+was a bounded development comparison, not independent held-out or production acceptance.
+
+Official pinned 32B provisioning and minimal source identity support are underway. No imported
+32B bytes, live answers, serving-model restart/rollback or VM/offline gate is passed by that source
+work. The tested 14B selection profiles inherit the base resource/network/credential restrictions
+and require a protected explicit model-identity file; they were not installed. Failed 14B must not
+be selected. Private outputs and operational commands remain outside Git.
+
 ## Exact application-release qualification — manifest contract
 
 ### Corrected clarity release — 2026-09-29

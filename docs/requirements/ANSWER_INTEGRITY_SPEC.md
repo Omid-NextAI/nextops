@@ -1,12 +1,22 @@
 # Answer integrity specification
 
-Status: the focused app increment is deployed for controlled user testing on release
-`nextops-0.1.0-01755d1`; earlier bounded live API/browser checks passed, but a fresh synthetic
-semantic probe failed and the full held-out review remains unfinished. A source-only correction
-is not yet deployed. Qualification remains revision-specific and is not a guarantee that model-only
-text is always true.
+Status: corrected app/API `nextops-0.1.0-c4351fd` serves controlled user testing with 8B.
+Named live regressions and app/API rollback passed; full held-out semantics remain partial.
+Matched 14B development review failed. Pinned 32B provisioning and source-only identity support
+are underway, not selected or deployed. Qualification remains revision-specific and is not a
+guarantee that model-only text is always true.
 
 ## Problem
+
+Current larger-model task: retain the working CPU runtime, authentication, deterministic policy,
+384-token bound, one-active/two-queued scheduler, bilingual UI and audit. A candidate must pass
+the same versioned question set with direct correct explanations/calculations, preserved source,
+time, stale/partial scope, no injection or invented execution, and bounded latency before guarded
+selection. Pin complete artifacts outside Git; missing/corrupt bytes fail without download.
+Retain exact 8B rollback. No retrieval, training, GPU, VM allocation or runtime migration belongs
+to this bounded upgrade. Record failures and maintain paired guides and release identity; full
+held-out/offline/production gates remain separate. The 14B factual failures motivate evaluating
+the official 32B candidate, not teaching the model answers to the acceptance corpus.
 
 A small local language model can produce fluent text that is irrelevant, unsupported, stale or
 wrong. Prompt instructions alone are not a security or truth boundary. NextOps must never present

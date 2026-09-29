@@ -1,5 +1,17 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Larger-model trace (sections 9, 10, 19, 25; 2026-09-29): matched 8B/14B development review used
+fourteen bilingual cases per model at 384 tokens. Both completed, but 14B factual/arithmetic and
+evidence-qualifier failures prohibit selection. Official 32B has pinned source/license/size/hash
+metadata and source-only typed identity support; its provisioning is not verified import or live
+acceptance. Existing CPU runtime, 8B serving path, resources, policy, audit and rollback persist.
+
+ردیابی مدل بزرگ‌تر (بخش‌های ۹، ۱۰، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): بازبینی توسعه‌ایِ همسان 8B و 14B،
+چهارده مورد دوزبانه برای هر مدل با سقف ۳۸۴ توکن داشت. هر دو کامل شدند، اما واقعیت و محاسبهٔ
+نادرست و ضعف قیدِ شاهد در 14B مانع انتخاب است. منبع، مجوز، اندازه و هشِ 32B رسمی تثبیت و
+شناسهٔ نوع‌دار آن فقط در کد اضافه شده است؛ آماده‌سازی، ورودِ تأییدشده یا پذیرش زنده نیست.
+محیط CPU، مسیر مستقر 8B، منابع، سیاست، ممیزی و امکان بازگشت حفظ شده‌اند.
+
 Live clarity trace (sections 9, 19, 25; 2026-09-29): `c4351fd` now serves application and inference
 API. Twelve fresh bilingual authenticated API cases and seven browser cases across two contexts
 cover the named greeting, general-knowledge, unknown-live-state and focus/scope regressions.

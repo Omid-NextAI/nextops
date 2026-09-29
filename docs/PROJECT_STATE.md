@@ -1,6 +1,20 @@
 # Project state / وضعیت پروژه
 
-Live clarity checkpoint, 2026-09-29 — Application and inference API now serve
+Larger-model checkpoint, 2026-09-29 — Fourteen matched bilingual cases per model completed with
+the corrected app prompts at 384 tokens. Semantic review rejected 14B: incorrect Persian RAM and
+50/200 arithmetic, plus source/time/stale omissions. Baseline 8B also failed some stale/source
+cases. Serving c4351fd/8B and its safeguards remain unchanged. Official 32B Q4_K_M is pinned and
+being provisioned; source-only identity support and protected selection profiles are development
+aids, not deployment or acceptance. No runtime, dependency, VM, database or connector change ran.
+
+گام مدل بزرگ‌تر، ۷ مهر ۱۴۰۵ — چهارده موردِ همسان دوزبانه برای هر مدل، با دستورهای اصلاح‌شدهٔ
+برنامه و سقف ۳۸۴ توکن کامل شدند. بازبینی معنایی، 14B را به‌دلیل پاسخ نادرستِ فارسی دربارهٔ RAM
+و محاسبهٔ ۵۰ تقسیم بر ۲۰۰ و حذفِ منبع، زمان یا قید شاهد قدیمی رد کرد. 8B نیز بعضی مواردِ منبع
+و شاهد قدیمی را نگذرانده است. انتشار مستقر c4351fd/8B و کنترل‌های آن تغییر نکرده‌اند. مدل رسمیِ
+32B با Q4_K_M تثبیت و در حال آماده‌سازی است؛ شناسه و پروفایل انتخاب فقط در کد، ابزار توسعه‌اند،
+نه استقرار یا پذیرش. محیط اجرا، وابستگی، ماشین، پایگاه و اتصال‌دهنده تغییر نکردند.
+
+Earlier live clarity checkpoint, 2026-09-29 — Application and inference API now serve
 `nextops-0.1.0-c4351fd` after PR #32 and all five hosted CI jobs passed. Twelve fresh bilingual API
 cases passed with matching code digest and logout; the four known focus/scope failures are fixed.
 Five general browser cases and a separate two-case filesystem context passed their respective

@@ -16,6 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "docs/status/current-release.yaml"
 SCHEMA = ROOT / "docs/status/release-status.schema.json"
 INFERENCE_MANIFEST = ROOT / "deploy/inference/qwen3-8b-q4-k-m.yaml"
+LARGER_MODEL_MANIFEST = ROOT / "deploy/inference/qwen3-14b-q4-k-m.candidate.json"
+LARGER_32B_MODEL_MANIFEST = ROOT / "deploy/inference/qwen3-32b-q4-k-m.candidate.json"
 RECOVERY_VALIDATOR = ROOT / "scripts/check_recovery_profile.py"
 REQUIRED_CURRENT_APP_GATES = frozenset(
     {
@@ -146,6 +148,27 @@ def production_claim_errors(status: dict[str, Any], recovery_qualified: bool) ->
     return errors
 
 
+def model_identity_errors(
+    model: dict[str, Any], baseline: dict[str, Any], larger: dict[str, Any]
+) -> list[str]:
+    """Verify the entire selected identity without rewriting historical 8B evidence."""
+
+    identifier = model.get("identifier")
+    if identifier == baseline.get("model_id"):
+        selected = baseline
+    elif identifier == larger.get("model_id"):
+        if larger.get("status") != "controlled_selected_not_production_accepted":
+            return ["larger model selected without controlled-selection evidence"]
+        selected = {**larger, "quantization": "Q4_K_M"}
+    else:
+        return ["selected model identity is not an explicitly reviewed artifact"]
+    return [
+        f"selected model {field} differs from its inference artifact manifest"
+        for field in ("source_revision", "quantization", "size_bytes", "sha256")
+        if model.get(field) != selected.get(field)
+    ]
+
+
 def main() -> int:
     errors: list[str] = []
     status = _load_yaml(MANIFEST)
@@ -184,8 +207,13 @@ def main() -> int:
             errors.append("runtime source commit differs from the inference artifact manifest")
         if runtime.get("binary_sha256") != inference.get("runtime", {}).get("binary_sha256"):
             errors.append("runtime SHA-256 differs from the inference artifact manifest")
-        if model.get("sha256") != inference.get("model", {}).get("sha256"):
-            errors.append("model SHA-256 differs from the inference artifact manifest")
+        larger_path = (
+            LARGER_32B_MODEL_MANIFEST
+            if model.get("identifier") == "nextops-qwen3-32b-q4-k-m"
+            else LARGER_MODEL_MANIFEST
+        )
+        larger_model = json.loads(larger_path.read_text(encoding="utf-8"))
+        errors.extend(model_identity_errors(model, inference.get("model", {}), larger_model))
 
     if errors:
         print("Release status validation failed:")

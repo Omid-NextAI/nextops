@@ -11,6 +11,26 @@ configured public certificate and fails on an invalid or warning-window state. T
 read private keys, renew certificates or itself provide operator notification; deployment must keep
 the key root-only and connect failure state to an approved local alert before production sign-off.
 
+## Explicit larger-model profiles / پروفایل صریح مدل بزرگ‌تر
+
+`model-profiles/qwen3-14b-runtime.conf` changes only the immutable current filename/alias and
+resets the matching systemd condition. The tested command preserves every other base flag and
+inherits authentication, CPU/memory limits, one slot and loopback-only denial policy. The API
+drop-in requires `/etc/nextops/model-selection.env`; the separate non-secret sample selects the
+exact allowlisted alias. File absence fails startup. These source profiles are not authorization
+or acceptance: 14B failed the current matched quality review and must not be installed or selected.
+32B needs its own complete artifact verification, model identity through every app/API boundary,
+quality/latency results and guarded model/config rollback. Keep the verified 8B release intact.
+
+فایل `model-profiles/qwen3-14b-runtime.conf` فقط نام فایلِ تغییرناپذیر و شناسهٔ مدل را عوض
+می‌کند و شرط متناظر systemd را بازتنظیم می‌کند. فرمان آزموده‌شده، همهٔ گزینه‌های دیگر را حفظ
+و احراز هویت، حدود CPU/حافظه، یک جایگاه و سیاستِ صرفاً loopback را به ارث می‌برد. پروفایل API
+به `/etc/nextops/model-selection.env` نیاز دارد؛ نمونهٔ جدا و غیرمحرمانه، شناسهٔ دقیقِ مجاز
+را انتخاب می‌کند. نبود فایل، شروع را ناموفق می‌کند. این فایل‌های کد مجوز یا پذیرش نیستند؛
+14B بازبینی جاری را نگذرانده و نباید نصب یا انتخاب شود. 32B به تأیید کامل فایل، شناسهٔ درست
+در تمام مرزهای برنامه/API، نتیجهٔ کیفیت و تأخیر و بازگشتِ محافظت‌شدهٔ مدل/تنظیم نیاز دارد.
+نسخهٔ تأییدشدهٔ 8B دست‌نخورده بماند.
+
 Application-side units:
 
 - `nextops-app.service` runs the authenticated panel/API on loopback and reads database, bootstrap,
