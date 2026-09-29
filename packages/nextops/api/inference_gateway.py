@@ -8,7 +8,7 @@ from uuid import UUID, uuid4
 from pydantic import ValidationError
 
 from nextops.application.errors import ApplicationError
-from nextops.contracts.assistant import AssistantRequest, AssistantResponse
+from nextops.contracts.assistant import AssistantResponse, SynthesisRequest
 from nextops.contracts.errors import ErrorCode
 from nextops.inference.contracts import InferenceReadiness, InferenceResult
 from nextops.inference.llama_cpp import JsonTransport, UrllibJsonTransport
@@ -20,7 +20,7 @@ class InferenceGateway(Protocol):
     async def readiness(self) -> InferenceReadiness: ...
 
     async def generate(
-        self, request: AssistantRequest, correlation_id: UUID
+        self, request: SynthesisRequest, correlation_id: UUID
     ) -> AssistantResponse: ...
 
 
@@ -57,7 +57,7 @@ class LoopbackInferenceGateway:
                 retryable=True,
             ) from error
 
-    async def generate(self, request: AssistantRequest, correlation_id: UUID) -> AssistantResponse:
+    async def generate(self, request: SynthesisRequest, correlation_id: UUID) -> AssistantResponse:
         request_id = uuid4()
         raw = await self._transport.post_json(
             "/api/v1/generate",
@@ -65,6 +65,7 @@ class LoopbackInferenceGateway:
                 "request_id": str(request_id),
                 "locale": request.locale,
                 "prompt": request.question,
+                "purpose": request.purpose,
                 "max_output_tokens": request.max_output_tokens,
                 "temperature": 0.3,
             },

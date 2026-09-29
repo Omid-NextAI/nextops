@@ -43,6 +43,21 @@ credential boundaries, fixed loopback origins, one llama.cpp slot, and the one-a
 scheduler. These are source and smoke-test results, not full bilingual quality, latency, memory,
 failure, offline cold-start, backup, restore, rollback, or production acceptance.
 
+### Larger clarity candidate — 2026-09-29
+
+The owner requested a larger local model. The official [Qwen3-14B-GGUF](https://huggingface.co/Qwen/Qwen3-14B-GGUF)
+Q4_K_M artifact is pinned in [candidate metadata](../../deploy/inference/qwen3-14b-q4-k-m.candidate.json):
+revision `530227a7d994db8eca5ab5ced2fb692b614357fd`, 9,001,752,960 bytes, SHA-256
+`500a8806e85ee9c83f3ae08420295592451379b4f8cf2d0f41c15dffeb6b81f0`, upstream Apache-2.0.
+It uses the existing pinned CPU runtime; compatibility must still be tested. Source metadata is
+not a verified import or a quality result. The serving 8B artifact and rollback are preserved.
+Explicit `NEXTOPS_MODEL_ID` selects only the reviewed 8B/14B aliases; arbitrary names/URLs fail.
+Runtime alias, local file and configuration must match, and missing files must not trigger a download.
+
+Compare the same English/Persian questions, completion state, relevance, evidence preservation,
+latency and resources. A larger model is a candidate, not a guarantee of accuracy or production
+acceptance. Provisioning downloads occur outside the model service, not through runtime Internet.
+
 ## Hardware discovery before tuning
 
 Confirm CPU model, physical/logical cores, sockets, NUMA nodes, effective affinity/cgroup allocation, instruction sets, available RAM, storage and existing workload contention. “G10” and “90 CPU” establish none of these details. Discovery must not install packages or stress the host; see [installation](INSTALL.md).

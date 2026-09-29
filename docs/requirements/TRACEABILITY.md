@@ -1,5 +1,20 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Clarity/workflow trace (sections 9, 19, 25; 2026-09-29): the owner retired the unrelated
+questionnaire prerequisite. The candidate separates application-owned general/evidence purpose,
+retains the full accepted question and permits bounded 384-token answers; browser clients cannot
+set provider controls. The official 14B candidate has immutable source/size/hash metadata and a
+local-only alias. Eight synthetic 8B loopback generations completed, with Persian/source-label
+issues retained for comparison. These observations do not close the failed serving semantic gate
+or any exact-release offline, rollback, recovery or production gate.
+
+ردیابی وضوح و روند توسعه (بخش‌های ۹، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): مالک پیش‌شرطِ پرسش‌نامهٔ نامرتبط را
+حذف کرد. نامزد، نوع پردازش عمومی و شاهد را در اختیار برنامه جدا می‌کند، پرسش کامل را حفظ می‌کند
+و پاسخ محدودِ ۳۸۴توکنی می‌دهد؛ کاربرِ مرورگر نمی‌تواند تنظیم‌های مدل را تعیین کند. نامزد رسمی
+14B رکورد منبع، اندازه و هش تغییرناپذیر و شناسهٔ صرفاً محلی دارد. هشت تولید ساختگی روی 8B کامل
+شدند و اشکال عبارت فارسی و برچسب منبع برای مقایسه حفظ شد. این مشاهده‌ها شکست معیار معناییِ
+برنامهٔ مستقر یا معیارهای آفلاین، بازگشت، بازیابی و تولید را نمی‌بندند.
+
 Repository-policy trace (active prompt section 8, 2026-09-28): read-only GitHub branch and
 ruleset results confirm absent merge enforcement despite five successful trusted CI checks.
 The paired development/runbook handoff covers administrator setup and denied-merge verification;

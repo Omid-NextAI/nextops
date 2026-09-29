@@ -1,13 +1,34 @@
 """Selected local-inference artifact metadata validation tests."""
 
+import json
 import subprocess
 import sys
 from pathlib import Path
 
 import yaml
+from jsonschema import Draft202012Validator
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = REPOSITORY_ROOT / "deploy" / "inference" / "qwen3-8b-q4-k-m.yaml"
+
+
+def test_larger_candidate_is_pinned_without_runtime_download_or_acceptance_claim() -> None:
+    directory = MANIFEST.parent
+    candidate = json.loads((directory / "qwen3-14b-q4-k-m.candidate.json").read_text("utf-8"))
+    schema = json.loads((directory / "model-candidate.schema.json").read_text("utf-8"))
+    validator = Draft202012Validator(schema)
+    assert not list(validator.iter_errors(candidate))
+    assert candidate["runtime_download_allowed"] is False
+    assert candidate["cpu_only_required"] is True
+    assert candidate["status"] == "pinned_candidate_not_live_qualified"
+    for field, value in (
+        ("sha256", "0" * 64),
+        ("source_revision", "main"),
+        ("runtime_download_allowed", True),
+        ("max_active_requests", 2),
+        ("source_repository", "https://unapproved.invalid/model"),
+    ):
+        assert list(validator.iter_errors({**candidate, field: value}))
 
 
 def test_selected_artifact_manifest_is_human_readable_and_schema_valid() -> None:

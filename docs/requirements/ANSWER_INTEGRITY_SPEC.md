@@ -15,6 +15,14 @@ an operation, and must preserve stale/partial qualifiers even when generated pro
 
 ## Requirements
 
+- Application-owned generation purpose separates ordinary Q&A from evidence synthesis. Browser
+  requests cannot choose provider identity, system instructions or synthesis purpose.
+- Preserve the complete accepted question (up to 4,000 characters) in a separate bounded internal
+  prompt contract (up to 12,000 characters); never silently discard the question's last instruction.
+- The UI and application permit at most 384 output tokens per answer, respecting a lower requested
+  limit. Incident input accepts up to 512 but the application clamps it to 384. Existing truncation
+  rejection and one-active/two-queued scheduling remain mandatory.
+
 - General mode remains useful for ordinary questions but is explicitly labelled as model-only and
   potentially incorrect.
 - A general-mode question asking for current infrastructure state is redirected to a live evidence
@@ -72,6 +80,34 @@ establish the truth of arbitrary model-only answers, so the UI must preserve the
 warning.
 
 ## Implementation and tasks
+
+### Clarity repair and larger-model comparison — 2026-09-29
+
+Problem: the prior shared system prompt treated ordinary chat as an evidence recap, public and
+internal prompt bounds were conflated, and the UI/application reduced every answer to 128 tokens.
+The repair does not rebuild the platform, train a foundation model, increase concurrency, add
+retrieval, or grant execution. General explanations remain model-only; live answers retain the
+stricter evidence-only prompt, assurance, provenance and audit.
+
+Plan: retire the unrelated owner form; add typed internal purpose and prompt bounds; remove silent
+question-tail clipping; raise the bounded answer budget; test forged controls, all three route
+question tails, model-identity mismatches and bilingual behavior. Pin the official 14B Q4_K_M
+artifact separately from the serving 8B record, verify its downloaded bytes, and compare both using
+the same synthetic and held-out questions before any model selection. Larger weights alone do not
+establish clarity, truth or acceptable CPU latency.
+
+Deployment dependency: upgrade the inference API before the application because older inference
+APIs reject the new `purpose` field. Old application calls omit it and retain evidence-synthesis
+semantics. Roll back the application before the inference API; preserve compatible previous
+immutable releases and the verified 8B model. No database migration, host firewall change, VM
+reboot or destructive operation belongs to this repair. Model switching needs its own verified
+runtime/path/identity tuple and measured comparison; it must not download at startup.
+
+Acceptance: all accepted question tails reach synthesis; forged browser purpose/model fields fail;
+both locales use the intended prompt; no false live/execution claims pass; results name the actual
+configured model. Local fixtures, bounded loopback generation and serving-path qualification are
+recorded separately in paired guides and current state. Exact-release offline/rollback tests and
+full semantic review remain required, not inferred from lexical checks or a downloaded artifact.
 
 1. Extend the assistant contract with consistent evidence mode, live-data marker, integrity status
    and bounded limitation codes.

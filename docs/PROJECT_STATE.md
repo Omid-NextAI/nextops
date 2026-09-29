@@ -1,5 +1,24 @@
 # Project state / وضعیت پروژه
 
+AI clarity development, 2026-09-29 — The owner retired the all-at-once decision form; it is no
+longer a development prerequisite. The active private copy was moved to a recoverable retired
+copy. The candidate separates general/evidence synthesis, retains full accepted question tails,
+and raises the UI/application output cap to 384 without increasing concurrency. An eight-case
+serial CPU loopback probe using candidate provider code returned complete 8B answers in both
+languages, but Persian wording and an omitted evidence-source label still need improvement.
+This is bounded synthetic generation, not a serving-app or production pass. A separately pinned
+official 14B Q4_K_M candidate is being provisioned and compared; the serving 8B and rollback remain
+unchanged. Existing failed/not-run release gates are preserved.
+
+توسعهٔ وضوح پاسخ، ۷ مهر ۱۴۰۵ — مالک فرمِ یک‌جای تصمیم‌ها را کنار گذاشت؛ تکمیل آن دیگر پیش‌شرط
+توسعه نیست. نسخهٔ فعال خصوصی به نسخهٔ کنارگذاشته‌شده و قابل‌بازیابی منتقل شد. نامزد، دستور
+پرسش عمومی و خلاصه‌سازی شاهد را جدا می‌کند، پایان کامل پرسش را حفظ می‌کند و سقف پاسخ رابط و
+برنامه را بدون افزایش هم‌زمانی به ۳۸۴ توکن می‌رساند. هشت پرسش ساختگیِ متوالی با کد نامزد روی
+مدل CPU فعلیِ 8B، در هر دو زبان پاسخ کامل گرفتند؛ بااین‌حال، عبارت فارسی و حذف نام منبعِ شاهد
+هنوز نیازمند بهبود است. این تولید محدود و ساختگی، پذیرش مسیر برنامهٔ مستقر یا تولید نیست.
+مدل رسمیِ 14B با Q4_K_M و رکورد مستقل در حال آماده‌سازی و مقایسه است؛ مدل مستقر 8B و امکان
+بازگشت آن تغییر نکرده‌اند. معیارهای ناموفق و اجرا‌نشدهٔ انتشار حفظ شده‌اند.
+
 Repository enforcement audit, 2026-09-28 — At `de52e43`, GitHub's read-only branch metadata
 reported `main` unprotected and required status checks off; the repository/inherited ruleset
 list was empty. All five check runs succeeded from GitHub Actions app `15368`, but are not

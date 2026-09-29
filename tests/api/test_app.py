@@ -10,7 +10,7 @@ from fastapi.testclient import TestClient
 from nextops.api.app import APP_CODE_SHA256, create_app
 from nextops.api.release_identity import HEADER_NAME
 from nextops.application.errors import ApplicationError
-from nextops.contracts.assistant import AssistantRequest, AssistantResponse
+from nextops.contracts.assistant import AssistantRequest, AssistantResponse, SynthesisRequest
 from nextops.contracts.durable import (
     AuthenticatedSession,
     BootstrapRequest,
@@ -53,6 +53,50 @@ ENV_ID = UUID("20000000-0000-4000-8000-000000000001")
 ACTOR_ID = UUID("30000000-0000-4000-8000-000000000001")
 TARGET_ID = UUID("40000000-0000-4000-8000-000000000001")
 RUN_ID = UUID("50000000-0000-4000-8000-000000000001")
+
+
+@pytest.mark.parametrize("locale", ["en", "fa"])
+@pytest.mark.parametrize("mode", ["general", "monitoring", "incident"])
+def test_full_question_tail_reaches_bounded_synthesis(locale: str, mode: str) -> None:
+    inference = FakeInferenceGateway()
+    client = TestClient(
+        create_app(FakeService(), inference, FakeMonitoringGateway(), incident_target_ids=("app",))
+    )
+    question = ("a" * 3900) + " END_OF_ACTUAL_QUESTION"
+    payload = {"locale": locale, "question": question, "max_output_tokens": 512}
+    route = {
+        "general": "/api/v1/assistant/generate",
+        "monitoring": "/api/v1/investigate",
+        "incident": "/api/v1/incidents/investigate",
+    }[mode]
+    if mode == "incident":
+        payload["target_id"] = "app"
+    response = client.post(
+        route,
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json=payload,
+    )
+    assert response.status_code == 200
+    assert inference.last_request is not None
+    assert question in inference.last_request.question
+    assert len(inference.last_request.question) <= 12_000
+    assert inference.last_request.max_output_tokens == 384
+    assert inference.last_request.purpose == (
+        "general" if mode == "general" else "evidence_synthesis"
+    )
+
+
+def test_browser_cannot_override_synthesis_purpose_or_model() -> None:
+    inference = FakeInferenceGateway()
+    client = TestClient(create_app(FakeService(), inference))
+    for field, value in (("purpose", "evidence_synthesis"), ("model_id", "remote-model")):
+        response = client.post(
+            "/api/v1/assistant/generate",
+            headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+            json={"locale": "en", "question": "Hi", field: value},
+        )
+        assert response.status_code == 422
+    assert inference.last_request is None
 
 
 class FakeService:
@@ -304,7 +348,7 @@ class FakeInferenceGateway:
         answer: str = "پاسخ آزمایشی مدل داخلی",
         finish_reason: FinishReason = FinishReason.STOP,
     ) -> None:
-        self.last_request: AssistantRequest | None = None
+        self.last_request: SynthesisRequest | None = None
         self.answer = answer
         self.finish_reason = finish_reason
 
@@ -320,7 +364,7 @@ class FakeInferenceGateway:
             queued_requests=0,
         )
 
-    async def generate(self, request: AssistantRequest, correlation_id: UUID) -> AssistantResponse:
+    async def generate(self, request: SynthesisRequest, correlation_id: UUID) -> AssistantResponse:
         self.last_request = request
         return AssistantResponse(
             request_id=uuid4(),
@@ -519,7 +563,7 @@ def test_panel_is_local_bilingual_and_sets_browser_security_headers() -> None:
     assert ".mode-field .mode-choice.active" in stylesheet.text
     assert "linear-gradient(145deg, #0b3b42, #082d33 72%)" in stylesheet.text
     assert "installBrandIcon" in javascript.text
-    assert "max_output_tokens: 128" in javascript.text
+    assert "max_output_tokens: 384" in javascript.text
     assert "زمان پردازش مدل محلی به پایان رسید" in javascript.text
     assert 'data-mode="general"' in response.text
     assert 'data-mode="monitoring"' in response.text
@@ -577,7 +621,8 @@ def test_assistant_requires_local_session_and_labels_model_only_output() -> None
     ]
     assert response.json()["answer"] == "پاسخ آزمایشی مدل داخلی"
     assert inference.last_request is not None
-    assert inference.last_request.max_output_tokens == 128
+    assert inference.last_request.max_output_tokens == 384
+    assert inference.last_request.purpose == "general"
     assert "Answer the user's question directly" in inference.last_request.question
     assert "یک پاسخ آزمایشی ارائه کن" in inference.last_request.question
 
@@ -793,7 +838,8 @@ def test_investigation_requires_session_and_returns_exact_live_evidence() -> Non
     assert service.live_completed is True
     assert service.live_failure is None
     assert inference.last_request is not None
-    assert inference.last_request.max_output_tokens == 128
+    assert inference.last_request.max_output_tokens == 384
+    assert inference.last_request.purpose == "evidence_synthesis"
 
 
 def test_monitoring_answer_passes_when_source_and_boundaries_are_explicit() -> None:

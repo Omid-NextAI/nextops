@@ -4,7 +4,12 @@
 
 [English](../en/PRODUCTION_BLOCKERS_RUNBOOK.md) · [قرارداد بازیابی](../../deploy/recovery/README.md) · [وضعیت جاری](../status/current-release.yaml)
 
-**وضعیت: اقدام مالک لازم است؛ این سند به‌تنهایی هیچ دروازه‌ای را نمی‌بندد.** به‌روزرسانی: ۶ مهر ۱۴۰۵، برابر با ۲۸ سپتامبر ۲۰۲۶.
+**وضعیت: کارهای باقی‌ماندهٔ پذیرش؛ نه فرمِ پیش‌شرط توسعه.** به‌روزرسانی: ۷ مهر ۱۴۰۵، برابر با ۲۹ سپتامبر ۲۰۲۶.
+
+مالک در ۷ مهر ۱۴۰۵ فرمِ یک‌جای تصمیم‌ها را کنار گذاشت. توسعهٔ کد، آزمون محلی و ارزیابی محدودِ
+مدل نامزد، منتظر ورودی‌های نامرتبطِ بازیابی، SMTP، مجوز یا گواهی نمی‌مانند. تصمیم غایب فقط زمانی
+پرسیده شود که عملیات مشخصِ بعدی واقعاً به آن وابسته باشد. حذف این تشریفات به معنی حذف احراز
+هویت، ممیزی، راستی‌آزمایی فایل، بررسی امکان بازگشت یا گزارش صادقانهٔ آزمون ناموفق و اجرا‌نشده نیست.
 
 ترتیب کنونی تحویل تغییر کرده است: مالک می‌گوید از هر چهار سرور هر روز در ESXi ‏snapshot گرفته
 می‌شود و کار بازیابی مستقل را برای این استقرار محلی به تعویق انداخته است. بخش‌های ۳ و ۴ برای
@@ -48,65 +53,17 @@ datastore، گذرواژه، توکن، کلید خصوصی، راز SMTP، کل
 شش مورد دیگر، دروازه‌های وضعیت جاری یا کنترل‌های مشخصِ معیار یکپارچگی انتشارند. سیاست مخزن،
 مجوز استقرار نیست.
 
-## ۲. ساخت پروندهٔ خصوصی تصمیم‌های مالک
+## ۲. ثبتِ فقط عملیات بعدی
 
-این فرمان‌ها را روی رایانهٔ توسعهٔ Windows اجرا کنید. مسیر ساخته‌شده بیرون مخزن است.
+پرسش‌نامه یا فایلِ اجباریِ تصمیم‌های مالک وجود ندارد. عامل مهندسی شناسهٔ تغییر را می‌سازد، دستور
+مرتبط مالک را ثبت می‌کند، تنظیم‌های قابل‌مشاهده را با پیش‌بررسی محدود مشخص می‌کند و فرمان‌ها و
+نتیجه‌های دقیق را بیرون Git نگه می‌دارد. مقدارهای شناخته‌شده دوباره از مالک پرسیده نشوند.
 
-```powershell
-$QualificationDir = Join-Path $HOME '.nextops\production-qualification'
-New-Item -ItemType Directory -Force -Path $QualificationDir | Out-Null
-$DecisionFile = Join-Path $QualificationDir 'owner-decisions.txt'
-New-Item -ItemType File -Force -Path $DecisionFile | Out-Null
-notepad $DecisionFile
-```
-
-قالب زیر را در فایل قرار دهید و همهٔ مقدارهای `REQUIRED` را تکمیل کنید. سیاست پیشنهادی نقطهٔ شروع
-است و تأیید کسب‌وکار از روی سکوت استنباط نمی‌شود.
-
-```text
-change_id=REQUIRED
-owner_approver=REQUIRED
-recovery_operator=REQUIRED
-rollback_owner=REQUIRED
-maintenance_window=REQUIRED
-management_ssh_source_ranges=REQUIRED_PRIVATE_RECORD
-host_dns_time_proxy_egress_routes=REQUIRED_PRIVATE_RECORD
-
-destination_id=REQUIRED_NON_SECRET_ALIAS
-destination_type=dedicated_physical_or_separate_hypervisor
-independent_from_serving_guest=yes
-independent_from_serving_datastore=yes
-independent_from_serving_hypervisor=yes
-
-rpo_minutes=15
-rto_minutes=240
-full_backups_to_keep=4
-differential_backups_to_keep=14
-wal_days_to_keep=14
-file_snapshots_to_keep=30
-restore_test_cadence=quarterly
-
-key_custodian_primary=REQUIRED
-key_custodian_secondary=REQUIRED_DIFFERENT_PERSON
-offline_recovery_copy_location=REQUIRED_PRIVATE_REFERENCE
-
-notification_type=internal_smtp_or_approved_lan_route
-notification_owner_primary=REQUIRED
-notification_owner_backup=REQUIRED
-notification_recipient_primary=REQUIRED_PRIVATE_REFERENCE
-notification_recipient_backup=REQUIRED_PRIVATE_REFERENCE
-
-certificate_issuer=REQUIRED_PRIVATE_REFERENCE
-certificate_change_window=REQUIRED
-certificate_rollback_owner=REQUIRED
-
-license_approver=REQUIRED
-security_approver=REQUIRED
-production_approver=REQUIRED
-```
-
-این فایل را در گفتگو paste نکنید. فقط تصمیم‌های غیرمحرمانه را ارسال کنید و اعلام کنید که پروندهٔ
-خصوصی کامل شده است.
+پیش از تغییر سرور، مقصد و فایل نامزدِ دقیق، دسترسی موجود، نسخهٔ سالم قبلی، سازگاری و امکان
+بازگشتِ محدود بررسی شوند. اجازهٔ صریحِ همین کار را می‌توان مستقیم ثبت کرد؛ از آن اجازهٔ تغییر
+نامرتبط دیوارهٔ آتش، راه‌اندازی دوبارهٔ VM، تغییر مخرب ذخیره‌سازی یا بار نامحدود استنباط نشود.
+فقط تصمیمِ واقعاً غایب و لازمِ همان عملیات پرسیده شود. تأیید نهایی تولید و بازیابیِ به‌تعویق‌افتاده
+از اصلاح جاریِ پاسخ هوش مصنوعی و مقایسهٔ مدل جدا می‌مانند.
 
 ## ۳. ایجاد مقصد مستقل بازیابی
 

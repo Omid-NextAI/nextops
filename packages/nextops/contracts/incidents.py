@@ -19,7 +19,7 @@ class IncidentInvestigationRequest(FrozenContract):
     target_id: LinuxTargetId
     locale: Literal["en", "fa"]
     question: str = Field(min_length=1, max_length=4_000)
-    max_output_tokens: int = Field(default=128, ge=32, le=128)
+    max_output_tokens: int = Field(default=384, ge=32, le=512)
 
 
 class IncidentTargetsResponse(FrozenContract):

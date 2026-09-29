@@ -1,5 +1,24 @@
 # Next task / کار بعدی
 
+Active owner-directed checkpoint, 2026-09-29 — Do not recreate the retired owner questionnaire
+or wait for unrelated owner inputs before development. Complete the bounded clarity candidate:
+full-question/internal-purpose boundary tests, bilingual browser regression, verified 14B artifact
+import and measured CPU question comparison. Record the actual current instruction and engineer-
+generated change ID privately. Before a serving change, verify exact candidate bytes, access,
+compatible last-known-good releases and bounded rollback; update inference before the application,
+and reverse that order for rollback. Larger-model selection requires its measured comparison,
+not simply enough RAM. Preserve failed/not-run exact-release semantic/offline/rollback gates and
+the owner-deferred recovery record. Historical handoffs below are not an all-at-once form gate.
+
+گام فعال به دستور مالک، ۷ مهر ۱۴۰۵ — فرمِ کنارگذاشته‌شدهٔ مالک دوباره ساخته نشود و توسعه منتظر
+ورودی‌های نامرتبط نماند. نامزدِ محدود وضوح پاسخ تکمیل شود: آزمون مرز پرسش کامل و نوع پردازش
+داخلی، بازآزمایی مرورگر دوزبانه، ورود تأییدشدهٔ فایل 14B و مقایسهٔ سنجیدهٔ پرسش‌ها روی CPU.
+دستور جاری و شناسهٔ ساخته‌شده توسط عامل، خصوصی ثبت شوند. پیش از تغییر سرور، فایل دقیق نامزد،
+دسترسی، نسخه‌های سالم و سازگار و امکان بازگشتِ محدود بررسی شوند؛ ابتدا استنتاج و سپس برنامه
+به‌روز شوند و ترتیب بازگشت برعکس باشد. انتخاب مدل بزرگ‌تر به نتیجهٔ مقایسه وابسته است، نه صرفاً
+RAM کافی. معیارهای معنایی، آفلاین و بازگشتِ ناموفق یا اجرا‌نشده و رکورد بازیابیِ به‌تعویق‌افتاده
+حفظ شوند. تحویل‌های تاریخی زیر، پیش‌شرطِ تکمیل یک‌جای فرم نیستند.
+
 Repository-policy handoff, 2026-09-28 — Merge enforcement is confirmed absent, not merely
 unverified. The owner must approve the policy, arrange an independent eligible reviewer and
 use repository administration to configure the controls in the paired development guide.

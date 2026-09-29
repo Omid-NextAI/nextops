@@ -13,6 +13,7 @@ from yaml.constructor import ConstructorError
 from yaml.nodes import MappingNode
 
 EXPECTED_MANIFEST = "qwen3-8b-q4-k-m.yaml"
+LARGER_CANDIDATE = "qwen3-14b-q4-k-m.candidate.json"
 
 
 class ArtifactValidationError(RuntimeError):
@@ -80,6 +81,18 @@ def validate_repository(repository_root: Path) -> dict[str, Any]:
     if errors:
         details = "; ".join(f"{_format_path(error.path)}: {error.message}" for error in errors)
         raise ArtifactValidationError(f"candidate schema validation failed: {details}")
+    try:
+        larger_schema = json.loads((directory / "model-candidate.schema.json").read_text("utf-8"))
+        larger = json.loads((directory / LARGER_CANDIDATE).read_text("utf-8"))
+        Draft202012Validator.check_schema(larger_schema)
+    except (OSError, json.JSONDecodeError) as error:
+        raise ArtifactValidationError(f"cannot parse larger candidate metadata: {error}") from error
+    larger_errors = list(Draft202012Validator(larger_schema).iter_errors(larger))
+    if larger_errors:
+        details = "; ".join(
+            f"{_format_path(error.path)}: {error.message}" for error in larger_errors
+        )
+        raise ArtifactValidationError(f"larger candidate schema validation failed: {details}")
     return document
 
 
