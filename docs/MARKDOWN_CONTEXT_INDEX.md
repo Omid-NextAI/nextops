@@ -25,7 +25,7 @@ remaining task-specific sources. The repository skill
 | Application or database code | `docs/en/DEVELOPMENT.md`, `DATA_API.md`, `TESTING.md`, current state/next task, source contracts, migrations, and neighboring tests |
 | Authentication or session lifecycle | `docs/requirements/SESSION_TERMINATION_SPEC.md`, `docs/en/SECURITY.md`, `DATA_API.md`, `TESTING.md`, current release manifest, source service/API, and identity integration tests |
 | Certificate lifecycle | `docs/requirements/CERTIFICATE_LIFECYCLE_SPEC.md`, `docs/en/OPERATIONS.md`, Persian operations pair, systemd checker/timer, Nginx profiles, current release manifest, and private rotation/alert evidence |
-| Local CPU inference | `docs/en/CPU_AI.md`, `OFFLINE_RUNTIME.md`, `TESTING.md`, pinned 8B/14B/32B artifact records, systemd model-selection profiles, current state/next task, and Persian pairs when human-facing text changes |
+| Local CPU inference | `docs/en/CPU_AI.md`, `OFFLINE_RUNTIME.md`, `TESTING.md`, pinned 8B/14B/32B/30B-A3B artifact records, systemd model-selection profiles, current state/next task, and Persian pairs when human-facing text changes |
 | AI answer integrity | `docs/requirements/ANSWER_INTEGRITY_SPEC.md`, `docs/en/AI_INTEGRITY.md`, Persian pair, assistant contracts, answer-integrity policy, evaluation corpus, current release manifest, and private live evidence |
 | Server, storage, or deployment | use `nextops-server-operations`; read the start checklist, matching dossier, installer guide, storage/offline/server guide, and current private change record |
 | Zabbix or connector work | Zabbix guide, integration guide, MCP/security/data contracts, matching dossiers, ZBX/OFF acceptance cases, and target-specific private evidence |

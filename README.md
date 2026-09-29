@@ -11,8 +11,10 @@ Answer-quality update (2026-09-29): the guarded clarity repair passed twelve fre
 English/Persian API cases, including the four file-focus and host-scope failures observed on
 2026-09-26. This is a bounded regression pass, not a complete held-out semantic qualification.
 The 14B CPU model was imported and rejected after matched bilingual factual/arithmetic and
-evidence-qualifier findings. Official pinned 32B provisioning and source-only identity support are
-underway; it is not yet imported, selected or live-qualified. The serving model remains 8B.
+evidence-qualifier findings. The verified 32B import completed eleven answers, but a Persian
+stale-evidence question exceeded the 120-second timeout. It was not selected. Official pinned
+30B-A3B provisioning and source-only identity support are underway; selection remains gated by
+quality, latency and rollback tests. The serving model remains 8B.
 
 > **Status: controlled bilingual user testing is live; production is not accepted.** Application and AI API are `nextops-0.1.0-c4351fd`; connector remains `nextops-0.1.0-cdde129`. General/evidence instructions are separated, full accepted questions are retained, and answers have a bounded 384-token ceiling. The serving model remains CPU-only 8B. Exact-release evidence is recorded in the [release status](docs/status/current-release.yaml), [testing guide](docs/en/TESTING.md) and [project state](docs/PROJECT_STATE.md). Earlier WAN/reboot evidence does not transfer automatically. The retired owner questionnaire no longer blocks development. Recovery remains owner-deferred and unqualified; certificate, notification, licensing, release-integrity and final production gates remain open. Management-shell public egress is not permanently denied, despite restricted service boundaries. See the [production runbook](docs/en/PRODUCTION_BLOCKERS_RUNBOOK.md).
 

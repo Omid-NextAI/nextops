@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "status": "pinned_candidate_not_live_qualified",
+  "model_id": "nextops-qwen3-30b-a3b-q4-k-m",
+  "source_repository": "https://huggingface.co/Qwen/Qwen3-30B-A3B-GGUF",
+  "source_revision": "e4d4bafdfb96a411a163846265362aceb0b9c63a",
+  "filename": "Qwen3-30B-A3B-Q4_K_M.gguf",
+  "size_bytes": 18556685824,
+  "sha256": "0d003f6662faee786ed5da3e31b29c978de5ae5d275c8794c606a7f3c01aa8f5",
+  "license": "Apache-2.0",
+  "native_context_tokens": 32768,
+  "runtime_commit": "b29c606e28a01b1bc8c1351026a0fa6e616bf6c4",
+  "cpu_only_required": true,
+  "runtime_download_allowed": false,
+  "max_active_requests": 1,
+  "max_queued_requests": 2,
+  "qualification": {
+    "artifact_import": "not_run",
+    "bilingual_quality": "not_run",
+    "latency_resource_comparison": "not_run",
+    "offline_cold_start": "not_run",
+    "runtime_model_rollback": "not_run"
+  }
+}

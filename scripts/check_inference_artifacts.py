@@ -15,6 +15,7 @@ from yaml.nodes import MappingNode
 EXPECTED_MANIFEST = "qwen3-8b-q4-k-m.yaml"
 LARGER_CANDIDATE = "qwen3-14b-q4-k-m.candidate.json"
 LARGER_32B_CANDIDATE = "qwen3-32b-q4-k-m.candidate.json"
+LARGER_MOE_CANDIDATE = "qwen3-30b-a3b-q4-k-m.candidate.json"
 
 
 class ArtifactValidationError(RuntimeError):
@@ -85,6 +86,7 @@ def validate_repository(repository_root: Path) -> dict[str, Any]:
     for candidate_name, schema_name in (
         (LARGER_CANDIDATE, "model-candidate.schema.json"),
         (LARGER_32B_CANDIDATE, "model-32b-candidate.schema.json"),
+        (LARGER_MOE_CANDIDATE, "model-30b-a3b-candidate.schema.json"),
     ):
         try:
             larger_schema = json.loads((directory / schema_name).read_text("utf-8"))

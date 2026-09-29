@@ -10,7 +10,9 @@ Fourteen matched bilingual cases completed at 384 tokens on both 8B and 14B. Sem
 rejected 14B for incorrect Persian RAM and arithmetic answers and missing/weakened evidence
 qualifiers. 8B also failed some source/stale cases. These are development observations, not
 independent held-out acceptance. No model gained a tool or credential. The serving 8B remains
-unchanged; pinned 32B provisioning and source-only identity support are the next step. See
+unchanged. Verified 32B import completed eleven samples, but the Persian stale-evidence request
+exceeded 120 seconds; it was not selected and injection cases were not run. The next bounded
+candidate is pinned 30B-A3B, with identical prompts/deadlines and source-only identity support. See
 [CPU_AI](CPU_AI.md); larger weights do not waive deterministic safeguards.
 
 ## Clarity repair — 2026-09-29

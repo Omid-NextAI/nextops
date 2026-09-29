@@ -26,9 +26,13 @@ omitted source/collection time. No execution tool or target credential was expos
 also failed stale/source review; existing deterministic live controls remain required. The corpus
 was a bounded development comparison, not independent held-out or production acceptance.
 
-Official pinned 32B provisioning and minimal source identity support are underway. No imported
-32B bytes, live answers, serving-model restart/rollback or VM/offline gate is passed by that source
-work. The tested 14B selection profiles inherit the base resource/network/credential restrictions
+Official pinned 32B passed desktop and protected server size/hash checks. The same comparison
+completed eleven answers in 9.9–97.6 seconds, then the Persian stale request exceeded the 120-second
+provider timeout. Injection cases were not run; quality is partial and latency failed. The
+temporary unit stopped, with 18,324,066,304-byte memory peak and 9,496,891,246,000 CPU nanoseconds.
+These are transient cgroup measurements, not sustained capacity. The serving 8B stayed unchanged.
+Pinned 30B-A3B provisioning and source-only identity support are next; no serving restart/rollback,
+VM or offline gate is passed by source compatibility. The tested 14B selection profiles inherit the base resource/network/credential restrictions
 and require a protected explicit model-identity file; they were not installed. Failed 14B must not
 be selected. Private outputs and operational commands remain outside Git.
 

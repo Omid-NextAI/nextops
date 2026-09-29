@@ -2,8 +2,9 @@
 
 Status: corrected app/API `nextops-0.1.0-c4351fd` serves controlled user testing with 8B.
 Named live regressions and app/API rollback passed; full held-out semantics remain partial.
-Matched 14B development review failed. Pinned 32B provisioning and source-only identity support
-are underway, not selected or deployed. Qualification remains revision-specific and is not a
+Matched 14B development review failed. Verified 32B import failed its Persian evidence deadline,
+with semantic review partial. Pinned 30B-A3B provisioning and source identity support are underway,
+not selected or deployed. Qualification remains revision-specific and is not a
 guarantee that model-only text is always true.
 
 ## Problem
@@ -15,8 +16,10 @@ time, stale/partial scope, no injection or invented execution, and bounded laten
 selection. Pin complete artifacts outside Git; missing/corrupt bytes fail without download.
 Retain exact 8B rollback. No retrieval, training, GPU, VM allocation or runtime migration belongs
 to this bounded upgrade. Record failures and maintain paired guides and release identity; full
-held-out/offline/production gates remain separate. The 14B factual failures motivate evaluating
-the official 32B candidate, not teaching the model answers to the acceptance corpus.
+held-out/offline/production gates remain separate. After 14B factual failures and a 32B deadline
+failure, evaluate official 30B-A3B behind the same runtime/interface. Its sparse active parameters
+may reduce CPU cost; measured outcomes, not total parameter count, authorize selection. Do not
+teach the model answers to the acceptance corpus or loosen deadlines to hide failure.
 
 A small local language model can produce fluent text that is irrelevant, unsupported, stale or
 wrong. Prompt instructions alone are not a security or truth boundary. NextOps must never present

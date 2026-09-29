@@ -1,6 +1,21 @@
 # Next task / کار بعدی
 
-Active larger-model step, 2026-09-29 — Complete verified provisioning/import of pinned 32B, then
+Active larger-model step, 2026-09-29 — Complete pinned 30B-A3B provisioning, protected import and
+the same bilingual CPU comparison. 32B import passed but Persian stale evidence exceeded 120
+seconds; it must not be selected. 14B failed factual review. Retain c4351fd/8B until a candidate
+passes quality and deadline gates. Before a larger-model switch, qualify source identity through
+both app/API boundaries, install an exact timed rollback, test fresh browser/API answers and
+restart/rollback/re-promotion. Do not change the VM, runtime, concurrency or deadline, teach test
+answers, or claim held-out/WAN/reboot/recovery/production acceptance from development samples.
+
+گام فعالِ مدل بزرگ‌تر، ۷ مهر ۱۴۰۵ — آماده‌سازی 30B-A3B تثبیت‌شده، ورودِ محافظت‌شده و همان
+مقایسهٔ دوزبانه روی CPU تکمیل شوند. ورودِ 32B موفق بود، اما پرسش فارسیِ شاهد قدیمی از ۱۲۰
+ثانیه گذشت؛ این مدل انتخاب نشود. 14B نیز بازبینی واقعیت را نگذرانده است. تا موفقیت کیفیت و
+مهلت، c4351fd/8B حفظ شود. پیش از تغییر مدل، شناسه در هر دو مرز برنامه/API آزموده، بازگشتِ
+زمان‌دارِ دقیق نصب و پاسخ تازهٔ مرورگر/API و شروع و بازگشت و استقرار مجدد بررسی شوند. ماشین،
+محیط اجرا، هم‌زمانی و مهلت تغییر نکنند؛ پاسخ آزمون آموزش داده نشود و پذیرش کامل ادعا نشود.
+
+Earlier larger-model step, 2026-09-29 — Complete verified provisioning/import of pinned 32B, then
 compare the same corrected bilingual prompts and budgets on the existing CPU guest. Reject wrong
 facts/arithmetic, incomplete answers, lost evidence qualifiers and unacceptable latency. 14B failed
 this matched review and must not be selected. Keep serving c4351fd/8B until a candidate passes;
@@ -8,7 +23,7 @@ this matched review and must not be selected. Keep serving c4351fd/8B until a ca
 checks, cold restart and exact model rollback. Do not increase VMs, replace runtime, loosen policy
 or mark held-out, WAN, reboot, recovery or production gates passed from development samples.
 
-گام فعالِ مدل بزرگ‌تر، ۷ مهر ۱۴۰۵ — آماده‌سازی و ورودِ تأییدشدهٔ 32B تثبیت‌شده تکمیل شود؛ سپس
+گام پیشینِ مدل بزرگ‌تر، ۷ مهر ۱۴۰۵ — آماده‌سازی و ورودِ تأییدشدهٔ 32B تثبیت‌شده تکمیل شود؛ سپس
 همان دستورهای اصلاح‌شدهٔ دوزبانه و سقف‌ها روی مهمان CPU موجود مقایسه شوند. واقعیت یا محاسبهٔ
 نادرست، پاسخ ناتمام، حذف قید شاهد و تأخیر نامناسب رد شوند. 14B این بازبینی همسان را نگذرانده
 و نباید انتخاب شود. تا موفقیت نامزد، c4351fd/8B مستقر حفظ شود؛ 32B به شناسهٔ درست در کل مسیر

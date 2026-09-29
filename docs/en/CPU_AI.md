@@ -13,14 +13,24 @@ calculation gave 50/200 as 50%, not 25%. Source/time/stale qualifiers also faile
 The 8B baseline likewise had unsupported stale-health wording and source omissions. Completion,
 fluency and enough RAM are not accuracy. The serving 8B and deterministic safeguards remain intact.
 
-The next candidate is official Qwen3-32B Q4_K_M, pinned in
+Official Qwen3-32B Q4_K_M is pinned in
 [32B metadata](../../deploy/inference/qwen3-32b-q4-k-m.candidate.json) at revision
 `938a7432affaec9157f883a87164e2646ae17555`, 19,762,149,024 bytes, SHA-256
 `efd971561896866f0e910cce52761ca77b1b138090c7f15fe284676d57d1f689`, Apache-2.0.
-Provisioning is in progress, not verified import or live acceptance. The source-only alias adds no
-runtime resolver/download, cloud fallback or concurrency. The 24-vCPU/128-GiB guest and pinned CPU
-runtime are unchanged. Bilingual quality, latency, serving-path checks, cold restart and rollback
-are selection gates; full held-out and production acceptance remain separate.
+Desktop and protected server import passed size/hash verification. Eleven answers completed in
+9.9–97.6 seconds, with correct RAM/arithmetic and explicit English stale/source/time qualifiers.
+The Persian stale request exceeded 120 seconds; testing stopped before injection cases. Its
+latency gate failed, quality remains partial, and it was not selected. The transient cgroup peak
+was 18,324,066,304 bytes, not a sustained memory/capacity benchmark.
+
+The next pinned candidate is [Qwen3-30B-A3B-GGUF](https://huggingface.co/Qwen/Qwen3-30B-A3B-GGUF)
+with 30.5B total and 3.3B active parameters; the mixture-of-experts artifact may reduce CPU work,
+but that is not measured performance or accuracy. [Its record](../../deploy/inference/qwen3-30b-a3b-q4-k-m.candidate.json)
+pins revision, license, size and SHA-256. Provisioning and explicit source identity support do not
+prove qualification. The same prompts, 384-token budget, deadlines and pinned llama.cpp remain.
+No runtime resolver/download, cloud fallback, VM increase or new queue is added. The existing
+24-vCPU/128-GiB guest stays intact. Quality, latency, serving-path tests, cold restart and exact
+rollback gate selection; full held-out and production acceptance remain separate.
 
 ## Non-negotiable execution boundary
 
@@ -73,7 +83,8 @@ a truncated Persian RAM answer and wording/source omissions; a four-case 384-tok
 using the actual general prompt completed in about 13–41 seconds. The comparison used 16 threads,
 one slot and a 32 GiB memory ceiling; it was not a sustained capacity or NUMA benchmark. Quality
 remains failed and resource comparison partial. The serving 8B artifact and rollback are preserved.
-Explicit `NEXTOPS_MODEL_ID` selects only the reviewed 8B/14B aliases; arbitrary names/URLs fail.
+Explicit `NEXTOPS_MODEL_ID` accepts only the reviewed 8B/14B/32B/30B-A3B source aliases; arbitrary
+names/URLs fail. Source compatibility is not serving selection or quality acceptance.
 Runtime alias, local file and configuration must match, and missing files must not trigger a download.
 
 Compare the same English/Persian questions, completion state, relevance, evidence preservation,

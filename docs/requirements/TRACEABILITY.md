@@ -1,12 +1,24 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
-Larger-model trace (sections 9, 10, 19, 25; 2026-09-29): matched 8B/14B development review used
+Current larger-model trace (sections 9, 10, 19, 25; 2026-09-29): 32B protected size/hash import
+passed, eleven matched answers completed, then Persian stale evidence exceeded 120 seconds.
+Latency failed; quality is partial and injection cases unrun. Serving 8B is unchanged. Official
+30B-A3B is separately pinned for bounded provisioning/comparison under identical CPU/runtime,
+prompt, deadline and queue limits. Source alias support is not selection or production acceptance.
+
+ردیابی جاریِ مدل بزرگ‌تر (بخش‌های ۹، ۱۰، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): ورود محافظت‌شدهٔ 32B با اندازه
+و هش تأیید و یازده پاسخ همسان کامل شدند؛ سپس پرسش فارسیِ شاهد قدیمی از ۱۲۰ ثانیه گذشت. تأخیر
+ناموفق، کیفیت ناقص و موارد تزریق اجرا‌نشده‌اند. 8B مستقر تغییر نکرد. 30B-A3B رسمی جداگانه برای
+آماده‌سازی و مقایسهٔ محدود تثبیت شده است؛ CPU، محیط اجرا، دستور، مهلت و صف ثابت می‌مانند.
+پشتیبانی شناسه در کد، انتخاب مدل یا پذیرش تولید نیست.
+
+Earlier larger-model trace (sections 9, 10, 19, 25; 2026-09-29): matched 8B/14B development review used
 fourteen bilingual cases per model at 384 tokens. Both completed, but 14B factual/arithmetic and
 evidence-qualifier failures prohibit selection. Official 32B has pinned source/license/size/hash
 metadata and source-only typed identity support; its provisioning is not verified import or live
 acceptance. Existing CPU runtime, 8B serving path, resources, policy, audit and rollback persist.
 
-ردیابی مدل بزرگ‌تر (بخش‌های ۹، ۱۰، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): بازبینی توسعه‌ایِ همسان 8B و 14B،
+ردیابی پیشینِ مدل بزرگ‌تر (بخش‌های ۹، ۱۰، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): بازبینی توسعه‌ایِ همسان 8B و 14B،
 چهارده مورد دوزبانه برای هر مدل با سقف ۳۸۴ توکن داشت. هر دو کامل شدند، اما واقعیت و محاسبهٔ
 نادرست و ضعف قیدِ شاهد در 14B مانع انتخاب است. منبع، مجوز، اندازه و هشِ 32B رسمی تثبیت و
 شناسهٔ نوع‌دار آن فقط در کد اضافه شده است؛ آماده‌سازی، ورودِ تأییدشده یا پذیرش زنده نیست.
