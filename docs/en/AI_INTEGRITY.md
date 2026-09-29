@@ -6,6 +6,17 @@ category error: presenting unsupported model text as live operational fact.
 
 ## Current 35B semantic repair — 2026-09-29
 
+New NOC/SOC source candidate: general technical guidance prefers read-only diagnostic checklists,
+distinguishes hypotheses from observations, asks for one useful missing vendor/version detail and
+redacted output, and must not invent device access, execution, compromise, advisories or citations.
+Two bounded prior model-only turns can resolve a follow-up topic but are explicitly untrusted and
+never current evidence. Current-state follow-ups still redirect; clear “how do I check?” questions
+can receive general advice without a false live-status badge. Instructions are development aids,
+not security guarantees; deterministic authorization, evidence guards, CPU isolation and resource
+limits remain authoritative. No training, retrieval or new device connector is introduced. See
+[the specification](../requirements/NOC_SOC_WORKSPACE_SPEC.md); actual model qualification remains
+separate from fixture passes.
+
 Latest controlled selection: 95c6e50/35B passed twelve fresh API and twelve strict browser cases
 plus four durable audit/hash checks. The corrected CPU-only measurement answer is transparently
 application-owned, preserving exact idle meaning and provenance; it is not proof that raw model

@@ -1,5 +1,6 @@
 """Authenticated user-testing contracts for the local assistant panel."""
 
+import json
 from typing import Literal, Self
 from uuid import UUID
 
@@ -15,6 +16,31 @@ class AssistantRequest(FrozenContract):
     locale: Literal["en", "fa"]
     question: str = Field(min_length=1, max_length=4_000)
     max_output_tokens: int = Field(default=384, ge=32, le=512)
+
+
+class ConversationTurn(FrozenContract):
+    """Untrusted, model-only context, not a role, credential or evidence record."""
+
+    question: str = Field(min_length=1, max_length=2_000)
+    answer: str = Field(min_length=1, max_length=2_000)
+
+
+class GeneralAssistantRequest(AssistantRequest):
+    """Optional bounded context is accepted only by the general-answer endpoint."""
+
+    history: tuple[ConversationTurn, ...] = Field(default=(), max_length=2)
+
+    @model_validator(mode="after")
+    def serialized_context_is_bounded(self) -> Self:
+        # Escape expansion counts too; do not silently clip question/answer bytes.
+        encoded = json.dumps(
+            [turn.model_dump() for turn in self.history],
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+        if len(encoded) > 6_000:
+            raise ValueError("serialized general conversation context exceeds 6000 characters")
+        return self
 
 
 class SynthesisRequest(FrozenContract):

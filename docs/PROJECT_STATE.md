@@ -1,5 +1,28 @@
 # Project state / وضعیت پروژه
 
+Current source task, 2026-09-29 — The owner requests a conversational NOC/SOC frontend without
+changing the OCS logo/palette. The bounded candidate adds twelve in-memory turns, safe text/code
+rendering/copying, operator starters, two bounded untrusted general-context pairs and diagnostic
+guidance without new connectors, credentials, dependencies or training. Live modes reject history
+and retain fresh collection, scope, audit and deterministic safeguards. Local checks: 357 unit/API
+passed, two Windows/POSIX skips; twelve real-browser fixtures passed. A first ambiguous starter
+label and an early old-answer assertion were repaired without dropping checks. Fixtures are not
+actual model semantics, exact-package deployment or WAN/VM acceptance. Serving app/API remains
+95c6e50/35B; qualify the exact new source package and live EN/FA behavior before promotion. See
+[the feature packet](requirements/NOC_SOC_WORKSPACE_SPEC.md). Earlier deployment evidence below
+remains intact and does not automatically accept this candidate.
+
+کار جاریِ کد، ۷ مهر ۱۴۰۵ — مالک بازطراحیِ گفت‌وگوی NOC و SOC را بدون تغییر نشان و رنگ‌های OCS
+خواسته است. نامزد محدود، دوازده نوبت در حافظهٔ صفحه، نمایش و کپی ایمن متن و کد، شروع پرسش، دو
+جفت زمینهٔ محدود و تأییدنشدهٔ عمومی و راهنمای تشخیص را اضافه می‌کند؛ اتصال، اطلاعات ورود، وابستگی
+یا آموزش تازه ندارد. حالت‌های زنده سابقه را رد می‌کنند و گردآوری تازه، دامنه، ممیزی و کنترل قطعی
+را حفظ می‌کنند. ۳۵۷ آزمون محلی واحد/API موفق و دو مورد Windows/POSIX اجرا‌نشده‌اند؛ دوازده آزمون
+مرورگر واقعی با دادهٔ ساختگی موفق‌اند. ابهامِ نام یک دکمه و بررسیِ زودهنگام پاسخ قبلی، بدون حذف
+کنترل اصلاح شدند. دادهٔ ساختگی، صحت مدل واقعی، استقرار بستهٔ دقیق یا پذیرش WAN و VM نیست.
+95c6e50 و 35B مستقرند؛ پیش از ارتقا، بستهٔ دقیق و رفتار زندهٔ فارسی و انگلیسی آزموده شوند.
+[مشخصات تغییر](requirements/NOC_SOC_WORKSPACE_SPEC.md) مبناست؛ شواهد پیشین حفظ‌اند و این نامزد
+را خودکار نمی‌پذیرند.
+
 Current controlled selection, 2026-09-29 — Qwen3.5-35B-A3B Q4_K_M is serving on the unchanged
 CPU-only runtime with app/API 95c6e50, after PR39's five CI jobs and exact offline Ubuntu package
 qualification. The corrected trial passed twelve fresh API and twelve strict browser cases,

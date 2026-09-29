@@ -14,7 +14,7 @@ const translations = {
     secureAccess: "SECURE ACCESS", welcome: "Welcome to NextOps", credentialsPrompt: "Enter your evaluation credentials.", username: "Username",
     password: "Password", signIn: "Sign in securely", privacyNote: "Your session is stored only in this browser tab.",
     workspaceLabel: "NEXTOPS OPERATIONS WORKSPACE", workspaceHeadline: "Ask the local assistant",
-    workspaceLead: "Ask one question at a time. Each answer stands on its own; this screen does not carry chat history into the next request.",
+    workspaceLead: "Technical guidance for NOC and SOC teams, with live evidence kept distinct from model knowledge.",
     serviceStatus: "Service status",
     appReady: "Application ready", aiChecking: "Checking AI", aiReady: "AI ready", aiUnavailable: "AI unavailable",
     monitoringChecking: "Checking monitoring", monitoringReady: "Monitoring ready", monitoringUnavailable: "Monitoring unavailable",
@@ -120,14 +120,203 @@ const translations = {
 };
 
 const state = {
-  language: localStorage.getItem("nextops-language") || "en",
+  language: localStorage.getItem("nextops-language") === "fa" ? "fa" : "en",
   answerLocale: "en",
   answerMode: "general",
   incidentTargets: [],
   lastEvidence: null,
+  history: [],
+  busy: false,
+  epoch: 0,
   token: sessionStorage.getItem("nextops-session") || ""
 };
 const byId = id => document.getElementById(id);
+const resultTemplate = byId("resultCard").cloneNode(true);
+
+Object.assign(translations.en, {
+  newChat: "New conversation", operatorTools: "OPERATOR STARTERS",
+  starterHelp: "Choose a starting point, then add your details.",
+  starterServices: "Servers & services", starterNetwork: "Network & DNS",
+  starterFirewall: "Firewalls & VPN", starterSecurity: "Defensive security",
+  connectedEvidence: "AVAILABLE EVIDENCE",
+  capabilityText: "Live: authorized Zabbix and Linux. Other devices: technical guidance only, not connected access.",
+  welcomeTitle: "What can I help you investigate?",
+  welcomeHelp: "Explain a problem, understand an alert, or plan safe diagnostics. Start with general advice; select a live mode when you need verified observations.",
+  starterTriage: "Triage a service failure", starterTriageHelp: "Safe first checks, before changing anything.",
+  starterLatency: "Investigate network latency", starterLatencyHelp: "Separate DNS, routing and application delays.",
+  starterAlerts: "Review Zabbix evidence", starterAlertsHelp: "Use fresh, scoped Zabbix evidence.",
+  starterSecurityHelp: "Assess suspicious activity without assuming compromise.",
+  copyAnswer: "Copy answer", copyCode: "Copy code", copied: "Copied to clipboard.",
+  copyFailed: "Clipboard unavailable. Select the text and copy it manually.",
+  adviceNotExecution: "Advice and observations · no action executed",
+  contextHelp: "General follow-ups use up to two recent turns. Live requests fetch new evidence independently.",
+  contextOmitted: "The previous turn was too long for follow-up context; include the relevant detail in your next question.",
+  conversationLabel: "Conversation", answerReady: "Answer ready.", elapsed: "seconds elapsed",
+  blankQuestion: "Please enter a question.",
+  generalModeHelp: "Technical advice and follow-ups from local model knowledge, not live device facts."
+});
+Object.assign(translations.en, {
+  monitoringChecking: "Checking Zabbix data", monitoringReady: "Zabbix data reachable",
+  monitoringUnavailable: "Zabbix data unavailable",
+  deniedError: "This request is denied by application policy. Choose an authorized target or contact your administrator."
+});
+Object.assign(translations.fa, {
+  workspaceLead: "راهنمایی فنی برای تیم‌های عملیات شبکه و امنیت؛ با جداسازی روشن دانش مدل از شواهد زنده.",
+  newChat: "گفت‌وگوی تازه", operatorTools: "شروع کار اپراتور",
+  starterHelp: "یک موضوع انتخاب کنید و جزئیات خود را اضافه کنید.",
+  starterServices: "سرورها و سرویس‌ها", starterNetwork: "شبکه و DNS",
+  starterFirewall: "فایروال و VPN", starterSecurity: "امنیت دفاعی",
+  connectedEvidence: "شواهد در دسترس",
+  capabilityText: "دادهٔ زنده: Zabbix و Linux مجاز. برای سایر تجهیزات، فقط راهنمایی فنی ارائه می‌شود؛ اتصال مستقیم وجود ندارد.",
+  welcomeTitle: "چه چیزی را با هم بررسی کنیم؟",
+  welcomeHelp: "مشکل را شرح دهید، هشدار را بهتر بشناسید یا بررسی ایمن را برنامه‌ریزی کنید. برای مشاوره از حالت عمومی و برای مشاهدهٔ تأییدپذیر از حالت دارای شاهد استفاده کنید.",
+  starterTriage: "بررسی خرابی سرویس", starterTriageHelp: "بررسی‌های ایمن اولیه، پیش از هر تغییر.",
+  starterLatency: "بررسی تأخیر شبکه", starterLatencyHelp: "تفکیک تأخیر DNS، مسیر و برنامه.",
+  starterAlerts: "مرور شواهد Zabbix", starterAlertsHelp: "با شاهد تازه و محدود به دامنهٔ مجاز Zabbix.",
+  starterSecurityHelp: "ارزیابی فعالیت مشکوک، بدون فرضِ نفوذ قطعی.",
+  copyAnswer: "کپی پاسخ", copyCode: "کپی کد", copied: "در کلیپ‌بورد کپی شد.",
+  copyFailed: "کلیپ‌بورد در دسترس نیست؛ متن را انتخاب و دستی کپی کنید.",
+  adviceNotExecution: "مشاوره و مشاهده · هیچ عملیاتی اجرا نشده است",
+  contextHelp: "پیگیری عمومی از حداکثر دو نوبت اخیر استفاده می‌کند؛ درخواست زنده، شاهد تازه و مستقل می‌گیرد.",
+  contextOmitted: "نوبت قبلی برای زمینهٔ پیگیری طولانی بود؛ جزئیات مرتبط را در پرسش بعدی بنویسید.",
+  conversationLabel: "گفت‌وگو", answerReady: "پاسخ آماده است.", elapsed: "ثانیه سپری شده",
+  blankQuestion: "لطفاً پرسش خود را بنویسید.",
+  generalModeHelp: "مشاورهٔ فنی و پیگیری از دانش مدل محلی، نه گزارش وضعیت زندهٔ تجهیزات."
+});
+Object.assign(translations.fa, {
+  monitoringChecking: "بررسی دسترسی به دادهٔ Zabbix", monitoringReady: "دادهٔ Zabbix در دسترس است",
+  monitoringUnavailable: "دادهٔ Zabbix در دسترس نیست",
+  deniedError: "سیاست برنامه این درخواست را مجاز نمی‌داند؛ میزبان مجاز انتخاب کنید یا با مدیر سامانه تماس بگیرید."
+});
+
+const starters = {
+  en: {
+    services: ["general", "How can I safely diagnose a Linux service that fails to start? Explain the first read-only checks and what their results mean."],
+    network: ["general", "How can I distinguish a DNS failure from a routing or TCP connection problem? Give a short, safe diagnostic checklist."],
+    firewall: ["general", "How can I diagnose a VPN connection blocked by a firewall without changing any rules? What vendor and redacted diagnostics do you need?"],
+    security: ["general", "How should a SOC analyst triage repeated failed logins? Separate evidence, possible causes and safe checks; do not assume a confirmed breach."],
+    triage: ["general", "How can I safely diagnose a Linux service that fails to start? Explain the first read-only checks and what their results mean."],
+    latency: ["general", "How can I investigate intermittent network latency? Distinguish packet loss, DNS delay and application response time without assuming a root cause."],
+    alerts: ["monitoring", "What do the current authorized Zabbix observations show? Include their source, times, scope and any stale or partial limitations."]
+  },
+  fa: {
+    services: ["general", "چگونه سرویسی در Linux را که شروع نمی‌شود، به‌صورت ایمن عیب‌یابی کنم؟ بررسی‌های فقط‌خواندنیِ اولیه و معنی نتیجهٔ آن‌ها را توضیح بده."],
+    network: ["general", "چگونه خطای DNS را از مشکل مسیریابی یا اتصال TCP تشخیص دهم؟ یک فهرست کوتاه از بررسی‌های ایمن ارائه کن."],
+    firewall: ["general", "چگونه مشکل اتصال VPN را که احتمالاً به فایروال مربوط است، بدون تغییر هیچ قاعده‌ای بررسی کنم؟ به نام سازنده و چه خروجی پالایش‌شده‌ای نیاز داری؟"],
+    security: ["general", "تحلیلگر SOC چگونه تلاش‌های ناموفقِ مکرر برای ورود را بررسی کند؟ شاهد، علت احتمالی و بررسی ایمن را جدا کن؛ نفوذ قطعی را فرض نکن."],
+    triage: ["general", "چگونه سرویسی در Linux را که شروع نمی‌شود، به‌صورت ایمن عیب‌یابی کنم؟ بررسی‌های فقط‌خواندنیِ اولیه و معنی نتیجهٔ آن‌ها را توضیح بده."],
+    latency: ["general", "چگونه تأخیر متناوب شبکه را بررسی کنم؟ افت بسته، تأخیر DNS و زمان پاسخ برنامه را جدا کن و علت قطعی را حدس نزن."],
+    alerts: ["monitoring", "مشاهدات جاری و مجاز Zabbix چه چیزی نشان می‌دهند؟ منبع، زمان‌ها، دامنه و محدودیت شواهد قدیمی یا ناقص را نیز بیان کن."]
+  }
+};
+
+function clearConversation() {
+  state.history = [];
+  state.lastEvidence = null;
+  byId("conversationHistory").replaceChildren();
+  const fresh = resultTemplate.cloneNode(true);
+  fresh.querySelectorAll("[data-i18n]").forEach(node => { node.textContent = translations[state.language][node.dataset.i18n] || node.textContent; });
+  byId("resultCard").replaceWith(fresh);
+  byId("conversationWelcome").classList.remove("hidden");
+  byId("question").value = "";
+  byId("characterCount").textContent = "0 / 4000";
+  byId("assistantError").textContent = "";
+  byId("copyStatus").textContent = "";
+  byId("requestStatus").textContent = "";
+  byId("contextNotice").dataset.i18n = "contextHelp";
+  byId("contextNotice").textContent = translations[state.language].contextHelp;
+}
+
+function setBusy(busy) {
+  state.busy = busy;
+  byId("question").readOnly = busy;
+  document.querySelectorAll("#askButton, #newChatButton, .mode-choice, .locale-choice, [data-starter], #languageButton, #incidentTarget").forEach(node => {
+    node.disabled = busy || (node.id === "incidentTarget" && !state.incidentTargets.length);
+  });
+  byId("askButton").toggleAttribute("aria-busy", busy);
+  byId("askButton").querySelector("span").textContent = translations[state.language][busy ? "working" : "askAssistant"];
+}
+
+function archiveLastTurn() {
+  const latest = byId("resultCard");
+  if (latest.classList.contains("hidden")) return;
+  const archived = latest.cloneNode(true);
+  archived.removeAttribute("id");
+  archived.querySelectorAll("[id]").forEach(node => node.removeAttribute("id"));
+  byId("conversationHistory").append(archived);
+  // Eleven historical turns plus the current one. No persistent transcript store.
+  while (byId("conversationHistory").children.length > 11) {
+    byId("conversationHistory").firstElementChild.remove();
+  }
+}
+
+function rememberGeneralTurn(question, assistant) {
+  if (assistant.integrity_status !== "model_unverified" || assistant.evidence_mode !== "model_only") {
+    state.history = [];
+    return;
+  }
+  const pair = { question, answer: assistant.answer };
+  if (question.length > 2000 || assistant.answer.length > 2000) {
+    state.history = [];
+    byId("contextNotice").dataset.i18n = "contextOmitted";
+    byId("contextNotice").textContent = translations[state.language].contextOmitted;
+    return;
+  }
+  state.history.push(pair);
+  while (state.history.length > 2 || JSON.stringify(state.history).length > 6000) state.history.shift();
+  byId("contextNotice").dataset.i18n = "contextHelp";
+  byId("contextNotice").textContent = translations[state.language].contextHelp;
+}
+
+function renderAnswer(text, locale) {
+  const answer = byId("answer");
+  answer.replaceChildren();
+  answer.dir = locale === "fa" ? "rtl" : "ltr";
+  answer.lang = locale;
+  answer.dataset.rawText = text;
+  // Deliberately small formatter: no HTML, URLs, images or executable Markdown.
+  const parts = text.split(/(```[\s\S]*?(?:```|$))/g);
+  parts.filter(Boolean).forEach(part => {
+    if (part.startsWith("```")) {
+      const body = part.slice(3).replace(/```$/, "");
+      const firstLine = body.indexOf("\n");
+      const language = firstLine >= 0 ? body.slice(0, firstLine).trim() : "";
+      const codeText = firstLine >= 0 ? body.slice(firstLine + 1) : body;
+      const block = document.createElement("div");
+      block.className = "code-block";
+      const heading = document.createElement("div");
+      heading.className = "code-heading";
+      const label = document.createElement("bdi");
+      label.dir = "ltr";
+      label.textContent = /^[\w+-]{1,24}$/.test(language) ? language : "code";
+      const copy = document.createElement("button");
+      copy.type = "button";
+      copy.className = "quiet-button";
+      copy.dataset.copyCode = "";
+      copy.dataset.i18n = "copyCode";
+      copy.textContent = translations[state.language].copyCode;
+      heading.append(label, copy);
+      const pre = document.createElement("pre");
+      pre.dir = "ltr";
+      const code = document.createElement("code");
+      code.textContent = codeText;
+      pre.append(code);
+      block.append(heading, pre);
+      answer.append(block);
+    } else {
+      const paragraph = document.createElement("p");
+      part.split(/(`[^`\n]+`)/g).forEach(fragment => {
+        if (fragment.startsWith("`") && fragment.endsWith("`") && fragment.length > 2) {
+          const code = document.createElement("code");
+          code.dir = "ltr";
+          code.textContent = fragment.slice(1, -1);
+          paragraph.append(code);
+        } else paragraph.append(document.createTextNode(fragment));
+      });
+      answer.append(paragraph);
+    }
+  });
+}
 
 function installBrandIcon() {
   const background = getComputedStyle(document.querySelector(".ocs-logo")).backgroundImage;
@@ -141,6 +330,7 @@ function applyLanguage(language) {
   localStorage.setItem("nextops-language", language);
   document.documentElement.lang = language;
   document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
+  byId("copyStatus").textContent = "";
   byId("languageButton").textContent = language === "fa" ? "English" : "فارسی";
   byId("languageButton").setAttribute("aria-label", translations[language].languageToggleAria);
   document.querySelectorAll("[data-i18n]").forEach(node => {
@@ -153,6 +343,7 @@ function applyLanguage(language) {
   document.querySelector(".mode-field .segmented-control").setAttribute("aria-label", translations[language].answerMode);
   document.querySelector(".locale-control").setAttribute("aria-label", translations[language].answerLanguage);
   document.querySelector(".status-panel").setAttribute("aria-label", translations[language].serviceStatus);
+  byId("conversationFeed").setAttribute("aria-label", translations[language].conversationLabel);
   state.answerLocale = language;
   document.querySelectorAll(".locale-choice").forEach(item => {
     item.classList.toggle("active", item.dataset.locale === language);
@@ -166,6 +357,7 @@ function applyLanguage(language) {
 }
 
 async function api(path, options = {}) {
+  const token = state.token;
   const headers = { "Content-Type": "application/json", ...(options.headers || {}) };
   if (state.token) headers.Authorization = `Bearer ${state.token}`;
   const response = await fetch(path, { ...options, headers, cache: "no-store" });
@@ -175,12 +367,14 @@ async function api(path, options = {}) {
     const error = new Error(body?.error?.message_key || "request.failed");
     error.status = response.status;
     error.code = body?.error?.code || "internal_error";
+    if (response.status === 401 && token && state.token === token) showLogin(translations[state.language].sessionExpired);
     throw error;
   }
   return body;
 }
 
 function showLogin(message = "") {
+  state.epoch += 1;
   state.token = "";
   state.lastEvidence = null;
   sessionStorage.removeItem("nextops-session");
@@ -188,9 +382,8 @@ function showLogin(message = "") {
   byId("workspaceView").classList.add("hidden");
   byId("logoutButton").classList.add("hidden");
   byId("loginError").textContent = message;
-  byId("resultCard").classList.add("hidden");
-  byId("question").value = "";
-  byId("characterCount").textContent = "0 / 4000";
+  clearConversation();
+  setBusy(false);
 }
 
 function updateEvidenceBrief() {
@@ -231,12 +424,12 @@ async function showWorkspace() {
 }
 
 async function logout() {
+  const token = state.token;
+  showLogin(); // Remove private content immediately, before a network round trip.
   try {
-    if (state.token) await api("/api/v1/logout", { method: "POST" });
+    if (token) await api("/api/v1/logout", { method: "POST", headers: { Authorization: `Bearer ${token}` } });
   } catch (_) {
     // Local token removal remains fail-safe if the server is temporarily unavailable.
-  } finally {
-    showLogin();
   }
 }
 
@@ -449,14 +642,15 @@ function safeRequestError(error) {
   const keyByCode = {
     timeout: "timeoutError",
     overloaded: "overloadedError",
-    dependency_unavailable: "dependencyError"
+    dependency_unavailable: "dependencyError",
+    forbidden: "deniedError"
   };
   return translations[state.language][keyByCode[error.code] || "genericError"];
 }
 
 function setAnswerMode(mode) {
+  if (state.answerMode !== mode) state.history = [];
   state.answerMode = mode;
-  state.lastEvidence = null;
   document.querySelectorAll(".mode-choice").forEach(item => {
     item.classList.toggle("active", item.dataset.mode === mode);
     item.setAttribute("aria-pressed", item.dataset.mode === mode ? "true" : "false");
@@ -465,11 +659,37 @@ function setAnswerMode(mode) {
   byId("modeHelp").dataset.i18n = helpKey;
   byId("modeHelp").textContent = translations[state.language][helpKey];
   byId("incidentTargetField").classList.toggle("hidden", mode !== "incident");
-  byId("resultCard").classList.add("hidden");
 }
 
 byId("languageButton").addEventListener("click", () => applyLanguage(state.language === "en" ? "fa" : "en"));
 byId("logoutButton").addEventListener("click", logout);
+byId("newChatButton").addEventListener("click", () => {
+  if (state.busy) return;
+  state.epoch += 1;
+  clearConversation();
+  byId("question").focus();
+});
+document.querySelectorAll("[data-starter]").forEach(button => button.addEventListener("click", () => {
+  if (state.busy) return;
+  const [mode, question] = starters[state.answerLocale][button.dataset.starter];
+  setAnswerMode(mode);
+  byId("question").value = question;
+  byId("characterCount").textContent = `${question.length} / 4000`;
+  byId("question").focus();
+}));
+byId("conversationFeed").addEventListener("click", async event => {
+  const button = event.target.closest("[data-copy-answer], [data-copy-code]");
+  if (!button) return;
+  const text = button.hasAttribute("data-copy-code")
+    ? button.closest(".code-block").querySelector("code").textContent
+    : button.closest(".conversation-turn").querySelector(".answer").dataset.rawText;
+  try {
+    await navigator.clipboard.writeText(text);
+    byId("copyStatus").textContent = translations[state.language].copied;
+  } catch (_) {
+    byId("copyStatus").textContent = translations[state.language].copyFailed;
+  }
+});
 byId("loginForm").addEventListener("submit", async event => {
   event.preventDefault();
   const button = event.currentTarget.querySelector("button[type=submit]");
@@ -511,27 +731,35 @@ byId("question").addEventListener("keydown", event => {
 });
 byId("assistantForm").addEventListener("submit", async event => {
   event.preventDefault();
-  const button = byId("askButton");
+  if (state.busy) return;
   const errorNode = byId("assistantError");
   errorNode.textContent = "";
-  button.disabled = true;
-  button.setAttribute("aria-busy", "true");
-  const original = button.querySelector("span").textContent;
-  button.querySelector("span").textContent = translations[state.language].working;
+  const question = byId("question").value;
+  if (!question.trim()) { errorNode.textContent = translations[state.language].blankQuestion; return; }
+  const epoch = state.epoch;
+  setBusy(true);
+  const started = performance.now();
+  byId("requestStatus").textContent = translations[state.language].working;
+  const clock = document.createElement("span");
+  clock.setAttribute("aria-hidden", "true");
+  byId("requestStatus").append(clock);
+  const timer = setInterval(() => { clock.textContent = ` · ${Math.floor((performance.now() - started) / 1000)} ${translations[state.language].elapsed}`; }, 1000);
   try {
     const monitoring = state.answerMode === "monitoring";
     const incident = state.answerMode === "incident";
     if (incident && !byId("incidentTarget").value) throw new Error("incident.target_missing");
     const path = incident ? "/api/v1/incidents/investigate" : monitoring ? "/api/v1/investigate" : "/api/v1/assistant/generate";
-    const payload = { locale: state.answerLocale, question: byId("question").value, max_output_tokens: 384 };
+    const payload = { locale: state.answerLocale, question, max_output_tokens: 384 };
     if (incident) payload.target_id = byId("incidentTarget").value;
+    if (!monitoring && !incident && state.history.length) payload.history = state.history;
     const result = await api(path, { method: "POST", body: JSON.stringify(payload) });
+    if (epoch !== state.epoch) return; // A late result must not resurrect a signed-out session.
     const evidenceBacked = monitoring || incident;
     const assistant = evidenceBacked ? result.assistant : result;
+    archiveLastTurn();
     byId("askedQuestion").textContent = payload.question;
     byId("askedQuestion").dir = "auto";
-    byId("answer").textContent = assistant.answer;
-    byId("answer").dir = assistant.locale === "fa" ? "rtl" : "ltr";
+    renderAnswer(assistant.answer, assistant.locale);
     byId("modelId").textContent = assistant.model_id;
     byId("tokenCount").textContent = assistant.completion_tokens;
     byId("completedAt").textContent = new Date(assistant.completed_at).toLocaleString(state.language === "fa" ? "fa-IR" : "en-GB");
@@ -575,20 +803,29 @@ byId("assistantForm").addEventListener("submit", async event => {
     } else {
       state.lastEvidence = null;
       byId("evidenceBrief").classList.add("hidden");
+      rememberGeneralTurn(payload.question, assistant);
     }
+    byId("conversationWelcome").classList.add("hidden");
     byId("resultCard").classList.remove("hidden");
     byId("question").value = "";
     byId("characterCount").textContent = "0 / 4000";
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    byId("resultCard").scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+    byId("requestStatus").textContent = translations[state.language].answerReady;
+    const focus = document.activeElement;
+    if ([byId("question"), byId("askButton"), document.body].includes(focus)) {
+      byId("resultCard").tabIndex = -1;
+      byId("resultCard").focus({ preventScroll: true });
+      byId("resultCard").scrollIntoView({ behavior: "instant", block: "start" });
+    }
   } catch (error) {
+    if (epoch !== state.epoch) return;
+    byId("requestStatus").textContent = "";
+    state.history = []; // Do not resolve a later follow-up against a failed request.
     if (error.status === 401) showLogin(translations[state.language].sessionExpired);
     else if (error.message === "incident.target_missing") errorNode.textContent = translations[state.language].noIncidentTargets;
     else errorNode.textContent = safeRequestError(error);
   } finally {
-    button.disabled = false;
-    button.removeAttribute("aria-busy");
-    button.querySelector("span").textContent = original;
+    clearInterval(timer);
+    if (epoch === state.epoch) setBusy(false);
   }
 });
 

@@ -82,6 +82,14 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: noc_soc_conversation_workspace
+    status: implemented_unaccepted
+    evidence:
+      - docs/requirements/NOC_SOC_WORKSPACE_SPEC.md
+      - docs/en/UI.md
+      - docs/fa/UI.md
+      - tests/api/test_app.py
+      - tests/browser/test_phase2_panel.py
   - id: authenticated_bilingual_panel
     status: accepted_controlled
     evidence:

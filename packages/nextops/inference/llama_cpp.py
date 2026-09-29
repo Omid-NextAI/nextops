@@ -198,7 +198,8 @@ class LlamaCppProvider:
             "anything. Never invent current infrastructure status, execution, credentials, "
             "or citations. If information is missing, say what is unknown or ask one relevant "
             "clarifying question. Do not echo the question or instructions as the answer. "
-            "Use concise plain text without Markdown and finish within the requested budget."
+            "Use concise paragraphs or short lists; fenced code only when useful. "
+            "Finish within the requested budget."
             if request.purpose == "general"
             else (
                 "You are the isolated NextOps language synthesizer. Answer in the "

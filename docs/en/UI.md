@@ -4,6 +4,32 @@
 
 **Status: specification plus a delivered controlled user-testing subset.** Source: master specification sections 3, 7 and 17 plus original sections 3 and 30.
 
+## Conversational NOC/SOC source candidate — 2026-09-29
+
+The [bounded specification](../requirements/NOC_SOC_WORKSPACE_SPEC.md) adds a conversation thread,
+operator starters for servers/services, DNS/network latency, firewalls/VPN and defensive security,
+safe text/code presentation, answer/code copying and a compact composer. The locally embedded OCS
+logo and the original gold/teal/semantic palette are unchanged. No framework, CDN, font or package
+dependency is added. Twelve local real-browser fixtures passed, including native RTL/LTR, hostile
+HTML remaining inert text, code direction, responsive layouts, copying, expiry and late logout
+responses. These are fixture results, not actual model accuracy or deployed-release acceptance.
+
+At most twelve completed turns remain in page memory. New conversation, logout or session expiry
+clears the transcript; refresh starts afresh. No conversation is saved in localStorage/sessionStorage.
+General mode carries at most two recent accepted model-only question/answer pairs, bounded at 2,000
+characters per field and 6,000 serialized characters. Oversized turns are omitted with a notice,
+not silently clipped. Mode changes clear model context. Live modes do not submit previous turns and
+continue fresh, authorized collection; archived evidence keeps its original source/time/audit.
+
+The assistant provides technical advice, not unrestricted NOC/SOC device access. Only the existing
+authorized Zabbix/Linux evidence routes are connected. Other vendors/devices receive general
+guidance, not invented live status. No command executes from this interface. Broader product
+screens, additional connectors and full accuracy/accessibility/production acceptance remain open.
+The currently serving package is identified by the release manifest; this source candidate requires
+its own exact-package live qualification before the newer behavior is called deployed.
+
+## Existing controlled subset
+
 The controlled subset provides authenticated English/Persian login, genuine RTL/LTR switching,
 AI and monitoring readiness and a bounded question form with three explicit answer modes. General
 assistant is the default: it answers through the local model without retrieving or displaying live
@@ -28,7 +54,7 @@ not prove that an answer is true or relevant. A token-limit completion is treate
 and displayed through an explicitly limited evidence-only fallback. The app-only release passed
 bounded live API and browser checks; the full held-out semantic corpus remains unrun.
 
-The current controlled application release also replaces the dense two-column evaluation workspace with a
+The earlier controlled application redesign replaced the dense two-column evaluation workspace with a
 single-column question/answer flow. Mode, approved target and language remain explicit; the
 submitted question and answer appear together, with source, collection times and scope visible.
 The full authorized evidence and audit identifiers are available in a collapsed disclosure rather

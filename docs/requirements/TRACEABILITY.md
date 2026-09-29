@@ -1,5 +1,18 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+NOC/SOC source increment (sections 3, 9, 17, 25, 27; 2026-09-29): preserved OCS brand, responsive
+conversation, safe text/code/copy and bounded general-only context; no persistent memory schema,
+retrieval or new connector. 357 unit/API checks and twelve real-browser fixtures pass, not model
+truth or exact-source live acceptance. Current-state/history cannot authorize access or become live
+evidence. The [bounded packet](NOC_SOC_WORKSPACE_SPEC.md) governs deployment/rollback next; earlier
+35B and unrun/failed qualification records remain authoritative for their exact revisions.
+
+برش کدِ NOC و SOC (بخش‌های ۳، ۹، ۱۷، ۲۵ و ۲۷؛ ۷ مهر ۱۴۰۵): نشان و رنگ حفظ شده‌اند و گفت‌وگوی
+واکنش‌گرا، متن و کد و کپی ایمن و زمینهٔ محدودِ صرفاً عمومی اضافه شده‌اند؛ ساختار حافظهٔ ماندگار،
+بازیابی سند یا اتصال تازه نداریم. ۳۵۷ آزمون واحد/API و دوازده موردِ مرورگر با دادهٔ ساختگی موفق‌اند،
+نه درستی مدل یا پذیرش زندهٔ کد دقیق. سابقه مجوز یا شاهد زنده نمی‌سازد. [مشخصات](NOC_SOC_WORKSPACE_SPEC.md)
+مبنای گام استقرار و بازگشت است؛ رکوردهای 35B و پذیرش اجرا‌نشده یا ناموفقِ نسخه‌های قبلی حفظ‌اند.
+
 Selected 35B trace (sections 9, 10, 19, 25; 2026-09-29): protected pinned artifact, exact source
 95c6e50/offline wheel and five CI jobs passed. Twelve API and twelve browser cases plus eight
 read-only audit/hash pairs, exact 8B/app/API rollback and six final re-promotion confirmations
