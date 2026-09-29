@@ -1,5 +1,19 @@
 # Next task / کار بعدی
 
+Immediate follow-up, 2026-09-29 — Qualify the generic diagnostic-reasoning refinement through locked
+CI and exact offline packaging, then repeat bounded live NOC/SOC browser/context/evidence checks.
+95c6e50/35B is restored after the first trial's semantic rejection; preserve its raw answer and
+separate harness failures. Exact source rollback already passed two fresh EN/FA questions, but a
+new source identity needs its own checks. Keep model/runtime/resources/credentials and all budgets
+unchanged. Review meaning, not merely HTTP/stop. No source-only success implies full production.
+
+گام فوری، ۷ مهر ۱۴۰۵ — اصلاح عمومیِ استدلال تشخیصی با CI قفل‌شده و بستهٔ دقیقِ آفلاین تأیید
+شود؛ سپس آزمون زنده و محدودِ مرورگر، زمینه و شاهد NOC و SOC تکرار شود. پس از رد معناییِ آزمون
+نخست، 95c6e50 و 35B برگشته‌اند؛ پاسخ خام و شکست جداگانهٔ ابزار آزمون حفظ شوند. بازگشت دقیقِ
+کد دو پرسش تازهٔ دوزبانه را گذراند، اما شناسهٔ تازه به بررسی خود نیاز دارد. مدل، محیط، منابع،
+اطلاعات ورود و سقف‌ها ثابت بمانند. معنی پاسخ بررسی شود، نه فقط HTTP و پایان تولید؛ موفقیت کد
+به معنی آمادگی کامل تولید نیست.
+
 Owner-directed source checkpoint, 2026-09-29 — Finish locked CI and exact offline packaging for the
 bounded [NOC/SOC workspace](requirements/NOC_SOC_WORKSPACE_SPEC.md). Local unit/API and twelve
 browser fixtures pass; serving 95c6e50/35B is unchanged. Require a guarded, exact-source app/API

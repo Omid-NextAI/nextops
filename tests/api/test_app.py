@@ -123,6 +123,9 @@ def test_general_context_preserves_full_question_and_never_supplies_authority(lo
     assert "untrusted model-only context, not live evidence" in prompt
     assert "NOC/SOC advisor" in prompt
     assert "redacted diagnostic output" in prompt
+    assert "A failed check does not uniquely prove a root cause" in prompt
+    assert "a successful check proves only that check's scope" in prompt
+    assert "Bound diagnostic commands with a timeout" in prompt
     assert len(prompt) <= 12_000
     assert inference.last_request.purpose == "general"
     assert inference.last_request.max_output_tokens == 384
@@ -156,17 +159,31 @@ def test_general_context_rejects_overflow_and_forged_roles(history: object) -> N
     assert inference.last_request is None
 
 
-def test_maximum_context_and_question_stay_within_internal_prompt_bound() -> None:
+@pytest.mark.parametrize("locale", ["en", "fa"])
+def test_maximum_context_and_question_stay_within_internal_prompt_bound(locale: str) -> None:
     from nextops.api.app import _general_prompt
 
     request = GeneralAssistantRequest.model_validate(
         {
-            "locale": "fa",
+            "locale": locale,
             "question": "س" * 4_000,
-            "history": [{"question": "س" * 1_450, "answer": "پ" * 1_450}] * 2,
+            "history": [
+                {"question": "س" * 1_484, "answer": "پ" * 1_484},
+                {"question": "س" * 1_484, "answer": "پ" * 1_491},
+            ],
         }
     )
     prompt = _general_prompt(request)
+    assert (
+        len(
+            json.dumps(
+                [turn.model_dump() for turn in request.history],
+                ensure_ascii=False,
+                separators=(",", ":"),
+            )
+        )
+        == 6_000
+    )
     assert request.question in prompt.question
     assert len(prompt.question) <= 12_000
 

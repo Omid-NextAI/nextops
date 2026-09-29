@@ -1,5 +1,23 @@
 # Project state / وضعیت پروژه
 
+Latest source qualification follow-up, 2026-09-29 — PR41 passed all five CI jobs and exact fresh
+offline Ubuntu packaging. The guarded 7ecd7ac app/API trial preserved 35B/CPU but rejected an overly
+absolute DNS diagnostic conclusion. Browser/rollback-harness failures are retained separately,
+not relabeled model success. Exact source rollback to 95c6e50/35B passed fresh EN/FA generation,
+TLS, identity and logout; only own guards were stopped. The bounded source refinement requires
+alternative causes, check-scope limits and command time bounds. Both locales now test exactly 6,000
+serialized context plus 4,000 question characters. New locked CI/package/live semantic review is
+next; the NOC/SOC UI is not yet accepted for live use. Earlier records remain historical.
+
+تازه‌ترین ادامهٔ ارزیابی کد، ۷ مهر ۱۴۰۵ — پنج کنترل CI در PR41 و بستهٔ دقیقِ تازه و آفلاین
+Ubuntu موفق شدند. آزمون محافظت‌شدهٔ برنامه/API نسخهٔ 7ecd7ac، مدل 35B و CPU را حفظ کرد، اما
+نتیجه‌گیری بیش‌ازحد قطعیِ DNS پذیرفته نشد. شکست ابزار آزمون مرورگر و بازگشت، جدا حفظ شده‌اند
+و موفقیت مدل نامیده نمی‌شوند. بازگشت دقیق به 95c6e50 و 35B، تولید تازهٔ فارسی و انگلیسی، TLS،
+شناسه‌ها و خروج را گذراند؛ فقط زمان‌سنج‌های همین تغییر متوقف شدند. اصلاح محدودِ کد، علت‌های
+جایگزین، محدودیت دامنهٔ بررسی و مهلت فرمان را الزام می‌کند. هر دو زبان با زمینهٔ JSON دقیقاً
+شش هزار نویسه و پرسش کامل چهار هزار نویسه آزموده می‌شوند. CI و بسته و بازبینی معنایی تازه لازم
+است؛ رابط NOC و SOC هنوز برای استفادهٔ زنده پذیرفته نیست. رکوردهای پیشین تاریخی‌اند.
+
 Current source task, 2026-09-29 — The owner requests a conversational NOC/SOC frontend without
 changing the OCS logo/palette. The bounded candidate adds twelve in-memory turns, safe text/code
 rendering/copying, operator starters, two bounded untrusted general-context pairs and diagnostic
