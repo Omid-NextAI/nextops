@@ -1,5 +1,28 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Controlled NOC/SOC workspace — 2026-09-29 / محیط کنترل‌شدهٔ NOC و SOC — ۷ مهر ۱۴۰۵
+
+Select app/API 862d311 with the unchanged CPU-only 35B model after five CI jobs, exact offline
+package installation, nine fresh live browser/API cases, three audit/hash pairs and exact b346c3e
+source rollback with two fresh EN/FA answers. Preserve exact OCS logo/palette; ship conversational
+layout, safe code/text copying, bounded general-only follow-ups, read-only-first NOC/SOC guidance,
+technical RTL isolation and a named EN/FA single-check blanket-health correction. 363 local
+unit/API checks and twelve browser fixtures pass (two POSIX tests skipped on Windows). No new
+dependency, training, retrieval, device credentials or connector. Keep 384 tokens/120s/one active/two
+queued and all evidence/authorization/audit boundaries. Earlier DNS/length/VPN-health/harness
+failures remain; independent technical quality is partial and exact-release WAN/VM gates are not
+run. Controlled user testing is live, not full production acceptance.
+
+برنامه/API نسخهٔ 862d311 با مدل ثابتِ 35B صرفاً CPU، پس از پنج کنترل CI، نصب دقیق آفلاین، نُه
+مورد زندهٔ مرورگر/API، سه تطبیق ممیزی و هش و بازگشت دقیق کد به b346c3e با دو پاسخ تازهٔ دوزبانه
+انتخاب شد. بایت‌های نشان و رنگ OCS حفظ و چیدمان گفت‌وگو، کپی ایمن متن و کد، پیگیری محدودِ
+صرفاً عمومی، راهنمای NOC و SOC با اولویت فقط‌خواندنی، جداسازی جهت متن فنی و اصلاح مشخصِ
+نتیجه‌گیری سلامت از یک بررسی مستقر شدند. ۳۶۳ آزمون محلی واحد/API و دوازده مورد مرورگرِ ساختگی
+موفق‌اند؛ دو آزمون POSIX در Windows کنار گذاشته شدند. وابستگی، آموزش، بازیابی سند، اطلاعات ورود
+یا اتصال تازه اضافه نشد. سقف ۳۸۴ توکن، ۱۲۰ ثانیه، یک فعال و دو منتظر و مرز شاهد، مجوز و ممیزی
+ثابت‌اند. شکست‌های قبلیِ DNS، سقف توکن، سلامت VPN و ابزار آزمون حفظ‌اند؛ صحت فنیِ مستقل ناقص و
+WAN و VM همین انتشار اجرا نشده‌اند. آزمون کنترل‌شدهٔ کاربر زنده است، نه پذیرش کامل تولید.
+
 ## NOC/SOC workspace source candidate — 2026-09-29 / نامزد کدِ محیط NOC و SOC — ۷ مهر ۱۴۰۵
 
 Preserve OCS logo/palette and native offline frontend; add bounded in-memory conversations,
