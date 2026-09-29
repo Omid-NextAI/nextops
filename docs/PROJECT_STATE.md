@@ -1,5 +1,28 @@
 # Project state / وضعیت پروژه
 
+Source candidate, 2026-09-29 — The owner requested the fullest bounded local-model answers and
+more relevant live facts. A source-only candidate raises **general mode only** from 384 to the
+existing contract maximum of 512 output tokens; live monitoring and incidents remain 384, with
+120 seconds, one active/two queued, the selected CPU-only 35B and connectors unchanged. The
+incident prompt now selects already-authorized Zabbix/Linux service or network observations by
+question, preserving the full stored evidence and audit. Two sequential 512-token native-model
+probes first ended at the ceiling; a focused prompt then completed EN/FA samples in 48.9/32.6s,
+and a calibrated prompt in 57.7/29.0s. Manual review still found overconfident DNS/restart and
+traceroute/firewall interpretations. These samples are **not** semantic acceptance or deployed
+source qualification; app/API 862d311 remains serving. No new device access, retrieval, training,
+model artifact or production claim follows.
+
+نامزد کد، ۷ مهر ۱۴۰۵ — مالک پاسخ کامل‌ترِ مدل محلی در سقف محدود و شاهد زندهٔ مرتبط‌تر خواسته
+است. نامزد، فقط سقف خروجیِ حالت عمومی را از ۳۸۴ به حداکثر فعلیِ قرارداد، یعنی ۵۱۲ توکن،
+می‌رساند؛ پایش و بررسی رخداد روی ۳۸۴ می‌مانند. مهلت ۱۲۰ ثانیه، یک درخواست فعال و دو منتظر،
+مدل 35B صرفاً CPU و اتصال‌های موجود تغییر نمی‌کنند. متنِ ورودیِ مدل برای رخداد، مشاهده‌های
+موجود و مجاز Zabbix و Linux دربارهٔ سرویس یا شبکه را متناسب با پرسش برمی‌گزیند؛ شاهد کاملِ
+ذخیره‌شده و ممیزی ثابت می‌مانند. دو نمونهٔ نخستِ ۵۱۲ توکنی به سقف رسیدند؛ دستور متمرکز،
+نمونه‌های فارسی و انگلیسی را در ۳۲٫۶ و ۴۸٫۹ ثانیه و دستور دقیق‌تر در ۲۹٫۰ و ۵۷٫۷ ثانیه
+تمام کرد. بازبینی انسانی هنوز تفسیر بیش‌ازحد قطعیِ DNS، راه‌اندازی سرویس، traceroute و
+فایروال را یافت. این نمونه‌ها پذیرش معنایی یا استقرار کد نیستند؛ 862d311 همچنان مستقر است.
+دسترسی تازه به تجهیزات، بازیابی سند، آموزش، فایل مدل تازه یا ادعای تولید اضافه نشده است.
+
 Current controlled workspace, 2026-09-29 — app/API 862d311 serves the unchanged CPU-only 35B model.
 PR44 passed five CI jobs, exact fresh offline Ubuntu packaging, five first/four final live
 browser/API cases, three durable audit/hash pairs and exact source rollback to b346c3e with fresh

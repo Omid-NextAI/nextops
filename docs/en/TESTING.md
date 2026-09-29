@@ -1,5 +1,27 @@
 # Testing, model evaluation and release evidence
 
+## Answer-depth source candidate — 2026-09-29
+
+The source-only candidate changes the general request default and browser budget to 512 output
+tokens; monitoring and incidents stay at 384. It reuses the selected CPU-only 35B, 120-second
+deadline, one active/two queued slots and existing authenticated Zabbix/Linux collectors. Topic
+selection changes only the model's bounded incident view; canonical evidence, source times,
+scope and audit remain untouched. Local API/provider tests cover EN/FA service/network/mixed
+questions, explicit exclusions, partial markers and an oversized collector string. They are
+fixtures, not actual-model correctness or a deployed-release claim.
+
+Sequential native-model probes without operational evidence were kept privately. The first
+English/Persian 512-token prompts both ended with `length`; a focused prompt stopped at 256/286
+tokens in 48.9/32.6s. A calibrated prompt stopped at 367/243 tokens in 57.7/29.0s. Manual
+review rejected complete-output-as-correctness: an English answer favored an unproven startup/DNS
+race and overstated a systemd ordering check; Persian text overstated what traceroute and
+firewall logs establish. A matched 384-token baseline also completed in 41.0/24.9s but was worse:
+the English answer unexpectedly switched to Persian and asserted unsupported timeout causes; the
+Persian answer treated DNS, routing and firewall cases as proof the others were healthy and then
+contradicted itself. This comparison does not certify the candidate. No stress, production, live
+browser, WAN or VM test is implied. Keep
+serving app/API 862d311 at 384 general tokens until exact-package and held-out qualification.
+
 ## Current controlled workspace qualification — 2026-09-29
 
 Serving app/API source 862d31130e43f5cdce216aff40d1d9fdb1a8f61a, wheel SHA-256

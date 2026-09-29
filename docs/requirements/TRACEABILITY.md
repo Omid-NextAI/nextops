@@ -1,5 +1,21 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Answer-depth source candidate (sections 9, 17, 25, 27; 2026-09-29): general-only 512-token
+contract/browser ceiling and question-selected **existing** Zabbix/Linux incident facts are
+implemented locally, not deployed. Monitoring/incidents retain 384; CPU model, runtime, 120s,
+queue, scoped collection and full durable audit are unchanged. Two native probes hit 512 and
+later focused EN/FA probes completed but failed full technical-semantic review. See the
+[amendment](NOC_SOC_WORKSPACE_SPEC.md) and paired [EN](../en/TESTING.md)/[FA](../fa/TESTING.md)
+evidence. No new device live facts, acceptance or production status is inferred.
+
+نامزدِ عمق پاسخ (بخش‌های ۹، ۱۷، ۲۵ و ۲۷؛ ۷ مهر ۱۴۰۵): سقف ۵۱۲ توکنِ فقط حالت عمومی در قرارداد
+و مرورگر و انتخاب شاهد **موجود** Zabbix و Linux بر پایهٔ پرسش، در کد محلی پیاده شده‌اند، نه
+مستقر. پایش و رخداد روی ۳۸۴، مدل CPU، محیط اجرا، ۱۲۰ ثانیه، صف، گردآوری محدود و ممیزی کامل
+ثابت‌اند. دو نمونهٔ نخست به سقف ۵۱۲ رسیدند و نمونه‌های متمرکزِ فارسی و انگلیسی کامل شدند،
+ولی بازبینیِ معنای فنی را کامل نگذراندند. [اصلاح مشخصات](NOC_SOC_WORKSPACE_SPEC.md) و راهنماهای
+[انگلیسی](../en/TESTING.md) و [فارسی](../fa/TESTING.md) مبنا هستند. واقعیت زندهٔ تجهیزات
+تازه، پذیرش یا وضعیت تولید از این تغییر نتیجه نمی‌شود.
+
 Controlled NOC/SOC increment (sections 3, 9, 17, 25, 27; 2026-09-29): exact 862d311/35B preserves
 OCS brand and provides responsive conversation, safe text/code/copy and bounded general-only context; no persistent memory schema,
 retrieval or new connector. 363 unit/API checks (two Windows POSIX skips), twelve browser fixtures,

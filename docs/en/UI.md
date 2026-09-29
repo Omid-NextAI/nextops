@@ -4,6 +4,12 @@
 
 **Status: specification plus a delivered controlled user-testing subset.** Source: master specification sections 3, 7 and 17 plus original sections 3 and 30.
 
+The new answer-depth candidate is source-only, not the serving UI: it requests 512 tokens for
+general model-only answers and retains 384 for both fresh-evidence modes. The latter now prefer
+question-relevant observations already returned by scoped Zabbix/Linux collection; the full
+authorized evidence remains available in the existing disclosure. No firewall/VPN/device status
+appears unless a connector actually observed it. See [testing](TESTING.md).
+
 ## Controlled conversational NOC/SOC workspace — 2026-09-29
 
 Now serving in controlled testing as 862d311/35B: five first/four final fresh browser/API cases,

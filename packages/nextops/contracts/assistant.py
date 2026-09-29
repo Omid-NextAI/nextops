@@ -28,6 +28,7 @@ class ConversationTurn(FrozenContract):
 class GeneralAssistantRequest(AssistantRequest):
     """Optional bounded context is accepted only by the general-answer endpoint."""
 
+    max_output_tokens: int = Field(default=512, ge=32, le=512)
     history: tuple[ConversationTurn, ...] = Field(default=(), max_length=2)
 
     @model_validator(mode="after")

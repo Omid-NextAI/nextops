@@ -1,5 +1,42 @@
 # NOC/SOC conversational workspace / محیط گفت‌وگوی NOC و SOC
 
+## Bounded answer-depth amendment / اصلاح محدودِ عمق پاسخ — 2026-09-29
+
+Problem: the serving 384-token general model can stop before a useful complex explanation;
+generic incident prompts can bury the requested service/network observations in unrelated data.
+Requirement: test at most 512 general output tokens, the existing contract ceiling, while live
+monitoring/incidents remain 384. Select only existing authorized Linux service, journal, socket,
+route or resolver observations relevant to the incident question, with distinct Zabbix/Linux
+scope and timestamps. Keep full canonical evidence, hash and audit unchanged. If the selected
+model view is shortened, mark it explicitly; do not infer firewall/VPN/remote state or cause.
+
+Non-goals: no new model, training, retrieval, connector, device credentials, arbitrary shell,
+Internet use, VM/runtime/queue/deadline increase, or claim of universally correct answers.
+Threats: longer unsupported prose, truncation, prompt injection in collected fields, mistaken
+Zabbix/Linux host equivalence and treating a socket/route/resolver as service or path health.
+Acceptance: EN/FA unit/API/browser scope and exclusion tests, bounded serialization, exact offline
+package and locked CI, held-out human technical review of raw model output, fresh authenticated
+live evidence/audit, measured completion and exact APP/AI source rollback. If model semantics or
+deadline fail, retain the serving 384-token release. No ADR is needed for this prompt projection:
+it neither widens evidence collection nor changes authority or the immutable artifact architecture.
+
+مسئله: پاسخ عمومی با سقف ۳۸۴ توکن گاهی پیش از توضیح کاربردیِ پرسش پیچیده ناتمام می‌ماند؛
+متنِ عمومی رخداد نیز ممکن است مشاهدهٔ سرویس یا شبکهٔ خواسته‌شده را میان داده‌های نامرتبط پنهان
+کند. نیاز: سقف ۵۱۲ توکن، یعنی حداکثر قرارداد فعلی، فقط برای حالت عمومی آزموده شود و پایش و
+رخداد روی ۳۸۴ بمانند. از مشاهده‌های موجود و مجازِ Linux دربارهٔ سرویس، ژورنال، سوکت، مسیر یا
+نام‌سرور فقط موارد مرتبط با پرسش انتخاب شوند؛ دامنه و زمانِ جداگانهٔ Zabbix و Linux روشن باشد.
+شاهد اصلی، هش و ممیزی ثابت و کوتاه‌شدنِ نمای مدل آشکار بماند. سلامت سرویس یا مسیر، علت قطعی،
+سیاست فایروال، وضعیت VPN و تجهیزات راه دور از یک مشاهده حدس زده نشوند.
+
+افزودن مدل، آموزش، بازیابی سند، اتصال، اطلاعات ورود، اجرای آزاد فرمان، اینترنت یا افزایش VM،
+محیط اجرا، صف و مهلت هدف نیست. خطرها عبارت‌اند از متنِ بلند اما بی‌پشتوانه، ناتمامی پاسخ،
+تزریق دستور در شاهد، یکسان دانستن میزبان Zabbix و Linux و برداشتِ سلامت از سوکت، مسیر یا
+نام‌سرور. پذیرش به آزمون دوزبانهٔ واحد و API و مرورگر برای دامنه و استثنا، اندازهٔ محدودِ متن،
+بستهٔ دقیق آفلاین، CI قفل‌شده، بازبینی انسانیِ پاسخ خام به پرسش‌های کنارگذاشته‌شده، شاهد زنده
+و ممیزیِ تازه، زمان‌سنجی و بازگشت دقیق کدِ برنامه/API نیاز دارد. شکست معنا یا مهلت، نسخهٔ
+مستقرِ ۳۸۴ توکنی را حفظ می‌کند. ADR تازه لازم نیست؛ این انتخابِ متن، گردآوری شاهد، مرز مجوز
+یا معماریِ فایلِ تغییرناپذیر را عوض نمی‌کند.
+
 Status: bounded implemented/controlled qualification, 2026-09-29; exact 862d311 app/API with unchanged
 35B, five CI jobs, fresh offline package, nine live browser/API cases, three audit/hash pairs and
 exact b346c3e source rollback passed. Full independent technical quality remains partial; no

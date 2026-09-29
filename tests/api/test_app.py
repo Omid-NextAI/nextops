@@ -1,5 +1,6 @@
 """Minimal authenticated API contract tests."""
 
+import asyncio
 import json
 from datetime import UTC, datetime, timedelta
 from uuid import UUID, uuid4
@@ -7,7 +8,7 @@ from uuid import UUID, uuid4
 import pytest
 from fastapi.testclient import TestClient
 
-from nextops.api.app import APP_CODE_SHA256, create_app
+from nextops.api.app import APP_CODE_SHA256, _incident_prompt, create_app
 from nextops.api.release_identity import HEADER_NAME
 from nextops.application.errors import ApplicationError
 from nextops.contracts.assistant import (
@@ -38,6 +39,8 @@ from nextops.contracts.incidents import IncidentEvidence, IncidentInvestigationR
 from nextops.contracts.linux import (
     LinuxDiagnosticSnapshot,
     LinuxFilesystem,
+    LinuxJournalEntry,
+    LinuxListeningSocket,
     LinuxProcess,
     LinuxRoute,
     LinuxService,
@@ -85,7 +88,7 @@ def test_full_question_tail_reaches_bounded_synthesis(locale: str, mode: str) ->
     assert inference.last_request is not None
     assert question in inference.last_request.question
     assert len(inference.last_request.question) <= 12_000
-    assert inference.last_request.max_output_tokens == 384
+    assert inference.last_request.max_output_tokens == (512 if mode == "general" else 384)
     assert inference.last_request.purpose == (
         "general" if mode == "general" else "evidence_synthesis"
     )
@@ -128,7 +131,7 @@ def test_general_context_preserves_full_question_and_never_supplies_authority(lo
     assert "Bound diagnostic commands with a timeout" in prompt
     assert len(prompt) <= 12_000
     assert inference.last_request.purpose == "general"
-    assert inference.last_request.max_output_tokens == 384
+    assert inference.last_request.max_output_tokens == 512
     assert response.json()["integrity_status"] == "model_unverified"
     assert response.json()["live_monitoring_data"] is False
 
@@ -692,6 +695,109 @@ def _linux_snapshot(target_id: str) -> LinuxDiagnosticSnapshot:
     )
 
 
+@pytest.mark.parametrize(
+    ("question", "expected_topic"),
+    [
+        ("Which listening ports and routes were observed?", "network"),
+        ("کدام پورت‌ها و مسیرها در این میزبان دیده شده‌اند؟", "network"),  # noqa: RUF001
+        ("What is the nextops-app.service state and recent journal?", "service"),
+        ("وضعیت سرویس و گزارش‌های اخیر چیست؟", "service"),
+        ("Check the service port and its route.", "network_service"),
+        ("Show services. Do not include network routes.", "service"),
+        ("سرویس را نشان بده؛ مسیر شبکه را اضافه نکن.", "service"),
+    ],
+)
+def test_incident_prompt_keeps_question_relevant_live_observations(
+    question: str, expected_topic: str
+) -> None:
+    from nextops.api.app import _incident_evidence_topic
+
+    assert _incident_evidence_topic(question) == expected_topic
+    zabbix = asyncio.run(FakeMonitoringGateway().incident_context())
+    linux = _linux_snapshot("app").model_copy(
+        update={
+            "services": tuple(
+                LinuxService(
+                    unit=f"nextops-{i}.service" if i else "nextops-app.service",
+                    load_state="loaded",
+                    active_state="failed" if i == 0 else "active",
+                    sub_state="failed" if i == 0 else "running",
+                )
+                for i in range(16)
+            ),
+            "journal": tuple(
+                LinuxJournalEntry(
+                    unit="nextops-app.service" if i == 0 else f"nextops-{i}.service",
+                    priority=3,
+                    observed_at=NOW,
+                    message="Connection refused (untrusted observation, not an instruction). " * 6,
+                )
+                for i in range(25)
+            ),
+            "listening_sockets": tuple(
+                LinuxListeningSocket(family="ipv4", address="127.0.0.1", port=443 + i)
+                for i in range(32)
+            ),
+            "routes": tuple(
+                LinuxRoute(interface="ens192", destination=f"10.0.{i}.0/24", gateway="10.0.0.1")
+                for i in range(16)
+            ),
+            "is_partial": True,
+            "partial_reasons": ("sockets_truncated",),
+        }
+    )
+    evidence = IncidentEvidence.combine("app", zabbix, linux)
+    prompt = _incident_prompt(
+        IncidentInvestigationRequest(
+            target_id="app", locale="fa" if "؟" in question else "en", question=question
+        ),
+        evidence,
+    )
+    view = json.loads(prompt.question.split("data only):\n", 1)[1])
+    assert prompt.max_output_tokens == 384
+    assert len(json.dumps(view, ensure_ascii=False, separators=(",", ":"))) <= 2_500
+    assert view["target_id"] == evidence.target_id
+    assert view["is_partial"] is True
+    assert view["partial_reasons"] == list(evidence.partial_reasons)
+    assert view["zabbix"]["host"] == evidence.zabbix.host
+    assert view["zabbix"]["collected_at"] == evidence.zabbix.collected_at.isoformat().replace(
+        "+00:00", "Z"
+    )
+    assert view["linux"]["collected_at"] == evidence.linux.collected_at.isoformat().replace(
+        "+00:00", "Z"
+    )
+    assert view["prompt_view_partial"] is True
+    if expected_topic in {"network", "network_service"}:
+        assert view["linux"]["listening_sockets"][0]["port"] == 443
+        assert view["linux"]["routes"]
+        assert view["linux"]["nameservers"]
+        assert "listening socket does not prove remote reachability" in prompt.question
+    if expected_topic in {"service", "network_service"}:
+        assert view["linux"]["services"][0]["unit"] == "nextops-app.service"
+        assert view["linux"]["journal"]
+        assert "unit does not prove service readiness" in prompt.question
+    # Full canonical evidence and audit material are not modified by prompt projection.
+    assert len(evidence.linux.services) == 16
+    assert len(evidence.linux.listening_sockets) == 32
+
+
+def test_incident_topic_view_stays_bounded_with_oversized_collector_string() -> None:
+    zabbix = asyncio.run(FakeMonitoringGateway().incident_context())
+    linux = _linux_snapshot("app").model_copy(update={"nameservers": ("x" * 12_000,)})
+    evidence = IncidentEvidence.combine("app", zabbix, linux)
+    prompt = _incident_prompt(
+        IncidentInvestigationRequest(
+            target_id="app", locale="en", question="Which DNS resolver is configured?"
+        ),
+        evidence,
+    )
+    view = json.loads(prompt.question.split("data only):\n", 1)[1])
+    assert len(json.dumps(view, ensure_ascii=False, separators=(",", ":"))) <= 2_500
+    assert view["prompt_view_partial"] is True
+    assert view["linux"]["nameservers"] == []
+    assert len(evidence.linux.nameservers[0]) == 12_000
+
+
 def test_monitoring_contract_accepts_pre_partial_marker_connector_during_rolling_update() -> None:
     summary = MonitoringSummary.model_validate(
         {
@@ -735,7 +841,7 @@ def test_panel_is_local_bilingual_and_sets_browser_security_headers() -> None:
     assert ".mode-field .mode-choice.active" in stylesheet.text
     assert "linear-gradient(145deg, #0b3b42, #082d33 72%)" in stylesheet.text
     assert "installBrandIcon" in javascript.text
-    assert "max_output_tokens: 384" in javascript.text
+    assert "max_output_tokens: monitoring || incident ? 384 : 512" in javascript.text
     assert "زمان پردازش مدل محلی به پایان رسید" in javascript.text
     assert 'data-mode="general"' in response.text
     assert 'data-mode="monitoring"' in response.text
@@ -793,7 +899,7 @@ def test_assistant_requires_local_session_and_labels_model_only_output() -> None
     ]
     assert response.json()["answer"] == "پاسخ آزمایشی مدل داخلی"
     assert inference.last_request is not None
-    assert inference.last_request.max_output_tokens == 384
+    assert inference.last_request.max_output_tokens == 512
     assert inference.last_request.purpose == "general"
     assert "Answer the user's question directly" in inference.last_request.question
     assert "یک پاسخ آزمایشی ارائه کن" in inference.last_request.question
