@@ -1,5 +1,24 @@
 # Project state / وضعیت پروژه
 
+Clarity HTTP correction, 2026-09-29 — The first `089e3ad` promotion failed fresh generation:
+the inference HTTP schema rejected the gateway's new purpose field. The application and then
+inference API were rolled back successfully; all six old-release requests returned 200, while
+the four known focus/scope expectations still failed. A corrected authenticated schema and
+complete gateway/HTTP/scheduler/provider regression now pass. The desktop suite has 257 passes
+and two POSIX-only skips. The 14B artifact import passed, but its bounded bilingual quality
+comparison failed and resource comparison is partial; it is not the selected model. The next
+step is guarded promotion of the rebuilt correction, not another owner questionnaire.
+
+اصلاح مرز HTTP، ۷ مهر ۱۴۰۵ — نخستین استقرار `089e3ad` در تولید تازه شکست خورد: طرح‌وارهٔ HTTP
+استنتاج، فیلد جدیدِ نوع پردازش درگاه را نمی‌پذیرفت. ابتدا برنامه و سپس API استنتاج با موفقیت
+برگشتند؛ هر شش درخواست نسخهٔ قبلی پاسخ 200 گرفت، ولی چهار انتظارِ شناخته‌شدهٔ تمرکز و دامنه
+همچنان شکست خورد. طرح‌وارهٔ احرازهویت‌شده و آزمون کامل درگاه/HTTP/زمان‌بند/مدل اکنون موفق‌اند.
+مجموعهٔ میزکار ۲۵۷ موفقیت و دو موردِ اجرا‌نشدهٔ مختص POSIX دارد. ورود فایل 14B موفق است، اما
+مقایسهٔ محدود کیفیت دوزبانه شکست خورده و مقایسهٔ منابع ناقص است؛ این مدل انتخاب نشده است.
+گام بعد، استقرار محافظت‌شدهٔ بستهٔ اصلاح‌شده است، نه فرم تازهٔ مالک.
+
+Earlier source checkpoint / گام پیشینِ کد:
+
 AI clarity development, 2026-09-29 — The owner retired the all-at-once decision form; it is no
 longer a development prerequisite. The active private copy was moved to a recoverable retired
 copy. The candidate separates general/evidence synthesis, retains full accepted question tails,

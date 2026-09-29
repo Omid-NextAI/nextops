@@ -1,5 +1,20 @@
 # Next task / کار بعدی
 
+Immediate checkpoint, 2026-09-29 — Rebuild and qualify the inference HTTP correction, then
+promote inference before app with protected exact artifacts and bounded rollback. The `089e3ad`
+attempt was rolled back after six dependency failures; do not reuse it as an accepted release.
+Repeat fresh authenticated bilingual scope/file/greeting checks, ordinary explanations and the
+browser UI against the corrected digest. The 14B candidate is imported but not quality-qualified
+or selected. Keep the retired questionnaire retired and preserve honest release gate outcomes.
+
+گام فوری، ۷ مهر ۱۴۰۵ — اصلاح HTTP استنتاج دوباره بسته‌بندی و آزموده شود؛ سپس با فایل‌های دقیق
+و محافظت‌شده و بازگشت محدود، ابتدا استنتاج و بعد برنامه مستقر شوند. تلاش `089e3ad` پس از شش
+خطای وابستگی برگشت؛ انتشار پذیرفته‌شده محسوب نشود. آزمون تازهٔ احرازهویت‌شدهٔ سلام، دامنه، فایل،
+توضیح عمومی و مرورگر دوزبانه با هش اصلاح‌شده تکرار شود. فایل 14B وارد شده، اما کیفیت آن پذیرفته
+نشده و مدل منتخب نیست. فرمِ کنارگذاشته‌شده احیا نشود و نتیجهٔ معیارهای انتشار صادقانه حفظ شود.
+
+Earlier checkpoint / گام پیشین:
+
 Active owner-directed checkpoint, 2026-09-29 — Do not recreate the retired owner questionnaire
 or wait for unrelated owner inputs before development. Complete the bounded clarity candidate:
 full-question/internal-purpose boundary tests, bilingual browser regression, verified 14B artifact

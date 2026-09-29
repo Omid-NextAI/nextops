@@ -1,17 +1,26 @@
 """Authenticated Stage 1B inference HTTP boundary tests."""
 
+import asyncio
 from datetime import UTC, datetime
+from typing import Any
 from uuid import uuid4
 
+import pytest
 from fastapi.testclient import TestClient
 
+from nextops.api.inference_gateway import LoopbackInferenceGateway
+from nextops.contracts.assistant import SynthesisRequest
 from nextops.inference.api import create_inference_app
+from nextops.inference.configuration import LlamaCppSettings
 from nextops.inference.contracts import (
+    GenerationPurpose,
     InferenceReadiness,
     InferenceRequest,
     InferenceResult,
     ReadinessState,
 )
+from nextops.inference.llama_cpp import LlamaCppProvider
+from nextops.inference.scheduler import BoundedInferenceService
 
 SERVICE_SECRET = "service-secret-that-is-at-least-32-characters"
 
@@ -19,8 +28,10 @@ SERVICE_SECRET = "service-secret-that-is-at-least-32-characters"
 class FakeInferenceService:
     def __init__(self, state: ReadinessState = ReadinessState.READY) -> None:
         self.state = state
+        self.last_request: InferenceRequest | None = None
 
     async def generate(self, request: InferenceRequest) -> InferenceResult:
+        self.last_request = request
         now = datetime.now(UTC)
         return InferenceResult(
             request_id=request.request_id,
@@ -114,3 +125,101 @@ def test_degraded_readiness_returns_service_unavailable() -> None:
 
     assert response.status_code == 503
     assert response.json()["state"] == "unavailable"
+
+
+class InferenceHttpTransport:
+    """Serialize through the authenticated ASGI HTTP schema, not a service mock."""
+
+    def __init__(self, client: TestClient) -> None:
+        self.client = client
+
+    async def get_json(
+        self, path: str, headers: dict[str, str], timeout_seconds: float
+    ) -> dict[str, Any]:
+        raise AssertionError("Generation test does not request readiness")
+
+    async def post_json(
+        self, path: str, payload: dict[str, Any], headers: dict[str, str], timeout_seconds: float
+    ) -> dict[str, Any]:
+        response = self.client.post(path, json=payload, headers=headers)
+        assert response.status_code == 200, response.json()
+        result: dict[str, Any] = response.json()
+        return result
+
+
+class LocalModelTransport:
+    """Only the CPU model completion is synthetic in the complete HTTP path test."""
+
+    def __init__(self) -> None:
+        self.payload: dict[str, Any] = {}
+
+    async def get_json(
+        self, path: str, headers: dict[str, str], timeout_seconds: float
+    ) -> dict[str, Any]:
+        return {"status": "ok"}
+
+    async def post_json(
+        self, path: str, payload: dict[str, Any], headers: dict[str, str], timeout_seconds: float
+    ) -> dict[str, Any]:
+        assert path == "/v1/chat/completions"
+        self.payload = payload
+        return {
+            "model": "nextops-qwen3-8b-q4-k-m",
+            "choices": [
+                {
+                    "message": {"role": "assistant", "content": "A local answer."},
+                    "finish_reason": "stop",
+                }
+            ],
+            "usage": {"prompt_tokens": 100, "completion_tokens": 4, "total_tokens": 104},
+        }
+
+
+@pytest.mark.parametrize("purpose", ["general", "evidence_synthesis"])
+@pytest.mark.parametrize("locale", ["en", "fa"])
+def test_gateway_http_scheduler_provider_preserves_trusted_purpose(
+    purpose: GenerationPurpose, locale: str
+) -> None:
+    model = LocalModelTransport()
+    settings = LlamaCppSettings(
+        base_url="http://127.0.0.1:8080",
+        provider_api_key="local-model-test-key-" + "p" * 32,
+        service_auth_secret=SERVICE_SECRET,
+    )
+    service = BoundedInferenceService(LlamaCppProvider(settings, model))
+    with TestClient(create_inference_app(service, SERVICE_SECRET)) as client:
+        gateway = LoopbackInferenceGateway(
+            "http://127.0.0.1:8090", SERVICE_SECRET, 120, InferenceHttpTransport(client)
+        )
+        request = SynthesisRequest(
+            locale=locale, question="q" * 5000 + " END", purpose=purpose, max_output_tokens=384
+        )
+        correlation_id = uuid4()
+        result = asyncio.run(gateway.generate(request, correlation_id))
+    assert result.correlation_id == correlation_id
+    assert result.answer == "A local answer."
+    assert model.payload["max_tokens"] == 384
+    assert model.payload["messages"][-1]["content"] == request.question + "\n/no_think"
+    system_prompt = model.payload["messages"][0]["content"]
+    assert ("local general assistant" in system_prompt) == (purpose == "general")
+    assert ("isolated NextOps language synthesizer" in system_prompt) == (
+        purpose == "evidence_synthesis"
+    )
+
+
+def test_http_purpose_defaults_safely_and_rejects_unknown_or_unauthenticated() -> None:
+    service = FakeInferenceService()
+    client = TestClient(create_inference_app(service, SERVICE_SECRET))
+    payload = {"request_id": str(uuid4()), "locale": "en", "prompt": "Supplied evidence"}
+    headers = {"Authorization": f"Bearer {SERVICE_SECRET}"}
+    assert client.post("/api/v1/generate", json=payload, headers=headers).status_code == 200
+    assert service.last_request is not None
+    assert service.last_request.purpose == "evidence_synthesis"
+    for purpose in ("shell", "remote", "", None):
+        denied = client.post(
+            "/api/v1/generate", json={**payload, "purpose": purpose}, headers=headers
+        )
+        assert denied.status_code == 422
+    assert (
+        client.post("/api/v1/generate", json={**payload, "purpose": "general"}).status_code == 401
+    )
