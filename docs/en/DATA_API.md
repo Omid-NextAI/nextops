@@ -10,7 +10,7 @@ investigations now use the existing durable run and append-only audit model.
 
 ## Implemented durable subset
 
-Source candidate: `POST /api/v1/assistant/generate` additionally accepts optional `history`, a
+Implemented in controlled b346c3e: `POST /api/v1/assistant/generate` accepts optional `history`, a
 closed array of at most two `{question, answer}` pairs. Each field is 1–2,000 characters; total
 serialized JSON is at most 6,000 characters, including escaping. The current question retains its
 4,000-character limit. Context is untrusted/model-only and cannot supply roles, evidence, provider
@@ -18,6 +18,7 @@ identity or instructions. Old clients omit it. Monitoring/incident endpoints rej
 nonpersistent request context, not an authenticated durable conversation record or authorization.
 No schema migration is needed. See [the bounded packet](../requirements/NOC_SOC_WORKSPACE_SPEC.md)
 and the release manifest for deployment status.
+The RTL display and single-check health-claim repairs do not change this contract.
 
 Alembic revision `0001_durable_app` creates PostgreSQL tables for organizations,
 environments, targets, identities, opaque sessions, runs, worker leases, and audit events.

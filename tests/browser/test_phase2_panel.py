@@ -606,7 +606,8 @@ def test_safe_code_formatting_copy_brand_and_responsive_rtl(
     )
     app.state.general_answers["en"] = answer
     app.state.general_answers["fa"] = (
-        "بررسی فقط‌خواندنی:\n```bash\nsystemctl status example.service\n```"
+        "بررسی فقط‌خواندنی:\n```bash\nsystemctl status example.service\n```\n"
+        "زمان: 2026-09-29T10:01:02.123Z؛ نشانی: 192.0.2.15/24؛ مقدار: 13.79%"
     )
     with sync_playwright() as playwright:
         browser = _launch_browser(playwright)
@@ -648,6 +649,21 @@ def test_safe_code_formatting_copy_brand_and_responsive_rtl(
         expect(page.locator("#answer .code-block")).to_be_visible()
         assert page.locator("#answer").get_attribute("dir") == "rtl"
         assert page.locator("#answer pre").get_attribute("dir") == "ltr"
+        expect(page.locator("#answer p bdi[dir=ltr]")).to_have_text(
+            ["2026-09-29T10:01:02.123Z", "192.0.2.15/24", "13.79%"]
+        )
+        assert (
+            page.locator("#answer p bdi").first.evaluate(
+                "element => getComputedStyle(element).direction"
+            )
+            == "ltr"
+        )
+        assert (
+            page.locator("#answer").get_attribute("data-raw-text")
+            == app.state.general_answers["fa"]
+        )
+        page.locator("#copyAnswerButton").click()
+        assert page.evaluate("window.copiedText") == app.state.general_answers["fa"]
         page.screenshot(path=str(tmp_path / "noc-workspace-persian.png"), full_page=True)
         for width, height in [(375, 812), (844, 390), (768, 1024)]:
             page.set_viewport_size({"width": width, "height": height})

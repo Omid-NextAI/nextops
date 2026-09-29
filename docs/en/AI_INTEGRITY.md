@@ -6,6 +6,15 @@ category error: presenting unsupported model text as live operational fact.
 
 ## Current 35B semantic repair — 2026-09-29
 
+Current controlled b346c3e has twelve fresh browser/API completions and three new durable audit
+checks; source rollback passed. Full technical semantics remain partial: a final Persian VPN answer
+incorrectly equated successful ping with overall network health. A bounded source-only EN/FA guard
+now replaces affirmative single-check blanket health/security claims with an explicitly deterministic,
+model-only explanation of test scope. Negated warnings remain unverified model text; live-state
+questions still redirect. This rule catches a named regression, not arbitrary technical errors or
+all equivalent wording. It is not authorization, training or a general factuality certificate.
+The plain-text RTL display repair preserves raw answer/copy/evidence bytes. Qualify the exact source.
+
 New NOC/SOC source candidate: general technical guidance prefers read-only diagnostic checklists,
 distinguishes hypotheses from observations, asks for one useful missing vendor/version detail and
 redacted output, and must not invent device access, execution, compromise, advisories or citations.
@@ -17,7 +26,7 @@ limits remain authoritative. No training, retrieval or new device connector is i
 [the specification](../requirements/NOC_SOC_WORKSPACE_SPEC.md); actual model qualification remains
 separate from fixture passes.
 
-Latest controlled selection: 95c6e50/35B passed twelve fresh API and twelve strict browser cases
+Previous controlled selection: 95c6e50/35B passed twelve fresh API and twelve strict browser cases
 plus four durable audit/hash checks. The corrected CPU-only measurement answer is transparently
 application-owned, preserving exact idle meaning and provenance; it is not proof that raw model
 labels are correct. EN/FA RAM/SSD and arithmetic were correct in both paths. Exact 8B/app/API

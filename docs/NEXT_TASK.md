@@ -1,5 +1,22 @@
 # Next task / کار بعدی
 
+Next source checkpoint — Qualify the RTL timestamp/IP/percentage display repair and bounded EN/FA
+single-check blanket-health correction. Preserve the final VPN failure and verify negation and
+current-state redirect priority. This does not train the model. NOC/SOC generation/context logic
+now serves as b346c3e/35B after twelve live browser/API cases,
+three audit/hash checks and exact source rollback. Do not repeat model import or broad development
+fixtures as if incomplete; validate the exact new package and live direction/copy/provenance,
+with source-only rollback to b346c3e. Then independent platform/vendor semantic review and exact
+server-WAN/VM gates remain. No universal correctness or new device connector is claimed.
+
+گامِ کدِ بعدی — اصلاح کوچکِ جهت نمایش زمان، IP و درصد تأیید شود. منطق تولید و زمینهٔ NOC و
+SOC اکنون در b346c3e و 35B، پس از دوازده مورد زنده، سه تطبیق ممیزی و هش و بازگشت دقیق کد
+مستقر است. ورود مدل یا آزمون‌های تکمیل‌شده از نو انجام نشوند؛ بستهٔ دقیق تازه، جهت و کپی و منشأ
+زنده و بازگشت صرفاً کد به b346c3e سنجیده شوند. سپس بازبینی مستقلِ سازنده/پلتفرم و معیار دقیق
+WAN و VM باقی است. درستی همگانی یا اتصال تازهٔ تجهیزات ادعا نمی‌شود.
+اصلاح محدودِ نتیجه‌گیری سلامت از یک بررسی نیز تأیید شود؛ شکست VPN حفظ و نفی فارسی و اولویت
+ارجاع وضعیت زنده بررسی شوند. مدل آموزش داده نمی‌شود.
+
 Immediate completion checkpoint — Qualify the trusted general-purpose brevity directive with
 locked CI, exact offline package and fresh EN/FA NOC/SOC follow-ups, source rollback and audit.
 Serving is restored 95c6e50/35B after a repeat reached the unchanged 384-token ceiling. Keep its

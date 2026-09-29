@@ -42,6 +42,16 @@ _EXPLICIT_CURRENT_FACT_QUESTION = re.compile(
     r"(?:وضعیت.{0,60}(?:چیست|چگونه\s*است)|آیا.{0,60}(?:اکنون|فعلی|الان)))",
     re.IGNORECASE,
 )
+_SINGLE_CHECK_HEALTH = re.compile(
+    r"(?:\b(?:successful|succeeds|success)\b.{0,80}\b(?:means|proves|confirms)\b"
+    r".{0,45}\b(?:network|system|service|server)\b.{0,25}\b(?:healthy|secure|safe)\b|"
+    r"(?:موفقیت|موفق\s*بودن|موفق\s*باشد|موفق\s*شود).{0,40}"
+    r"(?:یعنی|اثبات\s*می[‌ ]کند|نشان\s*می[‌ ]دهد).{0,35}"
+    r"(?:شبکه|سامانه|سیستم|سرویس|سرور).{0,25}(?:سالم|امن))",
+    re.IGNORECASE,
+)
+_HEALTH_NEGATION = re.compile(r"(?:\b(?:not|never|cannot)\b|نیست|نمی[‌ ]|نه\s)", re.IGNORECASE)
+_HEALTH_TRAILING_NEGATION = re.compile(r"^\s*(?:نیست|نمی[‌ ]|نخواهد)")
 _UNSAFE_EXECUTION_CLAIMS = (
     re.compile(
         r"\b(?:i|we)\s+(?:have\s+)?(?:successfully\s+)?(?:restarted|rebooted|deployed|"
@@ -126,6 +136,11 @@ def assure_general_answer(
     )
     file_request = bool(_SYSTEM_FILE_REQUEST.search(request.question))
     unsafe_claim = _contains_unsafe_execution_claim(assistant.answer)
+    single_check_health = any(
+        not _HEALTH_NEGATION.search(match.group())
+        and not _HEALTH_TRAILING_NEGATION.search(assistant.answer[match.end() : match.end() + 16])
+        for match in _SINGLE_CHECK_HEALTH.finditer(assistant.answer)
+    )
     prompt_echo = _is_long_prompt_echo(request.question, assistant.answer)
     incomplete = assistant.finish_reason != FinishReason.STOP
     greeting_mismatch = bool(
@@ -141,6 +156,7 @@ def assure_general_answer(
         not requires_live_evidence
         and not file_request
         and not unsafe_claim
+        and not single_check_health
         and not prompt_echo
         and not incomplete
         and not greeting_mismatch
@@ -182,6 +198,20 @@ def assure_general_answer(
     elif greeting_mismatch:
         answer = (
             "سلام! چطور می‌توانم کمک کنم؟" if request.locale == "fa" else "Hello! How can I help?"
+        )
+        integrity_status = "deterministic_fallback"
+        limitations = ("no_live_evidence", "model_output_may_be_incorrect")
+    elif single_check_health and not requires_live_evidence and not unsafe_claim:
+        answer = (
+            "نتیجه‌گیری مدل بیش‌ازحد کلی بود. موفقیت یک بررسی شبکه فقط همان مسیر، مقصد و "
+            "پروتکلِ بررسی‌شده را تأیید می‌کند؛ سلامت کل شبکه، امنیت یا کارکرد سرویس‌های دیگر "
+            "را ثابت نمی‌کند. مقصد و پورت موردنظر و خروجی پالایش‌شده را مشخص کنید تا بررسی "
+            "فقط‌خواندنیِ دقیق‌تری پیشنهاد شود. هیچ وضعیت زنده یا اجرای عملیاتی تأیید نشده است."
+            if request.locale == "fa"
+            else "The model's conclusion was too broad. A successful network check confirms only "
+            "the tested path, destination and protocol, not overall network health, security or "
+            "other services. Specify the target and port and provide redacted output for more "
+            "focused read-only guidance. No live status or executed action has been verified."
         )
         integrity_status = "deterministic_fallback"
         limitations = ("no_live_evidence", "model_output_may_be_incorrect")

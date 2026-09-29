@@ -1,7 +1,7 @@
 ---
 $schema: ./release-status.schema.json
 schema_version: 2.2.0
-release_identifier: nextops-qwen35-controlled-2026-09-29
+release_identifier: nextops-noc-soc-controlled-2026-09-29
 observed_at: '2026-09-29'
 deployment_status: controlled_user_testing_not_production_accepted
 delivery_scope:
@@ -17,17 +17,17 @@ snapshot_restore_owner_attestation:
 repository:
   remote: Omid-NextAI/nextops
   branch: main
-  inspected_baseline_commit: 802653a2a5911a4fcd9bc958b6489202a1cd1551
+  inspected_baseline_commit: 587b3f01b7fa3162c62594022c4512cdbc856caa
 components:
   application:
-    release: nextops-0.1.0-95c6e50
-    source_commit: 95c6e501a89f148c9a9bf802f48f05555c2c6400
+    release: nextops-0.1.0-b346c3e
+    source_commit: b346c3effdba4c53674f3f37f705b21a12943a86
   connector:
     release: nextops-0.1.0-cdde129
     source_commit: cdde129950f60f9f18f3ef109cbf98f4217fc5e1
   inference_api:
-    release: nextops-0.1.0-95c6e50
-    source_commit: 95c6e501a89f148c9a9bf802f48f05555c2c6400
+    release: nextops-0.1.0-b346c3e
+    source_commit: b346c3effdba4c53674f3f37f705b21a12943a86
   inference_runtime:
     name: llama.cpp
     source_tag: v0.4.1
@@ -50,8 +50,8 @@ components:
     name: Zabbix
     version: '7.0.31'
 current_application_qualification:
-  release: nextops-0.1.0-95c6e50
-  source_commit: 95c6e501a89f148c9a9bf802f48f05555c2c6400
+  release: nextops-0.1.0-b346c3e
+  source_commit: b346c3effdba4c53674f3f37f705b21a12943a86
   scope: application_revision_sensitive
   gates:
     - id: current_app_bounded_live_functionality
@@ -83,7 +83,7 @@ current_application_qualification:
         - docs/NEXT_TASK.md
 capabilities:
   - id: noc_soc_conversation_workspace
-    status: implemented_unaccepted
+    status: accepted_controlled
     evidence:
       - docs/requirements/NOC_SOC_WORKSPACE_SPEC.md
       - docs/en/UI.md

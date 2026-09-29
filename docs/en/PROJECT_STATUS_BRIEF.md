@@ -4,7 +4,14 @@
 
 Updated: 2026-09-29
 
-Current controlled selection: app/API `95c6e50` serves Qwen3.5-35B-A3B Q4_K_M on the existing
+Current controlled workspace: app/API b346c3e retains 35B/CPU, OCS palette/logo and existing evidence
+boundaries. Twelve fresh browser/API cases, three audit/hash pairs and exact source rollback passed.
+Sample latency is 19.7–75.3s. Technical semantics remain partial, including a known blanket
+ping-health claim; source repairs that named error and RTL timestamp display. No new connector,
+training or production acceptance. The release manifest is authoritative; the following 95c6e50
+qualification is earlier evidence, not the serving identity.
+
+Previous controlled selection: app/API `95c6e50` served Qwen3.5-35B-A3B Q4_K_M on the existing
 CPU-only guest/runtime. Twelve API and twelve browser cases, eight durable audit/hash pairs,
 exact 8B/app/API rollback and six final re-promotion confirmations passed. Sample latency was
 12.7–94.3s; hardware/queues/deadlines did not change. Full held-out quality is partial, not
@@ -40,7 +47,7 @@ rotation/operator notification and disaster-recovery sign-off remain open. The o
 deferred independent recovery; no independent destination or isolated restore lab exists and no
 recovery acceptance is implied. No SMTP or alternate named-recipient delivery route is configured.
 
-The current application and AI API are `nextops-0.1.0-95c6e50`; connector remains on
+The earlier application and AI API were `nextops-0.1.0-95c6e50`; connector remains on
 `nextops-0.1.0-cdde129`. The clarity update preserves full questions, separates general and evidence
 instructions, and bounds answers at 384 tokens. Selected CPU model is Qwen3.5-35B-A3B Q4_K_M.
 Twelve API/browser cases each, eight audit/hash pairs, exact 8B/source rollback and six final
