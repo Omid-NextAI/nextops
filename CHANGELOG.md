@@ -1,5 +1,21 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Larger CPU model qualification — 2026-09-29
+
+Matched fourteen-case-per-model English/Persian review completed all 28 generations at 384 tokens,
+but rejected 14B for wrong Persian RAM/arithmetic and evidence qualifiers. Serving 8B remains.
+Pin official 32B artifacts and explicit typed alias without runtime download, remote fallback,
+dependency, resource or concurrency changes. Add tested protected selection profiles and complete
+selected-model identity validation; provisioning/source tests are not live acceptance.
+
+## صلاحیت‌سنجی مدل CPU بزرگ‌تر — ۷ مهر ۱۴۰۵
+
+بازبینی همسانِ چهارده مورد برای هر مدل در فارسی و انگلیسی، همهٔ ۲۸ تولید را با سقف ۳۸۴ توکن
+کامل کرد، اما 14B را به‌دلیل پاسخ نادرستِ RAM و محاسبهٔ فارسی و ضعف قیدهای شاهد رد کرد.
+مدل مستقر 8B حفظ شده است. فایل رسمیِ 32B و شناسهٔ صریح آن بدون دانلود زمان اجرا، جایگزین
+خارجی یا تغییر وابستگی، منابع و هم‌زمانی تثبیت شدند. پروفایل انتخاب محافظت‌شده و اعتبارسنجی
+کامل شناسهٔ مدل آزموده شدند؛ آماده‌سازی و آزمون کد، پذیرش زنده نیستند.
+
 ## 2026-09-29 — Bounded clarity promotion / استقرار محدودِ وضوح پاسخ
 
 ### English

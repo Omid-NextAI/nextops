@@ -17,7 +17,7 @@ snapshot_restore_owner_attestation:
 repository:
   remote: Omid-NextAI/nextops
   branch: main
-  inspected_baseline_commit: 3e7f7d29d579b563b88a29d0d51b41adddad879f
+  inspected_baseline_commit: 6582b4e5976e57ce7a535bc9d96b49081bbb4bf6
 components:
   application:
     release: nextops-0.1.0-c4351fd
@@ -186,6 +186,24 @@ capabilities:
       - deploy/systemd/nextops-certificate-check.timer
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
+  - id: model14_matched_bilingual_quality
+    status: failed
+    evidence:
+      - deploy/inference/qwen3-14b-q4-k-m.candidate.json
+      - docs/en/CPU_AI.md
+      - docs/fa/CPU_AI.md
+      - docs/en/TESTING.md
+  - id: model32_bounded_qualification
+    status: not_run
+    evidence:
+      - deploy/inference/qwen3-32b-q4-k-m.candidate.json
+      - docs/en/CPU_AI.md
+      - docs/fa/CPU_AI.md
+  - id: model32_guarded_selection
+    status: not_run
+    evidence:
+      - docs/en/CPU_AI.md
+      - docs/NEXT_TASK.md
   - id: credentialed_http_redirect_denial
     status: passed
     evidence:

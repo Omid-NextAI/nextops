@@ -4,6 +4,15 @@
 guarantee that a generative model will never be wrong. It instead prevents the most dangerous
 category error: presenting unsupported model text as live operational fact.
 
+## Larger-model comparison — 2026-09-29
+
+Fourteen matched bilingual cases completed at 384 tokens on both 8B and 14B. Semantic review
+rejected 14B for incorrect Persian RAM and arithmetic answers and missing/weakened evidence
+qualifiers. 8B also failed some source/stale cases. These are development observations, not
+independent held-out acceptance. No model gained a tool or credential. The serving 8B remains
+unchanged; pinned 32B provisioning and source-only identity support are the next step. See
+[CPU_AI](CPU_AI.md); larger weights do not waive deterministic safeguards.
+
 ## Clarity repair — 2026-09-29
 
 The corrected `c4351fd` application/inference API is now live. Twelve fresh bilingual API cases

@@ -4,6 +4,24 @@
 
 **Status: bounded runtime/model smoke evidence and a repository-tested native service profile; full benchmark and deployment acceptance are not complete.** Source: master specification sections 2, 9–10 and 21. The pinned runtime/model pair has run on the qualified AI guest, but sustained throughput, production service behavior, rollback, restore, and Internet-blocked acceptance remain unmeasured.
 
+## Current larger-model qualification — 2026-09-29
+
+Fourteen matched development cases used the corrected app prompts, 384 output tokens, 16 threads
+and one slot. Every sample completed: 8B took about 1.5–21 seconds; 14B about 4–54 seconds.
+Semantic review rejected 14B: its Persian RAM answer called RAM flash memory and its Persian
+calculation gave 50/200 as 50%, not 25%. Source/time/stale qualifiers also failed some cases.
+The 8B baseline likewise had unsupported stale-health wording and source omissions. Completion,
+fluency and enough RAM are not accuracy. The serving 8B and deterministic safeguards remain intact.
+
+The next candidate is official Qwen3-32B Q4_K_M, pinned in
+[32B metadata](../../deploy/inference/qwen3-32b-q4-k-m.candidate.json) at revision
+`938a7432affaec9157f883a87164e2646ae17555`, 19,762,149,024 bytes, SHA-256
+`efd971561896866f0e910cce52761ca77b1b138090c7f15fe284676d57d1f689`, Apache-2.0.
+Provisioning is in progress, not verified import or live acceptance. The source-only alias adds no
+runtime resolver/download, cloud fallback or concurrency. The 24-vCPU/128-GiB guest and pinned CPU
+runtime are unchanged. Bilingual quality, latency, serving-path checks, cold restart and rollback
+are selection gates; full held-out and production acceptance remain separate.
+
 ## Non-negotiable execution boundary
 
 Generation, planning, embeddings, reranking, AI anomaly processing and optional automated model judging run on local CPUs. No external AI endpoint or silent cloud fallback is permitted. An OpenAI-compatible request format is only a protocol shape, not authorization to call an external provider. GitHub is not a runtime AI dependency.

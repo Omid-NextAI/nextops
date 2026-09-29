@@ -5,6 +5,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
 import yaml
 from jsonschema import Draft202012Validator
 
@@ -12,15 +13,48 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = REPOSITORY_ROOT / "deploy" / "inference" / "qwen3-8b-q4-k-m.yaml"
 
 
-def test_larger_candidate_is_pinned_without_runtime_download_or_acceptance_claim() -> None:
+def test_larger_runtime_profile_changes_identity_without_weakening_the_base_unit() -> None:
+    directory = REPOSITORY_ROOT / "deploy" / "systemd"
+    original = (directory / "nextops-llama.service").read_text("utf-8")
+    profile = (directory / "model-profiles" / "qwen3-14b-runtime.conf").read_text("utf-8")
+    base_command = original.split("ExecStart=", 1)[1].split("\nRestart=", 1)[0].strip()
+    expected = base_command.replace("Qwen3-8B-Q4_K_M.gguf", "Qwen3-14B-Q4_K_M.gguf").replace(
+        "nextops-qwen3-8b-q4-k-m", "nextops-qwen3-14b-q4-k-m"
+    )
+    assert profile.split("ExecStart=\nExecStart=", 1)[1].strip() == expected
+    assert "ConditionPathExists=\nConditionPathExists=" in profile
+    assert "ConditionPathExists=/srv/nextops/models/current/Qwen3-14B-Q4_K_M.gguf" in profile
+    directives = [line for line in profile.splitlines() if "=" in line and not line.startswith("#")]
+    assert len(directives) == 4
+
+
+def test_larger_api_profile_requires_a_separate_exact_identity_file() -> None:
+    directory = REPOSITORY_ROOT / "deploy" / "systemd" / "model-profiles"
+    profile = (directory / "qwen3-14b-api.conf").read_text("utf-8")
+    assert "EnvironmentFile=/etc/nextops/model-selection.env" in profile
+    assert "EnvironmentFile=-" not in profile
+    assert (directory / "qwen3-14b.env").read_text("utf-8").strip() == (
+        "NEXTOPS_MODEL_ID=nextops-qwen3-14b-q4-k-m"
+    )
+    assert "Environment=" not in profile
+
+
+@pytest.mark.parametrize("size", ["14b", "32b"])
+def test_larger_candidate_is_pinned_without_runtime_download_or_acceptance_claim(size: str) -> None:
     directory = MANIFEST.parent
-    candidate = json.loads((directory / "qwen3-14b-q4-k-m.candidate.json").read_text("utf-8"))
-    schema = json.loads((directory / "model-candidate.schema.json").read_text("utf-8"))
+    candidate = json.loads((directory / f"qwen3-{size}-q4-k-m.candidate.json").read_text("utf-8"))
+    schema_name = (
+        "model-candidate.schema.json" if size == "14b" else "model-32b-candidate.schema.json"
+    )
+    schema = json.loads((directory / schema_name).read_text("utf-8"))
     validator = Draft202012Validator(schema)
     assert not list(validator.iter_errors(candidate))
     assert candidate["runtime_download_allowed"] is False
     assert candidate["cpu_only_required"] is True
-    assert candidate["status"] == "pinned_candidate_not_live_qualified"
+    assert candidate["status"] in {
+        "pinned_candidate_not_live_qualified",
+        "controlled_selected_not_production_accepted",
+    }
     for field, value in (
         ("sha256", "0" * 64),
         ("source_revision", "main"),

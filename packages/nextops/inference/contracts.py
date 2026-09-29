@@ -12,7 +12,7 @@ from pydantic import AwareDatetime, Field, model_validator
 from nextops.contracts.models import FrozenContract
 
 MODEL_ID = "nextops-qwen3-8b-q4-k-m"
-ModelId = Literal["nextops-qwen3-8b-q4-k-m", "nextops-qwen3-14b-q4-k-m"]
+ModelId = Literal["nextops-qwen3-8b-q4-k-m", "nextops-qwen3-14b-q4-k-m", "nextops-qwen3-32b-q4-k-m"]
 GenerationPurpose = Literal["general", "evidence_synthesis"]
 
 

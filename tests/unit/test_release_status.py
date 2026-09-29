@@ -46,6 +46,46 @@ def test_release_status_manifest_is_valid_and_matches_ai_artifacts() -> None:
     assert "PASS:" in result.stdout
 
 
+def test_selected_model_identity_checks_all_fields_and_rejects_unqualified_selection() -> None:
+    module = _status_module()
+    baseline = yaml.safe_load((ROOT / "deploy/inference/qwen3-8b-q4-k-m.yaml").read_text("utf-8"))[
+        "model"
+    ]
+    larger = json.loads(
+        (ROOT / "deploy/inference/qwen3-14b-q4-k-m.candidate.json").read_text("utf-8")
+    )
+    larger_32b = json.loads(
+        (ROOT / "deploy/inference/qwen3-32b-q4-k-m.candidate.json").read_text("utf-8")
+    )
+    for artifact in (
+        baseline,
+        {**larger, "quantization": "Q4_K_M"},
+        {**larger_32b, "quantization": "Q4_K_M"},
+    ):
+        reference = larger_32b if artifact["model_id"] == larger_32b["model_id"] else larger
+        model = {
+            "identifier": artifact["model_id"],
+            **{
+                key: artifact[key]
+                for key in ("source_revision", "quantization", "size_bytes", "sha256")
+            },
+        }
+        reviewed = {**reference, "status": "controlled_selected_not_production_accepted"}
+        assert module.model_identity_errors(model, baseline, reviewed) == []
+        for field, wrong in (
+            ("source_revision", "0" * 40),
+            ("quantization", "Q8_0"),
+            ("size_bytes", 1),
+            ("sha256", "0" * 64),
+            ("identifier", "unreviewed-model"),
+        ):
+            assert module.model_identity_errors({**model, field: wrong}, baseline, reviewed)
+        if artifact["model_id"] != baseline["model_id"]:
+            assert module.model_identity_errors(
+                model, baseline, {**reference, "status": "pinned_candidate_not_live_qualified"}
+            )
+
+
 def test_current_app_qualification_is_bound_to_serving_release() -> None:
     module = _status_module()
     status = _manifest()

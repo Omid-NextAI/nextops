@@ -1,6 +1,22 @@
 # Next task / کار بعدی
 
-Active follow-up, 2026-09-29 — Keep the corrected `c4351fd` app/API and existing 8B runtime/model;
+Active larger-model step, 2026-09-29 — Complete verified provisioning/import of pinned 32B, then
+compare the same corrected bilingual prompts and budgets on the existing CPU guest. Reject wrong
+facts/arithmetic, incomplete answers, lost evidence qualifiers and unacceptable latency. 14B failed
+this matched review and must not be selected. Keep serving c4351fd/8B until a candidate passes;
+32B also requires exact identity support through the app/API, guarded selection, fresh browser/API
+checks, cold restart and exact model rollback. Do not increase VMs, replace runtime, loosen policy
+or mark held-out, WAN, reboot, recovery or production gates passed from development samples.
+
+گام فعالِ مدل بزرگ‌تر، ۷ مهر ۱۴۰۵ — آماده‌سازی و ورودِ تأییدشدهٔ 32B تثبیت‌شده تکمیل شود؛ سپس
+همان دستورهای اصلاح‌شدهٔ دوزبانه و سقف‌ها روی مهمان CPU موجود مقایسه شوند. واقعیت یا محاسبهٔ
+نادرست، پاسخ ناتمام، حذف قید شاهد و تأخیر نامناسب رد شوند. 14B این بازبینی همسان را نگذرانده
+و نباید انتخاب شود. تا موفقیت نامزد، c4351fd/8B مستقر حفظ شود؛ 32B به شناسهٔ درست در کل مسیر
+برنامه/API، انتخابِ محافظت‌شده، پرسش تازهٔ مرورگر/API، شروع سرد و بازگشتِ دقیق مدل نیاز دارد.
+ماشین یا محیط اجرا تغییر نکند؛ سیاست تضعیف نشود و آزمون توسعه، معیار کامل، WAN، reboot،
+بازیابی یا پذیرش تولید شمرده نشود.
+
+Earlier follow-up, 2026-09-29 — Keep the corrected `c4351fd` app/API and existing 8B runtime/model;
 do not redeploy the failed `089e3ad` candidate or recreate the owner form. Expand independent,
 held-out English/Persian relevance and evidence-preservation review beyond the twelve synthetic
 API cases. Evaluate the imported 14B with the same corrected application prompts/budgets before
