@@ -1,5 +1,28 @@
 # Testing, model evaluation and release evidence
 
+## Controlled conversational workspace — 2026-09-29
+
+Serving app/API b346c3effdba4c53674f3f37f705b21a12943a86, wheel SHA-256
+8390f84705d76ddf40d35913b3123073921554f1e71af86df96ded2e425fa2e1, code digest
+c427233fb1e835470717ea78362709cdbbb36440f4de14423c2cc1874f1eb414 passed fresh offline
+Ubuntu installation/native imports and PR43's five CI jobs. Eight fresh Edge/API cases passed
+DNS/SSH follow-ups, firewall advice/current-state redirect, live CPU and Persian filesystem focus;
+four final cases passed service/follow-up, Persian VPN and fresh CPU. Each completed with positive
+tokens, `stop`, matching code/model, verified TLS, fresh login/logout, local browser requests,
+normal RTL/LTR, mobile and exact copied content after platform newline normalization. Three new
+bounded `READ ONLY` audit/hash checks matched persisted response, actor/scope/correlation and
+canonical evidence. Exact source rollback to 95c6e50, retaining 35B, passed fresh EN/FA generation
+at 27.6/28.2s before re-promotion. Only own guards were stopped after final checks; units healthy,
+model selector hash unchanged, queue empty. Native model/runtime/VM/budgets/credentials unchanged.
+
+Twelve live request samples span 19.7–75.3s, not a load percentile. Bounded relevance is useful and
+general answers do not invent device access, but full technical correctness remains partial:
+cause prioritization, platform log availability, firewall ICMP behavior and command details need
+independent vendor/platform review. Preserve rejected DNS, length and harness reports. No training,
+new connector, universal correctness, server-WAN/VM cold-start or production acceptance is claimed.
+A small source-only RTL follow-up isolates plain timestamps/IPs/percentages for display without
+changing answer/copied/evidence bytes; fixtures and exact deployed identity must qualify separately.
+
 ## Bounded completion follow-up — 2026-09-29
 
 PR42 passed five CI jobs and exact fresh offline Ubuntu installation. A fresh first DNS sample

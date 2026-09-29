@@ -268,6 +268,19 @@ function rememberGeneralTurn(question, assistant) {
   byId("contextNotice").textContent = translations[state.language].contextHelp;
 }
 
+function appendTechnicalText(node, text) {
+  // Display isolation only, never validation or rewriting of untrusted values.
+  const tokens = text.split(/(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})|\b(?:\d{1,3}\.){3}\d{1,3}(?:\/\d{1,2})?\b|\b\d+(?:\.\d+)?%)/g);
+  tokens.forEach((token, index) => {
+    if (index % 2) {
+      const value = document.createElement("bdi");
+      value.dir = "ltr";
+      value.textContent = token;
+      node.append(value);
+    } else node.append(document.createTextNode(token));
+  });
+}
+
 function renderAnswer(text, locale) {
   const answer = byId("answer");
   answer.replaceChildren();
@@ -311,7 +324,7 @@ function renderAnswer(text, locale) {
           code.dir = "ltr";
           code.textContent = fragment.slice(1, -1);
           paragraph.append(code);
-        } else paragraph.append(document.createTextNode(fragment));
+        } else appendTechnicalText(paragraph, fragment);
       });
       answer.append(paragraph);
     }

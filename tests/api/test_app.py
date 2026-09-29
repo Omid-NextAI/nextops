@@ -906,6 +906,62 @@ def test_general_mode_replaces_a_false_execution_claim() -> None:
     assert "successfully restarted" not in response.json()["answer"]
 
 
+@pytest.mark.parametrize(
+    ("locale", "answer"),
+    [
+        ("en", "A successful ping means the network is healthy."),
+        ("fa", "موفقیت یعنی شبکه سالم است."),
+    ],
+)
+def test_general_mode_rejects_single_check_blanket_health(locale: str, answer: str) -> None:
+    client = TestClient(create_app(FakeService(), FakeInferenceGateway(answer)))
+    response = client.post(
+        "/api/v1/assistant/generate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={"locale": locale, "question": "Explain safe network diagnostics."},
+    )
+    assert response.status_code == 200
+    body = response.json()
+    assert body["integrity_status"] == "deterministic_fallback"
+    assert body["evidence_mode"] == "model_only" and not body["live_monitoring_data"]
+    assert body["answer"] != answer
+    assert body["limitations"] == ["no_live_evidence", "model_output_may_be_incorrect"]
+
+
+@pytest.mark.parametrize(
+    ("locale", "answer"),
+    [
+        ("en", "A successful ping never means the network is healthy."),
+        ("fa", "موفقیت یعنی شبکه لزوماً سالم نیست."),
+    ],
+)
+def test_general_mode_preserves_negated_health_warning(locale: str, answer: str) -> None:
+    client = TestClient(create_app(FakeService(), FakeInferenceGateway(answer)))
+    response = client.post(
+        "/api/v1/assistant/generate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={"locale": locale, "question": "Explain safe network diagnostics."},
+    )
+    assert response.status_code == 200
+    assert response.json()["integrity_status"] == "model_unverified"
+    assert response.json()["answer"] == answer
+
+
+def test_single_check_guard_does_not_bypass_live_state_redirect() -> None:
+    client = TestClient(
+        create_app(
+            FakeService(), FakeInferenceGateway("A successful ping means the network is healthy.")
+        )
+    )
+    response = client.post(
+        "/api/v1/assistant/generate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={"locale": "en", "question": "What is the current state of my network?"},
+    )
+    assert response.status_code == 200
+    assert response.json()["integrity_status"] == "scope_redirect"
+
+
 def test_general_mode_replaces_a_long_prompt_echo() -> None:
     question = "Explain carefully why a bounded read-only check should precede any system change."
     inference = FakeInferenceGateway(question)

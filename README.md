@@ -7,6 +7,13 @@
 Owner update (2026-09-26): the owner tested an ESXi VM snapshot restore. Its dated result has
 not been reviewed here; independent database backup and restore gates remain unpassed.
 
+Current controlled workspace (2026-09-29): app/API b346c3e serves the unchanged CPU-only 35B model.
+The conversational NOC/SOC UI preserves OCS branding; twelve live browser/API requests, three
+audit/hash checks and exact source rollback passed. Advice remains unverified and full technical
+quality is partial. The next source repair isolates RTL timestamps and rejects a named single-check
+blanket-health error. [Release status](docs/status/current-release.yaml) is authoritative; the
+95c6e50 qualification summary below is historical, not the current serving identity.
+
 Earlier answer-quality checkpoint (2026-09-29): the guarded clarity repair passed twelve fresh authenticated
 English/Persian API cases, including the four file-focus and host-scope failures observed on
 2026-09-26. This is a bounded regression pass, not a complete held-out semantic qualification.

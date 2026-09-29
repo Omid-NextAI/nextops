@@ -27,6 +27,8 @@ readability without turning prior prose into current operational evidence:
   detail, request redacted diagnostics, never invent execution/compromise/device access/advisories.
   A failed check must not uniquely establish a cause; successful checks establish only their own
   scope. Keep alternatives open and bound diagnostic commands where appropriate.
+  A bounded deterministic guard rejects named affirmative single-check blanket health/security
+  conclusions. It does not certify all advice or treat unrecognized prose as verified.
 - Preserve deterministic guards, typed evidence, scope, audit, stale/partial warnings, unknowns,
   authenticated routes, 384 output tokens, 120 seconds and one active/two queued requests.
 
@@ -84,6 +86,8 @@ application/provider boundaries, not a new orchestration or memory architecture.
 مجوز تغییر نیست. درستی تمام پاسخ‌ها یا هم‌ارزی با ChatGPT تضمین نمی‌شود.
 ناموفق بودن یک بررسی، به‌تنهایی علت قطعی را ثابت نمی‌کند؛ موفق بودن آن نیز فقط در دامنهٔ همان
 بررسی معتبر است. علت‌های جایگزین و مهلت مناسبِ فرمان تشخیصی باید روشن بمانند.
+کنترل قطعیِ محدود، نتیجه‌گیری مثبتِ سلامت یا امنیت کلی از یک بررسی را رد می‌کند؛ همهٔ مشاوره‌ها
+را تأیید نمی‌کند و متنِ شناسایی‌نشده را راستی‌آزمایی‌شده نمی‌نامد.
 
 رنگ‌ها و نشان، فارسی RTL و انگلیسی LTR، جداسازی کد، کنترل قطعیِ مجوز، منشأ شاهد، ممیزی، قیدهای
 قدیمی/ناقص و سقف ۳۸۴ توکن و ۱۲۰ ثانیه ثابت‌اند. متن مدل با گرهٔ متن نمایش داده می‌شود، نه HTML

@@ -6,6 +6,13 @@
 
 ## Conversational NOC/SOC source candidate — 2026-09-29
 
+Now serving in controlled testing as b346c3e/35B: eight first/four final fresh browser/API cases,
+three audit/hash matches and exact source rollback passed. The previous candidate discussion below
+records the original source stage. A small RTL display follow-up now isolates plain UTC timestamps,
+IP/CIDR and percentages with text-only `bdi`, preserving original answer/copy bytes. Its fresh
+package/live checks remain separate. Logo/palette and all model, evidence and resource boundaries
+remain unchanged. Technical model quality is still partial, not ChatGPT-equivalence or production.
+
 The [bounded specification](../requirements/NOC_SOC_WORKSPACE_SPEC.md) adds a conversation thread,
 operator starters for servers/services, DNS/network latency, firewalls/VPN and defensive security,
 safe text/code presentation, answer/code copying and a compact composer. The locally embedded OCS
