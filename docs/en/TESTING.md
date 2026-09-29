@@ -16,6 +16,13 @@ WAL/PITR and production acceptance remain open. Source: master specification sec
 
 ### Clarity candidate repository checks — 2026-09-29
 
+The first live promotion of `089e3ad` failed the fresh authenticated six-case capture because the
+inference HTTP payload schema lacked `purpose`. Both roles were rolled back in reverse dependency
+order; six old-release responses returned HTTP 200 and logout 204, while the four known monitoring/
+file-focus expectations still failed. This proves the bounded rollback worked, not that the old
+release's semantic gate passed. The repair adds five HTTP-boundary regression cases, including
+general/evidence purpose, English/Persian, legacy default, invalid purpose and missing service auth.
+
 On the Windows desktop, `uv run --offline pytest -m "not integration and not browser" -q`
 passed 252 tests with two POSIX-only skips. Strict types covered 92 files; lint and formatting
 passed. The five existing Playwright browser fixture tests passed with provisioned local browsers;

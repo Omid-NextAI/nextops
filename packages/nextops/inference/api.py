@@ -15,6 +15,7 @@ from nextops.contracts.errors import ErrorCode, ErrorDetail
 from nextops.contracts.models import FrozenContract
 from nextops.inference.configuration import LlamaCppSettings
 from nextops.inference.contracts import (
+    GenerationPurpose,
     InferenceReadiness,
     InferenceRequest,
     InferenceResult,
@@ -49,6 +50,7 @@ class GenerationPayload(FrozenContract):
     request_id: UUID
     locale: Literal["en", "fa"]
     prompt: str = Field(min_length=1, max_length=12_000)
+    purpose: GenerationPurpose = "evidence_synthesis"
     max_output_tokens: int = Field(default=512, ge=1, le=1_024)
     temperature: float = Field(default=0.7, ge=0.0, le=2.0)
 
@@ -142,6 +144,7 @@ def create_inference_app(service: InferenceService, service_auth_secret: str) ->
             correlation_id=_correlation_id(request),
             locale=payload.locale,
             prompt=payload.prompt,
+            purpose=payload.purpose,
             max_output_tokens=payload.max_output_tokens,
             temperature=payload.temperature,
         )

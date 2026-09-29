@@ -6,6 +6,21 @@ category error: presenting unsupported model text as live operational fact.
 
 ## Clarity repair — 2026-09-29
 
+The first guarded promotion of source `089e3ad` exposed an HTTP contract gap: the gateway sent
+`purpose`, but the inference endpoint rejected it. Six requests failed with dependency errors,
+so the operator restored the previous application and then the previous inference API. Fresh
+login, generation and logout worked after rollback. The corrected endpoint explicitly accepts
+only the two trusted synthesis purposes and defaults legacy calls to evidence synthesis. New
+tests traverse gateway serialization, authenticated HTTP validation, scheduler and provider
+prompt selection in both languages; only the model completion is synthetic. This incident is
+retained as a failed promotion, not a live acceptance.
+
+The 14B artifact was size/hash-verified and imported into a protected candidate directory without
+changing the serving model. Eight serial 192-token comparisons found a truncated Persian RAM
+answer and source/wording weaknesses. A four-case follow-up with the actual general prompt and
+384-token budget completed in about 13–41 seconds. These are bounded comparisons, not a complete
+bilingual or offline qualification; the 8B model remains selected.
+
 The development candidate separates ordinary Q&A from the evidence-only synthesizer prompt,
 preserves all 4,000 accepted question characters instead of clipping at 800/1,200, and raises the
 UI/application answer ceiling from 128 to 384 tokens without expanding concurrency. A typed
