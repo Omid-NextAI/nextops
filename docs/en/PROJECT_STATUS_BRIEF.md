@@ -2,11 +2,13 @@
 
 [فارسی](../fa/PROJECT_STATUS_BRIEF.md) · [Documentation index](INDEX.md) · [Project state](../PROJECT_STATE.md) · [Next task](../NEXT_TASK.md)
 
-Updated: 2026-09-26
+Updated: 2026-09-29
 
-Current quality correction: a six-case live semantic probe found two file-only misroutes and two
-multi-host scope mismatches on the serving endpoint. The expanded answer-quality gate is failed;
-a locally tested source repair is not deployed. Earlier bounded browser passes remain historical.
+Current quality correction: `c4351fd` is live in the app and AI API. Twelve fresh bilingual API
+cases repaired the named file-only and multi-host scope regressions and checked direct general
+answers. Seven browser cases were covered across two fresh contexts. Full held-out quality is
+partial, not production accepted. The blocking owner questionnaire has been retired; 14B was
+imported and compared but remains unselected after quality findings.
 
 Owner clarification: an ESXi VM snapshot restore was tested by the owner; its dated result was
 not reviewed here. This does not qualify independent PostgreSQL backup, WAL/PITR or isolated
@@ -32,15 +34,15 @@ distinct keys. Phase 2 source CI, live bilingual API investigations, durable evi
 service restart, rollback, guarded WAN denial, authenticated live browser, serial VM reboot and
 dependency loss/recovery pass. Certificate-expiry detection and the local Zabbix problem/recovery
 path also pass on both TLS frontends. Independent off-datastore backup, WAL/PITR, certificate
-rotation/operator notification and disaster-recovery sign-off remain open. The owner resumed
-recovery scope, but no independent destination or isolated restore lab exists; no recovery
-acceptance is implied. No SMTP or alternate named-recipient delivery route is configured.
+rotation/operator notification and disaster-recovery sign-off remain open. The owner subsequently
+deferred independent recovery; no independent destination or isolated restore lab exists and no
+recovery acceptance is implied. No SMTP or alternate named-recipient delivery route is configured.
 
-The current application release is `nextops-0.1.0-01755d1`; AI API and connector remain on
-`nextops-0.1.0-cdde129`. The app-only update focuses file/filesystem answers and simplifies the
-workspace. Fresh API and browser checks passed; a full held-out semantic corpus, exact-release
-rollback drill, server-side WAN isolation and VM cold start have not run on this app revision. The
-earlier release rejects credential-bearing HTTP redirects;
+The current application and AI API are `nextops-0.1.0-c4351fd`; connector remains on
+`nextops-0.1.0-cdde129`. The clarity update preserves full questions, separates general and evidence
+instructions, and bounds answers at 384 tokens. Selected CPU 8B remains unchanged. Bounded live
+checks, app/API rollback and re-promotion passed; full held-out quality is partial and exact-release
+server WAN isolation and VM cold start have not run. The current release retains the rejection of credential-bearing HTTP redirects;
 all four guests require key-only, non-root SSH and the
 AI host firewall is active. Zabbix Agent 2 is aligned at `7.0.31` on all four guests. The owner confirmed that recovery/restore resources, an approved
 project license, a named-recipient notification channel, replacement CA certificates and named

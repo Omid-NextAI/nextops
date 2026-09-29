@@ -1,10 +1,19 @@
 # AI answer integrity
 
-**Status: controlled user testing, with a new live answer-quality failure.** NextOps cannot
+**Status: controlled user testing; named regressions repaired, full semantic acceptance partial.** NextOps cannot
 guarantee that a generative model will never be wrong. It instead prevents the most dangerous
 category error: presenting unsupported model text as live operational fact.
 
 ## Clarity repair — 2026-09-29
+
+The corrected `c4351fd` application/inference API is now live. Twelve fresh bilingual API cases
+passed the named greeting, knowledge, unknown-current-state, file-focus and host-scope expectations
+with matching code digests. Browser review covered five general cases and two filesystem cases
+in separate fresh contexts. App/API rollback and re-promotion worked. This fixes the observed
+regressions, not arbitrary correctness. Full held-out quality, current-release WAN/VM cold start
+and larger-model qualification remain open; the selected model is still 8B.
+
+The dated records below preserve what was observed before this correction.
 
 The first guarded promotion of source `089e3ad` exposed an HTTP contract gap: the gateway sent
 `purpose`, but the inference endpoint rejected it. Six requests failed with dependency errors,

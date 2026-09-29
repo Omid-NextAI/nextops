@@ -1,5 +1,28 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-09-29 — Bounded clarity promotion / استقرار محدودِ وضوح پاسخ
+
+### English
+
+Retired the private owner questionnaire and its all-at-once prerequisite procedure. General and
+evidence synthesis now have distinct application-owned instructions; full accepted questions are
+retained and UI/app responses are bounded at 384 tokens. The first candidate exposed a missing
+inference HTTP field and was rolled back. Corrected app/API `c4351fd` passed twelve fresh bilingual
+API cases, seven browser cases across two contexts, and exact app/API rollback and re-promotion.
+The official 14B artifact was imported and compared but not selected after quality findings.
+CPU-only 8B/runtime, connector, databases, authorization/audit and bounded concurrency are preserved.
+Held-out semantics remain partial; exact-release WAN/VM cold start and production acceptance are open.
+
+### فارسی
+
+فرم خصوصیِ مالک و روندِ پیش‌شرطِ تکمیل یک‌جای آن کنار گذاشته شدند. دستور عمومی و شاهد در اختیار
+برنامه جداست، پرسش کامل حفظ می‌شود و سقف پاسخ رابط و برنامه ۳۸۴ توکن است. نامزد نخست، نبود
+فیلد HTTP استنتاج را آشکار کرد و برگشت. برنامه/API اصلاح‌شدهٔ `c4351fd` دوازده مورد API، هفت
+مورد مرورگر در دو محیط و بازگشت دقیق و استقرار مجدد را گذراندند. فایل رسمیِ 14B وارد و مقایسه
+شد، اما به‌دلیل یافته‌های کیفیت انتخاب نشد. CPU 8B و محیط اجرا، اتصال‌دهنده، پایگاه‌ها، مجوز و
+ممیزی و هم‌زمانی محدود حفظ شدند. معیار معناییِ کامل ناقص است؛ قطع WAN و شروع سردِ همین انتشار
+و پذیرش تولید همچنان بازند.
+
 ## Unreleased — controlled engineering foundation / بنیان مهندسی کنترل‌شده
 
 ### English

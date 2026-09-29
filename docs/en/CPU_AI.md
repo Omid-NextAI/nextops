@@ -49,8 +49,12 @@ The owner requested a larger local model. The official [Qwen3-14B-GGUF](https://
 Q4_K_M artifact is pinned in [candidate metadata](../../deploy/inference/qwen3-14b-q4-k-m.candidate.json):
 revision `530227a7d994db8eca5ab5ced2fb692b614357fd`, 9,001,752,960 bytes, SHA-256
 `500a8806e85ee9c83f3ae08420295592451379b4f8cf2d0f41c15dffeb6b81f0`, upstream Apache-2.0.
-It uses the existing pinned CPU runtime; compatibility must still be tested. Source metadata is
-not a verified import or a quality result. The serving 8B artifact and rollback are preserved.
+It ran with the existing pinned CPU runtime in a temporary loopback-only comparison. Desktop and
+guest size/hash checks and protected artifact import passed. Eight serial 192-token cases found
+a truncated Persian RAM answer and wording/source omissions; a four-case 384-token follow-up
+using the actual general prompt completed in about 13–41 seconds. The comparison used 16 threads,
+one slot and a 32 GiB memory ceiling; it was not a sustained capacity or NUMA benchmark. Quality
+remains failed and resource comparison partial. The serving 8B artifact and rollback are preserved.
 Explicit `NEXTOPS_MODEL_ID` selects only the reviewed 8B/14B aliases; arbitrary names/URLs fail.
 Runtime alias, local file and configuration must match, and missing files must not trigger a download.
 

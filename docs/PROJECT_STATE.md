@@ -1,5 +1,26 @@
 # Project state / وضعیت پروژه
 
+Live clarity checkpoint, 2026-09-29 — Application and inference API now serve
+`nextops-0.1.0-c4351fd` after PR #32 and all five hosted CI jobs passed. Twelve fresh bilingual API
+cases passed with matching code digest and logout; the four known focus/scope failures are fixed.
+Five general browser cases and a separate two-case filesystem context passed their respective
+checks after correcting harness assumptions. Exact app/API rollback restored fresh generation
+and the same candidate was re-promoted. Held-out semantics remain partial; exact-release server
+WAN isolation and VM cold start have not run. Connector, database and pinned 8B runtime/model
+remain unchanged. The 14B model is imported and compared, not selected or production-qualified.
+The retired private questionnaire and its prerequisite procedure remain removed.
+
+گام زندهٔ وضوح، ۷ مهر ۱۴۰۵ — برنامه و API استنتاج پس از PR شمارهٔ ۳۲ و موفقیت هر پنج کار CI،
+اکنون `nextops-0.1.0-c4351fd` را ارائه می‌کنند. دوازده پرسش تازهٔ دوزبانه با هش درست و خروج
+موفق، چهار شکستِ قبلیِ تمرکز و دامنه را رفع کردند. پنج مورد عمومیِ مرورگر و دو مورد فایل‌سیستم
+در محیط تازهٔ جدا، پس از اصلاح فرض‌های ابزار آزمون، کنترل‌های مربوط را گذراندند. بازگشتِ دقیق
+برنامه/API تولید تازه را برگرداند و همان نامزد دوباره مستقر شد. معیار معناییِ کنارگذاشته‌شده
+ناقص است؛ قطع WAN سمت سرور و شروع سرد ماشینِ همین انتشار اجرا نشده‌اند. اتصال‌دهنده، پایگاه،
+محیط اجرا و مدل تثبیت‌شدهٔ 8B تغییر نکرده‌اند. مدل 14B وارد و مقایسه شده، نه منتخب یا پذیرفتهٔ
+تولید. فرم خصوصیِ کنارگذاشته‌شده و روندِ پیش‌شرط آن حذف‌شده باقی می‌مانند.
+
+Earlier correction checkpoint / گام قبلیِ اصلاح:
+
 Clarity HTTP correction, 2026-09-29 — The first `089e3ad` promotion failed fresh generation:
 the inference HTTP schema rejected the gateway's new purpose field. The application and then
 inference API were rolled back successfully; all six old-release requests returned 200, while

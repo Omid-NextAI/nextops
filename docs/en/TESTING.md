@@ -14,6 +14,52 @@ WAL/PITR and production acceptance remain open. Source: master specification sec
 
 ## Exact application-release qualification — manifest contract
 
+### Corrected clarity release — 2026-09-29
+
+PR #32 merged after all five jobs in run `36529404103` passed: quality/dependency audit, PostgreSQL
+16, PostgreSQL 17, browser fixtures and secret scan. Local results were 257 unit/API passes and two
+POSIX-only skips, five browser-fixture passes, strict types/lint/format and documentation/artifact
+validation passes. The unchanged hash-locked Linux dependencies installed without an index in a
+fresh Ubuntu 24.04 WSL2 environment; native imports, package checks and code digest matched.
+
+Under private change `ai-clarity-c4351fd-20260929`, inference API and application were promoted in
+that order to protected `nextops-0.1.0-c4351fd` paths. The unsigned wheel SHA-256 is
+`bbbd3498b18b9290b831f0a335b59b0d0b1f1b979044ed88724fe5c262537cc0`; code digest is
+`1ae66f0d53cd50a3709643811d84a382fc2e9d97f8e6df5091f397b6b9e75bb0`. Dependencies, database
+schema, connector, pinned runtime and selected 8B model did not change. Fresh environments used
+the offline wheelhouse, correct final-path launchers and service-user imports, with timed rollback.
+
+Twelve fresh authenticated English/Persian API cases returned 200, matched the code digest and
+passed their configured expectations; both sessions logged out with 204. The original six-case
+regression took approximately 6–60 seconds per answer and corrected all four known file-focus/
+multi-host-scope failures. Six further general cases took about 2.5–19 seconds: RAM/storage and
+HTTP 404 answered the question, while current CPU questions returned an explicit scope limitation.
+These synthetic cases were reviewed but are not the owner's exact mismatch or a complete held-out
+corpus. One underlying Persian incident completion reached 384 tokens; the displayed filesystem
+answer was explicitly deterministic and derived from typed evidence, not that truncated text.
+
+A fresh Edge context passed five greeting/general cases. Its first incident continuation stopped
+on an ambiguous test selector, not an application error. A corrected separate fresh context then
+passed both English/Persian filesystem cases, rendered direction, closed full-evidence disclosure,
+hidden unrelated CPU metrics, durable evidence/audit identifiers, logout and private-host-only
+page requests. This is seven covered cases across two contexts, not one uninterrupted full-suite
+pass. Earlier harness failures incorrectly required explicit direction instead of rendered `auto`
+and read hidden metric text. A Node request-context CA mismatch during initial failure cleanup
+exposed an ephemeral test bearer in diagnostic output; that exact session was immediately revoked
+over verified local-CA TLS and the private error record redacted. Subsequent aborted sessions were
+revoked; no password/private key was published, and no TLS bypass was introduced.
+
+An exact-release drill restored the previous app and then inference API, checked their links,
+and passed fresh login/generation 200 and logout 204. A probe sent before application readiness
+received a transient 502; a later health/readiness check and fresh probe passed. The same verified
+candidate was re-promoted inference-first under fresh guards. This is bounded application/API
+rollback evidence, not runtime/model rollback, WAN isolation, VM reboot or zero-downtime acceptance.
+Three fresh post-repromotion cases passed their expectations and digest checks with logout 204.
+Final protected links/services were verified and both timers disarmed. The current held-out
+semantic gate is `partial`; the prior failures remain recorded below.
+
+Earlier source and deployment checkpoints follow; their statements refer to the dated revision.
+
 ### Clarity candidate repository checks — 2026-09-29
 
 The first live promotion of `089e3ad` failed the fresh authenticated six-case capture because the

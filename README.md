@@ -7,12 +7,12 @@
 Owner update (2026-09-26): the owner tested an ESXi VM snapshot restore. Its dated result has
 not been reviewed here; independent database backup and restore gates remain unpassed.
 
-Current answer-quality finding (2026-09-26): a fresh six-question live probe found two file-only
-requests misrouted as overviews and two multi-host availability requests answered only with
-generic counts. The current serving endpoint fails the expanded semantic gate. A source fix is
-tested locally but not deployed; earlier bounded pass claims below apply only to their named cases.
+Answer-quality update (2026-09-29): the guarded clarity repair passed twelve fresh authenticated
+English/Persian API cases, including the four file-focus and host-scope failures observed on
+2026-09-26. This is a bounded regression pass, not a complete held-out semantic qualification.
+The 14B CPU model was imported and compared but remains unselected after quality findings.
 
-> **Status: controlled bilingual user testing is live across four Ubuntu 24.04 guests; production is not accepted.** Application release `nextops-0.1.0-01755d1` is live with focused file/filesystem answers and the simplified panel; AI API and connector remain at `nextops-0.1.0-cdde129`. Fresh API and browser checks passed for bounded English/Persian examples, evidence and audit linkage, RTL/mobile layout and browser WAN denial; they do not establish general answer relevance. Earlier service restart, rollback, serial VM reboot and dependency-recovery evidence remains historical; an exact-release rollback drill and full held-out semantic corpus have not run. Host-wide public IPv4 is currently reachable, while app/AI/model units are loopback-restricted and the connector process is limited to the approved LAN. The owner reports daily ESXi snapshots and has deferred independent backup/PITR and isolated restore from the current local delivery; these remain unverified risks, not passed gates. Certificate rotation and operator notification, project licensing, release-integrity approval and final human sign-off remain open. See the [release status](docs/status/current-release.yaml), [current project state](docs/PROJECT_STATE.md) and [production blocker runbook](docs/en/PRODUCTION_BLOCKERS_RUNBOOK.md).
+> **Status: controlled bilingual user testing is live; production is not accepted.** Application and AI API are `nextops-0.1.0-c4351fd`; connector remains `nextops-0.1.0-cdde129`. General/evidence instructions are separated, full accepted questions are retained, and answers have a bounded 384-token ceiling. The serving model remains CPU-only 8B. Exact-release evidence is recorded in the [release status](docs/status/current-release.yaml), [testing guide](docs/en/TESTING.md) and [project state](docs/PROJECT_STATE.md). Earlier WAN/reboot evidence does not transfer automatically. The retired owner questionnaire no longer blocks development. Recovery remains owner-deferred and unqualified; certificate, notification, licensing, release-integrity and final production gates remain open. Management-shell public egress is not permanently denied, despite restricted service boundaries. See the [production runbook](docs/en/PRODUCTION_BLOCKERS_RUNBOOK.md).
 
 ## What NextOps is intended to do
 
