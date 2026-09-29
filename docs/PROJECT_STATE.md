@@ -1,5 +1,21 @@
 # Project state / وضعیت پروژه
 
+Source follow-up, 2026-09-29 — Qwen3.5 compatibility PR37 passed all five CI jobs and merged;
+its exact wheel passed fresh Ubuntu offline-index installation and identity/mode/assets probes.
+No serving selection followed. The source-only focused prompt now requests at most three short
+sentences without enumerating every mount/field; it retains every focused observation, source/time,
+partial marker and full authorized response/audit. Eight EN/FA API fixtures passed. Preserve
+384-token/120-second limits, deterministic focus and all prior raw/browser failures; actual model
+completion must be measured. 8d1f1d2/8B remains serving while Qwen3.5 provisioning continues.
+
+پیگیری کد، ۷ مهر ۱۴۰۵ — پشتیبانی Qwen3.5 در PR37، هر پنج کنترل CI را گذراند و ادغام شد؛
+wheel دقیق آن، نصب تازهٔ Ubuntu بدون فهرست اینترنتی و آزمون شناسه، حالت و فایل‌های رابط را
+گذراند. مدل مستقر تغییر نکرد. دستور متمرکز، فقط در کد، حداکثر سه جملهٔ کوتاه بدون تکرار همهٔ
+نقاط اتصال و فیلدها می‌خواهد؛ همهٔ مشاهده‌های مرتبط، منبع و زمان و قید ناقص‌بودن و پاسخ کاملِ
+مجاز و ممیزی حفظ‌اند. هشت آزمون API دوزبانه موفق‌اند. سقف ۳۸۴ توکن و ۱۲۰ ثانیه، کنترل قطعی و
+شکست‌های قبلیِ خام و مرورگر حفظ شوند؛ کامل‌شدن مدل واقعی باید سنجیده شود. تا آماده‌شدن
+Qwen3.5، نسخهٔ 8d1f1d2 با 8B مستقر می‌ماند.
+
 Current checkpoint, 2026-09-29 — The corrected 8d1f1d2/30B-A3B trial fixed answer direction but
 rejected larger-model selection: incorrect Persian technical terminology and repeated raw
 filesystem generation at the 384-token ceiling. Twelve API requests completed; eleven strict

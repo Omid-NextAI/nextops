@@ -1,5 +1,19 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Focused response length — 2026-09-29 / اختصار پاسخ متمرکز — ۷ مهر ۱۴۰۵
+
+The source-only file/filesystem prompt requests at most three short sentences instead of
+enumerating every mount/field. All focused observations, source/time/partial markers, complete
+authorized response/audit, deterministic focus, untrusted-text boundary and existing output limit
+are unchanged. Eight EN/FA/API fixtures cover both focused intents, eight mounts and lower/upper
+budgets. Fixtures do not prove actual model completion or erase prior raw/browser failures.
+
+دستورِ پاسخ به پرسش فایل و فایل‌سیستم، فقط در کد، حداکثر سه جملهٔ کوتاه می‌خواهد و از تکرار
+همهٔ نقاط اتصال و فیلدها پرهیز می‌کند. مشاهده‌های متمرکز، منبع و زمان و قید ناقص‌بودن، پاسخ
+کاملِ مجاز و ممیزی، کنترل قطعیِ تمرکز، مرز متن نامعتبر و سقف خروجی تغییر نکرده‌اند. هشت آزمون
+API فارسی و انگلیسی، هر دو نوع پرسش، هشت نقطهٔ اتصال و سقف کمتر و بیشتر را پوشش می‌دهند.
+دادهٔ آزمایشی، کامل‌شدن مدل واقعی را ثابت نمی‌کند و شکست‌های قبلی خام و مرورگر را نمی‌پوشاند.
+
 ## Rejected larger trial and Qwen3.5 compatibility — 2026-09-29 / رد آزمون بزرگ‌تر و سازگاری Qwen3.5 — ۷ مهر ۱۴۰۵
 
 Corrected 30B-A3B trial fixed direction but rejected selection for Persian technical errors and

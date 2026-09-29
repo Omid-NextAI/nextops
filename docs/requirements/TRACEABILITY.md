@@ -1,5 +1,13 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Focused-prompt trace (sections 9, 19, 25; 2026-09-29): source-only concise output instruction,
+eight EN/FA/API fixtures, no removed focused evidence/provenance, no budget/audit/guard change.
+Actual raw completion and existing failed browser/semantic gates remain unaccepted.
+
+ردیابی دستور متمرکز (بخش‌های ۹، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): دستور خروجی کوتاه فقط در کد و هشت
+آزمون API دوزبانه؛ شاهد مرتبط یا منشأ حذف و سقف و ممیزی و کنترل‌ها تغییر نکرده‌اند. کامل‌شدن
+خامِ واقعی و معیارهای ناموفق قبلیِ مرورگر و معنایی هنوز پذیرفته نیستند.
+
 Current continuation trace (sections 9, 10, 19, 25; 2026-09-29): corrected 30B-A3B selection rejected
 for Persian technical errors and repeated raw completion failure. Exact rollback passed; source
 8d1f1d2/original 8B retains the independently verified direction fix. Twelve API literal/code checks

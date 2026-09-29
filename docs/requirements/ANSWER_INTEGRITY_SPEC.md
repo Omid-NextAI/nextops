@@ -48,6 +48,15 @@ an operation, and must preserve stale/partial qualifiers even when generated pro
 
 ## Requirements
 
+- Focused file/filesystem synthesis requests at most three short sentences without enumerating
+  every mount or numeric field. Keep every focused observation and provenance/partial field,
+  complete authorized response/audit and deterministic focus unchanged. This format instruction
+  does not authorize evidence omission, larger limits, raw-completion claims or new file access.
+
+خلاصه‌سازی متمرکز فایل و فایل‌سیستم حداکثر سه جملهٔ کوتاه می‌خواهد، بدون تکرار همهٔ نقاط اتصال
+یا فیلدهای عددی. هر مشاهدهٔ مرتبط، منشأ و قید ناقص‌بودن، پاسخ کاملِ مجاز و ممیزی و کنترل قطعی
+حفظ شوند. این دستورِ قالب، اجازهٔ حذف شاهد، افزایش سقف، ادعای کامل‌شدن خام یا دسترسی تازه نیست.
+
 - Render each assistant answer using its validated response locale: Persian RTL, English LTR,
   independent of interface language and the answer's first character. A Latin technical prefix
   does not make a Persian answer English; retain bidirectional isolation of identifiers.

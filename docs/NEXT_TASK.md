@@ -1,5 +1,15 @@
 # Next task / کار بعدی
 
+Source checkpoint, 2026-09-29 — Include the source-only concise focused-prompt change in exact
+offline packaging/CI before the guarded trial. Eight API fixtures passed without dropping any
+focused mount/source/time/partial field or changing output budgets, full evidence, audit or guards.
+Require actual fresh raw completion and direct bilingual review; preserve earlier failures.
+
+گام کد، ۷ مهر ۱۴۰۵ — پیش از آزمون محافظت‌شده، تغییرِ اختصار دستور متمرکز که هنوز فقط در کد
+است، در بستهٔ دقیق آفلاین و CI سنجیده شود. هشت آزمون API، بدون حذف نقطهٔ اتصال، منبع، زمان یا
+قید ناقص‌بودن و بدون تغییر سقف خروجی، شاهد کامل، ممیزی یا کنترل‌ها موفق‌اند. کامل‌شدن واقعیِ
+پاسخ تازه و بازبینی مستقیم دوزبانه لازم است؛ شکست‌های قبلی حفظ شوند.
+
 Current unfinished checkpoint, 2026-09-29 — Complete pinned Qwen3.5-35B-A3B Q4_K_M verification and
 protected import, then compare the same bilingual development questions and budgets on the existing
 CPU-only runtime. Keep serving 8d1f1d2/8B and exact rollback. 30B-A3B was rejected for Persian
