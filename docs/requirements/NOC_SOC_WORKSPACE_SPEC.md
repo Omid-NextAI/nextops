@@ -1,6 +1,9 @@
 # NOC/SOC conversational workspace / محیط گفت‌وگوی NOC و SOC
 
-Status: bounded development specification, 2026-09-29. The owner requests a clearer conversational
+Status: bounded implemented/controlled qualification, 2026-09-29; exact 862d311 app/API with unchanged
+35B, five CI jobs, fresh offline package, nine live browser/API cases, three audit/hash pairs and
+exact b346c3e source rollback passed. Full independent technical quality remains partial; no
+exact-release server-WAN/VM cold-start or production acceptance. The owner requests a clearer conversational
 frontend and broader technical guidance while keeping the existing OCS palette and logo. This is
 not authorization for new device connectors, infrastructure changes, training, external AI or
 unrestricted command execution. Current serving identity remains in
@@ -8,7 +11,7 @@ unrestricted command execution. Current serving identity remains in
 
 ## Problem and requirements
 
-The current screen replaces each answer and sends independent questions. Improve continuity and
+The previous screen replaced each answer and sent independent questions. Improve continuity and
 readability without turning prior prose into current operational evidence:
 
 - Preserve the exact locally embedded OCS mark and all existing brand/semantic color tokens.
@@ -66,6 +69,11 @@ No new ADR is needed: this is optional, nonpersistent, untrusted request context
 application/provider boundaries, not a new orchestration or memory architecture.
 
 ## فارسی
+
+وضعیت: پیاده‌سازی و پذیرش محدودِ کنترل‌شدهٔ برنامه/API نسخهٔ 862d311 با مدل ثابتِ 35B. پنج
+کنترل CI، بستهٔ تازهٔ آفلاین، نُه مورد زندهٔ مرورگر/API، سه تطبیق ممیزی و هش و بازگشت دقیق کد
+به b346c3e موفق‌اند. صحت فنیِ مستقلِ کامل ناقص است؛ پذیرش WAN سرور، شروع سرد VM همین انتشار
+یا تولید ادعا نمی‌شود.
 
 مالک خواسته است ظاهر و تجربهٔ گفت‌وگو بهتر شود و راهنمایی فنیِ شبکه و امنیت گسترش یابد، بدون
 تغییر نشان و رنگ‌های OCS. این کار مجوز افزودن اتصال به تجهیزات، اجرای آزاد فرمان، آموزش مدل یا

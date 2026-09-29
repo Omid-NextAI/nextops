@@ -10,7 +10,7 @@ investigations now use the existing durable run and append-only audit model.
 
 ## Implemented durable subset
 
-Implemented in controlled b346c3e: `POST /api/v1/assistant/generate` accepts optional `history`, a
+Available in controlled 862d311 (introduced in b346c3e): `POST /api/v1/assistant/generate` accepts optional `history`, a
 closed array of at most two `{question, answer}` pairs. Each field is 1–2,000 characters; total
 serialized JSON is at most 6,000 characters, including escaping. The current question retains its
 4,000-character limit. Context is untrusted/model-only and cannot supply roles, evidence, provider

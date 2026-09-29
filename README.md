@@ -7,11 +7,13 @@
 Owner update (2026-09-26): the owner tested an ESXi VM snapshot restore. Its dated result has
 not been reviewed here; independent database backup and restore gates remain unpassed.
 
-Current controlled workspace (2026-09-29): app/API b346c3e serves the unchanged CPU-only 35B model.
-The conversational NOC/SOC UI preserves OCS branding; twelve live browser/API requests, three
-audit/hash checks and exact source rollback passed. Advice remains unverified and full technical
-quality is partial. The next source repair isolates RTL timestamps and rejects a named single-check
-blanket-health error. [Release status](docs/status/current-release.yaml) is authoritative; the
+Current controlled workspace (2026-09-29): app/API 862d311 serves the unchanged CPU-only 35B model.
+The redesigned NOC/SOC conversation UI preserves the exact OCS logo and palette, adds bounded
+general follow-ups and safe text/code copying, and isolates RTL technical values. Nine fresh live
+browser/API requests, three audit/hash checks and exact b346c3e source rollback passed. A bounded
+guard corrects a named single-check blanket-health error; advice remains unverified and independent
+technical quality is partial. No training or new device connector. User testing is live, not
+production accepted. [Release status](docs/status/current-release.yaml) is authoritative; the
 95c6e50 qualification summary below is historical, not the current serving identity.
 
 Earlier answer-quality checkpoint (2026-09-29): the guarded clarity repair passed twelve fresh authenticated
@@ -28,7 +30,7 @@ application answer and raw model completion are separate. Exact model/source rol
 At that checkpoint, only the RTL source repair was live as 8d1f1d2/8B; 35B was being provisioned.
 The current controlled 35B selection is recorded below; earlier failures remain preserved.
 
-> **Status: controlled bilingual user testing is live; production is not accepted.** App/AI API are `nextops-0.1.0-95c6e50`; connector remains `nextops-0.1.0-cdde129`. The selected CPU-only model is Qwen3.5-35B-A3B Q4_K_M. Twelve API and twelve strict browser cases, eight read-only audit/hash pairs, exact 8B/app/API rollback and six final re-promotion checks passed. Sample API latency was 12.7–94.3 seconds; VM/runtime/resource/queue/deadline limits did not change. Source/time/partial/stale evidence and transparent deterministic CPU/file focus remain mandatory; model-only text can still be wrong. Full held-out quality is partial, and current-release server-WAN/VM cold-start gates are not run. Consult [release status](docs/status/current-release.yaml), [testing](docs/en/TESTING.md) and [project state](docs/PROJECT_STATE.md). Recovery stays owner-deferred and unqualified; certificate, notification, licensing, release-integrity and final production gates remain open. The retired owner form does not block development. Restricted services do not imply permanent management-shell WAN denial. See the [production runbook](docs/en/PRODUCTION_BLOCKERS_RUNBOOK.md).
+> **Earlier 35B qualification, retained history—not the serving identity.** App/AI API were `nextops-0.1.0-95c6e50`; connector remains `nextops-0.1.0-cdde129`. The selected CPU-only model is Qwen3.5-35B-A3B Q4_K_M. Twelve API and twelve strict browser cases, eight read-only audit/hash pairs, exact 8B/app/API rollback and six final re-promotion checks passed. Sample API latency was 12.7–94.3 seconds; VM/runtime/resource/queue/deadline limits did not change. Source/time/partial/stale evidence and transparent deterministic CPU/file focus remain mandatory; model-only text can still be wrong. Full held-out quality is partial, and current-release server-WAN/VM cold-start gates are not run. Consult [release status](docs/status/current-release.yaml), [testing](docs/en/TESTING.md) and [project state](docs/PROJECT_STATE.md). Recovery stays owner-deferred and unqualified; certificate, notification, licensing, release-integrity and final production gates remain open. The retired owner form does not block development. Restricted services do not imply permanent management-shell WAN denial. See the [production runbook](docs/en/PRODUCTION_BLOCKERS_RUNBOOK.md).
 
 ## What NextOps is intended to do
 

@@ -1,24 +1,31 @@
 # Project state / وضعیت پروژه
 
-Current controlled workspace, 2026-09-29 — b346c3e/35B is serving after five CI jobs, exact fresh
-offline packaging, eight first/four final live browser/API requests, three durable audit/hash pairs
-and exact 95c6e50 source rollback with fresh EN/FA generation. All own guards are stopped after
-success; units healthy, model selector unchanged and queue empty. Logo/palette preserved. Source
-adds a small RTL display-isolation repair for plain timestamps/IPs/percentages; it must qualify
-before selection. General NOC/SOC guidance is model-only and full independent technical quality
-remains partial. See paired testing guides; retained failures and WAN/VM/production gates stay open.
-The final VPN sample's blanket ping-health claim is a known semantic failure; the same candidate
-now adds an EN/FA deterministic scope correction. It is not a universal factuality filter.
+Current controlled workspace, 2026-09-29 — app/API 862d311 serves the unchanged CPU-only 35B model.
+PR44 passed five CI jobs, exact fresh offline Ubuntu packaging, five first/four final live
+browser/API cases, three durable audit/hash pairs and exact source rollback to b346c3e with fresh
+EN/FA generation. Local checks: 363 unit/API passes, two Windows POSIX skips, twelve browser
+fixtures. Only own guards were stopped after final success; protected package identities and
+model selector match, units healthy and queue empty. The OCS logo/palette remain byte-identical.
+The conversational UI, general-only bounded follow-ups, NOC/SOC guidance, technical RTL isolation
+and named single-check blanket-health correction are live. See paired testing guides for exact
+wheel/code identity and 11.1–73.4s request samples, not load percentiles. Advice remains model-only;
+independent technical correctness is partial. Retained failures, exact-release server-WAN/VM
+cold-start and production gates stay open. No training, retrieval or new device connector.
 
-محیط کنترل‌شدهٔ جاری، ۷ مهر ۱۴۰۵ — b346c3e و 35B پس از پنج کنترل CI، بستهٔ دقیق آفلاین،
-هشت درخواست نخست و چهار درخواست نهاییِ مرورگر/API، سه تطبیق ممیزی و هش و بازگشت دقیق به
-95c6e50 با تولید تازهٔ دوزبانه مستقرند. زمان‌سنج‌های همین تغییر پس از موفقیت متوقف، سرویس‌ها
-سالم، انتخاب مدل ثابت و صف خالی است. نشان و رنگ‌ها حفظ‌اند. اصلاح کوچکِ نمایش RTL برای زمان و
-IP و درصد هنوز در کد است و پیش از انتخاب باید تأیید شود. مشاورهٔ NOC و SOC صرفاً از مدل است و
-صحت فنیِ مستقلِ کامل ناقص می‌ماند. شواهد در راهنمای آزمون دوزبانه‌اند؛ شکست‌ها و معیارهای WAN،
-VM و تولید همچنان بازند.
-نتیجه‌گیری کلیِ سلامت از ping در نمونهٔ نهایی VPN، خطای معنایی شناخته‌شده است؛ همین نامزد،
-اصلاح قطعیِ دامنهٔ آزمون را به دو زبان اضافه می‌کند، نه پالایهٔ درستی همگانی.
+محیط کنترل‌شدهٔ جاری، ۷ مهر ۱۴۰۵ — برنامه/API نسخهٔ 862d311 همان مدل 35B را صرفاً روی CPU
+ارائه می‌کند. پنج کنترل CI در PR44، بستهٔ دقیق و تازهٔ آفلاین Ubuntu، پنج مورد نخست و چهار
+مورد نهاییِ مرورگر/API، سه تطبیق ممیزی و هش و بازگشت دقیق کد به b346c3e با تولید تازهٔ دوزبانه
+موفق‌اند. آزمون محلی: ۳۶۳ مورد واحد/API موفق، دو مورد POSIX در Windows کنارگذاشته‌شده و دوازده
+مورد مرورگر با دادهٔ ساختگی. فقط زمان‌سنج‌های همین تغییر پس از موفقیت متوقف شدند؛ شناسهٔ بستهٔ
+محافظت‌شده و انتخاب مدل درست، سرویس‌ها سالم و صف خالی است. بایت‌های نشان و رنگ‌های OCS ثابت‌اند.
+رابط گفت‌وگو، زمینهٔ محدودِ صرفاً عمومی، راهنمای NOC و SOC، جداسازی جهت متن فنی و اصلاح محدودِ
+نتیجه‌گیری سلامت از یک بررسی مستقرند. شناسهٔ دقیق بسته و کد و نمونه‌های ۱۱٫۱ تا ۷۳٫۴ ثانیه در
+راهنمای آزمون آمده‌اند؛ این بازه صدک آزمون بار نیست. مشاوره صرفاً مدل و صحت فنیِ مستقل ناقص
+است. شکست‌های ثبت‌شده و معیارهای WAN سرور، شروع سرد VM همین انتشار و تولید بازند. آموزش،
+بازیابی سند یا اتصال تجهیز تازه اضافه نشده است.
+
+Earlier dated checkpoints below are historical, not the current serving identity.
+گام‌های تاریخ‌دار زیر تاریخی‌اند، نه شناسهٔ مستقر کنونی.
 
 Latest completion follow-up, 2026-09-29 — PR42 passed five CI jobs and exact offline install;
 another DNS sample hit 384 tokens and correctly fell back, so useful completion remains unaccepted.

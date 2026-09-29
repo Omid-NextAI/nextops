@@ -1,8 +1,41 @@
 # Testing, model evaluation and release evidence
 
-## Controlled conversational workspace — 2026-09-29
+## Current controlled workspace qualification — 2026-09-29
 
-Serving app/API b346c3effdba4c53674f3f37f705b21a12943a86, wheel SHA-256
+Serving app/API source 862d31130e43f5cdce216aff40d1d9fdb1a8f61a, wheel SHA-256
+09514e68d17f939c08830eaedf1774c98ae549c854402fb1facc48145e558c17 and code digest
+502cd1e2e55ef3b7f016e7f7eb65857f31c0f0d23b4cb099001f6e052c2694f3. PR44 CI run
+36586056961 passed quality/security, browser and PostgreSQL 16/17 integration jobs (five total).
+Exact fresh Ubuntu 24.04 offline installation/native imports passed with existing hash-locked
+wheels, no Internet installation. Local unit/API: 363 passed, two POSIX-only Windows skips;
+twelve real-browser fixtures passed, including the new text-only technical `bdi` isolation.
+
+Five first live Edge/API cases passed service/follow-up guidance, Persian VPN, new CPU-idle
+evidence and scoped filesystem focus; four final cases repeated service/follow-up, Persian VPN and
+fresh CPU evidence after re-promotion. Every request used verified TLS, fresh local login/logout,
+matching exact app/model identity, positive tokens, `stop`, at most 384 tokens and under 120s.
+Follow-up context matched exactly; live requests sent no history. RTL/LTR, mobile and display/copy
+content passed, with only Windows clipboard newline normalization. Live technical values and UTC
+timestamps were isolated LTR without changing raw answers or evidence hashes. Three bounded
+database `READ ONLY` checks matched persisted response, actor/scope/correlation, audit and canonical
+evidence SHA-256. Exact APP-then-AI API source rollback to b346c3e passed two fresh EN/FA answers
+at 20.4/19.6s with 35B unchanged, then AI-then-APP re-promotion passed. Only this change's timers
+were stopped after final success. Protected package/code identities, healthy enabled units, unchanged
+model-selector hash and empty queue were confirmed. Native runtime/model was not restarted.
+
+The nine new request samples span 11.1–73.4s, not p50/p95 or load qualification. The named EN/FA
+single-check blanket-health guard is tested outside the model, including negation and live-state
+priority; the fresh VPN samples did not reproduce the prior blanket-health wording. General advice
+remains `model_unverified`; independent platform/vendor correctness is **partial**, not passed.
+Traceroute failure, DNS cause priority, log availability, ICMP behavior and command details still
+need review. Keep earlier raw DNS, length, VPN-health and harness failures. Browser WAN denial does
+not establish server-WAN isolation: that and full-VM cold start for this exact release are **not_run**.
+No training, retrieval/new device connector, universal correctness or production acceptance.
+Private commands/reports and raw infrastructure evidence remain outside Git.
+
+## Earlier b346c3e conversational workspace — 2026-09-29
+
+Previously serving app/API b346c3effdba4c53674f3f37f705b21a12943a86, wheel SHA-256
 8390f84705d76ddf40d35913b3123073921554f1e71af86df96ded2e425fa2e1, code digest
 c427233fb1e835470717ea78362709cdbbb36440f4de14423c2cc1874f1eb414 passed fresh offline
 Ubuntu installation/native imports and PR43's five CI jobs. Eight fresh Edge/API cases passed

@@ -1,17 +1,24 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
-NOC/SOC source increment (sections 3, 9, 17, 25, 27; 2026-09-29): preserved OCS brand, responsive
-conversation, safe text/code/copy and bounded general-only context; no persistent memory schema,
-retrieval or new connector. 357 unit/API checks and twelve real-browser fixtures pass, not model
-truth or exact-source live acceptance. Current-state/history cannot authorize access or become live
-evidence. The [bounded packet](NOC_SOC_WORKSPACE_SPEC.md) governs deployment/rollback next; earlier
+Controlled NOC/SOC increment (sections 3, 9, 17, 25, 27; 2026-09-29): exact 862d311/35B preserves
+OCS brand and provides responsive conversation, safe text/code/copy and bounded general-only context; no persistent memory schema,
+retrieval or new connector. 363 unit/API checks (two Windows POSIX skips), twelve browser fixtures,
+five CI jobs, exact fresh offline package, nine live browser/API cases, three audit/hash pairs and
+exact b346c3e source rollback passed. Technical RTL isolation and the named EN/FA blanket-health
+guard are live; independent technical quality remains partial. Current-state/history cannot
+authorize access or become live evidence. The [bounded packet](NOC_SOC_WORKSPACE_SPEC.md) and paired
+testing guides govern this bounded acceptance; exact-release WAN/VM gates remain not run. Earlier
 35B and unrun/failed qualification records remain authoritative for their exact revisions.
 
-برش کدِ NOC و SOC (بخش‌های ۳، ۹، ۱۷، ۲۵ و ۲۷؛ ۷ مهر ۱۴۰۵): نشان و رنگ حفظ شده‌اند و گفت‌وگوی
-واکنش‌گرا، متن و کد و کپی ایمن و زمینهٔ محدودِ صرفاً عمومی اضافه شده‌اند؛ ساختار حافظهٔ ماندگار،
-بازیابی سند یا اتصال تازه نداریم. ۳۵۷ آزمون واحد/API و دوازده موردِ مرورگر با دادهٔ ساختگی موفق‌اند،
-نه درستی مدل یا پذیرش زندهٔ کد دقیق. سابقه مجوز یا شاهد زنده نمی‌سازد. [مشخصات](NOC_SOC_WORKSPACE_SPEC.md)
-مبنای گام استقرار و بازگشت است؛ رکوردهای 35B و پذیرش اجرا‌نشده یا ناموفقِ نسخه‌های قبلی حفظ‌اند.
+برش کنترل‌شدهٔ NOC و SOC (بخش‌های ۳، ۹، ۱۷، ۲۵ و ۲۷؛ ۷ مهر ۱۴۰۵): نسخهٔ دقیق 862d311 و 35B،
+نشان و رنگ OCS را حفظ کرده و گفت‌وگوی واکنش‌گرا، نمایش و کپی ایمن متن و کد و زمینهٔ محدودِ
+صرفاً عمومی را ارائه می‌کند؛ ساختار حافظهٔ ماندگار،
+بازیابی سند یا اتصال تازه نداریم. ۳۶۳ آزمون واحد/API با دو مورد POSIX کنارگذاشته‌شده در Windows،
+دوازده مورد مرورگرِ ساختگی، پنج کنترل CI، بستهٔ تازهٔ آفلاین، نُه مورد زنده، سه تطبیق ممیزی و هش
+و بازگشت دقیق کد به b346c3e موفق‌اند. جداسازی جهت متن فنی و کنترل مشخصِ دوزبانهٔ نتیجه‌گیری
+سلامت مستقرند؛ صحت فنیِ مستقل ناقص است. سابقه مجوز یا شاهد زنده نمی‌سازد.
+[مشخصات](NOC_SOC_WORKSPACE_SPEC.md) و راهنمای آزمون دوزبانه مبنای پذیرش محدودند؛ WAN و VM همین
+انتشار اجرا نشده‌اند. رکوردهای 35B و پذیرش اجرا‌نشده یا ناموفقِ نسخه‌های قبلی حفظ‌اند.
 
 Selected 35B trace (sections 9, 10, 19, 25; 2026-09-29): protected pinned artifact, exact source
 95c6e50/offline wheel and five CI jobs passed. Twelve API and twelve browser cases plus eight

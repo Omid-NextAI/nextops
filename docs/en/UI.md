@@ -4,14 +4,14 @@
 
 **Status: specification plus a delivered controlled user-testing subset.** Source: master specification sections 3, 7 and 17 plus original sections 3 and 30.
 
-## Conversational NOC/SOC source candidate — 2026-09-29
+## Controlled conversational NOC/SOC workspace — 2026-09-29
 
-Now serving in controlled testing as b346c3e/35B: eight first/four final fresh browser/API cases,
-three audit/hash matches and exact source rollback passed. The previous candidate discussion below
-records the original source stage. A small RTL display follow-up now isolates plain UTC timestamps,
-IP/CIDR and percentages with text-only `bdi`, preserving original answer/copy bytes. Its fresh
-package/live checks remain separate. Logo/palette and all model, evidence and resource boundaries
-remain unchanged. Technical model quality is still partial, not ChatGPT-equivalence or production.
+Now serving in controlled testing as 862d311/35B: five first/four final fresh browser/API cases,
+three audit/hash matches and exact b346c3e source rollback passed. Text-only `bdi` isolates plain UTC
+timestamps, IP/CIDR and percentages, preserving original answer/copy bytes; fresh offline package,
+RTL/mobile/copy and live provenance checks passed. Original OCS logo/palette bytes and all model,
+evidence and resource boundaries remain unchanged. Technical model quality is still partial,
+not ChatGPT-equivalence or production acceptance. See [testing](TESTING.md) for exact identities.
 
 The [bounded specification](../requirements/NOC_SOC_WORKSPACE_SPEC.md) adds a conversation thread,
 operator starters for servers/services, DNS/network latency, firewalls/VPN and defensive security,
@@ -32,8 +32,8 @@ The assistant provides technical advice, not unrestricted NOC/SOC device access.
 authorized Zabbix/Linux evidence routes are connected. Other vendors/devices receive general
 guidance, not invented live status. No command executes from this interface. Broader product
 screens, additional connectors and full accuracy/accessibility/production acceptance remain open.
-The currently serving package is identified by the release manifest; this source candidate requires
-its own exact-package live qualification before the newer behavior is called deployed.
+The release manifest identifies the currently serving package. Fixture passes are not model
+factuality certificates; additional device connectors still need separate acceptance.
 
 ## Existing controlled subset
 
@@ -66,7 +66,8 @@ single-column question/answer flow. Mode, approved target and language remain ex
 submitted question and answer appear together, with source, collection times and scope visible.
 The full authorized evidence and audit identifiers are available in a collapsed disclosure rather
 than an unsolicited all-data table. Each request is independent; the panel does not send earlier
-screen content as conversation history. A filesystem-capacity question shows only allowlisted mount
+screen content as conversation history in that earlier release. The new general-only context above
+does not change the independence of live requests. A filesystem-capacity question shows only allowlisted mount
 observations in the answer. A request for system file names or contents is answered as unavailable:
 the read-only collector does not retrieve them. The application labels these focused responses as
 deterministic evidence summaries, not verified AI prose. Fresh English/Persian API checks and a
