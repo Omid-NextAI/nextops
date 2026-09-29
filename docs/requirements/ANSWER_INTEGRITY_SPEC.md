@@ -6,8 +6,9 @@ Matched 14B development review failed. Verified 32B import failed its Persian ev
 with semantic review partial. 30B-A3B import/deadline checks passed, but later Persian technical
 review failed. Its corrected guarded trial fixed direction but failed raw Persian filesystem
 completion; the baseline 8B likewise reached that ceiling. Keep strict failures separate from the
-complete application-owned focused display. Qwen3.5-35B-A3B is pinned for provisioning and tested
-source-only non-thinking compatibility, not selected. Qualification remains revision-specific and is not a
+complete application-owned focused display. Qwen3.5-35B-A3B protected import and matched raw
+completions passed, but its first guarded trial failed Persian CPU-idle labeling. Exact rollback
+restored 8d1f1d2/8B; 35B is not selected and the semantic repair is source-only. Qualification is not a
 guarantee that model-only text is always true.
 
 ## Problem
