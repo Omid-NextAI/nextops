@@ -1,5 +1,20 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Live clarity trace (sections 9, 19, 25; 2026-09-29): `c4351fd` now serves application and inference
+API. Twelve fresh bilingual authenticated API cases and seven browser cases across two contexts
+cover the named greeting, general-knowledge, unknown-live-state and focus/scope regressions.
+Code-digest correlation, ordered app/API rollback and re-promotion were verified. Full held-out
+quality is partial, exact-release WAN/VM cold start unrun, and larger-model quality unaccepted.
+The 14B artifact import is verified; selected CPU 8B, bounded concurrency and credential isolation
+are unchanged. Historical failed promotion and answer findings remain recorded in the test guide.
+
+ردیابی وضوح زنده (بخش‌های ۹، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): برنامه و API استنتاج اکنون `c4351fd` هستند.
+دوازده پرسش تازهٔ API و هفت مورد مرورگر در دو محیط، بازآزمایی‌های مشخصِ سلام، دانش عمومی، وضعیت
+زندهٔ نامعلوم و تمرکز و دامنه را پوشش می‌دهند. تطبیق هش کد، بازگشت ترتیبی برنامه/API و استقرار
+مجدد بررسی شد. کیفیت کامل ناقص، قطع WAN و شروع سردِ همین انتشار اجرا‌نشده و کیفیت مدل بزرگ‌تر
+پذیرفته نیست. ورود فایل 14B تأیید شده است؛ CPU 8B منتخب، هم‌زمانی محدود و جداسازی اطلاعات ورود
+تغییر نکرده‌اند. استقرار ناموفق و یافته‌های پاسخ در تاریخچهٔ راهنمای آزمون حفظ شده‌اند.
+
 Clarity/workflow trace (sections 9, 19, 25; 2026-09-29): the owner retired the unrelated
 questionnaire prerequisite. The candidate separates application-owned general/evidence purpose,
 retains the full accepted question and permits bounded 384-token answers; browser clients cannot

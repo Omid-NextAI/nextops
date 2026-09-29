@@ -1,5 +1,24 @@
 # Next task / کار بعدی
 
+Active follow-up, 2026-09-29 — Keep the corrected `c4351fd` app/API and existing 8B runtime/model;
+do not redeploy the failed `089e3ad` candidate or recreate the owner form. Expand independent,
+held-out English/Persian relevance and evidence-preservation review beyond the twelve synthetic
+API cases. Evaluate the imported 14B with the same corrected application prompts/budgets before
+any selection; its earlier source/wording/truncation findings are not erased by four complete
+follow-ups. Continue exact-release offline/restart/cold-start qualification under an applicable
+bounded change authorization; previous WAN/reboot evidence is historical. Recovery stays owner-
+deferred, not passed. Required production sign-off is not implied by the live bug-fix campaign.
+
+پیگیری فعال، ۷ مهر ۱۴۰۵ — برنامه/API اصلاح‌شدهٔ `c4351fd` و محیط و مدل 8B موجود حفظ شوند؛ نامزد
+ناموفق `089e3ad` دوباره مستقر و فرم مالک احیا نشود. بازبینی مستقلِ ارتباط پاسخ و حفظ شاهد در
+فارسی و انگلیسی، با پرسش‌های کنارگذاشته‌شده و فراتر از دوازده مورد ساختگیِ API گسترش یابد. مدل
+واردشدهٔ 14B پیش از انتخاب، با همان دستور و سقف اصلاح‌شدهٔ برنامه سنجیده شود؛ چهار پاسخ کامل
+تکمیلی، یافته‌های قبلیِ منبع، عبارت و ناتمامی را حذف نمی‌کنند. آزمون آفلاین، شروع دوباره و شروع
+سردِ همین انتشار با مجوز تغییر محدودِ مرتبط ادامه یابد؛ شاهد پیشین WAN و reboot تاریخی است.
+بازیابی به دستور مالک به تعویق افتاده، نه موفق. آزمون زندهٔ رفع اشکال، تأیید نهایی تولید نیست.
+
+Earlier checkpoint / گام پیشین:
+
 Immediate checkpoint, 2026-09-29 — Rebuild and qualify the inference HTTP correction, then
 promote inference before app with protected exact artifacts and bounded rollback. The `089e3ad`
 attempt was rolled back after six dependency failures; do not reuse it as an accepted release.

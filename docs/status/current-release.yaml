@@ -1,8 +1,8 @@
 ---
 $schema: ./release-status.schema.json
 schema_version: 2.2.0
-release_identifier: nextops-focused-app-controlled-2026-09-26
-observed_at: '2026-09-26'
+release_identifier: nextops-clarity-controlled-2026-09-29
+observed_at: '2026-09-29'
 deployment_status: controlled_user_testing_not_production_accepted
 delivery_scope:
   profile: local_read_only_recovery_deferred
@@ -17,17 +17,17 @@ snapshot_restore_owner_attestation:
 repository:
   remote: Omid-NextAI/nextops
   branch: main
-  inspected_baseline_commit: b4d22097ad561c32735e4ee0343e755abcf5c7e4
+  inspected_baseline_commit: 3e7f7d29d579b563b88a29d0d51b41adddad879f
 components:
   application:
-    release: nextops-0.1.0-01755d1
-    source_commit: 01755d1cf3e2343dc49c418f73925d660db7d6a2
+    release: nextops-0.1.0-c4351fd
+    source_commit: c4351fdca5ef3ade67e1fc9b1beece6dced0b5fa
   connector:
     release: nextops-0.1.0-cdde129
     source_commit: cdde129950f60f9f18f3ef109cbf98f4217fc5e1
   inference_api:
-    release: nextops-0.1.0-cdde129
-    source_commit: cdde129950f60f9f18f3ef109cbf98f4217fc5e1
+    release: nextops-0.1.0-c4351fd
+    source_commit: c4351fdca5ef3ade67e1fc9b1beece6dced0b5fa
   inference_runtime:
     name: llama.cpp
     source_tag: v0.4.1
@@ -50,8 +50,8 @@ components:
     name: Zabbix
     version: '7.0.31'
 current_application_qualification:
-  release: nextops-0.1.0-01755d1
-  source_commit: 01755d1cf3e2343dc49c418f73925d660db7d6a2
+  release: nextops-0.1.0-c4351fd
+  source_commit: c4351fdca5ef3ade67e1fc9b1beece6dced0b5fa
   scope: application_revision_sensitive
   gates:
     - id: current_app_bounded_live_functionality
@@ -60,14 +60,14 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/fa/TESTING.md
     - id: current_app_held_out_answer_semantics
-      status: failed
+      status: partial
       evidence:
         - docs/en/AI_INTEGRITY.md
         - docs/en/TESTING.md
         - docs/fa/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_exact_release_rollback
-      status: not_run
+      status: passed
       evidence:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
