@@ -1,5 +1,17 @@
 # Testing, model evaluation and release evidence
 
+## Bounded completion follow-up — 2026-09-29
+
+PR42 passed five CI jobs and exact fresh offline Ubuntu installation. A fresh first DNS sample
+completed at 55.8s; the copy assertion failed. A labeled clipboard-only fixture proved exact
+content after Windows CRLF normalization (15 added carriage returns), not a product copy defect.
+The repeat generated `length` at 384 tokens in 31.0s and the application correctly displayed its
+unverified fallback. Preserve both failed reports. Exact a93a302 source rollback to 95c6e50/35B
+passed two fresh EN/FA DNS requests at 5.3/6.9s, TLS/code/model/logout. The source provider refinement
+now requires answer-first, at most three short points, no introduction/headings/closing, English
+under 120 words/Persian under 70, with no omission of safety or invented facts. Budgets and evidence
+instructions are unchanged. Directive tests are not proof of model compliance; qualify live again.
+
 ## NOC/SOC qualification follow-up — 2026-09-29
 
 PR41's five CI jobs passed and exact wheel 7ecd7ac passed a fresh offline Ubuntu install, native

@@ -140,6 +140,10 @@ def test_general_purpose_does_not_use_evidence_only_instructions(locale: str) ->
         assert "Answer the user's actual question first" in prompt
         assert "Explain general knowledge" in prompt
         assert "no live system evidence" in prompt
+        assert "at most three short points" in prompt
+        assert "English below 120 words and Persian below 70 words" in prompt
+        assert "not permission to omit safety or invent facts" in prompt
+        assert "Never expand an answer into a full procedure" in prompt
         assert "Restate each material observed event" not in prompt
         assert "Never invent identifiers, numbers" not in prompt
         assert "tools" not in transport.last_payload
