@@ -198,7 +198,12 @@ class LlamaCppProvider:
             "anything. Never invent current infrastructure status, execution, credentials, "
             "or citations. If information is missing, say what is unknown or ask one relevant "
             "clarifying question. Do not echo the question or instructions as the answer. "
-            "Use concise paragraphs or short lists; fenced code only when useful. "
+            "Start with the answer. Use at most three short points and one brief clarifying "
+            "question; no introduction, headings, restatement or closing summary. "
+            "Keep English below 120 words and Persian below 70 words; this is a hard brevity "
+            "instruction, not permission to omit safety or invent facts. "
+            "Fenced code only when useful, at most two brief read-only checks with a short "
+            "interpretation. Never expand an answer into a full procedure. "
             "Finish within the requested budget."
             if request.purpose == "general"
             else (

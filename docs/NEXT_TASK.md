@@ -1,5 +1,16 @@
 # Next task / کار بعدی
 
+Immediate completion checkpoint — Qualify the trusted general-purpose brevity directive with
+locked CI, exact offline package and fresh EN/FA NOC/SOC follow-ups, source rollback and audit.
+Serving is restored 95c6e50/35B after a repeat reached the unchanged 384-token ceiling. Keep its
+failure and the separately diagnosed Windows CRLF fixture. Never hide truncation or enlarge the
+approved budget to make a test pass. Then continue the exact-release held-out/WAN/VM gates.
+
+گام فوریِ کامل‌شدن — دستور اختصارِ قابل‌اعتمادِ حالت عمومی با CI، بستهٔ دقیق آفلاین، پیگیری
+تازهٔ دوزبانهٔ NOC و SOC، بازگشت کد و ممیزی تأیید شود. پس از رسیدن نمونهٔ تکراری به سقف ثابت
+۳۸۴ توکن، 95c6e50 و 35B برگشته‌اند. شکست و بررسی جداگانهٔ CRLF در Windows حفظ شوند؛ قطع پاسخ
+پنهان و بودجه برای موفق نامیدن آزمون بزرگ نشود. سپس معیار مستقل و WAN و VM همان انتشار ادامه یابد.
+
 Immediate follow-up, 2026-09-29 — Qualify the generic diagnostic-reasoning refinement through locked
 CI and exact offline packaging, then repeat bounded live NOC/SOC browser/context/evidence checks.
 95c6e50/35B is restored after the first trial's semantic rejection; preserve its raw answer and

@@ -1,5 +1,20 @@
 # Project state / وضعیت پروژه
 
+Latest completion follow-up, 2026-09-29 — PR42 passed five CI jobs and exact offline install;
+another DNS sample hit 384 tokens and correctly fell back, so useful completion remains unaccepted.
+95c6e50/35B is restored with two fresh EN/FA generation checks. A labeled clipboard-only fixture
+proved Windows LF-to-CRLF conversion with otherwise identical content; failed reports remain.
+The source-only provider now asks for at most three short points within a bilingual word budget,
+without increasing tokens/time/queue or weakening safety. Qualify this exact source before keeping
+the redesigned UI live. No model training or infrastructure change is introduced.
+
+ادامهٔ تازهٔ کامل‌شدن پاسخ، ۷ مهر ۱۴۰۵ — پنج کنترل CI در PR42 و نصب دقیق آفلاین موفق شدند؛
+نمونهٔ دیگرِ DNS به سقف ۳۸۴ توکن رسید و درست به پیام جایگزین رفت، اما پاسخ مفید پذیرفته نشد.
+95c6e50 و 35B با دو تولید تازهٔ دوزبانه برگشتند. آزمون صریحاً ساختگیِ کپی، تبدیل LF به CRLF
+در Windows و یکسان بودن باقی متن را ثابت کرد؛ گزارش شکست حفظ است. دستورِ محلیِ تولید، حداکثر
+سه نکتهٔ کوتاه با سقف واژهٔ دوزبانه می‌خواهد، بدون افزایش توکن، زمان یا صف یا کاهش ایمنی. پیش از
+نگه‌داشتن رابط تازه در محیط زنده، همین کد تأیید شود؛ آموزش مدل یا تغییر زیرساخت اضافه نشده است.
+
 Latest source qualification follow-up, 2026-09-29 — PR41 passed all five CI jobs and exact fresh
 offline Ubuntu packaging. The guarded 7ecd7ac app/API trial preserved 35B/CPU but rejected an overly
 absolute DNS diagnostic conclusion. Browser/rollback-harness failures are retained separately,
