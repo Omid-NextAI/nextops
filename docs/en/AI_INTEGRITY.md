@@ -6,6 +6,11 @@ category error: presenting unsupported model text as live operational fact.
 
 ## Larger-model comparison — 2026-09-29
 
+The source-only focused prompt requests at most three short sentences without enumerating all
+mounts/fields. No focused observation or provenance is removed; full evidence/audit, deterministic
+focus and 384-token limits are unchanged. Eight bilingual API fixtures passed, not actual raw
+generation. Preserve failed prior browser/completion reports until a fresh measured trial.
+
 30B-A3B passed import/deadline checks but failed later Persian technical review. Unchanged
 assurance retained typed provenance and replaced incomplete evidence prose. Its corrected trial
 fixed Latin-prefix Persian direction, but raw Persian filesystem generation hit 384 tokens and

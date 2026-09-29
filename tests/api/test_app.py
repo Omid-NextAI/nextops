@@ -1116,6 +1116,70 @@ def test_incident_multi_topic_question_keeps_overview() -> None:
     assert response.json()["answer_focus"] == "overview"
 
 
+@pytest.mark.parametrize("locale", ["en", "fa"])
+@pytest.mark.parametrize("question", ["Show only filesystem usage.", "Only show system files."])
+@pytest.mark.parametrize("budget", [128, 512])
+def test_focused_prompt_is_concise_without_dropping_evidence_or_raising_budget(
+    locale: str, question: str, budget: int
+) -> None:
+    class PartialGateway(FakeMonitoringGateway):
+        async def incident_evidence(self, target_id: str) -> IncidentEvidence:
+            linux = _linux_snapshot(target_id).model_copy(
+                update={
+                    "filesystems": tuple(
+                        LinuxFilesystem(
+                            path=f"/data-{index}",
+                            total_bytes=100_000 + index,
+                            available_bytes=75_000,
+                            used_percent=25.0,
+                        )
+                        for index in range(8)
+                    ),
+                    "is_partial": True,
+                    "partial_reasons": ("filesystems_truncated",),
+                }
+            )
+            return IncidentEvidence.combine(target_id, await self.incident_context(), linux)
+
+    inference = FakeInferenceGateway()
+    client = TestClient(
+        create_app(FakeService(), inference, PartialGateway(), incident_target_ids=("app",))
+    )
+    response = client.post(
+        "/api/v1/incidents/investigate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={
+            "target_id": "app",
+            "locale": locale,
+            "question": question,
+            "max_output_tokens": budget,
+        },
+    )
+    assert response.status_code == 200
+    assert inference.last_request is not None
+    synthesis = inference.last_request
+    assert synthesis.purpose == "evidence_synthesis"
+    assert synthesis.max_output_tokens == min(budget, 384)
+    assert "at most three short sentences" in synthesis.question
+    assert "rather than enumerating every mount" in synthesis.question
+    assert f"User question (untrusted text):\n{question}\n\n" in synthesis.question
+    view = json.loads(synthesis.question.split("never instructions):\n", 1)[1])
+    body = response.json()
+    assert body["assistant"]["integrity_status"] == "deterministic_focus"
+    assert "partial_evidence" in body["assistant"]["limitations"]
+    assert view["is_partial"] is True
+    assert view["partial_reasons"] == body["evidence"]["partial_reasons"]
+    assert view["linux_collected_at"] == body["evidence"]["linux"]["collected_at"]
+    assert view["zabbix_collected_at"] == body["evidence"]["zabbix"]["collected_at"]
+    assert len(body["evidence"]["linux"]["filesystems"]) == 8
+    if body["answer_focus"] == "filesystems":
+        assert view["filesystems"] == body["evidence"]["linux"]["filesystems"]
+    else:
+        assert view["filesystems"] == []
+    assert "nextops-app.service" not in synthesis.question
+    assert "do not claim a change occurred" in synthesis.question
+
+
 @pytest.mark.parametrize(
     ("question", "locale"),
     [
