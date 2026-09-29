@@ -10,7 +10,7 @@ from datetime import datetime
 from decimal import Decimal
 
 from nextops.api.incident_focus import incident_focus, monitoring_cpu_focus
-from nextops.contracts.assistant import AssistantRequest, AssistantResponse
+from nextops.contracts.assistant import AssistantRequest, AssistantResponse, GeneralAssistantRequest
 from nextops.contracts.incidents import IncidentEvidence, IncidentInvestigationRequest
 from nextops.contracts.monitoring import MonitoringSummary
 from nextops.inference.contracts import FinishReason
@@ -24,9 +24,22 @@ _LIVE_QUESTION_MARKERS = re.compile(
 )
 _OPERATIONAL_SUBJECT_MARKERS = re.compile(
     r"(?:\b(?:server|service|system|database|zabbix|linux|host|vm|deployment|application|"
-    r"connector|infrastructure)\b|"
+    r"connector|infrastructure|network|firewall|router|switch|vpn|dns|interface)\b|"
     r"(?:سرور|سرویس|سامانه|سیستم|پایگاه\s*داده|زبیکس|لینوکس|میزبان|ماشین\s*مجازی|"
-    r"استقرار|برنامه|کانکتور|زیرساخت))",
+    r"استقرار|برنامه|کانکتور|زیرساخت|شبکه|فایروال|دیوار\s*آتش|روتر|سوییچ|سوئیچ))",
+    re.IGNORECASE,
+)
+_DIAGNOSTIC_GUIDANCE_QUESTION = re.compile(
+    r"^\s*(?:how\s+(?:can|do|should)\s+(?:i|we)\s+"
+    r"(?:safely\s+)?(?:check|diagnose|troubleshoot|inspect|investigate|verify)\b|"
+    r"(?:چطور|چگونه).{0,60}(?:بررسی|عیب[‌ ]یابی|ارزیابی).{0,20}"
+    r"(?:کنم|کنیم|انجام\s*دهم|انجام\s*دهیم))",
+    re.IGNORECASE,
+)
+_EXPLICIT_CURRENT_FACT_QUESTION = re.compile(
+    r"(?:(?:^|[?;.]\s*|\band\s+)(?:what|which|is|are|show|tell|report)\b.{0,80}"
+    r"\b(?:current|currently|now|today|my|our)\b|"
+    r"(?:وضعیت.{0,60}(?:چیست|چگونه\s*است)|آیا.{0,60}(?:اکنون|فعلی|الان)))",
     re.IGNORECASE,
 )
 _UNSAFE_EXECUTION_CLAIMS = (
@@ -99,9 +112,17 @@ def assure_general_answer(
 ) -> AssistantResponse:
     """Label model-only output and replace unverifiable operational claims."""
 
+    historical_subject = bool(
+        isinstance(request, GeneralAssistantRequest)
+        and any(_OPERATIONAL_SUBJECT_MARKERS.search(turn.question) for turn in request.history)
+    )
     requires_live_evidence = bool(
         _LIVE_QUESTION_MARKERS.search(request.question)
-        and _OPERATIONAL_SUBJECT_MARKERS.search(request.question)
+        and (_OPERATIONAL_SUBJECT_MARKERS.search(request.question) or historical_subject)
+        and (
+            not _DIAGNOSTIC_GUIDANCE_QUESTION.search(request.question)
+            or _EXPLICIT_CURRENT_FACT_QUESTION.search(request.question)
+        )
     )
     file_request = bool(_SYSTEM_FILE_REQUEST.search(request.question))
     unsafe_claim = _contains_unsafe_execution_claim(assistant.answer)

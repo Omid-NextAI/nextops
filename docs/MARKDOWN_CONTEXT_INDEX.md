@@ -27,6 +27,7 @@ remaining task-specific sources. The repository skill
 | Certificate lifecycle | `docs/requirements/CERTIFICATE_LIFECYCLE_SPEC.md`, `docs/en/OPERATIONS.md`, Persian operations pair, systemd checker/timer, Nginx profiles, current release manifest, and private rotation/alert evidence |
 | Local CPU inference | `docs/en/CPU_AI.md`, `OFFLINE_RUNTIME.md`, `TESTING.md`, pinned 8B/14B/32B/30B-A3B/Qwen3.5-35B-A3B artifact records, systemd model-selection profiles, current state/next task, and Persian pairs when human-facing text changes |
 | AI answer integrity | `docs/requirements/ANSWER_INTEGRITY_SPEC.md`, `docs/en/AI_INTEGRITY.md`, Persian pair, assistant contracts, answer-integrity policy, evaluation corpus, current release manifest, and private live evidence |
+| Conversational frontend and NOC/SOC guidance | `docs/requirements/NOC_SOC_WORKSPACE_SPEC.md`, `docs/en/UI.md`, Persian pair, `DATA_API.md`, assistant/context contracts, static assets, browser tests, integrity guide and current release manifest |
 | Server, storage, or deployment | use `nextops-server-operations`; read the start checklist, matching dossier, installer guide, storage/offline/server guide, and current private change record |
 | Zabbix or connector work | Zabbix guide, integration guide, MCP/security/data contracts, matching dossiers, ZBX/OFF acceptance cases, and target-specific private evidence |
 | Documentation | use `nextops-bilingual-documentation`; read the source requirement plus both language versions and update state/traceability when capability changes |
@@ -41,6 +42,8 @@ remaining task-specific sources. The repository skill
 
 Each bullet uses a repository-relative path followed by its role. Keep the paths synchronized when a
 Markdown file is added, renamed, or removed.
+
+- `docs/requirements/NOC_SOC_WORKSPACE_SPEC.md` — Bounded bilingual conversational UI and untrusted NOC/SOC advisory context specification.
 
 - `.agents/skills/nextops-bilingual-documentation/SKILL.md` — Bilingual documentation workflow and archive rules.
 - `.agents/skills/nextops-change-planner/SKILL.md` — Bounded brownfield change-planning workflow.

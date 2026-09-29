@@ -1,5 +1,22 @@
 # Testing, model evaluation and release evidence
 
+## NOC/SOC workspace source candidate — 2026-09-29
+
+`pytest -m "not integration and not browser" -q`: 357 passed, two Windows/POSIX skips, 21
+integration/browser deselections. `pytest tests/browser/test_phase2_panel.py -m browser -q`:
+twelve passed. New tests cover old-client compatibility, full question/context bounds and escape
+expansion, forged roles, authentication, live-mode history rejection, diagnostic-versus-current
+intent, bounded visible/context turns, safe hostile-text/code formatting, copy, normal RTL/LTR,
+375/768-pixel and landscape layouts, reduced motion, request failure, expiry and late logout.
+The branded PNGs are fixture previews kept outside Git. The first browser run found a label
+ambiguity; the next found a new fixture assertion reading the preceding answer before completion.
+Distinct labels and waiting for the actual new question repaired these without removing assertions.
+
+These are local boundary/fixture checks, not actual 35B NOC/SOC answers or deployment evidence.
+Require exact-package offline installation, all locked CI jobs, guarded app/API live relevance,
+completion/latency, evidence/audit and source rollback. Existing release acceptance below remains
+revision-specific; full held-out/WAN/VM/production gates are not promoted by this source change.
+
 ## Selected 35B controlled qualification — 2026-09-29
 
 App/API source 95c6e501a89f148c9a9bf802f48f05555c2c6400, exact offline wheel SHA-256

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import socket
 import threading
 import time
@@ -174,6 +175,10 @@ def _fixture_app() -> FastAPI:
     app.state.incident_requests = []
     app.state.logout_requests = 0
     app.state.general_answers = {}
+    app.state.general_requests = []
+    app.state.general_integrity = "deterministic_fallback"
+    app.state.general_delay = 0.0
+    app.state.monitoring_requests = []
 
     @app.get("/")
     def panel() -> FileResponse:
@@ -216,12 +221,14 @@ def _fixture_app() -> FastAPI:
     @app.post("/api/v1/assistant/generate")
     async def general(request: Request) -> dict[str, Any]:
         payload = await request.json()
+        app.state.general_requests.append(payload)
+        await asyncio.sleep(app.state.general_delay)
         assistant = _assistant(str(payload["locale"]))
         assistant["answer"] = (
             "سلام! چطور می‌توانم کمک کنم؟" if payload["locale"] == "fa" else "Hello! How can I help?"
         )
         assistant["answer"] = app.state.general_answers.get(payload["locale"], assistant["answer"])
-        assistant["integrity_status"] = "deterministic_fallback"
+        assistant["integrity_status"] = app.state.general_integrity
         assistant["limitations"] = ["no_live_evidence", "model_output_may_be_incorrect"]
         return assistant
 
@@ -232,6 +239,7 @@ def _fixture_app() -> FastAPI:
     @app.post("/api/v1/investigate")
     async def investigate(request: Request) -> dict[str, Any]:
         payload = await request.json()
+        app.state.monitoring_requests.append(payload)
         assistant = _assistant(str(payload["locale"]))
         assistant["answer"] = (
             "این نمای زبیکس وضعیت دسترسیِ همهٔ میزبانان را ندارد."
@@ -535,4 +543,216 @@ def test_monitoring_host_inventory_limit_is_explained_in_browser(
         expect(page.locator("#integrityNotice")).to_contain_text(
             "وضعیت دسترسیِ فهرست میزبان‌های مجاز"
         )
+        browser.close()
+
+
+def test_general_conversation_context_is_bounded_and_live_evidence_is_independent(
+    browser_server: tuple[str, FastAPI],
+) -> None:
+    base_url, app = browser_server
+    app.state.general_integrity = "model_unverified"
+    app.state.general_answers["en"] = "DNS maps names to addresses."
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        _login(page, base_url)
+        page.locator("#question").fill("Explain DNS.")
+        page.locator("#question").press("Shift+Enter")
+        assert app.state.general_requests == []
+        page.locator("#question").fill("Explain DNS.")
+        page.locator("#question").press("Enter")
+        expect(page.locator("#answer")).to_have_text("DNS maps names to addresses.")
+        assert page.evaluate("document.activeElement.id") == "resultCard"
+        page.locator("#question").fill("What about caching?")
+        page.locator("#askButton").click()
+        expect(page.locator("#conversationHistory .conversation-turn")).to_have_count(1)
+        assert "history" not in app.state.general_requests[0]
+        assert app.state.general_requests[1]["history"] == [
+            {"question": "Explain DNS.", "answer": "DNS maps names to addresses."}
+        ]
+        page.locator('[data-mode="monitoring"]').click()
+        page.locator("#question").fill("Which hosts are currently unavailable?")
+        page.locator("#askButton").click()
+        expect(page.locator("#evidenceBrief")).to_be_visible()
+        assert "history" not in app.state.monitoring_requests[0]
+        page.locator('[data-mode="general"]').click()
+        page.locator("#question").fill("Explain DNS TTL.")
+        page.locator("#askButton").click()
+        expect(page.locator("#conversationHistory .conversation-turn")).to_have_count(3)
+        assert "history" not in app.state.general_requests[-1]
+        assert page.evaluate(
+            "new Set([...document.querySelectorAll('[id]')].map(n => n.id)).size === "
+            "document.querySelectorAll('[id]').length"
+        )
+        assert page.evaluate("Object.keys(sessionStorage)") == ["nextops-session"]
+        assert page.evaluate("Object.keys(localStorage)") == ["nextops-language"]
+        page.locator("#newChatButton").click()
+        expect(page.locator("#conversationHistory")).to_be_empty()
+        expect(page.locator("#resultCard")).to_be_hidden()
+        expect(page.locator("#conversationWelcome")).to_be_visible()
+        expect(page.locator("#answer")).to_be_empty()
+        browser.close()
+
+
+def test_safe_code_formatting_copy_brand_and_responsive_rtl(
+    browser_server: tuple[str, FastAPI], tmp_path: Path
+) -> None:
+    base_url, app = browser_server
+    print(f"Fixture-only UI previews: {tmp_path}")
+    app.state.general_integrity = "model_unverified"
+    hostile = '<img src="https://invalid.example/steal" onerror="window.injected=true">'
+    answer = (
+        "Inspect `example.service`:\n```bash\nsystemctl status example.service\n```\n" + hostile
+    )
+    app.state.general_answers["en"] = answer
+    app.state.general_answers["fa"] = (
+        "بررسی فقط‌خواندنی:\n```bash\nsystemctl status example.service\n```"
+    )
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1440, "height": 1000})
+        requests: list[str] = []
+        page.on("request", lambda request: requests.append(request.url))
+        _login(page, base_url)
+        page.screenshot(path=str(tmp_path / "noc-workspace-welcome.png"), full_page=True)
+        page.locator("#question").fill("Suggest a read-only service check.")
+        page.locator("#askButton").click()
+        expect(page.locator("#answer .code-block code")).to_have_text(
+            "systemctl status example.service\n"
+        )
+        expect(page.locator("#answer")).to_contain_text(hostile)
+        expect(page.locator("#answer img, #answer script, #answer a")).to_have_count(0)
+        assert page.evaluate("window.injected") is None
+        assert all(url.startswith(base_url + "/") for url in requests)
+        assert (
+            page.evaluate(
+                "getComputedStyle(document.documentElement).getPropertyValue('--brand-gold').trim()"
+            )
+            == "#d0a840"
+        )
+        assert (
+            page.evaluate(
+                "getComputedStyle(document.documentElement).getPropertyValue('--brand-teal').trim()"
+            )
+            == "#0090a0"
+        )
+        page.evaluate("navigator.clipboard.writeText = async text => { window.copiedText = text; }")
+        page.get_by_role("button", name="Copy code", exact=True).click()
+        assert page.evaluate("window.copiedText") == "systemctl status example.service\n"
+        page.locator("#copyAnswerButton").click()
+        assert page.evaluate("window.copiedText") == answer
+        page.locator("#languageButton").click()
+        page.locator("#question").fill("یک بررسی ایمن پیشنهاد کن.")
+        page.locator("#askButton").click()
+        expect(page.locator("#askedQuestion")).to_have_text("یک بررسی ایمن پیشنهاد کن.")
+        expect(page.locator("#answer .code-block")).to_be_visible()
+        assert page.locator("#answer").get_attribute("dir") == "rtl"
+        assert page.locator("#answer pre").get_attribute("dir") == "ltr"
+        page.screenshot(path=str(tmp_path / "noc-workspace-persian.png"), full_page=True)
+        for width, height in [(375, 812), (844, 390), (768, 1024)]:
+            page.set_viewport_size({"width": width, "height": height})
+            page.emulate_media(reduced_motion="reduce")
+            assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
+        page.set_viewport_size({"width": 375, "height": 812})
+        page.screenshot(path=str(tmp_path / "noc-workspace-mobile.png"), full_page=True)
+        browser.close()
+
+
+def test_visible_turn_limit_and_oversized_context_are_not_silent_truncation(
+    browser_server: tuple[str, FastAPI],
+) -> None:
+    base_url, app = browser_server
+    app.state.general_integrity = "model_unverified"
+    app.state.general_answers["en"] = "A bounded general explanation."
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        _login(page, base_url)
+        for index in range(14):
+            page.locator("#question").fill(f"Explain concept {index}.")
+            page.locator("#askButton").click()
+            expect(page.locator("#question")).to_be_editable()
+        expect(page.locator(".conversation-turn:not(.hidden)")).to_have_count(12)
+        assert len(app.state.general_requests[-1]["history"]) == 2
+        question = "q" * 3_980 + " QUESTION_TAIL"
+        page.locator("#question").fill(question)
+        page.locator("#askButton").click()
+        expect(page.locator("#askedQuestion")).to_have_text(question)
+        expect(page.locator("#contextNotice")).to_contain_text("too long")
+        assert app.state.general_requests[-1]["question"] == question
+        page.locator("#question").fill("Explain another concept.")
+        page.locator("#askButton").click()
+        expect(page.locator("#question")).to_be_editable()
+        assert "history" not in app.state.general_requests[-1]
+        browser.close()
+
+
+def test_pending_logout_clears_private_turns_and_rejects_late_result(
+    browser_server: tuple[str, FastAPI],
+) -> None:
+    base_url, app = browser_server
+    app.state.general_delay = 0.7
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        _login(page, base_url)
+        page.locator("#question").fill("Explain safe service diagnostics.")
+        page.locator("#askButton").click()
+        expect(page.locator("#newChatButton")).to_be_disabled()
+        expect(page.locator('[data-mode="monitoring"]')).to_be_disabled()
+        page.evaluate(
+            "document.getElementById('assistantForm').dispatchEvent("
+            "new Event('submit', {cancelable: true}))"
+        )
+        page.locator("#logoutButton").click()
+        expect(page.locator("#loginView")).to_be_visible()
+        page.wait_for_timeout(850)  # Controlled fixture's delayed response, not a serving model.
+        assert len(app.state.general_requests) == 1
+        assert app.state.logout_requests == 1
+        expect(page.locator("#resultCard")).to_be_hidden()
+        expect(page.locator("#answer")).to_be_empty()
+        expect(page.locator("#conversationHistory")).to_be_empty()
+        assert page.evaluate("sessionStorage.getItem('nextops-session')") is None
+        browser.close()
+
+
+def test_expired_session_purges_transcript_and_failed_request_keeps_question(
+    browser_server: tuple[str, FastAPI],
+) -> None:
+    base_url, _ = browser_server
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        _login(page, base_url)
+        page.locator("#question").fill("Hi")
+        page.locator("#askButton").click()
+        expect(page.locator("#answer")).to_contain_text("Hello")
+        page.route(
+            "**/api/v1/assistant/generate",
+            lambda route: route.fulfill(
+                status=503, json={"error": {"code": "dependency_unavailable"}}
+            ),
+        )
+        page.locator("#question").fill("Explain DNS.")
+        page.locator("#askButton").click()
+        expect(page.locator("#assistantError")).to_contain_text("temporarily unavailable")
+        expect(page.locator("#question")).to_have_value("Explain DNS.")
+        expect(page.locator("#answer")).to_contain_text("Hello")
+        page.unroute("**/api/v1/assistant/generate")
+        page.route(
+            "**/api/v1/assistant/generate",
+            lambda route: route.fulfill(status=403, json={"error": {"code": "forbidden"}}),
+        )
+        page.locator("#askButton").click()
+        expect(page.locator("#assistantError")).to_contain_text("denied by application policy")
+        expect(page.locator("#question")).to_have_value("Explain DNS.")
+        page.unroute("**/api/v1/assistant/generate")
+        page.route(
+            "**/api/v1/assistant/generate",
+            lambda route: route.fulfill(status=401, json={"error": {"code": "unauthenticated"}}),
+        )
+        page.locator("#askButton").click()
+        expect(page.locator("#loginView")).to_be_visible()
+        expect(page.locator("#answer")).to_be_empty()
+        assert page.evaluate("sessionStorage.getItem('nextops-session')") is None
         browser.close()

@@ -1,5 +1,24 @@
 # Next task / کار بعدی
 
+Owner-directed source checkpoint, 2026-09-29 — Finish locked CI and exact offline packaging for the
+bounded [NOC/SOC workspace](requirements/NOC_SOC_WORKSPACE_SPEC.md). Local unit/API and twelve
+browser fixtures pass; serving 95c6e50/35B is unchanged. Require a guarded, exact-source app/API
+promotion with fresh EN/FA general guidance and follow-up relevance, actual completion/deadline,
+RTL/mobile, independent live evidence/audit and exact 95c6e50 source rollback. Do not change the
+model, runtime, VM, authorization, target credentials, database, queues or token/deadline budget.
+Then extend independent held-out technical/semantic review and the applicable exact-release WAN/VM
+gates. Do not represent prompt guidance or fixture replies as universally correct NOC/SOC answers.
+Recovery remains deferred; no owner form is reinstated.
+
+گامِ کد به دستور مالک، ۷ مهر ۱۴۰۵ — CI قفل‌شده و بسته‌بندی دقیقِ آفلاینِ
+[محیط NOC و SOC](requirements/NOC_SOC_WORKSPACE_SPEC.md) تکمیل شوند. آزمون محلیِ واحد/API و
+دوازده موردِ مرورگرِ ساختگی موفق‌اند؛ 95c6e50 و 35B مستقر و ثابت‌اند. ارتقای محافظت‌شدهٔ دقیقِ
+برنامه/API، راهنمایی و پیگیریِ مرتبطِ تازهٔ دوزبانه، تولید کامل در مهلت، RTL و موبایل، شاهد زندهٔ
+مستقل و ممیزی و بازگشت دقیق کدِ 95c6e50 لازم‌اند. مدل، محیط، VM، مجوز، اطلاعات ورود مقصد، پایگاه،
+صف و سقف توکن و زمان تغییر نکنند. سپس بازبینی فنی و معنایی مستقل و معیارهای WAN و VM برای همان
+انتشار ادامه یابند. دستور راهنما یا پاسخ ساختگی، درستیِ همهٔ پاسخ‌های NOC و SOC نیست. بازیابی
+در تعویق می‌ماند و فرم مالک احیا نمی‌شود.
+
 Current unfinished checkpoint, 2026-09-29 — Extend independent held-out English/Persian relevance
 and technical review for selected 95c6e50/35B. Six final re-promotion confirmations and audit passed.
 Do not repeat completed import, packaging, CI, twelve API/browser checks or exact 8B/source

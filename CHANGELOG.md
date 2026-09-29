@@ -1,5 +1,22 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## NOC/SOC workspace source candidate — 2026-09-29 / نامزد کدِ محیط NOC و SOC — ۷ مهر ۱۴۰۵
+
+Preserve OCS logo/palette and native offline frontend; add bounded in-memory conversations,
+operator starters, safe code/text presentation and copying, transparent general-only follow-up
+context and read-only-first NOC/SOC guidance. Keep authenticated live evidence independent and
+retain audit, deterministic guards, selected 35B, resources and 384-token/120-second limits.
+357 local unit/API and twelve real-browser fixtures passed; no training, new framework/dependency,
+device credential or connector. Exact-package/CI/live qualification remains separate; this entry
+does not declare the source candidate deployed or universally correct.
+
+نشان و رنگ‌های OCS و رابط بومی آفلاین حفظ و گفت‌وگوی محدودِ حافظهٔ صفحه، شروع پرسش، نمایش و کپی
+ایمن متن و کد، زمینهٔ روشنِ صرفاً عمومی و راهنمای NOC و SOC با اولویت فقط‌خواندنی اضافه شدند.
+شاهد زندهٔ احرازهویت‌شده مستقل و ممیزی، کنترل قطعی، 35B منتخب، منابع و سقف ۳۸۴ توکن و ۱۲۰ ثانیه
+ثابت‌اند. ۳۵۷ آزمون محلی واحد/API و دوازده مورد مرورگر واقعیِ ساختگی موفق‌اند؛ آموزش، چارچوب یا
+وابستگی، اطلاعات ورود یا اتصالِ تازه نداریم. بستهٔ دقیق، CI و پذیرش زنده جدا هستند؛ استقرار یا
+درستی همیشگیِ این نامزدِ کد ادعا نمی‌شود.
+
 ## Controlled 35B selection — 2026-09-29 / انتخاب کنترل‌شدهٔ 35B — ۷ مهر ۱۴۰۵
 
 Select protected pinned Qwen3.5-35B-A3B Q4_K_M with app/API 95c6e50 after exact offline packaging,

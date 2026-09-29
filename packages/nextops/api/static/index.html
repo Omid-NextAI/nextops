@@ -7,9 +7,9 @@
   <meta name="theme-color" content="#007986">
   <link id="appIcon" rel="icon" href="data:,">
   <title>NextOps by OCS | Local Operations Intelligence</title>
-  <link rel="stylesheet" href="/assets/app.css?v=20260926-focus2">
-  <link rel="stylesheet" href="/assets/evidence.css?v=20260926-focus2">
-  <script src="/assets/app.js?v=20260926-focus2" defer></script>
+  <link rel="stylesheet" href="/assets/app.css?v=20260929-noc1">
+  <link rel="stylesheet" href="/assets/evidence.css?v=20260929-noc1">
+  <script src="/assets/app.js?v=20260929-noc1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#mainContent" data-i18n="skipMain">Skip to main content</a>
@@ -76,10 +76,36 @@
         </div>
       </div>
 
-      <section id="resultCard" class="surface-card result-card hidden" aria-live="polite">
+      <div class="operator-layout">
+        <aside class="operator-rail" aria-labelledby="operatorHeading">
+          <button id="newChatButton" class="quiet-button new-chat-button" type="button"><span aria-hidden="true">＋</span><span data-i18n="newChat">New conversation</span></button>
+          <h2 id="operatorHeading" class="section-kicker" data-i18n="operatorTools">OPERATOR STARTERS</h2>
+          <p class="rail-help" data-i18n="starterHelp">Choose a starting point, then add your details.</p>
+          <button class="starter-link" type="button" data-starter="services"><span class="starter-symbol" aria-hidden="true">01</span><span data-i18n="starterServices">Servers &amp; services</span></button>
+          <button class="starter-link" type="button" data-starter="network"><span class="starter-symbol" aria-hidden="true">02</span><span data-i18n="starterNetwork">Network &amp; DNS</span></button>
+          <button class="starter-link" type="button" data-starter="firewall"><span class="starter-symbol" aria-hidden="true">03</span><span data-i18n="starterFirewall">Firewalls &amp; VPN</span></button>
+          <button class="starter-link" type="button" data-starter="security"><span class="starter-symbol" aria-hidden="true">04</span><span data-i18n="starterSecurity">Defensive security</span></button>
+          <div class="capability-note"><span class="section-kicker" data-i18n="connectedEvidence">AVAILABLE EVIDENCE</span><p data-i18n="capabilityText">Live: authorized Zabbix and Linux. Other devices: technical guidance only, not connected access.</p><span class="read-only-label" data-i18n="readOnlyTitle">Read-only by design</span></div>
+        </aside>
+        <div class="conversation-main">
+          <div id="conversationFeed" class="conversation-feed" role="region" aria-label="Conversation">
+            <section id="conversationWelcome" class="conversation-welcome">
+              <span class="welcome-mark" aria-hidden="true">N<span>O</span>C / S<span>O</span>C</span>
+              <h2 data-i18n="welcomeTitle">What can I help you investigate?</h2>
+              <p data-i18n="welcomeHelp">Explain a problem, understand an alert, or plan safe diagnostics. Start with general advice; select a live mode when you need verified observations.</p>
+              <div class="starter-grid">
+                <button type="button" class="starter-card" data-starter="triage"><strong data-i18n="starterTriage">Triage a service failure</strong><span data-i18n="starterTriageHelp">Safe first checks, before changing anything.</span></button>
+                <button type="button" class="starter-card" data-starter="latency"><strong data-i18n="starterLatency">Investigate network latency</strong><span data-i18n="starterLatencyHelp">Separate DNS, routing and application delays.</span></button>
+                <button type="button" class="starter-card" data-starter="alerts"><strong data-i18n="starterAlerts">Review Zabbix evidence</strong><span data-i18n="starterAlertsHelp">Use fresh, scoped Zabbix evidence.</span></button>
+                <button type="button" class="starter-card" data-starter="security"><strong data-i18n="starterSecurity">Defensive security</strong><span data-i18n="starterSecurityHelp">Assess suspicious activity without assuming compromise.</span></button>
+              </div>
+            </section>
+            <div id="conversationHistory"></div>
+      <section id="resultCard" class="surface-card result-card hidden conversation-turn">
         <div class="user-message"><span data-i18n="youAsked">You asked</span><p id="askedQuestion"></p></div>
         <div class="result-heading"><div><p class="eyebrow" data-i18n="assistantResponse">ASSISTANT RESPONSE</p><h2 id="responseTitle" data-i18n="generalResponseTitle">Direct local answer</h2></div><span id="evidenceBadge" class="evidence-badge" data-i18n="modelOnlyBadge">Local model · no live evidence</span></div>
         <div id="answer" class="answer"></div>
+        <div class="answer-actions"><button id="copyAnswerButton" type="button" class="quiet-button" data-copy-answer data-i18n="copyAnswer">Copy answer</button><span class="turn-context" data-i18n="adviceNotExecution">Advice and observations · no action executed</span></div>
         <p id="integrityNotice" class="integrity-notice" data-i18n="modelIntegrityNotice">Model-generated text has no live evidence; verify important facts independently.</p>
         <p id="evidenceBrief" class="evidence-brief hidden"></p>
         <details id="evidenceDetails" class="evidence-details"><summary data-i18n="showEvidence">View evidence and request details</summary>
@@ -99,14 +125,10 @@
           </div>
         </details>
       </section>
+          </div>
 
       <div class="workspace-grid">
         <form id="assistantForm" class="surface-card prompt-card">
-          <div class="card-heading compact">
-            <span class="spark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.8 14.2 9l6.2 2.2-6.2 2.2L12 19.6l-2.2-6.2-6.2-2.2L9.8 9 12 2.8Z"/></svg></span>
-            <div><p class="section-kicker" data-i18n="assistantLabel">LOCAL AI ASSISTANT</p><h2 data-i18n="newQuestion">New question</h2><p data-i18n="questionHelp">Ask in English or Persian. The answer follows the selected language.</p></div>
-          </div>
-
           <div class="mode-field">
             <span class="field-label" data-i18n="answerMode">Answer mode</span>
             <div class="segmented-control" role="group" aria-label="Answer mode">
@@ -139,6 +161,8 @@
               <svg class="button-arrow" aria-hidden="true" viewBox="0 0 20 20"><path d="M4 10h11m-4-4 4 4-4 4"/></svg>
             </button>
           </div>
+          <p id="requestStatus" class="request-status" role="status" aria-live="polite"></p>
+          <p id="contextNotice" class="context-notice" data-i18n="contextHelp">General follow-ups use up to two recent turns. Live requests fetch new evidence independently.</p>
           <p id="assistantError" class="form-error" role="alert"></p>
         </form>
 
@@ -154,7 +178,9 @@
           <div class="read-only-note"><span aria-hidden="true">RO</span><p><strong data-i18n="readOnlyTitle">Read-only by design</strong><small data-i18n="readOnlyText">This evaluation workspace cannot execute infrastructure changes.</small></p></div>
         </details>
       </div>
-
+        </div>
+      </div>
+      <p id="copyStatus" class="copy-status" role="status" aria-live="polite"></p>
     </section>
   </main>
 
