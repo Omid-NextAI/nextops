@@ -1,5 +1,33 @@
 # Project state / وضعیت پروژه
 
+Current continuation, 2026-09-29 — The exact 35B-A3B artifact was size/hash-verified on desktop and
+AI host and protected; fourteen matched CPU samples completed in 13.5–64.5 seconds. Raw provenance
+review remains partial (collection-time omissions). PR38 passed five CI jobs and exact fresh
+Ubuntu offline packaging. The guarded bb81109/35B trial completed all twelve fresh API requests
+with `stop`, correct code/model identity and logout 204, including both filesystem cases; Persian
+CPU prose mislabeled the idle metric. It failed semantic review, not transport. Exact model and
+app/API rollback restored 8d1f1d2/8B; fresh EN/FA generation, code identity and logout passed.
+The bounded source-only repair owns CPU-idle meaning for unambiguous measurement-only requests,
+without trusting free-form metric names. Malformed/missing/ambiguous values fail closed; full
+evidence, timestamps, limitations and audit remain intact. Local unit/API: 327 passed, two POSIX
+skips, sixteen integration/browser deselections. CI, packaging and fresh guarded requalification
+of this repair remain next. No 35B selection or held-out/WAN/VM/production acceptance is claimed.
+The dated checkpoints below preserve earlier observations, not current serving instructions.
+
+ادامهٔ جاری، ۷ مهر ۱۴۰۵ — اندازه و هش فایل دقیقِ 35B-A3B در میزکار و میزبان AI تطبیق و فایل
+محافظت شد؛ چهارده پرسش همسان CPU در ۱۳٫۵ تا ۶۴٫۵ ثانیه کامل شدند. بازبینی منشأ در متن خام،
+به‌دلیل حذف زمان گردآوری، همچنان ناقص است. PR38 پنج کنترل CI و بسته‌بندی تازهٔ آفلاین Ubuntu
+را گذراند. آزمون محافظت‌شدهٔ bb81109 و 35B، هر دوازده درخواست تازهٔ API، از جمله هر دو پرسش
+فایل‌سیستم را با `stop`، شناسهٔ درست کد و مدل و خروج 204 کامل کرد؛ اما متن فارسی، سنجهٔ بیکاری
+پردازنده را نادرست نام‌گذاری کرد. بازبینی معنایی ناموفق بود، نه ارتباط API. بازگشت دقیق مدل
+و برنامه/API، 8d1f1d2 و 8B را برگرداند؛ تولید تازهٔ دوزبانه، هش کد و خروج تأیید شدند. اصلاح
+محدود که هنوز فقط در کد است، معنای درصد بیکاری پردازنده را برای پرسشِ روشن و صرفاً اندازه‌گیری
+در اختیار برنامه می‌گذارد، نه نام آزاد سنجه. مقدار نامعتبر، غایب یا مبهم پذیرفته نمی‌شود؛
+شاهد کامل، زمان‌ها، قیدها و ممیزی حفظ‌اند. آزمون محلی واحد/API: ۳۲۷ موفق، دو مورد مختص POSIX
+اجرانشده و شانزده مورد integration/browser خارج از انتخاب. CI، بسته‌بندی و بازآزمایی تازهٔ
+این اصلاح گام بعدند؛ انتخاب 35B یا پذیرش مستقل، WAN، VM یا تولید ادعا نمی‌شود. گام‌های
+تاریخ‌دارِ زیر، مشاهده‌های پیشین‌اند، نه دستور وضعیت مستقر امروز.
+
 Source follow-up, 2026-09-29 — Qwen3.5 compatibility PR37 passed all five CI jobs and merged;
 its exact wheel passed fresh Ubuntu offline-index installation and identity/mode/assets probes.
 No serving selection followed. The source-only focused prompt now requests at most three short

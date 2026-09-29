@@ -60,12 +60,18 @@ def test_selected_model_identity_checks_all_fields_and_rejects_unqualified_selec
     larger_moe = json.loads(
         (ROOT / "deploy/inference/qwen3-30b-a3b-q4-k-m.candidate.json").read_text("utf-8")
     )
-    references = {item["model_id"]: item for item in (larger, larger_32b, larger_moe)}
+    larger_qwen35 = json.loads(
+        (ROOT / "deploy/inference/qwen3-5-35b-a3b-q4-k-m.candidate.json").read_text("utf-8")
+    )
+    references = {
+        item["model_id"]: item for item in (larger, larger_32b, larger_moe, larger_qwen35)
+    }
     for artifact in (
         baseline,
         {**larger, "quantization": "Q4_K_M"},
         {**larger_32b, "quantization": "Q4_K_M"},
         {**larger_moe, "quantization": "Q4_K_M"},
+        {**larger_qwen35, "quantization": "Q4_K_M"},
     ):
         reference = references.get(artifact["model_id"], larger)
         model = {

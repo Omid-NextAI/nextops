@@ -6,8 +6,9 @@ Matched 14B development review failed. Verified 32B import failed its Persian ev
 with semantic review partial. 30B-A3B import/deadline checks passed, but later Persian technical
 review failed. Its corrected guarded trial fixed direction but failed raw Persian filesystem
 completion; the baseline 8B likewise reached that ceiling. Keep strict failures separate from the
-complete application-owned focused display. Qwen3.5-35B-A3B is pinned for provisioning and tested
-source-only non-thinking compatibility, not selected. Qualification remains revision-specific and is not a
+complete application-owned focused display. Qwen3.5-35B-A3B protected import and matched raw
+completions passed, but its first guarded trial failed Persian CPU-idle labeling. Exact rollback
+restored 8d1f1d2/8B; 35B is not selected and the semantic repair is source-only. Qualification is not a
 guarantee that model-only text is always true.
 
 ## Problem
@@ -47,6 +48,30 @@ model memory as live infrastructure evidence, must never imply that a read-only 
 an operation, and must preserve stale/partial qualifiers even when generated prose fails.
 
 ## Requirements
+
+- For an unambiguous CPU-measurement-only monitoring question, the application owns the reviewed
+  idle-item meaning (`system.cpu.util[,idle]` or `system.cpu.util[,idle,avg1]`), not a generated
+  label or untrusted item name. Require exactly one recognized item, `%` units and a bounded
+  decimal in 0–100; otherwise state unavailable. Do not convert idle into utilization or health.
+  Show measurement/collection times, Zabbix source, stale/partial limitations and no-change notice.
+  Preserve actual model identity/completion, complete authorized evidence and durable audit, with
+  `deterministic_focus` visible to the user. Topic heuristics never authorize evidence collection.
+  Interpretation, history, cause and mixed-topic questions retain the existing synthesis path.
+
+برای پرسش روشنِ صرفاً اندازه‌گیری CPU در حالت پایش، معنای سنجهٔ بیکاریِ بررسی‌شده در اختیار
+برنامه است، نه برچسب تولیدشده یا نام نامعتبر سنجه. دقیقاً یک سنجه با کلیدهای فوق، واحد `%` و
+عدد اعشاری محدود بین صفر تا صد لازم است؛ در غیر این صورت، نبودِ شاهد قابل‌استفاده اعلام شود.
+بیکاری به مصرف یا سلامت تعبیر نشود. زمان اندازه‌گیری و گردآوری، منبع Zabbix، قید قدیمی یا
+ناقص و اعلان عدم تغییر نمایش داده شوند. شناسه و پایان تولید واقعیِ مدل، شاهد کاملِ مجاز و
+ممیزی ماندگار، با برچسب آشکار `deterministic_focus` حفظ شوند. تشخیص موضوع مجوز جمع‌آوری نیست؛
+پرسش تفسیری، تاریخچه، علت و چندموضوعی در مسیر خلاصه‌سازیِ قبلی باقی می‌ماند.
+
+Bounded repair plan: reproduce the first guarded 35B Persian idle-label failure; add domain-key,
+numeric/ambiguity, injection-name, bilingual scope/provenance API regressions; retain authorization,
+limits and full evidence; qualify CI/offline package; repeat actual API/browser/audit and exact
+8B/source rollback. No training, schema migration, connector/runtime/resource change or expanded
+credentials. Rollback restores exact 8d1f1d2/8B. Raw-model failures remain recorded separately from
+the correctly labeled application answer; full independent quality is not a fixture result.
 
 - Focused file/filesystem synthesis requests at most three short sentences without enumerating
   every mount or numeric field. Keep every focused observation and provenance/partial field,
