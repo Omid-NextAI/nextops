@@ -7,8 +7,9 @@ from __future__ import annotations
 
 import re
 from datetime import datetime
+from decimal import Decimal
 
-from nextops.api.incident_focus import incident_focus
+from nextops.api.incident_focus import incident_focus, monitoring_cpu_focus
 from nextops.contracts.assistant import AssistantRequest, AssistantResponse
 from nextops.contracts.incidents import IncidentEvidence, IncidentInvestigationRequest
 from nextops.contracts.monitoring import MonitoringSummary
@@ -261,6 +262,19 @@ def assure_monitoring_answer(
                 "limitations": (*limitations, "file_listing_unavailable"),
             }
         )
+    if monitoring_cpu_focus(request.question):
+        answer, available = _cpu_idle_summary(request.locale, evidence)
+        return assistant.model_copy(
+            update={
+                "answer": answer,
+                "evidence_mode": "live_zabbix",
+                "live_monitoring_data": True,
+                "integrity_status": "deterministic_focus",
+                "limitations": (
+                    limitations if available else (*limitations, "cpu_idle_percentage_unavailable")
+                ),
+            }
+        )
     safe = (
         _is_safe_evidence_answer(
             assistant.answer,
@@ -327,6 +341,70 @@ def assure_incident_answer(
             "integrity_status": "evidence_bounded" if safe else "deterministic_fallback",
             "limitations": limitations,
         }
+    )
+
+
+def _cpu_idle_summary(locale: str, evidence: MonitoringSummary) -> tuple[str, bool]:
+    """Own the meaning of a reviewed item key; never trust a generated metric label."""
+
+    metrics = tuple(
+        metric
+        for metric in evidence.metrics
+        if metric.key in {"system.cpu.util[,idle]", "system.cpu.util[,idle,avg1]"}
+    )
+    # Multiple matching items are ambiguous; do not silently choose one observation.
+    metric = metrics[0] if len(metrics) == 1 else None
+    if metric and not (
+        metric.units == "%"
+        and re.fullmatch(r"[0-9]{1,3}(?:\.[0-9]{1,16})?", metric.value)
+        and Decimal(metric.value) <= 100
+    ):
+        metric = None
+    collected = _timestamp(evidence.collected_at)
+    if locale == "fa":
+        observation = (
+            f"در میزبان {evidence.host}، درصد بیکاری پردازنده (CPU idle) برابر {metric.value}٪ "
+            f"در {_timestamp(metric.measured_at)} ثبت شده است؛ این مقدار درصد مصرف CPU نیست. "
+            if metric
+            else f"برای میزبان {evidence.host}، درصد بیکاری پردازندهٔ معتبر و بدون ابهام "
+            "در این شاهد موجود نیست. "
+        )
+        qualifier = (
+            f"شواهد ناقص است ({', '.join(evidence.partial_reasons)}). "
+            if evidence.is_partial
+            else ""
+        )
+        freshness = (
+            "برخی سنجه‌ها قدیمی‌اند و وضعیت کنونی آن‌ها نامعلوم است. "
+            if any(item.stale for item in evidence.metrics)
+            else "این مشاهدهٔ ثبت‌شده به‌تنهایی سلامت یا وضعیت همین لحظه را ثابت نمی‌کند. "
+        )
+        return (
+            f"{observation}منبع Zabbix؛ زمان گردآوری {collected}. "
+            f"{qualifier}{freshness}هیچ تغییری انجام نشد.",
+            metric is not None,
+        )
+    observation = (
+        f"For {evidence.host}, CPU idle was {metric.value}% measured at "
+        f"{_timestamp(metric.measured_at)}; this is not CPU utilization. "
+        if metric
+        else f"For {evidence.host}, no usable, unambiguous CPU-idle percentage is available "
+        "in this evidence. "
+    )
+    qualifier = (
+        f"Evidence is partial ({', '.join(evidence.partial_reasons)}). "
+        if evidence.is_partial
+        else ""
+    )
+    freshness = (
+        "Some metrics are stale and their current state is unknown. "
+        if any(item.stale for item in evidence.metrics)
+        else "This recorded observation alone does not prove health or the state right now. "
+    )
+    return (
+        f"{observation}Source Zabbix; collected at {collected}. "
+        f"{qualifier}{freshness}No change was performed.",
+        metric is not None,
     )
 
 

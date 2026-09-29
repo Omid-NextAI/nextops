@@ -1,5 +1,20 @@
 # Testing, model evaluation and release evidence
 
+## Latest 35B trial and CPU repair — 2026-09-29
+
+Protected import and fourteen matched raw completions passed; collection-time omissions remain
+partial/failed raw provenance. PR38 passed five CI jobs and fresh offline Ubuntu packaging. The
+bb81109/35B trial returned twelve HTTP 200/stop responses, matching code/model and logout 204,
+including both filesystem cases, but Persian CPU-idle labeling failed semantic review. Exact
+model/app/API rollback restored 8d1f1d2/8B; two fresh EN/FA questions matched original code/model
+and logout 204. No browser/audit pass is claimed for that failed trial. Source-only CPU repair
+validates reviewed key/unit/range/ambiguity, renders canonical provenance/partial/stale labels and
+preserves full evidence/audit without echoing injection-bearing metric names. Interpretation/mixed
+topics remain synthesis. Local unit/API: 327 passed, two POSIX skips, sixteen integration/browser
+deselections. Fresh strict browser/API, durable hashes/audit and exact rollback remain next.
+This is not held-out, server-WAN, VM or production acceptance. Older dated records follow.
+
+
 [فارسی](../fa/TESTING.md) · [Index](INDEX.md)
 
 **Status: active test plan with repository, isolated PostgreSQL, live connector and bounded local-AI

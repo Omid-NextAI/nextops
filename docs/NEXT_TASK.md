@@ -1,5 +1,26 @@
 # Next task / کار بعدی
 
+Current unfinished checkpoint, 2026-09-29 — Qualify the bounded CPU-idle semantic repair through
+CI and exact offline wheel installation, then repeat the timed 35B-A3B trial. Preserve the first
+trial's Persian metric-label failure and the raw collection-time omissions; twelve completed API
+requests are not a semantic pass. 8d1f1d2/8B is restored and serving. Require fresh strict bilingual
+browser/API review, durable audit/evidence hashes, exact model/source rollback and measured
+latency before re-promotion. Keep 384 tokens, 120 seconds, one active/two queued, CPU-only, existing
+runtime/VM/resources and all security boundaries. Interpretation/mixed-topic questions must not
+be silently narrowed. Missing/ambiguous CPU observations must not become utilization or health.
+Do not infer held-out, server-WAN, full-VM cold start or production acceptance.
+
+نخستین گام ناتمام، ۷ مهر ۱۴۰۵ — اصلاح محدودِ معنای درصد بیکاری پردازنده با CI و نصب آفلاینِ
+wheel دقیق سنجیده شود؛ سپس آزمون زمان‌دارِ 35B-A3B تکرار گردد. شکست نام‌گذاری فارسیِ سنجه در
+آزمون نخست و حذف زمان گردآوری از متن خام حفظ شوند؛ دوازده درخواست کامل API به معنی موفقیت
+معنایی نیستند. 8d1f1d2 و 8B برگشته و مستقرند. پیش از استقرار مجدد، مرورگر و API تازه و
+سخت‌گیرانهٔ دوزبانه، ممیزی ماندگار و هش شاهد، بازگشت دقیق کد و مدل و تأخیر سنجیده لازم‌اند.
+سقف ۳۸۴ توکن، ۱۲۰ ثانیه، یک فعال و دو منتظر، CPU محلی، محیط و ماشین و منابع و مرزهای امنیت
+حفظ شوند. دامنهٔ پرسش تفسیری یا چندموضوعی بی‌اعلان محدود نشود؛ شاهد غایب یا مبهم، درصد مصرف
+یا سلامت تلقی نشود. پذیرش مستقل، WAN سرور، شروع سردِ VM یا تولید نتیجه گرفته نشود.
+
+Earlier checkpoints follow / گام‌های پیشین:
+
 Source checkpoint, 2026-09-29 — Include the source-only concise focused-prompt change in exact
 offline packaging/CI before the guarded trial. Eight API fixtures passed without dropping any
 focused mount/source/time/partial field or changing output budgets, full evidence, audit or guards.

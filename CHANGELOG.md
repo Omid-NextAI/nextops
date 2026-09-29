@@ -1,5 +1,24 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## CPU metric semantics — 2026-09-29 / معنای سنجهٔ CPU — ۷ مهر ۱۴۰۵
+
+Preserve the first 35B-A3B guarded trial's Persian idle-label failure despite twelve completed
+API requests. Exact rollback restored 8d1f1d2/8B. Add transparent application-owned CPU focus:
+reviewed idle keys, exact `%`/bounded decimal/range/ambiguity checks, canonical bilingual labels,
+source/measurement/collection time and stale/partial/no-change qualifiers. Refuse unavailable
+observations; do not reinterpret idle as utilization or health. Full authorized evidence/audit,
+model completion, interpretation/mixed-topic synthesis, authorization and resource budgets remain
+intact. Source fixtures do not qualify a larger model. Include the pinned 35B identity in release
+validation without making it selected.
+
+شکست معنای فارسیِ بیکاری پردازنده در آزمون نخستِ 35B-A3B، با وجود دوازده درخواست کامل API،
+حفظ شد. بازگشت دقیق، 8d1f1d2 و 8B را برگرداند. تمرکز آشکار و برنامه‌محور CPU افزوده شد:
+کلید بررسی‌شده، واحد `%`، عدد اعشاری محدود، دامنه و نبود ابهام، برچسب درست دوزبانه، منبع و
+زمان اندازه‌گیری و گردآوری و قید قدیمی یا ناقص و عدم تغییر. شاهد غیرقابل‌استفاده رد می‌شود؛
+بیکاری، مصرف یا سلامت نیست. شاهد کاملِ مجاز و ممیزی، پایان تولید مدل، مسیر پرسش تفسیری و
+چندموضوعی، مجوز و حدود منابع حفظ‌اند. دادهٔ آزمون، پذیرش مدل بزرگ‌تر نیست. شناسهٔ تثبیت‌شدهٔ
+35B به اعتبارسنجی انتشار افزوده شد، بدون انتخاب مدل.
+
 ## Focused response length — 2026-09-29 / اختصار پاسخ متمرکز — ۷ مهر ۱۴۰۵
 
 The source-only file/filesystem prompt requests at most three short sentences instead of

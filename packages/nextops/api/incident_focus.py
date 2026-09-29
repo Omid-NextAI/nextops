@@ -44,6 +44,30 @@ _EN_NEGATED_ACTION = re.compile(
 )
 _FA_NEGATED_ACTION = re.compile(r"(?:اضافه\s*نکن|نشان\s*نده|گزارش\s*نکن)")
 _FA_POSITIVE_ACTION = re.compile(r"(?:نشان\s*بده|نمایش\s*بده|فهرست\s*کن|گزارش\s*کن)")
+_CPU_TOPIC = re.compile(r"(?:\bcpu\b|\bprocessor\b|پردازنده)", re.IGNORECASE)
+_CPU_OBSERVATION = re.compile(
+    r"(?:\b(?:measurements?|readings?|idle)\b|اندازه[‌ ]گیری|مشاهده|بیکاری)",
+    re.IGNORECASE,
+)
+_OTHER_CPU_TOPIC = re.compile(
+    r"(?:\b(?:memory|ram|disk|storage|files?|filesystems?|services?|events?|problems?|"
+    r"network|everything|history|trend|peak|average|cause|why|restart|reboot|explain|"
+    r"meaning|means)\b|"
+    r"حافظه|دیسک|فایل|سرویس|رویداد|مشکل|شبکه|همه|تاریخچه|روند|بیشینه|میانگین|"
+    r"علت|چرا|توضیح|معنی|معنا|راه[‌ ]اندازی\s*مجدد)",
+    re.IGNORECASE,
+)
+
+
+def monitoring_cpu_focus(question: str) -> bool:
+    """Narrow an unambiguous CPU observation request; never authorize collection."""
+
+    requested = _EXCLUDED_OTHER.sub("", _requested_text(question))
+    return bool(
+        _CPU_TOPIC.search(requested)
+        and _CPU_OBSERVATION.search(requested)
+        and not _OTHER_CPU_TOPIC.search(requested)
+    )
 
 
 def _requested_text(question: str) -> str:

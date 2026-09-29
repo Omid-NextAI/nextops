@@ -1,5 +1,19 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+CPU semantic repair trace (sections 9, 19, 25; 2026-09-29): 35B protected import and fourteen
+bounded completions passed; first guarded twelve API completions passed, but Persian CPU-idle
+meaning failed. Exact model/source rollback restored fresh 8d1f1d2/8B. Source-only deterministic
+CPU focus validates reviewed keys, units, range and ambiguity, preserves provenance/audit and
+refuses unavailable observations. 327 local tests passed with two POSIX skips; new live/CI/package
+acceptance remains next. Historical failures and independent/offline gates are not erased.
+
+ردیابی اصلاح معنای CPU (بخش‌های ۹، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): ورود محافظت‌شدهٔ 35B و چهارده تولید
+محدود موفق بودند؛ دوازده تولید API در آزمون محافظت‌شدهٔ نخست کامل شدند، اما معنای فارسیِ
+بیکاری پردازنده ناموفق بود. بازگشت دقیق مدل و کد، 8d1f1d2 و 8B را با تولید تازه برگرداند.
+کنترلِ تمرکز CPU که هنوز فقط در کد است، کلید بررسی‌شده، واحد، دامنهٔ عدد و ابهام را می‌سنجد؛
+منشأ و ممیزی را حفظ و شاهد غیرقابل‌استفاده را رد می‌کند. ۳۲۷ آزمون محلی موفق و دو مورد POSIX
+اجرانشده‌اند؛ پذیرش تازهٔ زنده، CI و بسته گام بعد است. شکست‌های تاریخی و معیار مستقل و آفلاین حفظ‌اند.
+
 Focused-prompt trace (sections 9, 19, 25; 2026-09-29): source-only concise output instruction,
 eight EN/FA/API fixtures, no removed focused evidence/provenance, no budget/audit/guard change.
 Actual raw completion and existing failed browser/semantic gates remain unaccepted.

@@ -6,6 +6,14 @@
 
 ## Current larger-model qualification — 2026-09-29
 
+Latest continuation: protected 35B import passed; fourteen CPU samples stopped in 13.5–64.5s.
+The first bb81109 guarded trial completed twelve API cases, but Persian CPU-idle labeling failed.
+Exact rollback restored 8d1f1d2/8B; 35B is protected, not selected. Point process RSS was about
+35.4 GiB; cgroup peak is not total resident RAM. VM/runtime/threads/context/queues/tokens/deadlines
+remain unchanged. The source-only semantic repair requires fresh qualification. Raw provenance,
+sustained/NUMA/server-WAN/VM/production gates are partial or not run. Earlier observations follow.
+
+
 Fourteen matched development cases used the corrected app prompts, 384 output tokens, 16 threads
 and one slot. Every sample completed: 8B took about 1.5–21 seconds; 14B about 4–54 seconds.
 Semantic review rejected 14B: its Persian RAM answer called RAM flash memory and its Persian

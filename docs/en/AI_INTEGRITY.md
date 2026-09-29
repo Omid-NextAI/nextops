@@ -4,6 +4,18 @@
 guarantee that a generative model will never be wrong. It instead prevents the most dangerous
 category error: presenting unsupported model text as live operational fact.
 
+## Current 35B semantic repair — 2026-09-29
+
+Protected 35B import passed; all fourteen raw comparison responses completed, but collection-time
+omissions remain a raw-provenance failure. The first exact bb81109/35B guarded trial completed
+twelve API requests, including both filesystem cases, yet mislabeled CPU idle in Persian. Semantic
+review failed; exact rollback restored 8d1f1d2/8B with fresh generation and logout. The source-only
+repair renders unambiguous CPU-idle measurements from reviewed keys/units/range, refuses ambiguity
+or missing values, and preserves source/time/partial/stale/full evidence/audit. It is transparently
+`deterministic_focus`, not verified model reasoning. Interpretation/mixed-topic questions keep the
+existing path. Live requalification is required; larger-model selection and full independent
+quality are not claimed. Earlier checkpoints below remain historical.
+
 ## Larger-model comparison — 2026-09-29
 
 The source-only focused prompt requests at most three short sentences without enumerating all
