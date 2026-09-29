@@ -17,6 +17,7 @@ from nextops.inference.contracts import (
     InferenceReadiness,
     InferenceRequest,
     InferenceResult,
+    ModelId,
     ReadinessState,
 )
 from nextops.inference.llama_cpp import LlamaCppProvider
@@ -150,8 +151,9 @@ class InferenceHttpTransport:
 class LocalModelTransport:
     """Only the CPU model completion is synthetic in the complete HTTP path test."""
 
-    def __init__(self) -> None:
+    def __init__(self, model_id: ModelId = "nextops-qwen3-8b-q4-k-m") -> None:
         self.payload: dict[str, Any] = {}
+        self.model_id = model_id
 
     async def get_json(
         self, path: str, headers: dict[str, str], timeout_seconds: float
@@ -164,7 +166,7 @@ class LocalModelTransport:
         assert path == "/v1/chat/completions"
         self.payload = payload
         return {
-            "model": "nextops-qwen3-8b-q4-k-m",
+            "model": self.model_id,
             "choices": [
                 {
                     "message": {"role": "assistant", "content": "A local answer."},
@@ -177,14 +179,16 @@ class LocalModelTransport:
 
 @pytest.mark.parametrize("purpose", ["general", "evidence_synthesis"])
 @pytest.mark.parametrize("locale", ["en", "fa"])
+@pytest.mark.parametrize("model_id", ["nextops-qwen3-8b-q4-k-m", "nextops-qwen3-5-35b-a3b-q4-k-m"])
 def test_gateway_http_scheduler_provider_preserves_trusted_purpose(
-    purpose: GenerationPurpose, locale: str
+    purpose: GenerationPurpose, locale: str, model_id: ModelId
 ) -> None:
-    model = LocalModelTransport()
+    model = LocalModelTransport(model_id)
     settings = LlamaCppSettings(
         base_url="http://127.0.0.1:8080",
         provider_api_key="local-model-test-key-" + "p" * 32,
         service_auth_secret=SERVICE_SECRET,
+        model_id=model_id,
     )
     service = BoundedInferenceService(LlamaCppProvider(settings, model))
     with TestClient(create_inference_app(service, SERVICE_SECRET)) as client:
@@ -199,7 +203,13 @@ def test_gateway_http_scheduler_provider_preserves_trusted_purpose(
     assert result.correlation_id == correlation_id
     assert result.answer == "A local answer."
     assert model.payload["max_tokens"] == 384
-    assert model.payload["messages"][-1]["content"] == request.question + "\n/no_think"
+    assert result.model_id == model_id
+    if model_id == "nextops-qwen3-5-35b-a3b-q4-k-m":
+        assert model.payload["messages"][-1]["content"] == request.question
+        assert model.payload["chat_template_kwargs"] == {"enable_thinking": False}
+    else:
+        assert model.payload["messages"][-1]["content"] == request.question + "\n/no_think"
+        assert "chat_template_kwargs" not in model.payload
     system_prompt = model.payload["messages"][0]["content"]
     assert ("local general assistant" in system_prompt) == (purpose == "general")
     assert ("isolated NextOps language synthesizer" in system_prompt) == (
@@ -223,3 +233,23 @@ def test_http_purpose_defaults_safely_and_rejects_unknown_or_unauthenticated() -
     assert (
         client.post("/api/v1/generate", json={**payload, "purpose": "general"}).status_code == 401
     )
+
+
+@pytest.mark.parametrize(
+    "extra",
+    [
+        {"model_id": "nextops-qwen3-5-35b-a3b-q4-k-m"},
+        {"chat_template_kwargs": {"enable_thinking": True}},
+    ],
+)
+def test_authenticated_http_client_cannot_choose_model_or_thinking_controls(
+    extra: dict[str, Any],
+) -> None:
+    service = FakeInferenceService()
+    client = TestClient(create_inference_app(service, SERVICE_SECRET))
+    payload = {"request_id": str(uuid4()), "locale": "en", "prompt": "Supplied evidence", **extra}
+    response = client.post(
+        "/api/v1/generate", json=payload, headers={"Authorization": f"Bearer {SERVICE_SECRET}"}
+    )
+    assert response.status_code == 422
+    assert service.last_request is None

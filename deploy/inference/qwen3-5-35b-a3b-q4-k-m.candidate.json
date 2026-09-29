@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "status": "pinned_candidate_not_live_qualified",
+  "model_id": "nextops-qwen3-5-35b-a3b-q4-k-m",
+  "source_repository": "https://huggingface.co/bartowski/Qwen_Qwen3.5-35B-A3B-GGUF",
+  "source_revision": "3d2a22d4eb631b9c8fd2be94599dc2fd84b4a595",
+  "quantized_by": "bartowski",
+  "quantizer_runtime_tag": "b9222",
+  "upstream_repository": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+  "upstream_reference_revision": "59d61f3ce65a6d9863b86d2e96597125219dc754",
+  "conversion_source_revision_verified": false,
+  "filename": "Qwen_Qwen3.5-35B-A3B-Q4_K_M.gguf",
+  "size_bytes": 22285080384,
+  "sha256": "2f2df1e8b2e92b642c1850ea1734b341cc8ca5098c42cc0a8b8c436a8d4751ab",
+  "license": "Apache-2.0",
+  "native_context_tokens": 262144,
+  "runtime_commit": "b29c606e28a01b1bc8c1351026a0fa6e616bf6c4",
+  "cpu_only_required": true,
+  "runtime_download_allowed": false,
+  "max_active_requests": 1,
+  "max_queued_requests": 2,
+  "qualification": {
+    "artifact_import": "not_run",
+    "bilingual_quality": "not_run",
+    "latency_resource_comparison": "not_run",
+    "offline_cold_start": "not_run",
+    "runtime_model_rollback": "not_run"
+  }
+}

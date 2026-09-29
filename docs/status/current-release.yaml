@@ -1,7 +1,7 @@
 ---
 $schema: ./release-status.schema.json
 schema_version: 2.2.0
-release_identifier: nextops-clarity-controlled-2026-09-29
+release_identifier: nextops-rtl-controlled-2026-09-29
 observed_at: '2026-09-29'
 deployment_status: controlled_user_testing_not_production_accepted
 delivery_scope:
@@ -17,17 +17,17 @@ snapshot_restore_owner_attestation:
 repository:
   remote: Omid-NextAI/nextops
   branch: main
-  inspected_baseline_commit: 505aa94d9b283554fc8e74601c9440dbe72bff4d
+  inspected_baseline_commit: 06f36092209119bca2feaf06925ea08510eef43e
 components:
   application:
-    release: nextops-0.1.0-c4351fd
-    source_commit: c4351fdca5ef3ade67e1fc9b1beece6dced0b5fa
+    release: nextops-0.1.0-8d1f1d2
+    source_commit: 8d1f1d265207c8c9e9d5f1d3ae7294c56928f50b
   connector:
     release: nextops-0.1.0-cdde129
     source_commit: cdde129950f60f9f18f3ef109cbf98f4217fc5e1
   inference_api:
-    release: nextops-0.1.0-c4351fd
-    source_commit: c4351fdca5ef3ade67e1fc9b1beece6dced0b5fa
+    release: nextops-0.1.0-8d1f1d2
+    source_commit: 8d1f1d265207c8c9e9d5f1d3ae7294c56928f50b
   inference_runtime:
     name: llama.cpp
     source_tag: v0.4.1
@@ -50,12 +50,12 @@ components:
     name: Zabbix
     version: '7.0.31'
 current_application_qualification:
-  release: nextops-0.1.0-c4351fd
-  source_commit: c4351fdca5ef3ade67e1fc9b1beece6dced0b5fa
+  release: nextops-0.1.0-8d1f1d2
+  source_commit: 8d1f1d265207c8c9e9d5f1d3ae7294c56928f50b
   scope: application_revision_sensitive
   gates:
     - id: current_app_bounded_live_functionality
-      status: passed
+      status: partial
       evidence:
         - docs/en/TESTING.md
         - docs/fa/TESTING.md
@@ -205,13 +205,24 @@ acceptance_gates:
       - docs/en/CPU_AI.md
       - docs/NEXT_TASK.md
   - id: model30a3b_bounded_qualification
-    status: partial
+    status: failed
     evidence:
       - deploy/inference/qwen3-30b-a3b-q4-k-m.candidate.json
       - docs/en/CPU_AI.md
       - docs/fa/CPU_AI.md
   - id: model30a3b_guarded_selection
-    status: partial
+    status: failed
+    evidence:
+      - docs/en/CPU_AI.md
+      - docs/NEXT_TASK.md
+  - id: model35a3b_bounded_qualification
+    status: not_run
+    evidence:
+      - deploy/inference/qwen3-5-35b-a3b-q4-k-m.candidate.json
+      - docs/en/CPU_AI.md
+      - docs/fa/CPU_AI.md
+  - id: model35a3b_guarded_selection
+    status: not_run
     evidence:
       - docs/en/CPU_AI.md
       - docs/NEXT_TASK.md

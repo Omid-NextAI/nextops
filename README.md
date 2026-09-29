@@ -14,12 +14,14 @@ The 14B CPU model was imported and rejected after matched bilingual factual/arit
 evidence-qualifier findings. The verified 32B import completed eleven answers, but a Persian
 stale-evidence question exceeded the 120-second timeout. It was not selected. Official pinned
 30B-A3B import and fourteen matched completions passed, at 1.3–23.7 seconds; raw evidence
-qualifiers and Persian wording remain partial. Its timed app trial returned twelve authenticated
-responses, but browser review exposed Latin-prefix Persian answers rendering LTR. Exact rollback
-restored c4351fd/8B with fresh generation. The response-locale direction repair passed seven local
-browser fixtures; serving-path requalification is next. The serving model remains 8B.
+qualifiers and Persian wording failed later review. Its corrected timed app trial fixed answer
+direction but rejected selection for Persian technical errors and repeat length-limited raw
+investigation. The baseline 8B also hit that raw Persian filesystem limit; the complete focused
+application answer and raw model completion are separate. Exact model/source rollback passed.
+Only the verified RTL source fix is now live as 8d1f1d2 with 8B. Qwen3.5-35B-A3B provisioning and
+source-only non-thinking compatibility are in progress, not accepted model selection.
 
-> **Status: controlled bilingual user testing is live; production is not accepted.** Application and AI API are `nextops-0.1.0-c4351fd`; connector remains `nextops-0.1.0-cdde129`. General/evidence instructions are separated, full accepted questions are retained, and answers have a bounded 384-token ceiling. The serving model remains CPU-only 8B. Exact-release evidence is recorded in the [release status](docs/status/current-release.yaml), [testing guide](docs/en/TESTING.md) and [project state](docs/PROJECT_STATE.md). Earlier WAN/reboot evidence does not transfer automatically. The retired owner questionnaire no longer blocks development. Recovery remains owner-deferred and unqualified; certificate, notification, licensing, release-integrity and final production gates remain open. Management-shell public egress is not permanently denied, despite restricted service boundaries. See the [production runbook](docs/en/PRODUCTION_BLOCKERS_RUNBOOK.md).
+> **Status: controlled bilingual user testing is live; production is not accepted.** Application and AI API are `nextops-0.1.0-8d1f1d2`; connector remains `nextops-0.1.0-cdde129`. General/evidence instructions are separated, full accepted questions are retained, and answers have a bounded 384-token ceiling. The serving model remains CPU-only 8B; current bounded functionality and held-out semantic gates are partial. Exact-release evidence is recorded in the [release status](docs/status/current-release.yaml), [testing guide](docs/en/TESTING.md) and [project state](docs/PROJECT_STATE.md). Earlier WAN/reboot evidence does not transfer automatically. The retired owner questionnaire no longer blocks development. Recovery remains owner-deferred and unqualified; certificate, notification, licensing, release-integrity and final production gates remain open. Management-shell public egress is not permanently denied, despite restricted service boundaries. See the [production runbook](docs/en/PRODUCTION_BLOCKERS_RUNBOOK.md).
 
 ## What NextOps is intended to do
 

@@ -2,7 +2,7 @@
 
 [فارسی](../fa/CPU_AI.md) · [Index](INDEX.md)
 
-**Status: bounded runtime/model smoke evidence and a repository-tested native service profile; full benchmark and deployment acceptance are not complete.** Source: master specification sections 2, 9–10 and 21. The pinned runtime/model pair has run on the qualified AI guest, but sustained throughput, production service behavior, rollback, restore, and Internet-blocked acceptance remain unmeasured.
+**Status: bounded CPU evidence and tested native profiles; full benchmark and production acceptance remain open.** Source: master specification sections 2, 9–10 and 21. Exact bounded restart/rollback observations are recorded below. Sustained throughput, production behavior, independent restore and current-release WAN/VM cold start remain unqualified.
 
 ## Current larger-model qualification — 2026-09-29
 
@@ -30,13 +30,31 @@ This is a bounded observation, not sustained throughput. Raw source/collection/p
 and Persian terminology remain partial. Unchanged assurance replay retained typed evidence and
 replaced incomplete evidence prose; it does not prove arbitrary correctness.
 
-The timed 3deba0d/30B-A3B app trial returned twelve authenticated responses, but browser review
+The earlier timed 3deba0d/30B-A3B app trial returned twelve authenticated responses, but browser review
 exposed Latin-prefix Persian LTR rendering. Exact model and source rollback restored c4351fd/8B
-with fresh bilingual generation. The source-only response-locale direction repair passed seven
-browser fixtures and awaits serving requalification. [The artifact record](../../deploy/inference/qwen3-30b-a3b-q4-k-m.candidate.json)
-retains partial quality and unrun offline cold start. Runtime, deadline, queue, network restrictions
+with fresh bilingual generation. The response-locale direction repair passed seven browser fixtures.
+The corrected 8d1f1d2/30B-A3B trial passed eleven strict browser cases, then failed raw Persian
+filesystem completion. Persian technical errors also rejected selection: SSD was called main
+memory and non-native terms recurred. Twelve API responses and four stored evidence/audit hash
+checks are not a semantic pass. [The artifact record](../../deploy/inference/qwen3-30b-a3b-q4-k-m.candidate.json)
+now records failed bilingual quality and unrun offline cold start. Runtime, deadline, queue, network restrictions
 and the existing 24-vCPU/128-GiB guest are unchanged; no cloud, runtime download or VM increase is
 introduced. Full held-out and production acceptance remain separate.
+
+Only the exact RTL source repair is live as 8d1f1d2 with original 8B. Twelve fresh API requests
+passed literal/code checks; the strict browser likewise failed final raw Persian filesystem
+completion after eleven cases. A separate focused-answer display check passed, without claiming
+raw completion. The shared 384-token finding needs bounded prompt-scope review, not a larger queue
+or deadline. Do not claim baseline 8B is universally accurate either.
+
+The next bounded candidate is [Qwen3.5-35B-A3B](https://huggingface.co/Qwen/Qwen3.5-35B-A3B), with
+35B total/3B active parameters. The [pinned artifact record](../../deploy/inference/qwen3-5-35b-a3b-q4-k-m.candidate.json)
+uses [Bartowski's Q4_K_M quantization](https://huggingface.co/bartowski/Qwen_Qwen3.5-35B-A3B-GGUF),
+not an official Qwen GGUF publication. Both cards declare Apache-2.0. Upstream reference revision
+is not verified conversion lineage. Provisioning and source fixtures are not a load/quality pass.
+Qwen3.5 needs trusted `chat_template_kwargs.enable_thinking=false`; Qwen3's soft suffix is not
+supported. The native context is not the configured context: retain 8192, CPU-only, one slot,
+the existing ceilings, no vision projector and no speculative MTP. Preserve older provider payloads.
 
 ## Non-negotiable execution boundary
 
@@ -89,7 +107,7 @@ a truncated Persian RAM answer and wording/source omissions; a four-case 384-tok
 using the actual general prompt completed in about 13–41 seconds. The comparison used 16 threads,
 one slot and a 32 GiB memory ceiling; it was not a sustained capacity or NUMA benchmark. Quality
 remains failed and resource comparison partial. The serving 8B artifact and rollback are preserved.
-Explicit `NEXTOPS_MODEL_ID` accepts only the reviewed 8B/14B/32B/30B-A3B source aliases; arbitrary
+Explicit `NEXTOPS_MODEL_ID` accepts only the reviewed 8B/14B/32B/30B-A3B/Qwen3.5-35B-A3B source aliases; arbitrary
 names/URLs fail. Source compatibility is not serving selection or quality acceptance.
 Runtime alias, local file and configuration must match, and missing files must not trigger a download.
 

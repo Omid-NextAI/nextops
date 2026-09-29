@@ -6,12 +6,15 @@ category error: presenting unsupported model text as live operational fact.
 
 ## Larger-model comparison — 2026-09-29
 
-30B-A3B passed import/deadline checks, but raw qualifiers and Persian terminology remain partial.
-Unchanged application assurance replay retained typed provenance and replaced incomplete evidence
-prose. Its timed app trial exposed Latin-prefix Persian LTR rendering and was rolled back to
-c4351fd/8B with fresh generation. A response-locale direction fix passed seven local browser
-fixtures; live requalification is next. Model-only text remains explicitly unverified. Raw-model,
-application-guard, browser and independent semantic results must not be conflated.
+30B-A3B passed import/deadline checks but failed later Persian technical review. Unchanged
+assurance retained typed provenance and replaced incomplete evidence prose. Its corrected trial
+fixed Latin-prefix Persian direction, but raw Persian filesystem generation hit 384 tokens and
+the strict browser failed after eleven cases. Exact model/source rollback passed; only the RTL
+source fix is live as 8d1f1d2 with original 8B. The baseline likewise hit that raw ceiling. A
+separate complete focused-answer display pass is not a raw-completion or general truth pass.
+Model-only text remains unverified. Raw-model, guard, browser and independent semantic results
+must not be conflated. Qwen3.5-35B-A3B is being provisioned with tested source-only non-thinking
+compatibility, not selected. Bigger weights do not erase failed quality or justify larger limits.
 
 Earlier observations: fourteen matched bilingual cases completed at 384 tokens on both 8B and 14B. Semantic review
 rejected 14B for incorrect Persian RAM and arithmetic answers and missing/weakened evidence
@@ -19,12 +22,12 @@ qualifiers. 8B also failed some source/stale cases. These are development observ
 independent held-out acceptance. No model gained a tool or credential. The serving 8B remains
 unchanged. Verified 32B import completed eleven samples, but the Persian stale-evidence request
 exceeded 120 seconds; it was not selected and injection cases were not run. The next bounded
-candidate is pinned 30B-A3B, with identical prompts/deadlines and source-only identity support. See
+candidate was pinned 30B-A3B, with identical prompts/deadlines and source-only identity support. See
 [CPU_AI](CPU_AI.md); larger weights do not waive deterministic safeguards.
 
-## Clarity repair — 2026-09-29
+## Earlier clarity repair — 2026-09-29
 
-The corrected `c4351fd` application/inference API is now live. Twelve fresh bilingual API cases
+The corrected `c4351fd` application/inference API was live at this earlier checkpoint. Twelve fresh bilingual API cases
 passed the named greeting, knowledge, unknown-current-state, file-focus and host-scope expectations
 with matching code digests. Browser review covered five general cases and two filesystem cases
 in separate fresh contexts. App/API rollback and re-promotion worked. This fixes the observed

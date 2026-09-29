@@ -16,7 +16,7 @@
   "max_queued_requests": 2,
   "qualification": {
     "artifact_import": "passed",
-    "bilingual_quality": "partial",
+    "bilingual_quality": "failed",
     "latency_resource_comparison": "passed",
     "offline_cold_start": "not_run",
     "runtime_model_rollback": "passed"

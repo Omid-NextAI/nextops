@@ -1,13 +1,34 @@
 # Next task / کار بعدی
 
-Current unfinished checkpoint, 2026-09-29 — Qualify the response-locale RTL/LTR repair as an
+Current unfinished checkpoint, 2026-09-29 — Complete pinned Qwen3.5-35B-A3B Q4_K_M verification and
+protected import, then compare the same bilingual development questions and budgets on the existing
+CPU-only runtime. Keep serving 8d1f1d2/8B and exact rollback. 30B-A3B was rejected for Persian
+technical errors; raw Persian filesystem completion also failed on baseline 8B. Preserve both
+strict failures, distinguish the complete application-owned focus display from discarded raw
+generation, and investigate bounded prompt scope rather than increasing limits or teaching test
+answers. Qwen3.5 needs a trusted non-thinking parameter, not Qwen3's soft switch. Its quantizer is
+Bartowski, not Qwen; upstream reference is not verified conversion lineage. Require correct facts,
+professional EN/FA, fresh exact-identity API/browser/audit and rollback before larger-model selection.
+Provisioning/fixtures are not held-out, server-WAN, VM-reboot or production acceptance.
+
+نخستین گام ناتمام، ۷ مهر ۱۴۰۵ — تطبیق اندازه و هش و ورود محافظت‌شدهٔ Qwen3.5 با 35B-A3B و
+Q4_K_M تکمیل و سپس همان پرسش‌های توسعه‌ای دوزبانه و سقف‌ها روی محیط CPU موجود مقایسه شوند.
+8d1f1d2 و 8B مستقر، همراه امکان بازگشت دقیق حفظ شوند. 30B-A3B به‌دلیل خطای اصطلاحات فنی فارسی
+رد شد؛ کامل‌شدن تولید خامِ فایل‌سیستم فارسی در خط مبنای 8B نیز شکست خورد. هر دو شکست حفظ و
+پاسخ کامل و متمرکزِ برنامه از متن خامِ کنارگذاشته‌شده جدا شوند؛ دامنهٔ محدود دستور بررسی شود،
+نه افزایش سقف یا آموزش پاسخ آزمون. Qwen3.5 به پارامتر معتبرِ حالت بدون تفکر نیاز دارد، نه دستور
+نرم Qwen3. سازندهٔ کوانتیزه Bartowski است، نه Qwen؛ نسخهٔ مرجع، زنجیرهٔ تبدیل تأییدشده نیست.
+پیش از انتخاب مدل بزرگ‌تر، واقعیت درست، فارسی و انگلیسی حرفه‌ای، API و مرورگر تازه با شناسهٔ
+دقیق، ممیزی و بازگشت آزموده شوند. آماده‌سازی و دادهٔ آزمون، پذیرش مستقل، WAN، reboot یا تولید نیستند.
+
+Earlier unfinished checkpoint, 2026-09-29 — Qualify the response-locale RTL/LTR repair as an
 exact offline-installed package, then repeat the timed 30B-A3B app trial. Artifact/deadline checks
 passed; raw qualifier/Persian review remains partial. Keep deterministic assurance, typed
 provenance and the model-only warning. Require fresh EN/FA API/browser, unchanged security/resource
 limits and exact rollback. c4351fd/8B was restored with fresh generation after Latin-prefix Persian
 LTR rendering failed the first trial. Seven local browser fixtures pass, not live/WAN/VM gates.
 
-نخستین گام ناتمام، ۷ مهر ۱۴۰۵ — اصلاح RTL/LTR بر پایهٔ زبان پاسخ، با بستهٔ دقیق و نصب آفلاین
+گام پیشینِ ناتمام، ۷ مهر ۱۴۰۵ — اصلاح RTL/LTR بر پایهٔ زبان پاسخ، با بستهٔ دقیق و نصب آفلاین
 تأیید و سپس آزمون موقت 30B-A3B در برنامه تکرار شود. فایل و مهلت تأیید شدند؛ قیدهای متن مدل و
 نگارش فارسی هنوز کاملاً پذیرفته نیستند. کنترل قطعی، انتساب شاهد نوع‌دار و هشدار خطای مدل حفظ
 شوند. API و مرورگر با پرسش تازهٔ فارسی و انگلیسی، حدود ثابت امنیت و منابع و بازگشت دقیق

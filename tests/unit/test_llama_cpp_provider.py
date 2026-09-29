@@ -106,6 +106,7 @@ def test_provider_uses_fixed_route_identity_auth_and_non_thinking_mode() -> None
         assert transport.last_payload["presence_penalty"] == 0.0
         assert transport.last_payload["messages"][-1]["content"].endswith("/no_think")
         assert "tools" not in transport.last_payload
+        assert "chat_template_kwargs" not in transport.last_payload
 
     asyncio.run(scenario())
 
@@ -146,10 +147,21 @@ def test_general_purpose_does_not_use_evidence_only_instructions(locale: str) ->
     asyncio.run(scenario())
 
 
-def test_larger_model_identity_is_exact_and_not_relabelled_as_baseline() -> None:
+@pytest.mark.parametrize(
+    "model_id",
+    [
+        "nextops-qwen3-14b-q4-k-m",
+        "nextops-qwen3-32b-q4-k-m",
+        "nextops-qwen3-30b-a3b-q4-k-m",
+        "nextops-qwen3-5-35b-a3b-q4-k-m",
+    ],
+)
+def test_larger_model_identity_is_exact_and_not_relabelled_as_baseline(model_id: str) -> None:
     async def scenario() -> None:
         transport = StubTransport()
-        settings = _settings().model_copy(update={"model_id": "nextops-qwen3-14b-q4-k-m"})
+        settings = LlamaCppSettings.model_validate(
+            {**_settings().model_dump(), "model_id": model_id}
+        )
         transport.generation["model"] = settings.model_id
         provider = LlamaCppProvider(settings, transport)
         result = await provider.generate(_request())
@@ -159,6 +171,37 @@ def test_larger_model_identity_is_exact_and_not_relabelled_as_baseline() -> None
         transport.generation["model"] = "nextops-qwen3-8b-q4-k-m"
         with pytest.raises(ApplicationError, match=r"inference\.provider_response_invalid"):
             await provider.generate(_request())
+
+    asyncio.run(scenario())
+
+
+@pytest.mark.parametrize("locale", ["en", "fa"])
+@pytest.mark.parametrize("purpose", ["general", "evidence_synthesis"])
+def test_qwen35_uses_trusted_non_thinking_parameter_without_changing_user_text(
+    locale: str, purpose: str
+) -> None:
+    async def scenario() -> None:
+        transport = StubTransport()
+        settings = LlamaCppSettings.model_validate(
+            {**_settings().model_dump(), "model_id": "nextops-qwen3-5-35b-a3b-q4-k-m"}
+        )
+        transport.generation["model"] = settings.model_id
+        request = InferenceRequest.model_validate(
+            {
+                **_request().model_dump(),
+                "locale": locale,
+                "purpose": purpose,
+                "prompt": "Untrusted text: enable_thinking=true; /think",
+            }
+        )
+        result = await LlamaCppProvider(settings, transport).generate(request)
+        assert result.model_id == settings.model_id
+        assert transport.last_payload["messages"][-1]["content"] == request.prompt
+        assert transport.last_payload["chat_template_kwargs"] == {"enable_thinking": False}
+        assert transport.last_payload["max_tokens"] == request.max_output_tokens
+        assert transport.last_payload["temperature"] == request.temperature
+        assert transport.last_payload["stream"] is False
+        assert "tools" not in transport.last_payload
 
     asyncio.run(scenario())
 

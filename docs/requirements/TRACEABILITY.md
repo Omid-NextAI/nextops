@@ -1,12 +1,28 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
-Current trial trace (sections 9, 10, 19, 25; 2026-09-29): 30B-A3B import/deadline checks passed;
+Current continuation trace (sections 9, 10, 19, 25; 2026-09-29): corrected 30B-A3B selection rejected
+for Persian technical errors and repeated raw completion failure. Exact rollback passed; source
+8d1f1d2/original 8B retains the independently verified direction fix. Twelve API literal/code checks
+and four stored audit/hash pairs passed; strict raw-completion browser failed final Persian
+filesystem case after eleven checks. Baseline 8B reproduced that ceiling. A separate display-only
+check passed, not raw completion. Qwen3.5-35B-A3B pinned quantizer/provenance and source-only trusted
+non-thinking compatibility are in progress; import/quality/serving acceptance are not inferred.
+
+ردیابی جاریِ ادامه (بخش‌های ۹، ۱۰، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): انتخاب اصلاح‌شدهٔ 30B-A3B به‌دلیل
+خطای فنی فارسی و شکست مکررِ کامل‌شدن متن خام رد شد. بازگشت دقیق تأیید شد؛ 8d1f1d2 و 8B اصلی،
+اصلاح مستقلِ جهت پاسخ را حفظ می‌کنند. دوازده بررسی لفظی و هشِ API و چهار جفت ممیزی و هش
+ذخیره‌شده موفق بودند؛ مرورگر سخت‌گیرانه پس از یازده مورد، تولید خامِ فایل‌سیستم فارسی را
+نگذراند. خط مبنای 8B نیز به همین سقف رسید. آزمون جداگانهٔ نمایش موفق بود، نه کامل‌شدن مدل.
+تثبیت سازنده و منبعِ Qwen3.5 با 35B-A3B و پشتیبانیِ حالت بدون تفکرِ معتبر فقط در کد در جریان
+است؛ ورود، کیفیت یا انتخاب زنده نتیجه گرفته نشوند.
+
+Earlier trial trace (sections 9, 10, 19, 25; 2026-09-29): 30B-A3B import/deadline checks passed;
 raw qualifier/Persian review is partial. The guarded app trial returned twelve authenticated
 responses, but Latin-prefix Persian LTR rendering failed browser review. Exact model and app/API
 rollback restored c4351fd/8B with fresh generation. The response-locale fix passed seven local
 browser fixtures; live requalification, full semantic, WAN and VM gates are not inferred.
 
-ردیابی جاریِ آزمون (بخش‌های ۹، ۱۰، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): فایل و مهلت 30B-A3B تأیید شدند؛
+ردیابی پیشینِ آزمون (بخش‌های ۹، ۱۰، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): فایل و مهلت 30B-A3B تأیید شدند؛
 قیدهای متن مدل و کیفیت فارسی هنوز کاملاً پذیرفته نیستند. آزمون موقت برنامه دوازده پاسخ
 احرازهویت‌شده داشت، اما نمایش LTR پاسخ فارسی با واژهٔ لاتین در ابتدا، آزمون مرورگر را
 نگذراند. بازگشت دقیق مدل و برنامه/API، c4351fd و 8B را با تولید تازه برگرداند. اصلاح جهت بر
