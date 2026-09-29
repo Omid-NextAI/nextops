@@ -1,5 +1,21 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Selected 35B trace (sections 9, 10, 19, 25; 2026-09-29): protected pinned artifact, exact source
+95c6e50/offline wheel and five CI jobs passed. Twelve API and twelve browser cases plus eight
+read-only audit/hash pairs, exact 8B/app/API rollback and six final re-promotion confirmations
+passed. Canonical CPU/file-focus ownership and all authorization/resource/offline-design boundaries
+remain. Metadata identity/context/template/lineage limits are tracked. Prior raw failures are
+preserved; held-out semantics are partial and current server-WAN/full-VM gates are not run.
+Controlled selection is not production acceptance. Current source state supersedes dated records below.
+
+ردیابی 35B منتخب (بخش‌های ۹، ۱۰، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): فایل تثبیت‌شده و محافظت‌شده، کد دقیق
+95c6e50، wheel آفلاین و پنج کنترل CI تأیید شدند. دوازده آزمون API و دوازده مورد مرورگر، هشت
+تطبیق فقط‌خواندنیِ ممیزی و هش، بازگشت دقیق 8B و برنامه/API و شش تأیید نهاییِ استقرار مجدد
+موفق‌اند. معنای CPU و تمرکز فایل در اختیار برنامه و مرزهای مجوز، منابع و طراحی آفلاین حفظ‌اند.
+شناسهٔ فراداده، context، قالب و محدودیت زنجیرهٔ تبدیل ثبت‌اند. شکست‌های خام پیشین حفظ شده‌اند؛
+معنای مستقل ناقص و WAN سرور و شروع سردِ کامل VM همین انتشار اجرا‌نشده‌اند. انتخاب کنترل‌شده،
+پذیرش تولید نیست. وضعیت جاری بر رکوردهای تاریخ‌دارِ زیر تقدم دارد.
+
 CPU semantic repair trace (sections 9, 19, 25; 2026-09-29): 35B protected import and fourteen
 bounded completions passed; first guarded twelve API completions passed, but Persian CPU-idle
 meaning failed. Exact model/source rollback restored fresh 8d1f1d2/8B. Source-only deterministic

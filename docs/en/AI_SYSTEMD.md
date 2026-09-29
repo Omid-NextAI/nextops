@@ -2,9 +2,11 @@
 
 [فارسی](../fa/AI_SYSTEMD.md) · [Index](INDEX.md) · [CPU-only AI](CPU_AI.md) · [Offline runtime](OFFLINE_RUNTIME.md)
 
-**Status: installed and running on the authorized AI server; controlled Stage 1B qualification
+**Dated qualification: installed on the authorized AI server; controlled Stage 1B qualification
 passed on 2026-09-22 and the answer-integrity qualification passed on 2026-09-26, while production
-and full offline acceptance remain open.**
+and full offline acceptance remain open.** These dated results do not qualify a later application
+or model; consult the [current release](../status/current-release.yaml), [CPU guide](CPU_AI.md)
+and [testing record](TESTING.md) for the actual selected identity and revision-sensitive gates.
 
 Stage 1B uses the native systemd profile under [`deploy/systemd`](../../deploy/systemd). Docker is
 not required and no service receives a container socket. The profile separates the pinned llama.cpp
@@ -33,11 +35,11 @@ values, oversized files, ambiguous environment-plus-file sources, and world-acce
 files on POSIX. Ordinary environment values remain available only for isolated development/tests;
 the deployment profile does not use them.
 
-The protected AI application release `nextops-0.1.0-fd3c353` is active. It retains the qualified
+At the 2026-09-26 checkpoint, protected AI release `nextops-0.1.0-fd3c353` was active. It retained the qualified
 evidence prompt and adds deterministic evaluation rules that reject prompt echo, invented execution
 claims and answers that present model memory as current infrastructure state. The earlier
 `62de8d6`, `417d888` and `5de76ac` builds remain historical qualification or rollback evidence, not
-the current application.
+the current application. `fd3c353` is also historical; it is not the current serving identity.
 
 ## Verified live result
 
@@ -54,7 +56,7 @@ The private evidence record for 2026-09-22 verifies:
 5. a cold process restart restored the authenticated services in 109 seconds; the unit network policy
    denied non-loopback IP traffic throughout;
 6. application rollback to `417d888` and forward restoration to `62de8d6` both passed authentication
-   denial/readiness checks in the 2026-09-22 qualification. The later integrity deployment leaves
+   denial/readiness checks in the 2026-09-22 qualification. The later 2026-09-26 integrity deployment left
    `fd3c353` active and preserves the prior immutable releases.
 
 The private 2026-09-26 integrity report contains eight balanced English/Persian live cases. All

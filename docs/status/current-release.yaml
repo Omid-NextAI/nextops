@@ -1,7 +1,7 @@
 ---
 $schema: ./release-status.schema.json
 schema_version: 2.2.0
-release_identifier: nextops-rtl-controlled-2026-09-29
+release_identifier: nextops-qwen35-controlled-2026-09-29
 observed_at: '2026-09-29'
 deployment_status: controlled_user_testing_not_production_accepted
 delivery_scope:
@@ -17,17 +17,17 @@ snapshot_restore_owner_attestation:
 repository:
   remote: Omid-NextAI/nextops
   branch: main
-  inspected_baseline_commit: 06f36092209119bca2feaf06925ea08510eef43e
+  inspected_baseline_commit: 802653a2a5911a4fcd9bc958b6489202a1cd1551
 components:
   application:
-    release: nextops-0.1.0-8d1f1d2
-    source_commit: 8d1f1d265207c8c9e9d5f1d3ae7294c56928f50b
+    release: nextops-0.1.0-95c6e50
+    source_commit: 95c6e501a89f148c9a9bf802f48f05555c2c6400
   connector:
     release: nextops-0.1.0-cdde129
     source_commit: cdde129950f60f9f18f3ef109cbf98f4217fc5e1
   inference_api:
-    release: nextops-0.1.0-8d1f1d2
-    source_commit: 8d1f1d265207c8c9e9d5f1d3ae7294c56928f50b
+    release: nextops-0.1.0-95c6e50
+    source_commit: 95c6e501a89f148c9a9bf802f48f05555c2c6400
   inference_runtime:
     name: llama.cpp
     source_tag: v0.4.1
@@ -35,11 +35,11 @@ components:
     binary_sha256: dbe5a5cdd4842fe2d498270c1e1df58344e9052e97214e2ba9c9845443a1b0dc
     cpu_only: true
   model:
-    identifier: nextops-qwen3-8b-q4-k-m
-    source_revision: 7c41481f57cb95916b40956ab2f0b139b296d974
+    identifier: nextops-qwen3-5-35b-a3b-q4-k-m
+    source_revision: 3d2a22d4eb631b9c8fd2be94599dc2fd84b4a595
     quantization: Q4_K_M
-    size_bytes: 5027783488
-    sha256: d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785
+    size_bytes: 22285080384
+    sha256: 2f2df1e8b2e92b642c1850ea1734b341cc8ca5098c42cc0a8b8c436a8d4751ab
   application_database:
     name: PostgreSQL
     version: '16.15'
@@ -50,12 +50,12 @@ components:
     name: Zabbix
     version: '7.0.31'
 current_application_qualification:
-  release: nextops-0.1.0-8d1f1d2
-  source_commit: 8d1f1d265207c8c9e9d5f1d3ae7294c56928f50b
+  release: nextops-0.1.0-95c6e50
+  source_commit: 95c6e501a89f148c9a9bf802f48f05555c2c6400
   scope: application_revision_sensitive
   gates:
     - id: current_app_bounded_live_functionality
-      status: partial
+      status: passed
       evidence:
         - docs/en/TESTING.md
         - docs/fa/TESTING.md
@@ -381,20 +381,20 @@ acceptance_gates:
       - docs/en/OPERATIONS.md
       - docs/en/TESTING.md
   - id: answer_integrity_live
-    status: failed
+    status: partial
     evidence:
       - docs/requirements/ANSWER_INTEGRITY_SPEC.md
       - docs/en/AI_INTEGRITY.md
       - docs/en/TESTING.md
   - id: focused_app_live_qualification
-    status: failed
+    status: passed
     evidence:
       - docs/en/TESTING.md
       - docs/fa/TESTING.md
       - tests/api/test_app.py
       - tests/browser/test_phase2_panel.py
   - id: focused_app_exact_rollback_drill
-    status: not_run
+    status: passed
     evidence:
       - docs/en/TESTING.md
   - id: serving_guest_package_maintenance

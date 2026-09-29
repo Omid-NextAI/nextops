@@ -1,6 +1,6 @@
 # Answer integrity specification
 
-Status: RTL-corrected app/API `nextops-0.1.0-8d1f1d2` serves controlled user testing with 8B.
+Status: app/API `nextops-0.1.0-95c6e50` serves controlled user testing with CPU-only 35B-A3B.
 Named live regressions and exact app/API/model rollback passed; full held-out semantics remain partial.
 Matched 14B development review failed. Verified 32B import failed its Persian evidence deadline,
 with semantic review partial. 30B-A3B import/deadline checks passed, but later Persian technical
@@ -8,7 +8,9 @@ review failed. Its corrected guarded trial fixed direction but failed raw Persia
 completion; the baseline 8B likewise reached that ceiling. Keep strict failures separate from the
 complete application-owned focused display. Qwen3.5-35B-A3B protected import and matched raw
 completions passed, but its first guarded trial failed Persian CPU-idle labeling. Exact rollback
-restored 8d1f1d2/8B; 35B is not selected and the semantic repair is source-only. Qualification is not a
+restored 8d1f1d2/8B. The bounded CPU repair then passed twelve API/browser cases and eight durable
+audit/hash checks with exact rollback and six final re-promotion confirmations. 35B is selected
+for controlled testing; raw/full quality remains partial. Qualification is not a
 guarantee that model-only text is always true.
 
 ## Problem

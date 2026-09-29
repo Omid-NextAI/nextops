@@ -4,11 +4,13 @@
 
 Updated: 2026-09-29
 
-Current quality correction: `c4351fd` is live in the app and AI API. Twelve fresh bilingual API
-cases repaired the named file-only and multi-host scope regressions and checked direct general
-answers. Seven browser cases were covered across two fresh contexts. Full held-out quality is
-partial, not production accepted. The blocking owner questionnaire has been retired; 14B was
-imported and compared but remains unselected after quality findings.
+Current controlled selection: app/API `95c6e50` serves Qwen3.5-35B-A3B Q4_K_M on the existing
+CPU-only guest/runtime. Twelve API and twelve browser cases, eight durable audit/hash pairs,
+exact 8B/app/API rollback and six final re-promotion confirmations passed. Sample latency was
+12.7–94.3s; hardware/queues/deadlines did not change. Full held-out quality is partial, not
+production accepted. Preserve the first 35B semantic failure and rejected 14B/32B/30B findings.
+The retired owner form remains retired. Earlier clarity regressions and checks are recorded in
+the testing guide; larger weights do not guarantee universally correct answers.
 
 Owner clarification: an ESXi VM snapshot restore was tested by the owner; its dated result was
 not reviewed here. This does not qualify independent PostgreSQL backup, WAL/PITR or isolated
@@ -38,10 +40,11 @@ rotation/operator notification and disaster-recovery sign-off remain open. The o
 deferred independent recovery; no independent destination or isolated restore lab exists and no
 recovery acceptance is implied. No SMTP or alternate named-recipient delivery route is configured.
 
-The current application and AI API are `nextops-0.1.0-c4351fd`; connector remains on
+The current application and AI API are `nextops-0.1.0-95c6e50`; connector remains on
 `nextops-0.1.0-cdde129`. The clarity update preserves full questions, separates general and evidence
-instructions, and bounds answers at 384 tokens. Selected CPU 8B remains unchanged. Bounded live
-checks, app/API rollback and re-promotion passed; full held-out quality is partial and exact-release
+instructions, and bounds answers at 384 tokens. Selected CPU model is Qwen3.5-35B-A3B Q4_K_M.
+Twelve API/browser cases each, eight audit/hash pairs, exact 8B/source rollback and six final
+re-promotion confirmations passed; full held-out quality is partial and exact-release
 server WAN isolation and VM cold start have not run. The current release retains the rejection of credential-bearing HTTP redirects;
 all four guests require key-only, non-root SSH and the
 AI host firewall is active. Zabbix Agent 2 is aligned at `7.0.31` on all four guests. The owner confirmed that recovery/restore resources, an approved

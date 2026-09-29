@@ -1,5 +1,32 @@
 # Project state / وضعیت پروژه
 
+Current controlled selection, 2026-09-29 — Qwen3.5-35B-A3B Q4_K_M is serving on the unchanged
+CPU-only runtime with app/API 95c6e50, after PR39's five CI jobs and exact offline Ubuntu package
+qualification. The corrected trial passed twelve fresh API and twelve strict browser cases,
+EN/FA facts/arithmetic, canonical CPU-idle provenance, raw completion, RTL/LTR, local assets and
+login/logout. Four bounded read-only database checks matched stored responses, scope, audit and
+evidence hashes. Exact model and app/API rollback restored 8d1f1d2/8B with fresh EN/FA generation;
+re-promotion passed six fresh final confirmations and four more read-only audit/hash checks. Keep the
+first 35B Persian semantic failure and raw collection-time omissions: full bilingual/held-out
+quality is partial. API sample latency was 12.7–93.6 seconds; process RSS observation about 35.4
+GiB, not a sustained benchmark. No VM/runtime/resource/queue/deadline change; no GPU/cloud/
+training. Original 8B/source rollback stays protected. Current-release server-WAN and full-VM
+cold start are not run; production is not accepted. The dated checkpoints below are historical.
+
+انتخاب کنترل‌شدهٔ جاری، ۷ مهر ۱۴۰۵ — Qwen3.5 با 35B-A3B و Q4_K_M، روی همان محیط CPU و با
+برنامه/API نسخهٔ 95c6e50 مستقر است؛ پنج کنترل CI در PR39 و بستهٔ دقیقِ آفلاین Ubuntu تأیید
+شدند. آزمون اصلاح‌شده، دوازده پرسش تازهٔ API و دوازده مورد سخت‌گیرانهٔ مرورگر، واقعیت و محاسبهٔ
+دوزبانه، منشأ درستِ بیکاری پردازنده، تولید کامل، RTL/LTR، دارایی محلی و ورود و خروج را گذراند.
+چهار بررسی محدود و فقط‌خواندنی پایگاه، پاسخ ذخیره‌شده، دامنه، ممیزی و هش شاهد را تطبیق دادند.
+بازگشت دقیق مدل و برنامه/API، 8d1f1d2 و 8B را با تولید تازهٔ دوزبانه برگرداند؛ استقرار مجدد،
+شش تأیید تازهٔ نهاییِ API و چهار تطبیق فقط‌خواندنیِ دیگرِ ممیزی و هش را گذراند. شکست معناییِ فارسی در آزمون
+نخستِ 35B و حذف زمان گردآوری از متن خام حفظ شوند؛ کیفیت کامل دوزبانه و مستقل هنوز ناقص است.
+تأخیر نمونه‌های API، ۱۲٫۷ تا ۹۳٫۶ ثانیه و مشاهدهٔ RSS حدود ۳۵٫۴ GiB بود، نه کارایی پایدار.
+ماشین، محیط اجرا، منابع، صف و مهلت تغییر نکردند؛ GPU، ابر یا آموزش مدل اضافه نشد. مدل و کد
+اصلی برای بازگشت محافظت‌شده‌اند. WAN سرور و شروع سردِ کامل VM همین انتشار اجرا نشده‌اند و
+تولید پذیرفته نیست. گام‌های تاریخ‌دارِ زیر تاریخی‌اند.
+
+
 Current continuation, 2026-09-29 — The exact 35B-A3B artifact was size/hash-verified on desktop and
 AI host and protected; fourteen matched CPU samples completed in 13.5–64.5 seconds. Raw provenance
 review remains partial (collection-time omissions). PR38 passed five CI jobs and exact fresh

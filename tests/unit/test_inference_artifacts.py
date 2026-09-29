@@ -103,6 +103,30 @@ def test_qwen35_quantizer_reference_is_not_claimed_as_verified_conversion_lineag
     assert list(validator.iter_errors({**candidate, "conversion_source_revision_verified": True}))
 
 
+@pytest.mark.parametrize(
+    ("field", "incorrect"),
+    [
+        ("gguf_base_model_repository", "https://example.invalid/unverified-lineage"),
+        ("architecture", "llama"),
+        ("quantization", "Q8_0"),
+        ("chat_template_sha256", "0" * 64),
+        ("trusted_enable_thinking", True),
+        ("configured_context_tokens", 262144),
+    ],
+)
+def test_qwen35_metadata_identity_and_bounded_mode_are_required(
+    field: str, incorrect: object
+) -> None:
+    directory = MANIFEST.parent
+    candidate = json.loads((directory / "qwen3-5-35b-a3b-q4-k-m.candidate.json").read_text("utf-8"))
+    schema = json.loads((directory / "model-35b-a3b-candidate.schema.json").read_text("utf-8"))
+    validator = Draft202012Validator(schema)
+    assert not list(validator.iter_errors(candidate))
+    assert list(validator.iter_errors({**candidate, field: incorrect}))
+    missing = {key: value for key, value in candidate.items() if key != field}
+    assert list(validator.iter_errors(missing))
+
+
 def test_selected_artifact_manifest_is_human_readable_and_schema_valid() -> None:
     result = subprocess.run(
         [sys.executable, "scripts/check_inference_artifacts.py"],

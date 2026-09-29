@@ -17,8 +17,9 @@ evidence-reference tooltip. Assets are served locally without a CDN.
 The broader operations console described below—inventory, incident timelines, topology, approvals,
 audit search and settings—remains specification work.
 
-Live investigations are capped server-side at the qualified 128-token CPU budget; the browser uses
-the same bound. Timeout, overload and local-dependency failures retain safe machine-readable status
+Live investigations are capped server-side at the bounded 384-token CPU budget; the browser uses
+the same bound. Completion and quality still require measured qualification. Timeout, overload
+and local-dependency failures retain safe machine-readable status
 and are presented as distinct actionable messages in both languages. This prevents a stale or
 modified browser from raising the output limit beyond the qualified user-testing profile.
 
@@ -39,6 +40,11 @@ deterministic evidence summaries, not verified AI prose. Fresh English/Persian A
 fresh Edge browser pass for this exact app release; they do not establish production readiness.
 
 ## Information architecture
+
+For unambiguous CPU-measurement-only monitoring requests, transparent deterministic focus labels
+the reviewed CPU-idle percentage, not utilization or health. Source, both timestamps, partial/stale
+warnings and the full authorized evidence/audit remain available. Missing or ambiguous readings
+are unavailable, not guessed; interpretation/mixed-topic questions retain model synthesis.
 
 Build an operations console, not just a chat page or decorative landing page. Primary areas are overview, asset inventory/details, incidents and evidence timeline, topology, approval requests, connector health, audit search, model/resource health, and settings. Chat is one way to start or inspect a durable investigation.
 

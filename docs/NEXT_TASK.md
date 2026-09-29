@@ -1,5 +1,28 @@
 # Next task / کار بعدی
 
+Current unfinished checkpoint, 2026-09-29 — Extend independent held-out English/Persian relevance
+and technical review for selected 95c6e50/35B. Six final re-promotion confirmations and audit passed.
+Do not repeat completed import, packaging, CI, twelve API/browser checks or exact 8B/source
+rollback. Preserve rejected candidate/raw failures, explicit model-only warnings and deterministic
+CPU/file-focus evidence ownership. Keep 384 tokens, 120 seconds, one active/two queued and the
+existing CPU runtime/VM. Qualify server-WAN disconnection and full-VM cold start for this exact
+release under an applicable bounded change; older evidence does not transfer. Recovery remains
+owner-deferred, not passed, and the retired owner form must not return. Larger-model selection is
+controlled testing, not a guarantee of universally correct answers or production acceptance.
+
+نخستین گام ناتمام، ۷ مهر ۱۴۰۵ — شش تأیید تازهٔ نهایی و ممیزیِ استقرار مجددِ 95c6e50 و 35B
+موفق‌اند؛ بازبینی مستقلِ ارتباط پاسخ و اصطلاحات فنی فارسی و انگلیسی با پرسش‌های کنارگذاشته‌شده
+گسترش یابد. ورود فایل، بسته‌بندی، CI، دوازده آزمون API و مرورگر و بازگشت دقیقِ مدل و کد که
+تکمیل شده‌اند، تکرار نشوند. شکست نامزدها و متن خام، هشدار آشکارِ پاسخ صرفاً مدل و مالکیت قطعیِ
+معنای CPU و تمرکز فایل در برنامه حفظ شوند. سقف ۳۸۴ توکن، ۱۲۰ ثانیه، یک فعال و دو منتظر و
+ماشین و محیط CPU موجود ثابت بمانند. قطع WAN سرور و شروع سردِ کامل VM برای همین انتشار با
+مجوز تغییرِ محدودِ مرتبط سنجیده شوند؛ شاهد قدیمی منتقل نمی‌شود. بازیابی به دستور مالک به
+تعویق افتاده، نه موفق، و فرم کنارگذاشته‌شده احیا نشود. انتخاب مدل بزرگ‌تر آزمون کنترل‌شده است،
+نه تضمین درستی همهٔ پاسخ‌ها یا پذیرش تولید.
+
+Earlier checkpoints follow / گام‌های پیشین:
+
+
 Current unfinished checkpoint, 2026-09-29 — Qualify the bounded CPU-idle semantic repair through
 CI and exact offline wheel installation, then repeat the timed 35B-A3B trial. Preserve the first
 trial's Persian metric-label failure and the raw collection-time omissions; twelve completed API

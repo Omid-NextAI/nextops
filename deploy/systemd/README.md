@@ -15,13 +15,27 @@ the key root-only and connect failure state to an approved local alert before pr
 
 `model-profiles/qwen3-30b-a3b-*` uses the same exact-command and required-identity-file pattern.
 It is a reviewed source profile, not authorization to select an unqualified model. 32B failed
-its Persian evidence deadline; 30B-A3B needs protected import, bilingual/deadline tests, compatible
-app/API code, guarded selection and rollback. Do not install a failed candidate to bypass a gate.
+its Persian evidence deadline; 30B-A3B passed import but failed Persian terminology and raw
+completion review. Do not select failed candidates to bypass a gate.
 
 فایل‌های `model-profiles/qwen3-30b-a3b-*` همان الگوی فرمان دقیق و فایلِ الزامیِ شناسه را دارند.
 این پروفایلِ کد، مجوز انتخاب مدلِ آزمون‌نشده نیست. 32B مهلت پرسش فارسیِ شاهد را نگذرانده است؛
-30B-A3B به ورود محافظت‌شده، آزمون دوزبانه و مهلت، کد سازگار برنامه/API، انتخاب محافظت‌شده و
-بازگشت نیاز دارد. نصب نامزد ناموفق نباید معیار پذیرش را دور بزند.
+ورودِ 30B-A3B تأیید شد، اما اصطلاحات فنی فارسی و کامل‌شدن خامِ پاسخ را نگذرانده است. انتخاب
+نامزد ناموفق نباید معیار پذیرش را دور بزند.
+
+`model-profiles/qwen3-5-35b-a3b-*` preserves all base security/resource flags and requires a
+protected selector file. It changes the immutable filename/alias and explicitly enforces trusted
+`enable_thinking=false` in the native template; the authenticated provider also owns that setting.
+No vision projector, MTP speculative decoding, GPU, WAN fallback or larger context is enabled.
+Use the current release/artifact records and measured qualification, not this source profile,
+to decide whether the model is selected. Preserve the exact 8B/model/source rollback.
+
+پروفایل‌های `model-profiles/qwen3-5-35b-a3b-*` حدود امنیت و منابعِ پایه را حفظ و فایل شناسهٔ
+محافظت‌شده را الزامی می‌کنند. فقط نام فایل تغییرناپذیر و شناسه عوض می‌شوند و پارامتر معتبر
+`enable_thinking=false` در قالب بومی اعمال می‌شود؛ تأمین‌کنندهٔ احرازهویت‌شده نیز این تنظیم را
+در اختیار دارد. projector بینایی، پردازش حدسی MTP، GPU، جایگزین WAN یا context بزرگ‌تر فعال
+نیستند. انتخاب مدل از رکورد انتشار و فایل و آزمون سنجیده تعیین شود، نه صرف وجود این پروفایل.
+بازگشت دقیقِ مدل 8B و کد حفظ شود.
 
 `model-profiles/qwen3-14b-runtime.conf` changes only the immutable current filename/alias and
 resets the matching systemd condition. The tested command preserves every other base flag and
