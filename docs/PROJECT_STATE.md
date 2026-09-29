@@ -1,6 +1,28 @@
 # Project state / وضعیت پروژه
 
-Current larger-model checkpoint, 2026-09-29 — The pinned 32B desktop/server import passed. Eleven
+Current trial checkpoint, 2026-09-29 — 30B-A3B import passed; fourteen matched CPU responses
+completed in 1.3–23.7 seconds. Raw source/collection/partial qualifiers and Persian terminology
+remain partial. Replaying actual outputs through unchanged assurance preserved typed evidence and
+replaced both partial responses. A timed 3deba0d/30B-A3B trial returned twelve HTTP 200 responses
+with matching model/code identity. The failed Persian-source literal check expected «زبیکس»
+instead of displayed `Zabbix`; its report is retained. Browser review stopped after three cases;
+a fresh probe confirmed a Persian answer beginning `SSD` rendered LTR. Exact model and source
+rollback restored c4351fd/8B with fresh EN/FA generation. The response-locale fix passed seven
+isolated browser fixtures, not a new deployment. Requalification is next; raw outputs stay private
+and production, held-out, WAN and VM reboot gates are not inferred.
+
+گام جاریِ آزمون، ۷ مهر ۱۴۰۵ — ورودِ 30B-A3B تأیید و چهارده پاسخ همسانِ CPU در ۱٫۳ تا ۲۳٫۷
+ثانیه کامل شدند. منبع، زمان گردآوری و قید ناقص‌بودن در متن مدل و اصطلاحات فارسی هنوز کاملاً
+پذیرفته نیستند. بازپخش خروجی واقعی با کنترل قطعیِ بدون تغییر، شاهد نوع‌دار را حفظ و هر دو پاسخ
+شاهد ناقص را جایگزین کرد. آزمون موقتِ 3deba0d و 30B-A3B دوازده پاسخ HTTP 200 با شناسهٔ درست
+مدل و هش کد داشت. بررسی لفظیِ ناموفقِ منبع فارسی، «زبیکس» را به‌جای `Zabbix` نمایش‌داده‌شده
+انتظار داشت؛ گزارش آن حفظ شده است. مرورگر پس از سه مورد متوقف شد و آزمون تازه تأیید کرد پاسخ
+فارسی با `SSD` در ابتدا، اشتباه LTR است. بازگشت دقیق مدل و کد، c4351fd و 8B را با تولید تازهٔ
+فارسی و انگلیسی برگرداند. اصلاح جهت بر پایهٔ زبان پاسخ، هفت آزمون ایزولهٔ مرورگر را گذرانده
+است، نه استقرار تازه. بازآزمایی گام بعدی است؛ خروجی خام خصوصی می‌ماند و پذیرش تولید، کیفیت
+مستقل، قطع WAN یا reboot نتیجه گرفته نشود.
+
+Earlier larger-model checkpoint, 2026-09-29 — The pinned 32B desktop/server import passed. Eleven
 same-budget answers completed in 9.9–97.6 seconds, including correct RAM/arithmetic and English
 stale qualifiers; Persian stale evidence exceeded the 120-second deadline. Testing stopped before
 injection cases; latency failed, semantic review remains partial, and 32B was not selected. Its
@@ -8,7 +30,7 @@ temporary unit stopped; c4351fd/8B remains live. Official pinned 30B-A3B provisi
 source compatibility are next. Its 30.5B total/3.3B active parameters motivate measurement, not
 an accuracy/speed claim. Preserve the existing runtime, resources, policy, audit and rollback.
 
-گام جاریِ مدل بزرگ‌تر، ۷ مهر ۱۴۰۵ — ورودِ تثبیت‌شدهٔ 32B در میزکار و سرور تأیید شد. یازده پاسخ
+گام پیشینِ مدل بزرگ‌تر، ۷ مهر ۱۴۰۵ — ورودِ تثبیت‌شدهٔ 32B در میزکار و سرور تأیید شد. یازده پاسخ
 با همان سقف، در ۹٫۹ تا ۹۷٫۶ ثانیه کامل شدند؛ RAM، محاسبه و قید شاهد قدیمیِ انگلیسی درست بودند.
 پرسش فارسیِ شاهد قدیمی از مهلت ۱۲۰ ثانیه گذشت و آزمون پیش از موارد تزریق متوقف شد. تأخیر
 ناموفق و بازبینی معنایی ناقص است؛ 32B انتخاب نشد و سرویس موقت متوقف شد. c4351fd/8B زنده ماند.

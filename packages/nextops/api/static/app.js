@@ -531,7 +531,7 @@ byId("assistantForm").addEventListener("submit", async event => {
     byId("askedQuestion").textContent = payload.question;
     byId("askedQuestion").dir = "auto";
     byId("answer").textContent = assistant.answer;
-    byId("answer").dir = "auto";
+    byId("answer").dir = assistant.locale === "fa" ? "rtl" : "ltr";
     byId("modelId").textContent = assistant.model_id;
     byId("tokenCount").textContent = assistant.completion_tokens;
     byId("completedAt").textContent = new Date(assistant.completed_at).toLocaleString(state.language === "fa" ? "fa-IR" : "en-GB");

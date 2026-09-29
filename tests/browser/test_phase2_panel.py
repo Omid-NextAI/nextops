@@ -173,6 +173,7 @@ def _fixture_app() -> FastAPI:
     app.mount("/assets", StaticFiles(directory=STATIC), name="assets")
     app.state.incident_requests = []
     app.state.logout_requests = 0
+    app.state.general_answers = {}
 
     @app.get("/")
     def panel() -> FileResponse:
@@ -219,6 +220,7 @@ def _fixture_app() -> FastAPI:
         assistant["answer"] = (
             "سلام! چطور می‌توانم کمک کنم؟" if payload["locale"] == "fa" else "Hello! How can I help?"
         )
+        assistant["answer"] = app.state.general_answers.get(payload["locale"], assistant["answer"])
         assistant["integrity_status"] = "deterministic_fallback"
         assistant["limitations"] = ["no_live_evidence", "model_output_may_be_incorrect"]
         return assistant
@@ -442,6 +444,42 @@ def test_file_request_is_honest_and_does_not_open_a_data_dump(
         expect(page.get_by_text("nextops-app.service")).to_be_visible()
         page.set_viewport_size({"width": 375, "height": 812})
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth") is True
+        browser.close()
+
+
+@pytest.mark.parametrize(
+    ("locale", "answer", "direction"),
+    [
+        ("fa", "SSD داده را پس از قطع برق نگه می‌دارد.", "rtl"),
+        ("en", "سلام means hello in Persian.", "ltr"),
+    ],
+)
+def test_answer_direction_uses_response_locale_not_first_strong_character(
+    browser_server: tuple[str, FastAPI], locale: str, answer: str, direction: str
+) -> None:
+    base_url, app = browser_server
+    app.state.general_answers[locale] = answer
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        _login(page, base_url)
+        # The answer language is independent of the interface language.
+        if locale == "en":
+            page.locator("#languageButton").click()
+        page.locator(f'.locale-choice[data-locale="{locale}"]').click()
+        page.locator("#question").fill("Explain briefly.")
+        page.locator("#askButton").click()
+        expect(page.locator("#answer")).to_have_text(answer)
+        assert page.locator("#answer").get_attribute("dir") == direction
+        assert (
+            page.locator("#answer").evaluate("element => getComputedStyle(element).direction")
+            == direction
+        )
+        page.set_viewport_size({"width": 375, "height": 812})
+        assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
+        page.emulate_media(reduced_motion="reduce")
+        page.set_viewport_size({"width": 844, "height": 390})
+        assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
         browser.close()
 
 

@@ -1,12 +1,25 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
-Current larger-model trace (sections 9, 10, 19, 25; 2026-09-29): 32B protected size/hash import
+Current trial trace (sections 9, 10, 19, 25; 2026-09-29): 30B-A3B import/deadline checks passed;
+raw qualifier/Persian review is partial. The guarded app trial returned twelve authenticated
+responses, but Latin-prefix Persian LTR rendering failed browser review. Exact model and app/API
+rollback restored c4351fd/8B with fresh generation. The response-locale fix passed seven local
+browser fixtures; live requalification, full semantic, WAN and VM gates are not inferred.
+
+ردیابی جاریِ آزمون (بخش‌های ۹، ۱۰، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): فایل و مهلت 30B-A3B تأیید شدند؛
+قیدهای متن مدل و کیفیت فارسی هنوز کاملاً پذیرفته نیستند. آزمون موقت برنامه دوازده پاسخ
+احرازهویت‌شده داشت، اما نمایش LTR پاسخ فارسی با واژهٔ لاتین در ابتدا، آزمون مرورگر را
+نگذراند. بازگشت دقیق مدل و برنامه/API، c4351fd و 8B را با تولید تازه برگرداند. اصلاح جهت بر
+پایهٔ زبان پاسخ، هفت آزمون محلی مرورگر را گذرانده است؛ پذیرش زنده، کیفیت کامل، WAN و VM
+نتیجه گرفته نشوند.
+
+Earlier 32B trace (sections 9, 10, 19, 25; 2026-09-29): 32B protected size/hash import
 passed, eleven matched answers completed, then Persian stale evidence exceeded 120 seconds.
 Latency failed; quality is partial and injection cases unrun. Serving 8B is unchanged. Official
 30B-A3B is separately pinned for bounded provisioning/comparison under identical CPU/runtime,
 prompt, deadline and queue limits. Source alias support is not selection or production acceptance.
 
-ردیابی جاریِ مدل بزرگ‌تر (بخش‌های ۹، ۱۰، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): ورود محافظت‌شدهٔ 32B با اندازه
+ردیابی پیشینِ 32B (بخش‌های ۹، ۱۰، ۱۹ و ۲۵؛ ۷ مهر ۱۴۰۵): ورود محافظت‌شدهٔ 32B با اندازه
 و هش تأیید و یازده پاسخ همسان کامل شدند؛ سپس پرسش فارسیِ شاهد قدیمی از ۱۲۰ ثانیه گذشت. تأخیر
 ناموفق، کیفیت ناقص و موارد تزریق اجرا‌نشده‌اند. 8B مستقر تغییر نکرد. 30B-A3B رسمی جداگانه برای
 آماده‌سازی و مقایسهٔ محدود تثبیت شده است؛ CPU، محیط اجرا، دستور، مهلت و صف ثابت می‌مانند.

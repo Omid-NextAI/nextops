@@ -23,14 +23,20 @@ The Persian stale request exceeded 120 seconds; testing stopped before injection
 latency gate failed, quality remains partial, and it was not selected. The transient cgroup peak
 was 18,324,066,304 bytes, not a sustained memory/capacity benchmark.
 
-The next pinned candidate is [Qwen3-30B-A3B-GGUF](https://huggingface.co/Qwen/Qwen3-30B-A3B-GGUF)
-with 30.5B total and 3.3B active parameters; the mixture-of-experts artifact may reduce CPU work,
-but that is not measured performance or accuracy. [Its record](../../deploy/inference/qwen3-30b-a3b-q4-k-m.candidate.json)
-pins revision, license, size and SHA-256. Provisioning and explicit source identity support do not
-prove qualification. The same prompts, 384-token budget, deadlines and pinned llama.cpp remain.
-No runtime resolver/download, cloud fallback, VM increase or new queue is added. The existing
-24-vCPU/128-GiB guest stays intact. Quality, latency, serving-path tests, cold restart and exact
-rollback gate selection; full held-out and production acceptance remain separate.
+Pinned [Qwen3-30B-A3B-GGUF](https://huggingface.co/Qwen/Qwen3-30B-A3B-GGUF), with 30.5B total and
+3.3B active parameters, passed desktop/server size/hash import. All fourteen matched questions
+completed in 1.3–23.7 seconds with the same prompts, 384-token ceiling, 16 threads and one slot.
+This is a bounded observation, not sustained throughput. Raw source/collection/partial qualifiers
+and Persian terminology remain partial. Unchanged assurance replay retained typed evidence and
+replaced incomplete evidence prose; it does not prove arbitrary correctness.
+
+The timed 3deba0d/30B-A3B app trial returned twelve authenticated responses, but browser review
+exposed Latin-prefix Persian LTR rendering. Exact model and source rollback restored c4351fd/8B
+with fresh bilingual generation. The source-only response-locale direction repair passed seven
+browser fixtures and awaits serving requalification. [The artifact record](../../deploy/inference/qwen3-30b-a3b-q4-k-m.candidate.json)
+retains partial quality and unrun offline cold start. Runtime, deadline, queue, network restrictions
+and the existing 24-vCPU/128-GiB guest are unchanged; no cloud, runtime download or VM increase is
+introduced. Full held-out and production acceptance remain separate.
 
 ## Non-negotiable execution boundary
 

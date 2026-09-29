@@ -1,5 +1,23 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Larger-model trial and answer direction — 2026-09-29 / آزمون مدل بزرگ‌تر و جهت پاسخ — ۷ مهر ۱۴۰۵
+
+30B-A3B import and fourteen CPU completions passed the deadline; raw qualifiers and Persian
+terminology remain partial. Unchanged application assurance preserved typed provenance and
+replaced incomplete evidence prose. The timed trial returned twelve authenticated responses but
+exposed Latin-prefix Persian LTR rendering. Exact model and app/API rollback restored c4351fd/8B
+with fresh bilingual generation. Bind answer direction to validated response locale, not its
+first character or UI language; seven local browser fixtures pass. No prompt, dependency,
+runtime, resource, queue, authorization or offline-policy change is made.
+
+ورودِ 30B-A3B و چهارده تولید روی CPU، مهلت پاسخ را گذراندند؛ قیدهای متن مدل و اصطلاحات فارسی
+هنوز کاملاً پذیرفته نیستند. کنترل قطعیِ موجود، انتساب شاهد را حفظ و متن ناقص را جایگزین کرد.
+آزمون موقت دوازده پاسخ احرازهویت‌شده داشت، اما نمایش نادرست LTR برای پاسخ فارسی با واژهٔ لاتین
+در ابتدا را آشکار کرد. بازگشت دقیق مدل و برنامه/API، c4351fd و 8B را با تولید تازهٔ دوزبانه
+برگرداند. جهت پاسخ اکنون از زبان معتبر پاسخ تعیین می‌شود، نه نویسهٔ اول یا زبان رابط؛ هفت
+آزمون محلی مرورگر موفق‌اند. دستور مدل، وابستگی، محیط اجرا، منابع، صف، مجوزدهی و سیاست آفلاین
+تغییر نکرده‌اند.
+
 ## CPU-efficient larger-model candidate — 2026-09-29 / نامزد کم‌هزینه‌تر روی CPU — ۷ مهر ۱۴۰۵
 
 Verified 32B import passed; eleven answers completed, but Persian stale evidence exceeded the
