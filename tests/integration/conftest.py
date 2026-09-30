@@ -13,6 +13,8 @@ from sqlalchemy import Engine, create_engine, event, text
 from sqlalchemy.orm import Session, sessionmaker
 
 TABLES = (
+    "conversation_messages",
+    "conversations",
     "audit_events",
     "run_leases",
     "runs",

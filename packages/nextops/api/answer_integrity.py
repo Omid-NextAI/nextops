@@ -16,6 +16,7 @@ from nextops.api.incident_focus import (
     requested_service_units,
 )
 from nextops.contracts.assistant import AssistantRequest, AssistantResponse, GeneralAssistantRequest
+from nextops.contracts.conversations import ConversationAssistantRequest
 from nextops.contracts.incidents import IncidentEvidence, IncidentInvestigationRequest
 from nextops.contracts.monitoring import MonitoringSummary
 from nextops.inference.contracts import FinishReason
@@ -128,7 +129,7 @@ def assure_general_answer(
     """Label model-only output and replace unverifiable operational claims."""
 
     historical_subject = bool(
-        isinstance(request, GeneralAssistantRequest)
+        isinstance(request, GeneralAssistantRequest | ConversationAssistantRequest)
         and any(_OPERATIONAL_SUBJECT_MARKERS.search(turn.question) for turn in request.history)
     )
     requires_live_evidence = bool(

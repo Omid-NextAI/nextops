@@ -24,6 +24,9 @@ class LlamaCppSettings(BaseModel):
     runtime_version: Literal["v0.4.1"] = "v0.4.1"
     request_timeout_seconds: float = Field(default=120.0, ge=1.0, le=600.0)
     queue_timeout_seconds: float = Field(default=5.0, ge=0.01, le=60.0)
+    expanded_chat_enabled: bool = False
+    thinking_enabled: bool = False
+    context_tokens: Literal[8192, 16384, 32768] = 8192
 
     @model_validator(mode="after")
     def validate_security_boundary(self) -> Self:
@@ -45,6 +48,10 @@ class LlamaCppSettings(BaseModel):
             raise ValueError("base_url must be an undecorated http://127.0.0.1:<port> origin")
         if self.provider_api_key.get_secret_value() == self.service_auth_secret.get_secret_value():
             raise ValueError("provider_api_key and service_auth_secret must differ")
+        if self.thinking_enabled and (
+            not self.expanded_chat_enabled or self.model_id != "nextops-qwen3-5-35b-a3b-q4-k-m"
+        ):
+            raise ValueError("thinking requires the qualified expanded Qwen3.5 profile")
         return self
 
     @classmethod
@@ -68,4 +75,7 @@ class LlamaCppSettings(BaseModel):
                 os.environ.get("NEXTOPS_INFERENCE_TIMEOUT_SECONDS", "120")
             ),
             queue_timeout_seconds=float(os.environ.get("NEXTOPS_QUEUE_TIMEOUT_SECONDS", "5")),
+            expanded_chat_enabled=os.environ.get("NEXTOPS_EXPANDED_CHAT_ENABLED", "0") == "1",
+            thinking_enabled=os.environ.get("NEXTOPS_THINKING_ENABLED", "0") == "1",
+            context_tokens=int(os.environ.get("NEXTOPS_CONTEXT_TOKENS", "8192")),
         )

@@ -47,9 +47,17 @@ class SynthesisRequest(FrozenContract):
     """Application-built prompt; never accepted as the public browser request contract."""
 
     locale: Literal["en", "fa"]
-    question: str = Field(min_length=1, max_length=12_000)
-    max_output_tokens: int = Field(default=384, ge=32, le=512)
+    question: str = Field(min_length=1, max_length=32_000)
+    max_output_tokens: int = Field(default=384, ge=32, le=2_048)
     purpose: GenerationPurpose = "evidence_synthesis"
+    thinking: bool = False
+    detailed: bool = False
+
+    @model_validator(mode="after")
+    def validate_general_controls(self) -> Self:
+        if self.purpose != "general" and (self.thinking or self.detailed):
+            raise ValueError("reasoning is available only for general requests")
+        return self
 
 
 class AssistantResponse(FrozenContract):
@@ -61,7 +69,7 @@ class AssistantResponse(FrozenContract):
     answer: str = Field(min_length=1, max_length=16_000)
     model_id: ModelId
     prompt_tokens: int = Field(ge=0, le=65_536)
-    completion_tokens: int = Field(ge=0, le=512)
+    completion_tokens: int = Field(ge=0, le=2_048)
     finish_reason: FinishReason
     started_at: AwareDatetime
     completed_at: AwareDatetime

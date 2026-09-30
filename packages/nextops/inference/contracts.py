@@ -44,10 +44,20 @@ class InferenceRequest(FrozenContract):
     request_id: UUID
     correlation_id: UUID
     locale: Literal["en", "fa"]
-    prompt: str = Field(min_length=1, max_length=12_000)
+    prompt: str = Field(min_length=1, max_length=32_000)
     purpose: GenerationPurpose = "evidence_synthesis"
-    max_output_tokens: int = Field(default=512, ge=1, le=1_024)
+    max_output_tokens: int = Field(default=512, ge=1, le=2_048)
     temperature: float = Field(default=0.7, ge=0.0, le=2.0)
+    thinking: bool = False
+    detailed: bool = False
+
+    @model_validator(mode="after")
+    def reasoning_is_general_only(self) -> InferenceRequest:
+        if self.purpose != "general" and (self.thinking or self.detailed):
+            raise ValueError("reasoning and detailed answers are general-only")
+        if not self.detailed and (self.max_output_tokens > 1_024 or len(self.prompt) > 12_000):
+            raise ValueError("expanded budgets require a detailed general request")
+        return self
 
 
 class ProviderGeneration(FrozenContract):
@@ -56,7 +66,7 @@ class ProviderGeneration(FrozenContract):
     answer: str = Field(min_length=1, max_length=16_000)
     model_id: ModelId
     prompt_tokens: int = Field(ge=0, le=65_536)
-    completion_tokens: int = Field(ge=0, le=1_024)
+    completion_tokens: int = Field(ge=0, le=2_048)
     finish_reason: FinishReason
     started_at: AwareDatetime
     completed_at: AwareDatetime
