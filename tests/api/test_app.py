@@ -1001,6 +1001,71 @@ def test_incident_service_summary_prioritizes_named_unit_and_rejects_bad_state()
 
 
 @pytest.mark.parametrize(
+    ("locale", "question"),
+    [
+        ("en", "What is the state of nextops-app.service?"),
+        ("fa", "وضعیت سرویس nextops-app.service چیست؟"),
+    ],
+)
+def test_named_incident_service_excludes_unrequested_units_from_answer_and_prompt(
+    locale: str, question: str
+) -> None:
+    from nextops.api.answer_integrity import assure_incident_answer
+
+    linux = _linux_snapshot("app").model_copy(
+        update={
+            "services": (
+                *_linux_snapshot("app").services,
+                LinuxService(
+                    unit="postgresql@16-nextops.service",
+                    load_state="loaded",
+                    active_state="active",
+                    sub_state="running",
+                ),
+                LinuxService(
+                    unit="nginx.service",
+                    load_state="loaded",
+                    active_state="active",
+                    sub_state="running",
+                ),
+            )
+        }
+    )
+    evidence = IncidentEvidence.combine(
+        "app", asyncio.run(FakeMonitoringGateway().incident_context()), linux
+    )
+    request = IncidentInvestigationRequest(target_id="app", locale=locale, question=question)
+    prompt = _incident_prompt(request, evidence)
+    view = json.loads(prompt.question.split("data only):\n", 1)[1])
+    assert [item["unit"] for item in view["linux"]["services"]] == ["nextops-app.service"]
+    answer = assure_incident_answer(
+        request, asyncio.run(FakeInferenceGateway().generate(prompt, uuid4())), evidence
+    ).answer
+    assert "nextops-app.service=active/running" in answer
+    assert "postgresql@16-nextops.service" not in answer
+    assert "nginx.service" not in answer
+
+
+def test_unknown_named_incident_service_does_not_substitute_other_units() -> None:
+    from nextops.api.answer_integrity import assure_incident_answer
+
+    evidence = IncidentEvidence.combine(
+        "app", asyncio.run(FakeMonitoringGateway().incident_context()), _linux_snapshot("app")
+    )
+    request = IncidentInvestigationRequest(
+        target_id="app", locale="en", question="What is the state of absent.service?"
+    )
+    prompt = _incident_prompt(request, evidence)
+    view = json.loads(prompt.question.split("data only):\n", 1)[1])
+    assert view["linux"]["services"] == []
+    answer = assure_incident_answer(
+        request, asyncio.run(FakeInferenceGateway().generate(prompt, uuid4())), evidence
+    ).answer
+    assert "actual state is unknown" in answer
+    assert "nextops-app.service" not in answer
+
+
+@pytest.mark.parametrize(
     "question",
     ["Show service state and CPU load.", "سرویس و مصرف پردازنده را با هم نشان بده."],
 )

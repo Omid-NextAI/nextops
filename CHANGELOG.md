@@ -1,5 +1,19 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Named-unit incident repair candidate — 2026-09-30 / نامزد اصلاح واحدِ نام‌برده — ۹ مهر ۱۴۰۵
+
+4d99c2c passed CI and exact offline packaging but was rejected live after a named service
+question listed unrelated units. Its earlier 504 was reproduced on restored 862d311 during AI
+scheduler contention. The app was rolled back and its guard stopped. New source restricts answer,
+prompt and focused UI to the exact named unit, without changing canonical evidence or budgets.
+Local tests pass; this new source needs independent CI, package and live acceptance.
+
+نسخهٔ 4d99c2c کنترل‌های CI و بستهٔ دقیق آفلاین را گذراند، اما چون پاسخِ سرویسِ نام‌برده واحدهای
+نامرتبط را نیز آورد، در آزمون زنده رد شد. خطای ۵۰۴ پیشین روی نسخهٔ بازگشتهٔ 862d311 نیز هنگام
+اشتغالِ صف AI تکرار شد. برنامه بازگشت و زمان‌سنجِ همان تغییر متوقف شد. کد تازه پاسخ، ورودیِ
+مدل و بخشِ متمرکزِ رابط را به واحدِ دقیق محدود می‌کند؛ شاهدِ اصلی و سقف‌ها ثابت‌اند. آزمون‌های
+محلی موفق‌اند و CI، بسته و پذیرش زندهٔ مستقلِ همین کد هنوز لازم‌اند.
+
 ## Incident focus source candidate — 2026-09-30 / نامزدِ تمرکز رخداد — ۹ مهر ۱۴۰۵
 
 The first e2ea487 live trial failed semantic review and was rolled back to 862d311; corrected

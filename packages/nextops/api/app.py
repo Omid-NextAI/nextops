@@ -21,6 +21,7 @@ from nextops.api.answer_integrity import (
 from nextops.api.incident_focus import (
     IncidentFocus,
     incident_focus,
+    requested_service_units,
 )
 from nextops.api.incident_focus import incident_evidence_topic as _incident_evidence_topic
 from nextops.api.inference_gateway import InferenceGateway, LoopbackInferenceGateway
@@ -806,10 +807,21 @@ def _topical_incident_view(question: str, evidence: IncidentEvidence, topic: str
             else 2
         ),
     )
+    named_units = requested_service_units(
+        question, (service["unit"] for service in ordered_services)
+    )
+    if named_units is not None:
+        ordered_services = [
+            service for service in ordered_services if service["unit"] in named_units
+        ]
     ordered_journal = sorted(
         linux["journal"],
         key=lambda entry: 0 if entry["unit"].casefold() in asked else 1,
     )
+    if named_units is not None:
+        ordered_journal = [
+            entry for entry in ordered_journal if entry["unit"] in named_units
+        ]
     include_network = topic in {"network", "network_service"}
     include_services = topic in {"service", "network_service"}
     view: dict[str, Any] = {

@@ -1,5 +1,22 @@
 # Next task / کار بعدی
 
+Immediate checkpoint, 2026-09-30 — Qualify the **new exact-unit source identity** through
+five-job CI, fresh offline wheel/install, guarded app-only live EN/FA network and named-service
+questions, persisted audit/evidence-hash matching, exact 862d311 rollback with fresh restored
+answers, then re-promotion and final checks. Verify that neither answer nor default focused UI
+lists unrequested services. Preserve the 4d99c2c 504/admission-contention finding and four-case
+semantic rejection; neither is release acceptance. Serving is restored 862d311/35B. Keep AI,
+model, connector, database, queue, credentials and branding unchanged. General advice accuracy,
+exact-release server-WAN isolation and VM cold start remain open; do not claim full production.
+
+گام فوری، ۹ مهر ۱۴۰۵ — **شناسهٔ تازهٔ کدِ واحدِ دقیق** با پنج کنترل CI، بسته و نصبِ تازهٔ
+آفلاین، آزمون زندهٔ محافظت‌شدهٔ برنامه برای پرسش‌های شبکه و سرویسِ نام‌برده به دو زبان، تطبیقِ
+ممیزی و هشِ شاهد، بازگشت دقیق به 862d311 با پاسخ‌های تازه، سپس استقرار دوباره و بررسی نهایی
+سنجیده شود. پاسخ و بخشِ متمرکزِ رابط نباید سرویسِ درخواست‌نشده را نشان دهند. خطای ۵۰۴ هنگام
+اشتغالِ صف و ردِ معناییِ آزمون چهارموردیِ 4d99c2c حفظ شوند؛ هیچ‌یک پذیرش انتشار نیست.
+نسخهٔ در حال خدمت 862d311/35B برگشته است. AI، مدل، اتصال، پایگاه، صف، اعتبارنامه و نشان ثابت
+بمانند. درستیِ مشاورهٔ عمومی، قطع WAN سرور و شروع سرد VM همین انتشار بازند؛ تولیدِ کامل ادعا نشود.
+
 Immediate candidate checkpoint, 2026-09-30 — Qualify the isolated app-only network/service
 incident focus through locked CI, exact offline packaging and guarded live EN/FA browser/API,
 durable audit/evidence hash and exact 862d311 app rollback. Local source and fixtures pass; four

@@ -10,7 +10,11 @@ import re
 from datetime import datetime
 from decimal import Decimal
 
-from nextops.api.incident_focus import incident_focus, monitoring_cpu_focus
+from nextops.api.incident_focus import (
+    incident_focus,
+    monitoring_cpu_focus,
+    requested_service_units,
+)
 from nextops.contracts.assistant import AssistantRequest, AssistantResponse, GeneralAssistantRequest
 from nextops.contracts.incidents import IncidentEvidence, IncidentInvestigationRequest
 from nextops.contracts.monitoring import MonitoringSummary
@@ -584,20 +588,31 @@ def _observed_incident_summary(
             )
         details.append(("؛ " if locale == "fa" else "; ").join(network_details))
     if service:
-        ordered_services = sorted(
-            linux.services,
-            key=lambda item: 0 if item.unit.casefold() in question.casefold() else 1,
+        named_units = requested_service_units(question, (item.unit for item in linux.services))
+        selected_services = (
+            [item for item in linux.services if item.unit in named_units]
+            if named_units is not None
+            else list(linux.services[:3])
         )
         states = "; ".join(
             f"{item.unit}={item.active_state}/{item.sub_state}"
-            for item in ordered_services[:3]
+            for item in selected_services[:3]
             if _safe_service_state(item.active_state) and _safe_service_state(item.sub_state)
-        ) or _missing_network_value(locale, bool(linux.services))
-        service_detail = (
-            f"وضعیت سرویس‌های ثبت‌شده: {states}"
-            if locale == "fa"
-            else f"recorded service states: {states}"
         )
+        if named_units is not None and not states:
+            service_detail = (
+                "وضعیت واحدِ نام‌برده در نمای مجاز ثبت نشده است؛ وضعیت واقعی آن نامعلوم است"
+                if locale == "fa"
+                else "the named unit has no usable state in the authorized snapshot; "
+                "its actual state is unknown"
+            )
+        else:
+            states = states or _missing_network_value(locale, bool(linux.services))
+            service_detail = (
+                f"وضعیت سرویس‌های ثبت‌شده: {states}"
+                if locale == "fa"
+                else f"recorded service states: {states}"
+            )
         if re.search(r"\b(?:journal|logs?)\b|ژورنال|لاگ|گزارش", question, re.IGNORECASE):
             service_detail += (
                 f"؛ {len(linux.journal)} رکورد ژورنالِ مجاز"

@@ -1,5 +1,28 @@
 # Testing, model evaluation and release evidence
 
+## Exact-unit live rejection and new source — 2026-09-30
+
+Corrected 4d99c2c passed five CI jobs and fresh hash-locked Ubuntu 24.04 offline installation.
+The first guarded app-only promotion returned HTTP 504 before an answer; the restored 862d311
+baseline repeated the inference timeout while a request occupied the AI scheduler. This is an
+admission/contention observation, not evidence that the candidate's answer was correct. After an
+idle window, a second guarded promotion produced four fresh EN/FA network/service browser answers
+under verified TLS and local-only browser traffic. Transport, model identity, source timestamps,
+canonical evidence hashes, latency under 120 seconds and logout passed. One Persian raw model
+generation ended at the unchanged 384-token cap, while the application-owned summary remained
+complete. Manual semantic review nevertheless **rejected** the release: a named service answer
+also listed unrelated PostgreSQL and Nginx units. Exact app rollback restored healthy 862d311;
+its guard was stopped. No persisted-audit or fresh restored-answer pass is claimed for that attempt.
+Private raw reports remain outside Git.
+
+The subsequent source change matches explicitly named, authorized service units in the answer,
+bounded inference prompt and default focused panel; an absent named unit is reported as unknown.
+The full canonical evidence stays available only after explicit expansion and is not changed by
+projection. Local checks: 399 pass, eleven Windows/environment skips; fourteen real-browser
+fixtures pass; lint and strict typing pass. These are fixture checks, not live acceptance. CI,
+exact offline packaging, live audit and rollback must be rerun for the new source identity.
+Serving remains 862d311/35B; general model accuracy and production acceptance remain partial/open.
+
 ## Incident network/service focus candidate — 2026-09-30
 
 First guarded e2ea487 app promotion installed offline and started under a 65-minute rollback

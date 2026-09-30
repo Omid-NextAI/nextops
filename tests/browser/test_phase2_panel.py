@@ -130,7 +130,13 @@ def _incident_response(locale: str, target_id: str, question: str = "") -> dict[
                     "load_state": "loaded",
                     "active_state": "active",
                     "sub_state": "running",
-                }
+                },
+                {
+                    "unit": "nginx.service",
+                    "load_state": "loaded",
+                    "active_state": "active",
+                    "sub_state": "running",
+                },
             ],
             "journal": [],
             "local_user_count": 1,
@@ -575,8 +581,11 @@ def test_network_and_service_focus_hide_unrelated_evidence_until_explicit_expand
             expect(page.get_by_role("heading", name="Listening sockets")).to_be_hidden()
         if scope == "Recorded service observations only":
             expect(page.get_by_role("heading", name="High-priority journal")).to_be_hidden()
+            expect(page.get_by_text("nginx.service")).to_be_hidden()
         page.get_by_text("Show complete authorized evidence").click()
         expect(page.get_by_role("heading", name=excluded_heading)).to_be_visible()
+        if scope == "Recorded service observations only":
+            expect(page.get_by_text("nginx.service")).to_be_visible()
         page.set_viewport_size({"width": 375, "height": 812})
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth") is True
         browser.close()

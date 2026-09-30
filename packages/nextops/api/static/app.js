@@ -652,8 +652,26 @@ function renderIncidentEvidence(evidence, focus = "overview", question = "") {
     } else {
       focused.className = "incident-sections";
       if (focus === "service" || focus === "network_service") {
-        focused.append(sections.children[1].cloneNode(true));
-        if (/\b(?:journal|logs?)\b|ژورنال|لاگ|گزارش/i.test(question)) focused.append(sections.children[3].cloneNode(true));
+        const namedUnits = [...question.matchAll(/(?<![\w@.-])([A-Za-z0-9_@.-]+\.(?:service|socket|timer))(?![\w@.-])/gi)]
+          .map(match => match[1].toLocaleLowerCase("en-US"));
+        const selectedServices = namedUnits.length
+          ? evidence.linux.services.filter(item => namedUnits.includes(item.unit.toLocaleLowerCase("en-US")))
+          : evidence.linux.services;
+        focused.append(evidenceSection(translations[state.language].services, selectedServices.map(service => ({
+          label: service.unit,
+          value: `${service.active_state} / ${service.sub_state}`,
+          detail: service.load_state
+        }))));
+        if (/\b(?:journal|logs?)\b|ژورنال|لاگ|گزارش/i.test(question)) {
+          const selectedJournal = namedUnits.length
+            ? evidence.linux.journal.filter(item => namedUnits.includes(item.unit.toLocaleLowerCase("en-US")))
+            : evidence.linux.journal;
+          focused.append(evidenceSection(translations[state.language].criticalJournal, selectedJournal.map(entry => ({
+            label: entry.unit,
+            value: entry.message,
+            detail: new Date(entry.observed_at).toLocaleString(locale)
+          }))));
+        }
       }
       if (focus === "network" || focus === "network_service") {
         const requested = [

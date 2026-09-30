@@ -1,5 +1,29 @@
 # Project state / وضعیت پروژه
 
+Exact-unit repair candidate, 2026-09-30 — The 4d99c2c correction passed five CI jobs and a
+fresh hash-locked Ubuntu 24.04 offline installation. Its first guarded live attempt returned a
+504 before an answer; the restored 862d311 also returned 504 while the AI scheduler was busy.
+A second guarded 4d99c2c attempt, serialized after idle, passed four fresh EN/FA network/service
+browser requests, but semantic review rejected it: a named `nextops-app.service` question listed
+unrequested PostgreSQL and Nginx units. It was immediately rolled back to healthy 862d311 and
+its timer stopped. No durable audit or exact rollback answer pass is claimed for 4d99c2c. The
+new source restricts named-unit answers, model prompt and focused UI to the exact observed unit;
+an unknown unit stays unknown. Local 399 tests passed, eleven environment-dependent tests skipped,
+fourteen browser fixtures passed, lint and typing passed. CI, exact offline package, live audit and
+rollback for this **new** source remain pending. Serving is 862d311/35B, not production accepted.
+
+نامزدِ اصلاحِ واحدِ نام‌برده، ۹ مهر ۱۴۰۵ — اصلاح 4d99c2c پنج کنترل CI و نصب تازهٔ آفلاینِ
+Ubuntu 24.04 با هشِ قفل‌شده را گذراند. نخستین آزمون زندهٔ محافظت‌شده پیش از پاسخ، خطای ۵۰۴ داد؛
+نسخهٔ بازگشتهٔ 862d311 نیز هنگام اشتغالِ صف AI همین خطا را داد. آزمون دوم پس از خالی‌شدن صف،
+چهار درخواست تازهٔ مرورگرِ شبکه و سرویس به فارسی و انگلیسی را گذراند؛ اما بازبینی معنایی آن را
+رد کرد: پاسخِ پرسش دربارهٔ `nextops-app.service`، واحدهای درخواست‌نشدهٔ PostgreSQL و Nginx را
+نیز آورد. برنامه فوراً به 862d311 سالم بازگشت و زمان‌سنجِ همان تغییر متوقف شد. ممیزی ماندگار یا
+آزمونِ کاملِ پاسخ پس از بازگشت برای 4d99c2c ادعا نمی‌شود. کد تازه، پاسخ و ورودیِ مدل و بخشِ
+متمرکزِ رابط را به واحدِ دقیقِ مشاهده‌شده محدود می‌کند و وضعیت واحدِ ناشناخته را نامعلوم می‌داند.
+۳۹۹ آزمون محلی موفق، یازده آزمون وابسته به محیط کنارگذاشته‌شده، چهارده آزمون مرورگرِ ساختگی و
+بررسی lint و نوع موفق‌اند. CI، بستهٔ دقیق آفلاین، ممیزی زنده و بازگشتِ همین کد تازه هنوز بازند.
+انتشارِ در حال خدمت 862d311/35B است و پذیرش تولید ادعا نمی‌شود.
+
 Question-focused incident candidate, 2026-09-30 — A separate app-only source change makes
 unambiguous network/service investigations show validated, application-owned Linux observations
 first, with distinct Zabbix scope/time and canonical evidence/audit intact. Unrelated sections are

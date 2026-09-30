@@ -6,11 +6,32 @@
 from __future__ import annotations
 
 import re
+from collections.abc import Iterable
 from typing import Literal
 
 IncidentFocus = Literal[
     "overview", "filesystems", "file_listing", "network", "service", "network_service"
 ]
+
+_NAMED_UNIT = re.compile(
+    r"(?<![\w@.-])([A-Za-z0-9_@.-]+\.(?:service|socket|timer))(?![\w@.-])",
+    re.IGNORECASE,
+)
+
+
+def requested_service_units(
+    question: str, available_units: Iterable[str]
+) -> tuple[str, ...] | None:
+    """Return explicitly named authorized units, or None for a broad service question.
+
+    An unknown named unit yields an empty tuple; it must not cause unrelated
+    service observations to be presented as the answer.
+    """
+
+    named = {match.casefold() for match in _NAMED_UNIT.findall(question)}
+    if not named:
+        return None
+    return tuple(unit for unit in available_units if unit.casefold() in named)
 
 _NON_NETWORK_SERVICE_TOPIC = re.compile(
     r"(?:\b(?:cpu|memory|ram|files?|filesystems?|disks?|storage|zabbix|metrics?|"
