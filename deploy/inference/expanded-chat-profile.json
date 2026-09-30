@@ -1,0 +1,27 @@
+{
+  "status": "candidate_not_deployed",
+  "model_id": "nextops-qwen3-5-35b-a3b-q4-k-m",
+  "runtime_commit": "b29c606e28a01b1bc8c1351026a0fa6e616bf6c4",
+  "configured_context_tokens": 16384,
+  "max_context_turns": 6,
+  "max_context_characters": 12000,
+  "standard_total_output_tokens": 1024,
+  "thinking_total_output_tokens": 2048,
+  "runtime_reasoning_budget_tokens": 1024,
+  "max_active_requests": 1,
+  "max_queued_requests": 2,
+  "max_conversations_per_identity": 50,
+  "max_turns_per_conversation": 100,
+  "max_content_bytes_per_conversation": 1048576,
+  "available_retention_days": 30,
+  "private_reasoning_persisted": false,
+  "cpu_only": true,
+  "runtime_network_downloads": false,
+  "qualification": {
+    "real_template_tokenization": "passed",
+    "thinking_semantics": "not_run",
+    "expanded_context_latency": "not_run",
+    "fresh_wan_disconnected_answers": "not_run",
+    "rollback": "not_run"
+  }
+}

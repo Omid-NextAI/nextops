@@ -13,6 +13,33 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = REPOSITORY_ROOT / "deploy" / "inference" / "qwen3-8b-q4-k-m.yaml"
 
 
+def test_thinking_candidate_preserves_sandbox_and_bounded_runtime() -> None:
+    directory = REPOSITORY_ROOT / "deploy" / "systemd" / "model-profiles"
+    profile = (directory / "qwen3-5-35b-a3b-thinking-runtime.conf").read_text("utf-8")
+    for required in (
+        "--ctx-size 16384",
+        "--threads 16",
+        "--parallel 1",
+        "--gpu-layers 0",
+        "--no-context-shift",
+        "--reasoning-format deepseek",
+        "--reasoning-budget 1024",
+        "--no-reasoning-preserve",
+        "--chat-template-kwargs '{\"enable_thinking\":false}'",
+    ):
+        assert required in profile
+    for forbidden in ("--hf-repo", "--model-url", "IPAddressDeny=", "MemoryMax=", "CPUQuota="):
+        assert forbidden not in profile
+
+
+def test_122b_is_immutable_research_not_a_serving_model() -> None:
+    record = json.loads((MANIFEST.parent / "qwen3-5-122b-a10b-research.json").read_text("utf-8"))
+    assert record["deployment_selection_allowed"] is False and record["download_verified"] is False
+    assert sum(s["size_bytes"] for s in record["shards"]) == record["total_size_bytes"]
+    assert len(record["source_revision"]) == 40
+    assert all(len(s["sha256"]) == 64 for s in record["shards"])
+
+
 @pytest.mark.parametrize("size,filename", [("14b", "14B"), ("30b-a3b", "30B-A3B")])
 def test_larger_runtime_profile_changes_identity_without_weakening_the_base_unit(
     size: str, filename: str

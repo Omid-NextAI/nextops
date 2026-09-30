@@ -1,5 +1,18 @@
 # Testing, model evaluation and release evidence
 
+## Saved-chat/thinking candidate source checks — 2026-09-30
+
+Locked full local command: `uv run pytest -q`, with an explicitly isolated PostgreSQL 18.6
+cluster bound to loopback, passed 441 tests with two Windows POSIX skips. This includes 19
+restricted-role PostgreSQL and 16 real-browser fixtures; CI still checks supported PostgreSQL
+16/17 separately. After visual inspection found a compressed mobile history panel, the layout
+was fixed and all 16 browser cases passed again. Strict typing/lint, all six documentation/profile
+validators, Alembic schema comparison and `uv build --no-sources --offline` passed. These are source,
+lab and desktop package results, not deployed thinking/model accuracy or server offline acceptance.
+Authenticated live 35B /apply-template and /tokenize calls passed for both trusted thinking
+settings without generation or service mutation. 122B metadata is pinned; actual import,
+long-context/think semantics, latency, matched live rollback and fresh WAN/VM gates are not run.
+
 ## Serving 810102f exact-unit incident focus — 2026-09-30
 
 Exact head 810102f226e8b02a967cb4895b7906dce7ae1712 passed all five CI jobs in run

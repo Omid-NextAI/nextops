@@ -1,5 +1,11 @@
 # Bilingual operations console and design system
 
+## Saved-chat candidate — 2026-09-30
+
+Owner-only local history, resume/new/delete controls and a gated standard/thinking selection are
+implemented but not deployed. The UI/UX workflow guided keyboard navigation and existing OCS tokens;
+brand assets are unchanged. See [conversation operation](CONVERSATIONS.md) for limits and privacy.
+
 ## Serving focused incident panel — 2026-09-30
 
 The controlled 810102f/35B workspace is live. A question naming `nextops-app.service` shows

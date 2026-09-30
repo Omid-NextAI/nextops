@@ -1,5 +1,21 @@
 # Prompt version history / تاریخچهٔ نسخه‌های پرامپت
 
+## Owner conversation/model expansion amendment — 2026-09-30
+
+The owner requests more context, local thinking, persistent chat and consecutive follow-up answers,
+reports expanded AI resources and directs implementation. The new bounded conversation packet
+supersedes the previous general-only nonpersistent-memory non-goal; live evidence, policy, CPU-only,
+offline and resource safeguards are unchanged. New candidate budgets are a separate qualification,
+not reinterpretation of earlier failed tests. More RAM/vCPU is not an accuracy or topology pass.
+See [the specification](../en/CONVERSATION_MEMORY_SPEC.md). No serving-profile promotion is implied.
+
+مالک زمینهٔ بزرگ‌تر، استدلال محلی، حافظهٔ گفت‌وگو و پاسخ پی‌درپی را خواسته، افزایش منابع AI را
+اعلام کرده و شروع پیاده‌سازی را درخواست کرده است. مشخصات تازه، خارج‌ازدامنه بودن حافظهٔ ماندگار
+در برش عمومی قبلی را جایگزین می‌کند؛ شاهد زنده، سیاست، CPU-only، آفلاین و محدودیت منابع حفظ
+می‌شوند. بودجهٔ نامزد جدید جداگانه سنجیده می‌شود و شکست قبلی را بازتفسیر نمی‌کند. افزایش منابع
+اثبات کیفیت یا توپولوژی نیست. [مشخصات فارسی](../fa/CONVERSATION_MEMORY_SPEC.md) مبناست؛ انتخاب
+نمایهٔ تازه برای نسخهٔ در حال خدمت از این دستور استنباط نمی‌شود.
+
 ## Owner development-workflow amendment — 2026-09-29
 
 The owner explicitly removes the all-at-once private decision form and its prerequisite procedure

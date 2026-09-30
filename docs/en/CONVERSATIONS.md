@@ -1,0 +1,66 @@
+# Saved conversations: operation and qualification
+
+[فارسی](../fa/CONVERSATIONS.md) · [Specification](CONVERSATION_MEMORY_SPEC.md)
+
+Candidate source only, 2026-09-30. These features are disabled in the current serving release.
+The UI/UX workflow guided keyboard-accessible history controls; OCS brand assets are unchanged.
+
+## User behavior
+
+When qualified and enabled, general chats are saved in local PostgreSQL for your account. Choose
+a conversation in the sidebar to resume it. New conversation does not delete old chats; Delete
+this conversation explicitly removes its transcript. Logout clears private page content and the
+browser token, not saved history. Do not paste passwords, keys or other secrets.
+
+The page displays at most 12 exchanges. API pages contain at most 20, with a before_sequence cursor.
+The model sees at most six complete accepted pairs, within 12,000 characters; an omission notice
+means you must restate missing details. Old saved answers are not fresh generations. General
+memory is not proof of current server status; live modes still fetch fresh scoped evidence.
+
+Standard is the default. Think more is shown only after operator qualification. Its private
+reasoning is discarded; only a final answer is displayed/saved. It may be slower or still wrong.
+This is inference and conversation storage, not model training.
+
+## API and configuration reference
+
+All routes require a current bearer session. IDs alone grant no access.
+
+| Route | Contract |
+| --- | --- |
+| GET /api/v1/conversations/config | Enabled/thinking flags, context and retention bounds |
+| POST /api/v1/conversations | locale; creates owner-scoped empty chat |
+| GET /api/v1/conversations | At most 50 owner summaries, newest first |
+| GET /api/v1/conversations/{id} | Last 20 pairs; optional before_sequence 1–101 |
+| POST /api/v1/conversations/{id}/messages | request_id UUID, locale, question 1–4000, thinking boolean |
+| DELETE /api/v1/conversations/{id} | Explicit transcript deletion; audit metadata remains |
+
+Legacy /assistant/generate and live contracts keep their existing public limits. Completed
+request retries return the same saved response. Concurrent requests conflict; provider failure
+clears the pending lease if the same session is still valid. A crash/cancelled request expires
+after 540 seconds; no unbounded automatic retries are introduced.
+
+App flags: NEXTOPS_CONVERSATIONS_ENABLED=1; NEXTOPS_CHAT_THINKING_ENABLED=1 only after qualification.
+AI flags: NEXTOPS_EXPANDED_CHAT_ENABLED=1; NEXTOPS_THINKING_ENABLED=1 only after qualification;
+NEXTOPS_CONTEXT_TOKENS=16384 must match actual runtime n_ctx. Defaults are disabled/8192.
+Keep existing 120-second generation deadline for initial qualification; a separate measured profile
+decision is required if expanded replies fail it. Never widen deadlines to relabel a failed test.
+
+## Promotion and rollback sequence
+
+1. Preserve the exact serving app, AI API, model-selection file/drop-in and artifact hashes.
+2. Apply additive Alembic migration 0003 with the protected migration role in the existing reviewed
+   deployment workflow. Do not pass a secret-bearing database URL on a command line.
+3. Install the exact tested app/AI package with flags disabled. Existing paths must still pass.
+4. Qualify the thinking runtime drop-in at 16384 context, 16 threads, one slot, zero GPU layers,
+   1024 reasoning tokens and no reasoning preservation. Native sandbox/resource/network restrictions
+   remain inherited; no runtime download option is present. Real template/tokenization passed on
+   the current exact runtime; this did not generate or qualify a thinking answer.
+5. Enable matched flags only after EN/FA relevance, follow-up, provenance separation, latency,
+   failure, authorization, offline and rollback checks. Record exact release identities and results.
+6. Roll back by disabling flags and restoring exact previous app/AI/runtime profiles. Leave tables
+   intact to preserve transcripts; destructive downgrade requires an export and separate approval.
+
+The research-only 122B record pins two shards totaling 77,616,511,296 bytes. Its conversion lineage,
+bytes, template, CPU latency and quality are not verified. More assigned vCPUs do not justify more
+threads automatically. Current guest preflight: 64 vCPUs, 193185 MiB usable RAM, one guest NUMA node;
+actual host placement/reservations remain unknown. Do not resize again before benchmark evidence.

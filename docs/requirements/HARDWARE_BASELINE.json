@@ -3,6 +3,30 @@
   "received_date": "2026-09-20",
   "source_kind": "owner_supplied_esxcli_output_with_separately_attributed_storage_statement",
   "direct_host_access_performed": false,
+  "later_guest_observations": [
+    {
+      "observed_date": "2026-09-30",
+      "source_kind": "authorized_read_only_ssh_guest_preflight",
+      "role": "nextops-ai",
+      "online_vcpu": 64,
+      "reported_usable_memory_mib": 193185,
+      "reported_available_memory_mib_point_in_time": 175852,
+      "reported_swap_mib": 8191,
+      "swap_used_mib": 0,
+      "guest_numa_nodes": 1,
+      "guest_virtual_sockets": 64,
+      "guest_cores_per_socket": 1,
+      "esxi_saved_configuration_verified": false,
+      "host_placement_and_reservations_verified": false,
+      "runtime_threads": 16,
+      "runtime_context_tokens": 8192,
+      "runtime_cpu_quota_equivalent_cores": 18,
+      "runtime_memory_max_gib": 96,
+      "runtime_parallel_slots": 1,
+      "changes_performed": "none; observation only",
+      "note": "Later guest evidence supersedes the initial AI 24-vCPU/128-GiB allocation for current sizing. Usable guest memory is not an exact ESXi configured-RAM observation or host-free-memory measurement."
+    }
+  ],
   "capture_timestamp": null,
   "commands": [
     "esxcli hardware cpu global get",

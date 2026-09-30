@@ -1,5 +1,15 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Conversation expansion (sections 3, 9, 17, 25, 27; 2026-09-30): owner-scoped PostgreSQL memory,
+bounded six-pair context, independently gated local reasoning and token admission are candidate
+source, not deployed. CM-01–CM-08 map to conversation unit/integration/browser tests and
+[the bounded packet](../en/CONVERSATION_MEMORY_SPEC.md). Serving 810102f/35B is unchanged.
+
+گسترش گفت‌وگو (بخش‌های ۳، ۹، ۱۷، ۲۵ و ۲۷؛ ۹ مهر ۱۴۰۵): حافظهٔ مالک‌محور PostgreSQL، زمینهٔ
+حداکثر شش جفت، استدلال محلی با فعال‌سازی مستقل و پذیرش توکن، کد نامزدند و مستقر نیستند.
+CM-01 تا CM-08 به آزمون واحد، پایگاه و مرورگر و [مشخصات](../fa/CONVERSATION_MEMORY_SPEC.md)
+متصل‌اند. نسخهٔ در حال خدمت 810102f/35B تغییر نکرده است.
+
 Controlled NOC/SOC increment (sections 3, 9, 17, 25, 27; 2026-09-29): exact 862d311/35B preserves
 OCS brand and provides responsive conversation, safe text/code/copy and bounded general-only context; no persistent memory schema,
 retrieval or new connector. 363 unit/API checks (two Windows POSIX skips), twelve browser fixtures,

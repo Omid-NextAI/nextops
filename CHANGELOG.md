@@ -1,5 +1,19 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Saved-chat and reasoning candidate — 2026-09-30 / نامزد حافظه و استدلال — ۹ مهر ۱۴۰۵
+
+Add owner-scoped PostgreSQL conversation storage, audited additive migration, six-pair bounded
+context, safe bilingual resume/delete UI, gated thinking/final-only output and actual local token
+admission. Keep serving 810102f/35B and all flags unchanged. Record the expanded guest observation
+and pin research-only 122B shards without downloading/selecting them. Local full suite: 441 passed,
+two platform skips; supported-major CI and matched live model/profile acceptance are separate.
+
+حافظهٔ مالک‌محور PostgreSQL، مهاجرت افزایشی و ممیزی، زمینهٔ محدودِ شش جفت، رابط ایمن و دوزبانهٔ
+ادامه و حذف، استدلال دروازه‌دار با خروجی صرفاً نهایی و پذیرش بر پایهٔ توکن واقعی اضافه شدند.
+نسخهٔ زندهٔ 810102f/35B و گزینه‌ها ثابت‌اند. مشاهدهٔ منابع تازه ثبت و فایل‌های صرفاً پژوهشی
+122B بدون دریافت یا انتخاب پین شدند. مجموعهٔ محلی ۴۴۱ آزمون موفق و دو مورد کنارگذاشته‌شدهٔ
+وابسته به سکو دارد؛ CI نسخهٔ پشتیبانی‌شدهٔ پایگاه و پذیرش زندهٔ مدل/نمایه جدا هستند.
+
 ## Controlled exact-unit incident focus — 2026-09-30 / تمرکز کنترل‌شدهٔ واحدِ دقیق — ۹ مهر ۱۴۰۵
 
 Select app/API 810102f with unchanged CPU-only 35B after five CI jobs, fresh hash-locked

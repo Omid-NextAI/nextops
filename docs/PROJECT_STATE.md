@@ -1,5 +1,24 @@
 # Project state / وضعیت پروژه
 
+Conversation/model expansion candidate, 2026-09-30 — owner-scoped local PostgreSQL chat,
+six-pair/12000-character context, feature-gated thinking, exact-template token admission and
+final-only storage are implemented on a separate branch. Flags remain off; the serving release
+below is unchanged. Read-only live runtime template/tokenization succeeded for both trusted
+thinking settings; this is not a generation, quality, longer-context or offline acceptance result.
+Guest preflight observes 64 vCPUs, 193185 MiB usable RAM and one guest NUMA node; no additional resize
+or guest topology change was performed. 122B split-artifact metadata is pinned for research only;
+download, exact bytes/lineage, CPU performance and semantics are not verified.
+See [the packet](en/CONVERSATION_MEMORY_SPEC.md) and [operations](en/CONVERSATIONS.md).
+
+نامزد گسترش گفت‌وگو و مدل، ۹ مهر ۱۴۰۵ — حافظهٔ محلی و مالک‌محور PostgreSQL، زمینهٔ شش جفت و
+۱۲ هزار نویسه، استدلال دروازه‌دار، پذیرش بر پایهٔ قالب واقعی و ذخیرهٔ صرفاً پاسخ نهایی در شاخهٔ
+جدا پیاده شده‌اند. گزینه‌ها غیرفعال‌اند و نسخهٔ در حال خدمتِ زیر ثابت است. قالب و توکن‌بندی
+واقعی برای هر دو انتخابِ معتبر استدلال موفق بود؛ تولید پاسخ، کیفیت، زمینهٔ بزرگ‌تر یا پذیرش
+آفلاین را ثابت نمی‌کند. مهمان اکنون ۶۴ vCPU، حافظهٔ قابل‌استفادهٔ ۱۹۳۱۸۵ MiB و یک گرهٔ NUMA
+نشان می‌دهد؛ افزایش مجدد یا تغییر توپولوژی انجام نشد. رکورد دو فایل 122B صرفاً پژوهشی است؛
+دریافت، بایت و منشأ دقیق، کارایی CPU و کیفیت هنوز تأیید نشده‌اند.
+[مشخصات](fa/CONVERSATION_MEMORY_SPEC.md) و [راهنمای عملیات](fa/CONVERSATIONS.md) مبنا هستند.
+
 Current controlled live workspace, 2026-09-30 — App/API 810102f is serving the unchanged
 CPU-only 35B model. Five exact-head CI jobs, a fresh hash-locked offline Ubuntu 24.04 package
 install, four first and two final authenticated EN/FA network/named-service browser cases, six
