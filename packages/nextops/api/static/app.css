@@ -33,11 +33,45 @@
   --radius-full: 999px;
   --size-control: 44px;
   --size-content-max: 1280px;
+  --button-bg: #006c78;
   color: var(--ink);
   background: var(--bg);
   font-family: "Segoe UI", Tahoma, Arial, sans-serif;
   font-synthesis: none;
 }
+
+/* Brand base colours and the embedded OCS mark are identical in both themes. */
+:root[data-theme="dark"] {
+  --ink: #e7eff0;
+  --ink-soft: #cedcde;
+  --muted: #aabcc0;
+  --surface: #17272e;
+  --surface-subtle: #1d3037;
+  --line: #37515a;
+  --line-strong: #5a747c;
+  --bg: #101b20;
+  --brand-teal-dark: #73d2db;
+  --brand-teal-soft: #173c43;
+  --brand-gold-dark: #e1bc60;
+  --brand-gold-soft: #382f1c;
+  --success: #87cda1;
+  --warning: #e1bc60;
+  --danger: #ff9fb0;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .2), 0 8px 24px rgba(0, 0, 0, .12);
+  --shadow-lg: 0 24px 70px rgba(0, 0, 0, .3);
+}
+html[data-theme="dark"] body { background: radial-gradient(circle at 88% 10%, rgba(0, 144, 160, .1), transparent 25rem), var(--bg); }
+html[data-theme="dark"] :is(.topbar, footer, .trust-row > span, .status-panel) { background: var(--surface); }
+html[data-theme="dark"] :is(.quiet-button, .login-card input, .prompt-label textarea, .status-pill, .choice.active, .icon-lock::after, .target-field select, .evidence-summary > span, .metric-item, .incident-stats > span, .incident-section) { background: var(--surface); }
+html[data-theme="dark"] :is(.target-field, .evidence-panel, .integrity-notice) { background: var(--surface-subtle); border-color: var(--line); }
+html[data-theme="dark"] :is(.evidence-badge, .evidence-badge.live, .evidence-summary > span, .metric-item, .incident-stats > span, .incident-section, .incident-detail, .icon-lock, .choice.active) { border-color: var(--line-strong); }
+html[data-theme="dark"] .quiet-button:active, html[data-theme="dark"] .choice:active { background: var(--brand-teal-soft); }
+html[data-theme="dark"] :is(button, a, input, textarea, select):focus-visible { outline: 3px solid var(--brand-teal-dark); outline-offset: 3px; }
+html[data-theme="dark"] .skip-link { background: var(--button-bg); }
+.theme-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.theme-button svg { inline-size: 17px; block-size: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.theme-button[aria-pressed="true"] { border-color: var(--brand-gold); color: var(--brand-gold-dark); }
+@media (max-width: 680px) { .topbar { flex-wrap: wrap; } .top-actions { flex-wrap: wrap; justify-content: flex-end; } }
 
 .saved-chats { border-block-end: 1px solid var(--line); padding-block: var(--space-16); margin-block-end: var(--space-16); }
 .saved-chats #savedChatsList { display: grid; gap: var(--space-4); max-block-size: 320px; overflow-y: auto; }
@@ -224,10 +258,10 @@ main { position: relative; width: min(var(--size-content-max), calc(100% - 40px)
   justify-content: center;
   gap: 10px;
   padding: 13px 16px;
-  border: 1px solid var(--brand-teal-dark);
+  border: 1px solid var(--button-bg);
   border-radius: 9px;
   color: #fff;
-  background: var(--brand-teal-dark);
+  background: var(--button-bg);
   font: inherit;
   font-weight: 750;
   cursor: pointer;

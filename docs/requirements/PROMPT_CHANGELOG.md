@@ -1,5 +1,18 @@
 # Prompt version history / تاریخچهٔ نسخه‌های پرامپت
 
+## Owner live-chat/theme instruction — 2026-09-30
+
+The owner explicitly requests the work needed to take the conversation candidate live and a dark
+theme switch. This authorizes a bounded guarded app/AI/schema/profile qualification and promotion
+on the existing controlled guests, with exact rollback. It does not waive failed quality/offline
+gates or authorize new ESXi resources, destructive database downgrade or unrelated integrations.
+Recovery remains owner-deferred; this task is not an attestation of full production acceptance.
+
+مالک صریحاً آماده‌سازی نامزد گفت‌وگو برای استقرار زنده و دکمهٔ پوستهٔ تیره را خواسته است. این
+دستور، آزمون و استقرار محدود و محافظت‌شدهٔ برنامه، AI، پایگاه و نمایه در مهمان‌های موجود را با
+بازگشت دقیق مجاز می‌کند؛ شکست کیفیت یا آفلاین را حذف و منابع تازهٔ ESXi، بازگردانی مخربِ پایگاه
+یا اتصال نامرتبط را مجاز نمی‌کند. بازیابی همچنان در تعویق است و پذیرش کامل تولید ادعا نمی‌شود.
+
 ## Owner conversation/model expansion amendment — 2026-09-30
 
 The owner requests more context, local thinking, persistent chat and consecutive follow-up answers,

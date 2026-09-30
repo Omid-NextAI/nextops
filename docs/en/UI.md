@@ -1,5 +1,13 @@
 # Bilingual operations console and design system
 
+## Local theme switch candidate — 2026-09-30
+
+The header has a keyboard-accessible light/dark switch on login and workspace screens. Before
+first paint it uses the saved local preference or system theme. Only the theme/language preference
+is stored locally, never transcripts or credentials; restricted preference storage falls back to
+the current tab. Persian labels/RTL, 375-pixel layout and dark text/button contrast are tested.
+OCS base gold/teal values and the embedded logo are unchanged. This source change is not yet live.
+
 ## Saved-chat candidate — 2026-09-30
 
 Owner-only local history, resume/new/delete controls and a gated standard/thinking selection are

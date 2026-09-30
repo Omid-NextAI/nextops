@@ -122,7 +122,7 @@ const translations = {
 };
 
 const state = {
-  language: localStorage.getItem("nextops-language") === "fa" ? "fa" : "en",
+  language: (() => { try { return localStorage.getItem("nextops-language") === "fa" ? "fa" : "en"; } catch { return "en"; } })(),
   answerLocale: "en",
   answerMode: "general",
   incidentTargets: [],
@@ -381,9 +381,10 @@ function installBrandIcon() {
 
 function applyLanguage(language) {
   state.language = language;
-  localStorage.setItem("nextops-language", language);
+  try { localStorage.setItem("nextops-language", language); } catch { /* Tab-only preference. */ }
   document.documentElement.lang = language;
   document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
+  window.NextOpsTheme.updateControl();
   byId("copyStatus").textContent = "";
   byId("languageButton").textContent = language === "fa" ? "English" : "فارسی";
   byId("languageButton").setAttribute("aria-label", translations[language].languageToggleAria);

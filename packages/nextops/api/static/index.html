@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#007986">
   <link id="appIcon" rel="icon" href="data:,">
   <title>NextOps by OCS | Local Operations Intelligence</title>
-  <link rel="stylesheet" href="/assets/app.css?v=20260930-chat">
-  <link rel="stylesheet" href="/assets/evidence.css?v=20260930-chat">
-  <script src="/assets/app.js?v=20260930-chat" defer></script>
+  <script src="/assets/theme.js?v=20260930-theme"></script>
+  <link rel="stylesheet" href="/assets/app.css?v=20260930-theme">
+  <link rel="stylesheet" href="/assets/evidence.css?v=20260930-theme">
+  <script src="/assets/app.js?v=20260930-theme" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#mainContent" data-i18n="skipMain">Skip to main content</a>
@@ -24,6 +25,7 @@
     </a>
     <div class="top-actions">
       <span class="environment"><span class="dot" aria-hidden="true"></span><span data-i18n="localEnvironment">Private local environment</span></span>
+      <button id="themeButton" class="quiet-button theme-button" type="button" aria-label="Dark theme" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/></svg><span>Dark theme</span></button>
       <button id="languageButton" class="quiet-button" type="button" aria-label="Switch interface language">فارسی</button>
       <button id="logoutButton" class="quiet-button hidden" type="button" data-i18n="logout">Sign out</button>
     </div>

@@ -416,6 +416,86 @@ def _launch_browser(playwright: Any) -> Any:
         return playwright.chromium.launch(channel="chrome")
 
 
+@pytest.mark.parametrize("locale", ["en", "fa"])
+@pytest.mark.parametrize("width", [375, 1280])
+def test_theme_toggle_persists_is_keyboard_accessible_and_keeps_brand(
+    browser_server: tuple[str, FastAPI], locale: str, width: int
+) -> None:
+    base_url, _ = browser_server
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": width, "height": 900}, color_scheme="light")
+        page.goto(base_url, wait_until="networkidle")
+        if locale == "fa":
+            page.locator("#languageButton").click()
+        logo = page.locator(".ocs-logo-header").evaluate(
+            "el => getComputedStyle(el).backgroundImage"
+        )
+        switch = page.locator("#themeButton")
+        expect(switch).to_have_attribute("aria-pressed", "false")
+        switch.focus()
+        page.keyboard.press("Space")
+        expect(switch).to_have_attribute("aria-pressed", "true")
+        expect(page.locator("html")).to_have_attribute("data-theme", "dark")
+        assert page.evaluate("localStorage.getItem('nextops-theme')") == "dark"
+        assert (
+            page.locator(".ocs-logo-header").evaluate("el => getComputedStyle(el).backgroundImage")
+            == logo
+        )
+        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+        tokens = page.evaluate(
+            """() => {
+              const css = getComputedStyle(document.documentElement);
+              return Object.fromEntries(['--ink', '--muted', '--surface', '--button-bg',
+                '--brand-gold', '--brand-teal'].map(k => [k, css.getPropertyValue(k).trim()]));
+            }"""
+        )
+        assert tokens["--brand-gold"] == "#d0a840"
+        assert tokens["--brand-teal"] == "#0090a0"
+        assert _contrast(tokens["--ink"], tokens["--surface"]) >= 4.5
+        assert _contrast(tokens["--muted"], tokens["--surface"]) >= 4.5
+        assert _contrast("#ffffff", tokens["--button-bg"]) >= 4.5
+        page.reload(wait_until="networkidle")
+        expect(page.locator("html")).to_have_attribute("data-theme", "dark")
+        expect(switch).to_have_attribute(
+            "aria-label", "پوستهٔ تیره" if locale == "fa" else "Dark theme"
+        )
+        switch.click()
+        expect(page.locator("html")).to_have_attribute("data-theme", "light")
+        expect(switch).to_have_attribute("aria-pressed", "false")
+        browser.close()
+
+
+def _contrast(first: str, second: str) -> float:
+    def luminance(color: str) -> float:
+        values = [int(color[index : index + 2], 16) / 255 for index in (1, 3, 5)]
+        linear = [v / 12.92 if v <= 0.04045 else ((v + 0.055) / 1.055) ** 2.4 for v in values]
+        return sum(v * weight for v, weight in zip(linear, (0.2126, 0.7152, 0.0722), strict=True))
+
+    values = sorted((luminance(first), luminance(second)))
+    return (values[1] + 0.05) / (values[0] + 0.05)
+
+
+def test_system_theme_and_unavailable_preference_storage_do_not_block_login(
+    browser_server: tuple[str, FastAPI],
+) -> None:
+    base_url, _ = browser_server
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(color_scheme="dark")
+        page.add_init_script(
+            """Object.defineProperty(window, 'localStorage', {
+              get() { throw new DOMException('blocked', 'SecurityError'); }
+            });"""
+        )
+        _login(page, base_url)
+        expect(page.locator("html")).to_have_attribute("data-theme", "dark")
+        page.locator("#themeButton").click()
+        expect(page.locator("html")).to_have_attribute("data-theme", "light")
+        expect(page.locator("#workspaceView")).to_be_visible()
+        browser.close()
+
+
 def test_saved_chat_reload_followup_thinking_delete_and_logout(
     browser_server: tuple[str, FastAPI],
 ) -> None:

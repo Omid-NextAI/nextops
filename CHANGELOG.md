@@ -1,5 +1,15 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-09-30 — Local light/dark theme candidate / نامزد پوستهٔ روشن و تیره
+
+Add a bilingual keyboard-accessible theme switch and pre-paint local/system preference handling.
+Preserve the embedded OCS logo and base gold/teal palette; test dark contrast and 375-pixel RTL.
+Keep login usable when browser preference storage is unavailable. Live qualification is separate.
+
+دکمهٔ دوزبانه و صفحه‌کلیدیِ پوسته، با اعمال ترجیح محلی یا سیستم پیش از نمایش افزوده شد. نشان
+OCS و طلایی/فیروزه‌ای پایه ثابت‌اند؛ تضاد رنگ و RTL در پهنای ۳۷۵ پیکسل آزموده شد. منع ذخیرهٔ
+ترجیحات مانع ورود نمی‌شود. پذیرش زنده جداگانه انجام می‌شود.
+
 ## Saved-chat and reasoning candidate — 2026-09-30 / نامزد حافظه و استدلال — ۹ مهر ۱۴۰۵
 
 Add owner-scoped PostgreSQL conversation storage, audited additive migration, six-pair bounded
