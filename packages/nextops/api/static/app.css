@@ -39,6 +39,13 @@
   font-synthesis: none;
 }
 
+.saved-chats { border-block-end: 1px solid var(--line); padding-block: var(--space-16); margin-block-end: var(--space-16); }
+.saved-chats #savedChatsList { display: grid; gap: var(--space-4); max-block-size: 320px; overflow-y: auto; }
+.saved-chat-button { width: 100%; min-block-size: var(--size-control); text-align: start; padding: var(--space-8) var(--space-12); border: 1px solid transparent; border-radius: var(--radius-8); background: transparent; color: var(--ink-soft); font: inherit; cursor: pointer; overflow-wrap: anywhere; }
+.saved-chat-button:hover, .saved-chat-button[aria-current="true"] { background: var(--brand-teal-soft); border-color: var(--brand-teal); }
+.saved-chat-button:focus-visible { outline: 2px solid var(--brand-teal-dark); outline-offset: 2px; }
+.saved-chat-button:disabled { opacity: .6; cursor: wait; }
+
 * { box-sizing: border-box; }
 html { min-height: 100%; background: var(--bg); scroll-behavior: smooth; }
 button, a { touch-action: manipulation; }
@@ -520,8 +527,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 @media (max-width: 680px) {
   .operator-layout { grid-template-columns: minmax(0, 1fr); }
-  .operator-rail { position: static; display: flex; gap: var(--space-12); align-items: center; border: 0; padding: 0; background: transparent; }
+  .operator-rail { position: static; display: flex; flex-wrap: wrap; gap: var(--space-12); align-items: center; border: 0; padding: 0; background: transparent; }
   .operator-rail h2, .operator-rail .rail-help, .operator-rail .starter-link, .capability-note .section-kicker, .capability-note p { display: none; }
+  .operator-rail .saved-chats { flex: 0 0 100%; min-inline-size: 0; order: 3; border: 1px solid var(--line); border-radius: var(--radius-12); padding: var(--space-12); background: var(--surface); margin: 0; }
+  .operator-rail .saved-chats h2, .operator-rail .saved-chats .rail-help { display: block; }
+  .operator-rail .saved-chats h2 { margin-block-start: 0; }
+  .operator-rail .saved-chats #savedChatsList { max-block-size: 180px; }
   .new-chat-button { width: auto; flex-shrink: 0; background: var(--surface); font-size: 12px; }
   .capability-note { border: 0; margin: 0; padding: 0; }
   .conversation-welcome { padding: 12px 0 24px; }

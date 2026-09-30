@@ -128,12 +128,43 @@ const state = {
   incidentTargets: [],
   lastEvidence: null,
   history: [],
+  conversationsEnabled: false,
+  thinkingEnabled: false,
+  conversationId: null,
+  pendingMessage: null,
   busy: false,
   epoch: 0,
   token: sessionStorage.getItem("nextops-session") || ""
 };
 const byId = id => document.getElementById(id);
 const resultTemplate = byId("resultCard").cloneNode(true);
+
+Object.assign(translations.en, {
+  savedChats: "YOUR CONVERSATIONS", savedPrivacy: "Private to your account · retained for 30 days. Do not paste secrets.",
+  deleteChat: "Delete this conversation", deleteChatConfirm: "Delete this saved conversation permanently? Audit metadata will remain.",
+  savedContextHelp: "Saved locally for 30 days. Follow-ups use up to six recent exchanges; live requests always fetch new evidence.",
+  savedContextOmitted: "Older or oversized exchanges were left out of model context. Include any missing detail in your question.",
+  savedChatsUnavailable: "Saved conversations are unavailable. The current chat cannot be saved.",
+  olderMessages: "Showing the latest 12 exchanges. Earlier exchanges remain saved.",
+  savedHistoryUnavailable: "The history list is temporarily unavailable. Your answer was saved.",
+  thinkingMode: "Response mode", standardResponse: "Standard", thinkingResponse: "Think more · slower",
+  thinkingHelp: "Local, bounded reasoning. Only the final answer is shown and saved; thinking does not verify facts.",
+  conflictError: "This conversation already has a pending request. Wait before retrying.",
+  contextExceeded: "This question and its context exceed the model limit. Start a new conversation or shorten the question."
+});
+Object.assign(translations.fa, {
+  savedChats: "گفت‌وگوهای شما", savedPrivacy: "فقط برای حساب شما · نگهداری تا ۳۰ روز. اطلاعات محرمانه وارد نکنید.",
+  deleteChat: "حذف این گفت‌وگو", deleteChatConfirm: "این گفت‌وگو برای همیشه حذف شود؟ فرادادهٔ ممیزی باقی می‌ماند.",
+  savedContextHelp: "گفت‌وگو تا ۳۰ روز به‌صورت محلی ذخیره می‌شود. پیگیری از حداکثر شش پرسش‌وپاسخ اخیر استفاده می‌کند؛ درخواست زنده همیشه شاهد تازه می‌گیرد.",
+  savedContextOmitted: "بخشی از گفت‌وگوهای قدیمی یا طولانی از زمینهٔ مدل کنار گذاشته شده است. جزئیات لازم را در پرسش خود بیاورید.",
+  savedChatsUnavailable: "گفت‌وگوهای ذخیره‌شده در دسترس نیستند؛ گفت‌وگوی فعلی ذخیره نمی‌شود.",
+  olderMessages: "۱۲ پرسش‌وپاسخ آخر نمایش داده می‌شود؛ موارد قبلی همچنان ذخیره هستند.",
+  savedHistoryUnavailable: "فهرست گفت‌وگوها موقتاً در دسترس نیست؛ پاسخ شما ذخیره شده است.",
+  thinkingMode: "شیوهٔ پاسخ", standardResponse: "معمولی", thinkingResponse: "بررسی بیشتر · کندتر",
+  thinkingHelp: "استدلال محلی با بودجهٔ محدود انجام می‌شود. فقط پاسخ نهایی نمایش و ذخیره می‌شود؛ این حالت، صحت اطلاعات را تضمین نمی‌کند.",
+  conflictError: "در این گفت‌وگو درخواست دیگری در حال پردازش است؛ پیش از تلاش دوباره صبر کنید.",
+  contextExceeded: "پرسش و زمینهٔ آن از ظرفیت مدل بیشتر است. گفت‌وگوی تازه‌ای آغاز کنید یا پرسش را کوتاه‌تر بنویسید."
+});
 
 Object.assign(translations.en, {
   newChat: "New conversation", operatorTools: "OPERATOR STARTERS",
@@ -213,6 +244,8 @@ const starters = {
 };
 
 function clearConversation() {
+  state.conversationId = null;
+  state.pendingMessage = null;
   state.history = [];
   state.lastEvidence = null;
   byId("conversationHistory").replaceChildren();
@@ -225,14 +258,20 @@ function clearConversation() {
   byId("assistantError").textContent = "";
   byId("copyStatus").textContent = "";
   byId("requestStatus").textContent = "";
-  byId("contextNotice").dataset.i18n = "contextHelp";
-  byId("contextNotice").textContent = translations[state.language].contextHelp;
+  setContextNotice(state.conversationsEnabled ? "savedContextHelp" : "contextHelp");
+  byId("deleteChatButton").classList.add("hidden");
+  document.querySelectorAll(".saved-chat-button").forEach(node => node.removeAttribute("aria-current"));
+}
+
+function setContextNotice(key) {
+  byId("contextNotice").dataset.i18n = key;
+  byId("contextNotice").textContent = translations[state.language][key];
 }
 
 function setBusy(busy) {
   state.busy = busy;
   byId("question").readOnly = busy;
-  document.querySelectorAll("#askButton, #newChatButton, .mode-choice, .locale-choice, [data-starter], #languageButton, #incidentTarget").forEach(node => {
+  document.querySelectorAll("#askButton, #newChatButton, .mode-choice, .locale-choice, [data-starter], #languageButton, #incidentTarget, #thinkingMode, #deleteChatButton, .saved-chat-button").forEach(node => {
     node.disabled = busy || (node.id === "incidentTarget" && !state.incidentTargets.length);
   });
   byId("askButton").toggleAttribute("aria-busy", busy);
@@ -246,7 +285,7 @@ function archiveLastTurn() {
   archived.removeAttribute("id");
   archived.querySelectorAll("[id]").forEach(node => node.removeAttribute("id"));
   byId("conversationHistory").append(archived);
-  // Eleven historical turns plus the current one. No persistent transcript store.
+  // Bound DOM size independently of the server's durable transcript.
   while (byId("conversationHistory").children.length > 11) {
     byId("conversationHistory").firstElementChild.remove();
   }
@@ -392,6 +431,11 @@ function showLogin(message = "") {
   state.epoch += 1;
   state.token = "";
   state.lastEvidence = null;
+  state.conversationsEnabled = false;
+  state.thinkingEnabled = false;
+  byId("savedChatsList").replaceChildren();
+  byId("savedChatsPanel").classList.add("hidden");
+  byId("thinkingField").classList.add("hidden");
   sessionStorage.removeItem("nextops-session");
   byId("loginView").classList.remove("hidden");
   byId("workspaceView").classList.add("hidden");
@@ -436,7 +480,94 @@ async function showWorkspace() {
   checkAi();
   checkMonitoring();
   loadIncidentTargets();
+  const epoch = state.epoch;
+  try {
+    const config = await api("/api/v1/conversations/config");
+    if (epoch !== state.epoch) return;
+    state.conversationsEnabled = config.enabled === true;
+    state.thinkingEnabled = config.thinking_enabled === true;
+    byId("savedChatsPanel").classList.toggle("hidden", !state.conversationsEnabled);
+    byId("thinkingField").classList.toggle("hidden", !state.thinkingEnabled || state.answerMode !== "general");
+    if (state.conversationsEnabled) {
+      setContextNotice("savedContextHelp");
+      await refreshSavedChats();
+    }
+  } catch (error) {
+    if (epoch === state.epoch && error.status !== 401) setContextNotice("savedChatsUnavailable");
+  }
 }
+
+async function refreshSavedChats() {
+  const epoch = state.epoch;
+  const conversations = await api("/api/v1/conversations");
+  if (epoch !== state.epoch) return;
+  byId("savedChatsList").replaceChildren();
+  conversations.forEach(chat => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "saved-chat-button";
+    button.textContent = chat.title;
+    button.dir = "auto";
+    button.disabled = state.busy;
+    if (chat.conversation_id === state.conversationId) button.setAttribute("aria-current", "true");
+    button.addEventListener("click", () => openSavedChat(chat.conversation_id));
+    byId("savedChatsList").append(button);
+  });
+  byId("deleteChatButton").classList.toggle("hidden", !state.conversationId);
+}
+
+async function openSavedChat(id) {
+  if (state.busy) return;
+  const epoch = ++state.epoch;
+  setBusy(true);
+  try {
+    const page = await api(`/api/v1/conversations/${id}`);
+    if (epoch !== state.epoch) return;
+    clearConversation();
+    state.conversationId = id;
+    setAnswerMode("general");
+    page.messages.slice(-12).forEach(message => {
+      archiveLastTurn();
+      byId("askedQuestion").textContent = message.question;
+      byId("askedQuestion").dir = "auto";
+      renderAnswer(message.assistant.answer, message.assistant.locale);
+      byId("modelId").textContent = message.assistant.model_id;
+      byId("tokenCount").textContent = message.assistant.completion_tokens;
+      byId("completedAt").textContent = new Date(message.assistant.completed_at).toLocaleString(state.language === "fa" ? "fa-IR" : "en-GB");
+      byId("requestId").textContent = message.assistant.request_id;
+      const key = message.assistant.integrity_status === "model_unverified" ? "modelIntegrityNotice" :
+        message.assistant.integrity_status === "scope_redirect" ? "redirectIntegrityNotice" : "generalFallbackIntegrityNotice";
+      byId("integrityNotice").dataset.i18n = key;
+      byId("integrityNotice").textContent = translations[state.language][key];
+      byId("resultCard").classList.remove("hidden");
+      byId("conversationWelcome").classList.add("hidden");
+    });
+    byId("savedChatsStatus").textContent = page.before_sequence || page.messages.length > 12 ? translations[state.language].olderMessages : "";
+    await refreshSavedChats();
+    byId("question").focus();
+  } catch (error) {
+    if (epoch === state.epoch) byId("assistantError").textContent = safeRequestError(error);
+  } finally {
+    if (epoch === state.epoch) setBusy(false);
+  }
+}
+
+byId("deleteChatButton").addEventListener("click", async () => {
+  if (state.busy || !state.conversationId || !window.confirm(translations[state.language].deleteChatConfirm)) return;
+  const epoch = ++state.epoch;
+  setBusy(true);
+  try {
+    await api(`/api/v1/conversations/${state.conversationId}`, { method: "DELETE" });
+    if (epoch !== state.epoch) return;
+    clearConversation();
+    await refreshSavedChats();
+    byId("question").focus();
+  } catch (error) {
+    if (epoch === state.epoch) byId("assistantError").textContent = safeRequestError(error);
+  } finally {
+    if (epoch === state.epoch) setBusy(false);
+  }
+});
 
 async function logout() {
   const token = state.token;
@@ -698,6 +829,8 @@ function renderIncidentEvidence(evidence, focus = "overview", question = "") {
 }
 
 function safeRequestError(error) {
+  if (error.message === "inference.context_exceeded") return translations[state.language].contextExceeded;
+  if (error.code === "conflict") return translations[state.language].conflictError;
   const keyByCode = {
     timeout: "timeoutError",
     overloaded: "overloadedError",
@@ -718,6 +851,7 @@ function setAnswerMode(mode) {
   byId("modeHelp").dataset.i18n = helpKey;
   byId("modeHelp").textContent = translations[state.language][helpKey];
   byId("incidentTargetField").classList.toggle("hidden", mode !== "incident");
+  byId("thinkingField").classList.toggle("hidden", !state.thinkingEnabled || mode !== "general");
 }
 
 byId("languageButton").addEventListener("click", () => applyLanguage(state.language === "en" ? "fa" : "en"));
@@ -807,14 +941,28 @@ byId("assistantForm").addEventListener("submit", async event => {
     const monitoring = state.answerMode === "monitoring";
     const incident = state.answerMode === "incident";
     if (incident && !byId("incidentTarget").value) throw new Error("incident.target_missing");
-    const path = incident ? "/api/v1/incidents/investigate" : monitoring ? "/api/v1/investigate" : "/api/v1/assistant/generate";
-    const payload = { locale: state.answerLocale, question, max_output_tokens: 384 };
+    const saved = !incident && !monitoring && state.conversationsEnabled;
+    let path = incident ? "/api/v1/incidents/investigate" : monitoring ? "/api/v1/investigate" : "/api/v1/assistant/generate";
+    let payload = { locale: state.answerLocale, question, max_output_tokens: 384 };
     if (incident) payload.target_id = byId("incidentTarget").value;
-    if (!monitoring && !incident && state.history.length) payload.history = state.history;
+    if (!monitoring && !incident && !saved && state.history.length) payload.history = state.history;
+    if (saved) {
+      if (!state.conversationId) {
+        const chat = await api("/api/v1/conversations", { method: "POST", body: JSON.stringify({ locale: state.answerLocale }) });
+        if (epoch !== state.epoch) return;
+        state.conversationId = chat.conversation_id;
+      }
+      const thinking = state.thinkingEnabled && byId("thinkingMode").value === "thinking";
+      const previous = state.pendingMessage;
+      payload = previous && previous.question === question && previous.locale === state.answerLocale && previous.thinking === thinking
+        ? previous : { request_id: crypto.randomUUID(), locale: state.answerLocale, question, thinking };
+      state.pendingMessage = payload;
+      path = `/api/v1/conversations/${state.conversationId}/messages`;
+    }
     const result = await api(path, { method: "POST", body: JSON.stringify(payload) });
     if (epoch !== state.epoch) return; // A late result must not resurrect a signed-out session.
     const evidenceBacked = monitoring || incident;
-    const assistant = evidenceBacked ? result.assistant : result;
+    const assistant = saved ? result.message.assistant : evidenceBacked ? result.assistant : result;
     archiveLastTurn();
     byId("askedQuestion").textContent = payload.question;
     byId("askedQuestion").dir = "auto";
@@ -862,7 +1010,13 @@ byId("assistantForm").addEventListener("submit", async event => {
     } else {
       state.lastEvidence = null;
       byId("evidenceBrief").classList.add("hidden");
-      rememberGeneralTurn(payload.question, assistant);
+      if (saved) {
+        state.pendingMessage = null;
+        setContextNotice(result.message.context_omitted ? "savedContextOmitted" : "savedContextHelp");
+        try { await refreshSavedChats(); }
+        catch (error) { if (error.status !== 401) byId("savedChatsStatus").textContent = translations[state.language].savedHistoryUnavailable; }
+        if (epoch !== state.epoch) return;
+      } else rememberGeneralTurn(payload.question, assistant);
     }
     byId("conversationWelcome").classList.add("hidden");
     byId("resultCard").classList.remove("hidden");

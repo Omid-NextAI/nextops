@@ -7,9 +7,9 @@
   <meta name="theme-color" content="#007986">
   <link id="appIcon" rel="icon" href="data:,">
   <title>NextOps by OCS | Local Operations Intelligence</title>
-  <link rel="stylesheet" href="/assets/app.css?v=20260929-noc2">
-  <link rel="stylesheet" href="/assets/evidence.css?v=20260929-noc2">
-  <script src="/assets/app.js?v=20260929-noc2" defer></script>
+  <link rel="stylesheet" href="/assets/app.css?v=20260930-chat">
+  <link rel="stylesheet" href="/assets/evidence.css?v=20260930-chat">
+  <script src="/assets/app.js?v=20260930-chat" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#mainContent" data-i18n="skipMain">Skip to main content</a>
@@ -79,6 +79,13 @@
       <div class="operator-layout">
         <aside class="operator-rail" aria-labelledby="operatorHeading">
           <button id="newChatButton" class="quiet-button new-chat-button" type="button"><span aria-hidden="true">＋</span><span data-i18n="newChat">New conversation</span></button>
+          <section id="savedChatsPanel" class="saved-chats hidden" aria-labelledby="savedChatsHeading">
+            <h2 id="savedChatsHeading" class="section-kicker" data-i18n="savedChats">YOUR CONVERSATIONS</h2>
+            <p class="rail-help" data-i18n="savedPrivacy">Private to your account · retained for 30 days. Do not paste secrets.</p>
+            <div id="savedChatsList"></div>
+            <p id="savedChatsStatus" class="rail-help" role="status" aria-live="polite"></p>
+            <button id="deleteChatButton" type="button" class="quiet-button hidden" data-i18n="deleteChat">Delete this conversation</button>
+          </section>
           <h2 id="operatorHeading" class="section-kicker" data-i18n="operatorTools">OPERATOR STARTERS</h2>
           <p class="rail-help" data-i18n="starterHelp">Choose a starting point, then add your details.</p>
           <button class="starter-link" type="button" data-starter="services"><span class="starter-symbol" aria-hidden="true">01</span><span data-i18n="starterServices">Servers &amp; services</span></button>
@@ -143,6 +150,14 @@
             <label for="incidentTarget" data-i18n="incidentTarget">Investigation target</label>
             <select id="incidentTarget" name="incident_target" disabled></select>
             <p id="incidentTargetHelp" data-i18n="incidentTargetHelp">Choose one approved host. NextOps will retrieve bounded Zabbix and direct read-only Linux evidence.</p>
+          </div>
+          <div id="thinkingField" class="target-field hidden">
+            <label for="thinkingMode" data-i18n="thinkingMode">Response mode</label>
+            <select id="thinkingMode">
+              <option value="standard" data-i18n="standardResponse">Standard</option>
+              <option value="thinking" data-i18n="thinkingResponse">Think more · slower</option>
+            </select>
+            <p data-i18n="thinkingHelp">Local, bounded reasoning. Only the final answer is shown and saved; thinking does not verify facts.</p>
           </div>
 
           <div class="locale-row">
