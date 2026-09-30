@@ -33,6 +33,7 @@ def requested_service_units(
         return None
     return tuple(unit for unit in available_units if unit.casefold() in named)
 
+
 _NON_NETWORK_SERVICE_TOPIC = re.compile(
     r"(?:\b(?:cpu|memory|ram|files?|filesystems?|disks?|storage|zabbix|metrics?|"
     r"problems?|events?|everything|all\s+data)\b|"

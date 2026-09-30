@@ -819,9 +819,7 @@ def _topical_incident_view(question: str, evidence: IncidentEvidence, topic: str
         key=lambda entry: 0 if entry["unit"].casefold() in asked else 1,
     )
     if named_units is not None:
-        ordered_journal = [
-            entry for entry in ordered_journal if entry["unit"] in named_units
-        ]
+        ordered_journal = [entry for entry in ordered_journal if entry["unit"] in named_units]
     include_network = topic in {"network", "network_service"}
     include_services = topic in {"service", "network_service"}
     view: dict[str, Any] = {
