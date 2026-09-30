@@ -3,8 +3,11 @@
 Conversation/model expansion candidate, 2026-09-30 — owner-scoped local PostgreSQL chat,
 six-pair/12000-character context, feature-gated thinking, exact-template token admission and
 final-only storage are implemented on a separate branch. Flags remain off; the serving release
-below is unchanged. Read-only live runtime template/tokenization succeeded for both trusted
-thinking settings; this is not a generation, quality, longer-context or offline acceptance result.
+below is unchanged. Source b0fbfb3 passed all five CI jobs in run 36704531576, including PostgreSQL
+16/17 and browser acceptance. The full isolated desktop suite passed 441 tests with two Windows
+POSIX skips; the offline desktop package build passed. Read-only live runtime template/tokenization
+succeeded for both trusted thinking settings; this is not a generation, quality, longer-context or
+offline acceptance result.
 Guest preflight observes 64 vCPUs, 193185 MiB usable RAM and one guest NUMA node; no additional resize
 or guest topology change was performed. 122B split-artifact metadata is pinned for research only;
 download, exact bytes/lineage, CPU performance and semantics are not verified.
@@ -12,7 +15,10 @@ See [the packet](en/CONVERSATION_MEMORY_SPEC.md) and [operations](en/CONVERSATIO
 
 نامزد گسترش گفت‌وگو و مدل، ۹ مهر ۱۴۰۵ — حافظهٔ محلی و مالک‌محور PostgreSQL، زمینهٔ شش جفت و
 ۱۲ هزار نویسه، استدلال دروازه‌دار، پذیرش بر پایهٔ قالب واقعی و ذخیرهٔ صرفاً پاسخ نهایی در شاخهٔ
-جدا پیاده شده‌اند. گزینه‌ها غیرفعال‌اند و نسخهٔ در حال خدمتِ زیر ثابت است. قالب و توکن‌بندی
+جدا پیاده شده‌اند. گزینه‌ها غیرفعال‌اند و نسخهٔ در حال خدمتِ زیر ثابت است.
+کد b0fbfb3 هر پنج کنترل CI در اجرای 36704531576، از جمله PostgreSQL نسخه‌های ۱۶ و ۱۷ و
+پذیرش مرورگر را گذراند. مجموعهٔ کاملِ ایزولهٔ رایانهٔ توسعه ۴۴۱ آزمون موفق و دو موردِ
+POSIX اجرا‌نشده در Windows داشت؛ ساخت آفلاین بسته نیز موفق بود. قالب و توکن‌بندی
 واقعی برای هر دو انتخابِ معتبر استدلال موفق بود؛ تولید پاسخ، کیفیت، زمینهٔ بزرگ‌تر یا پذیرش
 آفلاین را ثابت نمی‌کند. مهمان اکنون ۶۴ vCPU، حافظهٔ قابل‌استفادهٔ ۱۹۳۱۸۵ MiB و یک گرهٔ NUMA
 نشان می‌دهد؛ افزایش مجدد یا تغییر توپولوژی انجام نشد. رکورد دو فایل 122B صرفاً پژوهشی است؛

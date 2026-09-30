@@ -1,18 +1,20 @@
 # Next task / کار بعدی
 
-Active owner-requested increment, 2026-09-30 — finish exact-head CI and package qualification for
-[saved chat/local thinking](en/CONVERSATION_MEMORY_SPEC.md), then perform a guarded matched
-app/AI/schema/profile trial with EN/FA follow-ups, longer-context and reasoning quality/latency,
+Active owner-requested increment, 2026-09-30 — source b0fbfb3 passed all five CI jobs in run
+36704531576 and the desktop offline package build. Next perform a guarded matched
+app/AI/schema/profile trial for [saved chat/local thinking](en/CONVERSATION_MEMORY_SPEC.md),
+covering EN/FA follow-ups, longer-context and reasoning quality/latency,
 authorization, fresh evidence separation, audit and exact rollback. Feature flags stay off until
 their matching gates pass. Preserve serving 810102f/35B and all earlier failures. The pinned 122B
 research artifact is not yet downloaded/selectable; verify capacity, bytes, template/lineage and
 benchmark before adding it to runtime identities. Do not resize the guest again without measurements.
 Existing held-out semantics, admission-contention and server-WAN/VM acceptance remain open.
 
-برش فعال به درخواست مالک، ۹ مهر ۱۴۰۵ — CI و بستهٔ دقیقِ
-[حافظه و استدلال محلی](fa/CONVERSATION_MEMORY_SPEC.md) تکمیل و سپس آزمون محافظت‌شدهٔ هماهنگِ
-برنامه، AI، پایگاه و نمایه برای پیگیری فارسی/انگلیسی، زمینهٔ بزرگ‌تر، کیفیت و تأخیر استدلال،
-مجوز، جداسازی شاهد تازه، ممیزی و بازگشت دقیق اجرا شود. گزینه‌ها تا پذیرش معیار هماهنگ غیرفعال
+برش فعال به درخواست مالک، ۹ مهر ۱۴۰۵ — کد b0fbfb3 هر پنج کنترل CI در اجرای 36704531576 و
+ساخت آفلاین بسته در رایانهٔ توسعه را گذراند. گام بعد، آزمون محافظت‌شدهٔ هماهنگِ برنامه، AI،
+پایگاه و نمایه برای [حافظه و استدلال محلی](fa/CONVERSATION_MEMORY_SPEC.md) است. این آزمون باید
+پیگیری فارسی/انگلیسی، زمینهٔ بزرگ‌تر، کیفیت و تأخیر استدلال، مجوز، جداسازی شاهد تازه، ممیزی و
+بازگشت دقیق را بسنجد. گزینه‌ها تا پذیرش معیار هماهنگ غیرفعال
 بمانند. 810102f/35B و شکست‌های قبلی حفظ شوند. فایل پژوهشی 122B هنوز دریافت یا قابل انتخاب نیست؛
 ظرفیت، بایت، قالب و منشأ و benchmark پیش از افزودن شناسهٔ runtime تأیید شوند. منابع مهمان بدون
 اندازه‌گیری دوباره تغییر نکنند. کیفیت فنی، اشتغال صف و پذیرش WAN/VM همچنان بازند.
