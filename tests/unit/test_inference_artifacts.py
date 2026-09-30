@@ -1,5 +1,6 @@
 """Selected local-inference artifact metadata validation tests."""
 
+import importlib.util
 import json
 import subprocess
 import sys
@@ -11,6 +12,65 @@ from jsonschema import Draft202012Validator
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = REPOSITORY_ROOT / "deploy" / "inference" / "qwen3-8b-q4-k-m.yaml"
+
+
+@pytest.mark.parametrize(
+    "field,incorrect",
+    [
+        ("thinking_enabled", True),
+        ("max_queued_requests", 3),
+        ("configured_context_tokens", 262144),
+        ("qualification.thinking_semantics", "passed"),
+        ("qualification.expanded_context_latency", "passed"),
+    ],
+)
+def test_selected_standard_profile_cannot_conceal_unqualified_modes(
+    tmp_path: Path, field: str, incorrect: object
+) -> None:
+    spec = importlib.util.spec_from_file_location(
+        "artifact_guard", REPOSITORY_ROOT / "scripts" / "check_inference_artifacts.py"
+    )
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    profile = json.loads((MANIFEST.parent / "expanded-chat-profile.json").read_text("utf-8"))
+    if field.startswith("qualification."):
+        profile["qualification"][field.split(".", 1)[1]] = incorrect
+    else:
+        profile[field] = incorrect
+    (tmp_path / "expanded-chat-profile.json").write_text(json.dumps(profile), encoding="utf-8")
+    (tmp_path / "qwen3-5-122b-a10b-research.json").write_bytes(
+        (MANIFEST.parent / "qwen3-5-122b-a10b-research.json").read_bytes()
+    )
+    with pytest.raises(module.ArtifactValidationError):
+        module.validate_chat_candidates(tmp_path)
+
+
+def test_thinking_candidate_preserves_sandbox_and_bounded_runtime() -> None:
+    directory = REPOSITORY_ROOT / "deploy" / "systemd" / "model-profiles"
+    profile = (directory / "qwen3-5-35b-a3b-thinking-runtime.conf").read_text("utf-8")
+    for required in (
+        "--ctx-size 16384",
+        "--threads 16",
+        "--parallel 1",
+        "--gpu-layers 0",
+        "--no-context-shift",
+        "--reasoning-format deepseek",
+        "--reasoning-budget 384",
+        "--no-reasoning-preserve",
+        "--chat-template-kwargs '{\"enable_thinking\":false}'",
+    ):
+        assert required in profile
+    for forbidden in ("--hf-repo", "--model-url", "IPAddressDeny=", "MemoryMax=", "CPUQuota="):
+        assert forbidden not in profile
+
+
+def test_122b_is_immutable_research_not_a_serving_model() -> None:
+    record = json.loads((MANIFEST.parent / "qwen3-5-122b-a10b-research.json").read_text("utf-8"))
+    assert record["deployment_selection_allowed"] is False and record["download_verified"] is False
+    assert sum(s["size_bytes"] for s in record["shards"]) == record["total_size_bytes"]
+    assert len(record["source_revision"]) == 40
+    assert all(len(s["sha256"]) == 64 for s in record["shards"])
 
 
 @pytest.mark.parametrize("size,filename", [("14b", "14B"), ("30b-a3b", "30B-A3B")])

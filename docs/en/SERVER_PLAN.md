@@ -6,6 +6,13 @@
 
 ## Hardware evidence update
 
+Later status, 2026-09-30: the four controlled guests exist; the allocation tables below are the
+original planning profile, not a live inventory. After owner extension, the AI guest reports 64
+vCPUs and 193185 MiB usable memory. See the separately attributed later guest observation in the
+hardware baseline and [current CPU guidance](CPU_AI.md). No new VM, resize, guessed NUMA pinning or
+storage allocation is authorized by this observation. Existing dossiers remain initial reference
+profiles until their next role-specific change window, not proof of current guest allocation.
+
 Source: the owner supplied output from `esxcli hardware cpu global get` and `esxcli hardware memory get`. No direct host connection or independent measurement was performed. The sanitized machine-readable record is [HARDWARE_BASELINE.json](../requirements/HARDWARE_BASELINE.json); it contains no hostname, address, serial number or credential.
 
 | Field | Reported value / calculation | Evidence status |

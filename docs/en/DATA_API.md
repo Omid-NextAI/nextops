@@ -10,6 +10,10 @@ investigations now use the existing durable run and append-only audit model.
 
 ## Implemented durable subset
 
+New candidate, not deployed: migration 0003 adds owner-scoped general-chat tables and authenticated
+conversation APIs. Support-read roles have no transcript grant. See [reference](CONVERSATIONS.md)
+and ADR 0009; disable flags and preserve additive tables for ordinary source rollback.
+
 Available in controlled 862d311 (introduced in b346c3e): `POST /api/v1/assistant/generate` accepts optional `history`, a
 closed array of at most two `{question, answer}` pairs. Each field is 1–2,000 characters; total
 serialized JSON is at most 6,000 characters, including escaping. The current question retains its

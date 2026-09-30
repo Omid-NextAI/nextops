@@ -1,5 +1,63 @@
 # Next task / کار بعدی
 
+Current unfinished checkpoint, 2026-09-30 — Keep controlled b5e74f9/35B standard saved chat and
+light/dark UI live. Review held-out EN/FA technical correctness and instruction following, including
+physical-connectivity overclaims and unwanted follow-up prose. Thinking remains disabled after
+failed final-answer trials; any new reasoning profile needs its own bounded specification and
+measurements, not a longer timeout or relabelled failure. Qualify full-budget 16K context quality,
+latency and contention under one-active/two-queued limits. Preserve model lineage/recovery risks.
+Do not repeat passed CI/offline installs, 15 functional live cases, matched exact rollback, audit,
+four-guest WAN isolation or real VM cold starts as unfinished. Independent recovery is owner-deferred,
+not passed and not a form blocking controlled use. No 122B selection or further resize without
+separate verified capacity/benchmark evidence. Full production acceptance remains unclaimed.
+
+گام ناتمامِ جاری، ۹ مهر ۱۴۰۵ — گفت‌وگوی معمولیِ ذخیره‌شده و رابط روشن/تیرهٔ b5e74f9/35B
+کنترل‌شده زنده بمانند. درستی فنی و رعایت دستور در پرسش‌های مستقل فارسی/انگلیسی، از جمله
+ادعای بیش‌ازحد دربارهٔ اتصال فیزیکی و متنِ پیگیریِ ناخواسته، بازبینی شوند. استدلال پس از شکست
+پاسخ نهایی غیرفعال می‌ماند؛ نمایهٔ تازه به مشخصات محدود و اندازه‌گیری مستقل نیاز دارد، نه
+مهلت بیشتر یا موفق نامیدن شکست. کیفیت، تأخیر و اشتغالِ ظرفیت کاملِ 16K در سقفِ یک فعال/دو
+منتظر سنجیده شوند. خطر منشأ مدل و بازیابی حفظ شود. CI، نصب آفلاین، پانزده مورد کارکردیِ زنده،
+بازگشت دقیقِ هماهنگ، ممیزی، قطع WAN چهار مهمان و شروع سرد واقعی VM تکمیل شده‌اند و دوباره
+کار ناتمام شمرده نشوند. بازیابی مستقل به دستور مالک در تعویق است، نه موفق و نه فرمِ مسدودکنندهٔ
+استفادهٔ کنترل‌شده. انتخاب 122B یا افزایش مجدد منابع بدون ظرفیت و benchmark مستقل انجام نشود.
+پذیرش کامل تولید ادعا نمی‌شود.
+
+Earlier qualification instructions below are historical, not the active next checkpoint.
+دستورهای پذیرشِ زیر تاریخی‌اند، نه گام بعدیِ فعال.
+
+Immediate checkpoint — Qualify the corrected saved-message proxy route and 384-token private
+reasoning profile as a new exact release. Repeat locked CI, fresh offline install, matched guarded
+app/AI/proxy promotion, EN/FA standard/thinking/follow-ups, audit, failure recovery and exact rollback.
+Preserve the failed c609a83 trial and healthy serving 810102f/862d311. Then run exact-release
+server-WAN/service/VM cold-start checks under persistent access-preserving rollback guards. Do not
+claim the dark UI or a successful HTTP response proves model semantics or full production.
+
+گام فوری — مسیر اصلاح‌شدهٔ پراکسیِ پیامِ ذخیره‌شده و نمایهٔ استدلال خصوصیِ ۳۸۴توکنی، به‌عنوان
+انتشار دقیقِ تازه سنجیده شوند: CI، نصب تازهٔ آفلاین، استقرار محافظت‌شدهٔ هماهنگِ برنامه، AI و
+پراکسی، پاسخ معمولی/استدلال و پیگیری دوزبانه، ممیزی، ادامه پس از خرابی و بازگشت دقیق. شکست
+c609a83 و نسخهٔ سالمِ 810102f/862d311 حفظ شوند. سپس قطع WAN سرور و شروع سردِ سرویس/VM همین
+انتشار با محافظِ بازگشتِ پایدار و حفظ دسترسی سنجیده شوند. پوستهٔ تیره یا موفقیت HTTP، اثبات
+درستی مدل یا پذیرش کامل تولید نیست.
+
+Active owner-requested increment, 2026-09-30 — source b0fbfb3 passed all five CI jobs in run
+36704531576 and the desktop offline package build. Next perform a guarded matched
+app/AI/schema/profile trial for [saved chat/local thinking](en/CONVERSATION_MEMORY_SPEC.md),
+covering EN/FA follow-ups, longer-context and reasoning quality/latency,
+authorization, fresh evidence separation, audit and exact rollback. Feature flags stay off until
+their matching gates pass. Preserve serving 810102f/35B and all earlier failures. The pinned 122B
+research artifact is not yet downloaded/selectable; verify capacity, bytes, template/lineage and
+benchmark before adding it to runtime identities. Do not resize the guest again without measurements.
+Existing held-out semantics, admission-contention and server-WAN/VM acceptance remain open.
+
+برش فعال به درخواست مالک، ۹ مهر ۱۴۰۵ — کد b0fbfb3 هر پنج کنترل CI در اجرای 36704531576 و
+ساخت آفلاین بسته در رایانهٔ توسعه را گذراند. گام بعد، آزمون محافظت‌شدهٔ هماهنگِ برنامه، AI،
+پایگاه و نمایه برای [حافظه و استدلال محلی](fa/CONVERSATION_MEMORY_SPEC.md) است. این آزمون باید
+پیگیری فارسی/انگلیسی، زمینهٔ بزرگ‌تر، کیفیت و تأخیر استدلال، مجوز، جداسازی شاهد تازه، ممیزی و
+بازگشت دقیق را بسنجد. گزینه‌ها تا پذیرش معیار هماهنگ غیرفعال
+بمانند. 810102f/35B و شکست‌های قبلی حفظ شوند. فایل پژوهشی 122B هنوز دریافت یا قابل انتخاب نیست؛
+ظرفیت، بایت، قالب و منشأ و benchmark پیش از افزودن شناسهٔ runtime تأیید شوند. منابع مهمان بدون
+اندازه‌گیری دوباره تغییر نکنند. کیفیت فنی، اشتغال صف و پذیرش WAN/VM همچنان بازند.
+
 Current unfinished checkpoint, 2026-09-30 — Keep the qualified 810102f/35B controlled
 workspace live and review held-out NOC/SOC technical answers against real platform/vendor
 semantics. Investigate the observed inference-admission 504 under existing one-active/two-queued

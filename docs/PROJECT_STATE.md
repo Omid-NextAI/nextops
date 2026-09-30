@@ -1,5 +1,111 @@
 # Project state / وضعیت پروژه
 
+Current verified deployment, 2026-09-30 — app and AI API b5e74f9 with the unchanged local CPU-only
+35B model are live for controlled users. Standard owner-scoped saved conversations, reload/resume,
+bounded follow-ups and the bilingual header light/dark switch are enabled. Context is configured
+to 16,384 with actual local token admission; thinking failed and stays off at both APIs. Exact
+five-job CI, fresh offline installs, staged Nginx validation, seven first/eight final live cases,
+12 text-free chat audits, three live evidence/hash pairs, matched app/AI/proxy/profile rollback
+with two fresh restored answers, four-guest WAN denial and actual serial guest reboots passed.
+Fresh post-boot login, EN/FA generation and real Zabbix reboot-alert evidence passed under WAN
+denial. The temporary network rules and only owned rollback timers were removed/disabled after
+verification; protected fallback artifacts and additive schema remain. See [English](en/TESTING.md)
+and [Persian](fa/TESTING.md) records. This is controlled live service, not full production acceptance.
+Technical semantics/brevity, full-budget context quality/latency, admission contention, model
+lineage and independent recovery remain unqualified; historical failures below are not erased.
+
+استقرار جاریِ تأییدشده، ۹ مهر ۱۴۰۵ — برنامه و API هوش مصنوعیِ b5e74f9 با همان مدل محلیِ
+35B صرفاً CPU برای کاربران کنترل‌شده زنده‌اند. سابقهٔ محلیِ مخصوص مالک، بازکردن و ادامه، پیگیری
+محدود و انتخاب روشن/تیرهٔ دوزبانهٔ سربرگ فعال‌اند. زمینهٔ تنظیم‌شده ۱۶۳۸۴ با پذیرش واقعیِ
+توکن محلی است؛ استدلال شکست خورده و در هر دو API غیرفعال است. پنج کنترل CI، نصب تازهٔ آفلاین،
+نحو مرحله‌ایِ واقعی Nginx، هفت مورد نخست/هشت مورد نهاییِ زنده، دوازده ممیزیِ گفت‌وگوی بدون متن،
+سه جفتِ شاهد/هش، بازگشت هماهنگ برنامه، AI، پراکسی و نمایه با دو پاسخ تازهٔ نسخهٔ بازگشته،
+منع WAN چهار مهمان و راه‌اندازی دوبارهٔ واقعی و ترتیبی آن‌ها موفق‌اند. ورود تازه، تولید تازهٔ
+دوزبانه و شاهد واقعیِ هشدار شروع دوبارهٔ Zabbix پس از boot، زیر منع WAN موفق بودند. پس از
+تأیید، قانون موقت شبکه و فقط زمان‌سنج‌های متعلق به این تغییر حذف/غیرفعال شدند؛ نسخه‌های
+محافظت‌شدهٔ بازگشت و پایگاه افزایشی باقی‌اند. جزئیات در [فارسی](fa/TESTING.md) و
+[انگلیسی](en/TESTING.md) آمده است. این خدمت زندهٔ کنترل‌شده است، نه پذیرش کامل تولید. درستی
+و اختصار، کیفیت و تأخیرِ ظرفیت کامل زمینه، اشتغال صف، منشأ مدل و بازیابی مستقل همچنان تأیید
+نشده‌اند؛ شکست‌های تاریخیِ زیر حذف نشده‌اند.
+
+Earlier dated checkpoints below are historical; current identity is the release manifest above.
+گام‌های تاریخ‌دارِ زیر تاریخی‌اند؛ شناسهٔ جاری در رکورد انتشار ثبت شده است.
+
+258ac65 guarded findings, 2026-09-30 — five-job CI and the real staged Nginx parser passed.
+Thinking failed at the unchanged 120-second model deadline and remains disabled. Standard EN/FA
+chat, reload and ticket recall ran, but the Persian current-status question using standalone
+«الان» missed the deterministic scope redirect. It is fixed in the new candidate with explicit
+personal-status checks and negative recall/guidance regressions; all prior results remain private
+evidence, not release acceptance. A broad Persian DNS answer was also semantically rejected;
+general factual accuracy remains partial. Exact app/AI/proxy/profile rollback restored 810102f/862d311.
+
+یافته‌های آزمونِ محافظت‌شدهٔ 258ac65، ۹ مهر ۱۴۰۵ — پنج کنترل CI و مفسر واقعیِ مرحله‌ایِ Nginx
+موفق بودند. استدلال در مهلت ثابتِ ۱۲۰ثانیه‌ای مدل شکست خورد و غیرفعال می‌ماند. گفت‌وگو،
+بازکردن دوباره و یادآوری شناسه به دو زبان اجرا شدند؛ اما پرسشِ وضعیت فعلی با «الان» مستقل،
+ارجاع قطعی به شاهد زنده را نگرفت. نامزد تازه این مورد و پرسشِ صریحِ وضعیت شخصی را با آزمون
+مثبت و کنترل منفیِ یادآوری و راهنمایی اصلاح می‌کند. شاهدهای قبلی حفظ‌اند، نه پذیرش انتشار.
+پاسخ عمومیِ فارسی دربارهٔ DNS نیز از نظر معنا رد شد؛ دقت عمومی همچنان ناقص است. بازگشت دقیقِ
+برنامه، AI، پراکسی و نمایه، 810102f/862d311 را برگرداند.
+
+Proxy syntax preflight, 2026-09-30 — 95f4de7 passed all five CI jobs in run 36711401339 and
+fresh offline desktop/server installs. Nginx's real parser rejected the unquoted quantified route
+before reload. The app/proxy rollback restored the untouched serving site; AI/profile was also
+restored. No live answer, thinking or offline acceptance is claimed for this attempt. The next
+candidate quotes the route and must pass a staged real-server parser check before any switching.
+
+بررسی واقعیِ نحو پراکسی، ۹ مهر ۱۴۰۵ — 95f4de7 هر پنج کنترل CI در اجرای 36711401339 و نصب
+آفلاین تازهٔ رایانه و سرورها را گذراند. مفسر واقعی Nginx، مسیر دارای شمارشگرِ بدون علامت نقل‌قول
+را پیش از reload رد کرد. برنامه و پراکسی به سایت قبلیِ دست‌نخورده و AI و نمایه نیز به نسخهٔ
+قبلی برگشتند. این تلاش، شاهد پاسخ زنده، استدلال یا پذیرش آفلاین نیست. نامزد بعدی مسیر را داخل
+نقل‌قول می‌گذارد و پیش از تعویض باید بررسیِ مرحله‌ایِ مفسر واقعی سرور را بگذراند.
+
+Guarded chat/theme trial, 2026-09-30 — c609a83 passed all five CI jobs in run 36707574912,
+fresh hash-locked Ubuntu installation and both app/AI offline installs. Additive migration 0003
+passed. Live English chat/reload/ticket recall and dark EN/FA mobile UI passed, but thinking hit
+the generic Nginx 30-second timeout; the provider continued to its unchanged 120-second deadline
+without a final answer. Exact app 810102f/AI 862d311/8192 profile rollback passed two fresh EN/FA
+answers; additive tables remain. This is a failed qualification, not accepted thinking. A harness
+TLS error exposed one test session in an error log; that exact session was revoked and audited.
+The corrected candidate routes saved generation through the existing 180-second inference proxy
+policy/rate limit and reduces private reasoning to 384 tokens, based on observed ~8 tokens/second.
+The model deadline, queue, credentials and branding are unchanged; new matched acceptance is pending.
+
+آزمون محافظت‌شدهٔ گفت‌وگو و پوسته، ۹ مهر ۱۴۰۵ — c609a83 هر پنج کنترل CI در اجرای
+36707574912، نصب تازهٔ Ubuntu با هشِ قفل‌شده و نصب آفلاین روی برنامه و AI را گذراند؛ مهاجرت
+افزایشی 0003 موفق بود. گفت‌وگوی انگلیسی، بازکردن دوباره و یادآوری شناسه، و رابط تیرهٔ دوزبانهٔ
+موبایل موفق بودند؛ اما استدلال به مهلت عمومیِ ۳۰ثانیه‌ای Nginx رسید و مدل تا مهلت ثابتِ
+۱۲۰ ثانیه، بدون پاسخ نهایی ادامه یافت. بازگشت دقیق به برنامهٔ 810102f، API نسخهٔ 862d311 و
+زمینهٔ ۸۱۹۲، دو پاسخ تازهٔ فارسی/انگلیسی را گذراند؛ جدول‌های افزوده حفظ شدند. این آزمون ناموفق
+است، نه پذیرش استدلال. خطای TLS ابزار آزمون، یک نشست آزمایشی را در گزارش خطا آشکار کرد؛ همان
+نشست دقیقاً لغو و ممیزی شد. نامزد اصلاح‌شده مسیر تولیدِ ذخیره‌شده را به سیاستِ موجودِ ۱۸۰ثانیه‌ای
+و محدودیت نرخِ استنتاج می‌برد و با اتکا به سرعت حدود هشت توکن در ثانیه، استدلال خصوصی را به
+۳۸۴ توکن محدود می‌کند. مهلت مدل، صف، اطلاعات ورود و نشان ثابت‌اند؛ پذیرش تازه هنوز انجام نشده است.
+
+Conversation/model expansion candidate, 2026-09-30 — owner-scoped local PostgreSQL chat,
+six-pair/12000-character context, feature-gated thinking, exact-template token admission and
+final-only storage are implemented on a separate branch. Flags remain off; the serving release
+below is unchanged. Source b0fbfb3 passed all five CI jobs in run 36704531576, including PostgreSQL
+16/17 and browser acceptance. The full isolated desktop suite passed 441 tests with two Windows
+POSIX skips; the offline desktop package build passed. Read-only live runtime template/tokenization
+succeeded for both trusted thinking settings; this is not a generation, quality, longer-context or
+offline acceptance result.
+Guest preflight observes 64 vCPUs, 193185 MiB usable RAM and one guest NUMA node; no additional resize
+or guest topology change was performed. 122B split-artifact metadata is pinned for research only;
+download, exact bytes/lineage, CPU performance and semantics are not verified.
+See [the packet](en/CONVERSATION_MEMORY_SPEC.md) and [operations](en/CONVERSATIONS.md).
+
+نامزد گسترش گفت‌وگو و مدل، ۹ مهر ۱۴۰۵ — حافظهٔ محلی و مالک‌محور PostgreSQL، زمینهٔ شش جفت و
+۱۲ هزار نویسه، استدلال دروازه‌دار، پذیرش بر پایهٔ قالب واقعی و ذخیرهٔ صرفاً پاسخ نهایی در شاخهٔ
+جدا پیاده شده‌اند. گزینه‌ها غیرفعال‌اند و نسخهٔ در حال خدمتِ زیر ثابت است.
+کد b0fbfb3 هر پنج کنترل CI در اجرای 36704531576، از جمله PostgreSQL نسخه‌های ۱۶ و ۱۷ و
+پذیرش مرورگر را گذراند. مجموعهٔ کاملِ ایزولهٔ رایانهٔ توسعه ۴۴۱ آزمون موفق و دو موردِ
+POSIX اجرا‌نشده در Windows داشت؛ ساخت آفلاین بسته نیز موفق بود. قالب و توکن‌بندی
+واقعی برای هر دو انتخابِ معتبر استدلال موفق بود؛ تولید پاسخ، کیفیت، زمینهٔ بزرگ‌تر یا پذیرش
+آفلاین را ثابت نمی‌کند. مهمان اکنون ۶۴ vCPU، حافظهٔ قابل‌استفادهٔ ۱۹۳۱۸۵ MiB و یک گرهٔ NUMA
+نشان می‌دهد؛ افزایش مجدد یا تغییر توپولوژی انجام نشد. رکورد دو فایل 122B صرفاً پژوهشی است؛
+دریافت، بایت و منشأ دقیق، کارایی CPU و کیفیت هنوز تأیید نشده‌اند.
+[مشخصات](fa/CONVERSATION_MEMORY_SPEC.md) و [راهنمای عملیات](fa/CONVERSATIONS.md) مبنا هستند.
+
 Current controlled live workspace, 2026-09-30 — App/API 810102f is serving the unchanged
 CPU-only 35B model. Five exact-head CI jobs, a fresh hash-locked offline Ubuntu 24.04 package
 install, four first and two final authenticated EN/FA network/named-service browser cases, six

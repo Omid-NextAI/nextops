@@ -1,0 +1,30 @@
+{
+  "status": "research_candidate_not_downloaded_not_selectable",
+  "model": "Qwen3.5-122B-A10B",
+  "quantization": "Q4_K_M",
+  "source_repository": "bartowski/Qwen_Qwen3.5-122B-A10B-GGUF",
+  "source_revision": "fec8b222a2eddc3346d6b6d7f7c85efea93cd6bf",
+  "advertised_base_model": "Qwen/Qwen3.5-122B-A10B",
+  "conversion_source_revision_verified": false,
+  "license": "Apache-2.0",
+  "license_source": "https://huggingface.co/bartowski/Qwen_Qwen3.5-122B-A10B-GGUF/blob/fec8b222a2eddc3346d6b6d7f7c85efea93cd6bf/README.md",
+  "total_size_bytes": 77616511296,
+  "shards": [
+    {
+      "filename": "Qwen_Qwen3.5-122B-A10B-Q4_K_M/Qwen_Qwen3.5-122B-A10B-Q4_K_M-00001-of-00002.gguf",
+      "size_bytes": 39925205312,
+      "sha256": "e6f74fc4e5ff7da7888cb0a135f9fafbf1265b748f5db9f72c7794061a333843"
+    },
+    {
+      "filename": "Qwen_Qwen3.5-122B-A10B-Q4_K_M/Qwen_Qwen3.5-122B-A10B-Q4_K_M-00002-of-00002.gguf",
+      "size_bytes": 37691305984,
+      "sha256": "1c07a0f86507ad661830a2c317f9c4450e40a836bf9133225926054ab0722316"
+    }
+  ],
+  "download_verified": false,
+  "gguf_template_verified": false,
+  "cpu_benchmark": "not_run",
+  "bilingual_quality": "not_run",
+  "offline_restart": "not_run",
+  "deployment_selection_allowed": false
+}

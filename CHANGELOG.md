@@ -1,5 +1,64 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-09-30 — Live standard chat and dark theme / گفت‌وگوی معمولی و پوستهٔ تیرهٔ زنده
+
+Select matched app/AI b5e74f9 with standard local saved chat, bounded follow-ups, actual 16K
+token admission and the bilingual light/dark header control; keep OCS assets unchanged.
+Five-job CI, offline installs, 15 functional live cases, audit/hash matches, exact matched rollback,
+four-guest WAN isolation and real serial reboots passed. Thinking failed and stays off. Preserve
+semantic/brevity, full-context, contention and recovery gaps; controlled live is not full production.
+
+برنامه و AI هماهنگِ b5e74f9 با گفت‌وگوی معمولیِ ذخیره‌شدهٔ محلی، پیگیری محدود، پذیرش واقعی
+توکنِ 16K و انتخاب دوزبانهٔ روشن/تیرهٔ سربرگ مستقر شدند؛ نشان و رنگ OCS ثابت‌اند. پنج کنترل
+CI، نصب آفلاین، پانزده مورد کارکردیِ زنده، تطبیق ممیزی و هش، بازگشت دقیقِ هماهنگ، قطع WAN چهار
+مهمان و راه‌اندازی دوبارهٔ واقعیِ ترتیبی موفق‌اند. استدلال شکست خورده و غیرفعال است. شکاف
+معنا و اختصار، ظرفیت کامل زمینه، اشتغال صف و بازیابی حفظ‌اند؛ خدمت کنترل‌شده، تولید کامل نیست.
+
+## 2026-09-30 — Persian current-fact guard / کنترلِ پرسشِ وضعیت فعلی در فارسی
+
+Recognize standalone «الان» and explicit personal infrastructure-state questions in general chat,
+including saved-history follow-ups. Keep ticket recall, safe diagnostic guidance and «بالانس»
+out of current-state classification. Retain failed thinking and technical semantic trials.
+
+«الان» مستقل و پرسش صریحِ وضعیت زیرساخت شخصی، از جمله در پیگیریِ گفت‌وگوی ذخیره‌شده، به شاهد
+زنده ارجاع داده می‌شوند. یادآوری شناسه، راهنمایی ایمن و «بالانس» پرسشِ وضعیت فعلی شمرده
+نمی‌شوند. آزمون‌های ناموفقِ استدلال و درستی فنی حفظ‌اند.
+
+## 2026-09-30 — Saved-generation proxy repair / اصلاح پراکسیِ تولید ذخیره‌شده
+
+Match saved-message generation to the existing inference proxy timeout and rate limit, leaving
+ordinary routes at 30 seconds. Add route-boundary regression tests. Reduce candidate private
+reasoning to 384 tokens after the failed live 1024-token trial; preserve the 120-second model
+deadline, exact rollback, failed evidence, branding and security controls.
+
+تولیدِ پیام ذخیره‌شده به مهلت و محدودیت نرخِ موجودِ پراکسیِ استنتاج متصل شد؛ مسیرهای عادی
+همچنان ۳۰ ثانیه‌اند. آزمون مرز مسیر افزوده شد. پس از شکست آزمون زندهٔ ۱۰۲۴توکنی، سقفِ
+استدلال خصوصیِ نامزد به ۳۸۴ کاهش یافت؛ مهلت مدل، بازگشت دقیق، شاهد شکست، نشان و امنیت حفظ شدند.
+
+## 2026-09-30 — Local light/dark theme candidate / نامزد پوستهٔ روشن و تیره
+
+Add a bilingual keyboard-accessible theme switch and pre-paint local/system preference handling.
+Preserve the embedded OCS logo and base gold/teal palette; test dark contrast and 375-pixel RTL.
+Keep login usable when browser preference storage is unavailable. Live qualification is separate.
+
+دکمهٔ دوزبانه و صفحه‌کلیدیِ پوسته، با اعمال ترجیح محلی یا سیستم پیش از نمایش افزوده شد. نشان
+OCS و طلایی/فیروزه‌ای پایه ثابت‌اند؛ تضاد رنگ و RTL در پهنای ۳۷۵ پیکسل آزموده شد. منع ذخیرهٔ
+ترجیحات مانع ورود نمی‌شود. پذیرش زنده جداگانه انجام می‌شود.
+
+## Saved-chat and reasoning candidate — 2026-09-30 / نامزد حافظه و استدلال — ۹ مهر ۱۴۰۵
+
+Add owner-scoped PostgreSQL conversation storage, audited additive migration, six-pair bounded
+context, safe bilingual resume/delete UI, gated thinking/final-only output and actual local token
+admission. Keep serving 810102f/35B and all flags unchanged. Record the expanded guest observation
+and pin research-only 122B shards without downloading/selecting them. Local full suite: 441 passed,
+two platform skips; supported-major CI and matched live model/profile acceptance are separate.
+
+حافظهٔ مالک‌محور PostgreSQL، مهاجرت افزایشی و ممیزی، زمینهٔ محدودِ شش جفت، رابط ایمن و دوزبانهٔ
+ادامه و حذف، استدلال دروازه‌دار با خروجی صرفاً نهایی و پذیرش بر پایهٔ توکن واقعی اضافه شدند.
+نسخهٔ زندهٔ 810102f/35B و گزینه‌ها ثابت‌اند. مشاهدهٔ منابع تازه ثبت و فایل‌های صرفاً پژوهشی
+122B بدون دریافت یا انتخاب پین شدند. مجموعهٔ محلی ۴۴۱ آزمون موفق و دو مورد کنارگذاشته‌شدهٔ
+وابسته به سکو دارد؛ CI نسخهٔ پشتیبانی‌شدهٔ پایگاه و پذیرش زندهٔ مدل/نمایه جدا هستند.
+
 ## Controlled exact-unit incident focus — 2026-09-30 / تمرکز کنترل‌شدهٔ واحدِ دقیق — ۹ مهر ۱۴۰۵
 
 Select app/API 810102f with unchanged CPU-only 35B after five CI jobs, fresh hash-locked

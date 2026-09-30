@@ -193,6 +193,65 @@ def _fixture_app() -> FastAPI:
     app.state.general_integrity = "deterministic_fallback"
     app.state.general_delay = 0.0
     app.state.monitoring_requests = []
+    app.state.saved_chats_enabled = False
+    app.state.saved_chats = {}
+
+    @app.get("/api/v1/conversations/config")
+    async def chat_config() -> dict[str, bool]:
+        return {
+            "enabled": app.state.saved_chats_enabled,
+            "thinking_enabled": app.state.saved_chats_enabled,
+        }
+
+    @app.get("/api/v1/conversations")
+    async def chats() -> list[dict[str, Any]]:
+        return [c["conversation"] for c in app.state.saved_chats.values()]
+
+    @app.post("/api/v1/conversations", status_code=201)
+    async def create_chat(request: Request) -> dict[str, Any]:
+        payload = await request.json()
+        chat = {
+            "conversation_id": str(uuid4()),
+            "title": "New chat",
+            "locale": payload["locale"],
+            "turn_count": 0,
+        }
+        app.state.saved_chats[chat["conversation_id"]] = {
+            "conversation": chat,
+            "messages": [],
+            "before_sequence": None,
+        }
+        return chat
+
+    @app.get("/api/v1/conversations/{chat_id}")
+    async def get_chat(chat_id: str) -> dict[str, Any]:
+        return dict(app.state.saved_chats[chat_id])
+
+    @app.delete("/api/v1/conversations/{chat_id}", status_code=204)
+    async def delete_chat(chat_id: str) -> None:
+        del app.state.saved_chats[chat_id]
+
+    @app.post("/api/v1/conversations/{chat_id}/messages")
+    async def chat_message(chat_id: str, request: Request) -> dict[str, Any]:
+        payload = await request.json()
+        app.state.general_requests.append(payload)
+        chat = app.state.saved_chats[chat_id]
+        answer = _assistant(payload["locale"])
+        answer["answer"] = (
+            "پاسخ محلیِ پیگیری" if payload["locale"] == "fa" else "Local follow-up answer."
+        )
+        answer["integrity_status"] = "model_unverified"
+        saved = {
+            "request_id": payload["request_id"],
+            "question": payload["question"],
+            "assistant": answer,
+            "context_turns": min(6, len(chat["messages"])),
+            "context_omitted": False,
+            "thinking_requested": payload["thinking"],
+        }
+        chat["messages"].append(saved)
+        chat["conversation"]["title"] = chat["messages"][0]["question"][:80]
+        return {"conversation_id": chat_id, "message": saved}
 
     @app.get("/")
     def panel() -> FileResponse:
@@ -355,6 +414,172 @@ def _launch_browser(playwright: Any) -> Any:
         return playwright.chromium.launch()
     except PlaywrightError:
         return playwright.chromium.launch(channel="chrome")
+
+
+@pytest.mark.parametrize("locale", ["en", "fa"])
+@pytest.mark.parametrize("width", [375, 1280])
+def test_theme_toggle_persists_is_keyboard_accessible_and_keeps_brand(
+    browser_server: tuple[str, FastAPI], locale: str, width: int
+) -> None:
+    base_url, _ = browser_server
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": width, "height": 900}, color_scheme="light")
+        page.goto(base_url, wait_until="networkidle")
+        if locale == "fa":
+            page.locator("#languageButton").click()
+        logo = page.locator(".ocs-logo-header").evaluate(
+            "el => getComputedStyle(el).backgroundImage"
+        )
+        switch = page.locator("#themeButton")
+        expect(switch).to_have_attribute("aria-pressed", "false")
+        switch.focus()
+        page.keyboard.press("Space")
+        expect(switch).to_have_attribute("aria-pressed", "true")
+        expect(page.locator("html")).to_have_attribute("data-theme", "dark")
+        assert page.evaluate("localStorage.getItem('nextops-theme')") == "dark"
+        assert (
+            page.locator(".ocs-logo-header").evaluate("el => getComputedStyle(el).backgroundImage")
+            == logo
+        )
+        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+        tokens = page.evaluate(
+            """() => {
+              const css = getComputedStyle(document.documentElement);
+              return Object.fromEntries(['--ink', '--muted', '--surface', '--button-bg',
+                '--brand-gold-dark', '--brand-gold', '--brand-teal']
+                .map(k => [k, css.getPropertyValue(k).trim()]));
+            }"""
+        )
+        assert tokens["--brand-gold"] == "#d0a840"
+        assert tokens["--brand-teal"] == "#0090a0"
+        assert _contrast(tokens["--ink"], tokens["--surface"]) >= 4.5
+        assert _contrast(tokens["--muted"], tokens["--surface"]) >= 4.5
+        expect(switch).to_have_css("color", "rgb(225, 188, 96)")
+        assert _contrast(tokens["--brand-gold-dark"], tokens["--surface"]) >= 4.5
+        assert _contrast("#ffffff", tokens["--button-bg"]) >= 4.5
+        page.reload(wait_until="networkidle")
+        expect(page.locator("html")).to_have_attribute("data-theme", "dark")
+        expect(switch).to_have_attribute(
+            "aria-label", "پوستهٔ تیره" if locale == "fa" else "Dark theme"
+        )
+        switch.click()
+        expect(page.locator("html")).to_have_attribute("data-theme", "light")
+        expect(switch).to_have_attribute("aria-pressed", "false")
+        browser.close()
+
+
+def _contrast(first: str, second: str) -> float:
+    def luminance(color: str) -> float:
+        values = [int(color[index : index + 2], 16) / 255 for index in (1, 3, 5)]
+        linear = [v / 12.92 if v <= 0.04045 else ((v + 0.055) / 1.055) ** 2.4 for v in values]
+        return sum(v * weight for v, weight in zip(linear, (0.2126, 0.7152, 0.0722), strict=True))
+
+    values = sorted((luminance(first), luminance(second)))
+    return (values[1] + 0.05) / (values[0] + 0.05)
+
+
+def test_system_theme_and_unavailable_preference_storage_do_not_block_login(
+    browser_server: tuple[str, FastAPI],
+) -> None:
+    base_url, _ = browser_server
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(color_scheme="dark")
+        page.add_init_script(
+            """Object.defineProperty(window, 'localStorage', {
+              get() { throw new DOMException('blocked', 'SecurityError'); }
+            });"""
+        )
+        _login(page, base_url)
+        expect(page.locator("html")).to_have_attribute("data-theme", "dark")
+        page.locator("#themeButton").click()
+        expect(page.locator("html")).to_have_attribute("data-theme", "light")
+        expect(page.locator("#workspaceView")).to_be_visible()
+        browser.close()
+
+
+def test_saved_chat_reload_followup_thinking_delete_and_logout(
+    browser_server: tuple[str, FastAPI],
+) -> None:
+    """Browser fixture verifies UX; PostgreSQL tests verify the real ownership boundary."""
+    base_url, app = browser_server
+    app.state.saved_chats_enabled = True
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        _login(page, base_url)
+        expect(page.locator("#savedChatsPanel")).to_be_visible()
+        page.get_by_label("Question", exact=True).fill("What is DNS?")
+        page.get_by_role("button", name="Ask assistant", exact=True).click()
+        expect(page.locator("#answer")).to_have_text("Local follow-up answer.")
+        assert len(app.state.saved_chats) == 1
+        first = app.state.general_requests[-1]
+        assert "request_id" in first and "history" not in first and "max_output_tokens" not in first
+        page.get_by_label("Response mode").select_option("thinking")
+        page.get_by_label("Question", exact=True).fill("Give an example.")
+        page.get_by_role("button", name="Ask assistant", exact=True).click()
+        expect(page.locator("#askedQuestion")).to_have_text("Give an example.")
+        expect(page.get_by_role("button", name="Ask assistant", exact=True)).to_be_enabled()
+        assert app.state.general_requests[-1]["thinking"] is True
+        page.reload(wait_until="networkidle")
+        page.get_by_role("button", name="What is DNS?", exact=True).click()
+        expect(page.locator("#askedQuestion")).to_have_text("Give an example.")
+        expect(page.locator("#conversationHistory")).to_contain_text("What is DNS?")
+        page.get_by_role("button", name="New conversation", exact=True).click()
+        expect(page.locator("#resultCard")).to_be_hidden()
+        assert len(app.state.saved_chats) == 1  # New does not delete saved history.
+        page.get_by_role("button", name="What is DNS?", exact=True).click()
+        page.on("dialog", lambda dialog: dialog.accept())
+        page.get_by_role("button", name="Delete this conversation").click()
+        expect(page.locator("#savedChatsList")).to_be_empty()
+        assert not app.state.saved_chats
+        page.get_by_role("button", name="Sign out").click()
+        expect(page.locator("#savedChatsPanel")).to_be_hidden()
+        assert page.locator("#savedChatsList").text_content() == ""
+        browser.close()
+
+
+def test_saved_chat_persian_rtl_literal_title_and_live_memory_separation(
+    browser_server: tuple[str, FastAPI],
+) -> None:
+    base_url, app = browser_server
+    app.state.saved_chats_enabled = True
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        _login(page, base_url)
+        page.locator("#languageButton").click()
+        question = "DNS چیست؟ <img src=x onerror=alert(1)>"
+        page.locator("#question").fill(question)
+        page.locator("#askButton").click()
+        expect(page.locator("#answer")).to_have_text("پاسخ محلیِ پیگیری")
+        expect(page.locator("#askButton")).to_be_enabled()
+        expect(page.locator(".saved-chat-button")).to_have_text(question)
+        assert page.locator("#savedChatsList img").count() == 0
+        page.set_viewport_size({"width": 375, "height": 812})
+        assert page.locator("html").get_attribute("dir") == "rtl"
+        expect(page.locator("#savedChatsHeading")).to_be_visible()
+        assert page.locator("#savedChatsPanel").evaluate(
+            "el => el.getBoundingClientRect().width >= 300"
+        )
+        assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
+        assert page.locator(".saved-chat-button").evaluate(
+            "el => el.getBoundingClientRect().height >= 44"
+        )
+        page.locator(".saved-chat-button").focus()
+        assert page.locator(".saved-chat-button").evaluate("el => el === document.activeElement")
+        page.screenshot(path="build/chat-ui-fa.png", full_page=True)
+        page.emulate_media(reduced_motion="reduce")
+        page.get_by_role("button", name="پایش زنده", exact=True).click()
+        expect(page.locator("#thinkingField")).to_be_hidden()
+        page.locator("#question").fill("وضعیت فعلی چیست؟")
+        page.locator("#askButton").click()
+        expect(page.locator("#evidenceBadge")).to_contain_text("Zabbix")
+        assert "history" not in app.state.monitoring_requests[-1]
+        assert "thinking" not in app.state.monitoring_requests[-1]
+        assert sum(len(c["messages"]) for c in app.state.saved_chats.values()) == 1
+        browser.close()
 
 
 def test_phase2_panel_supports_incident_evidence_and_persian_rtl(

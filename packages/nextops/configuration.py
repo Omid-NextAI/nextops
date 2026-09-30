@@ -29,6 +29,8 @@ class AppSettings(BaseModel):
     connector_service_secret: SecretStr | None = Field(default=None, min_length=32, max_length=512)
     connector_timeout_seconds: float = Field(default=20.0, ge=1.0, le=60.0)
     incident_target_ids: tuple[str, ...] = Field(default_factory=tuple, max_length=8)
+    conversations_enabled: bool = False
+    conversation_thinking_enabled: bool = False
 
     @model_validator(mode="after")
     def validate_security_boundaries(self) -> Self:
@@ -39,6 +41,8 @@ class AppSettings(BaseModel):
             raise ValueError("database_url must use postgresql+psycopg")
         if self.bootstrap_secret.get_secret_value() == self.recovery_secret.get_secret_value():
             raise ValueError("bootstrap_secret and recovery_secret must differ")
+        if self.conversation_thinking_enabled and not self.conversations_enabled:
+            raise ValueError("thinking requires durable conversations")
         if (self.inference_base_url is None) != (self.inference_service_secret is None):
             raise ValueError("inference_base_url and inference_service_secret must be set together")
         if self.inference_base_url is not None:
@@ -107,6 +111,9 @@ class AppSettings(BaseModel):
             ),
             session_ttl_seconds=int(os.environ.get("NEXTOPS_SESSION_TTL_SECONDS", "3600")),
             lease_ttl_seconds=int(os.environ.get("NEXTOPS_LEASE_TTL_SECONDS", "30")),
+            conversations_enabled=os.environ.get("NEXTOPS_CONVERSATIONS_ENABLED", "0") == "1",
+            conversation_thinking_enabled=os.environ.get("NEXTOPS_CHAT_THINKING_ENABLED", "0")
+            == "1",
             inference_base_url=os.environ.get("NEXTOPS_INFERENCE_BASE_URL") or None,
             inference_service_secret=(
                 deployment_secret(

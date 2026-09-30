@@ -1,8 +1,23 @@
 # Bilingual operations console and design system
 
+## Live local theme switch — 2026-09-30
+
+The header has a keyboard-accessible light/dark switch on login and workspace screens. Before
+first paint it uses the saved local preference or system theme. Only the theme/language preference
+is stored locally, never transcripts or credentials; restricted preference storage falls back to
+the current tab. Persian labels/RTL, 375-pixel layout and dark text/button contrast are tested.
+OCS base gold/teal values and the embedded logo are unchanged. This is live in controlled b5e74f9;
+five theme fixtures and the live 375-pixel Persian view passed. Use the header button to switch.
+
+## Live standard saved chat — 2026-09-30
+
+Owner-only local history and resume/new/delete controls are enabled in b5e74f9. Thinking is hidden
+and rejected at both APIs after failed final-answer trials. The UI/UX workflow guided keyboard navigation and existing OCS tokens;
+brand assets are unchanged. See [conversation operation](CONVERSATIONS.md) for limits and privacy.
+
 ## Serving focused incident panel — 2026-09-30
 
-The controlled 810102f/35B workspace is live. A question naming `nextops-app.service` shows
+The focused behavior first qualified in 810102f remains in serving b5e74f9/35B. A question naming `nextops-app.service` shows
 only that authorized unit's recorded state in the answer and default focused panel. Other
 already-authorized observations remain in “Show complete authorized evidence,” opened only by
 the user. English/Persian live browser checks, mobile width, exact app rollback and audit/hash
@@ -21,7 +36,7 @@ the current release is recorded above. Logo and palette bytes are unchanged.
 
 **Status: specification plus a delivered controlled user-testing subset.** Source: master specification sections 3, 7 and 17 plus original sections 3 and 30.
 
-## Controlled conversational NOC/SOC workspace — 2026-09-29
+## Earlier page-memory-only NOC/SOC workspace — 2026-09-29
 
 At that earlier controlled 862d311/35B checkpoint: five first/four final fresh browser/API cases,
 three audit/hash matches and exact b346c3e source rollback passed. Text-only `bdi` isolates plain UTC
@@ -37,6 +52,9 @@ logo and the original gold/teal/semantic palette are unchanged. No framework, CD
 dependency is added. Twelve local real-browser fixtures passed, including native RTL/LTR, hostile
 HTML remaining inert text, code direction, responsive layouts, copying, expiry and late logout
 responses. These are fixture results, not actual model accuracy or deployed-release acceptance.
+
+The following paragraph describes that older release, superseded for enabled general saved chat
+by [the current local history contract](CONVERSATIONS.md).
 
 At most twelve completed turns remain in page memory. New conversation, logout or session expiry
 clears the transcript; refresh starts afresh. No conversation is saved in localStorage/sessionStorage.

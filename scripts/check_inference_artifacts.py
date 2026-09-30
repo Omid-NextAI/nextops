@@ -104,7 +104,71 @@ def validate_repository(repository_root: Path) -> dict[str, Any]:
                 f"{_format_path(error.path)}: {error.message}" for error in larger_errors
             )
             raise ArtifactValidationError(f"larger candidate schema validation failed: {details}")
+    validate_chat_candidates(directory)
     return document
+
+
+def validate_chat_candidates(directory: Path) -> None:
+    """Research metadata cannot silently become a selectable or downloaded model."""
+    try:
+        chat = json.loads((directory / "expanded-chat-profile.json").read_text("utf-8"))
+        research = json.loads((directory / "qwen3-5-122b-a10b-research.json").read_text("utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise ArtifactValidationError("cannot parse chat candidate metadata") from error
+    if not isinstance(chat, dict) or not isinstance(research, dict):
+        raise ArtifactValidationError("chat candidate metadata must be an object")
+    expected = {
+        "status": "standard_controlled_thinking_rejected",
+        "standard_enabled": True,
+        "thinking_enabled": False,
+        "configured_context_tokens": 16384,
+        "max_context_turns": 6,
+        "max_context_characters": 12000,
+        "standard_total_output_tokens": 1024,
+        "thinking_total_output_tokens": 2048,
+        "runtime_reasoning_budget_tokens": 384,
+        "max_active_requests": 1,
+        "max_queued_requests": 2,
+        "max_conversations_per_identity": 50,
+        "max_turns_per_conversation": 100,
+        "max_content_bytes_per_conversation": 1048576,
+        "available_retention_days": 30,
+        "private_reasoning_persisted": False,
+        "cpu_only": True,
+        "runtime_network_downloads": False,
+    }
+    if any(type(chat.get(k)) is not type(v) or chat.get(k) != v for k, v in expected.items()):
+        raise ArtifactValidationError("expanded chat profile changed its safety bounds or gates")
+    qualification = chat.get("qualification")
+    if (
+        not isinstance(qualification, dict)
+        or qualification.get("thinking_semantics") != "failed"
+        or qualification.get("expanded_context_latency") != "not_run"
+    ):
+        raise ArtifactValidationError("failed thinking or unrun full-context review was concealed")
+    if (
+        research.get("source_revision") != "fec8b222a2eddc3346d6b6d7f7c85efea93cd6bf"
+        or research.get("total_size_bytes") != 77616511296
+        or research.get("status") != "research_candidate_not_downloaded_not_selectable"
+        or research.get("download_verified") is not False
+        or research.get("deployment_selection_allowed") is not False
+        or research.get("conversion_source_revision_verified") is not False
+    ):
+        raise ArtifactValidationError("122B research is not qualified for selection")
+    shards = research.get("shards")
+    expected_hashes = (
+        "e6f74fc4e5ff7da7888cb0a135f9fafbf1265b748f5db9f72c7794061a333843",
+        "1c07a0f86507ad661830a2c317f9c4450e40a836bf9133225926054ab0722316",
+    )
+    if (
+        not isinstance(shards, list)
+        or len(shards) != 2
+        or any(not isinstance(s, dict) for s in shards)
+        or tuple(s.get("sha256") for s in shards) != expected_hashes
+        or [s.get("size_bytes") for s in shards] != [39925205312, 37691305984]
+        or len({s.get("filename") for s in shards}) != 2
+    ):
+        raise ArtifactValidationError("122B research shard identity mismatch")
 
 
 def main() -> int:

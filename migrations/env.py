@@ -8,6 +8,7 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 
+from nextops.persistence import conversations as _conversation_models  # noqa: F401
 from nextops.persistence.models import Base
 
 config = context.config

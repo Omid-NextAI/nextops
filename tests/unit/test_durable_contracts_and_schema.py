@@ -83,6 +83,8 @@ def test_fixture_result_carries_provenance_scope_and_limitations() -> None:
 
 def test_schema_contains_authoritative_state_tables() -> None:
     assert set(Base.metadata.tables) == {
+        "conversations",
+        "conversation_messages",
         "audit_events",
         "environments",
         "identities",

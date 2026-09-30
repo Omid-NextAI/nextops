@@ -1,5 +1,34 @@
 # Prompt version history / تاریخچهٔ نسخه‌های پرامپت
 
+## Owner live-chat/theme instruction — 2026-09-30
+
+The owner explicitly requests the work needed to take the conversation candidate live and a dark
+theme switch. This authorizes a bounded guarded app/AI/schema/profile qualification and promotion
+on the existing controlled guests, with exact rollback. It does not waive failed quality/offline
+gates or authorize new ESXi resources, destructive database downgrade or unrelated integrations.
+Recovery remains owner-deferred; this task is not an attestation of full production acceptance.
+
+مالک صریحاً آماده‌سازی نامزد گفت‌وگو برای استقرار زنده و دکمهٔ پوستهٔ تیره را خواسته است. این
+دستور، آزمون و استقرار محدود و محافظت‌شدهٔ برنامه، AI، پایگاه و نمایه در مهمان‌های موجود را با
+بازگشت دقیق مجاز می‌کند؛ شکست کیفیت یا آفلاین را حذف و منابع تازهٔ ESXi، بازگردانی مخربِ پایگاه
+یا اتصال نامرتبط را مجاز نمی‌کند. بازیابی همچنان در تعویق است و پذیرش کامل تولید ادعا نمی‌شود.
+
+## Owner conversation/model expansion amendment — 2026-09-30
+
+The owner requests more context, local thinking, persistent chat and consecutive follow-up answers,
+reports expanded AI resources and directs implementation. The new bounded conversation packet
+supersedes the previous general-only nonpersistent-memory non-goal; live evidence, policy, CPU-only,
+offline and resource safeguards are unchanged. New candidate budgets are a separate qualification,
+not reinterpretation of earlier failed tests. More RAM/vCPU is not an accuracy or topology pass.
+See [the specification](../en/CONVERSATION_MEMORY_SPEC.md). No serving-profile promotion is implied.
+
+مالک زمینهٔ بزرگ‌تر، استدلال محلی، حافظهٔ گفت‌وگو و پاسخ پی‌درپی را خواسته، افزایش منابع AI را
+اعلام کرده و شروع پیاده‌سازی را درخواست کرده است. مشخصات تازه، خارج‌ازدامنه بودن حافظهٔ ماندگار
+در برش عمومی قبلی را جایگزین می‌کند؛ شاهد زنده، سیاست، CPU-only، آفلاین و محدودیت منابع حفظ
+می‌شوند. بودجهٔ نامزد جدید جداگانه سنجیده می‌شود و شکست قبلی را بازتفسیر نمی‌کند. افزایش منابع
+اثبات کیفیت یا توپولوژی نیست. [مشخصات فارسی](../fa/CONVERSATION_MEMORY_SPEC.md) مبناست؛ انتخاب
+نمایهٔ تازه برای نسخهٔ در حال خدمت از این دستور استنباط نمی‌شود.
+
 ## Owner development-workflow amendment — 2026-09-29
 
 The owner explicitly removes the all-at-once private decision form and its prerequisite procedure

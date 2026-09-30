@@ -1,5 +1,121 @@
 # Testing, model evaluation and release evidence
 
+## Serving standard chat and theme b5e74f9 — 2026-09-30
+
+Exact app/AI source b5e74f9b384e65d7fa487d9aa14a7abb43b6576f passed all five CI jobs in
+[run 36716384847](https://github.com/Omid-NextAI/nextops/actions/runs/36716384847), including
+PostgreSQL 16/17, browser acceptance and secret scanning. Local unit/API/contract checks: 416
+passed, two Windows POSIX skips, 40 environment/browser cases deselected; the 21 browser fixtures
+were separately qualified. These are not a new all-environment full-suite total.
+Fresh hash-locked offline installs passed on Ubuntu 24.04 and both serving guests; real staged
+Nginx syntax, dependency and protected installed-code probes passed before activation.
+Post-record validation passed 59 selected artifact/status/browser tests, including all 21 browser
+fixtures and five regressions preventing failed thinking/full-context gates from becoming passed.
+Wheel SHA-256: `8b41ee7c9551f5f38e57d96fd765b2799ac331b80278991a4967973da686f68a`.
+Installed code: `c56b04148862c6e47200716eebb4c4642f0b2d9a6e046b23d0f3747c947b1e05`.
+
+Standard saved chat is enabled, thinking disabled at both APIs, context configured to 16384;
+the original 35B artifact/runtime, 16 threads, one slot, one active/two queued, resource bounds,
+120-second generation deadline, credentials and OCS logo/base palette are unchanged.
+Seven first live cases passed functional checks: fresh EN/FA generation, reload, server-owned
+ticket recall, current-status redirects and fresh Zabbix evidence. Completed UUID replay,
+403 thinking denial, delete/404 and logout/401 also passed. A read-only database transaction
+matched six text-free completion audits and one run/evidence/audit hash pair.
+Exact rollback restored app 810102f, AI 862d311, original proxy and 8192 profile; two new EN/FA
+answers passed. The rollback harness's candidate-digest label was explicitly corrected to unknown;
+protected prior metadata checksums and root release-link checks establish the restored identities.
+Additive migration 0003/transcripts were not destructively downgraded.
+
+The identical immutable b5e74f9 release was re-promoted under persistent access-preserving guards.
+All four guests had actual IPv4/IPv6 non-LAN egress denial active before boot and after testing;
+public IPv4 attempts were rejected with rule counters, while LAN/SSH remained usable. This is
+guest-side WAN isolation, not a physical cable pull or a permanent host-egress policy. Public
+direct connectivity was already unavailable at baseline; the explicit rules additionally deny it.
+No routed IPv6 connection was exercised; its deny rule was inspected, not a measured IPv6 outage.
+An operator `grep -q`/pipefail verification issue was corrected without changing the running app.
+Actual serial guest reboots changed all boot IDs; unit/management recovery was AI 150.844s,
+connector 12.906s, Zabbix 17.047s and app 16.515s. Both PostgreSQL clusters and required services
+restarted; AI readiness correctly returned unavailable while the model loaded, then ready.
+
+A new verified-TLS browser/login after those boots passed eight fresh functional cases under
+four-guest WAN denial: EN/FA standard chat, one-pair recall, scope redirect and new Zabbix
+answers with source/time/partial warnings. Both live answers reported the actual one reboot
+alert, not cached pre-reboot status. Six more text-free audits and two run/evidence/hash pairs
+matched; owned QA transcripts were deleted and the session revoked. Final standard latency was
+23.813/38.843s EN/FA; live evidence latency 41.078/49.719s. No external browser request occurred.
+Over the 234.187-second browser run, model-service CPU accounting increased by 3826.282s
+(about 16.3 vCPU equivalents averaged, not physical cores); final RSS was about 36.0 GiB and
+cgroup MemoryPeak about 37.0 GiB. These sparse observations are not load percentiles or a full
+context benchmark. Guest NUMA observations do not establish ESXi placement. Temporary WAN rules
+and only this change's rollback timers were removed/disabled after verification; unrelated
+firewall, SSH configuration, credentials and rollback artifacts remain intact.
+
+Theme keyboard/persistence/system/restricted-storage/contrast fixtures and live 375-pixel Persian
+dark display passed. A functional pass does **not** accept all answer semantics: the final Persian
+general answer overclaimed physical connectivity and ignored requested brevity; the earlier
+broad DNS semantic failure also remains. Thinking failed the preserved 120-second trial and is
+not enabled. Full-budget 16K quality/latency, admission-contention, artifact lineage, independent
+recovery and broader production acceptance remain open. Private raw reports remain outside Git.
+
+## 258ac65 guarded findings — 2026-09-30
+
+All five jobs in run 36712348697, fresh Ubuntu/server offline installs and real staged Nginx
+validation passed. Thinking returned 504 at the unchanged 120-second deadline; a separate bounded
+128-reasoning/512-total direct probe also failed to return an accepted final answer. Neither
+proves a qualified reasoning profile; thinking stays off. Standard EN/FA generation, reload and
+ticket recall ran; the initial reload harness wrongly compared raw backticks with rendered Markdown
+and was corrected without changing UI code. A broad Persian DNS answer falsely generalized ping's
+name-resolution behavior and remains a failed semantic case. The separate numeric-IP functional
+test found standalone Persian «الان» bypassing the live-status redirect. Exact rollback restored
+the prior app/AI/proxy/profile. The new candidate repairs that deterministic gap and tests recall,
+guidance and «بالانس» as negative controls; no broad answer-accuracy acceptance is claimed.
+
+## Saved-proxy real syntax preflight — 2026-09-30
+
+95f4de7 passed all five CI jobs in run 36711401339, 407 local unit/API/contract tests (two platform
+skips) and a fresh offline Ubuntu install. Both protected server installs passed. The real Nginx
+syntax check rejected the unquoted `{36}` route before reload; no broken configuration was served.
+The guarded app/proxy rollback passed `nginx -t`; AI/profile was also restored. This attempt has
+no live browser/model pass. The quoted correction requires staged real-parser validation before
+promotion; static regular-expression tests alone were insufficient.
+
+## First guarded chat/theme trial — 2026-09-30
+
+c609a83 passed five-job CI run 36707574912, 406 local non-integration/non-browser tests (two
+Windows skips), 21 browser fixtures, typing/lint/docs and fresh hash-locked Ubuntu 24.04 install.
+Exact wheel: b68dab01f3e47c1b3c4c4cde3d9a40bdc0ec7482e5a757b25146237bea2b1379.
+Installed code: 2700c0c5393d44f9280faf2cbb634bae11087bd8414e3cdb5fd88d7b9efbb8d8.
+Both server offline installs and additive database migration 0003 passed. Fresh live English DNS
+advice completed in 27.3s; ticket recall survived reload with one server-owned prior pair.
+Dark theme/375-pixel Persian UI passed. Thinking failed at the proxy's generic 30-second timeout;
+runtime generated 898 tokens before its 120-second cancellation without a final answer. This
+failed trial is retained, not model acceptance. App/AI/profile rollback restored 810102f/862d311
+and 8192 context; two new EN/FA model answers completed at 28.6/31.7s. One harness-error-exposed
+test session was precisely revoked with an audit event; subsequent cleanup also revoked its own
+session. No password/key was published. The corrected proxy/384-reasoning candidate needs new CI,
+exact install and live acceptance; the 120-second generation deadline is not enlarged.
+
+## Saved-chat/thinking candidate source checks — 2026-09-30
+
+Locked full local command: `uv run pytest -q`, with an explicitly isolated PostgreSQL 18.6
+cluster bound to loopback, passed 441 tests with two Windows POSIX skips. This includes 19
+restricted-role PostgreSQL and 16 real-browser fixtures; CI still checks supported PostgreSQL
+16/17 separately. Exact source b0fbfb35dc8aa534edd0617305f26dd64b4b668d passed all five CI jobs in
+[run 36704531576](https://github.com/Omid-NextAI/nextops/actions/runs/36704531576): quality/unit,
+PostgreSQL 16, PostgreSQL 17, browser acceptance and secret scan. After visual inspection found a
+compressed mobile history panel, the layout was fixed and all 16 browser cases passed again.
+Strict typing/lint, all six documentation/profile
+validators, Alembic schema comparison and `uv build --no-sources --offline` passed. These are source,
+lab and desktop package results, not deployed thinking/model accuracy or server offline acceptance.
+Authenticated live 35B /apply-template and /tokenize calls passed for both trusted thinking
+settings without generation or service mutation. 122B metadata is pinned; actual import,
+long-context/think semantics, latency, matched live rollback and fresh WAN/VM gates are not run.
+The pinned serving runtime's read-only `llama-server --help` also confirms support for the
+candidate reasoning-format, reasoning-budget and no-reasoning-preserve flags; this is CLI
+compatibility, not generation acceptance. The final desktop wheel built from this source has
+SHA-256 9b106dbe1eba3e950b6e693a24efcb2f64834104a69721f4194e96aa975eed46; it is not an
+installed Ubuntu release or live promotion artifact.
+
 ## Serving 810102f exact-unit incident focus — 2026-09-30
 
 Exact head 810102f226e8b02a967cb4895b7906dce7ae1712 passed all five CI jobs in run

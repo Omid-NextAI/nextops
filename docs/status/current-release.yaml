@@ -1,7 +1,7 @@
 ---
 $schema: ./release-status.schema.json
 schema_version: 2.2.0
-release_identifier: nextops-incident-focus-controlled-2026-09-30
+release_identifier: nextops-saved-chat-theme-controlled-2026-09-30
 observed_at: '2026-09-30'
 deployment_status: controlled_user_testing_not_production_accepted
 delivery_scope:
@@ -17,17 +17,17 @@ snapshot_restore_owner_attestation:
 repository:
   remote: Omid-NextAI/nextops
   branch: main
-  inspected_baseline_commit: b3fa073d60baf8c2fce1350c71cab622fdaf72fd
+  inspected_baseline_commit: 24fbc55b0821014048b0f2c042a14becf4c099ae
 components:
   application:
-    release: nextops-0.1.0-810102f
-    source_commit: 810102f226e8b02a967cb4895b7906dce7ae1712
+    release: nextops-0.1.0-b5e74f9
+    source_commit: b5e74f9b384e65d7fa487d9aa14a7abb43b6576f
   connector:
     release: nextops-0.1.0-cdde129
     source_commit: cdde129950f60f9f18f3ef109cbf98f4217fc5e1
   inference_api:
-    release: nextops-0.1.0-862d311
-    source_commit: 862d31130e43f5cdce216aff40d1d9fdb1a8f61a
+    release: nextops-0.1.0-b5e74f9
+    source_commit: b5e74f9b384e65d7fa487d9aa14a7abb43b6576f
   inference_runtime:
     name: llama.cpp
     source_tag: v0.4.1
@@ -50,8 +50,8 @@ components:
     name: Zabbix
     version: '7.0.31'
 current_application_qualification:
-  release: nextops-0.1.0-810102f
-  source_commit: 810102f226e8b02a967cb4895b7906dce7ae1712
+  release: nextops-0.1.0-b5e74f9
+  source_commit: b5e74f9b384e65d7fa487d9aa14a7abb43b6576f
   scope: application_revision_sensitive
   gates:
     - id: current_app_bounded_live_functionality
@@ -72,16 +72,35 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_server_side_wan_isolation
-      status: not_run
+      status: passed
       evidence:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_vm_reboot_cold_start
-      status: not_run
+      status: passed
       evidence:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: owner_scoped_saved_conversations
+    status: accepted_controlled
+    evidence:
+      - docs/en/CONVERSATION_MEMORY_SPEC.md
+      - docs/fa/CONVERSATION_MEMORY_SPEC.md
+      - docs/en/TESTING.md
+      - tests/integration/test_conversations_postgresql.py
+  - id: local_light_dark_theme
+    status: accepted_controlled
+    evidence:
+      - docs/en/UI.md
+      - docs/fa/UI.md
+      - tests/browser/test_phase2_panel.py
+  - id: local_thinking
+    status: implemented_unaccepted
+    evidence:
+      - deploy/inference/expanded-chat-profile.json
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
   - id: noc_soc_conversation_workspace
     status: accepted_controlled
     evidence:
@@ -194,6 +213,21 @@ capabilities:
       - deploy/systemd/nextops-certificate-check.timer
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
+  - id: saved_chat_standard_follow_up
+    status: passed
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: saved_chat_thinking_final_answer
+    status: failed
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: expanded_context_full_budget_quality_latency
+    status: not_run
+    evidence:
+      - docs/en/CONVERSATION_MEMORY_SPEC.md
+      - docs/en/TESTING.md
   - id: model14_matched_bilingual_quality
     status: failed
     evidence:

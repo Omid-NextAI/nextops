@@ -11,6 +11,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from fastapi.staticfiles import StaticFiles
+from starlette.concurrency import run_in_threadpool
 from starlette.responses import Response
 
 from nextops.api.answer_integrity import (
@@ -27,6 +28,7 @@ from nextops.api.incident_focus import incident_evidence_topic as _incident_evid
 from nextops.api.inference_gateway import InferenceGateway, LoopbackInferenceGateway
 from nextops.api.monitoring_gateway import LoopbackMonitoringGateway, MonitoringGateway
 from nextops.api.release_identity import HEADER_NAME, installed_code_digest
+from nextops.application.conversations import DurableConversationService, GenerationTicket
 from nextops.application.errors import ApplicationError
 from nextops.application.service import DurableAppService
 from nextops.configuration import AppSettings
@@ -35,6 +37,15 @@ from nextops.contracts.assistant import (
     AssistantResponse,
     GeneralAssistantRequest,
     SynthesisRequest,
+)
+from nextops.contracts.conversations import (
+    ConversationAnswer,
+    ConversationAssistantRequest,
+    ConversationCapabilities,
+    ConversationCreate,
+    ConversationMessageRequest,
+    ConversationPage,
+    ConversationSummary,
 )
 from nextops.contracts.durable import (
     AuthenticatedSession,
@@ -169,6 +180,8 @@ def create_app(
     inference_gateway: InferenceGateway | None = None,
     monitoring_gateway: MonitoringGateway | None = None,
     incident_target_ids: tuple[str, ...] = (),
+    conversation_service: DurableConversationService | None = None,
+    conversation_thinking_enabled: bool = False,
 ) -> FastAPI:
     """Build the API around an injected durable service."""
 
@@ -189,7 +202,13 @@ def create_app(
         request.state.correlation_id = correlation_id
         response = await call_next(request)
         response.headers["X-Correlation-ID"] = str(correlation_id)
-        if request.url.path in ANSWER_PATHS and response.status_code == 200:
+        if (
+            request.url.path in ANSWER_PATHS
+            or (
+                request.url.path.startswith("/api/v1/conversations/")
+                and request.url.path.endswith("/messages")
+            )
+        ) and response.status_code == 200:
             response.headers[HEADER_NAME] = APP_CODE_SHA256
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["Referrer-Policy"] = "no-referrer"
@@ -344,6 +363,95 @@ def create_app(
             _general_prompt(payload), _correlation_id(request)
         )
         return assure_general_answer(payload, assistant)
+
+    def conversations() -> DurableConversationService:
+        if conversation_service is None:
+            raise ApplicationError(ErrorCode.DEPENDENCY_UNAVAILABLE, "conversation.not_configured")
+        return conversation_service
+
+    @app.get("/api/v1/conversations/config", response_model=ConversationCapabilities)
+    def conversation_config(
+        actor: Annotated[ActorContext, Depends(current_actor)],
+    ) -> ConversationCapabilities:
+        del actor
+        return ConversationCapabilities(
+            enabled=conversation_service is not None,
+            thinking_enabled=conversation_service is not None and conversation_thinking_enabled,
+        )
+
+    @app.get("/api/v1/conversations", response_model=tuple[ConversationSummary, ...])
+    def conversation_list(
+        request: Request,
+        token: Annotated[str, Depends(current_token)],
+    ) -> tuple[ConversationSummary, ...]:
+        return conversations().list(token, _correlation_id(request))
+
+    @app.post("/api/v1/conversations", response_model=ConversationSummary, status_code=201)
+    def conversation_create(
+        request: Request,
+        payload: ConversationCreate,
+        token: Annotated[str, Depends(current_token)],
+    ) -> ConversationSummary:
+        return conversations().create(token, payload.locale, _correlation_id(request))
+
+    @app.get("/api/v1/conversations/{conversation_id}", response_model=ConversationPage)
+    def conversation_get(
+        request: Request,
+        conversation_id: UUID,
+        token: Annotated[str, Depends(current_token)],
+        before_sequence: int = 101,
+    ) -> ConversationPage:
+        if not 1 <= before_sequence <= 101:
+            raise ApplicationError(ErrorCode.INVALID_REQUEST, "conversation.invalid_cursor")
+        return conversations().get(
+            token, conversation_id, _correlation_id(request), before_sequence
+        )
+
+    @app.delete("/api/v1/conversations/{conversation_id}", status_code=204)
+    def conversation_delete(
+        request: Request,
+        conversation_id: UUID,
+        token: Annotated[str, Depends(current_token)],
+    ) -> Response:
+        conversations().delete(token, conversation_id, _correlation_id(request))
+        return Response(status_code=204)
+
+    @app.post("/api/v1/conversations/{conversation_id}/messages", response_model=ConversationAnswer)
+    async def conversation_message(
+        request: Request,
+        conversation_id: UUID,
+        payload: ConversationMessageRequest,
+        token: Annotated[str, Depends(current_token)],
+    ) -> ConversationAnswer:
+        store = conversations()
+        # Authenticate before reporting any capability details or invoking the provider.
+        await run_in_threadpool(service.authenticate, token)
+        if payload.thinking and not conversation_thinking_enabled:
+            raise ApplicationError(ErrorCode.POLICY_DENIED, "conversation.thinking_unqualified")
+        if inference_gateway is None:
+            raise ApplicationError(ErrorCode.DEPENDENCY_UNAVAILABLE, "assistant.not_configured")
+        correlation_id = _correlation_id(request)
+        ticket = await run_in_threadpool(
+            store.begin, token, conversation_id, payload, correlation_id
+        )
+        if not isinstance(ticket, GenerationTicket):
+            return ConversationAnswer(conversation_id=conversation_id, message=ticket)
+        try:
+            assistant = await inference_gateway.generate(
+                _general_prompt(ticket.context), correlation_id
+            )
+            assistant = assure_general_answer(ticket.context, assistant)
+            message = await run_in_threadpool(
+                store.complete, token, ticket, assistant, correlation_id
+            )
+            return ConversationAnswer(conversation_id=conversation_id, message=message)
+        except Exception:
+            try:
+                await run_in_threadpool(store.fail, token, ticket, correlation_id)
+            except ApplicationError as cleanup_error:
+                if cleanup_error.code not in {ErrorCode.UNAUTHENTICATED, ErrorCode.NOT_FOUND}:
+                    raise
+            raise
 
     @app.post("/api/v1/investigate", response_model=InvestigationResponse)
     async def investigate(
@@ -505,7 +613,8 @@ def create_runtime_app() -> FastAPI:
 
     settings = AppSettings.from_environment()
     engine = create_database_engine(settings.database_url.get_secret_value())
-    service = DurableAppService(create_session_factory(engine), settings)
+    session_factory = create_session_factory(engine)
+    service = DurableAppService(session_factory, settings)
     inference_gateway = None
     monitoring_gateway = None
     if settings.inference_base_url and settings.inference_service_secret:
@@ -525,6 +634,8 @@ def create_runtime_app() -> FastAPI:
         inference_gateway,
         monitoring_gateway,
         settings.incident_target_ids,
+        DurableConversationService(session_factory) if settings.conversations_enabled else None,
+        settings.conversation_thinking_enabled,
     )
 
 
@@ -902,7 +1013,9 @@ def _topical_incident_view(question: str, evidence: IncidentEvidence, topic: str
     return view
 
 
-def _general_prompt(request: GeneralAssistantRequest) -> SynthesisRequest:
+def _general_prompt(
+    request: GeneralAssistantRequest | ConversationAssistantRequest,
+) -> SynthesisRequest:
     """Keep general conversation separate from the opt-in live-evidence route."""
 
     locale_instruction = (
@@ -946,7 +1059,11 @@ def _general_prompt(request: GeneralAssistantRequest) -> SynthesisRequest:
         locale=request.locale,
         question=prompt,
         purpose="general",
-        max_output_tokens=min(request.max_output_tokens, GENERAL_ASSISTANT_MAX_OUTPUT_TOKENS),
+        max_output_tokens=request.max_output_tokens
+        if isinstance(request, ConversationAssistantRequest)
+        else min(request.max_output_tokens, GENERAL_ASSISTANT_MAX_OUTPUT_TOKENS),
+        thinking=request.thinking if isinstance(request, ConversationAssistantRequest) else False,
+        detailed=isinstance(request, ConversationAssistantRequest),
     )
 
 

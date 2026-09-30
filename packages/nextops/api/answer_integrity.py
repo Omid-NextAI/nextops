@@ -16,6 +16,7 @@ from nextops.api.incident_focus import (
     requested_service_units,
 )
 from nextops.contracts.assistant import AssistantRequest, AssistantResponse, GeneralAssistantRequest
+from nextops.contracts.conversations import ConversationAssistantRequest
 from nextops.contracts.incidents import IncidentEvidence, IncidentInvestigationRequest
 from nextops.contracts.monitoring import MonitoringSummary
 from nextops.inference.contracts import FinishReason
@@ -23,7 +24,8 @@ from nextops.inference.contracts import FinishReason
 _LIVE_QUESTION_MARKERS = re.compile(
     r"(?:\b(?:current|currently|now|today|live|status|state|health|running|available|"
     r"restarted|rebooted|deployed|installed|changed)\b|"
-    r"(?:وضعیت|همین\s*الان|اکنون|فعلی|زنده|سلامت|در\s*حال\s*اجرا|راه[‌ ]اندازی\s*مجدد|"
+    r"(?:وضعیت|همین\s*الان|(?<!\w)الان(?!\w)|اکنون|فعلی|زنده|سلامت|در\s*حال\s*اجرا|"
+    r"راه[‌ ]اندازی\s*مجدد|"
     r"ری[‌ ]استارت|نصب|اعمال))",
     re.IGNORECASE,
 )
@@ -128,16 +130,20 @@ def assure_general_answer(
     """Label model-only output and replace unverifiable operational claims."""
 
     historical_subject = bool(
-        isinstance(request, GeneralAssistantRequest)
+        isinstance(request, GeneralAssistantRequest | ConversationAssistantRequest)
         and any(_OPERATIONAL_SUBJECT_MARKERS.search(turn.question) for turn in request.history)
     )
+    direct_subject = bool(_OPERATIONAL_SUBJECT_MARKERS.search(request.question))
+    explicit_current_fact = bool(_EXPLICIT_CURRENT_FACT_QUESTION.search(request.question))
     requires_live_evidence = bool(
-        _LIVE_QUESTION_MARKERS.search(request.question)
-        and (_OPERATIONAL_SUBJECT_MARKERS.search(request.question) or historical_subject)
-        and (
-            not _DIAGNOSTIC_GUIDANCE_QUESTION.search(request.question)
-            or _EXPLICIT_CURRENT_FACT_QUESTION.search(request.question)
+        (
+            (
+                _LIVE_QUESTION_MARKERS.search(request.question)
+                and (direct_subject or historical_subject)
+            )
+            or (explicit_current_fact and direct_subject)
         )
+        and (not _DIAGNOSTIC_GUIDANCE_QUESTION.search(request.question) or explicit_current_fact)
     )
     file_request = bool(_SYSTEM_FILE_REQUEST.search(request.question))
     unsafe_claim = _contains_unsafe_execution_claim(assistant.answer)

@@ -8,7 +8,7 @@ from fastapi import Depends, FastAPI, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from pydantic import Field
+from pydantic import Field, model_validator
 
 from nextops.application.errors import ApplicationError
 from nextops.contracts.errors import ErrorCode, ErrorDetail
@@ -49,10 +49,20 @@ class GenerationPayload(FrozenContract):
 
     request_id: UUID
     locale: Literal["en", "fa"]
-    prompt: str = Field(min_length=1, max_length=12_000)
+    prompt: str = Field(min_length=1, max_length=32_000)
     purpose: GenerationPurpose = "evidence_synthesis"
-    max_output_tokens: int = Field(default=512, ge=1, le=1_024)
+    max_output_tokens: int = Field(default=512, ge=1, le=2_048)
     temperature: float = Field(default=0.7, ge=0.0, le=2.0)
+    thinking: bool = False
+    detailed: bool = False
+
+    @model_validator(mode="after")
+    def validate_general_controls(self) -> "GenerationPayload":
+        if self.purpose != "general" and (self.thinking or self.detailed):
+            raise ValueError("reasoning is available only for general requests")
+        if not self.detailed and (self.max_output_tokens > 1_024 or len(self.prompt) > 12_000):
+            raise ValueError("expanded budgets require a detailed general request")
+        return self
 
 
 def create_inference_app(service: InferenceService, service_auth_secret: str) -> FastAPI:
@@ -147,6 +157,8 @@ def create_inference_app(service: InferenceService, service_auth_secret: str) ->
             purpose=payload.purpose,
             max_output_tokens=payload.max_output_tokens,
             temperature=payload.temperature,
+            thinking=payload.thinking,
+            detailed=payload.detailed,
         )
         return await service.generate(bounded_request)
 
