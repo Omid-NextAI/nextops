@@ -2,6 +2,15 @@
 
 ## Incident network/service focus candidate — 2026-09-30
 
+First guarded e2ea487 app promotion installed offline and started under a 65-minute rollback
+timer. Two fresh EN/FA network browser requests passed transport/model/evidence-hash checks, but
+manual answer review rejected route wording and unrelated socket disclosure. The browser run was
+interrupted after those two cases; no complete browser or durable database-audit pass is claimed.
+Exact app rollback restored 862d311, its service was healthy, and the change's timer was stopped.
+Fresh restored EN/FA general generations and logout then passed. An early rollback harness
+incorrectly required a code header on login/logout; that test failure remains separate from the
+product result. Corrected source and tests require new exact-head qualification.
+
 The isolated candidate keeps the serving 35B model, inference API and 384-token budget unchanged.
 Local unit/API: 378 passed, two POSIX-only Windows skips before the latest hostile-value additions;
 the focused API subset then passed 78 cases. Formatting, lint and strict source typing passed.

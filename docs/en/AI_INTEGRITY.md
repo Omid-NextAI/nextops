@@ -2,6 +2,14 @@
 
 ## Question-focused incident candidate — 2026-09-30
 
+The first guarded app-only e2ea487 trial was rejected and rolled back to 862d311. Two fresh
+EN/FA network answers were generated and audited, but review found a semantic presentation error:
+an on-link route with gateway field `0.0.0.0` was written as “via 0.0.0.0”; a resolver/route
+question also received unsolicited listening-socket details. The corrected source now labels the
+zero-gateway field without inventing a hop, shows only named network subtopics and qualifies a
+loopback resolver as not identifying upstream DNS. This correction needs its **own** CI, offline
+package and live acceptance; the first trial is not a pass.
+
 The source candidate keeps the approved 384-token, 120-second, one-active/two-queued CPU-only
 profile. It selects only already-authorized Linux/Zabbix observations relevant to an unambiguous
 network or service question. The application, not the model, renders validated resolver, route,

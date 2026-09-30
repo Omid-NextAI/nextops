@@ -365,7 +365,7 @@ function applyLanguage(language) {
     item.setAttribute("aria-pressed", item.dataset.locale === language ? "true" : "false");
   });
   if (state.lastEvidence) {
-    if (state.lastEvidence.incident) renderIncidentEvidence(state.lastEvidence.evidence, state.lastEvidence.focus);
+    if (state.lastEvidence.incident) renderIncidentEvidence(state.lastEvidence.evidence, state.lastEvidence.focus, state.lastEvidence.question);
     else renderEvidence(state.lastEvidence.evidence);
     updateEvidenceBrief();
   }
@@ -573,7 +573,7 @@ function evidenceSection(titleText, rows) {
   return section;
 }
 
-function renderIncidentEvidence(evidence, focus = "overview") {
+function renderIncidentEvidence(evidence, focus = "overview", question = "") {
   const locale = state.language === "fa" ? "fa-IR" : "en-GB";
   renderEvidence(evidence.zabbix.summary);
   byId("evidenceSource").textContent = `Zabbix ${evidence.zabbix.source_version} + Linux ${evidence.linux.collector_version}`;
@@ -652,10 +652,19 @@ function renderIncidentEvidence(evidence, focus = "overview") {
     } else {
       focused.className = "incident-sections";
       if (focus === "service" || focus === "network_service") {
-        focused.append(sections.children[1].cloneNode(true), sections.children[3].cloneNode(true));
+        focused.append(sections.children[1].cloneNode(true));
+        if (/\b(?:journal|logs?)\b|ژورنال|لاگ|گزارش/i.test(question)) focused.append(sections.children[3].cloneNode(true));
       }
       if (focus === "network" || focus === "network_service") {
-        networkSections.querySelectorAll(":scope > section").forEach(section => focused.append(section.cloneNode(true)));
+        const requested = [
+          /\b(?:dns|resolvers?|nameservers?)\b|نام[‌-]?سرور|دی[‌-]?ان[‌-]?اس/i.test(question),
+          /\b(?:routes?|routing|gateway)\b|مسیر|دروازه/i.test(question),
+          /\b(?:ports?|sockets?|listen(?:ing)?)\b|پورت|سوکت|شنود/i.test(question)
+        ];
+        const showAll = !requested.some(Boolean);
+        networkSections.querySelectorAll(":scope > section").forEach((section, index) => {
+          if (showAll || requested[index]) focused.append(section.cloneNode(true));
+        });
       }
     }
     detail.replaceChildren(focused, complete);
@@ -821,9 +830,9 @@ byId("assistantForm").addEventListener("submit", async event => {
     byId("evidenceDetails").open = false;
     document.querySelectorAll(".monitoring-meta").forEach(node => node.classList.toggle("hidden", !evidenceBacked));
     if (evidenceBacked) {
-      if (incident) renderIncidentEvidence(result.evidence, result.answer_focus || "overview");
+      if (incident) renderIncidentEvidence(result.evidence, result.answer_focus || "overview", question);
       else renderEvidence(result.evidence);
-      state.lastEvidence = { evidence: result.evidence, incident, focus: result.answer_focus || "overview" };
+      state.lastEvidence = { evidence: result.evidence, incident, focus: result.answer_focus || "overview", question };
       updateEvidenceBrief();
       byId("evidenceBrief").classList.remove("hidden");
       byId("runId").textContent = result.run_id;

@@ -10,6 +10,10 @@ runtime, model, queue/deadline or branding. Keep current-release identity at 862
 live gates pass. Exact-release server-WAN and full-VM cold start remain not_run, and production
 acceptance is not implied by this narrow change.
 
+First e2ea487 promotion was rejected for route/socket answer semantics and exactly rolled back
+to 862d311; two fresh EN/FA restored answers and logout passed. Qualify the corrected source as
+a **new** release. Do not reuse the first candidate's wheel, CI or incomplete browser run as proof.
+
 گام فوریِ نامزد، ۹ مهر ۱۴۰۵ — تغییر جداگانهٔ برنامه برای تمرکز شبکه و سرویس در بررسی رخداد،
 با CI قفل‌شده، بستهٔ دقیقِ آفلاین، مرورگر و API زندهٔ محافظت‌شدهٔ فارسی و انگلیسی، تطبیقِ ممیزی
 و هشِ شاهد، و بازگشت دقیقِ برنامه به 862d311 سنجیده شود. کد و آزمون ساختگیِ محلی موفق‌اند؛
@@ -18,6 +22,10 @@ acceptance is not implied by this narrow change.
 ردشدهٔ PR46 با سقف ۵۱۲ توکن مستقر نشود. میزبان AI، اتصال، اعتبارنامه، محیط اجرا، مدل، صف، مهلت
 و نشان و رنگ تغییر نکنند. تا گذرِ معیارهای زنده، شناسهٔ انتشار 862d311 است. قطع WAN سرور و
 شروع سردِ کامل VM همین انتشار هنوز اجرا نشده‌اند و این تغییر، پذیرش تولید نیست.
+
+نخستین استقرار e2ea487 به‌دلیل خطای معناییِ مسیر و نمایشِ سوکت رد و دقیقاً به 862d311 بازگشت؛
+دو پاسخ تازهٔ فارسی و انگلیسی و خروج از نشستِ نسخهٔ بازگشته موفق بودند. اصلاح جدید، انتشارِ
+جداگانه است. بسته، CI و آزمون مرورگرِ ناتمامِ نامزد نخست، شاهدِ پذیرشِ آن محسوب نشوند.
 
 Current unfinished checkpoint — Independently review held-out English/Persian NOC/SOC technical
 answers for actual platform/vendor semantics. The controlled 862d311/35B workspace, bounded

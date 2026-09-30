@@ -9,6 +9,11 @@ model probes still truncated at 384 tokens. CI, exact offline packaging, live pr
 audit and rollback for this candidate are not yet recorded. Serving remains 862d311/35B; this
 does not make general technical advice or production accepted.
 
+The first e2ea487 live trial was rejected on answer semantics: `0.0.0.0` gateway was phrased as
+a hop and a resolver/route question received socket details. Exact app rollback restored healthy
+862d311; fresh EN/FA general answers and logout passed. The corrected candidate is source-only
+until its own CI, offline package and live gate pass. No complete first-trial browser/audit pass.
+
 نامزدِ تمرکزِ بررسی رخداد، ۹ مهر ۱۴۰۵ — در تغییر جداگانهٔ کدِ برنامه، پرسش روشن دربارهٔ شبکه یا
 سرویس ابتدا مشاهدهٔ اعتبارسنجی‌شدهٔ Linux را با زمان و دامنهٔ مستقل Zabbix نشان می‌دهد؛ شاهد اصلی
 و ممیزی ثابت‌اند و بخش نامرتبط فقط با گشودنِ صریح دیده می‌شود. سقف پاسخ عمومی، مدل 35B صرفاً CPU،
@@ -16,6 +21,11 @@ does not make general technical advice or production accepted.
 موفق بودند؛ دو آزمایش خامِ فارسیِ مدل همچنان در سقف ۳۸۴ توکن قطع شدند. CI، بستهٔ دقیقِ آفلاین،
 استقرار زنده، ممیزی ماندگار و بازگشت همین نامزد هنوز ثبت نشده‌اند. انتشارِ در حال خدمت 862d311
 و 35B است؛ این نامزد نه مشاورهٔ عمومی را تأیید می‌کند و نه پذیرش تولید را.
+
+نخستین آزمون زندهٔ e2ea487 به‌سبب بیانِ نادرستِ گیت‌وی `0.0.0.0` و نمایشِ سوکتِ درخواست‌نشده
+رد شد. بازگشت دقیق، 862d311 سالم را برگرداند؛ دو پاسخ تازهٔ عمومیِ فارسی و انگلیسی و خروج
+از نشست موفق بودند. نامزدِ اصلاح‌شده تا گذرِ CI، بستهٔ آفلاین و پذیرش زندهٔ مستقل فقط در کد
+است. برای آزمون نخست، موفقیتِ کامل مرورگر یا ممیزی ادعا نمی‌شود.
 
 
 Current controlled workspace, 2026-09-29 — app/API 862d311 serves the unchanged CPU-only 35B model.

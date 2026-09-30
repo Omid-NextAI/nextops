@@ -858,6 +858,12 @@ def test_incident_observations_are_application_owned_even_if_model_truncates(
     assert "All devices are healthy" not in answer
     assert "firewall was fixed" not in answer
     assert "10.0.0.1" in answer or focus == "service"
+    if "DNS resolver and route" in question or "نام‌سرور و مسیر" in question:
+        assert "listening sockets" not in answer
+        assert "سوکت‌های در حال شنود" not in answer
+    if focus == "service":
+        assert "journal record" not in answer
+        assert "رکورد ژورنال" not in answer
     assert body["evidence"]["linux"]["target_id"] == "app"
     assert body["evidence"]["zabbix"]["host"] == "Zabbix server"
     assert body["evidence_sha256"] == "b" * 64
@@ -886,7 +892,65 @@ def test_incident_network_summary_does_not_repeat_malformed_collector_values() -
 
     answer = assure_incident_answer(request, assistant, evidence).answer
     assert raw not in answer
-    assert answer.count("no usable recorded value") == 3
+    assert answer.count("no usable recorded value") == 2
+    assert "configured resolvers" not in answer
+
+
+def test_incident_on_link_route_is_not_described_as_via_zero_gateway() -> None:
+    from nextops.api.answer_integrity import assure_incident_answer
+
+    linux = _linux_snapshot("app").model_copy(
+        update={
+            "routes": (
+                LinuxRoute(interface="ens34", destination="192.168.240.0", gateway="0.0.0.0"),
+            )
+        }
+    )
+    evidence = IncidentEvidence.combine(
+        "app", asyncio.run(FakeMonitoringGateway().incident_context()), linux
+    )
+    request = IncidentInvestigationRequest(
+        target_id="app", locale="en", question="Which route was recorded?"
+    )
+    assistant = asyncio.run(
+        FakeInferenceGateway().generate(_incident_prompt(request, evidence), uuid4())
+    )
+
+    answer = assure_incident_answer(request, assistant, evidence).answer
+    assert "192.168.240.0 (no gateway recorded; ens34)" in answer
+    assert "via 0.0.0.0" not in answer
+    assert "configured resolvers" not in answer
+    assert "listening sockets" not in answer
+
+
+def test_incident_loopback_resolver_and_persian_routes_are_qualified() -> None:
+    from nextops.api.answer_integrity import assure_incident_answer
+
+    linux = _linux_snapshot("app").model_copy(
+        update={
+            "nameservers": ("127.0.0.53",),
+            "routes": (
+                LinuxRoute(interface="ens34", destination="0.0.0.0", gateway="192.168.240.1"),
+                LinuxRoute(interface="ens34", destination="192.168.240.0", gateway="0.0.0.0"),
+            ),
+        }
+    )
+    evidence = IncidentEvidence.combine(
+        "app", asyncio.run(FakeMonitoringGateway().incident_context()), linux
+    )
+    request = IncidentInvestigationRequest(
+        target_id="app", locale="fa", question="کدام نام‌سرور و مسیر ثبت شده‌اند؟"
+    )
+    assistant = asyncio.run(
+        FakeInferenceGateway().generate(_incident_prompt(request, evidence), uuid4())
+    )
+
+    answer = assure_incident_answer(request, assistant, evidence).answer
+    assert "نام‌سرور بالادستی را مشخص نمی‌کند" in answer
+    assert "0.0.0.0 از طریق 192.168.240.1" in answer
+    assert "192.168.240.0 (بدون گیت‌وی ثبت‌شده; ens34)" in answer
+    assert "via 0.0.0.0" not in answer
+    assert "سوکت‌های در حال شنود" not in answer
 
 
 def test_incident_service_summary_prioritizes_named_unit_and_rejects_bad_state() -> None:

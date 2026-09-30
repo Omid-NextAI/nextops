@@ -2,6 +2,13 @@
 
 ## Incident focus source candidate — 2026-09-30 / نامزدِ تمرکز رخداد — ۹ مهر ۱۴۰۵
 
+The first e2ea487 live trial failed semantic review and was rolled back to 862d311; corrected
+route and answer-subtopic wording requires separate qualification. No complete first-trial
+browser/audit pass is claimed.
+
+آزمون زندهٔ نخستِ e2ea487 در بازبینی معنایی رد و به 862d311 بازگشت؛ بیانِ اصلاح‌شدهٔ مسیر و
+زیرموضوعِ پاسخ به پذیرش مستقل نیاز دارد. آزمون نخست، موفقیتِ کامل مرورگر یا ممیزی نیست.
+
 An isolated app-only candidate presents validated, already-scoped network/service observations
 first, with provenance and canonical evidence intact and unrelated details behind disclosure.
 General budgets, 35B CPU model, connector and OCS branding are unchanged. Local checks pass;
