@@ -52,13 +52,21 @@ decision is required if expanded replies fail it. Never widen deadlines to relab
    deployment workflow. Do not pass a secret-bearing database URL on a command line.
 3. Install the exact tested app/AI package with flags disabled. Existing paths must still pass.
 4. Qualify the thinking runtime drop-in at 16384 context, 16 threads, one slot, zero GPU layers,
-   1024 reasoning tokens and no reasoning preservation. Native sandbox/resource/network restrictions
+   384 reasoning tokens and no reasoning preservation. The first 1024-token trial hit an unrelated
+   30-second proxy timeout and continued to the 120-second provider deadline without a final answer.
+   At the observed approximately eight decode tokens/second, this new smaller reasoning profile
+   reserves time for a final answer; it still needs its own acceptance. Native restrictions
    remain inherited; no runtime download option is present. Real template/tokenization passed on
    the current exact runtime; this did not generate or qualify a thinking answer.
 5. Enable matched flags only after EN/FA relevance, follow-up, provenance separation, latency,
    failure, authorization, offline and rollback checks. Record exact release identities and results.
 6. Roll back by disabling flags and restoring exact previous app/AI/runtime profiles. Leave tables
    intact to preserve transcripts; destructive downgrade requires an export and separate approval.
+
+The saved-message route must inherit the existing inference proxy policy: 180-second proxy
+transport timeout and the same request rate limit, not the generic 30-second page timeout.
+This does not change the 120-second model deadline, queue bounds or authentication. Preserve and
+restore the exact previous proxy configuration when rolling back this matched deployment.
 
 The research-only 122B record pins two shards totaling 77,616,511,296 bytes. Its conversion lineage,
 bytes, template, CPU latency and quality are not verified. More assigned vCPUs do not justify more

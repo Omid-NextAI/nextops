@@ -1,5 +1,27 @@
 # Project state / وضعیت پروژه
 
+Guarded chat/theme trial, 2026-09-30 — c609a83 passed all five CI jobs in run 36707574912,
+fresh hash-locked Ubuntu installation and both app/AI offline installs. Additive migration 0003
+passed. Live English chat/reload/ticket recall and dark EN/FA mobile UI passed, but thinking hit
+the generic Nginx 30-second timeout; the provider continued to its unchanged 120-second deadline
+without a final answer. Exact app 810102f/AI 862d311/8192 profile rollback passed two fresh EN/FA
+answers; additive tables remain. This is a failed qualification, not accepted thinking. A harness
+TLS error exposed one test session in an error log; that exact session was revoked and audited.
+The corrected candidate routes saved generation through the existing 180-second inference proxy
+policy/rate limit and reduces private reasoning to 384 tokens, based on observed ~8 tokens/second.
+The model deadline, queue, credentials and branding are unchanged; new matched acceptance is pending.
+
+آزمون محافظت‌شدهٔ گفت‌وگو و پوسته، ۹ مهر ۱۴۰۵ — c609a83 هر پنج کنترل CI در اجرای
+36707574912، نصب تازهٔ Ubuntu با هشِ قفل‌شده و نصب آفلاین روی برنامه و AI را گذراند؛ مهاجرت
+افزایشی 0003 موفق بود. گفت‌وگوی انگلیسی، بازکردن دوباره و یادآوری شناسه، و رابط تیرهٔ دوزبانهٔ
+موبایل موفق بودند؛ اما استدلال به مهلت عمومیِ ۳۰ثانیه‌ای Nginx رسید و مدل تا مهلت ثابتِ
+۱۲۰ ثانیه، بدون پاسخ نهایی ادامه یافت. بازگشت دقیق به برنامهٔ 810102f، API نسخهٔ 862d311 و
+زمینهٔ ۸۱۹۲، دو پاسخ تازهٔ فارسی/انگلیسی را گذراند؛ جدول‌های افزوده حفظ شدند. این آزمون ناموفق
+است، نه پذیرش استدلال. خطای TLS ابزار آزمون، یک نشست آزمایشی را در گزارش خطا آشکار کرد؛ همان
+نشست دقیقاً لغو و ممیزی شد. نامزد اصلاح‌شده مسیر تولیدِ ذخیره‌شده را به سیاستِ موجودِ ۱۸۰ثانیه‌ای
+و محدودیت نرخِ استنتاج می‌برد و با اتکا به سرعت حدود هشت توکن در ثانیه، استدلال خصوصی را به
+۳۸۴ توکن محدود می‌کند. مهلت مدل، صف، اطلاعات ورود و نشان ثابت‌اند؛ پذیرش تازه هنوز انجام نشده است.
+
 Conversation/model expansion candidate, 2026-09-30 — owner-scoped local PostgreSQL chat,
 six-pair/12000-character context, feature-gated thinking, exact-template token admission and
 final-only storage are implemented on a separate branch. Flags remain off; the serving release

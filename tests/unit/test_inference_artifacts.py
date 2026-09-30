@@ -23,7 +23,7 @@ def test_thinking_candidate_preserves_sandbox_and_bounded_runtime() -> None:
         "--gpu-layers 0",
         "--no-context-shift",
         "--reasoning-format deepseek",
-        "--reasoning-budget 1024",
+        "--reasoning-budget 384",
         "--no-reasoning-preserve",
         "--chat-template-kwargs '{\"enable_thinking\":false}'",
     ):

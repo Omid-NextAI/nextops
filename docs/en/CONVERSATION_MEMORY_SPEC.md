@@ -32,7 +32,8 @@ accuracy. The exact 35B conversion lineage remains unverified.
   a generation nonce and a 540-second lease. No successful late completion after delete/logout.
 - CM-05: saved standard answers have a 1024-token total limit; requested thinking has 2048 total.
   Thinking is general-only and independently enabled by operator configuration. The candidate
-  runtime limits reasoning to 1024 tokens and extracts it into a discarded provider field.
+  runtime limits reasoning to 384 tokens and extracts it into a discarded provider field.
+  This supersedes the failed 1024-token live profile without widening the 120-second deadline.
   Final content containing reasoning tags is rejected. Only a final answer passes to UI/storage.
 - CM-06: candidate context is 16,384 tokens, not the advertised native maximum. Read actual
   runtime context from authenticated local properties, render the exact local template, tokenize

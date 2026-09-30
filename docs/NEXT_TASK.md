@@ -1,5 +1,19 @@
 # Next task / کار بعدی
 
+Immediate checkpoint — Qualify the corrected saved-message proxy route and 384-token private
+reasoning profile as a new exact release. Repeat locked CI, fresh offline install, matched guarded
+app/AI/proxy promotion, EN/FA standard/thinking/follow-ups, audit, failure recovery and exact rollback.
+Preserve the failed c609a83 trial and healthy serving 810102f/862d311. Then run exact-release
+server-WAN/service/VM cold-start checks under persistent access-preserving rollback guards. Do not
+claim the dark UI or a successful HTTP response proves model semantics or full production.
+
+گام فوری — مسیر اصلاح‌شدهٔ پراکسیِ پیامِ ذخیره‌شده و نمایهٔ استدلال خصوصیِ ۳۸۴توکنی، به‌عنوان
+انتشار دقیقِ تازه سنجیده شوند: CI، نصب تازهٔ آفلاین، استقرار محافظت‌شدهٔ هماهنگِ برنامه، AI و
+پراکسی، پاسخ معمولی/استدلال و پیگیری دوزبانه، ممیزی، ادامه پس از خرابی و بازگشت دقیق. شکست
+c609a83 و نسخهٔ سالمِ 810102f/862d311 حفظ شوند. سپس قطع WAN سرور و شروع سردِ سرویس/VM همین
+انتشار با محافظِ بازگشتِ پایدار و حفظ دسترسی سنجیده شوند. پوستهٔ تیره یا موفقیت HTTP، اثبات
+درستی مدل یا پذیرش کامل تولید نیست.
+
 Active owner-requested increment, 2026-09-30 — source b0fbfb3 passed all five CI jobs in run
 36704531576 and the desktop offline package build. Next perform a guarded matched
 app/AI/schema/profile trial for [saved chat/local thinking](en/CONVERSATION_MEMORY_SPEC.md),

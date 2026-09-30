@@ -1,5 +1,16 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-09-30 — Saved-generation proxy repair / اصلاح پراکسیِ تولید ذخیره‌شده
+
+Match saved-message generation to the existing inference proxy timeout and rate limit, leaving
+ordinary routes at 30 seconds. Add route-boundary regression tests. Reduce candidate private
+reasoning to 384 tokens after the failed live 1024-token trial; preserve the 120-second model
+deadline, exact rollback, failed evidence, branding and security controls.
+
+تولیدِ پیام ذخیره‌شده به مهلت و محدودیت نرخِ موجودِ پراکسیِ استنتاج متصل شد؛ مسیرهای عادی
+همچنان ۳۰ ثانیه‌اند. آزمون مرز مسیر افزوده شد. پس از شکست آزمون زندهٔ ۱۰۲۴توکنی، سقفِ
+استدلال خصوصیِ نامزد به ۳۸۴ کاهش یافت؛ مهلت مدل، بازگشت دقیق، شاهد شکست، نشان و امنیت حفظ شدند.
+
 ## 2026-09-30 — Local light/dark theme candidate / نامزد پوستهٔ روشن و تیره
 
 Add a bilingual keyboard-accessible theme switch and pre-paint local/system preference handling.

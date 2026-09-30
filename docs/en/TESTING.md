@@ -1,5 +1,21 @@
 # Testing, model evaluation and release evidence
 
+## First guarded chat/theme trial — 2026-09-30
+
+c609a83 passed five-job CI run 36707574912, 406 local non-integration/non-browser tests (two
+Windows skips), 21 browser fixtures, typing/lint/docs and fresh hash-locked Ubuntu 24.04 install.
+Exact wheel: b68dab01f3e47c1b3c4c4cde3d9a40bdc0ec7482e5a757b25146237bea2b1379.
+Installed code: 2700c0c5393d44f9280faf2cbb634bae11087bd8414e3cdb5fd88d7b9efbb8d8.
+Both server offline installs and additive database migration 0003 passed. Fresh live English DNS
+advice completed in 27.3s; ticket recall survived reload with one server-owned prior pair.
+Dark theme/375-pixel Persian UI passed. Thinking failed at the proxy's generic 30-second timeout;
+runtime generated 898 tokens before its 120-second cancellation without a final answer. This
+failed trial is retained, not model acceptance. App/AI/profile rollback restored 810102f/862d311
+and 8192 context; two new EN/FA model answers completed at 28.6/31.7s. One harness-error-exposed
+test session was precisely revoked with an audit event; subsequent cleanup also revoked its own
+session. No password/key was published. The corrected proxy/384-reasoning candidate needs new CI,
+exact install and live acceptance; the 120-second generation deadline is not enlarged.
+
 ## Saved-chat/thinking candidate source checks — 2026-09-30
 
 Locked full local command: `uv run pytest -q`, with an explicitly isolated PostgreSQL 18.6
