@@ -142,8 +142,12 @@ def test_general_purpose_does_not_use_evidence_only_instructions(locale: str) ->
         assert "no live system evidence" in prompt
         assert "Match detail to the question" in prompt
         assert "complex NOC/SOC question its most decision-useful explanation" in prompt
-        assert "below 190 English words or 110 Persian words" in prompt
-        assert "at most three concise read-only checks" in prompt
+        assert "below 150 English words or 90 Persian words" in prompt
+        assert "at most three read-only checks" in prompt
+        assert "Do not rank a cause" in prompt
+        assert "ordering alone neither pulls in a dependency" in prompt
+        assert "Firewall logs show only" in prompt
+        assert "TCP timeout does not show whether packets reached the target" in prompt
         assert "Never turn a check into proof of overall health" in prompt
         assert "never claim to perform them" in prompt
         assert "Restate each material observed event" not in prompt
