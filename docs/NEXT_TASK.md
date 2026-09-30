@@ -1,5 +1,45 @@
 # Next task / کار بعدی
 
+Current gate after 2026-09-30 review — Do not deploy or merge draft PR46's 512-token general
+candidate. Eight fresh native EN/FA cases completed within 120 seconds, but both prompt revisions
+failed technical semantics. Keep serving 862d311/35B at 384 general tokens. Repair the failed
+DNS/TCP/readiness/traceroute reasoning without teaching to the reviewed questions, then use a
+new independent held-out EN/FA set. Only a semantic pass permits locked CI, exact offline package,
+guarded APP/AI trial, fresh browser/evidence/audit and exact rollback. Separate server-WAN, VM
+cold-start and production gates remain open; no outcome may be inferred from native generation.
+
+معیار کنونی پس از بازبینیِ ۸ مهر ۱۴۰۵ — نامزد عمومیِ ۵۱۲ توکنیِ PR46 پیش‌نویس، ادغام یا
+مستقر نشود. هشت پاسخ تازهٔ فارسی و انگلیسیِ مدل بومی زیر ۱۲۰ ثانیه کامل شدند، اما هر دو
+دستور در معنای فنی شکست خوردند. نسخهٔ 862d311 و مدل 35B با سقف عمومیِ ۳۸۴ توکن حفظ شوند.
+برداشت نادرست از DNS، TCP، آمادگی سرویس و traceroute بدون آموختن پاسخِ پرسش‌های بررسی‌شده
+اصلاح و سپس مجموعهٔ تازه و مستقلِ دوزبانه آزموده شود. فقط قبولی معنایی، CI قفل‌شده، بستهٔ
+دقیقِ آفلاین، آزمون محافظت‌شدهٔ برنامه/AI، مرورگر و شاهد و ممیزی تازه و بازگشت دقیق را
+مجاز می‌کند. معیارهای WAN سرور، شروع سرد VM و تولید نیز جداگانه بازند؛ از پایان تولیدِ مدل
+نتیجهٔ پذیرش گرفته نشود.
+
+Current bounded candidate, 2026-09-29 — Complete independent held-out EN/FA semantic review of
+the 512-token **general-only** answer-depth and topic-selected, already-authorized live incident
+evidence. Local fixture tests and direct native-model probes do not qualify the source release.
+Review unsupported diagnosis, DNS/TCP stages, unit/path assumptions, traceroute and firewall-log
+scope. Draft PR46 passed five CI jobs in run 36612675877. Require complete answers within 120
+seconds, no invented live facts, exact offline package, guarded APP/AI promotion, fresh
+browser/API/evidence/audit and exact rollback before
+changing the serving 862d311/35B identity. If quality fails, leave 384-token serving settings and
+the existing source in place. Keep full canonical evidence, scoped authorization, model/VM/runtime,
+one active/two queued and recovery disposition unchanged. Do not count browser-WAN denial as the
+unrun server-WAN or VM cold-start gate; production remains unaccepted.
+
+نامزد محدودِ جاری، ۷ مهر ۱۴۰۵ — بازبینی مستقلِ معنای پاسخ‌های تازه و کنارگذاشته‌شدهٔ فارسی و
+انگلیسی برای سقف ۵۱۲ توکنِ **فقط حالت عمومی** و انتخاب شاهد زندهٔ موجود و مجاز بر پایهٔ پرسش
+تکمیل شود. آزمون ساختگی و نمونهٔ مستقیم مدل، انتشار کد را تأیید نمی‌کنند. نتیجه‌گیریِ بی‌شاهد،
+تمایز DNS و TCP، فرض نام سرویس و مسیر فایل، حدود traceroute و گزارش فایروال بررسی شوند.
+پنج کنترل CI پیش‌نویس PR46 در اجرای 36612675877 موفق‌اند. پیش از تغییر نسخهٔ مستقرِ 862d311
+و 35B، پاسخ کامل زیر ۱۲۰ ثانیه، نبود واقعیت زندهٔ ساختگی، بستهٔ دقیق آفلاین، ارتقای
+محافظت‌شدهٔ برنامه/API، آزمون تازهٔ مرورگر و شاهد و ممیزی
+و بازگشت دقیق لازم‌اند. در صورت رد کیفی، سقف ۳۸۴ توکن و کد مستقر حفظ شوند. شاهد کامل، مجوز
+محدود، مدل و VM و محیط اجرا، یک فعال و دو منتظر و وضعیت بازیابی تغییر نکنند. قطع WAN مرورگر
+به‌جای معیار اجرا‌نشدهٔ WAN سرور یا شروع سرد VM محسوب نشود؛ تولید پذیرفته نشده است.
+
 Current unfinished checkpoint — Independently review held-out English/Persian NOC/SOC technical
 answers for actual platform/vendor semantics. The controlled 862d311/35B workspace, bounded
 follow-ups, RTL display and named single-check health correction passed five CI jobs, exact offline

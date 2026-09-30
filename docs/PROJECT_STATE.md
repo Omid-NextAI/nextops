@@ -1,5 +1,47 @@
 # Project state / وضعیت پروژه
 
+Candidate semantic gate, 2026-09-30 — Two private four-case English/Persian native-model sets
+used the exact general-provider payload at 512 tokens and temperature 0.3. All eight stopped
+within 120 seconds, but technical review rejected both the initial and revised prompt for
+unsupported DNS/TCP, systemd, HTTP-readiness and traceroute conclusions. Source lint, typing,
+371 unit/API tests and twelve browser fixtures passed; they do not override the semantic failure.
+Draft PR46 remains unpromoted. The protected serving app/API is still 862d311/35B with 384
+general tokens; no live release, model, connector, credential or infrastructure change occurred.
+
+معیار معناییِ نامزد، ۸ مهر ۱۴۰۵ — دو مجموعهٔ خصوصیِ چهارتاییِ فارسی و انگلیسی با ورودیِ دقیق
+مدلِ حالت عمومی، سقف ۵۱۲ توکن و دمای ۰٫۳ اجرا شدند. هر هشت پاسخ زیر ۱۲۰ ثانیه کامل شدند،
+اما بازبینی فنی هم دستور نخست و هم نسخهٔ اصلاح‌شده را به‌دلیل نتیجه‌گیریِ بی‌شاهد دربارهٔ
+DNS و TCP، ترتیب systemd، آمادگی از HTTP و traceroute رد کرد. آزمون قالب، کیفیت و نوع، ۳۷۱
+مورد واحد/API و دوازده مورد مرورگر موفق‌اند، ولی رد معنایی را برطرف نمی‌کنند. PR46 همچنان
+پیش‌نویس و بدون ارتقا است. برنامه/API محافظت‌شدهٔ 862d311 و مدل 35B با سقف عمومی ۳۸۴ توکن
+ثابت مانده‌اند؛ انتشار زنده، مدل، اتصال، اطلاعات ورود و زیرساخت تغییر نکرده‌اند.
+
+Source candidate, 2026-09-29 — The owner requested the fullest bounded local-model answers and
+more relevant live facts. A source-only candidate raises **general mode only** from 384 to the
+existing contract maximum of 512 output tokens; live monitoring and incidents remain 384, with
+120 seconds, one active/two queued, the selected CPU-only 35B and connectors unchanged. The
+incident prompt now selects already-authorized Zabbix/Linux service or network observations by
+question, preserving the full stored evidence and audit. Two sequential 512-token native-model
+probes first ended at the ceiling; a focused prompt then completed EN/FA samples in 48.9/32.6s,
+and a calibrated prompt in 57.7/29.0s. Manual review still found overconfident DNS/restart and
+traceroute/firewall interpretations. These samples are **not** semantic acceptance or deployed
+source qualification. Draft PR46's CI run 36612675877 passed all five jobs; exact offline-package
+and live candidate gates are unrun. App/API 862d311 remains serving. No new device access,
+retrieval, training, model artifact or production claim follows.
+
+نامزد کد، ۷ مهر ۱۴۰۵ — مالک پاسخ کامل‌ترِ مدل محلی در سقف محدود و شاهد زندهٔ مرتبط‌تر خواسته
+است. نامزد، فقط سقف خروجیِ حالت عمومی را از ۳۸۴ به حداکثر فعلیِ قرارداد، یعنی ۵۱۲ توکن،
+می‌رساند؛ پایش و بررسی رخداد روی ۳۸۴ می‌مانند. مهلت ۱۲۰ ثانیه، یک درخواست فعال و دو منتظر،
+مدل 35B صرفاً CPU و اتصال‌های موجود تغییر نمی‌کنند. متنِ ورودیِ مدل برای رخداد، مشاهده‌های
+موجود و مجاز Zabbix و Linux دربارهٔ سرویس یا شبکه را متناسب با پرسش برمی‌گزیند؛ شاهد کاملِ
+ذخیره‌شده و ممیزی ثابت می‌مانند. دو نمونهٔ نخستِ ۵۱۲ توکنی به سقف رسیدند؛ دستور متمرکز،
+نمونه‌های فارسی و انگلیسی را در ۳۲٫۶ و ۴۸٫۹ ثانیه و دستور دقیق‌تر در ۲۹٫۰ و ۵۷٫۷ ثانیه
+تمام کرد. بازبینی انسانی هنوز تفسیر بیش‌ازحد قطعیِ DNS، راه‌اندازی سرویس، traceroute و
+فایروال را یافت. این نمونه‌ها پذیرش معنایی یا استقرار کد نیستند؛ 862d311 همچنان مستقر است.
+پنج کنترل CI اجرای 36612675877 برای PR46 پیش‌نویس موفق‌اند، ولی بستهٔ دقیقِ آفلاین و معیار
+زندهٔ نامزد هنوز اجرا نشده‌اند.
+دسترسی تازه به تجهیزات، بازیابی سند، آموزش، فایل مدل تازه یا ادعای تولید اضافه نشده است.
+
 Current controlled workspace, 2026-09-29 — app/API 862d311 serves the unchanged CPU-only 35B model.
 PR44 passed five CI jobs, exact fresh offline Ubuntu packaging, five first/four final live
 browser/API cases, three durable audit/hash pairs and exact source rollback to b346c3e with fresh

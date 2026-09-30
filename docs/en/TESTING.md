@@ -1,5 +1,49 @@
 # Testing, model evaluation and release evidence
 
+## Held-out native-model rejection — 2026-09-30
+
+Two private, synthetic English/Persian sets (four fresh questions each) used the exact candidate
+general-provider payload: CPU-only 35B, non-thinking mode, temperature 0.3, 512 output tokens,
+one sequential request at a time and a 120-second limit. All eight returned `stop` in 22.162–
+92.228 seconds; completion is not factuality. The first set still inferred target reachability
+from a TCP timeout, treated one HTTP 200 as readiness, and overstated traceroute interpretation.
+After a bounded general-prompt refinement, a separate second set still favored an unproven
+resolver race, interpreted refusal as proof of a stopped listener, and favored a firewall from
+an open port. Persian replies also made non-exclusive ping/traceroute inferences. Manual technical
+review therefore **rejected the 512-token candidate**. Raw prompts, answers, timings and the
+private change record are retained outside Git. This is native-model testing, not authenticated
+APP/API, live Zabbix, exact-package, server-WAN or VM qualification. The protected serving
+862d311/35B release and its 384-token general limit were not changed.
+
+Local source checks after the prompt refinement: Ruff lint/format and mypy passed; 371 unit/API
+tests passed with two Windows/POSIX skips; twelve real-browser fixtures passed with one POSIX-only
+skip. These do not override the semantic rejection. The draft PR remains unpromoted.
+
+## Answer-depth source candidate — 2026-09-29
+
+Draft PR46 CI run 36612675877 passed all five jobs: quality/unit, browser, PostgreSQL 16/17
+integration and secret scan. This is not exact offline-package or live-release qualification.
+
+The source-only candidate changes the general request default and browser budget to 512 output
+tokens; monitoring and incidents stay at 384. It reuses the selected CPU-only 35B, 120-second
+deadline, one active/two queued slots and existing authenticated Zabbix/Linux collectors. Topic
+selection changes only the model's bounded incident view; canonical evidence, source times,
+scope and audit remain untouched. Local API/provider tests cover EN/FA service/network/mixed
+questions, explicit exclusions, partial markers and an oversized collector string. They are
+fixtures, not actual-model correctness or a deployed-release claim.
+
+Sequential native-model probes without operational evidence were kept privately. The first
+English/Persian 512-token prompts both ended with `length`; a focused prompt stopped at 256/286
+tokens in 48.9/32.6s. A calibrated prompt stopped at 367/243 tokens in 57.7/29.0s. Manual
+review rejected complete-output-as-correctness: an English answer favored an unproven startup/DNS
+race and overstated a systemd ordering check; Persian text overstated what traceroute and
+firewall logs establish. A matched 384-token baseline also completed in 41.0/24.9s but was worse:
+the English answer unexpectedly switched to Persian and asserted unsupported timeout causes; the
+Persian answer treated DNS, routing and firewall cases as proof the others were healthy and then
+contradicted itself. This comparison does not certify the candidate. No stress, production, live
+browser, WAN or VM test is implied. Keep
+serving app/API 862d311 at 384 general tokens until exact-package and held-out qualification.
+
 ## Current controlled workspace qualification — 2026-09-29
 
 Serving app/API source 862d31130e43f5cdce216aff40d1d9fdb1a8f61a, wheel SHA-256

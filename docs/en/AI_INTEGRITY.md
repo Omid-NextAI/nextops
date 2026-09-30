@@ -1,5 +1,18 @@
 # AI answer integrity
 
+The 2026-09-29 answer-depth candidate is **not serving**. A larger 512-token general budget
+may complete more detail but does not improve factuality by itself: native EN/FA probes still
+overstated diagnostic meaning. General answers remain model-only and unverified. Topic-selected
+live incident prompts can cite only the already-scoped Zabbix/Linux snapshot; they cannot see
+firewall policy, VPN state or remote-device facts. Deterministic authorization, evidence and
+audit remain outside the model. See [testing](TESTING.md) and [the bounded packet](../requirements/NOC_SOC_WORKSPACE_SPEC.md).
+
+On 2026-09-30, eight additional native-model cases in two separate EN/FA sets all completed,
+but manual engineering review rejected both the initial and revised source-only prompts.
+Wrong inferences about TCP timeout/refusal, a single HTTP 200, resolver timing and traceroute
+remained. The prompt refinement is a development candidate, not training, a deterministic
+truth control or a qualified release. The serving 862d311/35B identity is unchanged.
+
 **Status: controlled user testing; named regressions repaired, full semantic acceptance partial.** NextOps cannot
 guarantee that a generative model will never be wrong. It instead prevents the most dangerous
 category error: presenting unsupported model text as live operational fact.

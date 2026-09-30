@@ -1,5 +1,21 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Bounded answer-depth and relevant live facts candidate — 2026-09-29 / نامزد عمق پاسخ و شاهد مرتبط — ۷ مهر ۱۴۰۵
+
+In source only, set general-answer default/ceiling to 512 tokens while live modes retain 384;
+keep the 120-second deadline, selected local CPU model, queue and credentials. Select existing
+authorized Linux service/network observations for incident synthesis without widening collection
+or changing canonical evidence/audit. Two native 512-token probes truncated; shorter calibrated
+EN/FA probes completed but retained technical overclaims. This candidate is not deployed or
+semantically accepted; serving 862d311 remains unchanged. No training or new connector.
+
+فقط در کد، سقف و مقدار پیش‌فرض پاسخ عمومی ۵۱۲ توکن شد و حالت‌های زنده روی ۳۸۴ ماندند؛ مهلت،
+مدل محلی CPU، صف و اطلاعات ورود ثابت‌اند. برای توضیح رخداد، مشاهده‌های موجود و مجازِ Linux
+دربارهٔ سرویس یا شبکه بر پایهٔ پرسش برگزیده می‌شوند، بی‌آنکه گردآوری یا شاهد و ممیزیِ اصلی
+تغییر کنند. دو نمونهٔ نخستِ ۵۱۲ توکنی ناتمام ماندند؛ نمونه‌های کوتاه‌ترِ فارسی و انگلیسی
+کامل شدند، ولی ادعاهای فنیِ بیش‌ازحد قطعی داشتند. نامزد هنوز مستقر یا از نظر معنا پذیرفته
+نیست؛ 862d311 ثابت است. آموزش یا اتصال تازه‌ای اضافه نشده است.
+
 ## Controlled NOC/SOC workspace — 2026-09-29 / محیط کنترل‌شدهٔ NOC و SOC — ۷ مهر ۱۴۰۵
 
 Select app/API 862d311 with the unchanged CPU-only 35B model after five CI jobs, exact offline

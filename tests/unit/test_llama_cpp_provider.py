@@ -140,10 +140,16 @@ def test_general_purpose_does_not_use_evidence_only_instructions(locale: str) ->
         assert "Answer the user's actual question first" in prompt
         assert "Explain general knowledge" in prompt
         assert "no live system evidence" in prompt
-        assert "at most three short points" in prompt
-        assert "English below 120 words and Persian below 70 words" in prompt
-        assert "not permission to omit safety or invent facts" in prompt
-        assert "Never expand an answer into a full procedure" in prompt
+        assert "Match detail to the question" in prompt
+        assert "complex NOC/SOC question its most decision-useful explanation" in prompt
+        assert "below 150 English words or 90 Persian words" in prompt
+        assert "at most three read-only checks" in prompt
+        assert "Do not rank a cause" in prompt
+        assert "ordering alone neither pulls in a dependency" in prompt
+        assert "Firewall logs show only" in prompt
+        assert "TCP timeout does not show whether packets reached the target" in prompt
+        assert "Never turn a check into proof of overall health" in prompt
+        assert "never claim to perform them" in prompt
         assert "Restate each material observed event" not in prompt
         assert "Never invent identifiers, numbers" not in prompt
         assert "tools" not in transport.last_payload

@@ -1,6 +1,8 @@
 # Answer integrity specification
 
-Status: app/API `nextops-0.1.0-95c6e50` serves controlled user testing with CPU-only 35B-A3B.
+Status: app/API `nextops-0.1.0-862d311` serves controlled user testing with CPU-only 35B-A3B;
+the 512-token general-answer candidate is source-only and failed the 2026-09-30 native-model
+semantic review. Earlier 95c6e50 evidence below is retained as history, not the serving identity.
 Named live regressions and exact app/API/model rollback passed; full held-out semantics remain partial.
 Matched 14B development review failed. Verified 32B import failed its Persian evidence deadline,
 with semantic review partial. 30B-A3B import/deadline checks passed, but later Persian technical
