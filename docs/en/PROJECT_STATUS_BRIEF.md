@@ -2,15 +2,15 @@
 
 [فارسی](../fa/PROJECT_STATUS_BRIEF.md) · [Documentation index](INDEX.md) · [Project state](../PROJECT_STATE.md) · [Next task](../NEXT_TASK.md)
 
-Updated: 2026-09-29
+Updated: 2026-09-30
 
-Current controlled workspace: app/API 862d311 retains 35B/CPU, exact OCS palette/logo and existing
-evidence boundaries. Nine fresh browser/API cases, three audit/hash pairs and exact b346c3e source
-rollback passed; local unit/API 363 and browser fixtures twelve passed. Sample latency is
-11.1–73.4s, not a load percentile. Bounded general follow-ups, clearer text/code presentation,
-technical RTL isolation and a named blanket-health correction are live. Technical semantics remain
-partial; no new connector, training or production acceptance. The release manifest is authoritative;
-the following 95c6e50 qualification is earlier evidence, not the serving identity.
+Current controlled workspace: app/API 810102f retains 35B/CPU, the exact OCS palette/logo and
+canonical evidence boundaries. Five CI jobs, fresh offline install, six live EN/FA browser cases,
+six audit/hash matches and exact 862d311 rollback with fresh restored answers passed. Named-service
+answers and the focused panel now exclude unrelated units. The 49.5–93.0s first-run samples are
+not load percentiles. General technical semantics, server-WAN/VM cold-start and independent
+recovery remain open; no new connector, training or full production acceptance. The release
+manifest is authoritative; the following 95c6e50 qualification is historical evidence.
 
 Previous controlled selection: app/API `95c6e50` served Qwen3.5-35B-A3B Q4_K_M on the existing
 CPU-only guest/runtime. Twelve API and twelve browser cases, eight durable audit/hash pairs,

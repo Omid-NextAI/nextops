@@ -49,6 +49,7 @@ const translations = {
     runId: "Durable run", evidenceReference: "Evidence reference", auditEvent: "Audit event",
     linuxSnapshot: "Linux snapshot", zabbixTimeline: "Zabbix timeline", systemLoad: "System load", memoryAvailable: "Memory available",
     uptime: "Uptime", filesystems: "Filesystems", services: "Allowlisted services", recentEvents: "Recent Zabbix events",
+    configuredResolvers: "Configured resolvers", recordedRoutes: "Recorded routes", listeningSockets: "Listening sockets",
     criticalJournal: "High-priority journal", noEntries: "No entries in the bounded window", partialReasons: "Partial reasons",
     available: "available", historyPoints: "history points", eventRecords: "events",
     footer: "Private, controlled user-evaluation environment", invalidLogin: "The username or password is incorrect.",
@@ -57,7 +58,7 @@ const translations = {
     sessionExpired: "Your session expired. Please sign in again.",
     working: "Generating locally…",
     howEvidenceWorks: "How evidence works", youAsked: "You asked", showEvidence: "View evidence and request details", showCompleteEvidence: "Show complete authorized evidence",
-    sourceBrief: "Source", collectedBrief: "Collected", linuxCollected: "Linux collected", zabbixCollected: "Zabbix collected", scopeBrief: "Scope", filesystemScope: "Approved filesystem mounts only", fileScope: "File names and contents unavailable", incidentScope: "Approved incident target", monitoringScope: "Zabbix monitoring", keyboardHint: " · Enter to send · Shift+Enter for a new line"
+    sourceBrief: "Source", collectedBrief: "Collected", linuxCollected: "Linux collected", zabbixCollected: "Zabbix collected", scopeBrief: "Scope", filesystemScope: "Approved filesystem mounts only", fileScope: "File names and contents unavailable", networkScope: "Recorded network observations only", serviceScope: "Recorded service observations only", networkServiceScope: "Recorded network and service observations", incidentScope: "Approved incident target", monitoringScope: "Zabbix monitoring", keyboardHint: " · Enter to send · Shift+Enter for a new line"
   },
   fa: {
     skipMain: "رفتن به محتوای اصلی",
@@ -107,6 +108,7 @@ const translations = {
     runId: "اجرای ماندگار", evidenceReference: "مرجع شاهد", auditEvent: "رویداد ممیزی",
     linuxSnapshot: "نمای لحظه‌ای Linux", zabbixTimeline: "خط زمانی Zabbix", systemLoad: "بار سامانه", memoryAvailable: "حافظهٔ در دسترس",
     uptime: "مدت کارکرد", filesystems: "فایل‌سیستم‌ها", services: "سرویس‌های مجاز", recentEvents: "رویدادهای اخیر Zabbix",
+    configuredResolvers: "نام‌سرورهای پیکربندی‌شده", recordedRoutes: "مسیرهای ثبت‌شده", listeningSockets: "سوکت‌های در حال شنود",
     criticalJournal: "رخدادهای پراهمیت سامانه", noEntries: "در بازهٔ محدودشده موردی ثبت نشده است", partialReasons: "دلایل ناقص بودن شاهد",
     available: "در دسترس", historyPoints: "نقطهٔ تاریخی", eventRecords: "رویداد",
     footer: "محیط خصوصی و کنترل‌شدهٔ ارزیابی کاربران", invalidLogin: "نام کاربری یا گذرواژه صحیح نیست.",
@@ -115,7 +117,7 @@ const translations = {
     sessionExpired: "نشست شما پایان یافته است. دوباره وارد شوید.",
     working: "در حال تولید پاسخ در محیط داخلی…",
     howEvidenceWorks: "شیوهٔ استفاده از شواهد", youAsked: "پرسش شما", showEvidence: "نمایش شواهد و جزئیات درخواست", showCompleteEvidence: "نمایش همهٔ شواهد مجاز",
-    sourceBrief: "منبع", collectedBrief: "زمان گردآوری", linuxCollected: "زمان گردآوری Linux", zabbixCollected: "زمان گردآوری Zabbix", scopeBrief: "دامنه", filesystemScope: "فقط نقاط اتصال فایل‌سیستمِ مجاز", fileScope: "نام و محتوای فایل‌ها در دسترس نیست", incidentScope: "میزبان مجازِ بررسی", monitoringScope: "پایش Zabbix", keyboardHint: " · Enter برای ارسال · Shift+Enter برای سطر تازه"
+    sourceBrief: "منبع", collectedBrief: "زمان گردآوری", linuxCollected: "زمان گردآوری Linux", zabbixCollected: "زمان گردآوری Zabbix", scopeBrief: "دامنه", filesystemScope: "فقط نقاط اتصال فایل‌سیستمِ مجاز", fileScope: "نام و محتوای فایل‌ها در دسترس نیست", networkScope: "فقط مشاهدات ثبت‌شدهٔ شبکه", serviceScope: "فقط مشاهدات ثبت‌شدهٔ سرویس", networkServiceScope: "مشاهدات ثبت‌شدهٔ شبکه و سرویس", incidentScope: "میزبان مجازِ بررسی", monitoringScope: "پایش Zabbix", keyboardHint: " · Enter برای ارسال · Shift+Enter برای سطر تازه"
   }
 };
 
@@ -363,7 +365,7 @@ function applyLanguage(language) {
     item.setAttribute("aria-pressed", item.dataset.locale === language ? "true" : "false");
   });
   if (state.lastEvidence) {
-    if (state.lastEvidence.incident) renderIncidentEvidence(state.lastEvidence.evidence, state.lastEvidence.focus);
+    if (state.lastEvidence.incident) renderIncidentEvidence(state.lastEvidence.evidence, state.lastEvidence.focus, state.lastEvidence.question);
     else renderEvidence(state.lastEvidence.evidence);
     updateEvidenceBrief();
   }
@@ -403,7 +405,7 @@ function updateEvidenceBrief() {
   if (!state.lastEvidence) return;
   const { evidence, incident, focus } = state.lastEvidence;
   const displayTime = value => new Date(value).toLocaleString(state.language === "fa" ? "fa-IR" : "en-GB");
-  const scopeKey = incident ? focus === "filesystems" ? "filesystemScope" : focus === "file_listing" ? "fileScope" : "incidentScope" : "monitoringScope";
+  const scopeKey = incident ? ({ filesystems: "filesystemScope", file_listing: "fileScope", network: "networkScope", service: "serviceScope", network_service: "networkServiceScope" }[focus] || "incidentScope") : "monitoringScope";
   const fields = [
     ["sourceBrief", incident ? "Zabbix + Linux" : "Zabbix", true],
     ...(incident ? [
@@ -571,7 +573,7 @@ function evidenceSection(titleText, rows) {
   return section;
 }
 
-function renderIncidentEvidence(evidence, focus = "overview") {
+function renderIncidentEvidence(evidence, focus = "overview", question = "") {
   const locale = state.language === "fa" ? "fa-IR" : "en-GB";
   renderEvidence(evidence.zabbix.summary);
   byId("evidenceSource").textContent = `Zabbix ${evidence.zabbix.source_version} + Linux ${evidence.linux.collector_version}`;
@@ -622,8 +624,15 @@ function renderIncidentEvidence(evidence, focus = "overview") {
       detail: new Date(entry.observed_at).toLocaleString(locale)
     })))
   );
+  const networkSections = document.createElement("div");
+  networkSections.className = "incident-sections";
+  networkSections.append(
+    evidenceSection(translations[state.language].configuredResolvers, evidence.linux.nameservers.map(value => ({ label: value, value: "" }))),
+    evidenceSection(translations[state.language].recordedRoutes, evidence.linux.routes.map(route => ({ label: route.destination, value: route.gateway, detail: route.interface }))),
+    evidenceSection(translations[state.language].listeningSockets, evidence.linux.listening_sockets.map(socket => ({ label: `${socket.address}:${socket.port}`, value: socket.family })))
+  );
   if (focus === "overview") {
-    detail.replaceChildren(stats, sections);
+    detail.replaceChildren(stats, sections, networkSections);
   } else {
     const complete = document.createElement("details");
     complete.className = "complete-evidence";
@@ -632,12 +641,49 @@ function renderIncidentEvidence(evidence, focus = "overview") {
     summary.textContent = translations[state.language].showCompleteEvidence;
     const allMetrics = byId("metricList").cloneNode(true);
     allMetrics.removeAttribute("id");
-    complete.append(summary, allMetrics, stats, sections);
-    const focused = focus === "file_listing" ? document.createElement("p") : sections.firstElementChild.cloneNode(true);
+    complete.append(summary, allMetrics, stats, sections, networkSections);
+    const focused = focus === "file_listing" ? document.createElement("p") : document.createElement("div");
     if (focus === "file_listing") {
       focused.className = "empty-evidence";
       focused.dataset.i18n = "fileListingNotCollected";
       focused.textContent = translations[state.language].fileListingNotCollected;
+    } else if (focus === "filesystems") {
+      focused.append(sections.children[0].cloneNode(true));
+    } else {
+      focused.className = "incident-sections";
+      if (focus === "service" || focus === "network_service") {
+        const namedUnits = [...question.matchAll(/(?<![\w@.-])([A-Za-z0-9_@.-]+\.(?:service|socket|timer))(?![\w@.-])/gi)]
+          .map(match => match[1].toLocaleLowerCase("en-US"));
+        const selectedServices = namedUnits.length
+          ? evidence.linux.services.filter(item => namedUnits.includes(item.unit.toLocaleLowerCase("en-US")))
+          : evidence.linux.services;
+        focused.append(evidenceSection(translations[state.language].services, selectedServices.map(service => ({
+          label: service.unit,
+          value: `${service.active_state} / ${service.sub_state}`,
+          detail: service.load_state
+        }))));
+        if (/\b(?:journal|logs?)\b|ژورنال|لاگ|گزارش/i.test(question)) {
+          const selectedJournal = namedUnits.length
+            ? evidence.linux.journal.filter(item => namedUnits.includes(item.unit.toLocaleLowerCase("en-US")))
+            : evidence.linux.journal;
+          focused.append(evidenceSection(translations[state.language].criticalJournal, selectedJournal.map(entry => ({
+            label: entry.unit,
+            value: entry.message,
+            detail: new Date(entry.observed_at).toLocaleString(locale)
+          }))));
+        }
+      }
+      if (focus === "network" || focus === "network_service") {
+        const requested = [
+          /\b(?:dns|resolvers?|nameservers?)\b|نام[‌-]?سرور|دی[‌-]?ان[‌-]?اس/i.test(question),
+          /\b(?:routes?|routing|gateway)\b|مسیر|دروازه/i.test(question),
+          /\b(?:ports?|sockets?|listen(?:ing)?)\b|پورت|سوکت|شنود/i.test(question)
+        ];
+        const showAll = !requested.some(Boolean);
+        networkSections.querySelectorAll(":scope > section").forEach((section, index) => {
+          if (showAll || requested[index]) focused.append(section.cloneNode(true));
+        });
+      }
     }
     detail.replaceChildren(focused, complete);
     byId("metricList").classList.add("hidden");
@@ -802,9 +848,9 @@ byId("assistantForm").addEventListener("submit", async event => {
     byId("evidenceDetails").open = false;
     document.querySelectorAll(".monitoring-meta").forEach(node => node.classList.toggle("hidden", !evidenceBacked));
     if (evidenceBacked) {
-      if (incident) renderIncidentEvidence(result.evidence, result.answer_focus || "overview");
+      if (incident) renderIncidentEvidence(result.evidence, result.answer_focus || "overview", question);
       else renderEvidence(result.evidence);
-      state.lastEvidence = { evidence: result.evidence, incident, focus: result.answer_focus || "overview" };
+      state.lastEvidence = { evidence: result.evidence, incident, focus: result.answer_focus || "overview", question };
       updateEvidenceBrief();
       byId("evidenceBrief").classList.remove("hidden");
       byId("runId").textContent = result.run_id;

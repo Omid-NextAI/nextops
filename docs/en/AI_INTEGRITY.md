@@ -1,12 +1,47 @@
 # AI answer integrity
 
+## Serving named-unit safeguard — 2026-09-30
+
+810102f is live for controlled testing after exact-head CI, offline install, six authenticated
+EN/FA network/service browser answers, six persisted audit/hash matches and exact app rollback
+with fresh restored answers. The application selects only explicitly named authorized service
+units for the model's bounded evidence view, deterministic answer and default focused panel;
+unknown units remain unknown. The raw local model still reaches 384 tokens in some cases, so
+the focused application-owned answer must not be described as model training or general semantic
+accuracy. Prior route/socket, unrelated-service and scheduler-timeout failures remain recorded.
+See [testing](TESTING.md). Full production acceptance remains open.
+
+## Question-focused incident candidate — 2026-09-30
+
+The first guarded app-only e2ea487 trial was rejected and rolled back to 862d311. Two fresh
+EN/FA network answers were generated and audited, but review found a semantic presentation error:
+an on-link route with gateway field `0.0.0.0` was written as “via 0.0.0.0”; a resolver/route
+question also received unsolicited listening-socket details. The corrected source now labels the
+zero-gateway field without inventing a hop, shows only named network subtopics and qualifies a
+loopback resolver as not identifying upstream DNS. This correction needs its **own** CI, offline
+package and live acceptance; the first trial is not a pass.
+
+The source candidate keeps the approved 384-token, 120-second, one-active/two-queued CPU-only
+profile. It selects only already-authorized Linux/Zabbix observations relevant to an unambiguous
+network or service question. The application, not the model, renders validated resolver, route,
+socket and allowlisted systemd-state observations with distinct Linux/Zabbix scopes and collection
+times. It does not infer DNS success, reachability, application health, cause or recovery. The
+complete canonical evidence and audit hash remain unchanged; unrelated observations are behind an
+explicit disclosure in the browser. Mixed-topic questions retain the existing overview behavior.
+
+Four direct synthetic-evidence model probes completed in the private lab: EN network and EN service
+stopped normally; FA network and FA service reached the 384-token limit and failed semantic
+acceptance. The deterministic focused answer therefore does **not** claim that the model became
+more accurate or that general NOC/SOC answers are qualified. Local API/browser and guarded live
+release evidence must be recorded separately before the serving identity changes.
+
 **Status: controlled user testing; named regressions repaired, full semantic acceptance partial.** NextOps cannot
 guarantee that a generative model will never be wrong. It instead prevents the most dangerous
 category error: presenting unsupported model text as live operational fact.
 
 ## Current 35B semantic repair — 2026-09-29
 
-Current controlled 862d311/35B passed nine fresh browser/API completions, three durable audit/hash
+Earlier controlled 862d311/35B passed nine fresh browser/API completions, three durable audit/hash
 checks and exact b346c3e source rollback. Full technical semantics remain partial: the earlier
 b346c3e final Persian VPN answer incorrectly equated successful ping with overall network health.
 The deployed bounded EN/FA guard replaces named affirmative single-check blanket health/security

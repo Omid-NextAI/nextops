@@ -81,4 +81,6 @@ class IncidentInvestigationResponse(FrozenContract):
     audit_event_id: UUID
     evidence_mode: Literal["live_zabbix_linux"] = "live_zabbix_linux"
     live_monitoring_data: Literal[True] = True
-    answer_focus: Literal["overview", "filesystems", "file_listing"] = "overview"
+    answer_focus: Literal[
+        "overview", "filesystems", "file_listing", "network", "service", "network_service"
+    ] = "overview"

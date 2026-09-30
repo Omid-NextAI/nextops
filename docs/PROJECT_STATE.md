@@ -1,6 +1,88 @@
 # Project state / وضعیت پروژه
 
-Current controlled workspace, 2026-09-29 — app/API 862d311 serves the unchanged CPU-only 35B model.
+Current controlled live workspace, 2026-09-30 — App/API 810102f is serving the unchanged
+CPU-only 35B model. Five exact-head CI jobs, a fresh hash-locked offline Ubuntu 24.04 package
+install, four first and two final authenticated EN/FA network/named-service browser cases, six
+persisted audit/evidence-hash matches and exact app rollback to 862d311 with two fresh restored
+answers passed. After re-promotion, wheel/installed-code identity, app/DB/Nginx units and zero
+failed units passed; only this change's final rollback timer was stopped. Named-service answers
+and the default focused panel show only the requested authorized unit, while canonical full
+evidence remains available after explicit expansion. OCS branding and all AI, connector, model,
+queue and resource limits are unchanged. Raw model generations can still hit 384 tokens; the
+focused application-owned summary does not certify general AI accuracy. Prior semantic and 504
+failures remain recorded. Exact-release server-WAN disconnection, VM cold start, independent
+recovery and broad technical semantic acceptance remain open. This is live controlled user
+testing, **not full production acceptance**.
+
+محیط کنترل‌شدهٔ زنده، ۹ مهر ۱۴۰۵ — برنامه/API نسخهٔ 810102f همان مدل 35B صرفاً CPU را ارائه
+می‌کند. پنج کنترل CI برای همین کد، نصب تازهٔ بستهٔ آفلاینِ Ubuntu 24.04 با هشِ قفل‌شده، چهار
+مورد نخست و دو مورد نهاییِ مرورگرِ احرازهویت‌شدهٔ شبکه و سرویسِ نام‌برده به دو زبان، شش تطبیق
+ممیزیِ ماندگار و هشِ شاهد، و بازگشت دقیقِ برنامه به 862d311 با دو پاسخ تازهٔ نسخهٔ بازگشته
+موفق‌اند. پس از استقرار دوباره، شناسهٔ wheel و کد نصب‌شده، سرویس‌های برنامه/پایگاه/Nginx و
+نبودِ سرویس ناموفق تأیید شد؛ فقط زمان‌سنجِ بازگشتِ همین تغییر متوقف شد. پاسخِ سرویسِ نام‌برده و
+بخشِ متمرکزِ رابط فقط واحدِ مجازِ خواسته‌شده را نشان می‌دهند؛ شاهدِ اصلیِ کامل پس از گشودنِ
+صریح در دسترس است. نشان OCS، AI، اتصال، مدل، صف و سقف منابع ثابت‌اند. تولید خامِ مدل ممکن است
+هنوز به ۳۸۴ توکن برسد؛ خلاصهٔ متمرکزِ متعلق به برنامه، گواهیِ دقت عمومی AI نیست. شکست‌های
+معنایی و ۵۰۴ پیشین ثبت‌اند. قطع WAN سرور، شروع سرد VM همین انتشار، بازیابی مستقل و پذیرشِ
+گستردهٔ معناییِ فنی بازند. این، **آزمون زندهٔ کنترل‌شدهٔ کاربران** است، نه پذیرش کامل تولید.
+
+Earlier candidate checkpoints below are historical, not the current serving identity.
+گام‌های نامزدِ زیر تاریخی‌اند، نه شناسهٔ در حال خدمتِ کنونی.
+
+Exact-unit repair candidate, 2026-09-30 — The 4d99c2c correction passed five CI jobs and a
+fresh hash-locked Ubuntu 24.04 offline installation. Its first guarded live attempt returned a
+504 before an answer; the restored 862d311 also returned 504 while the AI scheduler was busy.
+A second guarded 4d99c2c attempt, serialized after idle, passed four fresh EN/FA network/service
+browser requests, but semantic review rejected it: a named `nextops-app.service` question listed
+unrequested PostgreSQL and Nginx units. It was immediately rolled back to healthy 862d311 and
+its timer stopped. No durable audit or exact rollback answer pass is claimed for 4d99c2c. The
+new source restricts named-unit answers, model prompt and focused UI to the exact observed unit;
+an unknown unit stays unknown. Local 399 tests passed, eleven environment-dependent tests skipped,
+fourteen browser fixtures passed, lint and typing passed. CI, exact offline package, live audit and
+rollback for that then-new source were pending at this checkpoint. Serving was 862d311/35B,
+not production accepted.
+
+نامزدِ اصلاحِ واحدِ نام‌برده، ۹ مهر ۱۴۰۵ — اصلاح 4d99c2c پنج کنترل CI و نصب تازهٔ آفلاینِ
+Ubuntu 24.04 با هشِ قفل‌شده را گذراند. نخستین آزمون زندهٔ محافظت‌شده پیش از پاسخ، خطای ۵۰۴ داد؛
+نسخهٔ بازگشتهٔ 862d311 نیز هنگام اشتغالِ صف AI همین خطا را داد. آزمون دوم پس از خالی‌شدن صف،
+چهار درخواست تازهٔ مرورگرِ شبکه و سرویس به فارسی و انگلیسی را گذراند؛ اما بازبینی معنایی آن را
+رد کرد: پاسخِ پرسش دربارهٔ `nextops-app.service`، واحدهای درخواست‌نشدهٔ PostgreSQL و Nginx را
+نیز آورد. برنامه فوراً به 862d311 سالم بازگشت و زمان‌سنجِ همان تغییر متوقف شد. ممیزی ماندگار یا
+آزمونِ کاملِ پاسخ پس از بازگشت برای 4d99c2c ادعا نمی‌شود. کد تازه، پاسخ و ورودیِ مدل و بخشِ
+متمرکزِ رابط را به واحدِ دقیقِ مشاهده‌شده محدود می‌کند و وضعیت واحدِ ناشناخته را نامعلوم می‌داند.
+۳۹۹ آزمون محلی موفق، یازده آزمون وابسته به محیط کنارگذاشته‌شده، چهارده آزمون مرورگرِ ساختگی و
+بررسی lint و نوع موفق بودند. CI، بستهٔ دقیق آفلاین، ممیزی زنده و بازگشتِ آن کد در این نقطه باز
+بودند. انتشارِ در حال خدمت در این نقطه 862d311/35B بود و پذیرش تولید ادعا نمی‌شد.
+
+Question-focused incident candidate, 2026-09-30 — A separate app-only source change makes
+unambiguous network/service investigations show validated, application-owned Linux observations
+first, with distinct Zabbix scope/time and canonical evidence/audit intact. Unrelated sections are
+collapsed until explicitly opened. General answer limits, the 35B CPU model, runtime, connector,
+credentials and branding are unchanged. Local focused API/browser checks passed; two Persian raw
+model probes still truncated at 384 tokens. CI, exact offline packaging, live promotion, durable
+audit and rollback for this candidate are not yet recorded. Serving remains 862d311/35B; this
+does not make general technical advice or production accepted.
+
+The first e2ea487 live trial was rejected on answer semantics: `0.0.0.0` gateway was phrased as
+a hop and a resolver/route question received socket details. Exact app rollback restored healthy
+862d311; fresh EN/FA general answers and logout passed. The corrected candidate is source-only
+until its own CI, offline package and live gate pass. No complete first-trial browser/audit pass.
+
+نامزدِ تمرکزِ بررسی رخداد، ۹ مهر ۱۴۰۵ — در تغییر جداگانهٔ کدِ برنامه، پرسش روشن دربارهٔ شبکه یا
+سرویس ابتدا مشاهدهٔ اعتبارسنجی‌شدهٔ Linux را با زمان و دامنهٔ مستقل Zabbix نشان می‌دهد؛ شاهد اصلی
+و ممیزی ثابت‌اند و بخش نامرتبط فقط با گشودنِ صریح دیده می‌شود. سقف پاسخ عمومی، مدل 35B صرفاً CPU،
+محیط اجرا، اتصال، اعتبارنامه و نشان و رنگ تغییر نکرده‌اند. آزمون‌های محلیِ API و مرورگرِ متمرکز
+موفق بودند؛ دو آزمایش خامِ فارسیِ مدل همچنان در سقف ۳۸۴ توکن قطع شدند. CI، بستهٔ دقیقِ آفلاین،
+استقرار زنده، ممیزی ماندگار و بازگشت همین نامزد هنوز ثبت نشده‌اند. انتشارِ در حال خدمت 862d311
+و 35B است؛ این نامزد نه مشاورهٔ عمومی را تأیید می‌کند و نه پذیرش تولید را.
+
+نخستین آزمون زندهٔ e2ea487 به‌سبب بیانِ نادرستِ گیت‌وی `0.0.0.0` و نمایشِ سوکتِ درخواست‌نشده
+رد شد. بازگشت دقیق، 862d311 سالم را برگرداند؛ دو پاسخ تازهٔ عمومیِ فارسی و انگلیسی و خروج
+از نشست موفق بودند. نامزدِ اصلاح‌شده تا گذرِ CI، بستهٔ آفلاین و پذیرش زندهٔ مستقل فقط در کد
+است. برای آزمون نخست، موفقیتِ کامل مرورگر یا ممیزی ادعا نمی‌شود.
+
+
+Earlier controlled workspace, 2026-09-29 — app/API 862d311 served the unchanged CPU-only 35B model.
 PR44 passed five CI jobs, exact fresh offline Ubuntu packaging, five first/four final live
 browser/API cases, three durable audit/hash pairs and exact source rollback to b346c3e with fresh
 EN/FA generation. Local checks: 363 unit/API passes, two Windows POSIX skips, twelve browser
@@ -12,7 +94,7 @@ wheel/code identity and 11.1–73.4s request samples, not load percentiles. Advi
 independent technical correctness is partial. Retained failures, exact-release server-WAN/VM
 cold-start and production gates stay open. No training, retrieval or new device connector.
 
-محیط کنترل‌شدهٔ جاری، ۷ مهر ۱۴۰۵ — برنامه/API نسخهٔ 862d311 همان مدل 35B را صرفاً روی CPU
+محیط کنترل‌شدهٔ پیشین، ۷ مهر ۱۴۰۵ — برنامه/API نسخهٔ 862d311 همان مدل 35B را صرفاً روی CPU
 ارائه می‌کند. پنج کنترل CI در PR44، بستهٔ دقیق و تازهٔ آفلاین Ubuntu، پنج مورد نخست و چهار
 مورد نهاییِ مرورگر/API، سه تطبیق ممیزی و هش و بازگشت دقیق کد به b346c3e با تولید تازهٔ دوزبانه
 موفق‌اند. آزمون محلی: ۳۶۳ مورد واحد/API موفق، دو مورد POSIX در Windows کنارگذاشته‌شده و دوازده

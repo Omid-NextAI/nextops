@@ -1,5 +1,69 @@
 # Next task / کار بعدی
 
+Current unfinished checkpoint, 2026-09-30 — Keep the qualified 810102f/35B controlled
+workspace live and review held-out NOC/SOC technical answers against real platform/vendor
+semantics. Investigate the observed inference-admission 504 under existing one-active/two-queued
+limits without hiding timeouts or widening budgets. Run a separately authorized, bounded
+exact-release **server-side** WAN-disconnection and full-VM cold-start acceptance when a change
+window exists; browser WAN denial does not substitute. Independent recovery remains owner-deferred
+and unqualified. Do not redo the six passed live browser cases, six audit/hash matches, exact app
+rollback or fresh offline install. Do not represent this controlled deployment as full production.
+
+گام ناتمامِ جاری، ۹ مهر ۱۴۰۵ — محیط کنترل‌شدهٔ 810102f/35B زنده بماند و پاسخ‌های تازه و
+کنارگذاشته‌شدهٔ فنیِ NOC/SOC بر پایهٔ رفتار واقعیِ سکو و سازنده بازبینی شوند. خطای مشاهده‌شدهٔ
+۵۰۴ در پذیرشِ استنتاج، در همان سقفِ یک درخواست فعال و دو منتظر بررسی شود؛ مهلت‌گذشتگی پنهان یا
+سقف‌ها گسترش داده نشوند. قطع **سروری** WAN و شروع سرد کامل VM برای همین انتشار، در پنجرهٔ
+تغییرِ جداگانه و مجاز سنجیده شود؛ منع WAN مرورگر جای آن نیست. بازیابی مستقل به درخواست مالک
+در تعویق و هنوز تأییدنشده است. شش آزمون زندهٔ مرورگر، شش تطبیق ممیزی و هش، بازگشت دقیق برنامه و
+نصب تازهٔ آفلاینِ موفق دوباره کار ناتمام شمرده نشوند. این استقرارِ کنترل‌شده، تولیدِ کامل نیست.
+
+Earlier candidate checkpoints below are historical; do not re-run completed gates.
+گام‌های نامزدِ زیر تاریخی‌اند؛ معیارهای تکمیل‌شده دوباره اجرا نشوند.
+
+Immediate checkpoint, 2026-09-30 — Qualify the **new exact-unit source identity** through
+five-job CI, fresh offline wheel/install, guarded app-only live EN/FA network and named-service
+questions, persisted audit/evidence-hash matching, exact 862d311 rollback with fresh restored
+answers, then re-promotion and final checks. Verify that neither answer nor default focused UI
+lists unrequested services. Preserve the 4d99c2c 504/admission-contention finding and four-case
+semantic rejection; neither is release acceptance. Serving is restored 862d311/35B. Keep AI,
+model, connector, database, queue, credentials and branding unchanged. General advice accuracy,
+exact-release server-WAN isolation and VM cold start remain open; do not claim full production.
+
+گام فوری، ۹ مهر ۱۴۰۵ — **شناسهٔ تازهٔ کدِ واحدِ دقیق** با پنج کنترل CI، بسته و نصبِ تازهٔ
+آفلاین، آزمون زندهٔ محافظت‌شدهٔ برنامه برای پرسش‌های شبکه و سرویسِ نام‌برده به دو زبان، تطبیقِ
+ممیزی و هشِ شاهد، بازگشت دقیق به 862d311 با پاسخ‌های تازه، سپس استقرار دوباره و بررسی نهایی
+سنجیده شود. پاسخ و بخشِ متمرکزِ رابط نباید سرویسِ درخواست‌نشده را نشان دهند. خطای ۵۰۴ هنگام
+اشتغالِ صف و ردِ معناییِ آزمون چهارموردیِ 4d99c2c حفظ شوند؛ هیچ‌یک پذیرش انتشار نیست.
+نسخهٔ در حال خدمت 862d311/35B برگشته است. AI، مدل، اتصال، پایگاه، صف، اعتبارنامه و نشان ثابت
+بمانند. درستیِ مشاورهٔ عمومی، قطع WAN سرور و شروع سرد VM همین انتشار بازند؛ تولیدِ کامل ادعا نشود.
+
+Immediate candidate checkpoint, 2026-09-30 — Qualify the isolated app-only network/service
+incident focus through locked CI, exact offline packaging and guarded live EN/FA browser/API,
+durable audit/evidence hash and exact 862d311 app rollback. Local source and fixtures pass; four
+direct synthetic model probes exposed two Persian 384-token truncations, so focused observations
+are rendered by deterministic application code and **general model accuracy remains partial**.
+Do not promote the rejected PR46 512-token draft or alter the AI host, connector, credentials,
+runtime, model, queue/deadline or branding. Keep current-release identity at 862d311 until
+live gates pass. Exact-release server-WAN and full-VM cold start remain not_run, and production
+acceptance is not implied by this narrow change.
+
+First e2ea487 promotion was rejected for route/socket answer semantics and exactly rolled back
+to 862d311; two fresh EN/FA restored answers and logout passed. Qualify the corrected source as
+a **new** release. Do not reuse the first candidate's wheel, CI or incomplete browser run as proof.
+
+گام فوریِ نامزد، ۹ مهر ۱۴۰۵ — تغییر جداگانهٔ برنامه برای تمرکز شبکه و سرویس در بررسی رخداد،
+با CI قفل‌شده، بستهٔ دقیقِ آفلاین، مرورگر و API زندهٔ محافظت‌شدهٔ فارسی و انگلیسی، تطبیقِ ممیزی
+و هشِ شاهد، و بازگشت دقیقِ برنامه به 862d311 سنجیده شود. کد و آزمون ساختگیِ محلی موفق‌اند؛
+چهار آزمایش مستقیمِ مدل با شاهد ساختگی، دو قطعِ فارسی در سقف ۳۸۴ توکن داشت. ازاین‌رو مشاهدهٔ
+متمرکز را برنامه به‌صورت قطعی بیان می‌کند و دقت مشاورهٔ عمومیِ مدل همچنان ناقص است. نامزد
+ردشدهٔ PR46 با سقف ۵۱۲ توکن مستقر نشود. میزبان AI، اتصال، اعتبارنامه، محیط اجرا، مدل، صف، مهلت
+و نشان و رنگ تغییر نکنند. تا گذرِ معیارهای زنده، شناسهٔ انتشار 862d311 است. قطع WAN سرور و
+شروع سردِ کامل VM همین انتشار هنوز اجرا نشده‌اند و این تغییر، پذیرش تولید نیست.
+
+نخستین استقرار e2ea487 به‌دلیل خطای معناییِ مسیر و نمایشِ سوکت رد و دقیقاً به 862d311 بازگشت؛
+دو پاسخ تازهٔ فارسی و انگلیسی و خروج از نشستِ نسخهٔ بازگشته موفق بودند. اصلاح جدید، انتشارِ
+جداگانه است. بسته، CI و آزمون مرورگرِ ناتمامِ نامزد نخست، شاهدِ پذیرشِ آن محسوب نشوند.
+
 Current unfinished checkpoint — Independently review held-out English/Persian NOC/SOC technical
 answers for actual platform/vendor semantics. The controlled 862d311/35B workspace, bounded
 follow-ups, RTL display and named single-check health correction passed five CI jobs, exact offline

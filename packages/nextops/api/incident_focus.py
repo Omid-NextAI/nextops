@@ -6,9 +6,40 @@
 from __future__ import annotations
 
 import re
+from collections.abc import Iterable
 from typing import Literal
 
-IncidentFocus = Literal["overview", "filesystems", "file_listing"]
+IncidentFocus = Literal[
+    "overview", "filesystems", "file_listing", "network", "service", "network_service"
+]
+
+_NAMED_UNIT = re.compile(
+    r"(?<![\w@.-])([A-Za-z0-9_@.-]+\.(?:service|socket|timer))(?![\w@.-])",
+    re.IGNORECASE,
+)
+
+
+def requested_service_units(
+    question: str, available_units: Iterable[str]
+) -> tuple[str, ...] | None:
+    """Return explicitly named authorized units, or None for a broad service question.
+
+    An unknown named unit yields an empty tuple; it must not cause unrelated
+    service observations to be presented as the answer.
+    """
+
+    named = {match.casefold() for match in _NAMED_UNIT.findall(question)}
+    if not named:
+        return None
+    return tuple(unit for unit in available_units if unit.casefold() in named)
+
+
+_NON_NETWORK_SERVICE_TOPIC = re.compile(
+    r"(?:\b(?:cpu|memory|ram|files?|filesystems?|disks?|storage|zabbix|metrics?|"
+    r"problems?|events?|everything|all\s+data)\b|"
+    r"پردازنده|حافظه|فایل|دیسک|زبیکس|سنجه|مشکل|رویداد|همه[ٔ‌ ]?\s*داده)",
+    re.IGNORECASE,
+)
 
 _FILESYSTEM = re.compile(
     r"(?:\b(?:filesystems?|file\s+systems?|disk\s+(?:space|usage)|mounts?|"
@@ -96,10 +127,55 @@ def incident_focus(question: str) -> IncidentFocus:
     file_requested = bool(_FILES.search(requested))
     if file_requested and not filesystem_requested and _FILE_ACTION.search(requested):
         return "file_listing"
-    if _OTHER.search(_EXCLUDED_OTHER.sub("", requested)):
+    if (filesystem_requested or file_requested) and _OTHER.search(
+        _EXCLUDED_OTHER.sub("", requested)
+    ):
         return "overview"
     if filesystem_requested:
         return "filesystems"
     if file_requested:
         return "file_listing"
+    if not _NON_NETWORK_SERVICE_TOPIC.search(requested):
+        return incident_evidence_topic(requested)
+    return "overview"
+
+
+def incident_evidence_topic(question: str) -> IncidentFocus:
+    """Select a bounded prompt/answer topic, never authorize evidence collection."""
+
+    requested = _requested_text(question)
+    network = bool(
+        re.search(
+            r"\b(?:network|dns|resolver|nameserver|routing|routes?|sockets?|listen(?:ing)?|"
+            r"ports?|firewall|vpn)\b",
+            requested,
+            re.IGNORECASE,
+        )
+    ) or any(
+        word in requested
+        for word in (
+            "شبکه",
+            "مسیر",
+            "فایروال",
+            "پورت",
+            "شنود",
+            "سوکت",
+            "اتصال",
+            "وی‌پی‌ان",
+            "نام‌سرور",
+        )
+    )
+    services = bool(
+        re.search(
+            r"\b(?:services?|systemd|units?|journals?|logs?|daemons?)\b",
+            requested,
+            re.IGNORECASE,
+        )
+    ) or any(word in requested for word in ("سرویس", "خدمت", "واحد", "ژورنال", "گزارش", "لاگ"))
+    if network and services:
+        return "network_service"
+    if network:
+        return "network"
+    if services:
+        return "service"
     return "overview"

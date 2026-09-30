@@ -5,11 +5,16 @@
 
 from __future__ import annotations
 
+import ipaddress
 import re
 from datetime import datetime
 from decimal import Decimal
 
-from nextops.api.incident_focus import incident_focus, monitoring_cpu_focus
+from nextops.api.incident_focus import (
+    incident_focus,
+    monitoring_cpu_focus,
+    requested_service_units,
+)
 from nextops.contracts.assistant import AssistantRequest, AssistantResponse, GeneralAssistantRequest
 from nextops.contracts.incidents import IncidentEvidence, IncidentInvestigationRequest
 from nextops.contracts.monitoring import MonitoringSummary
@@ -362,7 +367,9 @@ def assure_incident_answer(
         # Render the bounded collector data directly until semantic validation is qualified.
         return assistant.model_copy(
             update={
-                "answer": _focused_incident_summary(request.locale, evidence, focus),
+                "answer": _focused_incident_summary(
+                    request.locale, evidence, focus, request.question
+                ),
                 "evidence_mode": "live_zabbix_linux",
                 "live_monitoring_data": True,
                 "integrity_status": "deterministic_focus",
@@ -459,7 +466,9 @@ def _cpu_idle_summary(locale: str, evidence: MonitoringSummary) -> tuple[str, bo
     )
 
 
-def _focused_incident_summary(locale: str, evidence: IncidentEvidence, focus: str) -> str:
+def _focused_incident_summary(
+    locale: str, evidence: IncidentEvidence, focus: str, question: str
+) -> str:
     linux = evidence.linux
     when = _timestamp(linux.collected_at)
     partial_fa = (
@@ -470,6 +479,8 @@ def _focused_incident_summary(locale: str, evidence: IncidentEvidence, focus: st
         if evidence.is_partial
         else ""
     )
+    if focus in {"network", "service", "network_service"}:
+        return _observed_incident_summary(locale, evidence, focus, question)
     if focus == "file_listing":
         if locale == "fa":
             return (
@@ -511,6 +522,201 @@ def _focused_incident_summary(locale: str, evidence: IncidentEvidence, focus: st
         f"approved filesystem capacity: {details}{remainder}.{partial_en} "
         "This does not list system file names or contents."
     )
+
+
+def _observed_incident_summary(
+    locale: str, evidence: IncidentEvidence, focus: str, question: str
+) -> str:
+    """Render typed observations, not model conjecture, for named service/network questions."""
+
+    linux = evidence.linux
+    zabbix = evidence.zabbix
+    network = focus in {"network", "network_service"}
+    service = focus in {"service", "network_service"}
+    details: list[str] = []
+    if network:
+        wanted = _requested_network_fields(question)
+        valid_resolvers = [
+            address
+            for raw in linux.nameservers[:3]
+            if (address := _safe_ip_address(raw)) is not None
+        ]
+        resolvers = ", ".join(valid_resolvers) or _missing_network_value(
+            locale, bool(linux.nameservers)
+        )
+        valid_routes = [
+            _route_description(locale, destination, gateway, item.interface)
+            for item in linux.routes[:2]
+            if (destination := _safe_ip_destination(item.destination)) is not None
+            and (gateway := _safe_ip_address(item.gateway)) is not None
+        ]
+        routes = "; ".join(valid_routes) or _missing_network_value(locale, bool(linux.routes))
+        ordered_sockets = sorted(
+            linux.listening_sockets,
+            key=lambda item: 0 if re.search(rf"(?<!\d){item.port}(?!\d)", question) else 1,
+        )
+        valid_sockets = [
+            f"{f'[{address}]' if ':' in address else address}:{item.port}/{item.family}"
+            for item in ordered_sockets[:3]
+            if (address := _safe_ip_address(item.address)) is not None
+        ]
+        sockets = "; ".join(valid_sockets) or _missing_network_value(
+            locale, bool(linux.listening_sockets)
+        )
+        network_details: list[str] = []
+        if "resolvers" in wanted:
+            network_details.append(
+                f"نام‌سرورهای پیکربندی‌شده: {resolvers}"
+                if locale == "fa"
+                else f"configured resolvers: {resolvers}"
+            )
+            if any(ipaddress.ip_address(address).is_loopback for address in valid_resolvers):
+                network_details.append(
+                    "نشانی محلیِ ثبت‌شده، نام‌سرور بالادستی را مشخص نمی‌کند"
+                    if locale == "fa"
+                    else "a recorded loopback resolver does not identify its upstream server"
+                )
+        if "routes" in wanted:
+            network_details.append(
+                f"مسیرهای ثبت‌شده: {routes}" if locale == "fa" else f"recorded routes: {routes}"
+            )
+        if "sockets" in wanted:
+            network_details.append(
+                f"سوکت‌های در حال شنودِ ثبت‌شده: {sockets}"
+                if locale == "fa"
+                else f"recorded listening sockets: {sockets}"
+            )
+        details.append(("؛ " if locale == "fa" else "; ").join(network_details))
+    if service:
+        named_units = requested_service_units(question, (item.unit for item in linux.services))
+        selected_services = (
+            [item for item in linux.services if item.unit in named_units]
+            if named_units is not None
+            else list(linux.services[:3])
+        )
+        states = "; ".join(
+            f"{item.unit}={item.active_state}/{item.sub_state}"
+            for item in selected_services[:3]
+            if _safe_service_state(item.active_state) and _safe_service_state(item.sub_state)
+        )
+        if named_units is not None and not states:
+            service_detail = (
+                "وضعیت واحدِ نام‌برده در نمای مجاز ثبت نشده است؛ وضعیت واقعی آن نامعلوم است"
+                if locale == "fa"
+                else "the named unit has no usable state in the authorized snapshot; "
+                "its actual state is unknown"
+            )
+        else:
+            states = states or _missing_network_value(locale, bool(linux.services))
+            service_detail = (
+                f"وضعیت سرویس‌های ثبت‌شده: {states}"
+                if locale == "fa"
+                else f"recorded service states: {states}"
+            )
+        if re.search(r"\b(?:journal|logs?)\b|ژورنال|لاگ|گزارش", question, re.IGNORECASE):
+            service_detail += (
+                f"؛ {len(linux.journal)} رکورد ژورنالِ مجاز"
+                if locale == "fa"
+                else f"; {len(linux.journal)} bounded journal record(s)"
+            )
+        details.append(service_detail)
+    partial = (
+        f" شاهد ناقص است ({', '.join(evidence.partial_reasons)})."
+        if locale == "fa" and evidence.is_partial
+        else f" Evidence is partial ({', '.join(evidence.partial_reasons)})."
+        if evidence.is_partial
+        else ""
+    )
+    stale_count = sum(metric.stale for metric in zabbix.summary.metrics)
+    stale = (
+        f" {stale_count} سنجهٔ Zabbix قدیمی است."
+        if locale == "fa" and stale_count
+        else f" {stale_count} Zabbix metric(s) are stale."
+        if stale_count
+        else ""
+    )
+    if locale == "fa":
+        qualification = (
+            "این مشاهده‌ها به‌تنهایی موفقیت DNS یا دسترسی راه دور را ثابت نمی‌کنند. "
+            if network and not service
+            else "این وضعیتِ ثبت‌شده به‌تنهایی سلامت سرویس یا رفع خطای پیشین را ثابت نمی‌کند. "
+            if service and not network
+            else "این مشاهده‌ها به‌تنهایی موفقیت DNS، دسترسی راه دور، سلامت سرویس "
+            "یا رفع خطای پیشین را ثابت نمی‌کنند. "
+        )
+        return (
+            f"برای هدف Linux به نام {evidence.target_id}، گردآوریِ {_timestamp(linux.collected_at)} "
+            f"این موارد را نشان می‌دهد: {'؛ '.join(details)}. نمای جداگانهٔ Zabbix برای "
+            f"{zabbix.host} در {_timestamp(zabbix.collected_at)} گردآوری شده است؛ "
+            "یکسان‌بودن این دو میزبان ثابت نشده است. "
+            f"{qualification.strip()}{partial}{stale} هیچ تغییری انجام نشد."
+        )
+    qualification = (
+        "These observations alone do not prove DNS success or remote reachability. "
+        if network and not service
+        else "The recorded state alone does not prove service readiness or recovery. "
+        if service and not network
+        else "These observations alone do not prove DNS success, remote reachability, "
+        "service readiness or recovery. "
+    )
+    return (
+        f"For Linux target {evidence.target_id}, the {_timestamp(linux.collected_at)} snapshot "
+        f"shows {'; '.join(details)}. The separate Zabbix scope is {zabbix.host}, collected "
+        f"at {_timestamp(zabbix.collected_at)}; these are not proven to be the same host. "
+        f"{qualification.strip()}{partial}{stale} No change was performed."
+    )
+
+
+def _requested_network_fields(question: str) -> frozenset[str]:
+    resolvers = re.search(
+        r"\b(?:dns|resolvers?|nameservers?)\b|نام[‌-]?سرور|دی[‌-]?ان[‌-]?اس", question, re.IGNORECASE
+    )
+    routes = re.search(r"\b(?:routes?|routing|gateway)\b|مسیر|دروازه", question, re.IGNORECASE)
+    sockets = re.search(
+        r"\b(?:ports?|sockets?|listen(?:ing)?)\b|پورت|سوکت|شنود", question, re.IGNORECASE
+    )
+    selected = {
+        field
+        for field, matched in (("resolvers", resolvers), ("routes", routes), ("sockets", sockets))
+        if matched
+    }
+    return frozenset(selected or {"resolvers", "routes", "sockets"})
+
+
+def _route_description(locale: str, destination: str, gateway: str, interface: str) -> str:
+    if gateway == "0.0.0.0":
+        note = "بدون گیت‌وی ثبت‌شده" if locale == "fa" else "no gateway recorded"
+        return f"{destination} ({note}; {interface})"
+    if locale == "fa":
+        return f"{destination} از طریق {gateway} ({interface})"
+    return f"{destination} via {gateway} ({interface})"
+
+
+def _safe_ip_address(raw: str) -> str | None:
+    try:
+        return str(ipaddress.ip_address(raw))
+    except ValueError:
+        return None
+
+
+def _safe_ip_destination(raw: str) -> str | None:
+    address = _safe_ip_address(raw)
+    if address is not None:
+        return address
+    try:
+        return str(ipaddress.ip_network(raw, strict=False))
+    except ValueError:
+        return None
+
+
+def _safe_service_state(raw: str) -> bool:
+    return re.fullmatch(r"[a-z][a-z-]{0,31}", raw) is not None
+
+
+def _missing_network_value(locale: str, had_values: bool) -> str:
+    if locale == "fa":
+        return "دادهٔ قابل‌استفاده ثبت نشد" if had_values else "ثبت نشده"
+    return "no usable recorded value" if had_values else "none recorded"
 
 
 def _contains_unsafe_execution_claim(answer: str) -> bool:

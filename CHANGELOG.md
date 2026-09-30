@@ -1,5 +1,54 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Controlled exact-unit incident focus — 2026-09-30 / تمرکز کنترل‌شدهٔ واحدِ دقیق — ۹ مهر ۱۴۰۵
+
+Select app/API 810102f with unchanged CPU-only 35B after five CI jobs, fresh hash-locked
+Ubuntu 24.04 offline installation, six authenticated live EN/FA browser cases, six persisted
+audit/evidence-hash matches and exact 862d311 app rollback with two fresh restored answers.
+Default answers and panel show only the named service; complete canonical evidence remains
+explicitly available. The release is live for controlled user testing, not fully production
+accepted. Preserve raw truncation, prior semantic/504 failures and open WAN/VM/recovery gates.
+
+برنامه/API نسخهٔ 810102f با مدل ثابتِ 35B صرفاً CPU پس از پنج کنترل CI، نصب تازهٔ آفلاینِ
+Ubuntu 24.04 با هشِ قفل‌شده، شش مورد زندهٔ مرورگرِ احرازهویت‌شدهٔ دوزبانه، شش تطبیق ممیزی و
+هشِ شاهد و بازگشت دقیق به 862d311 با دو پاسخ تازهٔ نسخهٔ بازگشته انتخاب شد. پاسخ و رابطِ
+پیش‌فرض فقط سرویسِ نام‌برده را نشان می‌دهند؛ شاهدِ اصلیِ کامل با گشودنِ صریح در دسترس است.
+انتشار برای آزمون کنترل‌شدهٔ کاربران زنده است، نه تولیدِ کاملاً پذیرفته‌شده. قطع خامِ مدل،
+شکست‌های معنایی و ۵۰۴ قبلی و معیارهای بازِ WAN، VM و بازیابی حفظ شوند.
+
+## Named-unit incident repair candidate — 2026-09-30 / نامزد اصلاح واحدِ نام‌برده — ۹ مهر ۱۴۰۵
+
+4d99c2c passed CI and exact offline packaging but was rejected live after a named service
+question listed unrelated units. Its earlier 504 was reproduced on restored 862d311 during AI
+scheduler contention. The app was rolled back and its guard stopped. New source restricts answer,
+prompt and focused UI to the exact named unit, without changing canonical evidence or budgets.
+Local tests pass; this new source needs independent CI, package and live acceptance.
+
+نسخهٔ 4d99c2c کنترل‌های CI و بستهٔ دقیق آفلاین را گذراند، اما چون پاسخِ سرویسِ نام‌برده واحدهای
+نامرتبط را نیز آورد، در آزمون زنده رد شد. خطای ۵۰۴ پیشین روی نسخهٔ بازگشتهٔ 862d311 نیز هنگام
+اشتغالِ صف AI تکرار شد. برنامه بازگشت و زمان‌سنجِ همان تغییر متوقف شد. کد تازه پاسخ، ورودیِ
+مدل و بخشِ متمرکزِ رابط را به واحدِ دقیق محدود می‌کند؛ شاهدِ اصلی و سقف‌ها ثابت‌اند. آزمون‌های
+محلی موفق‌اند و CI، بسته و پذیرش زندهٔ مستقلِ همین کد هنوز لازم‌اند.
+
+## Incident focus source candidate — 2026-09-30 / نامزدِ تمرکز رخداد — ۹ مهر ۱۴۰۵
+
+The first e2ea487 live trial failed semantic review and was rolled back to 862d311; corrected
+route and answer-subtopic wording requires separate qualification. No complete first-trial
+browser/audit pass is claimed.
+
+آزمون زندهٔ نخستِ e2ea487 در بازبینی معنایی رد و به 862d311 بازگشت؛ بیانِ اصلاح‌شدهٔ مسیر و
+زیرموضوعِ پاسخ به پذیرش مستقل نیاز دارد. آزمون نخست، موفقیتِ کامل مرورگر یا ممیزی نیست.
+
+An isolated app-only candidate presents validated, already-scoped network/service observations
+first, with provenance and canonical evidence intact and unrelated details behind disclosure.
+General budgets, 35B CPU model, connector and OCS branding are unchanged. Local checks pass;
+two direct Persian raw probes still truncate. CI and live qualification remain pending.
+
+نامزدِ جداگانهٔ برنامه، مشاهدهٔ اعتبارسنجی‌شده و ازپیش‌مجازِ شبکه و سرویس را نخست نشان می‌دهد؛
+منشأ و شاهد اصلی محفوظ‌اند و جزئیات نامرتبط با گشودنِ صریح دیده می‌شوند. سقف‌های عمومی، مدل
+35B صرفاً CPU، اتصال و نشان و رنگ OCS ثابت‌اند. آزمون محلی موفق است، اما دو آزمایش خام فارسی
+همچنان قطع می‌شوند؛ CI و پذیرش زنده هنوز در انتظارند.
+
 ## Controlled NOC/SOC workspace — 2026-09-29 / محیط کنترل‌شدهٔ NOC و SOC — ۷ مهر ۱۴۰۵
 
 Select app/API 862d311 with the unchanged CPU-only 35B model after five CI jobs, exact offline

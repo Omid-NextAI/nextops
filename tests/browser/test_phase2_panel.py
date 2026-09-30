@@ -130,15 +130,21 @@ def _incident_response(locale: str, target_id: str, question: str = "") -> dict[
                     "load_state": "loaded",
                     "active_state": "active",
                     "sub_state": "running",
-                }
+                },
+                {
+                    "unit": "nginx.service",
+                    "load_state": "loaded",
+                    "active_state": "active",
+                    "sub_state": "running",
+                },
             ],
             "journal": [],
             "local_user_count": 1,
             "logged_in_user_count": 0,
             "installed_package_count": 850,
-            "listening_sockets": [],
-            "routes": [],
-            "nameservers": [],
+            "listening_sockets": [{"family": "ipv4", "address": "127.0.0.1", "port": 8090}],
+            "routes": [{"interface": "ens192", "destination": "0.0.0.0/0", "gateway": "10.0.0.1"}],
+            "nameservers": ["10.0.0.1"],
             "is_partial": False,
             "partial_reasons": [],
         },
@@ -154,6 +160,14 @@ def _incident_response(locale: str, target_id: str, question: str = "") -> dict[
         assistant["limitations"] = ["read_only_no_action_performed", "file_listing_unavailable"]
     elif focus == "filesystems":
         assistant["answer"] = "Approved filesystem capacity only; no system file names or contents."
+        assistant["integrity_status"] = "deterministic_focus"
+        assistant["limitations"] = ["read_only_no_action_performed"]
+    elif focus in {"network", "service", "network_service"}:
+        assistant["answer"] = (
+            "مشاهدات ثبت‌شدهٔ Linux به‌تنهایی سلامت یا دسترسی راه دور را ثابت نمی‌کنند."
+            if locale == "fa"
+            else "The recorded Linux observations alone do not prove health or remote access."
+        )
         assistant["integrity_status"] = "deterministic_focus"
         assistant["limitations"] = ["read_only_no_action_performed"]
     return {
@@ -517,6 +531,63 @@ def test_file_only_question_hides_unrelated_evidence_until_explicit_expand(
         page.get_by_text("Show complete authorized evidence").click()
         expect(page.get_by_text("nextops-app.service")).to_be_visible()
         expect(page.locator(".complete-evidence").get_by_text("CPU idle time")).to_be_visible()
+        browser.close()
+
+
+@pytest.mark.parametrize(
+    ("question", "locale", "scope", "focused_heading", "excluded_heading"),
+    [
+        (
+            "Which DNS resolver and route were recorded for app?",
+            "en",
+            "Recorded network observations only",
+            "Configured resolvers",
+            "Filesystems",
+        ),
+        (
+            "وضعیت سرویس nextops-app.service چه بود؟",
+            "fa",
+            "Recorded service observations only",
+            "Allowlisted services",
+            "Filesystems",
+        ),
+    ],
+)
+def test_network_and_service_focus_hide_unrelated_evidence_until_explicit_expand(
+    browser_server: tuple[str, FastAPI],
+    question: str,
+    locale: str,
+    scope: str,
+    focused_heading: str,
+    excluded_heading: str,
+) -> None:
+    base_url, _ = browser_server
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        _login(page, base_url)
+        page.get_by_role("button", name="Incident investigation").click()
+        page.get_by_label("Investigation target").select_option("app")
+        page.locator(f'.locale-choice[data-locale="{locale}"]').click()
+        page.get_by_label("Question").fill(question)
+        page.get_by_role("button", name="Ask assistant").click()
+
+        expect(page.locator("#evidenceBrief")).to_contain_text(scope)
+        expect(page.locator("#integrityNotice")).to_contain_text("deterministic")
+        page.locator("#evidenceDetails > summary").click()
+        expect(page.get_by_role("heading", name=focused_heading)).to_be_visible()
+        expect(page.get_by_role("heading", name=excluded_heading)).to_be_hidden()
+        if scope == "Recorded network observations only":
+            expect(page.get_by_role("heading", name="Listening sockets")).to_be_hidden()
+        if scope == "Recorded service observations only":
+            expect(page.get_by_role("heading", name="High-priority journal")).to_be_hidden()
+            expect(page.get_by_text("nginx.service")).to_be_hidden()
+        page.get_by_text("Show complete authorized evidence").click()
+        expect(page.get_by_role("heading", name=excluded_heading)).to_be_visible()
+        if scope == "Recorded service observations only":
+            expect(page.get_by_text("nginx.service")).to_be_visible()
+        page.set_viewport_size({"width": 375, "height": 812})
+        assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth") is True
         browser.close()
 
 
