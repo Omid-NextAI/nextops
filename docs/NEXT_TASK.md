@@ -1,5 +1,24 @@
 # Next task / کار بعدی
 
+Immediate candidate checkpoint, 2026-09-30 — Qualify the isolated app-only network/service
+incident focus through locked CI, exact offline packaging and guarded live EN/FA browser/API,
+durable audit/evidence hash and exact 862d311 app rollback. Local source and fixtures pass; four
+direct synthetic model probes exposed two Persian 384-token truncations, so focused observations
+are rendered by deterministic application code and **general model accuracy remains partial**.
+Do not promote the rejected PR46 512-token draft or alter the AI host, connector, credentials,
+runtime, model, queue/deadline or branding. Keep current-release identity at 862d311 until
+live gates pass. Exact-release server-WAN and full-VM cold start remain not_run, and production
+acceptance is not implied by this narrow change.
+
+گام فوریِ نامزد، ۹ مهر ۱۴۰۵ — تغییر جداگانهٔ برنامه برای تمرکز شبکه و سرویس در بررسی رخداد،
+با CI قفل‌شده، بستهٔ دقیقِ آفلاین، مرورگر و API زندهٔ محافظت‌شدهٔ فارسی و انگلیسی، تطبیقِ ممیزی
+و هشِ شاهد، و بازگشت دقیقِ برنامه به 862d311 سنجیده شود. کد و آزمون ساختگیِ محلی موفق‌اند؛
+چهار آزمایش مستقیمِ مدل با شاهد ساختگی، دو قطعِ فارسی در سقف ۳۸۴ توکن داشت. ازاین‌رو مشاهدهٔ
+متمرکز را برنامه به‌صورت قطعی بیان می‌کند و دقت مشاورهٔ عمومیِ مدل همچنان ناقص است. نامزد
+ردشدهٔ PR46 با سقف ۵۱۲ توکن مستقر نشود. میزبان AI، اتصال، اعتبارنامه، محیط اجرا، مدل، صف، مهلت
+و نشان و رنگ تغییر نکنند. تا گذرِ معیارهای زنده، شناسهٔ انتشار 862d311 است. قطع WAN سرور و
+شروع سردِ کامل VM همین انتشار هنوز اجرا نشده‌اند و این تغییر، پذیرش تولید نیست.
+
 Current unfinished checkpoint — Independently review held-out English/Persian NOC/SOC technical
 answers for actual platform/vendor semantics. The controlled 862d311/35B workspace, bounded
 follow-ups, RTL display and named single-check health correction passed five CI jobs, exact offline

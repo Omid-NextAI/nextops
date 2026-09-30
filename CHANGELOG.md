@@ -1,5 +1,17 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Incident focus source candidate — 2026-09-30 / نامزدِ تمرکز رخداد — ۹ مهر ۱۴۰۵
+
+An isolated app-only candidate presents validated, already-scoped network/service observations
+first, with provenance and canonical evidence intact and unrelated details behind disclosure.
+General budgets, 35B CPU model, connector and OCS branding are unchanged. Local checks pass;
+two direct Persian raw probes still truncate. CI and live qualification remain pending.
+
+نامزدِ جداگانهٔ برنامه، مشاهدهٔ اعتبارسنجی‌شده و ازپیش‌مجازِ شبکه و سرویس را نخست نشان می‌دهد؛
+منشأ و شاهد اصلی محفوظ‌اند و جزئیات نامرتبط با گشودنِ صریح دیده می‌شوند. سقف‌های عمومی، مدل
+35B صرفاً CPU، اتصال و نشان و رنگ OCS ثابت‌اند. آزمون محلی موفق است، اما دو آزمایش خام فارسی
+همچنان قطع می‌شوند؛ CI و پذیرش زنده هنوز در انتظارند.
+
 ## Controlled NOC/SOC workspace — 2026-09-29 / محیط کنترل‌شدهٔ NOC و SOC — ۷ مهر ۱۴۰۵
 
 Select app/API 862d311 with the unchanged CPU-only 35B model after five CI jobs, exact offline

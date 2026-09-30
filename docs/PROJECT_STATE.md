@@ -1,5 +1,23 @@
 # Project state / وضعیت پروژه
 
+Question-focused incident candidate, 2026-09-30 — A separate app-only source change makes
+unambiguous network/service investigations show validated, application-owned Linux observations
+first, with distinct Zabbix scope/time and canonical evidence/audit intact. Unrelated sections are
+collapsed until explicitly opened. General answer limits, the 35B CPU model, runtime, connector,
+credentials and branding are unchanged. Local focused API/browser checks passed; two Persian raw
+model probes still truncated at 384 tokens. CI, exact offline packaging, live promotion, durable
+audit and rollback for this candidate are not yet recorded. Serving remains 862d311/35B; this
+does not make general technical advice or production accepted.
+
+نامزدِ تمرکزِ بررسی رخداد، ۹ مهر ۱۴۰۵ — در تغییر جداگانهٔ کدِ برنامه، پرسش روشن دربارهٔ شبکه یا
+سرویس ابتدا مشاهدهٔ اعتبارسنجی‌شدهٔ Linux را با زمان و دامنهٔ مستقل Zabbix نشان می‌دهد؛ شاهد اصلی
+و ممیزی ثابت‌اند و بخش نامرتبط فقط با گشودنِ صریح دیده می‌شود. سقف پاسخ عمومی، مدل 35B صرفاً CPU،
+محیط اجرا، اتصال، اعتبارنامه و نشان و رنگ تغییر نکرده‌اند. آزمون‌های محلیِ API و مرورگرِ متمرکز
+موفق بودند؛ دو آزمایش خامِ فارسیِ مدل همچنان در سقف ۳۸۴ توکن قطع شدند. CI، بستهٔ دقیقِ آفلاین،
+استقرار زنده، ممیزی ماندگار و بازگشت همین نامزد هنوز ثبت نشده‌اند. انتشارِ در حال خدمت 862d311
+و 35B است؛ این نامزد نه مشاورهٔ عمومی را تأیید می‌کند و نه پذیرش تولید را.
+
+
 Current controlled workspace, 2026-09-29 — app/API 862d311 serves the unchanged CPU-only 35B model.
 PR44 passed five CI jobs, exact fresh offline Ubuntu packaging, five first/four final live
 browser/API cases, three durable audit/hash pairs and exact source rollback to b346c3e with fresh

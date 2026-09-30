@@ -1,5 +1,19 @@
 # Testing, model evaluation and release evidence
 
+## Incident network/service focus candidate — 2026-09-30
+
+The isolated candidate keeps the serving 35B model, inference API and 384-token budget unchanged.
+Local unit/API: 378 passed, two POSIX-only Windows skips before the latest hostile-value additions;
+the focused API subset then passed 78 cases. Formatting, lint and strict source typing passed.
+Fourteen real-browser fixtures passed, including English network, Persian service, explicit full
+evidence disclosure and 375-pixel layout. Fixtures prove application boundaries, not source
+freshness or model accuracy. Four direct native probes used synthetic evidence: two EN `stop`
+responses, two FA `length` failures at 384 tokens. These failures remain in the private record.
+The application-owned focused summary is tested against a truncated, unsupported model claim and
+malformed collector values; it preserves canonical evidence and audit identity. CI, exact offline
+package, live authenticated answers, durable audit and exact rollback are **not yet run** for this
+candidate. The serving 862d311 release is unchanged at this checkpoint.
+
 ## Current controlled workspace qualification — 2026-09-29
 
 Serving app/API source 862d31130e43f5cdce216aff40d1d9fdb1a8f61a, wheel SHA-256

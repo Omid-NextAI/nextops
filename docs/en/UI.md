@@ -1,5 +1,13 @@
 # Bilingual operations console and design system
 
+## Network/service incident focus candidate — 2026-09-30
+
+For an unambiguous network or service investigation, the candidate shows the requested bounded
+observations first and keeps unrelated, already-authorized evidence behind “Show complete
+authorized evidence.” It does not broaden collection or infer firewall/VPN state. English and
+Persian 375-pixel browser fixtures pass; the serving UI remains 862d311 until guarded deployment
+qualifies this source. Logo and palette bytes are unchanged.
+
 [فارسی](../fa/UI.md) · [Index](INDEX.md)
 
 **Status: specification plus a delivered controlled user-testing subset.** Source: master specification sections 3, 7 and 17 plus original sections 3 and 30.

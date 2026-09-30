@@ -1,5 +1,21 @@
 # AI answer integrity
 
+## Question-focused incident candidate — 2026-09-30
+
+The source candidate keeps the approved 384-token, 120-second, one-active/two-queued CPU-only
+profile. It selects only already-authorized Linux/Zabbix observations relevant to an unambiguous
+network or service question. The application, not the model, renders validated resolver, route,
+socket and allowlisted systemd-state observations with distinct Linux/Zabbix scopes and collection
+times. It does not infer DNS success, reachability, application health, cause or recovery. The
+complete canonical evidence and audit hash remain unchanged; unrelated observations are behind an
+explicit disclosure in the browser. Mixed-topic questions retain the existing overview behavior.
+
+Four direct synthetic-evidence model probes completed in the private lab: EN network and EN service
+stopped normally; FA network and FA service reached the 384-token limit and failed semantic
+acceptance. The deterministic focused answer therefore does **not** claim that the model became
+more accurate or that general NOC/SOC answers are qualified. Local API/browser and guarded live
+release evidence must be recorded separately before the serving identity changes.
+
 **Status: controlled user testing; named regressions repaired, full semantic acceptance partial.** NextOps cannot
 guarantee that a generative model will never be wrong. It instead prevents the most dangerous
 category error: presenting unsupported model text as live operational fact.
