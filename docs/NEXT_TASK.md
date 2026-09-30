@@ -1,5 +1,22 @@
 # Next task / کار بعدی
 
+Current gate after 2026-09-30 review — Do not deploy or merge draft PR46's 512-token general
+candidate. Eight fresh native EN/FA cases completed within 120 seconds, but both prompt revisions
+failed technical semantics. Keep serving 862d311/35B at 384 general tokens. Repair the failed
+DNS/TCP/readiness/traceroute reasoning without teaching to the reviewed questions, then use a
+new independent held-out EN/FA set. Only a semantic pass permits locked CI, exact offline package,
+guarded APP/AI trial, fresh browser/evidence/audit and exact rollback. Separate server-WAN, VM
+cold-start and production gates remain open; no outcome may be inferred from native generation.
+
+معیار کنونی پس از بازبینیِ ۸ مهر ۱۴۰۵ — نامزد عمومیِ ۵۱۲ توکنیِ PR46 پیش‌نویس، ادغام یا
+مستقر نشود. هشت پاسخ تازهٔ فارسی و انگلیسیِ مدل بومی زیر ۱۲۰ ثانیه کامل شدند، اما هر دو
+دستور در معنای فنی شکست خوردند. نسخهٔ 862d311 و مدل 35B با سقف عمومیِ ۳۸۴ توکن حفظ شوند.
+برداشت نادرست از DNS، TCP، آمادگی سرویس و traceroute بدون آموختن پاسخِ پرسش‌های بررسی‌شده
+اصلاح و سپس مجموعهٔ تازه و مستقلِ دوزبانه آزموده شود. فقط قبولی معنایی، CI قفل‌شده، بستهٔ
+دقیقِ آفلاین، آزمون محافظت‌شدهٔ برنامه/AI، مرورگر و شاهد و ممیزی تازه و بازگشت دقیق را
+مجاز می‌کند. معیارهای WAN سرور، شروع سرد VM و تولید نیز جداگانه بازند؛ از پایان تولیدِ مدل
+نتیجهٔ پذیرش گرفته نشود.
+
 Current bounded candidate, 2026-09-29 — Complete independent held-out EN/FA semantic review of
 the 512-token **general-only** answer-depth and topic-selected, already-authorized live incident
 evidence. Local fixture tests and direct native-model probes do not qualify the source release.

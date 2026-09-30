@@ -1,5 +1,21 @@
 # Project state / وضعیت پروژه
 
+Candidate semantic gate, 2026-09-30 — Two private four-case English/Persian native-model sets
+used the exact general-provider payload at 512 tokens and temperature 0.3. All eight stopped
+within 120 seconds, but technical review rejected both the initial and revised prompt for
+unsupported DNS/TCP, systemd, HTTP-readiness and traceroute conclusions. Source lint, typing,
+371 unit/API tests and twelve browser fixtures passed; they do not override the semantic failure.
+Draft PR46 remains unpromoted. The protected serving app/API is still 862d311/35B with 384
+general tokens; no live release, model, connector, credential or infrastructure change occurred.
+
+معیار معناییِ نامزد، ۸ مهر ۱۴۰۵ — دو مجموعهٔ خصوصیِ چهارتاییِ فارسی و انگلیسی با ورودیِ دقیق
+مدلِ حالت عمومی، سقف ۵۱۲ توکن و دمای ۰٫۳ اجرا شدند. هر هشت پاسخ زیر ۱۲۰ ثانیه کامل شدند،
+اما بازبینی فنی هم دستور نخست و هم نسخهٔ اصلاح‌شده را به‌دلیل نتیجه‌گیریِ بی‌شاهد دربارهٔ
+DNS و TCP، ترتیب systemd، آمادگی از HTTP و traceroute رد کرد. آزمون قالب، کیفیت و نوع، ۳۷۱
+مورد واحد/API و دوازده مورد مرورگر موفق‌اند، ولی رد معنایی را برطرف نمی‌کنند. PR46 همچنان
+پیش‌نویس و بدون ارتقا است. برنامه/API محافظت‌شدهٔ 862d311 و مدل 35B با سقف عمومی ۳۸۴ توکن
+ثابت مانده‌اند؛ انتشار زنده، مدل، اتصال، اطلاعات ورود و زیرساخت تغییر نکرده‌اند.
+
 Source candidate, 2026-09-29 — The owner requested the fullest bounded local-model answers and
 more relevant live facts. A source-only candidate raises **general mode only** from 384 to the
 existing contract maximum of 512 output tokens; live monitoring and incidents remain 384, with

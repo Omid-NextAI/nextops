@@ -1,5 +1,24 @@
 # Testing, model evaluation and release evidence
 
+## Held-out native-model rejection — 2026-09-30
+
+Two private, synthetic English/Persian sets (four fresh questions each) used the exact candidate
+general-provider payload: CPU-only 35B, non-thinking mode, temperature 0.3, 512 output tokens,
+one sequential request at a time and a 120-second limit. All eight returned `stop` in 22.162–
+92.228 seconds; completion is not factuality. The first set still inferred target reachability
+from a TCP timeout, treated one HTTP 200 as readiness, and overstated traceroute interpretation.
+After a bounded general-prompt refinement, a separate second set still favored an unproven
+resolver race, interpreted refusal as proof of a stopped listener, and favored a firewall from
+an open port. Persian replies also made non-exclusive ping/traceroute inferences. Manual technical
+review therefore **rejected the 512-token candidate**. Raw prompts, answers, timings and the
+private change record are retained outside Git. This is native-model testing, not authenticated
+APP/API, live Zabbix, exact-package, server-WAN or VM qualification. The protected serving
+862d311/35B release and its 384-token general limit were not changed.
+
+Local source checks after the prompt refinement: Ruff lint/format and mypy passed; 371 unit/API
+tests passed with two Windows/POSIX skips; twelve real-browser fixtures passed with one POSIX-only
+skip. These do not override the semantic rejection. The draft PR remains unpromoted.
+
 ## Answer-depth source candidate — 2026-09-29
 
 Draft PR46 CI run 36612675877 passed all five jobs: quality/unit, browser, PostgreSQL 16/17
