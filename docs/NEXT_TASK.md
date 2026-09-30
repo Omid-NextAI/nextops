@@ -1,5 +1,30 @@
 # Next task / کار بعدی
 
+Current unfinished checkpoint, 2026-09-30 — Keep controlled b5e74f9/35B standard saved chat and
+light/dark UI live. Review held-out EN/FA technical correctness and instruction following, including
+physical-connectivity overclaims and unwanted follow-up prose. Thinking remains disabled after
+failed final-answer trials; any new reasoning profile needs its own bounded specification and
+measurements, not a longer timeout or relabelled failure. Qualify full-budget 16K context quality,
+latency and contention under one-active/two-queued limits. Preserve model lineage/recovery risks.
+Do not repeat passed CI/offline installs, 15 functional live cases, matched exact rollback, audit,
+four-guest WAN isolation or real VM cold starts as unfinished. Independent recovery is owner-deferred,
+not passed and not a form blocking controlled use. No 122B selection or further resize without
+separate verified capacity/benchmark evidence. Full production acceptance remains unclaimed.
+
+گام ناتمامِ جاری، ۹ مهر ۱۴۰۵ — گفت‌وگوی معمولیِ ذخیره‌شده و رابط روشن/تیرهٔ b5e74f9/35B
+کنترل‌شده زنده بمانند. درستی فنی و رعایت دستور در پرسش‌های مستقل فارسی/انگلیسی، از جمله
+ادعای بیش‌ازحد دربارهٔ اتصال فیزیکی و متنِ پیگیریِ ناخواسته، بازبینی شوند. استدلال پس از شکست
+پاسخ نهایی غیرفعال می‌ماند؛ نمایهٔ تازه به مشخصات محدود و اندازه‌گیری مستقل نیاز دارد، نه
+مهلت بیشتر یا موفق نامیدن شکست. کیفیت، تأخیر و اشتغالِ ظرفیت کاملِ 16K در سقفِ یک فعال/دو
+منتظر سنجیده شوند. خطر منشأ مدل و بازیابی حفظ شود. CI، نصب آفلاین، پانزده مورد کارکردیِ زنده،
+بازگشت دقیقِ هماهنگ، ممیزی، قطع WAN چهار مهمان و شروع سرد واقعی VM تکمیل شده‌اند و دوباره
+کار ناتمام شمرده نشوند. بازیابی مستقل به دستور مالک در تعویق است، نه موفق و نه فرمِ مسدودکنندهٔ
+استفادهٔ کنترل‌شده. انتخاب 122B یا افزایش مجدد منابع بدون ظرفیت و benchmark مستقل انجام نشود.
+پذیرش کامل تولید ادعا نمی‌شود.
+
+Earlier qualification instructions below are historical, not the active next checkpoint.
+دستورهای پذیرشِ زیر تاریخی‌اند، نه گام بعدیِ فعال.
+
 Immediate checkpoint — Qualify the corrected saved-message proxy route and 384-token private
 reasoning profile as a new exact release. Repeat locked CI, fresh offline install, matched guarded
 app/AI/proxy promotion, EN/FA standard/thinking/follow-ups, audit, failure recovery and exact rollback.

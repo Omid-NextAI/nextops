@@ -118,7 +118,9 @@ def validate_chat_candidates(directory: Path) -> None:
     if not isinstance(chat, dict) or not isinstance(research, dict):
         raise ArtifactValidationError("chat candidate metadata must be an object")
     expected = {
-        "status": "candidate_not_deployed",
+        "status": "standard_controlled_thinking_rejected",
+        "standard_enabled": True,
+        "thinking_enabled": False,
         "configured_context_tokens": 16384,
         "max_context_turns": 6,
         "max_context_characters": 12000,
@@ -136,7 +138,14 @@ def validate_chat_candidates(directory: Path) -> None:
         "runtime_network_downloads": False,
     }
     if any(type(chat.get(k)) is not type(v) or chat.get(k) != v for k, v in expected.items()):
-        raise ArtifactValidationError("expanded chat profile changed its unqualified bounds")
+        raise ArtifactValidationError("expanded chat profile changed its safety bounds or gates")
+    qualification = chat.get("qualification")
+    if (
+        not isinstance(qualification, dict)
+        or qualification.get("thinking_semantics") != "failed"
+        or qualification.get("expanded_context_latency") != "not_run"
+    ):
+        raise ArtifactValidationError("failed thinking or unrun full-context review was concealed")
     if (
         research.get("source_revision") != "fec8b222a2eddc3346d6b6d7f7c85efea93cd6bf"
         or research.get("total_size_bytes") != 77616511296

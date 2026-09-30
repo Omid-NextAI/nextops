@@ -1,5 +1,36 @@
 # Project state / وضعیت پروژه
 
+Current verified deployment, 2026-09-30 — app and AI API b5e74f9 with the unchanged local CPU-only
+35B model are live for controlled users. Standard owner-scoped saved conversations, reload/resume,
+bounded follow-ups and the bilingual header light/dark switch are enabled. Context is configured
+to 16,384 with actual local token admission; thinking failed and stays off at both APIs. Exact
+five-job CI, fresh offline installs, staged Nginx validation, seven first/eight final live cases,
+12 text-free chat audits, three live evidence/hash pairs, matched app/AI/proxy/profile rollback
+with two fresh restored answers, four-guest WAN denial and actual serial guest reboots passed.
+Fresh post-boot login, EN/FA generation and real Zabbix reboot-alert evidence passed under WAN
+denial. The temporary network rules and only owned rollback timers were removed/disabled after
+verification; protected fallback artifacts and additive schema remain. See [English](en/TESTING.md)
+and [Persian](fa/TESTING.md) records. This is controlled live service, not full production acceptance.
+Technical semantics/brevity, full-budget context quality/latency, admission contention, model
+lineage and independent recovery remain unqualified; historical failures below are not erased.
+
+استقرار جاریِ تأییدشده، ۹ مهر ۱۴۰۵ — برنامه و API هوش مصنوعیِ b5e74f9 با همان مدل محلیِ
+35B صرفاً CPU برای کاربران کنترل‌شده زنده‌اند. سابقهٔ محلیِ مخصوص مالک، بازکردن و ادامه، پیگیری
+محدود و انتخاب روشن/تیرهٔ دوزبانهٔ سربرگ فعال‌اند. زمینهٔ تنظیم‌شده ۱۶۳۸۴ با پذیرش واقعیِ
+توکن محلی است؛ استدلال شکست خورده و در هر دو API غیرفعال است. پنج کنترل CI، نصب تازهٔ آفلاین،
+نحو مرحله‌ایِ واقعی Nginx، هفت مورد نخست/هشت مورد نهاییِ زنده، دوازده ممیزیِ گفت‌وگوی بدون متن،
+سه جفتِ شاهد/هش، بازگشت هماهنگ برنامه، AI، پراکسی و نمایه با دو پاسخ تازهٔ نسخهٔ بازگشته،
+منع WAN چهار مهمان و راه‌اندازی دوبارهٔ واقعی و ترتیبی آن‌ها موفق‌اند. ورود تازه، تولید تازهٔ
+دوزبانه و شاهد واقعیِ هشدار شروع دوبارهٔ Zabbix پس از boot، زیر منع WAN موفق بودند. پس از
+تأیید، قانون موقت شبکه و فقط زمان‌سنج‌های متعلق به این تغییر حذف/غیرفعال شدند؛ نسخه‌های
+محافظت‌شدهٔ بازگشت و پایگاه افزایشی باقی‌اند. جزئیات در [فارسی](fa/TESTING.md) و
+[انگلیسی](en/TESTING.md) آمده است. این خدمت زندهٔ کنترل‌شده است، نه پذیرش کامل تولید. درستی
+و اختصار، کیفیت و تأخیرِ ظرفیت کامل زمینه، اشتغال صف، منشأ مدل و بازیابی مستقل همچنان تأیید
+نشده‌اند؛ شکست‌های تاریخیِ زیر حذف نشده‌اند.
+
+Earlier dated checkpoints below are historical; current identity is the release manifest above.
+گام‌های تاریخ‌دارِ زیر تاریخی‌اند؛ شناسهٔ جاری در رکورد انتشار ثبت شده است.
+
 258ac65 guarded findings, 2026-09-30 — five-job CI and the real staged Nginx parser passed.
 Thinking failed at the unchanged 120-second model deadline and remains disabled. Standard EN/FA
 chat, reload and ticket recall ran, but the Persian current-status question using standalone

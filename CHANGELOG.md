@@ -1,5 +1,19 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-09-30 — Live standard chat and dark theme / گفت‌وگوی معمولی و پوستهٔ تیرهٔ زنده
+
+Select matched app/AI b5e74f9 with standard local saved chat, bounded follow-ups, actual 16K
+token admission and the bilingual light/dark header control; keep OCS assets unchanged.
+Five-job CI, offline installs, 15 functional live cases, audit/hash matches, exact matched rollback,
+four-guest WAN isolation and real serial reboots passed. Thinking failed and stays off. Preserve
+semantic/brevity, full-context, contention and recovery gaps; controlled live is not full production.
+
+برنامه و AI هماهنگِ b5e74f9 با گفت‌وگوی معمولیِ ذخیره‌شدهٔ محلی، پیگیری محدود، پذیرش واقعی
+توکنِ 16K و انتخاب دوزبانهٔ روشن/تیرهٔ سربرگ مستقر شدند؛ نشان و رنگ OCS ثابت‌اند. پنج کنترل
+CI، نصب آفلاین، پانزده مورد کارکردیِ زنده، تطبیق ممیزی و هش، بازگشت دقیقِ هماهنگ، قطع WAN چهار
+مهمان و راه‌اندازی دوبارهٔ واقعیِ ترتیبی موفق‌اند. استدلال شکست خورده و غیرفعال است. شکاف
+معنا و اختصار، ظرفیت کامل زمینه، اشتغال صف و بازیابی حفظ‌اند؛ خدمت کنترل‌شده، تولید کامل نیست.
+
 ## 2026-09-30 — Persian current-fact guard / کنترلِ پرسشِ وضعیت فعلی در فارسی
 
 Recognize standalone «الان» and explicit personal infrastructure-state questions in general chat,

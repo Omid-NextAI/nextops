@@ -2,12 +2,14 @@
 
 [فارسی](../fa/CONVERSATIONS.md) · [Specification](CONVERSATION_MEMORY_SPEC.md)
 
-Candidate source only, 2026-09-30. These features are disabled in the current serving release.
+Controlled live release b5e74f9, 2026-09-30: saved standard chat is enabled; thinking is disabled
+at both application and inference boundaries after failed live trials. Configured context is 16,384
+tokens with actual local template/token admission. Full-budget context quality/latency is not qualified.
 The UI/UX workflow guided keyboard-accessible history controls; OCS brand assets are unchanged.
 
 ## User behavior
 
-When qualified and enabled, general chats are saved in local PostgreSQL for your account. Choose
+General chats are saved in local PostgreSQL for your account. Choose
 a conversation in the sidebar to resume it. New conversation does not delete old chats; Delete
 this conversation explicitly removes its transcript. Logout clears private page content and the
 browser token, not saved history. Do not paste passwords, keys or other secrets.
@@ -17,7 +19,8 @@ The model sees at most six complete accepted pairs, within 12,000 characters; an
 means you must restate missing details. Old saved answers are not fresh generations. General
 memory is not proof of current server status; live modes still fetch fresh scoped evidence.
 
-Standard is the default. Think more is shown only after operator qualification. Its private
+Standard is the only enabled choice. Think more remains hidden and denied by the API. If a future
+separate qualification enables it, its private
 reasoning is discarded; only a final answer is displayed/saved. It may be slower or still wrong.
 This is inference and conversation storage, not model training.
 
@@ -39,8 +42,8 @@ request retries return the same saved response. Concurrent requests conflict; pr
 clears the pending lease if the same session is still valid. A crash/cancelled request expires
 after 540 seconds; no unbounded automatic retries are introduced.
 
-App flags: NEXTOPS_CONVERSATIONS_ENABLED=1; NEXTOPS_CHAT_THINKING_ENABLED=1 only after qualification.
-AI flags: NEXTOPS_EXPANDED_CHAT_ENABLED=1; NEXTOPS_THINKING_ENABLED=1 only after qualification;
+Serving app flags: NEXTOPS_CONVERSATIONS_ENABLED=1; NEXTOPS_CHAT_THINKING_ENABLED=0.
+Serving AI flags: NEXTOPS_EXPANDED_CHAT_ENABLED=1; NEXTOPS_THINKING_ENABLED=0;
 NEXTOPS_CONTEXT_TOKENS=16384 must match actual runtime n_ctx. Defaults are disabled/8192.
 Keep existing 120-second generation deadline for initial qualification; a separate measured profile
 decision is required if expanded replies fail it. Never widen deadlines to relabel a failed test.
@@ -54,8 +57,9 @@ decision is required if expanded replies fail it. Never widen deadlines to relab
 4. Qualify the thinking runtime drop-in at 16384 context, 16 threads, one slot, zero GPU layers,
    384 reasoning tokens and no reasoning preservation. The first 1024-token trial hit an unrelated
    30-second proxy timeout and continued to the 120-second provider deadline without a final answer.
-   At the observed approximately eight decode tokens/second, this new smaller reasoning profile
-   reserves time for a final answer; it still needs its own acceptance. Native restrictions
+   The corrected 384-token trial also failed at 120 seconds; a separate 128-token direct probe
+   did not produce an accepted final answer. Do not enable thinking or claim its budget is qualified.
+   Only the default non-thinking path is selected. Native restrictions
    remain inherited; no runtime download option is present. Real template/tokenization passed on
    the current exact runtime; this did not generate or qualify a thinking answer.
 5. Enable matched flags only after EN/FA relevance, follow-up, provenance separation, latency,

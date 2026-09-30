@@ -1,5 +1,6 @@
 """Selected local-inference artifact metadata validation tests."""
 
+import importlib.util
 import json
 import subprocess
 import sys
@@ -11,6 +12,38 @@ from jsonschema import Draft202012Validator
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = REPOSITORY_ROOT / "deploy" / "inference" / "qwen3-8b-q4-k-m.yaml"
+
+
+@pytest.mark.parametrize(
+    "field,incorrect",
+    [
+        ("thinking_enabled", True),
+        ("max_queued_requests", 3),
+        ("configured_context_tokens", 262144),
+        ("qualification.thinking_semantics", "passed"),
+        ("qualification.expanded_context_latency", "passed"),
+    ],
+)
+def test_selected_standard_profile_cannot_conceal_unqualified_modes(
+    tmp_path: Path, field: str, incorrect: object
+) -> None:
+    spec = importlib.util.spec_from_file_location(
+        "artifact_guard", REPOSITORY_ROOT / "scripts" / "check_inference_artifacts.py"
+    )
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    profile = json.loads((MANIFEST.parent / "expanded-chat-profile.json").read_text("utf-8"))
+    if field.startswith("qualification."):
+        profile["qualification"][field.split(".", 1)[1]] = incorrect
+    else:
+        profile[field] = incorrect
+    (tmp_path / "expanded-chat-profile.json").write_text(json.dumps(profile), encoding="utf-8")
+    (tmp_path / "qwen3-5-122b-a10b-research.json").write_bytes(
+        (MANIFEST.parent / "qwen3-5-122b-a10b-research.json").read_bytes()
+    )
+    with pytest.raises(module.ArtifactValidationError):
+        module.validate_chat_candidates(tmp_path)
 
 
 def test_thinking_candidate_preserves_sandbox_and_bounded_runtime() -> None:

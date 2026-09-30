@@ -7,14 +7,15 @@
 Owner update (2026-09-26): the owner tested an ESXi VM snapshot restore. Its dated result has
 not been reviewed here; independent database backup and restore gates remain unpassed.
 
-Current controlled workspace (2026-09-30): app/API 810102f serves the unchanged CPU-only 35B model.
-Its bilingual network and named-service incident answers show only requested authorized observations;
-full evidence remains behind explicit disclosure. Five CI jobs, fresh offline installation, six live
-browser cases, six persisted audit/hash checks and exact 862d311 rollback with fresh EN/FA answers
-passed. The OCS logo/palette, general-answer limits and connector are unchanged. Raw model truncation,
-technical advice quality, exact-release server-WAN/VM cold-start and independent recovery remain
-open. User testing is live, **not full production acceptance**. [Release status](docs/status/current-release.yaml)
-is authoritative; the 95c6e50 qualification summary below is historical.
+Current controlled workspace (2026-09-30): app/AI API b5e74f9 serves the unchanged CPU-only 35B
+model with owner-scoped saved chat, bounded follow-ups and a header light/dark switch. OCS logo/base
+palette and focused read-only evidence remain intact. Configured context is 16K; thinking failed
+and stays disabled. Five CI jobs, exact offline installs, 15 functional live cases, matched
+app/AI/proxy rollback, audit/hash checks, four-guest WAN denial and real serial VM reboots passed.
+Fresh login, answers and Zabbix evidence worked after boot with WAN denied. Full-context quality,
+technical semantics/brevity, contention and independent recovery remain unqualified. Controlled
+use is live, **not full production acceptance**. [Release status](docs/status/current-release.yaml)
+is authoritative; older summaries below are historical.
 
 Earlier answer-quality checkpoint (2026-09-29): the guarded clarity repair passed twelve fresh authenticated
 English/Persian API cases, including the four file-focus and host-scope failures observed on

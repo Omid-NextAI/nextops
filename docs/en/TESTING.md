@@ -1,5 +1,62 @@
 # Testing, model evaluation and release evidence
 
+## Serving standard chat and theme b5e74f9 — 2026-09-30
+
+Exact app/AI source b5e74f9b384e65d7fa487d9aa14a7abb43b6576f passed all five CI jobs in
+[run 36716384847](https://github.com/Omid-NextAI/nextops/actions/runs/36716384847), including
+PostgreSQL 16/17, browser acceptance and secret scanning. Local unit/API/contract checks: 416
+passed, two Windows POSIX skips, 40 environment/browser cases deselected; the 21 browser fixtures
+were separately qualified. These are not a new all-environment full-suite total.
+Fresh hash-locked offline installs passed on Ubuntu 24.04 and both serving guests; real staged
+Nginx syntax, dependency and protected installed-code probes passed before activation.
+Post-record validation passed 59 selected artifact/status/browser tests, including all 21 browser
+fixtures and five regressions preventing failed thinking/full-context gates from becoming passed.
+Wheel SHA-256: `8b41ee7c9551f5f38e57d96fd765b2799ac331b80278991a4967973da686f68a`.
+Installed code: `c56b04148862c6e47200716eebb4c4642f0b2d9a6e046b23d0f3747c947b1e05`.
+
+Standard saved chat is enabled, thinking disabled at both APIs, context configured to 16384;
+the original 35B artifact/runtime, 16 threads, one slot, one active/two queued, resource bounds,
+120-second generation deadline, credentials and OCS logo/base palette are unchanged.
+Seven first live cases passed functional checks: fresh EN/FA generation, reload, server-owned
+ticket recall, current-status redirects and fresh Zabbix evidence. Completed UUID replay,
+403 thinking denial, delete/404 and logout/401 also passed. A read-only database transaction
+matched six text-free completion audits and one run/evidence/audit hash pair.
+Exact rollback restored app 810102f, AI 862d311, original proxy and 8192 profile; two new EN/FA
+answers passed. The rollback harness's candidate-digest label was explicitly corrected to unknown;
+protected prior metadata checksums and root release-link checks establish the restored identities.
+Additive migration 0003/transcripts were not destructively downgraded.
+
+The identical immutable b5e74f9 release was re-promoted under persistent access-preserving guards.
+All four guests had actual IPv4/IPv6 non-LAN egress denial active before boot and after testing;
+public IPv4 attempts were rejected with rule counters, while LAN/SSH remained usable. This is
+guest-side WAN isolation, not a physical cable pull or a permanent host-egress policy. Public
+direct connectivity was already unavailable at baseline; the explicit rules additionally deny it.
+No routed IPv6 connection was exercised; its deny rule was inspected, not a measured IPv6 outage.
+An operator `grep -q`/pipefail verification issue was corrected without changing the running app.
+Actual serial guest reboots changed all boot IDs; unit/management recovery was AI 150.844s,
+connector 12.906s, Zabbix 17.047s and app 16.515s. Both PostgreSQL clusters and required services
+restarted; AI readiness correctly returned unavailable while the model loaded, then ready.
+
+A new verified-TLS browser/login after those boots passed eight fresh functional cases under
+four-guest WAN denial: EN/FA standard chat, one-pair recall, scope redirect and new Zabbix
+answers with source/time/partial warnings. Both live answers reported the actual one reboot
+alert, not cached pre-reboot status. Six more text-free audits and two run/evidence/hash pairs
+matched; owned QA transcripts were deleted and the session revoked. Final standard latency was
+23.813/38.843s EN/FA; live evidence latency 41.078/49.719s. No external browser request occurred.
+Over the 234.187-second browser run, model-service CPU accounting increased by 3826.282s
+(about 16.3 vCPU equivalents averaged, not physical cores); final RSS was about 36.0 GiB and
+cgroup MemoryPeak about 37.0 GiB. These sparse observations are not load percentiles or a full
+context benchmark. Guest NUMA observations do not establish ESXi placement. Temporary WAN rules
+and only this change's rollback timers were removed/disabled after verification; unrelated
+firewall, SSH configuration, credentials and rollback artifacts remain intact.
+
+Theme keyboard/persistence/system/restricted-storage/contrast fixtures and live 375-pixel Persian
+dark display passed. A functional pass does **not** accept all answer semantics: the final Persian
+general answer overclaimed physical connectivity and ignored requested brevity; the earlier
+broad DNS semantic failure also remains. Thinking failed the preserved 120-second trial and is
+not enabled. Full-budget 16K quality/latency, admission-contention, artifact lineage, independent
+recovery and broader production acceptance remain open. Private raw reports remain outside Git.
+
 ## 258ac65 guarded findings — 2026-09-30
 
 All five jobs in run 36712348697, fresh Ubuntu/server offline installs and real staged Nginx

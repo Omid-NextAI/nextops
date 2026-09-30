@@ -447,13 +447,16 @@ def test_theme_toggle_persists_is_keyboard_accessible_and_keeps_brand(
             """() => {
               const css = getComputedStyle(document.documentElement);
               return Object.fromEntries(['--ink', '--muted', '--surface', '--button-bg',
-                '--brand-gold', '--brand-teal'].map(k => [k, css.getPropertyValue(k).trim()]));
+                '--brand-gold-dark', '--brand-gold', '--brand-teal']
+                .map(k => [k, css.getPropertyValue(k).trim()]));
             }"""
         )
         assert tokens["--brand-gold"] == "#d0a840"
         assert tokens["--brand-teal"] == "#0090a0"
         assert _contrast(tokens["--ink"], tokens["--surface"]) >= 4.5
         assert _contrast(tokens["--muted"], tokens["--surface"]) >= 4.5
+        expect(switch).to_have_css("color", "rgb(225, 188, 96)")
+        assert _contrast(tokens["--brand-gold-dark"], tokens["--surface"]) >= 4.5
         assert _contrast("#ffffff", tokens["--button-bg"]) >= 4.5
         page.reload(wait_until="networkidle")
         expect(page.locator("html")).to_have_attribute("data-theme", "dark")

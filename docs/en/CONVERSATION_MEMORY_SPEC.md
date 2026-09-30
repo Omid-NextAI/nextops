@@ -2,8 +2,10 @@
 
 [فارسی](../fa/CONVERSATION_MEMORY_SPEC.md) · [Operator guide](CONVERSATIONS.md)
 
-Status, 2026-09-30: implemented candidate, not deployed. The serving release remains
-810102f/35B with an 8192-token context and thinking disabled.
+Status, 2026-09-30: b5e74f9/35B serves controlled standard saved chat with 16,384 configured
+context tokens. Bilingual short follow-ups, exact rollback and four-guest WAN/reboot acceptance
+passed. Thinking failed live qualification and is disabled at both boundaries. Full-context
+quality/latency and broad technical accuracy remain unqualified; this is not full production.
 
 ## Problem and precedence
 

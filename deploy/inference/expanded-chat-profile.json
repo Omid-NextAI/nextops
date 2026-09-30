@@ -1,5 +1,8 @@
 {
-  "status": "candidate_not_deployed",
+  "status": "standard_controlled_thinking_rejected",
+  "source_commit": "b5e74f9b384e65d7fa487d9aa14a7abb43b6576f",
+  "standard_enabled": true,
+  "thinking_enabled": false,
   "model_id": "nextops-qwen3-5-35b-a3b-q4-k-m",
   "runtime_commit": "b29c606e28a01b1bc8c1351026a0fa6e616bf6c4",
   "configured_context_tokens": 16384,
@@ -19,9 +22,9 @@
   "runtime_network_downloads": false,
   "qualification": {
     "real_template_tokenization": "passed",
-    "thinking_semantics": "not_run",
+    "thinking_semantics": "failed",
     "expanded_context_latency": "not_run",
-    "fresh_wan_disconnected_answers": "not_run",
-    "rollback": "not_run"
+    "fresh_wan_disconnected_answers": "passed",
+    "rollback": "passed"
   }
 }

@@ -1,18 +1,19 @@
 # Local CPU-only AI and capacity planning
 
-## Later guest sizing and expanded-chat candidate — 2026-09-30
+## Current guest sizing and standard-chat profile — 2026-09-30
 
 After the owner's resource extension, authorized read-only guest preflight observes 64 vCPUs,
 193185 MiB usable RAM, zero swap use and one guest NUMA node/64 virtual sockets. This supersedes
 the older AI guest allocation for current sizing, not the measured inference limits: the serving
-profile still has 16 threads, 8192 context, one slot, 18 CPU-quota equivalents and 96 GiB MemoryMax.
+profile has 16 threads, 16384 context, one slot, 18 CPU-quota equivalents and 96 GiB MemoryMax.
 No further resize or ESXi topology change was made. Host placement/reservations remain unknown.
-The [expanded-chat candidate](CONVERSATION_MEMORY_SPEC.md) targets 16384 context and bounded
-thinking behind disabled flags; 122B is pinned research, not downloaded or selected.
+The [standard-chat profile](CONVERSATION_MEMORY_SPEC.md) is serving in controlled b5e74f9;
+thinking failed and is disabled. Four-guest WAN/reboot and fresh short-context answers passed,
+not full-budget context quality/latency. 122B is pinned research, not downloaded or selected.
 
 [فارسی](../fa/CPU_AI.md) · [Index](INDEX.md)
 
-**Status: bounded CPU evidence and tested native profiles; full benchmark and production acceptance remain open.** Source: master specification sections 2, 9–10 and 21. Exact bounded restart/rollback observations are recorded below. Sustained throughput, production behavior, independent restore and current-release WAN/VM cold start remain unqualified.
+**Status: bounded CPU evidence and tested native profiles; full benchmark and production acceptance remain open.** Source: master specification sections 2, 9–10 and 21. Exact bounded restart/rollback observations are recorded below. Current-release WAN/VM cold start passed; sustained expanded-profile throughput, production behavior and independent restore remain unqualified.
 
 ## Current larger-model qualification — 2026-09-29
 
