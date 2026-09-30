@@ -1,5 +1,17 @@
 # Project state / وضعیت پروژه
 
+Proxy syntax preflight, 2026-09-30 — 95f4de7 passed all five CI jobs in run 36711401339 and
+fresh offline desktop/server installs. Nginx's real parser rejected the unquoted quantified route
+before reload. The app/proxy rollback restored the untouched serving site; AI/profile was also
+restored. No live answer, thinking or offline acceptance is claimed for this attempt. The next
+candidate quotes the route and must pass a staged real-server parser check before any switching.
+
+بررسی واقعیِ نحو پراکسی، ۹ مهر ۱۴۰۵ — 95f4de7 هر پنج کنترل CI در اجرای 36711401339 و نصب
+آفلاین تازهٔ رایانه و سرورها را گذراند. مفسر واقعی Nginx، مسیر دارای شمارشگرِ بدون علامت نقل‌قول
+را پیش از reload رد کرد. برنامه و پراکسی به سایت قبلیِ دست‌نخورده و AI و نمایه نیز به نسخهٔ
+قبلی برگشتند. این تلاش، شاهد پاسخ زنده، استدلال یا پذیرش آفلاین نیست. نامزد بعدی مسیر را داخل
+نقل‌قول می‌گذارد و پیش از تعویض باید بررسیِ مرحله‌ایِ مفسر واقعی سرور را بگذراند.
+
 Guarded chat/theme trial, 2026-09-30 — c609a83 passed all five CI jobs in run 36707574912,
 fresh hash-locked Ubuntu installation and both app/AI offline installs. Additive migration 0003
 passed. Live English chat/reload/ticket recall and dark EN/FA mobile UI passed, but thinking hit

@@ -26,8 +26,8 @@ def test_app_proxy_requires_tls_and_only_targets_loopback() -> None:
 def test_saved_generation_inherits_existing_bounded_inference_proxy_policy() -> None:
     profile = PROFILE.read_text(encoding="utf-8")
     matched = re.search(
-        r"location ~ (\^/api/v1/[^\n]+) \{(.+?)\n    \}",
-        profile[profile.index("    location ~ ^/api/v1/(assistant/") :],
+        r'location ~ "(\^/api/v1/[^\n]+)" \{(.+?)\n    \}',
+        profile[profile.index('    location ~ "^/api/v1/(assistant/') :],
         re.DOTALL,
     )
     assert matched is not None

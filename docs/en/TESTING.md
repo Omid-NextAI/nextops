@@ -1,5 +1,14 @@
 # Testing, model evaluation and release evidence
 
+## Saved-proxy real syntax preflight — 2026-09-30
+
+95f4de7 passed all five CI jobs in run 36711401339, 407 local unit/API/contract tests (two platform
+skips) and a fresh offline Ubuntu install. Both protected server installs passed. The real Nginx
+syntax check rejected the unquoted `{36}` route before reload; no broken configuration was served.
+The guarded app/proxy rollback passed `nginx -t`; AI/profile was also restored. This attempt has
+no live browser/model pass. The quoted correction requires staged real-parser validation before
+promotion; static regular-expression tests alone were insufficient.
+
 ## First guarded chat/theme trial — 2026-09-30
 
 c609a83 passed five-job CI run 36707574912, 406 local non-integration/non-browser tests (two
