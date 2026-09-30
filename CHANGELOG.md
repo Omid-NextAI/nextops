@@ -1,5 +1,15 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-09-30 — Persian current-fact guard / کنترلِ پرسشِ وضعیت فعلی در فارسی
+
+Recognize standalone «الان» and explicit personal infrastructure-state questions in general chat,
+including saved-history follow-ups. Keep ticket recall, safe diagnostic guidance and «بالانس»
+out of current-state classification. Retain failed thinking and technical semantic trials.
+
+«الان» مستقل و پرسش صریحِ وضعیت زیرساخت شخصی، از جمله در پیگیریِ گفت‌وگوی ذخیره‌شده، به شاهد
+زنده ارجاع داده می‌شوند. یادآوری شناسه، راهنمایی ایمن و «بالانس» پرسشِ وضعیت فعلی شمرده
+نمی‌شوند. آزمون‌های ناموفقِ استدلال و درستی فنی حفظ‌اند.
+
 ## 2026-09-30 — Saved-generation proxy repair / اصلاح پراکسیِ تولید ذخیره‌شده
 
 Match saved-message generation to the existing inference proxy timeout and rate limit, leaving

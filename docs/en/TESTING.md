@@ -1,5 +1,18 @@
 # Testing, model evaluation and release evidence
 
+## 258ac65 guarded findings — 2026-09-30
+
+All five jobs in run 36712348697, fresh Ubuntu/server offline installs and real staged Nginx
+validation passed. Thinking returned 504 at the unchanged 120-second deadline; a separate bounded
+128-reasoning/512-total direct probe also failed to return an accepted final answer. Neither
+proves a qualified reasoning profile; thinking stays off. Standard EN/FA generation, reload and
+ticket recall ran; the initial reload harness wrongly compared raw backticks with rendered Markdown
+and was corrected without changing UI code. A broad Persian DNS answer falsely generalized ping's
+name-resolution behavior and remains a failed semantic case. The separate numeric-IP functional
+test found standalone Persian «الان» bypassing the live-status redirect. Exact rollback restored
+the prior app/AI/proxy/profile. The new candidate repairs that deterministic gap and tests recall,
+guidance and «بالانس» as negative controls; no broad answer-accuracy acceptance is claimed.
+
 ## Saved-proxy real syntax preflight — 2026-09-30
 
 95f4de7 passed all five CI jobs in run 36711401339, 407 local unit/API/contract tests (two platform

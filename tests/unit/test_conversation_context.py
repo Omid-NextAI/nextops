@@ -77,13 +77,43 @@ def test_rejected_answers_are_not_followup_facts() -> None:
     assert select_context([rejected]) == ((), True)
 
 
-def test_saved_operational_followup_still_requires_live_evidence() -> None:
+@pytest.mark.parametrize(
+    ("locale", "question"),
+    [
+        ("en", "Is it healthy now?"),
+        ("en", "Is my server healthy?"),
+        ("fa", "آیا سرور من الان سالم است؟"),
+        ("fa", "آیا الان سالم است؟"),
+        ("fa", "آیا سرور من اکنون سالم است؟"),
+    ],
+)
+def test_saved_operational_followup_still_requires_live_evidence(
+    locale: str, question: str
+) -> None:
     context, _ = select_context([message(1, question="Explain my Linux server.")])
-    request = ConversationAssistantRequest(
-        locale="en", question="Is it healthy now?", history=context
-    )
+    request = ConversationAssistantRequest(locale=locale, question=question, history=context)
     result = assure_general_answer(request, assistant("It is healthy now."))
     assert result.integrity_status == "scope_redirect"
+    assert not result.live_monitoring_data
+
+
+@pytest.mark.parametrize(
+    ("locale", "question"),
+    [
+        ("en", "What was my investigation ticket?"),
+        ("en", "How can I safely check my server?"),
+        ("fa", "شناسهٔ بررسی من چه بود؟"),
+        ("fa", "چگونه سرور را بررسی کنم؟"),
+        ("fa", "بالانس بار سرور یعنی چه؟"),
+    ],
+)
+def test_operational_memory_does_not_turn_recall_or_guidance_into_live_status(
+    locale: str, question: str
+) -> None:
+    context, _ = select_context([message(1, question="Explain my Linux server; ticket ALPHA-731.")])
+    request = ConversationAssistantRequest(locale=locale, question=question, history=context)
+    result = assure_general_answer(request, assistant("A model-only explanation or ALPHA-731."))
+    assert result.integrity_status == "model_unverified"
     assert not result.live_monitoring_data
 
 

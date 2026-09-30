@@ -1,5 +1,21 @@
 # Project state / وضعیت پروژه
 
+258ac65 guarded findings, 2026-09-30 — five-job CI and the real staged Nginx parser passed.
+Thinking failed at the unchanged 120-second model deadline and remains disabled. Standard EN/FA
+chat, reload and ticket recall ran, but the Persian current-status question using standalone
+«الان» missed the deterministic scope redirect. It is fixed in the new candidate with explicit
+personal-status checks and negative recall/guidance regressions; all prior results remain private
+evidence, not release acceptance. A broad Persian DNS answer was also semantically rejected;
+general factual accuracy remains partial. Exact app/AI/proxy/profile rollback restored 810102f/862d311.
+
+یافته‌های آزمونِ محافظت‌شدهٔ 258ac65، ۹ مهر ۱۴۰۵ — پنج کنترل CI و مفسر واقعیِ مرحله‌ایِ Nginx
+موفق بودند. استدلال در مهلت ثابتِ ۱۲۰ثانیه‌ای مدل شکست خورد و غیرفعال می‌ماند. گفت‌وگو،
+بازکردن دوباره و یادآوری شناسه به دو زبان اجرا شدند؛ اما پرسشِ وضعیت فعلی با «الان» مستقل،
+ارجاع قطعی به شاهد زنده را نگرفت. نامزد تازه این مورد و پرسشِ صریحِ وضعیت شخصی را با آزمون
+مثبت و کنترل منفیِ یادآوری و راهنمایی اصلاح می‌کند. شاهدهای قبلی حفظ‌اند، نه پذیرش انتشار.
+پاسخ عمومیِ فارسی دربارهٔ DNS نیز از نظر معنا رد شد؛ دقت عمومی همچنان ناقص است. بازگشت دقیقِ
+برنامه، AI، پراکسی و نمایه، 810102f/862d311 را برگرداند.
+
 Proxy syntax preflight, 2026-09-30 — 95f4de7 passed all five CI jobs in run 36711401339 and
 fresh offline desktop/server installs. Nginx's real parser rejected the unquoted quantified route
 before reload. The app/proxy rollback restored the untouched serving site; AI/profile was also
