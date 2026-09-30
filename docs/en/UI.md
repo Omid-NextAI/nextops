@@ -1,12 +1,21 @@
 # Bilingual operations console and design system
 
+## Serving focused incident panel — 2026-09-30
+
+The controlled 810102f/35B workspace is live. A question naming `nextops-app.service` shows
+only that authorized unit's recorded state in the answer and default focused panel. Other
+already-authorized observations remain in “Show complete authorized evidence,” opened only by
+the user. English/Persian live browser checks, mobile width, exact app rollback and audit/hash
+matching passed; see [testing](TESTING.md). The OCS logo/palette are unchanged. This is not
+a claim that the model can answer every NOC/SOC question or that full production gates passed.
+
 ## Network/service incident focus candidate — 2026-09-30
 
 For an unambiguous network or service investigation, the candidate shows the requested bounded
 observations first and keeps unrelated, already-authorized evidence behind “Show complete
 authorized evidence.” It does not broaden collection or infer firewall/VPN state. English and
-Persian 375-pixel browser fixtures pass; the serving UI remains 862d311 until guarded deployment
-qualifies this source. Logo and palette bytes are unchanged.
+Persian 375-pixel browser fixtures passed. At this earlier checkpoint the serving UI was 862d311;
+the current release is recorded above. Logo and palette bytes are unchanged.
 
 [فارسی](../fa/UI.md) · [Index](INDEX.md)
 
@@ -14,7 +23,7 @@ qualifies this source. Logo and palette bytes are unchanged.
 
 ## Controlled conversational NOC/SOC workspace — 2026-09-29
 
-Now serving in controlled testing as 862d311/35B: five first/four final fresh browser/API cases,
+At that earlier controlled 862d311/35B checkpoint: five first/four final fresh browser/API cases,
 three audit/hash matches and exact b346c3e source rollback passed. Text-only `bdi` isolates plain UTC
 timestamps, IP/CIDR and percentages, preserving original answer/copy bytes; fresh offline package,
 RTL/mobile/copy and live provenance checks passed. Original OCS logo/palette bytes and all model,

@@ -7,14 +7,14 @@
 Owner update (2026-09-26): the owner tested an ESXi VM snapshot restore. Its dated result has
 not been reviewed here; independent database backup and restore gates remain unpassed.
 
-Current controlled workspace (2026-09-29): app/API 862d311 serves the unchanged CPU-only 35B model.
-The redesigned NOC/SOC conversation UI preserves the exact OCS logo and palette, adds bounded
-general follow-ups and safe text/code copying, and isolates RTL technical values. Nine fresh live
-browser/API requests, three audit/hash checks and exact b346c3e source rollback passed. A bounded
-guard corrects a named single-check blanket-health error; advice remains unverified and independent
-technical quality is partial. No training or new device connector. User testing is live, not
-production accepted. [Release status](docs/status/current-release.yaml) is authoritative; the
-95c6e50 qualification summary below is historical, not the current serving identity.
+Current controlled workspace (2026-09-30): app/API 810102f serves the unchanged CPU-only 35B model.
+Its bilingual network and named-service incident answers show only requested authorized observations;
+full evidence remains behind explicit disclosure. Five CI jobs, fresh offline installation, six live
+browser cases, six persisted audit/hash checks and exact 862d311 rollback with fresh EN/FA answers
+passed. The OCS logo/palette, general-answer limits and connector are unchanged. Raw model truncation,
+technical advice quality, exact-release server-WAN/VM cold-start and independent recovery remain
+open. User testing is live, **not full production acceptance**. [Release status](docs/status/current-release.yaml)
+is authoritative; the 95c6e50 qualification summary below is historical.
 
 Earlier answer-quality checkpoint (2026-09-29): the guarded clarity repair passed twelve fresh authenticated
 English/Persian API cases, including the four file-focus and host-scope failures observed on

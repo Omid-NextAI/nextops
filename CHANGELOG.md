@@ -1,5 +1,21 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Controlled exact-unit incident focus — 2026-09-30 / تمرکز کنترل‌شدهٔ واحدِ دقیق — ۹ مهر ۱۴۰۵
+
+Select app/API 810102f with unchanged CPU-only 35B after five CI jobs, fresh hash-locked
+Ubuntu 24.04 offline installation, six authenticated live EN/FA browser cases, six persisted
+audit/evidence-hash matches and exact 862d311 app rollback with two fresh restored answers.
+Default answers and panel show only the named service; complete canonical evidence remains
+explicitly available. The release is live for controlled user testing, not fully production
+accepted. Preserve raw truncation, prior semantic/504 failures and open WAN/VM/recovery gates.
+
+برنامه/API نسخهٔ 810102f با مدل ثابتِ 35B صرفاً CPU پس از پنج کنترل CI، نصب تازهٔ آفلاینِ
+Ubuntu 24.04 با هشِ قفل‌شده، شش مورد زندهٔ مرورگرِ احرازهویت‌شدهٔ دوزبانه، شش تطبیق ممیزی و
+هشِ شاهد و بازگشت دقیق به 862d311 با دو پاسخ تازهٔ نسخهٔ بازگشته انتخاب شد. پاسخ و رابطِ
+پیش‌فرض فقط سرویسِ نام‌برده را نشان می‌دهند؛ شاهدِ اصلیِ کامل با گشودنِ صریح در دسترس است.
+انتشار برای آزمون کنترل‌شدهٔ کاربران زنده است، نه تولیدِ کاملاً پذیرفته‌شده. قطع خامِ مدل،
+شکست‌های معنایی و ۵۰۴ قبلی و معیارهای بازِ WAN، VM و بازیابی حفظ شوند.
+
 ## Named-unit incident repair candidate — 2026-09-30 / نامزد اصلاح واحدِ نام‌برده — ۹ مهر ۱۴۰۵
 
 4d99c2c passed CI and exact offline packaging but was rejected live after a named service

@@ -1,5 +1,25 @@
 # Next task / کار بعدی
 
+Current unfinished checkpoint, 2026-09-30 — Keep the qualified 810102f/35B controlled
+workspace live and review held-out NOC/SOC technical answers against real platform/vendor
+semantics. Investigate the observed inference-admission 504 under existing one-active/two-queued
+limits without hiding timeouts or widening budgets. Run a separately authorized, bounded
+exact-release **server-side** WAN-disconnection and full-VM cold-start acceptance when a change
+window exists; browser WAN denial does not substitute. Independent recovery remains owner-deferred
+and unqualified. Do not redo the six passed live browser cases, six audit/hash matches, exact app
+rollback or fresh offline install. Do not represent this controlled deployment as full production.
+
+گام ناتمامِ جاری، ۹ مهر ۱۴۰۵ — محیط کنترل‌شدهٔ 810102f/35B زنده بماند و پاسخ‌های تازه و
+کنارگذاشته‌شدهٔ فنیِ NOC/SOC بر پایهٔ رفتار واقعیِ سکو و سازنده بازبینی شوند. خطای مشاهده‌شدهٔ
+۵۰۴ در پذیرشِ استنتاج، در همان سقفِ یک درخواست فعال و دو منتظر بررسی شود؛ مهلت‌گذشتگی پنهان یا
+سقف‌ها گسترش داده نشوند. قطع **سروری** WAN و شروع سرد کامل VM برای همین انتشار، در پنجرهٔ
+تغییرِ جداگانه و مجاز سنجیده شود؛ منع WAN مرورگر جای آن نیست. بازیابی مستقل به درخواست مالک
+در تعویق و هنوز تأییدنشده است. شش آزمون زندهٔ مرورگر، شش تطبیق ممیزی و هش، بازگشت دقیق برنامه و
+نصب تازهٔ آفلاینِ موفق دوباره کار ناتمام شمرده نشوند. این استقرارِ کنترل‌شده، تولیدِ کامل نیست.
+
+Earlier candidate checkpoints below are historical; do not re-run completed gates.
+گام‌های نامزدِ زیر تاریخی‌اند؛ معیارهای تکمیل‌شده دوباره اجرا نشوند.
+
 Immediate checkpoint, 2026-09-30 — Qualify the **new exact-unit source identity** through
 five-job CI, fresh offline wheel/install, guarded app-only live EN/FA network and named-service
 questions, persisted audit/evidence-hash matching, exact 862d311 rollback with fresh restored

@@ -1,5 +1,35 @@
 # Testing, model evaluation and release evidence
 
+## Serving 810102f exact-unit incident focus — 2026-09-30
+
+Exact head 810102f226e8b02a967cb4895b7906dce7ae1712 passed all five CI jobs in run
+36682741490 (quality/unit, browser, PostgreSQL 16/17 and secret scan). The fresh wheel SHA-256
+was f6881f1267af3672163f68af4d642a31f3403d9ec9e72449782f78ca1e4da6bf; installed
+application code digest was 111e4903ff364548296286a2f7376f3e90d09929e36dff724449faef178f8606.
+A fresh Ubuntu 24.04 install used only preloaded, hash-locked wheels and passed imports,
+dependency check, bilingual static-asset and exact-unit behavior probes. Desktop checks: 399
+passed, eleven environment-dependent skips; fourteen local real-browser fixtures passed.
+
+Guarded app-only promotion passed four fresh authenticated Edge/browser cases (EN/FA network and
+EN/FA named service) under verified TLS and local-only browser traffic. All answers cited actual
+Linux and separate Zabbix source times, retained partial-evidence warnings and canonical evidence
+hashes, and did not include unrequested sockets/services. First-case latencies were 49.5–93.0s;
+three raw model generations reached the unchanged 384-token cap, while application-owned focused
+answers were complete. Four persisted run/audit/evidence-hash pairs matched in a read-only
+transaction. Exact app rollback restored protected 862d311 and two fresh EN/FA model-only answers
+passed at 7.5/18.0s. Re-promotion of the identical immutable 810102f release passed two final
+EN/FA browser cases at 76.0/57.7s and two more persisted audit/hash matches. The protected wheel,
+installed-code probe, app/DB/Nginx units and zero failed units passed; only the change's final
+rollback timer was stopped. AI, model, runtime, connector, database schema, credentials, queue
+limits and OCS branding were not changed. Private raw reports remain outside Git.
+
+These six bounded request samples are not load percentiles or a general model-accuracy
+certificate. Preserve the earlier e2ea487 route/socket and 4d99c2c unrelated-service semantic
+rejections and the 504 reproduced on restored 862d311 during AI scheduler occupancy. No
+server-side WAN-disconnection, VM reboot/cold-start or independent restore was performed for
+810102f; those gates and broad held-out technical semantics remain open. Status is live
+controlled user testing, **not full production acceptance**.
+
 ## Exact-unit live rejection and new source — 2026-09-30
 
 Corrected 4d99c2c passed five CI jobs and fresh hash-locked Ubuntu 24.04 offline installation.
@@ -21,7 +51,8 @@ The full canonical evidence stays available only after explicit expansion and is
 projection. Local checks: 399 pass, eleven Windows/environment skips; fourteen real-browser
 fixtures pass; lint and strict typing pass. These are fixture checks, not live acceptance. CI,
 exact offline packaging, live audit and rollback must be rerun for the new source identity.
-Serving remains 862d311/35B; general model accuracy and production acceptance remain partial/open.
+Serving was 862d311/35B at that checkpoint; general model accuracy and production acceptance
+remained partial/open.
 
 ## Incident network/service focus candidate — 2026-09-30
 
