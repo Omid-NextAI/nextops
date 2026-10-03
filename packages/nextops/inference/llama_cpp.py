@@ -25,6 +25,43 @@ from nextops.inference.contracts import (
 from nextops.security.http import NoRedirectHandler
 
 MAX_PROVIDER_RESPONSE_BYTES = 1_048_576
+THINKING_BUDGET_TOKENS = 128
+THINKING_BUDGET_MESSAGE = "Analysis budget exhausted. Stop analysis and give the final answer now."
+
+
+class _FinalAnswer(BaseModel):
+    """A thinking completion is a final-answer envelope, never a transcript."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+
+    answer: str = Field(min_length=1, max_length=16_000)
+
+
+def _final_answer(content: str, *, thinking: bool, finish_reason: FinishReason) -> str:
+    if thinking:
+        # A forced reasoning stop may otherwise leave planning prose in content, with no
+        # think tags. Do not treat HTTP 200 or a truncated envelope as a final answer.
+        if finish_reason != FinishReason.STOP:
+            raise ValueError("thinking did not complete a final answer")
+        content = _FinalAnswer.model_validate_json(content).answer
+    if not content.strip() or re.search(
+        r"</?(?:think|analysis|tool_call)\b|<\|(?:think|analysis|im_start|im_end)",
+        content,
+        re.IGNORECASE,
+    ):
+        raise ValueError("provider exposed private reasoning or empty final content")
+    if thinking and re.search(
+        r"(?im)^\s*(?:#{1,6}\s*|\d+[.)]\s*|[-*]\s*)?(?:\*\*)?"
+        r"(?:analy[sz]e the (?:user|question|request)|analysis of (?:the )?(?:user|question)|"
+        r"(?:draft|refine|formulate) (?:the |my )?(?:answer|response)|"
+        r"(?:check|review) (?:the )?(?:constraints|instructions)|"
+        r"(?:my |internal |private )?(?:reasoning|thought process)\s*:|"
+        r"(?:تحلیل (?:پرسش|سؤال|درخواست)|بررسی (?:قیود|دستورها)|"
+        r"پیش[‌ -]?نویس پاسخ|استدلال (?:خصوصی|داخلی))\s*:)",
+        content,
+    ):
+        raise ValueError("provider exposed internal drafting in final content")
+    return content
 
 
 class JsonTransport(Protocol):
@@ -245,6 +282,8 @@ class LlamaCppProvider:
                 "actions. Explain uncertainty and ask one focused question when necessary. "
                 "Do not solicit secrets. Prefer bounded read-only diagnostic examples. "
                 "A successful check proves only that check's scope, not overall health. "
+                "Follow the latest question's requested length and format exactly. "
+                "Do not add a follow-up question or a procedure unless needed or requested. "
                 "Write a finished answer within the total budget; never output internal reasoning."
             )
         # Qwen3 documents /no_think as its soft switch for non-thinking output:
@@ -270,9 +309,27 @@ class LlamaCppProvider:
             payload["messages"][-1]["content"] = request.prompt
             payload["chat_template_kwargs"] = {"enable_thinking": request.thinking}
         if request.thinking:
-            # The matching provisioned runtime caps reasoning globally; the total request
-            # budget also remains finite. Private reasoning is not part of our response.
+            # Controls belong to the trusted adapter, not user text or browser parameters.
+            # Pinned server-common.cpp accepts reasoning_budget_tokens and its message.
+            payload["messages"][0]["content"] += (
+                f" Keep private analysis concise: at most {THINKING_BUDGET_TOKENS} tokens. "
+                "Return only a JSON object with the final answer in the answer field, "
+                "never analysis, constraints, drafts or internal instructions."
+            )
             payload["reasoning_format"] = "deepseek"
+            payload["reasoning_budget_tokens"] = THINKING_BUDGET_TOKENS
+            payload["reasoning_budget_message"] = THINKING_BUDGET_MESSAGE
+            payload["response_format"] = {
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "nextops_final",
+                    "strict": True,
+                    "schema": _FinalAnswer.model_json_schema(),
+                },
+            }
+            payload["top_p"] = 0.95
+            payload["top_k"] = 20
+            payload["min_p"] = 0.0
         if request.detailed or request.thinking:
             await self._check_context(payload, request.max_output_tokens)
         raw = await self._transport.post_json(
@@ -287,14 +344,15 @@ class LlamaCppProvider:
             if parsed.model != self._settings.model_id:
                 raise ValueError("provider returned a different model identity")
             choice = parsed.choices[0]
-            if re.search(
-                r"</?think\b|<\|(?:think|analysis)", choice.message.content, re.IGNORECASE
-            ):
-                raise ValueError("provider exposed private reasoning in final content")
+            answer = _final_answer(
+                choice.message.content,
+                thinking=request.thinking,
+                finish_reason=choice.finish_reason,
+            )
             if parsed.usage.completion_tokens > request.max_output_tokens:
                 raise ValueError("provider exceeded the requested output limit")
             return ProviderGeneration(
-                answer=choice.message.content,
+                answer=answer,
                 model_id=self._settings.model_id,
                 prompt_tokens=parsed.usage.prompt_tokens,
                 completion_tokens=parsed.usage.completion_tokens,

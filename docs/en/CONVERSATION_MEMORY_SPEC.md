@@ -72,6 +72,40 @@ sensitive application data; do not paste secrets. Existing database/TLS/backup c
 
 ## Tests and deployment rollback
 
+### Bounded requalification — 2026-10-03
+
+The owner requests qualification testing and implementation of thinking. Preserve b5e74f9
+standard service while diagnosing the exact pinned runtime; do not simply flip the failed flag.
+First run explicit native reasoning budgets with synthetic, secret-free questions. A candidate
+must deliver a nonempty, complete EN/FA final answer within 120 seconds, discard private reasoning,
+and obey an application-owned reasoning budget no greater than 384 tokens and total output at
+most 2048. A HTTP 200, truncated reply or template-only success is insufficient.
+
+The new adapter owns a 128-token reasoning request, an explicit analysis-to-final transition
+message and a strict `answer` JSON envelope. Only its decoded, complete final answer is returned;
+empty/truncated/malformed envelopes, reasoning delimiters and recognizable internal drafting
+headings fail closed. These checks are not a proof that arbitrary reasoning prose cannot leak.
+Native diagnostic results: the 64-token English trial leaked drafting and failed; four revised
+128-token EN/FA final-envelope probes completed in 25.570–61.446 seconds. These short synthetic
+passes do not qualify the matched APIs, browser, persisted history, longer context or general
+technical correctness. Both live thinking flags remain disabled pending the complete gate.
+
+Then independently review held-out technical correctness and requested format; measure actual
+local token counts near the 16K admission boundary, rejection beyond it, latency and memory.
+Exercise at most four concurrent synthetic requests against the one-active/two-queued boundary:
+the excess request must be denied, waiters must expire within the existing five-second queue
+deadline, counters must return to zero and a new request must complete. Do not widen queues,
+deadlines, context or resources to obtain a pass. Native diagnostic outcomes, API outcomes and
+browser/storage/audit outcomes are separate evidence. Full-budget context generation can fail
+even when admission is correct. Preserve raw failed findings outside Git.
+
+Tasks: diagnose template/budget handling; implement trusted bounded controls and regression tests;
+run the bounded corpus and contention/recovery; review EN/FA outcomes; qualify exact package and
+matched rollback before enabling both flags. No runtime/model replacement, downloads, VM resize,
+schema downgrade or new target integration is part of this increment. If any required thinking
+gate fails, retain standard live service and the disabled thinking flag. Update both guides,
+project state and next task with actual results, not intended acceptance.
+
 Unit tests cover Unicode, whole-pair selection, omission, no client policy/history controls,
 live-fact follow-ups, thinking denial, wrong context, token overflow and reasoning leakage.
 PostgreSQL tests cover restart, cross-owner denial, concurrent requests, replay/conflict,
