@@ -110,6 +110,7 @@ def test_thinking_is_explicit_local_bounded_and_final_only() -> None:
         assert result.answer == "The final answer."
         assert "Private trace" not in result.model_dump_json()
         assert "Persian below 70 words" not in completion["messages"][0]["content"]
+        assert "use digits, not number words" in completion["messages"][0]["content"]
 
     asyncio.run(scenario())
 
@@ -172,6 +173,9 @@ def test_reasoning_in_content_is_rejected_not_stored_or_displayed(content: str) 
         '{"answer":"پیش‌نویس پاسخ: استدلال خصوصی"}',
         '{"answer":"تحلیل پرسش: استدلال خصوصی"}',
         '{"answer":"<|im_start|>assistant"}',
+        '{"answer":"Draft the Answer: private","answer":"Safe"}',
+        '{"answer":"Safe","ans\\u0077er":"Different"}',
+        '{"answer":false}',
     ],
 )
 def test_thinking_rejects_unstructured_empty_extra_fields_and_drafting(content: str) -> None:

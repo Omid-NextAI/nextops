@@ -37,13 +37,24 @@ class _FinalAnswer(BaseModel):
     answer: str = Field(min_length=1, max_length=16_000)
 
 
+def _unique_json_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    """Reject ambiguous duplicate envelope fields rather than accepting the last value."""
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("duplicate final-answer field")
+        result[key] = value
+    return result
+
+
 def _final_answer(content: str, *, thinking: bool, finish_reason: FinishReason) -> str:
     if thinking:
         # A forced reasoning stop may otherwise leave planning prose in content, with no
         # think tags. Do not treat HTTP 200 or a truncated envelope as a final answer.
         if finish_reason != FinishReason.STOP:
             raise ValueError("thinking did not complete a final answer")
-        content = _FinalAnswer.model_validate_json(content).answer
+        envelope = json.loads(content, object_pairs_hook=_unique_json_object)
+        content = _FinalAnswer.model_validate(envelope).answer
     if not content.strip() or re.search(
         r"</?(?:think|analysis|tool_call)\b|<\|(?:think|analysis|im_start|im_end)",
         content,
@@ -283,6 +294,8 @@ class LlamaCppProvider:
                 "Do not solicit secrets. Prefer bounded read-only diagnostic examples. "
                 "A successful check proves only that check's scope, not overall health. "
                 "Follow the latest question's requested length and format exactly. "
+                "For an identifier-only answer, return the exact identifier with no prefix, "
+                "suffix or explanation. For a digit-only answer, use digits, not number words. "
                 "Do not add a follow-up question or a procedure unless needed or requested. "
                 "Write a finished answer within the total budget; never output internal reasoning."
             )
