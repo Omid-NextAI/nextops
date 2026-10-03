@@ -2,16 +2,26 @@
 
 AI capability repair, 2026-10-03 — source adds a versioned task-adaptive general policy,
 whole-pair history selection that skips oversized exchanges, an internal omission marker and
-18 fresh EN/FA cases with explicit semantic criteria. 501 local tests, strict types/lint and
-24 browser fixtures pass; native semantics remain pending. Serving69/current35 and disabled
-thinking remain. No schema, dependency, branding, profile or resource change.
+18 fresh EN/FA cases with explicit semantic criteria. 502 local tests, strict types/lint,
+24 browser fixtures and all five source CI jobs pass, including PostgreSQL16/17. Exact-source
+standard35 completed all 18 requests and four exact checks, but technical/coding review failed.
+FA code invented range input and retained an invalid unhandled assertion; diagnostics still
+overclaimed scope. Both code blocks compile only, never executed. Offline application-guard
+replay changed four hypothetical/stale-data replies into generic redirects; user-facing acceptance
+is not run. No promotion or thinking re-test after failure. Serving69/current35, disabled thinking,
+schema, dependencies, branding, profiles and resources remain unchanged. Final native counters zero.
 [Specification](en/AI_CAPABILITY_SPEC.md).
 
 اصلاح توان پاسخ‌گویی، ۳ اکتبر ۲۰۲۶ — سیاست عمومیِ نسخه‌دار و متناسب با درخواست، انتخاب جفت
 کامل با کنارگذاشتن تبادلِ بزرگ، نشانگر داخلیِ حذف سابقه و ۱۸ پرسش تازهٔ دوزبانه با معیار صریح
-معنا در کد اضافه شدند. ۵۰۱ آزمون محلی، نوع‌سنجی/lint و ۲۴ آزمون مرورگر با دادهٔ ساختگی موفق‌اند؛
-معنای مدل هنوز ارزیابی نشده است. خدمت69/مدل35 و استدلال خاموش حفظ‌اند. پایگاه، وابستگی،
-نشان و رنگ، نمایه و منابع تغییر نکردند. [مشخصات](fa/AI_CAPABILITY_SPEC.md).
+معنا در کد اضافه شدند. ۵۰۲ آزمون محلی، نوع‌سنجی/lint، ۲۴ آزمون مرورگر با دادهٔ ساختگی و پنج
+کنترل CI، از جمله PostgreSQL16/17، موفق‌اند. مدل35 با کد دقیق، ۱۸ درخواست و چهار کنترل دقیق
+را تکمیل کرد، اما درستی فنی و کد شکست خورد: کد فارسی، محدودهٔ پورت را بی‌درخواست اضافه و
+assert نامعتبرِ بدون رسیدگی را حفظ کرد؛ حدود بعضی ادعاهای تشخیصی نیز بیش‌ازحد بود. دو قطعهٔ
+کد فقط کامپایل شدند، نه اجرا. بازپخش آفلاینِ کنترل پاسخ، چهار پاسخ فرضی/قدیمی را به پیام
+عمومی تبدیل کرد؛ پذیرش مرز کاربر اجرا نشده است. پس از شکست، استقرار یا آزمون دوبارهٔ استدلال
+انجام نشد. خدمت69/مدل35، استدلال خاموش، پایگاه، وابستگی، نشان و رنگ، نمایه و منابع ثابت‌اند.
+شمار نهاییِ کار فعال/منتظر مدل صفر است. [مشخصات](fa/AI_CAPABILITY_SPEC.md).
 
 Earlier measured comparison, retained unchanged / مقایسهٔ پیشین بدون تغییر محفوظ است:
 

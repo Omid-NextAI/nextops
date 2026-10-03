@@ -5,12 +5,16 @@
 Add shared task-adaptive, calibrated technical/coding guidance without expanding token/deadline
 budgets or tool authority. Skip oversized saved pairs, retain whole fitting history and supply an
 internal omission notice. Freeze 18 fresh EN/FA cases with separate semantic criteria. Source
-tests pass; live profile/branding/model and thinking-off state are unchanged. No accuracy promise.
+tests and five CI jobs pass. All 18 native standard replies/four exact checks pass, but technical/
+coding review fails and four offline guard replays redirect. Keep unpromoted; live profile/branding/
+model and thinking-off state are unchanged. No accuracy promise.
 
 راهنمای مشترک و متناسب با درخواست برای پاسخ فنی و کدنویسی، با حدود روشن ادعا، بدون افزایش سقف
 توکن/مهلت یا اختیار ابزار اضافه شد. سابقهٔ بزرگ کنار گذاشته، جفتِ کاملِ جاگرفتنی حفظ و حذف
 سابقه در داخل اعلام می‌شود. ۱۸ پرسش تازهٔ دوزبانه با معیار جداگانهٔ معنا ثابت شدند. آزمون کد
-موفق است؛ نمایه، نشان و رنگ، مدل زنده و استدلال خاموش ثابت‌اند. تضمین درستی داده نمی‌شود.
+و پنج کنترل CI موفق‌اند. هجده پاسخ مستقیمِ معمولی/چهار کنترل دقیق موفق‌اند، اما بازبینی فنی/
+کد شکست خورد و چهار پاسخ در بازپخش تغییر کردند. مستقر نشود؛ نمایه، نشان و رنگ، مدل زنده و
+استدلال خاموش ثابت‌اند. تضمین درستی داده نمی‌شود.
 
 ## 2026-10-03 — Measured model comparison / مقایسهٔ اندازه‌گیری‌شدهٔ مدل
 

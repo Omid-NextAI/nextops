@@ -2,15 +2,19 @@
 
 CAP-01–CAP-06 (2026-10-03) map to [capability specification](../en/AI_CAPABILITY_SPEC.md),
 `inference/advisory_prompt.py`, conversation selector/contracts, provider/API tests and the fresh
-18-case `qualify_thinking.py --scope capabilities` corpus. Source implemented; 501 local tests
-pass, not native semantic or production acceptance. CM-03's whole-pair/six-turn/12K bounds and
+18-case `qualify_thinking.py --scope capabilities` corpus. Source implemented; 502 local tests
+and five CI jobs pass. Native18 completions/four exact checks pass, but technical/coding semantics
+fail and four offline guard redirects expose an intent gap. No promotion. See [testing](../en/TESTING.md).
+CM-03's whole-pair/six-turn/12K bounds and
 omissions remain; oversized pairs may now be skipped for older fitting pairs. Original integrations,
 live-evidence permissions and offline gates are preserved.
 
 CAP-01 تا CAP-06 (۳ اکتبر ۲۰۲۶) به [مشخصات](../fa/AI_CAPABILITY_SPEC.md)، سیاست عمومی،
 انتخاب‌گر/قرارداد گفت‌وگو، آزمون provider/API و مجموعهٔ تازهٔ ۱۸موردیِ
-`qualify_thinking.py --scope capabilities` متصل‌اند. کد پیاده و ۵۰۱ آزمون محلی موفق‌اند، نه پذیرش
-معنا یا تولید. جفت کامل، سقف شش تبادل/۱۲ هزار نویسه و اعلام حذفِ CM-03 حفظ‌اند؛ جفت بزرگ
+`qualify_thinking.py --scope capabilities` متصل‌اند. کد پیاده، ۵۰۲ آزمون محلی و پنج کنترل CI
+موفق‌اند. هجده تولید/چهار کنترل دقیق موفق‌اند، اما معنا/کدنویسی شکست خورد و چهار تغییر پاسخ
+در بازپخش، شکاف قصد را نشان داد. استقرار انجام نشد؛ [آزمون](../fa/TESTING.md) مبناست.
+جفت کامل، سقف شش تبادل/۱۲ هزار نویسه و اعلام حذفِ CM-03 حفظ‌اند؛ جفت بزرگ
 می‌تواند به سود جفت قدیمی‌ترِ جاگرفتنی کنار رود. اتصال اولیه، مجوز شاهد زنده و معیار آفلاین حفظ‌اند.
 
 MU-01–MU-09 (original sections 9, 17, 25, 27; 2026-10-03) map to

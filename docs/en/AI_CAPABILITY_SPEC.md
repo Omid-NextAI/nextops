@@ -2,8 +2,17 @@
 
 [فارسی](../fa/AI_CAPABILITY_SPEC.md) · [Model comparison](MODEL_UPGRADE_SPEC.md)
 
-Status: implemented in source, 2026-10-03; native qualification pending. This is not a
-production-readiness claim.
+Status: implemented in source, 2026-10-03; standard native completion passed, semantic/coding
+qualification failed. Source `c145500` remains unpromoted. This is not production readiness.
+
+Measured outcome: 18 new final answers completed in 3.428–79.780s (median 13.602s); all four
+exact checks passed. Technical scope and coding conformance still failed, notably a Persian
+function that invented port-range input and retained an invalid unhandled test. Both code blocks
+compile, but were not executed. Offline guard replay changed four synthetic/stale-data replies
+into scope redirects; that is not matched serving-API/browser acceptance. Preserve this frozen
+corpus and scores. The next repair needs new cases, not a retuned pass on this set. See
+[testing](TESTING.md). Thinking, near-budget context, live promotion and WAN/cold-start/rollback
+for this revision were not run after the prerequisite failure.
 
 ## Problem and baseline
 

@@ -1,16 +1,21 @@
 # Next task / کار بعدی
 
-First unfinished checkpoint for the capability repair — freeze the exact source/new 18-case
-corpus, stage privately against serving35 without changing live flags, and review EN/FA finals
-against predeclared criteria. Completion/format is not semantic acceptance. Any failure stops
-promotion. Only a passing prerequisite permits matched app/history/audit/admission, near-budget
-recovery and current-source WAN/cold-start/rollback qualification. See
-[the bounded increment](en/AI_CAPABILITY_SPEC.md); older failed gates remain failed.
+First unfinished checkpoint after capability-v1 — preserve the measured 18-case results and
+live69/35/thinking-off state. Design a bounded coding requirement-conformance and diagnostic-scope
+repair plus safe hypothetical-versus-live intent handling. FA code added unrequested range syntax
+and an unhandled invalid assertion; four offline guard replays became generic redirects. Do not
+execute model code on a credential-bearing host, repeat this set as a held-out pass, enable thinking,
+switch models or widen budgets. Freeze new EN/FA cases before generation. Only passing semantics
+permit matched app/history/audit/admission, longer-context recovery and current-source WAN/cold-start/
+exact rollback. See [the bounded increment](en/AI_CAPABILITY_SPEC.md); older failed gates remain failed.
 
-نخستین گام ناتمامِ اصلاح — کد دقیق و مجموعهٔ تازهٔ ۱۸موردی ثابت و با مدل35 جاری، خصوصی و بدون
-تغییر گزینهٔ زنده آزموده شوند؛ پاسخ نهایی دوزبانه با معیار ازپیش‌اعلام‌شده بازبینی شود. تکمیل
-یا قالب دقیق، پذیرش معنا نیست. شکست مانع استقرار است. فقط پس از پذیرش پیش‌نیاز، آزمون
-برنامه/سابقه/ممیزی/صف، ادامه پس از خرابیِ نزدیک سقف، WAN/شروع سرد و بازگشتِ کد فعلی مجاز است.
+نخستین گام ناتمام پس از capability-v1 — نتیجهٔ ۱۸ مورد و خدمت69/مدل35 با استدلال خاموش حفظ
+شوند. اصلاح محدودِ انطباق کد با درخواست و حدود بررسی تشخیصی، همراه تفکیک امنِ پرسش فرضی و
+وضعیت زنده طراحی شود. کد فارسی، قالب محدوده و assert نامعتبرِ بدون رسیدگی اضافه کرد؛ چهار
+پاسخ در بازپخش آفلاین به پیام عمومی تبدیل شدند. کد مدل در میزبان دارای اطلاعات ورود اجرا
+نشود؛ همین مجموعه آزمون مستقلِ موفق نام نگیرد؛ استدلال، مدل یا سقف بی‌پذیرش تغییر نکند.
+پرسش تازهٔ دوزبانه پیش از تولید ثابت شود. فقط پذیرش معنا، آزمون هماهنگ برنامه/سابقه/ممیزی/صف،
+ادامه پس از خرابیِ زمینهٔ بلندتر و WAN/شروع سرد/بازگشت دقیقِ کد فعلی را مجاز می‌کند.
 [گام محدود](fa/AI_CAPABILITY_SPEC.md) مبناست؛ شکست قبلی حفظ می‌شود.
 
 Earlier checkpoint and outcomes / گام قبلی و نتیجه:

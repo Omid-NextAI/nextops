@@ -1,5 +1,49 @@
 # Testing, model evaluation and release evidence
 
+## Capability-v1 standard35 repair — 2026-10-03
+
+Source `c14550017b4fbc40e23747b8b961f32c2662b825`, code SHA-256
+`cdc57bdcaca97a6f8a3f961b9ea57607342bdec3f149cf3161be0749a8fc7db0`, was privately staged,
+not promoted. The 18-case in-house EN/FA corpus and review criteria were frozen before generation;
+standard corpus SHA-256 is `7c9106db35b4c5710c194a88f5a6890d5c6bad7efe53e6fbbe956f45644cc6e5`.
+The existing Qwen3.5 artifact/runtime, 16 threads, one slot, 18-equivalent quota, 96-GiB native
+memory cap, 16K context and 120-second deadline were unchanged. Saved-standard output stayed
+1024 tokens; no thinking, model download, runtime replacement, resource/network/schema mutation,
+public transcript or target collection occurred. Protected record `capability-v1-20261003` holds
+commands, final-only report and separate per-case engineering review; raw reasoning/secrets are absent.
+
+`qualify_thinking.py --scope capabilities --mode standard` made 18 sequential actual generations:
+all finished with stop in 3.428–79.780s, median 13.602s. Four exact recall/arithmetic checks passed.
+Observed native cgroup memory maximum was 46,822,105,088 bytes; it includes file-cache/accounting
+and possible other native work, not minimum required RAM. NUMA, TTFT, sustained/concurrent load
+and production p95 were not measured. No timeout/retry occurred. The script exited 2 (`partial`),
+not accepted; PowerShell surfaced the nonzero remote exit as 1. The underlying report is retained.
+
+Separate review **failed** technical/coding acceptance. EN diagnostic wording overclaimed what
+upstream/log checks establish. FA stale-service guidance substituted generic ping/curl/network
+health. FA coding invented port-range syntax and kept an unhandled invalid assertion before its
+purported correction; EN/FA produced six/eight assertions instead of the requested four. Both
+code blocks passed AST parsing/compilation only; generated code was never executed. Correct
+DNS/TLS/loss limitations, unknown missing references and exact replies in these cases do not prove
+broad accuracy. Persian `handshake` wording was also unnatural. This is engineering review,
+not independent human approval or an external benchmark. Do not retune these scores into a pass.
+
+Offline replay of these final answers through `assure_general_answer` preserved model-only labels
+but changed four synthetic TLS/stale-data replies to scope redirects. That exposes an intent/UX
+gap, not serving API/browser/storage/audit acceptance. The runtime and API ended ready with zero
+processing/deferred/active/queued requests, swap zero and both public thinking flags still off.
+Serving app/AI `69c9260` and selected35 remained unchanged. Longer-context/recovery, thinking,
+matched application/history/audit/admission, WAN/cold-start and this revision's exact rollback
+were not run after semantic failure. Older failures remain; no production promotion.
+
+Source evidence: `uv run --offline pytest -m "not integration and not browser" -q`:
+502 passed, two Windows POSIX skips, 46 deselected. Browser fixtures: 24 passed, one global POSIX
+skip, 523 deselected (before the added integration case). Strict104-file types, lint/format,
+offline build and docs130 Markdown/40 pairs plus artifact/dossier/installer validators passed.
+[CI run 37120644890](https://github.com/Omid-NextAI/nextops/actions/runs/37120644890) passed all
+five jobs, including restricted PostgreSQL16/17, browser fixtures, dependency audit and Gitleaks.
+This verifies source boundaries and fixtures, not general model accuracy or live deployment.
+
 ## Four-profile CPU comparison — 2026-10-03
 
 Protected record `qwen36-20261003` holds the exact commands, reports, final synthetic answers,
