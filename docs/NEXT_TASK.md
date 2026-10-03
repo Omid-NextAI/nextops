@@ -1,5 +1,20 @@
 # Next task / کار بعدی
 
+First unfinished checkpoint for the capability repair — freeze the exact source/new 18-case
+corpus, stage privately against serving35 without changing live flags, and review EN/FA finals
+against predeclared criteria. Completion/format is not semantic acceptance. Any failure stops
+promotion. Only a passing prerequisite permits matched app/history/audit/admission, near-budget
+recovery and current-source WAN/cold-start/rollback qualification. See
+[the bounded increment](en/AI_CAPABILITY_SPEC.md); older failed gates remain failed.
+
+نخستین گام ناتمامِ اصلاح — کد دقیق و مجموعهٔ تازهٔ ۱۸موردی ثابت و با مدل35 جاری، خصوصی و بدون
+تغییر گزینهٔ زنده آزموده شوند؛ پاسخ نهایی دوزبانه با معیار ازپیش‌اعلام‌شده بازبینی شود. تکمیل
+یا قالب دقیق، پذیرش معنا نیست. شکست مانع استقرار است. فقط پس از پذیرش پیش‌نیاز، آزمون
+برنامه/سابقه/ممیزی/صف، ادامه پس از خرابیِ نزدیک سقف، WAN/شروع سرد و بازگشتِ کد فعلی مجاز است.
+[گام محدود](fa/AI_CAPABILITY_SPEC.md) مبناست؛ شکست قبلی حفظ می‌شود.
+
+Earlier checkpoint and outcomes / گام قبلی و نتیجه:
+
 First unfinished checkpoint, after the 2026-10-03 four-profile comparison — keep standard
 `69c9260`/Qwen3.5 live and both thinking flags off. Full candidate hashes/import/CPU load and
 56 bounded requests are complete; do not repeat them as missing. Technical correctness failed

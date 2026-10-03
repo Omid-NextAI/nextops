@@ -1,5 +1,20 @@
 # Project state / وضعیت پروژه
 
+AI capability repair, 2026-10-03 — source adds a versioned task-adaptive general policy,
+whole-pair history selection that skips oversized exchanges, an internal omission marker and
+18 fresh EN/FA cases with explicit semantic criteria. 501 local tests, strict types/lint and
+24 browser fixtures pass; native semantics remain pending. Serving69/current35 and disabled
+thinking remain. No schema, dependency, branding, profile or resource change.
+[Specification](en/AI_CAPABILITY_SPEC.md).
+
+اصلاح توان پاسخ‌گویی، ۳ اکتبر ۲۰۲۶ — سیاست عمومیِ نسخه‌دار و متناسب با درخواست، انتخاب جفت
+کامل با کنارگذاشتن تبادلِ بزرگ، نشانگر داخلیِ حذف سابقه و ۱۸ پرسش تازهٔ دوزبانه با معیار صریح
+معنا در کد اضافه شدند. ۵۰۱ آزمون محلی، نوع‌سنجی/lint و ۲۴ آزمون مرورگر با دادهٔ ساختگی موفق‌اند؛
+معنای مدل هنوز ارزیابی نشده است. خدمت69/مدل35 و استدلال خاموش حفظ‌اند. پایگاه، وابستگی،
+نشان و رنگ، نمایه و منابع تغییر نکردند. [مشخصات](fa/AI_CAPABILITY_SPEC.md).
+
+Earlier measured comparison, retained unchanged / مقایسهٔ پیشین بدون تغییر محفوظ است:
+
 Qwen3.6 comparison outcome, 2026-10-03 — independent full-file desktop/server SHA checks,
 protected candidate import and isolated CPU load passed. Source `29e08fc` produced 56 new
 synthetic EN/FA responses: 14 cases per model/mode, all completed within 120s, all 16 exact

@@ -27,6 +27,7 @@ remaining task-specific sources. The repository skill
 | Certificate lifecycle | `docs/requirements/CERTIFICATE_LIFECYCLE_SPEC.md`, `docs/en/OPERATIONS.md`, Persian operations pair, systemd checker/timer, Nginx profiles, current release manifest, and private rotation/alert evidence |
 | Local CPU inference | `docs/en/CPU_AI.md`, `MODEL_UPGRADE_SPEC.md`, `OFFLINE_RUNTIME.md`, `TESTING.md`, pinned 8B/14B/32B/30B-A3B/Qwen3.5-35B-A3B and staged Qwen3.6 artifact records, systemd model-selection profiles, current state/next task, and Persian pairs when human-facing text changes |
 | AI answer integrity | `docs/requirements/ANSWER_INTEGRITY_SPEC.md`, `docs/en/AI_INTEGRITY.md`, Persian pair, assistant contracts, answer-integrity policy, evaluation corpus, current release manifest, and private live evidence |
+| General AI capability, coding and context repair | `docs/en/AI_CAPABILITY_SPEC.md`, Persian pair, conversation-memory specification, general-answer policy, capability corpus and current measured model results |
 | Conversational frontend and NOC/SOC guidance | `docs/requirements/NOC_SOC_WORKSPACE_SPEC.md`, `docs/en/UI.md`, Persian pair, `DATA_API.md`, assistant/context contracts, static assets, browser tests, integrity guide and current release manifest |
 | Persistent conversations and local thinking | `docs/en/CONVERSATION_MEMORY_SPEC.md`, `CONVERSATIONS.md`, Persian pairs, ADR 0009, conversation schema/API/tests, expanded-chat candidate profile and current release manifest |
 | Server, storage, or deployment | use `nextops-server-operations`; read the start checklist, matching dossier, installer guide, storage/offline/server guide, and current private change record |
@@ -45,6 +46,8 @@ Each bullet uses a repository-relative path followed by its role. Keep the paths
 Markdown file is added, renamed, or removed.
 
 - `docs/en/MODEL_UPGRADE_SPEC.md` — Bounded Qwen3.6 artifact, source, capacity, comparison and promotion specification.
+- `docs/en/AI_CAPABILITY_SPEC.md` — Bounded technical-answer, coding and conversation-context improvement specification.
+- `docs/fa/AI_CAPABILITY_SPEC.md` — Persian technical-answer, coding and context improvement specification.
 - `docs/fa/MODEL_UPGRADE_SPEC.md` — Persian bounded Qwen3.6 model evaluation specification.
 
 - `docs/en/CONVERSATION_MEMORY_SPEC.md` — Bounded saved-chat and local-thinking specification; source versus live acceptance.

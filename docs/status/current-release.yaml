@@ -82,6 +82,14 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: general_ai_capability_repair_v1
+    status: implemented_unaccepted
+    evidence:
+      - docs/en/AI_CAPABILITY_SPEC.md
+      - docs/fa/AI_CAPABILITY_SPEC.md
+      - packages/nextops/inference/advisory_prompt.py
+      - tests/unit/test_conversation_context.py
+      - tests/unit/test_thinking_qualification.py
   - id: qwen36_staged_source_support
     status: implemented_unaccepted
     evidence:
@@ -233,6 +241,12 @@ capabilities:
       - deploy/systemd/nextops-certificate-check.timer
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
+  - id: capability_v1_native_standard_semantics
+    status: not_run
+    evidence:
+      - docs/en/AI_CAPABILITY_SPEC.md
+      - docs/fa/AI_CAPABILITY_SPEC.md
+      - docs/NEXT_TASK.md
   - id: qwen36_desktop_artifact_integrity
     status: passed
     evidence:

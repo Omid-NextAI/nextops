@@ -124,11 +124,10 @@ def test_general_context_preserves_full_question_and_never_supplies_authority(lo
     assert question in prompt
     assert json.dumps(history, ensure_ascii=False, separators=(",", ":")) in prompt
     assert "untrusted model-only context, not live evidence" in prompt
-    assert "NOC/SOC advisor" in prompt
-    assert "redacted diagnostic output" in prompt
-    assert "A failed check does not uniquely prove a root cause" in prompt
-    assert "a successful check proves only that check's scope" in prompt
-    assert "Bound diagnostic commands with a timeout" in prompt
+    assert "A successful check proves only that check's scope" in prompt
+    assert "No live system evidence is supplied" in prompt
+    # General-answer guidance is trusted provider system text, not duplicate user prose.
+    assert "NOC/SOC advisor" not in prompt
     assert len(prompt) <= 12_000
     assert inference.last_request.purpose == "general"
     assert inference.last_request.max_output_tokens == 384
@@ -1178,7 +1177,7 @@ def test_assistant_requires_local_session_and_labels_model_only_output() -> None
     assert inference.last_request is not None
     assert inference.last_request.max_output_tokens == 384
     assert inference.last_request.purpose == "general"
-    assert "Answer the user's question directly" in inference.last_request.question
+    assert "Answer the latest question" in inference.last_request.question
     assert "یک پاسخ آزمایشی ارائه کن" in inference.last_request.question
 
 

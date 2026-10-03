@@ -1,5 +1,17 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-10-03 — Capability repair source / کد اصلاح توان پاسخ‌گویی
+
+Add shared task-adaptive, calibrated technical/coding guidance without expanding token/deadline
+budgets or tool authority. Skip oversized saved pairs, retain whole fitting history and supply an
+internal omission notice. Freeze 18 fresh EN/FA cases with separate semantic criteria. Source
+tests pass; live profile/branding/model and thinking-off state are unchanged. No accuracy promise.
+
+راهنمای مشترک و متناسب با درخواست برای پاسخ فنی و کدنویسی، با حدود روشن ادعا، بدون افزایش سقف
+توکن/مهلت یا اختیار ابزار اضافه شد. سابقهٔ بزرگ کنار گذاشته، جفتِ کاملِ جاگرفتنی حفظ و حذف
+سابقه در داخل اعلام می‌شود. ۱۸ پرسش تازهٔ دوزبانه با معیار جداگانهٔ معنا ثابت شدند. آزمون کد
+موفق است؛ نمایه، نشان و رنگ، مدل زنده و استدلال خاموش ثابت‌اند. تضمین درستی داده نمی‌شود.
+
 ## 2026-10-03 — Measured model comparison / مقایسهٔ اندازه‌گیری‌شدهٔ مدل
 
 Complete independent desktop/server hashes, protected 22.3-GB candidate import and isolated

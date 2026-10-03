@@ -1,5 +1,6 @@
 """Meaningful context, provenance, privacy, and reasoning-budget invariants."""
 
+import json
 from datetime import UTC, datetime
 from uuid import uuid4
 
@@ -65,6 +66,50 @@ def test_oversized_pair_is_not_silently_clipped() -> None:
     context, omitted = select_context([message(1, answer="پ" * 16_000)])
     assert not context
     assert omitted
+
+
+def test_oversized_recent_pair_does_not_erase_older_usable_history() -> None:
+    messages = [message(n, question=f"Question {n}") for n in range(1, 9)]
+    messages.append(message(9, answer="پ" * 16_000))
+    context, omitted = select_context(messages)
+    assert [turn.question for turn in context] == [f"Question {n}" for n in range(3, 9)]
+    assert omitted
+    assert all(turn.answer == "DNS maps names." for turn in context)
+
+
+def test_selection_skips_nonfitting_pairs_without_clipping_or_reordering() -> None:
+    messages = [message(n, question=f"Question {n}", answer="ی" * 3_800) for n in range(1, 5)]
+    messages.extend([message(5, answer="x" * 16_000), message(6, question="latest", answer="z")])
+    context, omitted = select_context(messages)
+    assert [turn.question for turn in context] == [
+        "Question 2",
+        "Question 3",
+        "Question 4",
+        "latest",
+    ]
+    assert len(json.dumps([turn.model_dump() for turn in context], ensure_ascii=False)) <= 12_000
+    assert [turn.answer for turn in context] == ["ی" * 3_800] * 3 + ["z"]
+    assert omitted
+
+
+def test_context_marker_is_explicit_without_changing_transcripts_or_budget() -> None:
+    original = message(1, question="My reference was omitted.", answer="پ" * 16_000)
+    before = original.model_dump_json()
+    context, omitted = select_context([original])
+    payload = ConversationAssistantRequest(
+        locale="fa", question="شناسه چه بود؟", history=context, history_omitted=omitted
+    )
+    prompt = _general_prompt(payload)
+    assert "Some prior exchanges were omitted" in prompt.question
+    assert "Do not infer missing identifiers" in prompt.question
+    assert prompt.max_output_tokens == 1024 and prompt.detailed and not prompt.thinking
+    assert original.model_dump_json() == before
+    assert (
+        "Some prior exchanges were omitted"
+        not in _general_prompt(
+            ConversationAssistantRequest(locale="en", question="Explain DNS.")
+        ).question
+    )
 
 
 @pytest.mark.parametrize(
@@ -167,7 +212,13 @@ def test_durable_prompt_keeps_literal_unicode_and_untrusted_boundaries() -> None
 
 
 @pytest.mark.parametrize(
-    "extra", [{"history": []}, {"roles": ["admin"]}, {"max_output_tokens": 99999}]
+    "extra",
+    [
+        {"history": []},
+        {"roles": ["admin"]},
+        {"max_output_tokens": 99999},
+        {"history_omitted": False},
+    ],
 )
 def test_browser_cannot_supply_memory_policy_or_budget(extra: dict[str, object]) -> None:
     with pytest.raises(ValidationError):

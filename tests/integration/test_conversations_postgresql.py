@@ -155,6 +155,33 @@ def test_persistence_restart_replay_conflict_and_audit(
     assert "سامانه" not in str([a.details for a in audit])
 
 
+def test_history_omission_reaches_generation_and_atomic_saved_metadata(
+    chats: tuple[DurableAppService, DurableConversationService, str],
+    app_session_factory: sessionmaker[Session],
+) -> None:
+    _, store, token = chats
+    chat = store.create(token, "en", uuid4())
+    for question, answer in [
+        ("My reference is REF-LOCAL-4.", "Noted."),
+        ("Long example", "پ" * 16_000),
+    ]:
+        ticket = store.begin(token, chat.conversation_id, payload(question), uuid4())
+        assert isinstance(ticket, GenerationTicket)
+        store.complete(token, ticket, assistant(answer), uuid4())
+    restarted = DurableConversationService(app_session_factory)
+    followup = restarted.begin(
+        token, chat.conversation_id, payload("What was my reference?"), uuid4()
+    )
+    assert isinstance(followup, GenerationTicket)
+    assert followup.context.history_omitted and followup.context_omitted
+    assert [turn.question for turn in followup.context.history] == ["My reference is REF-LOCAL-4."]
+    saved = restarted.complete(token, followup, assistant("REF-LOCAL-4"), uuid4())
+    assert saved.context_omitted and saved.context_turns == 1
+    page = restarted.get(token, chat.conversation_id, uuid4())
+    assert page.messages[-1] == saved
+    assert page.messages[1].assistant.answer == "پ" * 16_000
+
+
 def test_other_identity_including_admin_cannot_access_delete_or_generate(
     chats: tuple[DurableAppService, DurableConversationService, str],
     app_session_factory: sessionmaker[Session],
