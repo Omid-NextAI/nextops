@@ -12,9 +12,14 @@ by visibly selecting the existing approved target, returning that server's actua
 and keeping Zabbix scope separate. Five CI jobs, offline installs, seven final live functional
 cases, audit/hash matching, exact b5e74f9 rollback and bounded queue recovery passed. Branding,
 standard saved chat and the CPU-only 35B runtime/profile are unchanged. Thinking remains off;
-Persian brevity/format and broader semantics are still partial. This source's WAN/VM tests and
-full-context generation are unrun; older successful records remain dated. Controlled use is
+Persian brevity/format and broader semantics are still partial. Near-full-context thinking
+generation failed at 120 seconds; this source's WAN/VM tests remain unrun and older records dated. Controlled use is
 live, not full production acceptance. [Release status](docs/status/current-release.yaml) is authoritative.
+
+Thinking qualification (2026-10-03): source-only final-envelope/format hardening and a private
+opt-in real-token test runner are implemented. Four revised exact-format cases passed, but technical
+semantics and the near-16K deadline remain failed; thinking is not enabled. Fresh standard browser
+recovery and audit passed. [Measured results](docs/en/TESTING.md) distinguish staged source from live service.
 
 Earlier controlled workspace (2026-09-30): app/AI API b5e74f9 serves the unchanged CPU-only 35B
 model with owner-scoped saved chat, bounded follow-ups and a header light/dark switch. OCS logo/base

@@ -1,5 +1,32 @@
 # Project state / وضعیت پروژه
 
+Thinking requalification, 2026-10-03 — standard app/AI `69c9260` are unchanged and live.
+Eight installed-adapter short EN/FA requests completed, but Persian digit-only formatting failed.
+A real 14,336-token input plus 2,048 output reservation failed at the fixed 120-second deadline;
+native slot release was verified after cancellation, not inferred from wrapper counters. Fresh
+standard EN/FA browser recovery, reload and two text-free audit checks passed. Source-only
+b06bd30 hardens final JSON and improves four format cases; eight staged requests completed but
+technical semantics still failed engineering review. Five-job CI, 467 local checks and 24 browser
+fixtures passed for that source; it is not deployed or enabled-thinking acceptance. No runtime,
+model, resources, service/profile/proxy/schema change was made. Both flags remain off. Matched
+thinking app/history/audit/contention/offline gates remain unrun after failure. Raw private
+evidence and earlier failures are retained. [Measured record](en/TESTING.md).
+
+سنجش دوبارهٔ استدلال، ۳ اکتبر ۲۰۲۶ — برنامه و AI معمولیِ `69c9260` بدون تغییر زنده‌اند. هشت
+درخواست کوتاهِ دوزبانهٔ لایهٔ نصب‌شده تکمیل شدند، اما قالبِ فقط رقم در فارسی شکست خورد. ورودیِ
+واقعیِ ۱۴۳۳۶ توکن با ذخیرهٔ ۲۰۴۸ توکن خروجی در مهلت ثابتِ ۱۲۰ ثانیه پاسخ نهایی نداد؛ آزاد شدن
+جایگاه مدل پس از لغو بررسی شد، نه از شمارندهٔ بیرونی استنباط. ادامهٔ پاسخ معمولیِ دوزبانه در
+مرورگر تازه، بازکردن دوباره و دو ممیزیِ بدون متن موفق بودند. کدِ صرفاً مرحله‌ایِ b06bd30 قالب
+نهاییِ JSON را سخت‌گیرانه‌تر و چهار قالب را بهتر کرد؛ هشت پاسخِ مرحله‌ای تکمیل شدند، ولی معنای
+فنی بازبینی مهندسی را نگذرانده است. پنج کنترل CI، ۴۶۷ آزمون محلی و ۲۴ آزمون ساختگی مرورگرِ
+آن کد موفق‌اند؛ نه استقرار و نه پذیرش استدلال فعال ادعا می‌شود. مدل، runtime، منابع، سرویس،
+نمایه، پراکسی و پایگاه تغییر نکردند. هر دو گزینه خاموش‌اند؛ پس از شکست، معیار هماهنگِ برنامه،
+سابقه، ممیزی، اشتغال و آفلاینِ استدلال اجرا نشده است. شاهد خصوصی و شکست قبلی حفظ‌اند.
+[رکورد اندازه‌گیری](fa/TESTING.md).
+
+The following checkpoints remain dated history, not a new serving identity.
+گام‌های زیر با تاریخ خود حفظ‌اند، نه هویت تازهٔ نسخهٔ در حال خدمت.
+
 Current verified repair, 2026-10-03 — app and AI API `69c9260` are live for controlled users.
 The AI-server/Zabbix-host mismatch is repaired by bounded EN/FA approved-target selection,
 audited mismatch rejection and a deterministic source-scoped host summary. The exact Persian

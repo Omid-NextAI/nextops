@@ -1,5 +1,51 @@
 # Testing, model evaluation and release evidence
 
+## Full thinking-adapter requalification — 2026-10-03
+
+The serving app/AI remain `69c9260`; neither thinking flag, release link, model/runtime, proxy,
+schema, resources nor service lifecycle changed. Read-only preflight matched both releases,
+health and immutable runtime/model hashes. The explicit opt-in runner used the installed adapter,
+the exact saved-chat prompt builder, real local template/tokenizer and a private bounded scheduler.
+Eight short EN/FA cases completed with stop finishes in 35.090–82.630 seconds, but Persian used a
+number word when a digit was requested. This is a failed formatting gate, not eight semantic passes.
+
+Real near-boundary selection counted **14,336 prompt tokens + 2,048 reserved output = 16,384**
+while respecting the 12,000-character saved-context and 4,000-character latest-question quotas.
+The English generation failed at **120.035 seconds** without a final answer. Persian context/recall
+cases were stopped, not passed. Native cancellation and slot release were reconciled in logs;
+slot release occurred about 62 seconds after cancellation. Provider timeout and zero wrapper
+counters do not prove immediate native termination. No automatic retry, model restart or enlarged
+deadline was used to conceal this outcome. Observed native cgroup memory was 43,663,626,240 bytes
+maximum in this case, with 2,149.806 CPU seconds over the sampling interval. These may include
+other native work; cgroup memory includes cache and is not guest RSS or a sustained/NUMA benchmark.
+
+Source-only `b06bd30659f610b6eb4da8b77b52cbb6928e50a0` adds duplicate-JSON-field rejection and clearer
+digit/identifier-only instructions. All five jobs passed in
+[CI 37107933308](https://github.com/Omid-NextAI/nextops/actions/runs/37107933308), including PostgreSQL
+16/17, browser and secrets. Local checks: 467 unit/API/contract passes, two Windows POSIX skips;
+24 separate browser fixtures passed. A protected source-stage diagnostic—not an offline installed
+package or serving promotion—used code digest
+`2fff605bffa7c341d37318708486fb110f0f32bf3135f393922cc638699e28aa` and completed eight short cases
+in 22.911–88.060 seconds. Four exact-format checks passed, including the repaired Persian digit
+and EN/FA identifier cases. Technical semantics still fail: TCP success is overstated as network/
+firewall correctness and the 502 explanation omits the proxy/gateway receiving an invalid upstream
+response. The engineering review uses [RFC 9110 section 15.6.3](https://www.rfc-editor.org/rfc/rfc9110.html#name-502-bad-gateway);
+it is not an external human sign-off or a model judge. Reused development cases are not newly held-out.
+
+After the native slot was released, a fresh strict-TLS Edge browser completed two new standard
+EN/FA answers in 24.281/34.359 seconds, persisted the final responses across reload and obtained
+two 403 thinking denials with no transcript row. Read-only database verification matched two
+text-free completion audits; owned completed QA chats were deleted and the temporary session
+revoked. The first harness incorrectly expected 200 for a 201 create response; its failed report
+is retained. Its one empty QA chat was identified by exact creation metadata and separately
+deleted through its owner's authenticated API. No user conversations were removed.
+
+Thinking remains disabled. Matched enabled-thinking API/browser/history/audit, thinking four-request
+contention, candidate source rollback/install, WAN and VM-reboot gates were not run after the failed
+prerequisite. The earlier standard admission/negative-token and dated WAN/reboot passes are not
+silently transferred. Private final answers, failures and detailed resource evidence remain outside
+Git; private reasoning was neither reported nor persisted. Production acceptance is unchanged.
+
 ## Named-server repair qualification — 2026-10-03
 
 Source `69c9260c23f6cf85bb9678e8dc7fe1a4448ec3e2` passed all five jobs in

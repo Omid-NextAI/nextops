@@ -2,10 +2,13 @@
 
 [فارسی](../fa/CONVERSATION_MEMORY_SPEC.md) · [Operator guide](CONVERSATIONS.md)
 
-Status, 2026-09-30: b5e74f9/35B serves controlled standard saved chat with 16,384 configured
-context tokens. Bilingual short follow-ups, exact rollback and four-guest WAN/reboot acceptance
-passed. Thinking failed live qualification and is disabled at both boundaries. Full-context
-quality/latency and broad technical accuracy remain unqualified; this is not full production.
+Status, 2026-10-03: 69c9260/35B serves controlled standard saved chat with 16,384 configured
+context tokens; thinking is disabled at both boundaries. The installed thinking adapter completed
+eight short cases but failed Persian digit-only formatting. A real 14,336-token prompt plus 2,048
+output reservation timed out at 120 seconds. Fresh standard browser recovery and two text-free
+audits passed. Source-only b06bd30 improves four exact-format cases but fails technical semantic
+review and is not deployed. Prior b5e74f9 WAN/reboot results remain dated, not this revision's
+acceptance. Full-context quality/latency and broad accuracy are not accepted; this is not production.
 
 ## Problem and precedence
 
@@ -74,7 +77,7 @@ sensitive application data; do not paste secrets. Existing database/TLS/backup c
 
 ### Bounded requalification — 2026-10-03
 
-The owner requests qualification testing and implementation of thinking. Preserve b5e74f9
+The owner requests qualification testing and implementation of thinking. Preserve serving 69c9260
 standard service while diagnosing the exact pinned runtime; do not simply flip the failed flag.
 First run explicit native reasoning budgets with synthetic, secret-free questions. A candidate
 must deliver a nonempty, complete EN/FA final answer within 120 seconds, discard private reasoning,
@@ -105,6 +108,31 @@ matched rollback before enabling both flags. No runtime/model replacement, downl
 schema downgrade or new target integration is part of this increment. If any required thinking
 gate fails, retain standard live service and the disabled thinking flag. Update both guides,
 project state and next task with actual results, not intended acceptance.
+
+### Full-adapter findings and source hardening — 2026-10-03
+
+`scripts/qualify_thinking.py` requires explicit generation opt-in, a change ID and the expected
+installed package digest. It builds the exact saved-chat prompt, uses protected local credentials,
+rejects source-tree/non-private report paths and existing reports, and samples native cgroup CPU
+and memory. Its synthetic private scheduler is not the serving API admission boundary. Reports
+retain only final synthetic answers and reasoning length, never private reasoning text. Schema
+completion/exact-format checks do not certify semantics; engineering review remains separate.
+
+The installed 128-token adapter completed eight EN/FA cases in 35.090–82.630 seconds with stop
+finishes. Persian returned a word instead of the requested digit. The near-boundary English case
+used actual tokenization and valid saved-context/latest-question quotas; it failed at 120.035
+seconds without a final answer. Remaining context cases were stopped, not passed. Native logs
+showed cancellation and later slot release; timeout did not prove immediate remote termination.
+Keep explicit reconciliation before any new generation. No deadline, queue or resource was widened.
+
+Source b06bd30 rejects duplicate JSON answer keys and reinforces digit/identifier-only format.
+Eight source-staged short cases completed in 22.911–88.060 seconds; four exact-format checks passed.
+This is not installed-package/app acceptance or an independent held-out pass: the revised sample
+still overclaims network/firewall health and omits the gateway/upstream distinction for HTTP 502.
+Preserve the original failures rather than repeatedly tuning these same cases into a held-out claim.
+See [the measured record](TESTING.md). Matched enabled-thinking API/browser/history/audit, thinking
+contention, current-source WAN and VM checks remain not run after the failed prerequisite. Both
+serving flags stay off; standard remains usable. Retain immutable rollback and additive tables.
 
 Unit tests cover Unicode, whole-pair selection, omission, no client policy/history controls,
 live-fact follow-ups, thinking denial, wrong context, token overflow and reasoning leakage.

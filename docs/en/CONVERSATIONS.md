@@ -10,6 +10,12 @@ The named-server repair does not train the model or certify general technical ac
 identifier-only replies retained the correct ID but violated the requested format on both this
 release and the rollback baseline; that quality gate remains unaccepted. See [testing](TESTING.md).
 
+The 2026-10-03 full-adapter qualification failed the near-16K 120-second deadline. Source-only
+format/envelope repairs passed four narrow format checks but failed technical semantic review;
+they do not enable the serving flag. Standard browser recovery and two audit checks passed.
+The private opt-in runner exits 1 for measured failure or 2 for partial diagnostics pending
+semantic/matched application acceptance; a native completion never means feature acceptance.
+
 ## User behavior
 
 General chats are saved in local PostgreSQL for your account. Choose

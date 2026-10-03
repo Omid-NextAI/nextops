@@ -1,5 +1,17 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+CM-05/CM-06 requalification, 2026-10-03: installed 69c9260 thinking digit-format and real
+near-16K deadline failed. Source-only envelope/format hardening maps to expanded-inference tests;
+the opt-in exact-prompt/token runner maps to `tests/unit/test_thinking_qualification.py`.
+Post-timeout standard browser/history/two text-free audits passed, not enabled-thinking acceptance.
+Current [testing](../en/TESTING.md) and release gates preserve failures and all not-run dependencies.
+
+سنجش دوبارهٔ CM-05/CM-06، ۳ اکتبر ۲۰۲۶: قالبِ فقط رقم و مهلت واقعیِ نزدیک 16K در استدلالِ
+نصب‌شدهٔ 69c9260 شکست خوردند. سخت‌گیریِ صرفاً کدیِ قالب/شکل خروجی به آزمون استنتاجِ گسترش‌یافته
+و ابزارِ دارای انتخاب صریح و همان پرسش/توکن به `tests/unit/test_thinking_qualification.py`
+متصل‌اند. مرورگر/سابقهٔ معمولی و دو ممیزیِ بدون متن پس از پایان مهلت موفق‌اند، نه پذیرشِ
+استدلال فعال. [آزمون](../fa/TESTING.md) و معیارهای انتشار، شکست و وابستگیِ اجرا‌نشده را حفظ‌اند.
+
 Conversation expansion (sections 3, 9, 17, 25, 27; 2026-09-30): owner-scoped PostgreSQL memory,
 bounded six-pair context and actual token admission serve controlled b5e74f9/35B standard chat.
 CM-01–CM-08 map to conversation unit/integration/browser tests and
