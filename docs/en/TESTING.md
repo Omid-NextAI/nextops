@@ -1,5 +1,178 @@
 # Testing, model evaluation and release evidence
 
+## Capability-v1 standard35 repair — 2026-10-03
+
+Source `c14550017b4fbc40e23747b8b961f32c2662b825`, code SHA-256
+`cdc57bdcaca97a6f8a3f961b9ea57607342bdec3f149cf3161be0749a8fc7db0`, was privately staged,
+not promoted. The 18-case in-house EN/FA corpus and review criteria were frozen before generation;
+standard corpus SHA-256 is `7c9106db35b4c5710c194a88f5a6890d5c6bad7efe53e6fbbe956f45644cc6e5`.
+The existing Qwen3.5 artifact/runtime, 16 threads, one slot, 18-equivalent quota, 96-GiB native
+memory cap, 16K context and 120-second deadline were unchanged. Saved-standard output stayed
+1024 tokens; no thinking, model download, runtime replacement, resource/network/schema mutation,
+public transcript or target collection occurred. Protected record `capability-v1-20261003` holds
+commands, final-only report and separate per-case engineering review; raw reasoning/secrets are absent.
+
+`qualify_thinking.py --scope capabilities --mode standard` made 18 sequential actual generations:
+all finished with stop in 3.428–79.780s, median 13.602s. Four exact recall/arithmetic checks passed.
+Observed native cgroup memory maximum was 46,822,105,088 bytes; it includes file-cache/accounting
+and possible other native work, not minimum required RAM. NUMA, TTFT, sustained/concurrent load
+and production p95 were not measured. No timeout/retry occurred. The script exited 2 (`partial`),
+not accepted; PowerShell surfaced the nonzero remote exit as 1. The underlying report is retained.
+
+Separate review **failed** technical/coding acceptance. EN diagnostic wording overclaimed what
+upstream/log checks establish. FA stale-service guidance substituted generic ping/curl/network
+health. FA coding invented port-range syntax and kept an unhandled invalid assertion before its
+purported correction; EN/FA produced six/eight assertions instead of the requested four. Both
+code blocks passed AST parsing/compilation only; generated code was never executed. Correct
+DNS/TLS/loss limitations, unknown missing references and exact replies in these cases do not prove
+broad accuracy. Persian `handshake` wording was also unnatural. This is engineering review,
+not independent human approval or an external benchmark. Do not retune these scores into a pass.
+
+Offline replay of these final answers through `assure_general_answer` preserved model-only labels
+but changed four synthetic TLS/stale-data replies to scope redirects. That exposes an intent/UX
+gap, not serving API/browser/storage/audit acceptance. The runtime and API ended ready with zero
+processing/deferred/active/queued requests, swap zero and both public thinking flags still off.
+Serving app/AI `69c9260` and selected35 remained unchanged. Longer-context/recovery, thinking,
+matched application/history/audit/admission, WAN/cold-start and this revision's exact rollback
+were not run after semantic failure. Older failures remain; no production promotion.
+
+Source evidence: `uv run --offline pytest -m "not integration and not browser" -q`:
+502 passed, two Windows POSIX skips, 46 deselected. Browser fixtures: 24 passed, one global POSIX
+skip, 523 deselected (before the added integration case). Strict104-file types, lint/format,
+offline build and docs130 Markdown/40 pairs plus artifact/dossier/installer validators passed.
+[CI run 37120644890](https://github.com/Omid-NextAI/nextops/actions/runs/37120644890) passed all
+five jobs, including restricted PostgreSQL16/17, browser fixtures, dependency audit and Gitleaks.
+This verifies source boundaries and fixtures, not general model accuracy or live deployment.
+
+## Four-profile CPU comparison — 2026-10-03
+
+Protected record `qwen36-20261003` holds the exact commands, reports, final synthetic answers,
+identity checks and per-case engineering review. Raw reasoning, secrets, datastore identifiers
+and real monitoring text are not committed. The executed adapter source is `29e08fc`, package
+code SHA-256 `075c0df2ab6d2eae2e9b3bb93cacdde892d120261851de889d6687d8ed392686`;
+it was unpacked privately, not deployed as the serving app. Five CI jobs passed for that commit:
+quality, browser fixtures, real restricted PostgreSQL16/17 integration and Gitleaks.
+
+The complete 22,285,080,192-byte candidate passed desktop assembly SHA, independent desktop SHA
+and independent server SHA against the pinned manifest. Full-header inspection matched the
+template and architecture. The protected server file is root-owned/read-only; import used LAN
+transfer and same-volume staging rename, not a serving-model link change or server WAN download.
+The separately pinned license/tokenizer references were provisioned, without claiming exact
+quantizer conversion lineage. No packages/runtime/VM/ESXi resources or serving configuration changed.
+
+Owner images establish the AI 500-GB thick/lazy-zeroed disk on the selected SSD, 192-GB configured
+RAM, one visible snapshot and rounded SSD 3.49-TB total/1.52-TB free. The owner confirmed other-VM
+growth and bounded total additional growth to 500 GiB. The announced interpretation includes
+candidate staging, not disk resize; worst two-copy staging is 44,570,160,384 bytes inside that
+budget. The pessimistic decimal rounded-down 1.515e12 free-byte assumption minus 500 GiB and
+900 GiB leaves about 11.76 GB. Exact free bytes, snapshot sizes and storage performance remain
+unmeasured; this trial bound is not a reservation or a future change authorization. Existing
+allocated disks are not subtracted again. The 3-TB project ceiling remains.
+
+Candidate runs used a fresh authenticated loopback-only temporary unit per mode on port 8081,
+distinct protected credential, CPU-only pinned llama.cpp, 16 threads, 18-equivalent quota,
+16,384 context, one slot, 56/64-GiB high/max RAM, 35-minute lifetime, strict read-only sandbox,
+cleared proxies and local-only IP allow. Saved unit properties confirm those controls; unauthenticated
+generation returned HTTP401 in both trials. This does not simulate a whole-VM WAN/cold start.
+The current model remained on 8080 with its existing 96-GiB cap, without restart/reconfiguration.
+The same staged adapter ran the frozen 14-case EN/FA technical corpus sequentially against both
+models. Standard reserved 1024 output tokens; thinking reserved 2048 including a 128-token
+reasoning budget, trusted template switches and final-only JSON. No prompt tuning or generation
+retry followed observed answers. This private scheduler is not the public API admission boundary.
+
+| Model/profile | Completed | Observed latency, seconds | Median, seconds | Exact arithmetic/short recall | Factual review |
+|---|---:|---:|---:|---|---|
+| Qwen3.5 standard | 14/14 | 4.106–34.427 | 12.119 | 4/4 passed | failed |
+| Qwen3.5 thinking | 14/14 | 22.269–46.561 | 28.197 | 4/4 passed | failed |
+| Qwen3.6 standard | 14/14 | 4.228–32.580 | 8.959 | 4/4 passed | failed |
+| Qwen3.6 thinking | 14/14 | 21.558–52.734 | 28.004 | 4/4 passed | failed |
+
+All 56 requests completed inside the unchanged 120-second deadline; thinking final envelopes
+passed and private reasoning was discarded (length only recorded). Runner exit2/report `partial`
+means semantic review is separate, not acceptance. An initial Windows wrapper normalized a
+nonzero exit to1; later wrappers explicitly preserved2. Completed reports and cleanup, not that
+wrapper alone, establish outcomes. Percent checks allow Persian/Arabic numeral glyphs without
+ignoring extra prose. This short synthetic recall is not near-full-context recall.
+
+Hard failures: both models inferred network reachability/completed TCP handshake from a generic
+firewall permit log. Successful HTTPS was sometimes presented as proof of a healthy loss-free
+path; TCP recovery means loss rate remains unknown. Candidate Persian loopback answers added
+unrequested unscoped `0.0.0.0` exposure advice. Current35 standard English mislocated loopback
+binding as application-layer rejection. Stale-CPU and injection cases generally avoided fabricated
+values/healthy status, but some omitted age or made overly broad access claims. Thinking did not
+repair the central evidentiary errors. No blanket model-accuracy or training-necessity claim follows.
+
+Candidate cgroup peaks were 16,556,040,192 bytes standard and 16,619,569,152 thinking, with
+CPU totals 2,635,773,219,000 and 6,799,970,772,000 ns. A thinking process point observation was
+36,579,860 KiB RSS, 15,687,200 KiB anonymous PSS and 20,882,327 KiB file PSS, zero swap.
+Current35 observed cgroup maxima were 45,120,348,160/45,192,818,688 bytes; its before-thinking
+RSS was 43,032,268 KiB. Mapped file cache may be charged outside a new cgroup, baseline counters
+include existing-service work, RAM caps differ and cache/order were not randomized. These are
+not minimum-RAM requirements, a resource optimum, fully matched memory accounting, sustained
+throughput, production p95 or host NUMA observations. Fresh models-volume free bytes after import
+were 177,792,929,792; guest swap use was zero at preflight and final verification.
+
+Both candidate trials stopped their owned unit on exit. Final read-only verification found it
+`not-found`, no8081 listener, current app/AI/native active, serving69/current35/runtime links
+unchanged, both public thinking flags0 and native processing/deferred metrics0. No public
+Qwen3.6 message was saved. Keep the candidate unselected. Real new-model near-budget context,
+matched API/browser/history/audit/admission, offline/cold-start and transcript-compatible exact
+rollback are **not_run** after the failed semantic prerequisite. Earlier35 timeout/format failures
+remain failed. Follow [MODEL_UPGRADE_SPEC](MODEL_UPGRADE_SPEC.md) and the current next checkpoint.
+
+## Earlier source and artifact preparation, before comparison — 2026-10-03
+
+Source adds only the reviewed Qwen3.6 alias and trusted `preserve_thinking=false`, retaining the
+same strict final-envelope, private-reasoning rejection, credential, token, queue and deadline
+controls. The opt-in runner gains a frozen fourteen-case EN/FA technical corpus and standard/
+thinking modes. It rejects Qwen3.6 on native serving port 8080 before report creation/key reads;
+only the fixed loopback candidate port 8081 is supported. Reports and exit 1/2 retain their prior
+fail/partial meaning, never an automated semantic or feature acceptance verdict.
+
+Commands actually run with the frozen local development environment and no operational secrets:
+
+```text
+uv run --offline pytest -m "not integration and not browser" -q
+uv run --offline pytest -m browser -q
+uv run --offline ruff check packages migrations tests scripts deploy/installers
+uv run --offline mypy packages tests scripts deploy/installers
+uv run --offline python -X utf8 scripts/check_docs.py
+uv run --offline python scripts/check_release_status.py
+uv run --offline python scripts/check_inference_artifacts.py
+uv build --offline --no-sources
+```
+
+Results: 491 local unit/API/contract tests pass, two Windows POSIX skips, 45 deselected; 24 browser
+fixtures pass, one global POSIX skip, 513 deselected in the final browser run. Strict types pass for 102 files; lint,
+128-Markdown/39-pair catalog/local-link/RTL checks, release/artifact validators and wheel build
+pass. One first type check caught an untyped resource callback; the typed repair passed. These
+browser results are fixtures, not a deployed Qwen3.6/browser or live-answer pass.
+
+The pinned [candidate](../../deploy/inference/qwen3-6-35b-a3b-q4-k-m.candidate.json) is not selected.
+Its inspected range-prefix declares GGUF3, `qwen35moe`, 753 tensors, 49 fields and Apache-2.0;
+template hash is `e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259`.
+This does not prove the full model hash, runtime compatibility or exact conversion lineage.
+Explicit bounded desktop provisioning remains partial; interrupted transfer attempts/partials are
+retained privately and never treated as verified artifacts. Private final SHA must match before load.
+Fresh read-only AI checks confirm exact serving69, protected current35 model size, pinned runtime
+SHA and healthy active units. The first non-root path read lacked traversal permission; root read-only
+verification resolved it, without changing permissions. Guest CPU/RAM/model-volume headroom is
+observed; the supplied SSD overview shows rounded 3.49 TB total/1.97 TB provisioned/1.52 TB free,
+with the free ratio above 25%. Exact byte capacity, AI placement and snapshot/thin growth commitments
+remain unverified; no zero-growth assumption is made. No server import, native candidate load, generation, source deployment,
+service restart, model/profile/flags/resources/network/schema change or VM reboot occurred.
+
+New source fixtures preserve old/new fixed model IDs through the actual transcript reader and JSON
+round-trip, reject an arbitrary model ID, and normalize Persian/Arabic numeral glyphs without
+erasing explanations or converting number words into an exact-format pass. Restricted PostgreSQL
+round-trip cases for both model IDs are added for CI; they are not a locally run database or old
+deployed-release rollback test. The exact compatibility-release prerequisite is recorded in the packet.
+
+MU-01–MU-09 follow [the paired packet](MODEL_UPGRADE_SPEC.md). All candidate server/runtime,
+semantic/thinking/context, matched app/history/audit/admission, WAN/cold-start and rollback gates
+remain not_run. Prior actual thinking/context failures stay failed and standard service remains live.
+No benchmark score or structural check turns these unrun gates into passes.
+
 ## Full thinking-adapter requalification — 2026-10-03
 
 The serving app/AI remain `69c9260`; neither thinking flag, release link, model/runtime, proxy,

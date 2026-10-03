@@ -1,8 +1,34 @@
 # Storage evidence and capacity guardrails / شواهد ذخیره‌سازی و بودجهٔ دیسک
 
-Updated: 2026-09-20. Source: owner-supplied `esxcli storage filesystem list` output. Capture time is unknown; no direct host access or configuration change was performed.
+Updated: 2026-10-03. Original baseline: owner-supplied 2026-09-20 `esxcli storage filesystem list`.
+Later images and growth bound are separately attributed below. No direct ESXi access or host setting change.
 
 [English startup](en/START_HERE.md) · [شروع فارسی](fa/START_HERE.md) · [Next task / کار بعدی](NEXT_TASK.md) · [Hardware record / رکورد سخت‌افزار](requirements/HARDWARE_BASELINE.json)
+
+## Later bounded-trial evidence — 2026-10-03 / شاهد آزمون محدود
+
+Owner screenshots show DS-C SSD rounded 3.49-TB total/1.52-TB free, seven VMs, and the AI
+500-GB thick/lazy-zeroed disk on that datastore with one visible snapshot and 192-GB memory.
+Other-VM growth was confirmed. The owner allows up to 500 GiB growth; the announced interpretation
+is **total additional growth including this candidate trial**, not disk resize. Pessimistic decimal
+rounding gives 1.515e12 free bytes; 500 GiB growth plus 900 GiB reserve consumes 1,503,238,553,600
+bytes, leaving about 11.76 GB. Candidate two-copy staging 44,570,160,384 bytes is inside 500 GiB,
+not added again. Existing VMDKs/swap already reflected in usage are not subtracted again.
+This permitted a bounded import/CPU test, not a new VM/disk allocation or production capacity
+certification. Exact free bytes, snapshot sizes/full commitments and swap placement remain
+unmeasured. Recheck for each new window; preserve the 3-TB ceiling, 900-GiB target and private identifiers.
+The original tables below remain dated planning arithmetic, not current free-space measurements.
+
+تصاویر مالک، SSD منتخب DS-C با ظرفیت تقریبی ۳٫۴۹ TB/فضای آزاد ۱٫۵۲ TB، هفت VM و دیسک thick و
+lazy-zeroedِ ۵۰۰ GB سرور AI روی همان محل، یک snapshot و حافظهٔ ۱۹۲ GB را نشان می‌دهند. رشد
+سایر ماشین‌ها تأیید شد. مالک رشد تا ۵۰۰ GiB را مجاز کرد؛ تفسیر اعلام‌شده، **مجموع رشد اضافی با
+احتساب آزمون نامزد** است، نه افزایش دیسک. حد پایینِ محافظه‌کارانهٔ ده‌دهی، 1.515e12 بایت آزاد
+است؛ رشد ۵۰۰ GiB و حاشیهٔ ۹۰۰ GiB مجموعاً ۱۵۰۳۲۳۸۵۵۳۶۰۰ بایت مصرف می‌کنند و حدود ۱۱٫۷۶ GB
+باقی می‌ماند. دو نسخهٔ موقت نامزد، ۴۴۵۷۰۱۶۰۳۸۴ بایت، داخل ۵۰۰ GiB هستند و دوباره اضافه نمی‌شوند.
+دیسک و swap موجود که در مصرف فعلی لحاظ شده‌اند دوباره کم نشوند. این شاهد برای ورود و آزمون
+محدود CPU بود، نه تخصیص VM/دیسک یا تأیید ظرفیت عملیاتی. بایت دقیق، اندازهٔ snapshot/تعهد کامل
+و محل swap اندازه‌گیری نشده‌اند. ظرفیت در پنجرهٔ تازه بازبینی شود؛ سقف سه‌ترابایتی، هدف ۹۰۰ GiB
+و خصوصی بودن شناسه‌ها حفظ شوند. جدول‌های زیر محاسبهٔ برنامهٔ اولیه‌اند، نه فضای آزادِ جاری.
 
 ## English
 

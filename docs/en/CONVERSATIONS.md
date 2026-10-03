@@ -18,6 +18,11 @@ semantic/matched application acceptance; a native completion never means feature
 
 ## User behavior
 
+Source-only repair: [CAP-01–CAP-06](AI_CAPABILITY_SPEC.md) adds task-adaptive guidance and skips
+oversized history pairs in favor of older fitting pairs, without clipping. It supplies the existing
+omission flag internally. Transcripts, browser controls, budgets and provenance do not change.
+This is not yet live.
+
 General chats are saved in local PostgreSQL for your account. Choose
 a conversation in the sidebar to resume it. New conversation does not delete old chats; Delete
 this conversation explicitly removes its transcript. Logout clears private page content and the

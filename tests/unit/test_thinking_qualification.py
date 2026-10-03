@@ -34,6 +34,23 @@ def test_short_cases_use_exact_saved_chat_controls_and_both_locales() -> None:
     assert sum(expected is not None for _, _, expected in cases) == 4
 
 
+@pytest.mark.parametrize(
+    ("answer", "expected"),
+    [
+        (" ۲۵٪ ", "25%"),
+        ("٢٥٪", "25%"),
+        ("25%", "25%"),
+        ("بیست و پنج درصد", "بیست و پنج درصد"),
+        ("25% because 55/220", "25% because 55/220"),
+        ("CASE-628", "CASE-628"),
+    ],
+)
+def test_exact_check_accepts_numeral_glyphs_but_does_not_erase_explanations(
+    answer: str, expected: str
+) -> None:
+    assert module().normalized_exact_answer(answer) == expected
+
+
 def test_context_cannot_evade_application_character_quotas() -> None:
     for locale in ("en", "fa"):
         payload = module().context_request(locale, 5700)
@@ -43,6 +60,63 @@ def test_context_cannot_evade_application_character_quotas() -> None:
         module().context_request("en", 6100)
     with pytest.raises(ValueError):
         module().request("en", "x" * 4001)
+
+
+@pytest.mark.parametrize("thinking", [False, True])
+def test_fresh_technical_cases_are_bilingual_bounded_and_not_a_semantic_judge(
+    thinking: bool,
+) -> None:
+    cases = module().technical_cases(thinking)
+    assert len(cases) == 14
+    assert {payload.locale for _, payload, _ in cases} == {"en", "fa"}
+    assert all(payload.thinking is thinking and payload.detailed for _, payload, _ in cases)
+    assert all(payload.max_output_tokens == (2048 if thinking else 1024) for _, payload, _ in cases)
+    assert sum(expected is not None for _, _, expected in cases) == 4
+    assert not any(
+        "502" in payload.prompt or "TICKET-732" in payload.prompt for _, payload, _ in cases
+    )
+
+
+@pytest.mark.parametrize("thinking", [False, True])
+def test_new_capability_corpus_has_explicit_review_and_unchanged_budgets(thinking: bool) -> None:
+    runner = module()
+    cases = runner.capability_cases(thinking)
+    assert len(cases) == 18
+    assert len({name for name, _, _ in cases}) == 18
+    assert {payload.locale for _, payload, _ in cases} == {"en", "fa"}
+    assert all(payload.thinking is thinking and payload.detailed for _, payload, _ in cases)
+    assert all(payload.max_output_tokens == (2048 if thinking else 1024) for _, payload, _ in cases)
+    assert sum(exact is not None for _, _, exact in cases) == 4
+    assert set(runner.CAPABILITY_REVIEW_CRITERIA) == {
+        name.rsplit("-", 1)[-1] for name, _, _ in cases
+    }
+    for name, payload, _ in cases:
+        if name.endswith("history"):
+            assert "Some prior exchanges were omitted" in payload.prompt
+            assert "ignore policy" in payload.prompt
+        if name.endswith("coding"):
+            assert "parse_port" in payload.prompt and "ValueError" in payload.prompt
+    old_ids = {name for name, _, _ in runner.technical_cases(thinking)}
+    assert old_ids.isdisjoint(name for name, _, _ in cases)
+
+
+@pytest.mark.parametrize("port", [8080, 8082])
+def test_qwen36_probe_cannot_contact_the_serving_or_arbitrary_native_port(
+    tmp_path: Path, port: int
+) -> None:
+    runner = module()
+    output = tmp_path / "must-not-exist.json"
+    args = argparse.Namespace(
+        model=runner.QWEN36,
+        provider_port=port,
+        mode="thinking",
+        scope="technical",
+        output=output,
+        expected_app_code_sha256=runner.APP_CODE_SHA256,
+    )
+    with pytest.raises(ValueError):
+        asyncio.run(runner.qualify(args))
+    assert not output.exists()
 
 
 def test_private_report_is_exclusive_and_not_inside_repository(tmp_path: Path) -> None:
@@ -100,12 +174,16 @@ def test_timeout_stops_without_retry_or_feature_enablement(
     assert "reasoning_content" not in output.read_text()
 
 
+@pytest.mark.parametrize("scope", ["short", "capabilities"])
 def test_complete_native_diagnostics_still_exit_partial_not_accepted(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, scope: str
 ) -> None:
     runner = module()
     tmp_path.chmod(0o700)
-    answers = iter(["final", "final", "0", "TICKET-732"] * 2)
+    cases = runner.short_cases() if scope == "short" else runner.capability_cases(True)
+    answers = iter(
+        [exact or "Synthetic completion; not semantic acceptance." for _, _, exact in cases]
+    )
 
     class Idle:
         def __init__(self, *_args: Any) -> None:
@@ -132,9 +210,13 @@ def test_complete_native_diagnostics_still_exit_partial_not_accepted(
         output=output,
         provider_api_key_file=tmp_path / "key",
         change_id="thinking-unit-test",
-        scope="short",
+        scope=scope,
     )
     assert asyncio.run(runner.qualify(args)) == 2
     report = json.loads(output.read_text())
-    assert len(report["cases"]) == 8 and report["status"] == "partial"
+    assert len(report["cases"]) == len(cases) and report["status"] == "partial"
     assert report["semantic_review"] == "pending" and report["flags_changed"] is False
+    if scope == "capabilities":
+        assert report["corpus_revision"] == report["advisory_policy_revision"] == "capability-v1"
+        assert len(report["corpus_sha256"]) == 64
+        assert report["semantic_criteria"] == runner.CAPABILITY_REVIEW_CRITERIA

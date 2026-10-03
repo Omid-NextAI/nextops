@@ -1,5 +1,56 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-10-03 — Capability repair source / کد اصلاح توان پاسخ‌گویی
+
+Add shared task-adaptive, calibrated technical/coding guidance without expanding token/deadline
+budgets or tool authority. Skip oversized saved pairs, retain whole fitting history and supply an
+internal omission notice. Freeze 18 fresh EN/FA cases with separate semantic criteria. Source
+tests and five CI jobs pass. All 18 native standard replies/four exact checks pass, but technical/
+coding review fails and four offline guard replays redirect. Keep unpromoted; live profile/branding/
+model and thinking-off state are unchanged. No accuracy promise.
+
+راهنمای مشترک و متناسب با درخواست برای پاسخ فنی و کدنویسی، با حدود روشن ادعا، بدون افزایش سقف
+توکن/مهلت یا اختیار ابزار اضافه شد. سابقهٔ بزرگ کنار گذاشته، جفتِ کاملِ جاگرفتنی حفظ و حذف
+سابقه در داخل اعلام می‌شود. ۱۸ پرسش تازهٔ دوزبانه با معیار جداگانهٔ معنا ثابت شدند. آزمون کد
+و پنج کنترل CI موفق‌اند. هجده پاسخ مستقیمِ معمولی/چهار کنترل دقیق موفق‌اند، اما بازبینی فنی/
+کد شکست خورد و چهار پاسخ در بازپخش تغییر کردند. مستقر نشود؛ نمایه، نشان و رنگ، مدل زنده و
+استدلال خاموش ثابت‌اند. تضمین درستی داده نمی‌شود.
+
+## 2026-10-03 — Measured model comparison / مقایسهٔ اندازه‌گیری‌شدهٔ مدل
+
+Complete independent desktop/server hashes, protected 22.3-GB candidate import and isolated
+CPU loading. Record all 56 synthetic EN/FA responses for Qwen3.5/Qwen3.6 standard/thinking:
+completion, exact arithmetic/short recall and final envelopes passed; technical correctness
+failed in every profile. Keep Qwen3.6 unselected and public thinking off; serving69/current35,
+branding, resources and queue/deadline limits are unchanged. Record the owner's 500-GiB total
+growth bound including staging, without resizing. Preserve original failures and historical
+preparation; new-model context/user-facing/offline/rollback gates stay not_run. Update bilingual
+results, state/next task, traceability, candidate schema1.1 and release gates without claiming production.
+
+هش مستقلِ کامل دسکتاپ و سرور، ورود محافظت‌شدهٔ نامزد ۲۲٫۳ گیگابایتی و بارگذاری جداگانهٔ CPU
+تکمیل شدند. پنجاه‌وشش پاسخ آزمایشی فارسی/انگلیسی در دو مدل و دو حالت ثبت شدند: تکمیل،
+محاسبه/یادآوری کوتاه و قالب نهایی موفق‌اند؛ درستی فنی در هر نمایه شکست خورد. Qwen3.6 انتخاب
+و استدلال عمومی فعال نشد؛ خدمت69/مدل35، نشان و رنگ، منابع و سقف صف/مهلت ثابت‌اند. بودجهٔ
+مجموعِ رشدِ ۵۰۰ GiB مالک با احتساب فایل موقت ثبت شد، بدون افزایش دیسک. شکست اولیه و رکورد
+آماده‌سازی حفظ‌اند؛ زمینه، مرز کاربر، آفلاین و بازگشتِ مدل تازه اجرا نشده‌اند. نتایج دوزبانه،
+وضعیت/گام بعد، ردیابی، schema نسخهٔ۱٫۱ و معیار انتشار به‌روز شدند، بدون ادعای پذیرش تولید.
+
+## 2026-10-03 — Staged Qwen3.6 support / پشتیبانی مرحله‌ای Qwen3.6
+
+Pin one Qwen3.6-35B-A3B Q4_K_M development artifact and template; distinguish published source
+reference from unverified conversion lineage. Add a fixed source alias, trusted switches with
+private-reasoning preservation disabled and opt-in fourteen-case EN/FA standard/thinking probes
+that exclude the serving port. Preserve default flags, deadlines, queues and serving69/current35.
+491 local checks pass; desktop provisioning is partial and no server/model acceptance is claimed.
+Add paired bounded specification and indexed evidence; capacity is awaited before server import.
+
+یک نامزد توسعهٔ Qwen3.6-35B-A3B با Q4_K_M و قالب ثابت ثبت شد؛ مرجع منتشرشده از زنجیرهٔ تبدیل
+تأییدنشده جداست. شناسهٔ ثابت، گزینه‌های معتبر با منع نگه‌داری استدلال خصوصی و چهارده پرسش
+دوزبانهٔ معمولی و استدلالی با انتخاب صریح و ردِ پورت خدمت جاری اضافه شدند. گزینه‌های پیش‌فرض،
+مهلت، صف و خدمت69 با مدل35 ثابت‌اند. ۴۹۱ آزمون محلی موفق‌اند؛ آماده‌سازی دسکتاپ جزئی است و
+پذیرش سرور یا مدل ادعا نمی‌شود. مشخصات محدودِ دوزبانه و ردیابی اضافه شدند؛ ورود به سرور منتظر
+بررسی ظرفیت است.
+
 ## 2026-10-03 — Thinking requalification / سنجش دوبارهٔ استدلال
 
 Keep serving 69c9260 standard chat and thinking off. Add opt-in exact-prompt/local-token diagnostics,

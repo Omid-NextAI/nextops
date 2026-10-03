@@ -1,5 +1,38 @@
 # Prompt version history / تاریخچهٔ نسخه‌های پرامپت
 
+## Owner Qwen3.6 comparison instruction — 2026-10-03
+
+The owner says "do your suggestions" after a recommendation to stage Qwen3.6-35B-A3B, preserve
+the current CPU-only service and compare factuality, thinking, recall, latency, offline operation
+and rollback before switching. This authorizes explicit candidate preparation and bounded
+qualification on verified capacity, not an unconditional live switch, larger deadlines/queues,
+122B import, VM/ESXi change, cloud/GPU, private-reasoning retention or waived failed gates.
+See [the bounded packet](../en/MODEL_UPGRADE_SPEC.md). The owner offers a capacity screenshot;
+offering evidence is not the evidence itself. The later supplied overview confirms rounded free
+space, not AI placement/snapshot/thin growth. No retired all-at-once operator form is reinstated.
+
+Later same-day evidence shows AI thick 500-GB disk placement on the selected SSD, 192-GB RAM
+and one visible snapshot. The owner confirms other-VM growth and says "you can growth space up
+to 500gib". The announced working interpretation is a total additional-growth bound including
+candidate staging, not disk resize. Preserve 900-GiB reserve and 3-TB ceiling; exact bytes and
+snapshot sizes are not measured, nor are future changes pre-authorized. The bounded trial
+completed; both models/modes failed factual review, so no candidate selection or enabled thinking.
+
+مالک پس از پیشنهاد آماده‌سازی Qwen3.6-35B-A3B، حفظ خدمت CPU-only و مقایسهٔ درستی پاسخ،
+استدلال، یادآوری، تأخیر، آفلاین و بازگشت پیش از تغییر مدل، گفته است «پیشنهادهایت را انجام بده».
+این دستور آماده‌سازی صریح و سنجش محدود با ظرفیت بررسی‌شده را مجاز می‌کند، نه تغییر بی‌شرط مدل
+زنده، افزایش مهلت و صف، ورود 122B، تغییر VM و ESXi، ابر و GPU، نگه‌داری استدلال خصوصی یا
+نادیده گرفتن شکست. [مشخصات محدود](../fa/MODEL_UPGRADE_SPEC.md) مبناست. پیشنهاد ارسال تصویر
+ظرفیت به معنی دریافت شاهد نیست. تصویرِ دریافت‌شدهٔ بعدی ظرفیت آزاد تقریبی را نشان می‌دهد، نه
+محل دیسک AI و رشد snapshot و thin. فرمِ یک‌جایِ کنارگذاشته‌شده دوباره الزامی نمی‌شود.
+
+شاهد بعدیِ همان روز، دیسک thickِ ۵۰۰ GB روی SSD منتخب، حافظهٔ ۱۹۲ GB و یک snapshot را
+نشان داد. مالک رشد سایر ماشین‌ها را تأیید و گفته است «می‌توانی رشد فضا را تا ۵۰۰ GiB در نظر
+بگیری». تفسیر اعلام‌شده، سقف مجموعِ رشد اضافی با احتساب فایل موقت نامزد است، نه افزایش دیسک.
+حاشیهٔ ۹۰۰ GiB و سقف سه‌ترابایتی حفظ‌اند؛ بایت دقیق و اندازهٔ snapshot اندازه‌گیری نشده و
+تغییر آینده از پیش مجاز نیست. آزمون محدود تکمیل شد؛ درستی هر دو مدل و حالت شکست خورد،
+بنابراین نامزد انتخاب و استدلال فعال نشد.
+
 ## Owner live-chat/theme instruction — 2026-09-30
 
 The owner explicitly requests the work needed to take the conversation candidate live and a dark

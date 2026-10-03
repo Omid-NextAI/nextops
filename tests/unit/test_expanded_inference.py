@@ -9,10 +9,10 @@ import pytest
 from nextops.application.errors import ApplicationError
 from nextops.contracts.errors import ErrorCode
 from nextops.inference.configuration import LlamaCppSettings
-from nextops.inference.contracts import InferenceRequest
+from nextops.inference.contracts import InferenceRequest, ModelId
 from nextops.inference.llama_cpp import LlamaCppProvider
 
-MODEL = "nextops-qwen3-5-35b-a3b-q4-k-m"
+MODEL: ModelId = "nextops-qwen3-5-35b-a3b-q4-k-m"
 
 
 class TokenTransport:
@@ -22,6 +22,7 @@ class TokenTransport:
         self.content = '{"answer":"The final answer."}'
         self.finish_reason = "stop"
         self.context_tokens = 16384
+        self.model: ModelId = MODEL
 
     async def post_json(
         self,
@@ -39,7 +40,7 @@ class TokenTransport:
             assert payload["add_special"] is False
             return {"tokens": self.tokens}
         return {
-            "model": MODEL,
+            "model": self.model,
             "choices": [
                 {
                     "message": {
@@ -62,10 +63,10 @@ class TokenTransport:
         return {"default_generation_settings": {"n_ctx": self.context_tokens}}
 
 
-def settings(enabled: bool = True) -> LlamaCppSettings:
+def settings(enabled: bool = True, model: ModelId = MODEL) -> LlamaCppSettings:
     return LlamaCppSettings(
         base_url="http://127.0.0.1:8080",
-        model_id=MODEL,
+        model_id=model,
         provider_api_key="provider-secret-only-for-test-0001",
         service_auth_secret="service-secret-only-for-test-0002",
         expanded_chat_enabled=enabled,
@@ -208,5 +209,42 @@ def test_standard_chat_stays_plain_text_without_thinking_controls() -> None:
         assert completion["chat_template_kwargs"] == {"enable_thinking": False}
         for key in ("reasoning_budget_tokens", "reasoning_budget_message", "response_format"):
             assert key not in completion
+
+    asyncio.run(scenario())
+
+
+@pytest.mark.parametrize("thinking", [False, True])
+def test_qwen36_has_trusted_switch_no_reasoning_memory_or_soft_suffix(thinking: bool) -> None:
+    async def scenario() -> None:
+        model: ModelId = "nextops-qwen3-6-35b-a3b-q4-k-m"
+        transport = TokenTransport()
+        transport.model = model
+        if not thinking:
+            transport.content = "A plain final answer."
+        result = await LlamaCppProvider(settings(model=model), transport).generate(
+            request(thinking)
+        )
+        for path, payload in transport.calls:
+            if path in ("/apply-template", "/v1/chat/completions"):
+                assert payload["chat_template_kwargs"] == {
+                    "enable_thinking": thinking,
+                    "preserve_thinking": False,
+                }
+                assert not payload["messages"][-1]["content"].endswith("/no_think")
+        assert result.model_id == model
+        assert "Private trace" not in result.model_dump_json()
+
+    asyncio.run(scenario())
+
+
+def test_qwen36_thinking_remains_opt_in_and_denied_before_native_calls() -> None:
+    async def scenario() -> None:
+        transport = TokenTransport()
+        with pytest.raises(ApplicationError) as denied:
+            await LlamaCppProvider(
+                settings(False, "nextops-qwen3-6-35b-a3b-q4-k-m"), transport
+            ).generate(request())
+        assert denied.value.code == ErrorCode.POLICY_DENIED
+        assert not transport.calls
 
     asyncio.run(scenario())

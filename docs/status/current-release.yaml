@@ -17,7 +17,7 @@ snapshot_restore_owner_attestation:
 repository:
   remote: Omid-NextAI/nextops
   branch: main
-  inspected_baseline_commit: 01671dc9c2feda562b79a07a1d38c663dbea2b94
+  inspected_baseline_commit: b538edebb2ea41f11f95ce49a5306f5b1425310f
 components:
   application:
     release: nextops-0.1.0-69c9260
@@ -82,6 +82,22 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: general_ai_capability_repair_v1
+    status: implemented_unaccepted
+    evidence:
+      - docs/en/AI_CAPABILITY_SPEC.md
+      - docs/fa/AI_CAPABILITY_SPEC.md
+      - packages/nextops/inference/advisory_prompt.py
+      - tests/unit/test_conversation_context.py
+      - tests/unit/test_thinking_qualification.py
+  - id: qwen36_staged_source_support
+    status: implemented_unaccepted
+    evidence:
+      - docs/en/MODEL_UPGRADE_SPEC.md
+      - docs/fa/MODEL_UPGRADE_SPEC.md
+      - deploy/inference/qwen3-6-35b-a3b-q4-k-m.candidate.json
+      - tests/unit/test_expanded_inference.py
+      - tests/unit/test_thinking_qualification.py
   - id: named_server_status_scope_repair
     status: accepted_controlled
     evidence:
@@ -225,6 +241,72 @@ capabilities:
       - deploy/systemd/nextops-certificate-check.timer
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
+  - id: capability_v1_native_standard_semantics
+    status: failed
+    evidence:
+      - docs/en/AI_CAPABILITY_SPEC.md
+      - docs/fa/AI_CAPABILITY_SPEC.md
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+      - docs/NEXT_TASK.md
+  - id: capability_v1_synthetic_completion_and_exact_format
+    status: passed
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: capability_v1_offline_application_guard_replay
+    status: partial
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: qwen36_desktop_artifact_integrity
+    status: passed
+    evidence:
+      - deploy/inference/qwen3-6-35b-a3b-q4-k-m.candidate.json
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: qwen36_cpu_bilingual_thinking_context_qualification
+    status: failed
+    evidence:
+      - docs/en/MODEL_UPGRADE_SPEC.md
+      - docs/fa/MODEL_UPGRADE_SPEC.md
+      - docs/NEXT_TASK.md
+  - id: qwen36_protected_import_cpu_load_and_native_authentication
+    status: passed
+    evidence:
+      - deploy/inference/qwen3-6-35b-a3b-q4-k-m.candidate.json
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: qwen36_synthetic_thinking_final_envelope
+    status: passed
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: qwen36_synthetic_standard_and_thinking_semantics
+    status: failed
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: baseline35_staged_adapter_synthetic_technical_comparison
+    status: failed
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: qwen36_near_budget_context_and_recovery
+    status: not_run
+    evidence:
+      - docs/en/MODEL_UPGRADE_SPEC.md
+      - deploy/inference/qwen3-6-35b-a3b-q4-k-m.candidate.json
+  - id: qwen36_matched_user_facing_history_audit_admission
+    status: not_run
+    evidence:
+      - docs/en/MODEL_UPGRADE_SPEC.md
+      - docs/en/TESTING.md
+  - id: qwen36_wan_cold_start_and_exact_rollback
+    status: not_run
+    evidence:
+      - docs/en/MODEL_UPGRADE_SPEC.md
+      - deploy/inference/qwen3-6-35b-a3b-q4-k-m.candidate.json
   - id: thinking_installed_adapter_bilingual_format
     status: failed
     evidence:

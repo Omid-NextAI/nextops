@@ -1,5 +1,96 @@
 # Project state / وضعیت پروژه
 
+AI capability repair, 2026-10-03 — source adds a versioned task-adaptive general policy,
+whole-pair history selection that skips oversized exchanges, an internal omission marker and
+18 fresh EN/FA cases with explicit semantic criteria. 502 local tests, strict types/lint,
+24 browser fixtures and all five source CI jobs pass, including PostgreSQL16/17. Exact-source
+standard35 completed all 18 requests and four exact checks, but technical/coding review failed.
+FA code invented range input and retained an invalid unhandled assertion; diagnostics still
+overclaimed scope. Both code blocks compile only, never executed. Offline application-guard
+replay changed four hypothetical/stale-data replies into generic redirects; user-facing acceptance
+is not run. No promotion or thinking re-test after failure. Serving69/current35, disabled thinking,
+schema, dependencies, branding, profiles and resources remain unchanged. Final native counters zero.
+[Specification](en/AI_CAPABILITY_SPEC.md).
+
+اصلاح توان پاسخ‌گویی، ۳ اکتبر ۲۰۲۶ — سیاست عمومیِ نسخه‌دار و متناسب با درخواست، انتخاب جفت
+کامل با کنارگذاشتن تبادلِ بزرگ، نشانگر داخلیِ حذف سابقه و ۱۸ پرسش تازهٔ دوزبانه با معیار صریح
+معنا در کد اضافه شدند. ۵۰۲ آزمون محلی، نوع‌سنجی/lint، ۲۴ آزمون مرورگر با دادهٔ ساختگی و پنج
+کنترل CI، از جمله PostgreSQL16/17، موفق‌اند. مدل35 با کد دقیق، ۱۸ درخواست و چهار کنترل دقیق
+را تکمیل کرد، اما درستی فنی و کد شکست خورد: کد فارسی، محدودهٔ پورت را بی‌درخواست اضافه و
+assert نامعتبرِ بدون رسیدگی را حفظ کرد؛ حدود بعضی ادعاهای تشخیصی نیز بیش‌ازحد بود. دو قطعهٔ
+کد فقط کامپایل شدند، نه اجرا. بازپخش آفلاینِ کنترل پاسخ، چهار پاسخ فرضی/قدیمی را به پیام
+عمومی تبدیل کرد؛ پذیرش مرز کاربر اجرا نشده است. پس از شکست، استقرار یا آزمون دوبارهٔ استدلال
+انجام نشد. خدمت69/مدل35، استدلال خاموش، پایگاه، وابستگی، نشان و رنگ، نمایه و منابع ثابت‌اند.
+شمار نهاییِ کار فعال/منتظر مدل صفر است. [مشخصات](fa/AI_CAPABILITY_SPEC.md).
+
+Earlier measured comparison, retained unchanged / مقایسهٔ پیشین بدون تغییر محفوظ است:
+
+Qwen3.6 comparison outcome, 2026-10-03 — independent full-file desktop/server SHA checks,
+protected candidate import and isolated CPU load passed. Source `29e08fc` produced 56 new
+synthetic EN/FA responses: 14 cases per model/mode, all completed within 120s, all 16 exact
+arithmetic/short-recall checks passed and thinking final envelopes passed. Separate factual review
+failed all four profiles: firewall permission was incorrectly treated as proof of connectivity/
+handshake, and some answers overstated HTTPS as proof of a healthy loss-free path. Candidate
+thinking did not repair these errors. No prompt was retuned or answer relabelled as a held-out pass.
+The imported Qwen3.6 remains unselected; current standard `69c9260`/Qwen3.5, branding, profile,
+resources and both thinking flags are unchanged. Both candidate units were cleaned up; final
+native processing/deferred metrics were zero. No new-model public chat/history was created.
+The received AI disk/snapshot views and owner's total 500-GiB growth bound permit this bounded
+trial, including its staging, not disk resize or measured future capacity. Keep 900-GiB reserve;
+snapshot sizes/exact current datastore bytes remain unmeasured. All five source CI jobs passed,
+including real PostgreSQL16/17 integrations. New-model near-budget context, user-facing/audit/
+admission, offline/cold-start and compatible exact rollback remain not_run after semantic failure.
+The next checkpoint is technical grounding/calibration repair, not automatic model promotion.
+[Measured record](en/TESTING.md) · [Specification](en/MODEL_UPGRADE_SPEC.md).
+
+نتیجهٔ مقایسهٔ Qwen3.6، ۳ اکتبر ۲۰۲۶ — بررسی مستقل هش کامل روی دسکتاپ و سرور، ورود
+محافظت‌شدهٔ نامزد و بارگذاری جداگانه روی CPU موفق‌اند. کد `29e08fc`، پنجاه‌وشش پاسخ تازهٔ
+آزمایشی تولید کرد: چهارده مورد برای هر مدل و حالت، همه در مهلت ۱۲۰ ثانیه؛ هر شانزده محاسبه و
+یادآوری کوتاهِ دقیق و قالب نهاییِ استدلال موفق‌اند. بازبینی جداگانهٔ درستی، هر چهار نمایه را رد
+کرد: مجوز فایروال به‌اشتباه اثبات اتصال یا handshake دانسته شد و بعضی پاسخ‌ها HTTPS موفق را
+اثبات سلامت مسیر بدون افت بسته شمردند. استدلالِ نامزد این خطاها را اصلاح نکرد. پرسش‌ها بر
+مبنای پاسخ مشاهده‌شده تنظیم مجدد نشدند و هیچ نتیجه‌ای آزمون مستقلِ موفق نام نگرفت. Qwen3.6
+واردشده انتخاب نشده است؛ خدمت معمولی `69c9260`/Qwen3.5، نشان و رنگ، نمایه، منابع و خاموش بودن
+هر دو گزینهٔ استدلال حفظ‌اند. هر دو سرویس موقت جمع‌آوری شدند؛ شمار درخواست فعال و منتظر مدل
+جاری در بررسی نهایی صفر بود. گفت‌وگو یا سابقهٔ عمومی با مدل تازه ساخته نشد. تصاویر دیسک و
+snapshot و سقف مجموعِ رشدِ ۵۰۰ GiB تعیین‌شده توسط مالک، آزمون محدود و فایل موقت آن را پوشش
+می‌دهند، نه افزایش دیسک یا اندازه‌گیریِ ظرفیت آینده. حاشیهٔ ۹۰۰ GiB حفظ شود؛ اندازهٔ snapshot
+و بایت دقیق datastore هنوز اندازه‌گیری نشده‌اند. پنج کنترل CI کد، از جمله آزمون واقعی
+PostgreSQL16/17، موفق‌اند. پس از شکست معنایی، زمینهٔ نزدیک سقف، مرز کاربر/ممیزی/صف، آفلاین و
+شروع سرد و بازگشت دقیقِ سازگارِ مدل تازه اجرا نشده‌اند. گام بعد اصلاح محدودِ اتکا به شاهد و
+حدود ادعاست، نه استقرار خودکار مدل. [رکورد آزمون](fa/TESTING.md) · [مشخصات](fa/MODEL_UPGRADE_SPEC.md).
+
+Initial same-day preparation snapshot, before import and comparison:
+رکوردِ آماده‌سازیِ اولیه در همان روز، پیش از ورود فایل و مقایسه:
+
+Qwen3.6 evaluation preparation, 2026-10-03 — the owner authorized the recommended staged
+Qwen3.6-35B-A3B comparison. Source adds the fixed alias, trusted hard switch with historical
+reasoning preservation disabled, final-only checks and an opt-in 14-case fresh EN/FA technical
+corpus. The runner excludes Qwen3.6 from serving port 8080 and never enables public flags.
+491 local tests, strict types/lint and documentation/artifact checks passed. Desktop provisioning
+is partial; pinned GGUF-prefix metadata/template inspection passed, not complete-file/runtime
+acceptance. Fresh guest headroom and exact serving69/runtime identity were verified read-only;
+The owner supplied an SSD overview (rounded 3.49 TB total/1.52 TB free), above the 25% ratio;
+AI placement and snapshot/thin growth commitments remain unverified. No server
+candidate import, generation, source deployment or service/profile/resource change occurred.
+Standard69/current35 remains live, thinking off; earlier failures remain failed. See the
+[bounded specification](en/MODEL_UPGRADE_SPEC.md). Server/model/quality/offline gates are not_run.
+
+آماده‌سازی ارزیابی Qwen3.6، ۳ اکتبر ۲۰۲۶ — مالک مقایسهٔ مرحله‌ایِ پیشنهادیِ Qwen3.6-35B-A3B
+را مجاز کرد. کد، شناسهٔ ثابت تازه، گزینهٔ معتبرِ حالت استدلال با غیرفعال بودن نگه‌داریِ استدلال
+قبلی، کنترلِ پاسخ صرفاً نهایی و مجموعهٔ چهارده‌موردیِ تازهٔ دوزبانه را دارد. ابزار آزمون، اتصال
+Qwen3.6 به پورت خدمت جاریِ 8080 را رد می‌کند و گزینهٔ عمومی را فعال نمی‌کند. ۴۹۱ آزمون محلی،
+نوع‌سنجی، lint و کنترل مستندات و رکورد فایل موفق‌اند. آماده‌سازی روی دسکتاپ جزئی است؛ فراداده
+و قالبِ بخش ابتدایی بررسی شدند، نه تمامیت کل فایل یا اجرای مدل. فضای مهمان و شناسهٔ دقیق
+خدمت69 و runtime فقط‌خواندنی بررسی شدند؛ تصویر مالک، SSD با ظرفیت تقریبی ۳٫۴۹ TB و فضای
+آزاد ۱٫۵۲ TB، بیش از نسبت ۲۵ درصد، را نشان می‌دهد. محل دیسک AI و رشد snapshot و تعهد thin
+تأیید نشده‌اند. فایل نامزد وارد سرور نشد؛ تولید، استقرار کد یا تغییر سرویس، نمایه و منابع
+انجام نشد. گفت‌وگوی معمولی69 با مدل35 زنده و استدلال خاموش است؛ شکست قبلی حفظ شده است.
+[مشخصات محدود](fa/MODEL_UPGRADE_SPEC.md) مبناست؛ معیار سرور، مدل، کیفیت و آفلاین اجرا نشده‌اند.
+
+The checkpoints below retain their original dated outcomes.
+گام‌های زیر با نتایج تاریخ‌دار خود حفظ شده‌اند.
+
 Thinking requalification, 2026-10-03 — standard app/AI `69c9260` are unchanged and live.
 Eight installed-adapter short EN/FA requests completed, but Persian digit-only formatting failed.
 A real 14,336-token input plus 2,048 output reservation failed at the fixed 120-second deadline;

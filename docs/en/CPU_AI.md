@@ -1,5 +1,28 @@
 # Local CPU-only AI and capacity planning
 
+## Qwen3.6 measured comparison — 2026-10-03
+
+The owner authorized the [bounded Qwen3.6 comparison](MODEL_UPGRADE_SPEC.md). Serving app/AI
+remain `69c9260` with Qwen3.5-35B-A3B, standard saved chat and thinking off. The new fixed source
+alias and trusted template switches preserve final-only memory; no live configuration changed.
+The 22,285,080,192-byte Q4_K_M artifact passed complete independent desktop/server SHA checks,
+protected import and actual CPU load on the pinned runtime. All 14 cases in each of four profiles
+completed: current35 standard 4.106–34.427s, current35 thinking 22.269–46.561s, candidate36
+standard 4.228–32.580s, candidate36 thinking 21.558–52.734s. All exact arithmetic/short recall
+checks passed; technical semantics failed in every profile. Final-envelope success is not accuracy.
+No candidate is selected and no public thinking is enabled. [Detailed evidence](TESTING.md).
+
+Fresh guest checks retain 64 vCPUs, 193185 MiB usable RAM and zero swap use. The received ESXi
+views show the AI 500-GB thick disk on the selected SSD, 192-GB configured memory, one visible
+snapshot and rounded 1.52-TB free space. The owner confirmed other-VM growth and supplied a
+500-GiB total additional-growth budget, explicitly interpreted to include this trial. Candidate
+two-copy staging is inside that budget; preserve the 900-GiB free target and 3-TB project ceiling.
+Exact snapshot sizes, free bytes, host NUMA placement and storage performance are not measured.
+No disk/resource resize, runtime replacement or 122B import occurred. Candidate 64-GiB and current
+96-GiB RAM caps differ; mmap/file-cache accounting and existing-service load prevent a minimum-RAM
+or fully matched resource claim. Local fixtures/CI are not live user-facing/offline acceptance.
+The earlier dated records below are not the current source/model acceptance result.
+
 ## Current guest sizing and standard-chat profile — 2026-09-30
 
 After the owner's resource extension, authorized read-only guest preflight observes 64 vCPUs,

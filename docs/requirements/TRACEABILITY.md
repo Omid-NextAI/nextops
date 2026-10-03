@@ -1,5 +1,43 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+CAP-01–CAP-06 (2026-10-03) map to [capability specification](../en/AI_CAPABILITY_SPEC.md),
+`inference/advisory_prompt.py`, conversation selector/contracts, provider/API tests and the fresh
+18-case `qualify_thinking.py --scope capabilities` corpus. Source implemented; 502 local tests
+and five CI jobs pass. Native18 completions/four exact checks pass, but technical/coding semantics
+fail and four offline guard redirects expose an intent gap. No promotion. See [testing](../en/TESTING.md).
+CM-03's whole-pair/six-turn/12K bounds and
+omissions remain; oversized pairs may now be skipped for older fitting pairs. Original integrations,
+live-evidence permissions and offline gates are preserved.
+
+CAP-01 تا CAP-06 (۳ اکتبر ۲۰۲۶) به [مشخصات](../fa/AI_CAPABILITY_SPEC.md)، سیاست عمومی،
+انتخاب‌گر/قرارداد گفت‌وگو، آزمون provider/API و مجموعهٔ تازهٔ ۱۸موردیِ
+`qualify_thinking.py --scope capabilities` متصل‌اند. کد پیاده، ۵۰۲ آزمون محلی و پنج کنترل CI
+موفق‌اند. هجده تولید/چهار کنترل دقیق موفق‌اند، اما معنا/کدنویسی شکست خورد و چهار تغییر پاسخ
+در بازپخش، شکاف قصد را نشان داد. استقرار انجام نشد؛ [آزمون](../fa/TESTING.md) مبناست.
+جفت کامل، سقف شش تبادل/۱۲ هزار نویسه و اعلام حذفِ CM-03 حفظ‌اند؛ جفت بزرگ
+می‌تواند به سود جفت قدیمی‌ترِ جاگرفتنی کنار رود. اتصال اولیه، مجوز شاهد زنده و معیار آفلاین حفظ‌اند.
+
+MU-01–MU-09 (original sections 9, 17, 25, 27; 2026-10-03) map to
+[MODEL_UPGRADE_SPEC](../en/MODEL_UPGRADE_SPEC.md), the pinned Qwen3.6 candidate/schema,
+expanded-inference and qualification-runner tests. Fixed source alias, trusted no-reasoning-memory
+controls, candidate-port exclusion and new fourteen-case corpus are implemented in source only.
+491 local tests and all five source CI jobs pass, including PostgreSQL16/17. Full desktop/server
+integrity, protected import and CPU load passed. All 56 synthetic requests completed; exact
+arithmetic/short recall and thinking final envelopes passed, but standard/thinking technical
+accuracy failed for both models. New-model context, matched user-facing/offline/rollback gates
+remain not_run. Owner-bounded total 500-GiB growth includes staging; no resize occurred.
+Serving69/current35, disabled thinking, failed earlier gates and original integrations remain unchanged.
+
+MU-01 تا MU-09 (بخش‌های اصلی ۹، ۱۷، ۲۵ و ۲۷؛ ۳ اکتبر ۲۰۲۶) به
+[مشخصات ارتقای مدل](../fa/MODEL_UPGRADE_SPEC.md)، رکورد و schema ثابتِ Qwen3.6 و آزمون لایهٔ
+استنتاج و ابزار سنجش متصل‌اند. شناسهٔ ثابت، منع نگه‌داری استدلال، ردِ پورت خدمت جاری و مجموعهٔ
+تازهٔ چهارده‌موردی فقط در کد پیاده شده‌اند. ۴۹۱ آزمون محلی و پنج کنترل CI، از جمله PostgreSQL16/17،
+موفق‌اند. تمامیت دسکتاپ/سرور، ورود محافظت‌شده و بارگذاری CPU موفق شدند. هر ۵۶ پاسخ آزمایشی
+تکمیل شد؛ محاسبه/یادآوری کوتاهِ دقیق و قالب نهایی موفق‌اند، اما درستی فنیِ معمولی و استدلالی
+در هر دو مدل شکست خورد. زمینه، مرز کاربر، آفلاین و بازگشتِ مدل تازه اجرا نشده‌اند. سقف رشدِ
+مجموعاً ۵۰۰ GiB مالک، فایل موقت را هم شامل می‌شود؛ منابع افزایش نیافتند. خدمت69/مدل35،
+استدلال خاموش، شکست قبلی و همهٔ اتصال‌های اصلی بدون تغییر حفظ شده‌اند.
+
 CM-05/CM-06 requalification, 2026-10-03: installed 69c9260 thinking digit-format and real
 near-16K deadline failed. Source-only envelope/format hardening maps to expanded-inference tests;
 the opt-in exact-prompt/token runner maps to `tests/unit/test_thinking_qualification.py`.

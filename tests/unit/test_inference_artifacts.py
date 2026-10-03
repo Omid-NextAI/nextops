@@ -15,6 +15,32 @@ MANIFEST = REPOSITORY_ROOT / "deploy" / "inference" / "qwen3-8b-q4-k-m.yaml"
 
 
 @pytest.mark.parametrize(
+    "field,wrong",
+    [
+        ("deployment_selection_allowed", True),
+        ("runtime_download_allowed", True),
+        ("preserve_private_thinking", True),
+        ("conversion_source_revision_verified", True),
+        ("qualification_context_tokens", 262144),
+        ("source_revision", "main"),
+    ],
+)
+def test_qwen36_candidate_does_not_claim_selection_lineage_or_runtime_downloads(
+    field: str,
+    wrong: object,
+) -> None:
+    directory = REPOSITORY_ROOT / "deploy/inference"
+    candidate = json.loads((directory / "qwen3-6-35b-a3b-q4-k-m.candidate.json").read_text("utf-8"))
+    schema = json.loads(
+        (directory / "model-qwen36-35b-a3b-candidate.schema.json").read_text("utf-8")
+    )
+    validator = Draft202012Validator(schema)
+    assert validator.is_valid(candidate)
+    candidate[field] = wrong
+    assert not validator.is_valid(candidate)
+
+
+@pytest.mark.parametrize(
     "field,incorrect",
     [
         ("thinking_enabled", True),
