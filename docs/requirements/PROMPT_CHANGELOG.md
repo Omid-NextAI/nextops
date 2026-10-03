@@ -1,5 +1,24 @@
 # Prompt version history / تاریخچهٔ نسخه‌های پرامپت
 
+## Owner Qwen3.6 comparison instruction — 2026-10-03
+
+The owner says "do your suggestions" after a recommendation to stage Qwen3.6-35B-A3B, preserve
+the current CPU-only service and compare factuality, thinking, recall, latency, offline operation
+and rollback before switching. This authorizes explicit candidate preparation and bounded
+qualification on verified capacity, not an unconditional live switch, larger deadlines/queues,
+122B import, VM/ESXi change, cloud/GPU, private-reasoning retention or waived failed gates.
+See [the bounded packet](../en/MODEL_UPGRADE_SPEC.md). The owner offers a capacity screenshot;
+offering evidence is not the evidence itself. The later supplied overview confirms rounded free
+space, not AI placement/snapshot/thin growth. No retired all-at-once operator form is reinstated.
+
+مالک پس از پیشنهاد آماده‌سازی Qwen3.6-35B-A3B، حفظ خدمت CPU-only و مقایسهٔ درستی پاسخ،
+استدلال، یادآوری، تأخیر، آفلاین و بازگشت پیش از تغییر مدل، گفته است «پیشنهادهایت را انجام بده».
+این دستور آماده‌سازی صریح و سنجش محدود با ظرفیت بررسی‌شده را مجاز می‌کند، نه تغییر بی‌شرط مدل
+زنده، افزایش مهلت و صف، ورود 122B، تغییر VM و ESXi، ابر و GPU، نگه‌داری استدلال خصوصی یا
+نادیده گرفتن شکست. [مشخصات محدود](../fa/MODEL_UPGRADE_SPEC.md) مبناست. پیشنهاد ارسال تصویر
+ظرفیت به معنی دریافت شاهد نیست. تصویرِ دریافت‌شدهٔ بعدی ظرفیت آزاد تقریبی را نشان می‌دهد، نه
+محل دیسک AI و رشد snapshot و thin. فرمِ یک‌جایِ کنارگذاشته‌شده دوباره الزامی نمی‌شود.
+
 ## Owner live-chat/theme instruction — 2026-09-30
 
 The owner explicitly requests the work needed to take the conversation candidate live and a dark

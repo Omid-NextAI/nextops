@@ -1,5 +1,33 @@
 # Project state / وضعیت پروژه
 
+Qwen3.6 evaluation preparation, 2026-10-03 — the owner authorized the recommended staged
+Qwen3.6-35B-A3B comparison. Source adds the fixed alias, trusted hard switch with historical
+reasoning preservation disabled, final-only checks and an opt-in 14-case fresh EN/FA technical
+corpus. The runner excludes Qwen3.6 from serving port 8080 and never enables public flags.
+491 local tests, strict types/lint and documentation/artifact checks passed. Desktop provisioning
+is partial; pinned GGUF-prefix metadata/template inspection passed, not complete-file/runtime
+acceptance. Fresh guest headroom and exact serving69/runtime identity were verified read-only;
+The owner supplied an SSD overview (rounded 3.49 TB total/1.52 TB free), above the 25% ratio;
+AI placement and snapshot/thin growth commitments remain unverified. No server
+candidate import, generation, source deployment or service/profile/resource change occurred.
+Standard69/current35 remains live, thinking off; earlier failures remain failed. See the
+[bounded specification](en/MODEL_UPGRADE_SPEC.md). Server/model/quality/offline gates are not_run.
+
+آماده‌سازی ارزیابی Qwen3.6، ۳ اکتبر ۲۰۲۶ — مالک مقایسهٔ مرحله‌ایِ پیشنهادیِ Qwen3.6-35B-A3B
+را مجاز کرد. کد، شناسهٔ ثابت تازه، گزینهٔ معتبرِ حالت استدلال با غیرفعال بودن نگه‌داریِ استدلال
+قبلی، کنترلِ پاسخ صرفاً نهایی و مجموعهٔ چهارده‌موردیِ تازهٔ دوزبانه را دارد. ابزار آزمون، اتصال
+Qwen3.6 به پورت خدمت جاریِ 8080 را رد می‌کند و گزینهٔ عمومی را فعال نمی‌کند. ۴۹۱ آزمون محلی،
+نوع‌سنجی، lint و کنترل مستندات و رکورد فایل موفق‌اند. آماده‌سازی روی دسکتاپ جزئی است؛ فراداده
+و قالبِ بخش ابتدایی بررسی شدند، نه تمامیت کل فایل یا اجرای مدل. فضای مهمان و شناسهٔ دقیق
+خدمت69 و runtime فقط‌خواندنی بررسی شدند؛ تصویر مالک، SSD با ظرفیت تقریبی ۳٫۴۹ TB و فضای
+آزاد ۱٫۵۲ TB، بیش از نسبت ۲۵ درصد، را نشان می‌دهد. محل دیسک AI و رشد snapshot و تعهد thin
+تأیید نشده‌اند. فایل نامزد وارد سرور نشد؛ تولید، استقرار کد یا تغییر سرویس، نمایه و منابع
+انجام نشد. گفت‌وگوی معمولی69 با مدل35 زنده و استدلال خاموش است؛ شکست قبلی حفظ شده است.
+[مشخصات محدود](fa/MODEL_UPGRADE_SPEC.md) مبناست؛ معیار سرور، مدل، کیفیت و آفلاین اجرا نشده‌اند.
+
+The checkpoints below retain their original dated outcomes.
+گام‌های زیر با نتایج تاریخ‌دار خود حفظ شده‌اند.
+
 Thinking requalification, 2026-10-03 — standard app/AI `69c9260` are unchanged and live.
 Eight installed-adapter short EN/FA requests completed, but Persian digit-only formatting failed.
 A real 14,336-token input plus 2,048 output reservation failed at the fixed 120-second deadline;

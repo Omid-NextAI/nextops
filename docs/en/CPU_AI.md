@@ -1,5 +1,20 @@
 # Local CPU-only AI and capacity planning
 
+## Qwen3.6 staged evaluation — 2026-10-03
+
+The owner authorized the [bounded Qwen3.6 comparison](MODEL_UPGRADE_SPEC.md). Serving app/AI
+remain `69c9260` with Qwen3.5-35B-A3B, standard saved chat and thinking off. The new fixed source
+alias and trusted template switches preserve final-only memory; no live configuration changed.
+The pinned Q4_K_M file is 22,285,080,192 bytes. Prefix metadata confirms `qwen35moe` and a changed
+template, not compatibility or full integrity. Explicit desktop transfer is partial; no server
+import/generation occurred. Fresh guest checks retain 64 vCPUs, 193185 MiB usable RAM, zero swap
+use and sufficient guest-model-volume headroom. Backing ESXi capacity/snapshot/thin evidence is
+awaited before import. The received overview shows SSD 3.49 TB total/1.52 TB free, but not AI disk
+placement or snapshot/thin growth commitments. No resize, runtime replacement or 122B import is included. Local 491 tests,
+24 browser fixtures, types/lint, documentation/artifact checks and offline wheel build pass;
+these do not certify model accuracy, host placement, load, thinking or offline acceptance.
+The earlier dated records below are not the current source/model acceptance result.
+
 ## Current guest sizing and standard-chat profile — 2026-09-30
 
 After the owner's resource extension, authorized read-only guest preflight observes 64 vCPUs,

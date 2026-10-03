@@ -8,14 +8,15 @@ from pydantic import ValidationError
 
 from nextops.api.answer_integrity import assure_general_answer
 from nextops.api.app import _general_prompt
-from nextops.application.conversations import select_context
+from nextops.application.conversations import DurableConversationService, select_context
 from nextops.contracts.assistant import AssistantResponse, GeneralAssistantRequest
 from nextops.contracts.conversations import (
     ConversationAssistantRequest,
     ConversationMessageRequest,
     SavedMessage,
 )
-from nextops.inference.contracts import FinishReason, InferenceRequest
+from nextops.inference.contracts import FinishReason, InferenceRequest, ModelId
+from nextops.persistence.conversations import ConversationMessage
 
 
 def assistant(answer: str = "General guidance only.") -> AssistantResponse:
@@ -64,6 +65,35 @@ def test_oversized_pair_is_not_silently_clipped() -> None:
     context, omitted = select_context([message(1, answer="پ" * 16_000)])
     assert not context
     assert omitted
+
+
+@pytest.mark.parametrize(
+    "model", ["nextops-qwen3-5-35b-a3b-q4-k-m", "nextops-qwen3-6-35b-a3b-q4-k-m"]
+)
+def test_staged_transcript_reader_preserves_old_and_candidate_model_identity(
+    model: ModelId,
+) -> None:
+    response = AssistantResponse.model_validate(assistant().model_dump() | {"model_id": model})
+    record = ConversationMessage(
+        request_id=response.request_id,
+        sequence=1,
+        question="DNS چیست؟",
+        assistant=response.model_dump(mode="json"),
+        thinking_requested=False,
+        context_turns=0,
+        context_omitted=False,
+        created_at=response.completed_at,
+    )
+    saved = DurableConversationService._message(record)
+    assert saved.assistant == response
+    assert SavedMessage.model_validate_json(saved.model_dump_json()) == saved
+    assert select_context([saved])[0][0].answer == response.answer
+    assert not saved.assistant.live_monitoring_data
+
+
+def test_candidate_support_does_not_permit_an_arbitrary_transcript_model() -> None:
+    with pytest.raises(ValidationError):
+        AssistantResponse.model_validate(assistant().model_dump() | {"model_id": "remote-model"})
 
 
 def test_rejected_answers_are_not_followup_facts() -> None:

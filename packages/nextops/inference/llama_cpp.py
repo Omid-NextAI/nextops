@@ -316,11 +316,18 @@ class LlamaCppProvider:
             "presence_penalty": 0.0,
             "stream": False,
         }
-        if self._settings.model_id == "nextops-qwen3-5-35b-a3b-q4-k-m":
-            # Qwen3.5 requires the trusted hard switch, not Qwen3's soft suffix.
+        if self._settings.model_id in (
+            "nextops-qwen3-5-35b-a3b-q4-k-m",
+            "nextops-qwen3-6-35b-a3b-q4-k-m",
+        ):
+            # Qwen3.5/3.6 require the trusted hard switch, not Qwen3's soft suffix.
             # https://huggingface.co/Qwen/Qwen3.5-35B-A3B#instruct-or-non-thinking-mode
             payload["messages"][-1]["content"] = request.prompt
             payload["chat_template_kwargs"] = {"enable_thinking": request.thinking}
+            if self._settings.model_id == "nextops-qwen3-6-35b-a3b-q4-k-m":
+                # NextOps retains final answers only, never historical private reasoning.
+                # https://huggingface.co/Qwen/Qwen3.6-35B-A3B
+                payload["chat_template_kwargs"]["preserve_thinking"] = False
         if request.thinking:
             # Controls belong to the trusted adapter, not user text or browser parameters.
             # Pinned server-common.cpp accepts reasoning_budget_tokens and its message.

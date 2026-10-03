@@ -1,5 +1,32 @@
 # Next task / کار بعدی
 
+First unfinished checkpoint, Qwen3.6 owner instruction 2026-10-03 — finish the explicit pinned
+desktop artifact verification and finish the AI disk placement/snapshot/thin-growth checks before
+AI import. The received overview shows rounded SSD 3.49 TB total/1.52 TB free, not those commitments.
+Then follow [MODEL_UPGRADE_SPEC](en/MODEL_UPGRADE_SPEC.md): isolated CPU load,
+equivalent-profile standard/thinking technical comparison, separate EN/FA factual review and
+near-budget context/recovery. Only passing prerequisites permit matched app/browser/history/audit,
+offline package/start and exact rollback qualification before a guarded switch. Keep serving69/
+current35 and both thinking flags off. Source alias/fixtures or a published benchmark do not
+authorize promotion. No 122B import, VM resize or architecture/recovery replacement is included.
+The earlier real 16K timeout/semantic failures remain failed; do not rerun them blindly or widen
+deadlines/queues. Native completion must be reconciled after any timeout. Production remains unaccepted.
+
+نخستین گام ناتمام پس از دستور Qwen3.6 در ۳ اکتبر ۲۰۲۶ — تمامیت فایل ثابتِ دسکتاپ کامل بررسی
+و پیش از ورود به AI، محل دیسک و رشد snapshot و تعهد thin بررسی شود. تصویر دریافت‌شده، SSD
+با ظرفیت تقریبی ۳٫۴۹ TB و فضای آزاد ۱٫۵۲ TB را نشان می‌دهد، نه این تعهدها. سپس
+[مشخصات ارتقای مدل](fa/MODEL_UPGRADE_SPEC.md) اجرا شود: بارگذاری جداگانهٔ CPU،
+مقایسهٔ فنیِ معمولی و استدلالی با سقف همسان، بازبینی مستقلِ ادعای دوزبانه و زمینهٔ نزدیک سقف و
+ادامه پس از خرابی. فقط موفقیت پیش‌نیاز، آزمون هماهنگ برنامه، مرورگر، سابقه و ممیزی، بسته و شروع
+آفلاین و بازگشت دقیق را پیش از تغییر محافظت‌شده مجاز می‌کند. خدمت69، مدل35 و خاموش بودن هر دو
+گزینهٔ استدلال حفظ شوند. شناسه و آزمون ساختگی یا امتیاز منتشرشده اجازهٔ استقرار نیست. دریافت
+122B، افزایش منابع VM یا جایگزینی معماری و بازیابی در دامنه نیست. شکست واقعیِ مهلت 16K و
+معنای پاسخ حفظ شود؛ بدون بررسی یا با افزایش مهلت و صف تکرار نشود. پس از پایان مهلت، پایان
+واقعیِ کار مدل بررسی شود. محیط عملیاتی همچنان پذیرفته نیست.
+
+Earlier instructions below remain dated history, not a prohibition on the newly authorized comparison.
+دستورهای زیر سابقهٔ تاریخ‌دارند، نه منعِ مقایسه‌ای که اکنون مجاز شده است.
+
 First unfinished checkpoint, 2026-10-03 — preserve live standard `69c9260` and both disabled
 thinking flags. The installed 128-token/full-envelope adapter's digit-format and actual near-16K
 deadline gates failed. Do not relabel these as unrun or passed, repeat a timed-out native call

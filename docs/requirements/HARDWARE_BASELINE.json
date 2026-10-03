@@ -27,6 +27,29 @@
       "note": "Later guest evidence supersedes the initial AI 24-vCPU/128-GiB allocation for current sizing. Usable guest memory is not an exact ESXi configured-RAM observation or host-free-memory measurement."
     }
   ],
+  "later_storage_observations": [
+    {
+      "received_date": "2026-10-03",
+      "source_kind": "owner_supplied_esxi_datastore_overview_screenshot",
+      "evidence_sha256": "22af2f339fe856857279056597ae7fe3a98be6f0c27bb61dff5a61f0b5fa607d",
+      "direct_host_access_performed": false,
+      "datastore_alias": "DS-C",
+      "alias_mapping": "Capacity-based match to the initial selected largest VMFS datastore; exact identity and AI disk placement not verified by this cropped view.",
+      "reported_drive_type": "SSD",
+      "reported_capacity_display": "3.49 TB",
+      "reported_provisioned_display": "1.97 TB",
+      "reported_free_display": "1.52 TB",
+      "reported_type": "VMFS6",
+      "thin_provisioning_supported": true,
+      "display_values_are_rounded": true,
+      "decimal_or_binary_display_unit_confirmed": false,
+      "exact_current_free_bytes": null,
+      "snapshot_and_thin_growth_commitments_verified": false,
+      "capacity_preflight_complete": false,
+      "changes_performed": "none; evidence review only",
+      "limitations": "Visible free-space ratio exceeds the proposed 25% target, but the image does not establish AI VMDK placement/provisioning, snapshot size/growth, outstanding thin commitments, actual swap placement or storage health/performance. Existing byte baseline and 900-GiB conservative target are preserved; no allocation approved from this image alone."
+    }
+  ],
   "capture_timestamp": null,
   "commands": [
     "esxcli hardware cpu global get",

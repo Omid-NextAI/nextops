@@ -19,7 +19,7 @@ from nextops.contracts.assistant import AssistantResponse, SynthesisRequest
 from nextops.contracts.conversations import ConversationMessageRequest, SavedMessage
 from nextops.contracts.durable import BootstrapRequest, LoginRequest
 from nextops.contracts.errors import ErrorCode
-from nextops.inference.contracts import InferenceReadiness
+from nextops.inference.contracts import InferenceReadiness, ModelId
 from nextops.persistence.conversations import Conversation, ConversationMessage
 from nextops.persistence.models import AuditEvent, Identity
 
@@ -89,6 +89,32 @@ def completed(store: DurableConversationService, token: str) -> tuple[object, Sa
     ticket = store.begin(token, chat.conversation_id, payload(), uuid4())
     assert isinstance(ticket, GenerationTicket)
     return chat, store.complete(token, ticket, assistant("DNS maps names."), uuid4())
+
+
+@pytest.mark.parametrize(
+    "model", ["nextops-qwen3-5-35b-a3b-q4-k-m", "nextops-qwen3-6-35b-a3b-q4-k-m"]
+)
+def test_model_identity_survives_restricted_database_write_and_new_reader(
+    chats: tuple[DurableAppService, DurableConversationService, str],
+    app_session_factory: sessionmaker[Session],
+    model: ModelId,
+) -> None:
+    _, store, token = chats
+    chat = store.create(token, "en", uuid4())
+    ticket = store.begin(token, chat.conversation_id, payload(), uuid4())
+    assert isinstance(ticket, GenerationTicket)
+    response = AssistantResponse.model_validate(assistant().model_dump() | {"model_id": model})
+    saved = store.complete(token, ticket, response, uuid4())
+    restarted = DurableConversationService(app_session_factory)
+    page = restarted.get(token, chat.conversation_id, uuid4())
+    assert page.messages == (saved,)
+    assert page.messages[0].assistant.model_id == model
+    with app_session_factory() as session:
+        persisted = session.get(
+            ConversationMessage, (chat.conversation_id, ticket.payload.request_id)
+        )
+        assert persisted is not None and persisted.assistant["model_id"] == model
+    # This source reader is compatible; it does not prove an old deployed parser can roll back.
 
 
 def test_persistence_restart_replay_conflict_and_audit(

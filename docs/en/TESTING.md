@@ -1,5 +1,58 @@
 # Testing, model evaluation and release evidence
 
+## Staged Qwen3.6 source and artifact preparation — 2026-10-03
+
+Source adds only the reviewed Qwen3.6 alias and trusted `preserve_thinking=false`, retaining the
+same strict final-envelope, private-reasoning rejection, credential, token, queue and deadline
+controls. The opt-in runner gains a frozen fourteen-case EN/FA technical corpus and standard/
+thinking modes. It rejects Qwen3.6 on native serving port 8080 before report creation/key reads;
+only the fixed loopback candidate port 8081 is supported. Reports and exit 1/2 retain their prior
+fail/partial meaning, never an automated semantic or feature acceptance verdict.
+
+Commands actually run with the frozen local development environment and no operational secrets:
+
+```text
+uv run --offline pytest -m "not integration and not browser" -q
+uv run --offline pytest -m browser -q
+uv run --offline ruff check packages migrations tests scripts deploy/installers
+uv run --offline mypy packages tests scripts deploy/installers
+uv run --offline python -X utf8 scripts/check_docs.py
+uv run --offline python scripts/check_release_status.py
+uv run --offline python scripts/check_inference_artifacts.py
+uv build --offline --no-sources
+```
+
+Results: 491 local unit/API/contract tests pass, two Windows POSIX skips, 45 deselected; 24 browser
+fixtures pass, one global POSIX skip, 513 deselected in the final browser run. Strict types pass for 102 files; lint,
+128-Markdown/39-pair catalog/local-link/RTL checks, release/artifact validators and wheel build
+pass. One first type check caught an untyped resource callback; the typed repair passed. These
+browser results are fixtures, not a deployed Qwen3.6/browser or live-answer pass.
+
+The pinned [candidate](../../deploy/inference/qwen3-6-35b-a3b-q4-k-m.candidate.json) is not selected.
+Its inspected range-prefix declares GGUF3, `qwen35moe`, 753 tensors, 49 fields and Apache-2.0;
+template hash is `e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259`.
+This does not prove the full model hash, runtime compatibility or exact conversion lineage.
+Explicit bounded desktop provisioning remains partial; interrupted transfer attempts/partials are
+retained privately and never treated as verified artifacts. Private final SHA must match before load.
+Fresh read-only AI checks confirm exact serving69, protected current35 model size, pinned runtime
+SHA and healthy active units. The first non-root path read lacked traversal permission; root read-only
+verification resolved it, without changing permissions. Guest CPU/RAM/model-volume headroom is
+observed; the supplied SSD overview shows rounded 3.49 TB total/1.97 TB provisioned/1.52 TB free,
+with the free ratio above 25%. Exact byte capacity, AI placement and snapshot/thin growth commitments
+remain unverified; no zero-growth assumption is made. No server import, native candidate load, generation, source deployment,
+service restart, model/profile/flags/resources/network/schema change or VM reboot occurred.
+
+New source fixtures preserve old/new fixed model IDs through the actual transcript reader and JSON
+round-trip, reject an arbitrary model ID, and normalize Persian/Arabic numeral glyphs without
+erasing explanations or converting number words into an exact-format pass. Restricted PostgreSQL
+round-trip cases for both model IDs are added for CI; they are not a locally run database or old
+deployed-release rollback test. The exact compatibility-release prerequisite is recorded in the packet.
+
+MU-01–MU-09 follow [the paired packet](MODEL_UPGRADE_SPEC.md). All candidate server/runtime,
+semantic/thinking/context, matched app/history/audit/admission, WAN/cold-start and rollback gates
+remain not_run. Prior actual thinking/context failures stay failed and standard service remains live.
+No benchmark score or structural check turns these unrun gates into passes.
+
 ## Full thinking-adapter requalification — 2026-10-03
 
 The serving app/AI remain `69c9260`; neither thinking flag, release link, model/runtime, proxy,

@@ -1,5 +1,21 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-10-03 — Staged Qwen3.6 support / پشتیبانی مرحله‌ای Qwen3.6
+
+Pin one Qwen3.6-35B-A3B Q4_K_M development artifact and template; distinguish published source
+reference from unverified conversion lineage. Add a fixed source alias, trusted switches with
+private-reasoning preservation disabled and opt-in fourteen-case EN/FA standard/thinking probes
+that exclude the serving port. Preserve default flags, deadlines, queues and serving69/current35.
+491 local checks pass; desktop provisioning is partial and no server/model acceptance is claimed.
+Add paired bounded specification and indexed evidence; capacity is awaited before server import.
+
+یک نامزد توسعهٔ Qwen3.6-35B-A3B با Q4_K_M و قالب ثابت ثبت شد؛ مرجع منتشرشده از زنجیرهٔ تبدیل
+تأییدنشده جداست. شناسهٔ ثابت، گزینه‌های معتبر با منع نگه‌داری استدلال خصوصی و چهارده پرسش
+دوزبانهٔ معمولی و استدلالی با انتخاب صریح و ردِ پورت خدمت جاری اضافه شدند. گزینه‌های پیش‌فرض،
+مهلت، صف و خدمت69 با مدل35 ثابت‌اند. ۴۹۱ آزمون محلی موفق‌اند؛ آماده‌سازی دسکتاپ جزئی است و
+پذیرش سرور یا مدل ادعا نمی‌شود. مشخصات محدودِ دوزبانه و ردیابی اضافه شدند؛ ورود به سرور منتظر
+بررسی ظرفیت است.
+
 ## 2026-10-03 — Thinking requalification / سنجش دوبارهٔ استدلال
 
 Keep serving 69c9260 standard chat and thinking off. Add opt-in exact-prompt/local-token diagnostics,

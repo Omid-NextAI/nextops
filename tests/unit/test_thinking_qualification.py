@@ -34,6 +34,23 @@ def test_short_cases_use_exact_saved_chat_controls_and_both_locales() -> None:
     assert sum(expected is not None for _, _, expected in cases) == 4
 
 
+@pytest.mark.parametrize(
+    ("answer", "expected"),
+    [
+        (" ۲۵٪ ", "25%"),
+        ("٢٥٪", "25%"),
+        ("25%", "25%"),
+        ("بیست و پنج درصد", "بیست و پنج درصد"),
+        ("25% because 55/220", "25% because 55/220"),
+        ("CASE-628", "CASE-628"),
+    ],
+)
+def test_exact_check_accepts_numeral_glyphs_but_does_not_erase_explanations(
+    answer: str, expected: str
+) -> None:
+    assert module().normalized_exact_answer(answer) == expected
+
+
 def test_context_cannot_evade_application_character_quotas() -> None:
     for locale in ("en", "fa"):
         payload = module().context_request(locale, 5700)
@@ -43,6 +60,40 @@ def test_context_cannot_evade_application_character_quotas() -> None:
         module().context_request("en", 6100)
     with pytest.raises(ValueError):
         module().request("en", "x" * 4001)
+
+
+@pytest.mark.parametrize("thinking", [False, True])
+def test_fresh_technical_cases_are_bilingual_bounded_and_not_a_semantic_judge(
+    thinking: bool,
+) -> None:
+    cases = module().technical_cases(thinking)
+    assert len(cases) == 14
+    assert {payload.locale for _, payload, _ in cases} == {"en", "fa"}
+    assert all(payload.thinking is thinking and payload.detailed for _, payload, _ in cases)
+    assert all(payload.max_output_tokens == (2048 if thinking else 1024) for _, payload, _ in cases)
+    assert sum(expected is not None for _, _, expected in cases) == 4
+    assert not any(
+        "502" in payload.prompt or "TICKET-732" in payload.prompt for _, payload, _ in cases
+    )
+
+
+@pytest.mark.parametrize("port", [8080, 8082])
+def test_qwen36_probe_cannot_contact_the_serving_or_arbitrary_native_port(
+    tmp_path: Path, port: int
+) -> None:
+    runner = module()
+    output = tmp_path / "must-not-exist.json"
+    args = argparse.Namespace(
+        model=runner.QWEN36,
+        provider_port=port,
+        mode="thinking",
+        scope="technical",
+        output=output,
+        expected_app_code_sha256=runner.APP_CODE_SHA256,
+    )
+    with pytest.raises(ValueError):
+        asyncio.run(runner.qualify(args))
+    assert not output.exists()
 
 
 def test_private_report_is_exclusive_and_not_inside_repository(tmp_path: Path) -> None:

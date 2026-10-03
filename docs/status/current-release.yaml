@@ -17,7 +17,7 @@ snapshot_restore_owner_attestation:
 repository:
   remote: Omid-NextAI/nextops
   branch: main
-  inspected_baseline_commit: 01671dc9c2feda562b79a07a1d38c663dbea2b94
+  inspected_baseline_commit: b538edebb2ea41f11f95ce49a5306f5b1425310f
 components:
   application:
     release: nextops-0.1.0-69c9260
@@ -82,6 +82,14 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: qwen36_staged_source_support
+    status: implemented_unaccepted
+    evidence:
+      - docs/en/MODEL_UPGRADE_SPEC.md
+      - docs/fa/MODEL_UPGRADE_SPEC.md
+      - deploy/inference/qwen3-6-35b-a3b-q4-k-m.candidate.json
+      - tests/unit/test_expanded_inference.py
+      - tests/unit/test_thinking_qualification.py
   - id: named_server_status_scope_repair
     status: accepted_controlled
     evidence:
@@ -225,6 +233,18 @@ capabilities:
       - deploy/systemd/nextops-certificate-check.timer
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
+  - id: qwen36_desktop_artifact_integrity
+    status: partial
+    evidence:
+      - deploy/inference/qwen3-6-35b-a3b-q4-k-m.candidate.json
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: qwen36_cpu_bilingual_thinking_context_qualification
+    status: not_run
+    evidence:
+      - docs/en/MODEL_UPGRADE_SPEC.md
+      - docs/fa/MODEL_UPGRADE_SPEC.md
+      - docs/NEXT_TASK.md
   - id: thinking_installed_adapter_bilingual_format
     status: failed
     evidence:

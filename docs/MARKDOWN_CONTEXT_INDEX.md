@@ -1,6 +1,6 @@
 # NextOps Markdown context index
 
-Updated: 2026-09-29
+Updated: 2026-10-03
 
 This is the durable inventory and routing map for project-owned Markdown. It lets an agent remember
 that every document exists without flooding each task with every file. The documentation validator
@@ -25,7 +25,7 @@ remaining task-specific sources. The repository skill
 | Application or database code | `docs/en/DEVELOPMENT.md`, `DATA_API.md`, `TESTING.md`, current state/next task, source contracts, migrations, and neighboring tests |
 | Authentication or session lifecycle | `docs/requirements/SESSION_TERMINATION_SPEC.md`, `docs/en/SECURITY.md`, `DATA_API.md`, `TESTING.md`, current release manifest, source service/API, and identity integration tests |
 | Certificate lifecycle | `docs/requirements/CERTIFICATE_LIFECYCLE_SPEC.md`, `docs/en/OPERATIONS.md`, Persian operations pair, systemd checker/timer, Nginx profiles, current release manifest, and private rotation/alert evidence |
-| Local CPU inference | `docs/en/CPU_AI.md`, `OFFLINE_RUNTIME.md`, `TESTING.md`, pinned 8B/14B/32B/30B-A3B/Qwen3.5-35B-A3B artifact records, systemd model-selection profiles, current state/next task, and Persian pairs when human-facing text changes |
+| Local CPU inference | `docs/en/CPU_AI.md`, `MODEL_UPGRADE_SPEC.md`, `OFFLINE_RUNTIME.md`, `TESTING.md`, pinned 8B/14B/32B/30B-A3B/Qwen3.5-35B-A3B and staged Qwen3.6 artifact records, systemd model-selection profiles, current state/next task, and Persian pairs when human-facing text changes |
 | AI answer integrity | `docs/requirements/ANSWER_INTEGRITY_SPEC.md`, `docs/en/AI_INTEGRITY.md`, Persian pair, assistant contracts, answer-integrity policy, evaluation corpus, current release manifest, and private live evidence |
 | Conversational frontend and NOC/SOC guidance | `docs/requirements/NOC_SOC_WORKSPACE_SPEC.md`, `docs/en/UI.md`, Persian pair, `DATA_API.md`, assistant/context contracts, static assets, browser tests, integrity guide and current release manifest |
 | Persistent conversations and local thinking | `docs/en/CONVERSATION_MEMORY_SPEC.md`, `CONVERSATIONS.md`, Persian pairs, ADR 0009, conversation schema/API/tests, expanded-chat candidate profile and current release manifest |
@@ -43,6 +43,9 @@ remaining task-specific sources. The repository skill
 
 Each bullet uses a repository-relative path followed by its role. Keep the paths synchronized when a
 Markdown file is added, renamed, or removed.
+
+- `docs/en/MODEL_UPGRADE_SPEC.md` — Bounded Qwen3.6 artifact, source, capacity, comparison and promotion specification.
+- `docs/fa/MODEL_UPGRADE_SPEC.md` — Persian bounded Qwen3.6 model evaluation specification.
 
 - `docs/en/CONVERSATION_MEMORY_SPEC.md` — Bounded saved-chat and local-thinking specification; source versus live acceptance.
 - `docs/fa/CONVERSATION_MEMORY_SPEC.md` — Persian saved-chat and local-thinking specification.

@@ -49,9 +49,11 @@ class LlamaCppSettings(BaseModel):
         if self.provider_api_key.get_secret_value() == self.service_auth_secret.get_secret_value():
             raise ValueError("provider_api_key and service_auth_secret must differ")
         if self.thinking_enabled and (
-            not self.expanded_chat_enabled or self.model_id != "nextops-qwen3-5-35b-a3b-q4-k-m"
+            not self.expanded_chat_enabled
+            or self.model_id
+            not in ("nextops-qwen3-5-35b-a3b-q4-k-m", "nextops-qwen3-6-35b-a3b-q4-k-m")
         ):
-            raise ValueError("thinking requires the qualified expanded Qwen3.5 profile")
+            raise ValueError("thinking requires an explicitly enabled expanded Qwen3.5/3.6 profile")
         return self
 
     @classmethod

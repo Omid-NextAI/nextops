@@ -1,5 +1,20 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+MU-01–MU-09 (original sections 9, 17, 25, 27; 2026-10-03) map to
+[MODEL_UPGRADE_SPEC](../en/MODEL_UPGRADE_SPEC.md), the pinned Qwen3.6 candidate/schema,
+expanded-inference and qualification-runner tests. Fixed source alias, trusted no-reasoning-memory
+controls, candidate-port exclusion and new fourteen-case corpus are implemented in source only.
+491 local tests pass; full desktop file verification is partial and server import/runtime,
+semantics, context, matched user-facing/offline/rollback gates are not_run. Serving69/current35,
+disabled thinking, failed earlier gates and all original integrations remain unchanged.
+
+MU-01 تا MU-09 (بخش‌های اصلی ۹، ۱۷، ۲۵ و ۲۷؛ ۳ اکتبر ۲۰۲۶) به
+[مشخصات ارتقای مدل](../fa/MODEL_UPGRADE_SPEC.md)، رکورد و schema ثابتِ Qwen3.6 و آزمون لایهٔ
+استنتاج و ابزار سنجش متصل‌اند. شناسهٔ ثابت، منع نگه‌داری استدلال، ردِ پورت خدمت جاری و مجموعهٔ
+تازهٔ چهارده‌موردی فقط در کد پیاده شده‌اند. ۴۹۱ آزمون محلی موفق‌اند؛ تمامیت فایل دسکتاپ جزئی و
+ورود و اجرای سرور، معنای پاسخ، زمینه، مرز کاربر و آفلاین و بازگشت اجرا نشده‌اند. خدمت69 و مدل35،
+استدلال خاموش، شکست قبلی و همهٔ اتصال‌های اصلی بدون تغییر حفظ شده‌اند.
+
 CM-05/CM-06 requalification, 2026-10-03: installed 69c9260 thinking digit-format and real
 near-16K deadline failed. Source-only envelope/format hardening maps to expanded-inference tests;
 the opt-in exact-prompt/token runner maps to `tests/unit/test_thinking_qualification.py`.

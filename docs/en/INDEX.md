@@ -19,6 +19,7 @@ Begin with [START_HERE](START_HERE.md), [ZABBIX_SERVER](ZABBIX_SERVER.md) and th
 | [Project status brief](PROJECT_STATUS_BRIEF.md) | Presentation-ready summary of verified work, remaining delivery gates, and recommended sequence |
 | [Engineering upgrade plan](ENGINEERING_UPGRADE_PLAN.md) | Controlled adoption, evaluation, and deferral matrix for reliability, documentation, testing, and security work |
 | [Specification workflow](SPECIFICATION_WORKFLOW.md) | Brownfield, specification-driven workflow for bounded NextOps features without regenerating the product |
+| [Model upgrade specification](MODEL_UPGRADE_SPEC.md) | Pinned Qwen3.6 CPU comparison, capacity prerequisites, thinking/context gates and compatible rollback |
 | [Backup and restore specification](BACKUP_RESTORE_SPEC.md) | PostgreSQL-aware and file-artifact recovery requirements, threats, acceptance gates, and rollback |
 | [Production blocker runbook](PRODUCTION_BLOCKERS_RUNBOOK.md) | Exact owner actions, commands, private handoff fields and exit criteria for every remaining production gate |
 | [Phase 0 report](PHASE_0_REPORT.md) | Repository findings, architecture, gaps, threat summary, resource plan and the approval checkpoint |
