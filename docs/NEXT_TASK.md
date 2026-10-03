@@ -1,5 +1,38 @@
 # Next task / کار بعدی
 
+First unfinished checkpoint, after the 2026-10-03 four-profile comparison — keep standard
+`69c9260`/Qwen3.5 live and both thinking flags off. Full candidate hashes/import/CPU load and
+56 bounded requests are complete; do not repeat them as missing. Technical correctness failed
+for both models in both modes. Design a bounded grounding/calibration repair for permit-log,
+transport/TLS/application distinctions, packet-loss uncertainty, stale facts and unrequested
+exposure advice. Preserve the frozen original scores; use new untuned EN/FA acceptance questions
+and source tests for any repair. Do not deploy Qwen3.6 or widen deadlines/queues to hide failure.
+Near-budget context/recovery follows only a passing semantic prerequisite; matched user-facing
+history/audit/admission, offline/cold-start and exact transcript-compatible rollback remain unrun.
+No disk resize or 122B import: the owner's 500-GiB total growth bound includes candidate staging,
+and the 900-GiB reserve/3-TB project ceiling remain. Refresh datastore capacity for a new window.
+Review [results](en/TESTING.md) and [specification](en/MODEL_UPGRADE_SPEC.md). Existing production
+gates and earlier real timeout failures are not waived. This comparison does not prove training
+is needed or either model is qualified for production accuracy.
+
+نخستین گام ناتمام پس از مقایسهٔ چهار نمایه در ۳ اکتبر ۲۰۲۶ — خدمت معمولی `69c9260`/Qwen3.5
+زنده و هر دو گزینهٔ استدلال خاموش بمانند. هش کامل، ورود و بارگذاری نامزد و ۵۶ درخواست محدود
+تکمیل شده‌اند و دوباره کار ناتمام شمرده نشوند. درستی فنی در هر دو مدل و هر دو حالت شکست
+خورد. اصلاحی محدود برای اتکا به شاهد و حدود ادعا طراحی شود: تفاوت مجوز فایروال، اتصال TCP،
+TLS و سلامت برنامه، عدم قطعیتِ افت بسته، دادهٔ قدیمی و توصیهٔ ناخواستهٔ بازکردن دسترسی. نتیجهٔ
+مجموعهٔ ثابت اولیه حفظ شود؛ هر اصلاح با آزمون کد و پرسش‌های تازهٔ دوزبانه که از پیش برای پاسخ
+مدل تنظیم نشده‌اند سنجیده شود. Qwen3.6 مستقر و مهلت یا صف برای پوشاندن شکست افزایش نیابد.
+زمینهٔ نزدیک سقف و ادامه پس از خرابی فقط بعد از پذیرش معنا آزموده شوند؛ مرز هماهنگ کاربر،
+سابقه، ممیزی، صف، آفلاین/شروع سرد و بازگشت دقیقِ سازگار هنوز اجرا نشده‌اند. افزایش دیسک یا
+ورود 122B مجاز نیست؛ بودجهٔ مجموعِ رشدِ ۵۰۰ GiB، فایل‌های موقت نامزد را هم شامل می‌شود و
+حاشیهٔ ۹۰۰ GiB و سقف سه‌ترابایتی حفظ‌اند. برای پنجرهٔ تازه، ظرفیت datastore دوباره بررسی شود.
+[نتایج](fa/TESTING.md) و [مشخصات](fa/MODEL_UPGRADE_SPEC.md) مبنا هستند. معیارهای تولید و شکست
+واقعیِ پیشینِ مهلت لغو نشده‌اند. این مقایسه نه ضرورت آموزش مدل را اثبات می‌کند، نه درستیِ
+عملیاتیِ هیچ‌یک را.
+
+Earlier preparation checkpoint, now completed through the bounded comparison:
+گام قبلیِ آماده‌سازی که اکنون تا مقایسهٔ محدود تکمیل شده است:
+
 First unfinished checkpoint, Qwen3.6 owner instruction 2026-10-03 — finish the explicit pinned
 desktop artifact verification and finish the AI disk placement/snapshot/thin-growth checks before
 AI import. The received overview shows rounded SSD 3.49 TB total/1.52 TB free, not those commitments.

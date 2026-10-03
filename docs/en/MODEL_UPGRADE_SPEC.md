@@ -45,8 +45,9 @@ The [candidate manifest](../../deploy/inference/qwen3-6-35b-a3b-q4-k-m.candidate
 Bartowski `5c2410d71524f4f72b023ce8daf7a80528226d5f`, Q4_K_M, 22,285,080,192 bytes and SHA-256
 `b46fedd33e0bfb0cae308aa3c158d0a4b2c4a1d2185a1ed6f093cdaf39064772`.
 Its template hash is `e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259`.
-The inspected prefix declares `qwen35moe`, Apache-2.0 and the new reasoning-preservation option;
-prefix inspection is not full-artifact integrity or runtime compatibility. The separately pinned
+Initial prefix inspection declared `qwen35moe`, Apache-2.0 and the new reasoning-preservation option;
+it was not full-artifact integrity or runtime compatibility. Later complete hashes and native CPU
+load passed as recorded in [testing](TESTING.md); this does not qualify factuality. The separately pinned
 [official post-trained reference](https://huggingface.co/Qwen/Qwen3.6-35B-A3B/tree/995ad96eacd98c81ed38be0c5b274b04031597b0)
 does not prove the quantizer's exact conversion source revision. Keep that lineage limitation.
 
@@ -85,6 +86,27 @@ on serving port 8080 before report creation or credential reads. The temporary u
 candidate resource samples is `nextops-model-candidate-qualification.service`. Reports are exclusive,
 absolute, private and outside the checkout; source digest mismatch rejects the run. Exit 1 is failed
 and exit 2 is partial, never acceptance. This private scheduler is not the serving API admission gate.
+
+## Measured decision — 2026-10-03
+
+Tasks 1–5 completed: verified artifact import and 56 synthetic responses from staged `29e08fc`
+across both models/modes. All four exact checks per profile and strict thinking final envelopes
+passed, but technical accuracy failed in every profile. Retain the candidate protected and
+unselected. Tasks 6–7 remain not_run after that prerequisite failure; no live transcript/audit,
+admission, near-budget, WAN/cold-start or model-switch rollback pass is inferred.
+
+The owner's later images establish AI thick 500-GB disk placement on the selected SSD, configured
+192-GB RAM and one visible snapshot, not its size. Other-VM growth was explicitly confirmed.
+"Up to 500 GiB" was interpreted and announced as total additional growth including this trial,
+not resize. Under the pessimistic decimal rounded-display lower bound of 1.515e12 free bytes,
+500 GiB plus the 900-GiB reserve leaves about 11.76 GB; the worst two-copy candidate staging
+44,570,160,384 bytes is inside that growth budget, not added again. This is an owner-bounded
+trial calculation, not exact measured host capacity, snapshot inventory, a reservation or permission
+for a later change. The 3-TB ceiling remains; refresh capacity per window. No host settings changed.
+
+Use technical grounding/calibration repair and new untuned acceptance questions as the next
+bounded feature. Preserve original scores; do not claim an accuracy improvement from model size,
+thinking, upstream benchmarks or reused development questions alone.
 
 ## Rollback and documentation
 

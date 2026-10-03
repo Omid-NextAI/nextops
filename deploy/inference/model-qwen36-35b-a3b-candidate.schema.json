@@ -5,7 +5,7 @@
   "additionalProperties": false,
   "required": ["schema_version", "status", "model_id", "source_repository", "source_revision", "quantized_by", "quantizer_runtime_tag", "upstream_repository", "upstream_reference_revision", "conversion_source_revision_verified", "architecture", "quantization", "filename", "size_bytes", "sha256", "chat_template_sha256", "license", "license_source", "native_context_tokens", "qualification_context_tokens", "runtime_commit", "cpu_only_required", "runtime_download_allowed", "preserve_private_thinking", "deployment_selection_allowed", "qualification"],
   "properties": {
-    "schema_version": {"const": "1.0.0"},
+    "schema_version": {"const": "1.1.0"},
     "status": {"const": "explicit_provisioning_candidate_not_selected"},
     "model_id": {"const": "nextops-qwen3-6-35b-a3b-q4-k-m"},
     "source_repository": {"const": "https://huggingface.co/bartowski/Qwen_Qwen3.6-35B-A3B-GGUF"},
@@ -33,13 +33,14 @@
     "qualification": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["desktop_artifact_integrity", "server_artifact_import", "cpu_runtime_load", "bilingual_quality", "thinking_final_answer", "context_latency_recall", "offline_cold_start", "runtime_model_rollback", "guarded_selection"],
+      "required": ["desktop_artifact_integrity", "server_artifact_import", "cpu_runtime_load", "bilingual_quality", "thinking_final_envelope", "thinking_final_answer", "context_latency_recall", "offline_cold_start", "runtime_model_rollback", "guarded_selection"],
       "properties": {
         "desktop_artifact_integrity": {"enum": ["not_run", "partial", "failed", "passed"]},
-        "server_artifact_import": {"const": "not_run"},
-        "cpu_runtime_load": {"const": "not_run"},
-        "bilingual_quality": {"const": "not_run"},
-        "thinking_final_answer": {"const": "not_run"},
+        "server_artifact_import": {"enum": ["not_run", "partial", "failed", "passed"]},
+        "cpu_runtime_load": {"enum": ["not_run", "partial", "failed", "passed"]},
+        "bilingual_quality": {"enum": ["not_run", "partial", "failed", "passed"]},
+        "thinking_final_envelope": {"enum": ["not_run", "partial", "failed", "passed"]},
+        "thinking_final_answer": {"enum": ["not_run", "partial", "failed", "passed"]},
         "context_latency_recall": {"const": "not_run"},
         "offline_cold_start": {"const": "not_run"},
         "runtime_model_rollback": {"const": "not_run"},

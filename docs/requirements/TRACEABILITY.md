@@ -4,15 +4,21 @@ MU-01–MU-09 (original sections 9, 17, 25, 27; 2026-10-03) map to
 [MODEL_UPGRADE_SPEC](../en/MODEL_UPGRADE_SPEC.md), the pinned Qwen3.6 candidate/schema,
 expanded-inference and qualification-runner tests. Fixed source alias, trusted no-reasoning-memory
 controls, candidate-port exclusion and new fourteen-case corpus are implemented in source only.
-491 local tests pass; full desktop file verification is partial and server import/runtime,
-semantics, context, matched user-facing/offline/rollback gates are not_run. Serving69/current35,
-disabled thinking, failed earlier gates and all original integrations remain unchanged.
+491 local tests and all five source CI jobs pass, including PostgreSQL16/17. Full desktop/server
+integrity, protected import and CPU load passed. All 56 synthetic requests completed; exact
+arithmetic/short recall and thinking final envelopes passed, but standard/thinking technical
+accuracy failed for both models. New-model context, matched user-facing/offline/rollback gates
+remain not_run. Owner-bounded total 500-GiB growth includes staging; no resize occurred.
+Serving69/current35, disabled thinking, failed earlier gates and original integrations remain unchanged.
 
 MU-01 تا MU-09 (بخش‌های اصلی ۹، ۱۷، ۲۵ و ۲۷؛ ۳ اکتبر ۲۰۲۶) به
 [مشخصات ارتقای مدل](../fa/MODEL_UPGRADE_SPEC.md)، رکورد و schema ثابتِ Qwen3.6 و آزمون لایهٔ
 استنتاج و ابزار سنجش متصل‌اند. شناسهٔ ثابت، منع نگه‌داری استدلال، ردِ پورت خدمت جاری و مجموعهٔ
-تازهٔ چهارده‌موردی فقط در کد پیاده شده‌اند. ۴۹۱ آزمون محلی موفق‌اند؛ تمامیت فایل دسکتاپ جزئی و
-ورود و اجرای سرور، معنای پاسخ، زمینه، مرز کاربر و آفلاین و بازگشت اجرا نشده‌اند. خدمت69 و مدل35،
+تازهٔ چهارده‌موردی فقط در کد پیاده شده‌اند. ۴۹۱ آزمون محلی و پنج کنترل CI، از جمله PostgreSQL16/17،
+موفق‌اند. تمامیت دسکتاپ/سرور، ورود محافظت‌شده و بارگذاری CPU موفق شدند. هر ۵۶ پاسخ آزمایشی
+تکمیل شد؛ محاسبه/یادآوری کوتاهِ دقیق و قالب نهایی موفق‌اند، اما درستی فنیِ معمولی و استدلالی
+در هر دو مدل شکست خورد. زمینه، مرز کاربر، آفلاین و بازگشتِ مدل تازه اجرا نشده‌اند. سقف رشدِ
+مجموعاً ۵۰۰ GiB مالک، فایل موقت را هم شامل می‌شود؛ منابع افزایش نیافتند. خدمت69/مدل35،
 استدلال خاموش، شکست قبلی و همهٔ اتصال‌های اصلی بدون تغییر حفظ شده‌اند.
 
 CM-05/CM-06 requalification, 2026-10-03: installed 69c9260 thinking digit-format and real

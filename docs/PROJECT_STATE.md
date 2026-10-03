@@ -1,5 +1,43 @@
 # Project state / وضعیت پروژه
 
+Qwen3.6 comparison outcome, 2026-10-03 — independent full-file desktop/server SHA checks,
+protected candidate import and isolated CPU load passed. Source `29e08fc` produced 56 new
+synthetic EN/FA responses: 14 cases per model/mode, all completed within 120s, all 16 exact
+arithmetic/short-recall checks passed and thinking final envelopes passed. Separate factual review
+failed all four profiles: firewall permission was incorrectly treated as proof of connectivity/
+handshake, and some answers overstated HTTPS as proof of a healthy loss-free path. Candidate
+thinking did not repair these errors. No prompt was retuned or answer relabelled as a held-out pass.
+The imported Qwen3.6 remains unselected; current standard `69c9260`/Qwen3.5, branding, profile,
+resources and both thinking flags are unchanged. Both candidate units were cleaned up; final
+native processing/deferred metrics were zero. No new-model public chat/history was created.
+The received AI disk/snapshot views and owner's total 500-GiB growth bound permit this bounded
+trial, including its staging, not disk resize or measured future capacity. Keep 900-GiB reserve;
+snapshot sizes/exact current datastore bytes remain unmeasured. All five source CI jobs passed,
+including real PostgreSQL16/17 integrations. New-model near-budget context, user-facing/audit/
+admission, offline/cold-start and compatible exact rollback remain not_run after semantic failure.
+The next checkpoint is technical grounding/calibration repair, not automatic model promotion.
+[Measured record](en/TESTING.md) · [Specification](en/MODEL_UPGRADE_SPEC.md).
+
+نتیجهٔ مقایسهٔ Qwen3.6، ۳ اکتبر ۲۰۲۶ — بررسی مستقل هش کامل روی دسکتاپ و سرور، ورود
+محافظت‌شدهٔ نامزد و بارگذاری جداگانه روی CPU موفق‌اند. کد `29e08fc`، پنجاه‌وشش پاسخ تازهٔ
+آزمایشی تولید کرد: چهارده مورد برای هر مدل و حالت، همه در مهلت ۱۲۰ ثانیه؛ هر شانزده محاسبه و
+یادآوری کوتاهِ دقیق و قالب نهاییِ استدلال موفق‌اند. بازبینی جداگانهٔ درستی، هر چهار نمایه را رد
+کرد: مجوز فایروال به‌اشتباه اثبات اتصال یا handshake دانسته شد و بعضی پاسخ‌ها HTTPS موفق را
+اثبات سلامت مسیر بدون افت بسته شمردند. استدلالِ نامزد این خطاها را اصلاح نکرد. پرسش‌ها بر
+مبنای پاسخ مشاهده‌شده تنظیم مجدد نشدند و هیچ نتیجه‌ای آزمون مستقلِ موفق نام نگرفت. Qwen3.6
+واردشده انتخاب نشده است؛ خدمت معمولی `69c9260`/Qwen3.5، نشان و رنگ، نمایه، منابع و خاموش بودن
+هر دو گزینهٔ استدلال حفظ‌اند. هر دو سرویس موقت جمع‌آوری شدند؛ شمار درخواست فعال و منتظر مدل
+جاری در بررسی نهایی صفر بود. گفت‌وگو یا سابقهٔ عمومی با مدل تازه ساخته نشد. تصاویر دیسک و
+snapshot و سقف مجموعِ رشدِ ۵۰۰ GiB تعیین‌شده توسط مالک، آزمون محدود و فایل موقت آن را پوشش
+می‌دهند، نه افزایش دیسک یا اندازه‌گیریِ ظرفیت آینده. حاشیهٔ ۹۰۰ GiB حفظ شود؛ اندازهٔ snapshot
+و بایت دقیق datastore هنوز اندازه‌گیری نشده‌اند. پنج کنترل CI کد، از جمله آزمون واقعی
+PostgreSQL16/17، موفق‌اند. پس از شکست معنایی، زمینهٔ نزدیک سقف، مرز کاربر/ممیزی/صف، آفلاین و
+شروع سرد و بازگشت دقیقِ سازگارِ مدل تازه اجرا نشده‌اند. گام بعد اصلاح محدودِ اتکا به شاهد و
+حدود ادعاست، نه استقرار خودکار مدل. [رکورد آزمون](fa/TESTING.md) · [مشخصات](fa/MODEL_UPGRADE_SPEC.md).
+
+Initial same-day preparation snapshot, before import and comparison:
+رکوردِ آماده‌سازیِ اولیه در همان روز، پیش از ورود فایل و مقایسه:
+
 Qwen3.6 evaluation preparation, 2026-10-03 — the owner authorized the recommended staged
 Qwen3.6-35B-A3B comparison. Source adds the fixed alias, trusted hard switch with historical
 reasoning preservation disabled, final-only checks and an opt-in 14-case fresh EN/FA technical

@@ -1,5 +1,24 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-10-03 — Measured model comparison / مقایسهٔ اندازه‌گیری‌شدهٔ مدل
+
+Complete independent desktop/server hashes, protected 22.3-GB candidate import and isolated
+CPU loading. Record all 56 synthetic EN/FA responses for Qwen3.5/Qwen3.6 standard/thinking:
+completion, exact arithmetic/short recall and final envelopes passed; technical correctness
+failed in every profile. Keep Qwen3.6 unselected and public thinking off; serving69/current35,
+branding, resources and queue/deadline limits are unchanged. Record the owner's 500-GiB total
+growth bound including staging, without resizing. Preserve original failures and historical
+preparation; new-model context/user-facing/offline/rollback gates stay not_run. Update bilingual
+results, state/next task, traceability, candidate schema1.1 and release gates without claiming production.
+
+هش مستقلِ کامل دسکتاپ و سرور، ورود محافظت‌شدهٔ نامزد ۲۲٫۳ گیگابایتی و بارگذاری جداگانهٔ CPU
+تکمیل شدند. پنجاه‌وشش پاسخ آزمایشی فارسی/انگلیسی در دو مدل و دو حالت ثبت شدند: تکمیل،
+محاسبه/یادآوری کوتاه و قالب نهایی موفق‌اند؛ درستی فنی در هر نمایه شکست خورد. Qwen3.6 انتخاب
+و استدلال عمومی فعال نشد؛ خدمت69/مدل35، نشان و رنگ، منابع و سقف صف/مهلت ثابت‌اند. بودجهٔ
+مجموعِ رشدِ ۵۰۰ GiB مالک با احتساب فایل موقت ثبت شد، بدون افزایش دیسک. شکست اولیه و رکورد
+آماده‌سازی حفظ‌اند؛ زمینه، مرز کاربر، آفلاین و بازگشتِ مدل تازه اجرا نشده‌اند. نتایج دوزبانه،
+وضعیت/گام بعد، ردیابی، schema نسخهٔ۱٫۱ و معیار انتشار به‌روز شدند، بدون ادعای پذیرش تولید.
+
 ## 2026-10-03 — Staged Qwen3.6 support / پشتیبانی مرحله‌ای Qwen3.6
 
 Pin one Qwen3.6-35B-A3B Q4_K_M development artifact and template; distinguish published source

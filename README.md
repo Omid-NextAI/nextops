@@ -16,11 +16,13 @@ Persian brevity/format and broader semantics are still partial. Near-full-contex
 generation failed at 120 seconds; this source's WAN/VM tests remain unrun and older records dated. Controlled use is
 live, not full production acceptance. [Release status](docs/status/current-release.yaml) is authoritative.
 
-Model evaluation preparation (2026-10-03): the owner authorized a bounded Qwen3.6-35B-A3B
-comparison. The pinned 22.3-GB candidate and source support are staged, not selected or deployed;
-desktop provisioning is partial; datastore free space was supplied, while AI placement/growth checks remain open. No new-model
-semantic, thinking, context or offline pass is claimed. Existing chat stays live. Saved-transcript
-rollback needs a qualified compatible release before switching. [Evaluation specification](docs/en/MODEL_UPGRADE_SPEC.md).
+Model comparison (2026-10-03): the pinned 22.3-GB Qwen3.6 artifact passed independent desktop/server
+hash verification, protected import and isolated CPU load. All 56 synthetic requests across both
+models and both modes completed; arithmetic/short recall passed, but technical accuracy failed in
+all four profiles. Thinking did not fix unsupported connectivity claims. Qwen3.6 is not selected;
+live `69c9260`/Qwen3.5 and both disabled thinking flags are unchanged. The owner's 500-GiB total
+growth budget includes this trial, not a disk resize. New-model context, user-facing, offline and
+rollback gates remain unrun. [Measured results](docs/en/TESTING.md) · [Evaluation specification](docs/en/MODEL_UPGRADE_SPEC.md).
 
 Thinking qualification (2026-10-03): source-only final-envelope/format hardening and a private
 opt-in real-token test runner are implemented. Four revised exact-format cases passed, but technical

@@ -234,17 +234,53 @@ capabilities:
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
   - id: qwen36_desktop_artifact_integrity
-    status: partial
+    status: passed
     evidence:
       - deploy/inference/qwen3-6-35b-a3b-q4-k-m.candidate.json
       - docs/en/TESTING.md
       - docs/fa/TESTING.md
   - id: qwen36_cpu_bilingual_thinking_context_qualification
-    status: not_run
+    status: failed
     evidence:
       - docs/en/MODEL_UPGRADE_SPEC.md
       - docs/fa/MODEL_UPGRADE_SPEC.md
       - docs/NEXT_TASK.md
+  - id: qwen36_protected_import_cpu_load_and_native_authentication
+    status: passed
+    evidence:
+      - deploy/inference/qwen3-6-35b-a3b-q4-k-m.candidate.json
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: qwen36_synthetic_thinking_final_envelope
+    status: passed
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: qwen36_synthetic_standard_and_thinking_semantics
+    status: failed
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: baseline35_staged_adapter_synthetic_technical_comparison
+    status: failed
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: qwen36_near_budget_context_and_recovery
+    status: not_run
+    evidence:
+      - docs/en/MODEL_UPGRADE_SPEC.md
+      - deploy/inference/qwen3-6-35b-a3b-q4-k-m.candidate.json
+  - id: qwen36_matched_user_facing_history_audit_admission
+    status: not_run
+    evidence:
+      - docs/en/MODEL_UPGRADE_SPEC.md
+      - docs/en/TESTING.md
+  - id: qwen36_wan_cold_start_and_exact_rollback
+    status: not_run
+    evidence:
+      - docs/en/MODEL_UPGRADE_SPEC.md
+      - deploy/inference/qwen3-6-35b-a3b-q4-k-m.candidate.json
   - id: thinking_installed_adapter_bilingual_format
     status: failed
     evidence:

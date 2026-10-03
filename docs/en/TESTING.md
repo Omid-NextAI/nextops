@@ -1,6 +1,82 @@
 # Testing, model evaluation and release evidence
 
-## Staged Qwen3.6 source and artifact preparation — 2026-10-03
+## Four-profile CPU comparison — 2026-10-03
+
+Protected record `qwen36-20261003` holds the exact commands, reports, final synthetic answers,
+identity checks and per-case engineering review. Raw reasoning, secrets, datastore identifiers
+and real monitoring text are not committed. The executed adapter source is `29e08fc`, package
+code SHA-256 `075c0df2ab6d2eae2e9b3bb93cacdde892d120261851de889d6687d8ed392686`;
+it was unpacked privately, not deployed as the serving app. Five CI jobs passed for that commit:
+quality, browser fixtures, real restricted PostgreSQL16/17 integration and Gitleaks.
+
+The complete 22,285,080,192-byte candidate passed desktop assembly SHA, independent desktop SHA
+and independent server SHA against the pinned manifest. Full-header inspection matched the
+template and architecture. The protected server file is root-owned/read-only; import used LAN
+transfer and same-volume staging rename, not a serving-model link change or server WAN download.
+The separately pinned license/tokenizer references were provisioned, without claiming exact
+quantizer conversion lineage. No packages/runtime/VM/ESXi resources or serving configuration changed.
+
+Owner images establish the AI 500-GB thick/lazy-zeroed disk on the selected SSD, 192-GB configured
+RAM, one visible snapshot and rounded SSD 3.49-TB total/1.52-TB free. The owner confirmed other-VM
+growth and bounded total additional growth to 500 GiB. The announced interpretation includes
+candidate staging, not disk resize; worst two-copy staging is 44,570,160,384 bytes inside that
+budget. The pessimistic decimal rounded-down 1.515e12 free-byte assumption minus 500 GiB and
+900 GiB leaves about 11.76 GB. Exact free bytes, snapshot sizes and storage performance remain
+unmeasured; this trial bound is not a reservation or a future change authorization. Existing
+allocated disks are not subtracted again. The 3-TB project ceiling remains.
+
+Candidate runs used a fresh authenticated loopback-only temporary unit per mode on port 8081,
+distinct protected credential, CPU-only pinned llama.cpp, 16 threads, 18-equivalent quota,
+16,384 context, one slot, 56/64-GiB high/max RAM, 35-minute lifetime, strict read-only sandbox,
+cleared proxies and local-only IP allow. Saved unit properties confirm those controls; unauthenticated
+generation returned HTTP401 in both trials. This does not simulate a whole-VM WAN/cold start.
+The current model remained on 8080 with its existing 96-GiB cap, without restart/reconfiguration.
+The same staged adapter ran the frozen 14-case EN/FA technical corpus sequentially against both
+models. Standard reserved 1024 output tokens; thinking reserved 2048 including a 128-token
+reasoning budget, trusted template switches and final-only JSON. No prompt tuning or generation
+retry followed observed answers. This private scheduler is not the public API admission boundary.
+
+| Model/profile | Completed | Observed latency, seconds | Median, seconds | Exact arithmetic/short recall | Factual review |
+|---|---:|---:|---:|---|---|
+| Qwen3.5 standard | 14/14 | 4.106–34.427 | 12.119 | 4/4 passed | failed |
+| Qwen3.5 thinking | 14/14 | 22.269–46.561 | 28.197 | 4/4 passed | failed |
+| Qwen3.6 standard | 14/14 | 4.228–32.580 | 8.959 | 4/4 passed | failed |
+| Qwen3.6 thinking | 14/14 | 21.558–52.734 | 28.004 | 4/4 passed | failed |
+
+All 56 requests completed inside the unchanged 120-second deadline; thinking final envelopes
+passed and private reasoning was discarded (length only recorded). Runner exit2/report `partial`
+means semantic review is separate, not acceptance. An initial Windows wrapper normalized a
+nonzero exit to1; later wrappers explicitly preserved2. Completed reports and cleanup, not that
+wrapper alone, establish outcomes. Percent checks allow Persian/Arabic numeral glyphs without
+ignoring extra prose. This short synthetic recall is not near-full-context recall.
+
+Hard failures: both models inferred network reachability/completed TCP handshake from a generic
+firewall permit log. Successful HTTPS was sometimes presented as proof of a healthy loss-free
+path; TCP recovery means loss rate remains unknown. Candidate Persian loopback answers added
+unrequested unscoped `0.0.0.0` exposure advice. Current35 standard English mislocated loopback
+binding as application-layer rejection. Stale-CPU and injection cases generally avoided fabricated
+values/healthy status, but some omitted age or made overly broad access claims. Thinking did not
+repair the central evidentiary errors. No blanket model-accuracy or training-necessity claim follows.
+
+Candidate cgroup peaks were 16,556,040,192 bytes standard and 16,619,569,152 thinking, with
+CPU totals 2,635,773,219,000 and 6,799,970,772,000 ns. A thinking process point observation was
+36,579,860 KiB RSS, 15,687,200 KiB anonymous PSS and 20,882,327 KiB file PSS, zero swap.
+Current35 observed cgroup maxima were 45,120,348,160/45,192,818,688 bytes; its before-thinking
+RSS was 43,032,268 KiB. Mapped file cache may be charged outside a new cgroup, baseline counters
+include existing-service work, RAM caps differ and cache/order were not randomized. These are
+not minimum-RAM requirements, a resource optimum, fully matched memory accounting, sustained
+throughput, production p95 or host NUMA observations. Fresh models-volume free bytes after import
+were 177,792,929,792; guest swap use was zero at preflight and final verification.
+
+Both candidate trials stopped their owned unit on exit. Final read-only verification found it
+`not-found`, no8081 listener, current app/AI/native active, serving69/current35/runtime links
+unchanged, both public thinking flags0 and native processing/deferred metrics0. No public
+Qwen3.6 message was saved. Keep the candidate unselected. Real new-model near-budget context,
+matched API/browser/history/audit/admission, offline/cold-start and transcript-compatible exact
+rollback are **not_run** after the failed semantic prerequisite. Earlier35 timeout/format failures
+remain failed. Follow [MODEL_UPGRADE_SPEC](MODEL_UPGRADE_SPEC.md) and the current next checkpoint.
+
+## Earlier source and artifact preparation, before comparison — 2026-10-03
 
 Source adds only the reviewed Qwen3.6 alias and trusted `preserve_thinking=false`, retaining the
 same strict final-envelope, private-reasoning rejection, credential, token, queue and deadline
