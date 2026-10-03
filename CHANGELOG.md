@@ -1,5 +1,21 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-10-03 — Thinking requalification / سنجش دوبارهٔ استدلال
+
+Keep serving 69c9260 standard chat and thinking off. Add opt-in exact-prompt/local-token diagnostics,
+private final-only reports, resource samples and fail/partial exit codes. Harden duplicate final
+JSON keys and digit/identifier formatting in source, not a serving promotion. Eight staged short
+completions/four format checks and five CI jobs passed; technical semantics and actual near-16K
+120-second generation failed. Fresh standard browser recovery and two text-free audits passed.
+Preserve failures, cancellation/slot-release distinction and unrun matched-thinking/offline gates.
+
+گفت‌وگوی معمولیِ 69c9260 و خاموش بودن استدلال حفظ شدند. سنجشِ دارای انتخاب صریح با همان پرسش
+و توکن‌بندی محلی، گزارش خصوصیِ صرفاً نهایی، نمونهٔ منابع و کد خروجِ شکست/جزئی اضافه شد. کلید
+تکراریِ JSON و قالبِ رقم/شناسه در کد سخت‌گیرانه‌تر شدند، نه در استقرارِ خدمت. هشت پاسخ کوتاهِ
+مرحله‌ای، چهار قالب و پنج کنترل CI موفق‌اند؛ معنای فنی و تولید واقعیِ نزدیک 16K در مهلت
+۱۲۰ ثانیه شکست دارند. ادامهٔ مرورگر معمولی و دو ممیزیِ بدون متن موفق‌اند. شکست، تفاوت لغو
+و آزاد شدن جایگاه و معیار هماهنگِ استدلال/آفلاینِ اجرا‌نشده حفظ شدند.
+
 ## 2026-10-03 — Named-server evidence repair / اصلاح شاهدِ سرور مشخص
 
 Deploy matched app/AI `69c9260` for controlled use: explicit EN/FA host-status questions select

@@ -22,6 +22,7 @@ MANIFEST = REPOSITORY_ROOT / "deploy" / "inference" / "qwen3-8b-q4-k-m.yaml"
         ("configured_context_tokens", 262144),
         ("qualification.thinking_semantics", "passed"),
         ("qualification.expanded_context_latency", "passed"),
+        ("qualification.expanded_context_latency", "not_run"),
     ],
 )
 def test_selected_standard_profile_cannot_conceal_unqualified_modes(

@@ -1,5 +1,34 @@
 # Next task / کار بعدی
 
+First unfinished checkpoint, 2026-10-03 — preserve live standard `69c9260` and both disabled
+thinking flags. The installed 128-token/full-envelope adapter's digit-format and actual near-16K
+deadline gates failed. Do not relabel these as unrun or passed, repeat a timed-out native call
+without slot reconciliation, or widen deadlines/queues/resources. Source-only b06bd30 passed
+four format cases and CI but still failed technical semantic review; no candidate was promoted.
+Next design a bounded CPU-prefill/native-drain repair or independently measured narrower profile
+under the existing interfaces, and use new held-out EN/FA questions to review technical claims.
+Only an explicitly versioned, fully qualified matched profile may enable thinking. Qualification
+must cover real API admission, browser/history/final-only storage/audit, context quality, recovery,
+rollback and its offline contract. Standard post-timeout browser recovery/two audits already passed;
+do not repeat them as missing. Prior infrastructure acceptance stays dated. No new model, VM or
+recovery architecture is authorized by this checkpoint. Production remains unaccepted.
+
+نخستین گام ناتمام، ۳ اکتبر ۲۰۲۶ — گفت‌وگوی معمولیِ زندهٔ `69c9260` و خاموش بودن هر دو گزینهٔ
+استدلال حفظ شوند. قالبِ فقط رقم و مهلت واقعیِ نزدیک 16K در لایهٔ نصب‌شدهٔ ۱۲۸توکنی با قالب
+نهایی شکست خوردند. شکست، اجرا‌نشده یا موفق نامیده نشود؛ پس از پایان مهلت، بدون بررسی آزاد
+شدن جایگاه مدل تکرار نشود؛ مهلت، صف و منابع برای موفقیت افزایش نیابند. کدِ صرفاً مرحله‌ایِ
+b06bd30 چهار قالب و CI را گذراند، اما معنای فنی هنوز شکست دارد؛ نامزدی مستقر نشده است. گام
+بعد، اصلاح محدودِ پردازش ورودی و پایان واقعیِ کار مدل، یا نمایهٔ محدودترِ مستقلاً اندازه‌گیری‌شده
+در همان رابط‌ها و بررسی ادعای فنی با پرسش‌های تازهٔ دوزبانهٔ کنارگذاشته‌شده است. فقط نمایهٔ
+هماهنگِ نسخه‌دار با پذیرش کامل، استدلال را فعال کند: پذیرش واقعی API، مرورگر، سابقه، ذخیرهٔ
+صرفاً نهایی، ممیزی، کیفیت زمینه، ادامه پس از خرابی، بازگشت و قرارداد آفلاین سنجیده شوند. ادامهٔ
+مرورگرِ معمولی پس از پایان مهلت و دو ممیزی موفق‌اند و دوباره کار غایب شمرده نشوند. شاهد زیرساخت
+قبلی تاریخ‌دار بماند. این گام، مدل یا VM تازه و معماری بازیابی را مجاز نمی‌کند. تولید پذیرفته
+نشده است.
+
+Earlier checkpoints below are historical.
+گام‌های زیر تاریخی‌اند.
+
 Current unfinished checkpoint, 2026-10-03 — keep controlled `69c9260` standard service and the
 accepted named-AI-server repair live. Do not repeat its passed CI, offline installs, final seven
 functional browser cases, source/audit/hash proof, exact rollback, bounded standard queue recovery

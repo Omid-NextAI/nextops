@@ -17,7 +17,7 @@ snapshot_restore_owner_attestation:
 repository:
   remote: Omid-NextAI/nextops
   branch: main
-  inspected_baseline_commit: 38d451716a6419957010345219da05369d35739e
+  inspected_baseline_commit: 01671dc9c2feda562b79a07a1d38c663dbea2b94
 components:
   application:
     release: nextops-0.1.0-69c9260
@@ -111,6 +111,8 @@ capabilities:
       - deploy/inference/expanded-chat-profile.json
       - docs/en/TESTING.md
       - docs/fa/TESTING.md
+      - scripts/qualify_thinking.py
+      - tests/unit/test_thinking_qualification.py
   - id: noc_soc_conversation_workspace
     status: accepted_controlled
     evidence:
@@ -223,6 +225,16 @@ capabilities:
       - deploy/systemd/nextops-certificate-check.timer
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
+  - id: thinking_installed_adapter_bilingual_format
+    status: failed
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: thinking_post_timeout_standard_browser_recovery
+    status: passed
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
   - id: standard_four_request_admission_recovery
     status: passed
     evidence:
@@ -244,10 +256,11 @@ acceptance_gates:
       - docs/en/TESTING.md
       - docs/fa/TESTING.md
   - id: expanded_context_full_budget_quality_latency
-    status: not_run
+    status: failed
     evidence:
       - docs/en/CONVERSATION_MEMORY_SPEC.md
       - docs/en/TESTING.md
+      - docs/fa/TESTING.md
   - id: model14_matched_bilingual_quality
     status: failed
     evidence:

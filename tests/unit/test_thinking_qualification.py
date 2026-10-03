@@ -5,7 +5,7 @@ import asyncio
 import importlib.util
 import json
 from pathlib import Path
-from types import ModuleType
+from types import ModuleType, SimpleNamespace
 from typing import Any
 
 import pytest
@@ -98,3 +98,43 @@ def test_timeout_stops_without_retry_or_feature_enablement(
     assert report["semantic_review"] == "pending"
     assert report["cases"][0]["error"] == "inference.provider_timeout"
     assert "reasoning_content" not in output.read_text()
+
+
+def test_complete_native_diagnostics_still_exit_partial_not_accepted(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    runner = module()
+    tmp_path.chmod(0o700)
+    answers = iter(["final", "final", "0", "TICKET-732"] * 2)
+
+    class Idle:
+        def __init__(self, *_args: Any) -> None:
+            pass
+
+        async def get_json(self, *_args: Any) -> dict[str, Any]:
+            return {"state": "ready", "active_requests": 0, "queued_requests": 0}
+
+    class Complete:
+        def __init__(self, *_args: Any) -> None:
+            pass
+
+        async def generate(self, _payload: Any) -> Any:
+            answer = next(answers)
+            return SimpleNamespace(answer=answer, model_dump=lambda **_kwargs: {"answer": answer})
+
+    monkeypatch.setattr(runner, "secret", lambda _path: SecretStr("s" * 40))
+    monkeypatch.setattr(runner, "runtime_resources", lambda: {})
+    monkeypatch.setattr(runner, "UrllibJsonTransport", Idle)
+    monkeypatch.setattr(runner, "BoundedInferenceService", Complete)
+    output = tmp_path / "result.json"
+    args = argparse.Namespace(
+        expected_app_code_sha256=runner.APP_CODE_SHA256,
+        output=output,
+        provider_api_key_file=tmp_path / "key",
+        change_id="thinking-unit-test",
+        scope="short",
+    )
+    assert asyncio.run(runner.qualify(args)) == 2
+    report = json.loads(output.read_text())
+    assert len(report["cases"]) == 8 and report["status"] == "partial"
+    assert report["semantic_review"] == "pending" and report["flags_changed"] is False

@@ -322,7 +322,9 @@ async def qualify(args: argparse.Namespace) -> int:
         "failed" if any(c["status"] == "failed" for c in report["cases"]) else "partial"
     )
     save()
-    return 1 if report["status"] == "failed" else 0
+    # Exit 2 is deliberately not an accepted feature gate: semantics and matching
+    # serving API/browser/history/audit/offline qualification are still outstanding.
+    return 1 if report["status"] == "failed" else 2
 
 
 def main() -> int:

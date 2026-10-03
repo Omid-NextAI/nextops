@@ -143,9 +143,9 @@ def validate_chat_candidates(directory: Path) -> None:
     if (
         not isinstance(qualification, dict)
         or qualification.get("thinking_semantics") != "failed"
-        or qualification.get("expanded_context_latency") != "not_run"
+        or qualification.get("expanded_context_latency") != "failed"
     ):
-        raise ArtifactValidationError("failed thinking or unrun full-context review was concealed")
+        raise ArtifactValidationError("failed thinking or full-context review was concealed")
     if (
         research.get("source_revision") != "fec8b222a2eddc3346d6b6d7f7c85efea93cd6bf"
         or research.get("total_size_bytes") != 77616511296
