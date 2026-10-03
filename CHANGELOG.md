@@ -1,5 +1,25 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-10-03 — Named-server evidence repair / اصلاح شاهدِ سرور مشخص
+
+Deploy matched app/AI `69c9260` for controlled use: explicit EN/FA host-status questions select
+one existing approved target, APIs reject target mismatches and the focused answer separates
+actual Linux state from Zabbix scope. Preserve OCS branding, local CPU model/profile, standard
+saved chat and audit/credential boundaries. Five-job CI, offline package, seven final functional
+live cases, audit/hash proof, exact b5e74f9 rollback and bounded admission/recovery passed.
+Add a gated 128-token/strict-final-envelope thinking adapter; thinking remains disabled.
+Preserve drafting leakage, Persian identifier-only format failure, unrun full-context generation
+and this source revision's unrun WAN/VM gates. No model training or full production claim.
+
+برنامه و AI هماهنگِ `69c9260` برای استفادهٔ کنترل‌شده مستقر شدند: پرسش صریحِ دوزبانه دربارهٔ
+وضعیت سرور، یک هدفِ مجازِ موجود را انتخاب می‌کند؛ API عدم تطابق هدف را رد و پاسخِ متمرکز،
+وضعیت واقعی Linux را از دامنهٔ Zabbix جدا می‌کند. نشان و رنگ OCS، مدل/نمایهٔ CPU محلی، گفت‌وگوی
+معمولی و مرزِ ممیزی/اعتبارنامه حفظ‌اند. پنج کنترل CI، بستهٔ آفلاین، هفت مورد کارکردیِ نهاییِ
+زنده، تطبیق ممیزی/هش، بازگشت دقیق به b5e74f9 و پذیرش/ادامهٔ محدود موفق‌اند. adapter غیرفعالِ
+استدلال با بودجهٔ ۱۲۸ توکن و قالب سخت‌گیرانهٔ نهایی افزوده شد؛ استدلال خاموش می‌ماند. افشای
+پیش‌نویس، شکستِ قالبِ «فقط شناسه» در فارسی، تولیدِ اجرا‌نشده در ظرفیت کامل و معیارِ اجرا‌نشدهٔ
+WAN/VM این نسخه حفظ‌اند. آموزش مدل یا پذیرش کامل تولید ادعا نمی‌شود.
+
 ## 2026-09-30 — Live standard chat and dark theme / گفت‌وگوی معمولی و پوستهٔ تیرهٔ زنده
 
 Select matched app/AI b5e74f9 with standard local saved chat, bounded follow-ups, actual 16K

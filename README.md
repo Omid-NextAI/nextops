@@ -7,7 +7,16 @@
 Owner update (2026-09-26): the owner tested an ESXi VM snapshot restore. Its dated result has
 not been reviewed here; independent database backup and restore gates remain unpassed.
 
-Current controlled workspace (2026-09-30): app/AI API b5e74f9 serves the unchanged CPU-only 35B
+Current controlled repair (2026-10-03): app/AI API `69c9260` fixes the reported AI-server question
+by visibly selecting the existing approved target, returning that server's actual Linux state
+and keeping Zabbix scope separate. Five CI jobs, offline installs, seven final live functional
+cases, audit/hash matching, exact b5e74f9 rollback and bounded queue recovery passed. Branding,
+standard saved chat and the CPU-only 35B runtime/profile are unchanged. Thinking remains off;
+Persian brevity/format and broader semantics are still partial. This source's WAN/VM tests and
+full-context generation are unrun; older successful records remain dated. Controlled use is
+live, not full production acceptance. [Release status](docs/status/current-release.yaml) is authoritative.
+
+Earlier controlled workspace (2026-09-30): app/AI API b5e74f9 serves the unchanged CPU-only 35B
 model with owner-scoped saved chat, bounded follow-ups and a header light/dark switch. OCS logo/base
 palette and focused read-only evidence remain intact. Configured context is 16K; thinking failed
 and stays disabled. Five CI jobs, exact offline installs, 15 functional live cases, matched

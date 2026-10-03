@@ -2,9 +2,18 @@
 
 [فارسی](../fa/PROJECT_STATUS_BRIEF.md) · [Documentation index](INDEX.md) · [Project state](../PROJECT_STATE.md) · [Next task](../NEXT_TASK.md)
 
-Updated: 2026-09-30
+Updated: 2026-10-03
 
-Current controlled workspace: app/API 810102f retains 35B/CPU, the exact OCS palette/logo and
+Current controlled workspace: matched app/AI `69c9260` fixes the AI-server/Zabbix-host mismatch
+while retaining 35B/CPU, saved standard chat, themes and OCS branding. Five-job CI, fresh offline
+installs, seven final live functional cases, audit/hash matching, exact b5e74f9 rollback and
+bounded queue recovery passed. Thinking remains disabled; Persian format quality and broad
+semantics remain partial. Full-context generation, sustained load and this source's WAN/VM
+acceptance are unrun. Earlier b5e74f9 offline/reboot evidence is retained separately. Independent
+recovery remains owner-deferred, not passed. The [release manifest](../status/current-release.yaml)
+is authoritative; this is live controlled use, not full production acceptance.
+
+Earlier 2026-09-30 checkpoint: app/API 810102f retains 35B/CPU, the exact OCS palette/logo and
 canonical evidence boundaries. Five CI jobs, fresh offline install, six live EN/FA browser cases,
 six audit/hash matches and exact 862d311 rollback with fresh restored answers passed. Named-service
 answers and the focused panel now exclude unrelated units. The 49.5–93.0s first-run samples are

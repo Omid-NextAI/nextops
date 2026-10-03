@@ -1,5 +1,27 @@
 # Bilingual operations console and design system
 
+## Live named-server status repair — 2026-10-03
+
+The screenshot question “آخرین وضعیت سرور Ai رو بهم بگو” selected Live monitoring, whose
+configured snapshot covers a different Zabbix host. The candidate recognizes a narrowly scoped
+EN/FA status question naming one existing logical server and visibly selects that target in
+Incident investigation **only when the authenticated approved-target list includes it**. Advice,
+unit names, unknown hosts and ambiguous/multiple targets are not guessed. This intent helper is
+not authorization; server policy still decides access.
+
+The API rejects a named/selected target mismatch before collection or model generation and
+rejects a collector response for another target. A direct monitoring request cannot substitute
+the configured Zabbix host's health for the requested server. The focused status answer uses
+recorded Linux service states, memory, load and uptime; running services do not prove generation
+or application health. Zabbix retains its separate source/time/scope, with partial/stale warnings.
+Other authorized evidence stays collapsed until requested. No brand, palette, credential scope,
+collector, dependency or runtime change is introduced. Three new EN/FA/permission browser fixtures
+passed locally. The matched `69c9260` app/AI release passed seven final fresh live functional
+cases, audit/hash matching and exact b5e74f9 rollback. The owner's Persian AI-server question
+now retrieves that approved server's actual Linux evidence. The UI/UX workflow guided visible
+target selection and accessible status feedback; OCS assets remain unchanged. This repair is
+not model training, broad semantic acceptance or full production qualification.
+
 ## Live local theme switch — 2026-09-30
 
 The header has a keyboard-accessible light/dark switch on login and workspace screens. Before

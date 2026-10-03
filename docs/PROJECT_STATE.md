@@ -1,5 +1,37 @@
 # Project state / وضعیت پروژه
 
+Current verified repair, 2026-10-03 — app and AI API `69c9260` are live for controlled users.
+The AI-server/Zabbix-host mismatch is repaired by bounded EN/FA approved-target selection,
+audited mismatch rejection and a deterministic source-scoped host summary. The exact Persian
+question now retrieves the actual AI server. Five-job CI, fresh offline installs, 459 local
+unit/API/contract checks, 24 browser fixtures, seven final live functional cases, four final
+text-free chat audits/three canonical live hashes and exact b5e74f9 rollback passed. Real bounded
+four-request admission/queue recovery and actual over-16K token rejection passed; these are not
+sustained load or full-context generation acceptance. OCS logo/palette, standard saved chat,
+model/runtime/profile, proxy and schema are unchanged. Only owned transient guards were stopped.
+The gated thinking adapter has a 128-token/final-envelope contract, but thinking remains off.
+Native drafting/earlier failures and Persian identifier-only format failure are preserved.
+Held-out semantics, near-full-context recall/latency and thinking acceptance remain open; no
+new WAN/VM test was run for this source. Prior b5e74f9 infrastructure evidence below remains dated.
+See [testing](en/TESTING.md) and [thinking specification](en/CONVERSATION_MEMORY_SPEC.md).
+
+اصلاح تأییدشدهٔ جاری، ۳ اکتبر ۲۰۲۶ — برنامه و API هوش مصنوعیِ `69c9260` برای کاربران کنترل‌شده
+زنده‌اند. عدم تطابق سرور AI و میزبان Zabbix با انتخاب محدود و دوزبانهٔ هدف مجاز، ردِ قابل‌ممیزیِ
+عدم تطابق و خلاصهٔ قطعیِ محدود به منبع اصلاح شد؛ پرسش دقیقِ فارسی اکنون سرور واقعی AI را
+بررسی می‌کند. پنج کنترل CI، نصب تازهٔ آفلاین، ۴۵۹ آزمون محلیِ واحد/API/قرارداد، ۲۴ آزمون ساختگی
+مرورگر، هفت مورد کارکردیِ نهاییِ زنده، چهار ممیزیِ نهاییِ بدون متن/سه هشِ اصلی و بازگشت دقیق به
+b5e74f9 موفق‌اند. پذیرش/ادامهٔ صف در آزمون واقعیِ چهار درخواست و ردِ ورودیِ واقعیِ بیش از 16K
+موفق‌اند؛ این‌ها پذیرشِ بار پایدار یا تولید با ظرفیت کامل نیستند. نشان و رنگ OCS، گفت‌وگوی
+معمولی، مدل، runtime، نمایه، پراکسی و پایگاه ثابت‌اند؛ فقط محافظ‌های موقتِ همین کار متوقف شدند.
+قرارداد تازهٔ استدلال، بودجهٔ ۱۲۸ توکن و قالب نهایی دارد، ولی استدلال خاموش است. افشای پیش‌نویس،
+شکست‌های پیشین و شکستِ قالبِ «فقط شناسه» در فارسی حفظ‌اند. درستیِ مستقل، یادآوری/تأخیرِ ظرفیت
+کامل و پذیرشِ استدلال بازند؛ برای این نسخه آزمون تازهٔ WAN/VM اجرا نشد. شاهدِ زیرساختِ b5e74f9
+در ادامه تاریخ‌دار می‌ماند. [آزمون](fa/TESTING.md) و [مشخصات استدلال](fa/CONVERSATION_MEMORY_SPEC.md)
+را ببینید.
+
+The following deployment records are historical, not the current release identity.
+رکوردهای استقرارِ زیر تاریخی‌اند، نه هویتِ انتشار جاری.
+
 Current verified deployment, 2026-09-30 — app and AI API b5e74f9 with the unchanged local CPU-only
 35B model are live for controlled users. Standard owner-scoped saved conversations, reload/resume,
 bounded follow-ups and the bilingual header light/dark switch are enabled. Context is configured

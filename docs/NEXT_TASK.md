@@ -1,5 +1,29 @@
 # Next task / کار بعدی
 
+Current unfinished checkpoint, 2026-10-03 — keep controlled `69c9260` standard service and the
+accepted named-AI-server repair live. Do not repeat its passed CI, offline installs, final seven
+functional browser cases, source/audit/hash proof, exact rollback, bounded standard queue recovery
+or over-budget token rejection as unfinished. Thinking stays off: independently qualify the new
+final-envelope adapter through matched application/browser/history/audit, held-out EN/FA semantic
+and format checks, and actual near-full-16K recall/latency. Short native probes and over-budget
+rejection do not qualify that feature. Preserve the Persian identifier-only failure observed on
+candidate and baseline. Sustained contention/load and this source's WAN/VM gates are unrun;
+dated b5e74f9 infrastructure passes are not erased or silently inherited. No model/resources,
+recovery or architecture change is implied. Full production remains unclaimed.
+
+گام ناتمامِ جاری، ۳ اکتبر ۲۰۲۶ — خدمت معمولیِ کنترل‌شدهٔ `69c9260` و اصلاح پذیرفته‌شدهٔ سرور AI
+زنده بمانند. CI، نصب آفلاین، هفت آزمون کارکردیِ نهاییِ مرورگر، تطبیق منبع/ممیزی/هش، بازگشت دقیق،
+ادامهٔ صفِ معمولیِ محدود و ردِ ورودیِ بیش از سقف موفق‌اند و دوباره کار ناتمام شمرده نشوند.
+استدلال خاموش است: قالب تازهٔ پاسخ نهایی، با برنامه/مرورگر/سابقه/ممیزیِ هماهنگ، درستی و قالبِ
+دوزبانهٔ مستقل و یادآوری/تأخیرِ واقعی نزدیک ظرفیت 16K جداگانه پذیرفته شود. آزمون کوتاهِ مستقیم
+یا ردِ ورودیِ بیش از سقف، پذیرش آن قابلیت نیست. شکستِ «فقط شناسه» در فارسی، در نامزد و نسخهٔ
+مبنا حفظ شود. بار/اشتغال پایدار و معیار WAN/VM این نسخه اجرا نشده‌اند؛ شاهد تاریخ‌دارِ موفقِ
+b5e74f9 حذف یا به‌طور ضمنی منتقل نشود. تغییر مدل، منابع، بازیابی یا معماری از این گام نتیجه
+نمی‌شود. پذیرش کامل تولید ادعا نمی‌شود.
+
+Earlier checkpoints below are historical.
+گام‌های زیر تاریخی‌اند.
+
 Current unfinished checkpoint, 2026-09-30 — Keep controlled b5e74f9/35B standard saved chat and
 light/dark UI live. Review held-out EN/FA technical correctness and instruction following, including
 physical-connectivity overclaims and unwanted follow-up prose. Thinking remains disabled after

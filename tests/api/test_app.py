@@ -1683,6 +1683,127 @@ def test_monitoring_host_inventory_limit_preserves_partial_and_stale_qualifiers(
     assert "stale_evidence" in assistant["limitations"]
 
 
+@pytest.mark.parametrize("locale", ["en", "fa"])
+def test_monitoring_never_substitutes_zabbix_health_for_the_requested_ai_host(locale: str) -> None:
+    client = TestClient(create_app(FakeService(), FakeInferenceGateway(), FakeMonitoringGateway()))
+    response = client.post(
+        "/api/v1/investigate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={
+            "locale": locale,
+            "question": (
+                "آخرین وضعیت سرور Ai رو بهم بگو"
+                if locale == "fa"
+                else "Show the current status of the AI server."
+            ),
+        },
+    )
+    assert response.status_code == 200
+    body = response.json()
+    assistant = body["assistant"]
+    assert assistant["integrity_status"] == "deterministic_focus"
+    assert "requested_target_not_in_evidence" in assistant["limitations"]
+    assert assistant["answer"].startswith(
+        "وضعیت هدف ai از این شاهد معلوم نیست"
+        if locale == "fa"
+        else "The status of target ai is unknown from this evidence"
+    )
+    assert "Zabbix server" in assistant["answer"]
+    assert body["evidence"]["host"] == "Zabbix server"
+    assert body["evidence_reference"] == f"run-evidence:{RUN_ID}"
+
+
+@pytest.mark.parametrize("locale", ["en", "fa"])
+def test_named_ai_status_uses_only_the_selected_target_observations(locale: str) -> None:
+    client = TestClient(
+        create_app(
+            FakeService(),
+            FakeInferenceGateway("The whole infrastructure is healthy."),
+            FakeMonitoringGateway(),
+            incident_target_ids=("app", "ai"),
+        )
+    )
+    response = client.post(
+        "/api/v1/incidents/investigate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={
+            "target_id": "ai",
+            "locale": locale,
+            "question": (
+                "آخرین وضعیت سرور Ai رو بهم بگو"
+                if locale == "fa"
+                else "Show the current status of the AI server."
+            ),
+        },
+    )
+    assert response.status_code == 200
+    body = response.json()
+    assert body["answer_focus"] == "host_status"
+    assert body["evidence"]["linux"]["target_id"] == "ai"
+    answer = body["assistant"]["answer"]
+    assert body["assistant"]["integrity_status"] == "deterministic_focus"
+    assert "28.0/32.0 GiB" in answer
+    assert "0.10" in answer
+    assert "whole infrastructure is healthy" not in answer
+    assert "ثابت نمی‌کند" in answer if locale == "fa" else "do not prove" in answer
+    assert "Zabbix server" in answer
+
+
+def test_named_host_mismatch_is_audited_before_any_collection_or_generation() -> None:
+    class NeverCollect(FakeMonitoringGateway):
+        async def incident_evidence(self, target_id: str) -> IncidentEvidence:
+            raise AssertionError("A mismatched request must not collect evidence")
+
+    service = FakeService()
+    inference = FakeInferenceGateway()
+    client = TestClient(
+        create_app(
+            service,
+            inference,
+            NeverCollect(),
+            incident_target_ids=("app", "ai"),
+        )
+    )
+    response = client.post(
+        "/api/v1/incidents/investigate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={"target_id": "app", "locale": "fa", "question": "آخرین وضعیت سرور Ai رو بهم بگو"},
+    )
+    assert response.status_code == 400
+    assert response.json()["error"]["message_key"] == "incident.target_question_mismatch"
+    assert service.incident_failure is not None
+    assert service.incident_failure.message_key == "incident.target_question_mismatch"
+    assert service.incident_completed is False
+    assert inference.last_request is None
+
+
+def test_collector_cannot_substitute_evidence_from_a_different_logical_target() -> None:
+    class WrongTarget(FakeMonitoringGateway):
+        async def incident_evidence(self, target_id: str) -> IncidentEvidence:
+            return await super().incident_evidence("app")
+
+    service = FakeService()
+    inference = FakeInferenceGateway()
+    client = TestClient(
+        create_app(
+            service,
+            inference,
+            WrongTarget(),
+            incident_target_ids=("app", "ai"),
+        )
+    )
+    response = client.post(
+        "/api/v1/incidents/investigate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={"target_id": "ai", "locale": "en", "question": "Show the AI server status."},
+    )
+    assert response.status_code == 503
+    assert response.json()["error"]["message_key"] == "connector.incident_target_mismatch"
+    assert service.incident_failure is not None
+    assert service.incident_completed is False
+    assert inference.last_request is None
+
+
 def test_monitoring_answer_with_length_finish_falls_back_despite_source_words() -> None:
     inference = FakeInferenceGateway(
         "Zabbix evidence is partial, and the current observation shows",

@@ -2,10 +2,13 @@
 
 [فارسی](../fa/CONVERSATIONS.md) · [Specification](CONVERSATION_MEMORY_SPEC.md)
 
-Controlled live release b5e74f9, 2026-09-30: saved standard chat is enabled; thinking is disabled
+Controlled live release 69c9260, 2026-10-03: saved standard chat is enabled; thinking is disabled
 at both application and inference boundaries after failed live trials. Configured context is 16,384
 tokens with actual local template/token admission. Full-budget context quality/latency is not qualified.
 The UI/UX workflow guided keyboard-accessible history controls; OCS brand assets are unchanged.
+The named-server repair does not train the model or certify general technical accuracy. Persian
+identifier-only replies retained the correct ID but violated the requested format on both this
+release and the rollback baseline; that quality gate remains unaccepted. See [testing](TESTING.md).
 
 ## User behavior
 
