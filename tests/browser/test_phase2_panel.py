@@ -187,6 +187,7 @@ def _fixture_app() -> FastAPI:
     app = FastAPI()
     app.mount("/assets", StaticFiles(directory=STATIC), name="assets")
     app.state.incident_requests = []
+    app.state.incident_targets = ["app", "ai", "connector", "zabbix"]
     app.state.logout_requests = 0
     app.state.general_answers = {}
     app.state.general_requests = []
@@ -340,7 +341,7 @@ def _fixture_app() -> FastAPI:
 
     @app.get("/api/v1/incidents/targets")
     async def targets() -> dict[str, list[str]]:
-        return {"targets": ["app", "ai", "connector", "zabbix"]}
+        return {"targets": app.state.incident_targets}
 
     @app.post("/api/v1/incidents/investigate")
     async def incident(request: Request) -> dict[str, Any]:
@@ -633,6 +634,68 @@ def test_phase2_panel_supports_incident_evidence_and_persian_rtl(
         expect(page.get_by_role("button", name="ورود امن")).to_be_visible()
         assert page.evaluate("sessionStorage.getItem('nextops-session')") is None
         assert app.state.logout_requests == 1
+        browser.close()
+
+
+@pytest.mark.parametrize("locale", ["en", "fa"])
+def test_named_ai_host_status_selects_the_approved_target_not_the_zabbix_snapshot(
+    browser_server: tuple[str, FastAPI],
+    locale: str,
+) -> None:
+    base_url, app = browser_server
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        _login(page, base_url)
+        page.locator('[data-mode="monitoring"]').click()
+        if locale == "fa":
+            page.locator("#languageButton").click()
+            page.locator('[data-locale="fa"]').click()
+        question = (
+            "آخرین وضعیت سرور Ai رو بهم بگو"
+            if locale == "fa"
+            else "Show the current status of the AI server."
+        )
+        page.locator("#question").fill(question)
+        page.locator("#askButton").click()
+        expect(page.locator("#resultCard")).to_be_visible()
+        expect(page.locator('[data-mode="incident"]')).to_have_attribute("aria-pressed", "true")
+        expect(page.locator("#incidentTarget")).to_have_value("ai")
+        assert app.state.incident_requests[-1]["target_id"] == "ai"
+        assert app.state.incident_requests[-1]["question"] == question
+        assert "history" not in app.state.incident_requests[-1]
+        assert app.state.monitoring_requests == []
+        assert app.state.general_requests == []
+        page.locator("#evidenceDetails > summary").click()
+        expect(page.locator("#incidentDetail > div").first).to_contain_text("nextops-app.service")
+        expect(page.locator("#incidentDetail > details")).not_to_have_attribute("open", "")
+        expect(page.get_by_text("CPU pressure observed")).to_be_hidden()
+        page.set_viewport_size({"width": 375, "height": 812})
+        assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth") is True
+        browser.close()
+
+
+def test_host_status_intent_does_not_grant_an_unlisted_target_or_route_advice(
+    browser_server: tuple[str, FastAPI],
+) -> None:
+    base_url, app = browser_server
+    app.state.incident_targets = ["app"]
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page()
+        _login(page, base_url)
+        page.locator('[data-mode="monitoring"]').click()
+        page.locator("#question").fill("Show the current status of the AI server.")
+        page.locator("#askButton").click()
+        expect(page.locator("#resultCard")).to_be_visible()
+        assert app.state.incident_requests == []
+        assert len(app.state.monitoring_requests) == 1
+        page.locator('[data-mode="general"]').click()
+        page.locator("#question").fill("How can I check the AI server status?")
+        page.locator("#askButton").click()
+        expect(page.locator("#askedQuestion")).to_have_text("How can I check the AI server status?")
+        assert len(app.state.general_requests) == 1
+        assert app.state.incident_requests == []
         browser.close()
 
 

@@ -9,8 +9,16 @@ import re
 from collections.abc import Iterable
 from typing import Literal
 
+from nextops.api.target_focus import named_host_status
+
 IncidentFocus = Literal[
-    "overview", "filesystems", "file_listing", "network", "service", "network_service"
+    "overview",
+    "filesystems",
+    "file_listing",
+    "network",
+    "service",
+    "network_service",
+    "host_status",
 ]
 
 _NAMED_UNIT = re.compile(
@@ -123,6 +131,8 @@ def incident_focus(question: str) -> IncidentFocus:
     """Narrow only an unambiguous single-topic request; never grant new access."""
 
     requested = _requested_text(question)
+    if named_host_status(requested):
+        return "host_status"
     filesystem_requested = bool(_FILESYSTEM.search(requested))
     file_requested = bool(_FILES.search(requested))
     if file_requested and not filesystem_requested and _FILE_ACTION.search(requested):

@@ -25,6 +25,8 @@ const translations = {
     incidentModeHelp: "Combines bounded Zabbix history and events with direct read-only Linux diagnostics for one approved host.",
     incidentTarget: "Investigation target", incidentTargetHelp: "Choose one approved host. NextOps will retrieve bounded Zabbix and direct read-only Linux evidence.",
     noIncidentTargets: "No approved investigation target is available.",
+    checkingNamedTarget: "Retrieving approved read-only evidence for target",
+    targetMismatchError: "The selected host does not match your question. Select the approved host you named and try again.",
     answerLanguage: "Answer language", question: "Question", questionPlaceholder: "Explain a safe first response to a high CPU alert.", askAssistant: "Ask assistant",
     evidenceBoundary: "EVIDENCE BOUNDARY", liveEvidenceTitle: "Intelligence with a clear source",
     liveEvidenceBody: "NextOps keeps model generation, evidence access, and credentials inside separate protected boundaries.",
@@ -41,6 +43,7 @@ const translations = {
     focusedIntegrityNotice: "This is a deterministic, scope-limited summary of approved read-only observations, not a verified model explanation.",
     fileLimitNotice: "System file names and contents are outside the current read-only collector scope. Incident mode can show approved mount capacity only.",
     hostInventoryLimitNotice: "This Zabbix view does not contain reachability states for the authorized host inventory; it cannot identify unavailable hosts.",
+    targetLimitNotice: "This evidence belongs to another host and cannot establish the status of the server you asked about.",
     fileListingNotCollected: "No system file names or contents were collected. The complete authorized evidence is available below if you need other diagnostics.",
     redirectIntegrityNotice: "The question requires live evidence and was not answered from model memory. Choose a live evidence mode.",
     source: "Source", host: "Host", collected: "Collected", problems: "Active problems", coverage: "Evidence coverage",
@@ -84,6 +87,8 @@ const translations = {
     incidentModeHelp: "تاریخچه و رویدادهای محدودشدهٔ Zabbix را با داده‌های تشخیصی مستقیم و فقط‌خواندنی Linux برای یک میزبان مجاز ترکیب می‌کند.",
     incidentTarget: "میزبان بررسی", incidentTargetHelp: "یک میزبان مجاز را انتخاب کنید؛ NextOps شواهد محدودشدهٔ Zabbix و Linux را گردآوری می‌کند.",
     noIncidentTargets: "هیچ میزبان مجاز برای بررسی تعریف نشده است.",
+    checkingNamedTarget: "در حال گردآوری شواهد فقط‌خواندنیِ مجاز برای میزبان",
+    targetMismatchError: "میزبان انتخاب‌شده با پرسش شما مطابقت ندارد. میزبان مجازی را که نام برده‌اید انتخاب کنید و دوباره بپرسید.",
     answerLanguage: "زبان پاسخ", question: "پرسش", questionPlaceholder: "برای هشدار مصرف بالای پردازنده، یک اقدام اولیه ایمن پیشنهاد کنید.", askAssistant: "ارسال به دستیار",
     evidenceBoundary: "مرز شواهد", liveEvidenceTitle: "هوشمندی با منبع روشن",
     liveEvidenceBody: "NextOps تولید پاسخ، دسترسی به شواهد و اطلاعات ورود را در مرزهای محافظت‌شده و جدا از هم نگه می‌دارد.",
@@ -100,6 +105,7 @@ const translations = {
     focusedIntegrityNotice: "این متن، خلاصه‌ای محدود به دامنهٔ مشاهدات فقط‌خواندنیِ مجاز است؛ نه توضیح راستی‌آزمایی‌شدهٔ مدل.",
     fileLimitNotice: "نام و محتوای فایل‌های سیستم در دامنهٔ گردآورندهٔ فقط‌خواندنیِ کنونی نیستند. حالت بررسی رخداد فقط ظرفیت نقاط اتصالِ مجاز را نشان می‌دهد.",
     hostInventoryLimitNotice: "این نمای زبیکس وضعیت دسترسیِ فهرست میزبان‌های مجاز را ندارد و نمی‌تواند میزبان‌های خارج از دسترس را مشخص کند.",
+    targetLimitNotice: "این شاهد مربوط به میزبان دیگری است و وضعیت سروری را که دربارهٔ آن پرسیده‌اید مشخص نمی‌کند.",
     fileListingNotCollected: "نام یا محتوای فایل‌های سیستم گردآوری نشده است. اگر به داده‌های تشخیصی دیگر نیاز دارید، می‌توانید شواهد کاملِ مجاز را در بخش پایین باز کنید.",
     redirectIntegrityNotice: "این پرسش به شاهد زنده نیاز دارد و از حافظهٔ مدل پاسخ داده نشد؛ یکی از حالت‌های دارای شاهد زنده را انتخاب کنید.",
     source: "منبع", host: "میزبان", collected: "زمان گردآوری", problems: "مسائل فعال", coverage: "پوشش شواهد",
@@ -781,6 +787,10 @@ function renderIncidentEvidence(evidence, focus = "overview", question = "") {
       focused.textContent = translations[state.language].fileListingNotCollected;
     } else if (focus === "filesystems") {
       focused.append(sections.children[0].cloneNode(true));
+    } else if (focus === "host_status") {
+      const hostStats = stats.cloneNode(true);
+      hostStats.lastElementChild.remove(); // Zabbix history may belong to a different host.
+      focused.append(hostStats, sections.children[1].cloneNode(true));
     } else {
       focused.className = "incident-sections";
       if (focus === "service" || focus === "network_service") {
@@ -831,6 +841,7 @@ function renderIncidentEvidence(evidence, focus = "overview", question = "") {
 
 function safeRequestError(error) {
   if (error.message === "inference.context_exceeded") return translations[state.language].contextExceeded;
+  if (error.message === "incident.target_question_mismatch") return translations[state.language].targetMismatchError;
   if (error.code === "conflict") return translations[state.language].conflictError;
   const keyByCode = {
     timeout: "timeoutError",
@@ -839,6 +850,18 @@ function safeRequestError(error) {
     forbidden: "deniedError"
   };
   return translations[state.language][keyByCode[error.code] || "genericError"];
+}
+
+function requestedHostStatus(question) {
+  // Intent only: the authenticated target list and server policy remain authoritative.
+  if (!/\b(?:status|state|health|current|latest|now)\b|وضعیت|سلامت|فعلی|آخرین|الان/i.test(question)) return null;
+  if (/\b(?:why|explain|mean(?:ing|s)?|compare|difference|how)\b|چرا|توضیح|معنی|معنا|مقایسه|تفاوت|چطور|چگونه/i.test(question)) return null;
+  if (/\b(?:cpu|ram|memory|disk|file(?:s|systems?)?|network|dns|ports?|logs?|journal|services?)\b|پردازنده|حافظه|دیسک|فایل|شبکه|پورت|لاگ|ژورنال|سرویس/i.test(question)) return null;
+  const aliases = { ai: "ai|هوش\\s*مصنوعی", app: "app|application|برنامه", connector: "connectors?|کانکتور|اتصال", zabbix: "zabbix|زبیکس" };
+  const roles = Object.entries(aliases).filter(([role, names]) => new RegExp(
+    `(?<![\\p{L}\\p{N}_@.-])(?:nextops-${role}(?![\\p{L}\\p{N}_@.-])|(?:server|host|vm|سرور|میزبان)\\s+(?:${names})|(?:${names})\\s+(?:server|host|vm|سرور|میزبان))(?![\\p{L}\\p{N}_-])`, "iu"
+  ).test(question));
+  return roles.length === 1 ? roles[0][0] : null;
 }
 
 function setAnswerMode(mode) {
@@ -930,10 +953,17 @@ byId("assistantForm").addEventListener("submit", async event => {
   errorNode.textContent = "";
   const question = byId("question").value;
   if (!question.trim()) { errorNode.textContent = translations[state.language].blankQuestion; return; }
+  const namedTarget = requestedHostStatus(question);
+  if (namedTarget && state.incidentTargets.includes(namedTarget)) {
+    byId("incidentTarget").value = namedTarget;
+    setAnswerMode("incident");
+  }
   const epoch = state.epoch;
   setBusy(true);
   const started = performance.now();
-  byId("requestStatus").textContent = translations[state.language].working;
+  byId("requestStatus").textContent = namedTarget && state.answerMode === "incident"
+    ? `${translations[state.language].checkingNamedTarget} ${byId("incidentTarget").value}…`
+    : translations[state.language].working;
   const clock = document.createElement("span");
   clock.setAttribute("aria-hidden", "true");
   byId("requestStatus").append(clock);
@@ -982,6 +1012,7 @@ byId("assistantForm").addEventListener("submit", async event => {
     let integrityKey = integrityKeys[assistant.integrity_status] || "modelIntegrityNotice";
     if (!evidenceBacked && assistant.integrity_status === "deterministic_fallback") integrityKey = "generalFallbackIntegrityNotice";
     if (assistant.limitations?.includes("host_inventory_unavailable")) integrityKey = "hostInventoryLimitNotice";
+    if (assistant.limitations?.includes("requested_target_not_in_evidence")) integrityKey = "targetLimitNotice";
     if (assistant.limitations?.includes("file_listing_unavailable")) integrityKey = "fileLimitNotice";
     byId("integrityNotice").dataset.i18n = integrityKey;
     byId("integrityNotice").textContent = translations[state.language][integrityKey];

@@ -1,5 +1,21 @@
 # Next task / کار بعدی
 
+Immediate candidate checkpoint, 2026-10-03 — run exact five-job CI and fresh offline package
+checks, then qualify guarded app/AI promotion and exact b5e74f9 rollback for the named-server
+status repair. Replay the owner's Persian AI-server question through a fresh TLS browser,
+verify the actual Linux target/source/time/audit and confirm Zabbix scope is separate. Thinking
+stays off: qualify the revised final-envelope adapter, held-out EN/FA quality, actual near-16K
+context and bounded contention/recovery before enabling it. Do not relabel native short probes
+as application acceptance or repeat already passed infrastructure gates as missing work.
+
+گام فوریِ نامزد، ۳ اکتبر ۲۰۲۶ — پنج کنترل CI و بستهٔ تازهٔ آفلاین آزموده شوند؛ سپس استقرار
+محافظت‌شدهٔ برنامه/AI و بازگشت دقیق به b5e74f9 برای اصلاح وضعیتِ سرور مشخص سنجیده شود. پرسش
+فارسیِ مالک دربارهٔ سرور AI با مرورگر تازه و TLS معتبر تکرار و هدف، منبع، زمان و ممیزیِ واقعی
+Linux کنترل شوند؛ دامنهٔ Zabbix جدا بماند. استدلال خاموش است: قالب تازهٔ پاسخ نهایی، کیفیتِ
+دوزبانهٔ مستقل، زمینهٔ واقعی نزدیک 16K و اشتغال/ادامهٔ محدودِ صف پیش از فعال‌سازی پذیرفته شوند.
+آزمون کوتاهِ مستقیمِ runtime، پذیرش برنامه نامیده نشود؛ معیارهای زیرساختِ موفق نیز دوباره
+کار ناتمام شمرده نشوند.
+
 Current unfinished checkpoint, 2026-09-30 — Keep controlled b5e74f9/35B standard saved chat and
 light/dark UI live. Review held-out EN/FA technical correctness and instruction following, including
 physical-connectivity overclaims and unwanted follow-up prose. Thinking remains disabled after

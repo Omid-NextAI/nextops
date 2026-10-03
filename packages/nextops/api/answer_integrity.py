@@ -15,6 +15,7 @@ from nextops.api.incident_focus import (
     monitoring_cpu_focus,
     requested_service_units,
 )
+from nextops.api.target_focus import evidence_host_role, requested_named_target
 from nextops.contracts.assistant import AssistantRequest, AssistantResponse, GeneralAssistantRequest
 from nextops.contracts.conversations import ConversationAssistantRequest
 from nextops.contracts.incidents import IncidentEvidence, IncidentInvestigationRequest
@@ -258,6 +259,38 @@ def assure_monitoring_answer(
 
     is_stale = any(metric.stale for metric in evidence.metrics)
     limitations = _evidence_limitations(is_partial=evidence.is_partial, is_stale=is_stale)
+    named_target = requested_named_target(request.question)
+    if named_target and named_target != evidence_host_role(evidence.host):
+        answer = (
+            f"وضعیت هدف {named_target} از این شاهد معلوم نیست. این نمای Zabbix در "
+            f"{_timestamp(evidence.collected_at)} فقط میزبان {evidence.host} را پوشش می‌دهد، "
+            "نه سرور خواسته‌شده. برای شاهد همان سرور، هدف مجاز را در «بررسی رخداد» انتخاب کنید. "
+            "نبودِ مشکل در میزبان دیگر، سلامت سرور شما را ثابت نمی‌کند. هیچ تغییری انجام نشد."
+            if request.locale == "fa"
+            else f"The status of target {named_target} is unknown from this evidence. This Zabbix "
+            f"snapshot at {_timestamp(evidence.collected_at)} covers only {evidence.host}, not "
+            "the requested server. Select that approved target in Incident investigation. "
+            "No problems on a different host do not prove your server healthy. "
+            "No change was performed."
+        )
+        qualifiers = (
+            (" شاهد ناقص است." if request.locale == "fa" else " Evidence is partial.")
+            if evidence.is_partial
+            else ""
+        ) + (
+            (" برخی سنجه‌ها قدیمی‌اند." if request.locale == "fa" else " Some metrics are stale.")
+            if is_stale
+            else ""
+        )
+        return assistant.model_copy(
+            update={
+                "answer": answer + qualifiers,
+                "evidence_mode": "live_zabbix",
+                "live_monitoring_data": True,
+                "integrity_status": "deterministic_focus",
+                "limitations": (*limitations, "requested_target_not_in_evidence"),
+            }
+        )
     if _MULTI_HOST_QUESTION.search(request.question) and _HOST_AVAILABILITY_QUESTION.search(
         request.question
     ):
@@ -368,6 +401,16 @@ def assure_incident_answer(
     is_stale = any(metric.stale for metric in evidence.zabbix.summary.metrics)
     limitations = _evidence_limitations(is_partial=evidence.is_partial, is_stale=is_stale)
     focus = incident_focus(request.question)
+    if focus == "host_status":
+        return assistant.model_copy(
+            update={
+                "answer": _host_status_summary(request.locale, evidence),
+                "evidence_mode": "live_zabbix_linux",
+                "live_monitoring_data": True,
+                "integrity_status": "deterministic_focus",
+                "limitations": limitations,
+            }
+        )
     if focus != "overview":
         # A lexical source check cannot verify whether a generated file name or capacity is real.
         # Render the bounded collector data directly until semantic validation is qualified.
@@ -405,6 +448,54 @@ def assure_incident_answer(
             "integrity_status": "evidence_bounded" if safe else "deterministic_fallback",
             "limitations": limitations,
         }
+    )
+
+
+def _host_status_summary(locale: str, evidence: IncidentEvidence) -> str:
+    """Observed target facts only: running services are not an application health test."""
+    linux = evidence.linux
+    states = "; ".join(
+        f"{service.unit}={service.active_state}/{service.sub_state}"
+        for service in linux.services
+        if _safe_service_state(service.active_state) and _safe_service_state(service.sub_state)
+    ) or ("وضعیت سرویس دریافت نشد" if locale == "fa" else "no service states collected")
+    memory = (
+        f"{linux.memory_available_bytes / 1073741824:.1f}/"
+        f"{linux.memory_total_bytes / 1073741824:.1f} GiB"
+    )
+    partial = (
+        f" شاهد ناقص است ({', '.join(evidence.partial_reasons)})."
+        if locale == "fa" and evidence.is_partial
+        else f" Evidence is partial ({', '.join(evidence.partial_reasons)})."
+        if evidence.is_partial
+        else ""
+    )
+    stale = (
+        " برخی سنجه‌های Zabbix قدیمی‌اند."
+        if locale == "fa" and any(m.stale for m in evidence.zabbix.summary.metrics)
+        else " Some Zabbix metrics are stale."
+        if any(m.stale for m in evidence.zabbix.summary.metrics)
+        else ""
+    )
+    if locale == "fa":
+        return (
+            f"برای سرورِ هدف {evidence.target_id}، شاهد Linux در {_timestamp(linux.collected_at)} "
+            f"این وضعیت را ثبت کرده است: {states}. حافظهٔ در دسترس/کل: {memory}؛ "
+            f"بار یک‌دقیقه‌ای: {linux.load_1m:.2f}؛ مدت روشن‌بودن: {linux.uptime_seconds} ثانیه. "
+            "فعال‌بودن سرویس، موفقیت تولید پاسخ یا سلامت کامل برنامه را ثابت نمی‌کند. "
+            f"دامنهٔ جداگانهٔ Zabbix، میزبان {evidence.zabbix.host} در "
+            f"{_timestamp(evidence.zabbix.collected_at)} است؛ دادهٔ میزبان دیگر به این سرور نسبت "
+            f"داده نمی‌شود.{partial}{stale} هیچ تغییری انجام نشد."
+        )
+    return (
+        f"For server target {evidence.target_id}, "
+        f"Linux at {_timestamp(linux.collected_at)} records "
+        f"{states}. Available/total memory: {memory}; one-minute load: {linux.load_1m:.2f}; "
+        f"uptime: {linux.uptime_seconds} seconds. Running services alone do not prove successful "
+        "generation or full application health. "
+        f"The separate Zabbix scope is {evidence.zabbix.host} "
+        f"at {_timestamp(evidence.zabbix.collected_at)}; another host's data is not attributed to "
+        f"this server.{partial}{stale} No change was performed."
     )
 
 

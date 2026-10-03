@@ -1,5 +1,21 @@
 # Project state / وضعیت پروژه
 
+Candidate repair, 2026-10-03 — the reported AI-server/Zabbix-host mismatch now has bounded
+EN/FA target selection, API mismatch rejection and a deterministic source-scoped host summary.
+Local 24 browser fixtures passed; the latest targeted API/intent suite passed 183 tests. These
+are not deployment results. Thinking has a new gated 128-token/final-envelope adapter; one prior
+native drafting leak is preserved and four revised short native probes passed. Thinking remains
+disabled and its full qualification remains open. See [UI](en/UI.md) and
+[thinking specification](en/CONVERSATION_MEMORY_SPEC.md). Serving b5e74f9 is unchanged at this point.
+
+نامزد اصلاح، ۳ اکتبر ۲۰۲۶ — عدم تطابق سرور AI و میزبان Zabbix، با انتخاب هدفِ محدود و دوزبانه،
+ردِ عدم تطابق در API و خلاصهٔ قطعیِ محدود به منبع اصلاح شده است. ۲۴ آزمون ساختگیِ مرورگر و
+۱۸۳ آزمون منتخب API/مقصود در محیط محلی موفق‌اند؛ این‌ها نتیجهٔ استقرار نیستند. adapter
+غیرفعالِ تازه برای استدلال، بودجهٔ ۱۲۸ توکن و قالب پاسخ نهایی دارد؛ شکستِ افشای پیش‌نویس حفظ
+شده و چهار آزمون کوتاه و مستقیمِ اصلاح‌شده موفق‌اند. استدلال غیرفعال و پذیرش کامل آن باز است.
+[رابط](fa/UI.md) و [مشخصات استدلال](fa/CONVERSATION_MEMORY_SPEC.md) را ببینید. در این نقطه،
+انتشار زندهٔ b5e74f9 تغییر نکرده است.
+
 Current verified deployment, 2026-09-30 — app and AI API b5e74f9 with the unchanged local CPU-only
 35B model are live for controlled users. Standard owner-scoped saved conversations, reload/resume,
 bounded follow-ups and the bilingual header light/dark switch are enabled. Context is configured
