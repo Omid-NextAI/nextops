@@ -1,20 +1,28 @@
 # Next task / کار بعدی
 
-Immediate candidate checkpoint, 2026-10-03 — run exact five-job CI and fresh offline package
-checks, then qualify guarded app/AI promotion and exact b5e74f9 rollback for the named-server
-status repair. Replay the owner's Persian AI-server question through a fresh TLS browser,
-verify the actual Linux target/source/time/audit and confirm Zabbix scope is separate. Thinking
-stays off: qualify the revised final-envelope adapter, held-out EN/FA quality, actual near-16K
-context and bounded contention/recovery before enabling it. Do not relabel native short probes
-as application acceptance or repeat already passed infrastructure gates as missing work.
+Current unfinished checkpoint, 2026-10-03 — keep controlled `69c9260` standard service and the
+accepted named-AI-server repair live. Do not repeat its passed CI, offline installs, final seven
+functional browser cases, source/audit/hash proof, exact rollback, bounded standard queue recovery
+or over-budget token rejection as unfinished. Thinking stays off: independently qualify the new
+final-envelope adapter through matched application/browser/history/audit, held-out EN/FA semantic
+and format checks, and actual near-full-16K recall/latency. Short native probes and over-budget
+rejection do not qualify that feature. Preserve the Persian identifier-only failure observed on
+candidate and baseline. Sustained contention/load and this source's WAN/VM gates are unrun;
+dated b5e74f9 infrastructure passes are not erased or silently inherited. No model/resources,
+recovery or architecture change is implied. Full production remains unclaimed.
 
-گام فوریِ نامزد، ۳ اکتبر ۲۰۲۶ — پنج کنترل CI و بستهٔ تازهٔ آفلاین آزموده شوند؛ سپس استقرار
-محافظت‌شدهٔ برنامه/AI و بازگشت دقیق به b5e74f9 برای اصلاح وضعیتِ سرور مشخص سنجیده شود. پرسش
-فارسیِ مالک دربارهٔ سرور AI با مرورگر تازه و TLS معتبر تکرار و هدف، منبع، زمان و ممیزیِ واقعی
-Linux کنترل شوند؛ دامنهٔ Zabbix جدا بماند. استدلال خاموش است: قالب تازهٔ پاسخ نهایی، کیفیتِ
-دوزبانهٔ مستقل، زمینهٔ واقعی نزدیک 16K و اشتغال/ادامهٔ محدودِ صف پیش از فعال‌سازی پذیرفته شوند.
-آزمون کوتاهِ مستقیمِ runtime، پذیرش برنامه نامیده نشود؛ معیارهای زیرساختِ موفق نیز دوباره
-کار ناتمام شمرده نشوند.
+گام ناتمامِ جاری، ۳ اکتبر ۲۰۲۶ — خدمت معمولیِ کنترل‌شدهٔ `69c9260` و اصلاح پذیرفته‌شدهٔ سرور AI
+زنده بمانند. CI، نصب آفلاین، هفت آزمون کارکردیِ نهاییِ مرورگر، تطبیق منبع/ممیزی/هش، بازگشت دقیق،
+ادامهٔ صفِ معمولیِ محدود و ردِ ورودیِ بیش از سقف موفق‌اند و دوباره کار ناتمام شمرده نشوند.
+استدلال خاموش است: قالب تازهٔ پاسخ نهایی، با برنامه/مرورگر/سابقه/ممیزیِ هماهنگ، درستی و قالبِ
+دوزبانهٔ مستقل و یادآوری/تأخیرِ واقعی نزدیک ظرفیت 16K جداگانه پذیرفته شود. آزمون کوتاهِ مستقیم
+یا ردِ ورودیِ بیش از سقف، پذیرش آن قابلیت نیست. شکستِ «فقط شناسه» در فارسی، در نامزد و نسخهٔ
+مبنا حفظ شود. بار/اشتغال پایدار و معیار WAN/VM این نسخه اجرا نشده‌اند؛ شاهد تاریخ‌دارِ موفقِ
+b5e74f9 حذف یا به‌طور ضمنی منتقل نشود. تغییر مدل، منابع، بازیابی یا معماری از این گام نتیجه
+نمی‌شود. پذیرش کامل تولید ادعا نمی‌شود.
+
+Earlier checkpoints below are historical.
+گام‌های زیر تاریخی‌اند.
 
 Current unfinished checkpoint, 2026-09-30 — Keep controlled b5e74f9/35B standard saved chat and
 light/dark UI live. Review held-out EN/FA technical correctness and instruction following, including

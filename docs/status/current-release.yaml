@@ -1,8 +1,8 @@
 ---
 $schema: ./release-status.schema.json
 schema_version: 2.2.0
-release_identifier: nextops-saved-chat-theme-controlled-2026-09-30
-observed_at: '2026-09-30'
+release_identifier: nextops-named-server-status-controlled-2026-10-03
+observed_at: '2026-10-03'
 deployment_status: controlled_user_testing_not_production_accepted
 delivery_scope:
   profile: local_read_only_recovery_deferred
@@ -17,17 +17,17 @@ snapshot_restore_owner_attestation:
 repository:
   remote: Omid-NextAI/nextops
   branch: main
-  inspected_baseline_commit: 24fbc55b0821014048b0f2c042a14becf4c099ae
+  inspected_baseline_commit: 38d451716a6419957010345219da05369d35739e
 components:
   application:
-    release: nextops-0.1.0-b5e74f9
-    source_commit: b5e74f9b384e65d7fa487d9aa14a7abb43b6576f
+    release: nextops-0.1.0-69c9260
+    source_commit: 69c9260c23f6cf85bb9678e8dc7fe1a4448ec3e2
   connector:
     release: nextops-0.1.0-cdde129
     source_commit: cdde129950f60f9f18f3ef109cbf98f4217fc5e1
   inference_api:
-    release: nextops-0.1.0-b5e74f9
-    source_commit: b5e74f9b384e65d7fa487d9aa14a7abb43b6576f
+    release: nextops-0.1.0-69c9260
+    source_commit: 69c9260c23f6cf85bb9678e8dc7fe1a4448ec3e2
   inference_runtime:
     name: llama.cpp
     source_tag: v0.4.1
@@ -50,8 +50,8 @@ components:
     name: Zabbix
     version: '7.0.31'
 current_application_qualification:
-  release: nextops-0.1.0-b5e74f9
-  source_commit: b5e74f9b384e65d7fa487d9aa14a7abb43b6576f
+  release: nextops-0.1.0-69c9260
+  source_commit: 69c9260c23f6cf85bb9678e8dc7fe1a4448ec3e2
   scope: application_revision_sensitive
   gates:
     - id: current_app_bounded_live_functionality
@@ -72,16 +72,26 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_server_side_wan_isolation
-      status: passed
+      status: not_run
       evidence:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_vm_reboot_cold_start
-      status: passed
+      status: not_run
       evidence:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: named_server_status_scope_repair
+    status: accepted_controlled
+    evidence:
+      - docs/en/UI.md
+      - docs/fa/UI.md
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+      - tests/unit/test_target_focus.py
+      - tests/api/test_app.py
+      - tests/browser/test_phase2_panel.py
   - id: owner_scoped_saved_conversations
     status: accepted_controlled
     evidence:
@@ -213,6 +223,16 @@ capabilities:
       - deploy/systemd/nextops-certificate-check.timer
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
+  - id: standard_four_request_admission_recovery
+    status: passed
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: real_token_over_budget_rejection
+    status: passed
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
   - id: saved_chat_standard_follow_up
     status: passed
     evidence:

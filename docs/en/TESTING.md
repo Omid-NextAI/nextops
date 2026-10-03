@@ -1,5 +1,51 @@
 # Testing, model evaluation and release evidence
 
+## Named-server repair qualification — 2026-10-03
+
+Source `69c9260c23f6cf85bb9678e8dc7fe1a4448ec3e2` passed all five jobs in
+[CI 37103241957](https://github.com/Omid-NextAI/nextops/actions/runs/37103241957), including real
+PostgreSQL 16/17 integration, browser and secret checks. Local locked checks: 459 unit/API/contract
+passes, two Windows POSIX skips; 24 separate browser fixtures passed. Fresh hash-locked offline
+installs and protected installed-code probes passed on Ubuntu 24.04 and both existing guests.
+Wheel SHA-256: `6ee13d6a0f15a158960f9860847888c70f0af70b3f67ae326fe6e2041862842a`.
+Installed code: `d010e65ae6a8971f574004fda6bf8b66ed7ebeada0dd95fd391ea25c71f0a8d0`.
+
+Guarded matched app/AI promotion leaves model/runtime, proxy, schema, standard/thinking flags,
+16K context, 16 threads and deadlines unchanged. The owner's exact Persian AI-server question
+visibly selected the approved `ai` target and retrieved its actual Linux service/resource evidence.
+Its recorded state does not prove AI generation health; Zabbix remains a separate scope. English
+target checks also passed. The first completed Persian-only functional run passed four cases;
+read-only verification matched two text-free chat audit events, two live canonical hashes and
+the persisted wrong-target failure. Own QA chats were deleted and the test session revoked.
+Two harness failures incorrectly required code hashes on unversioned/error routes; corrected
+checks keep identity mandatory for successful answer responses. Original failed reports remain.
+
+Exact app/AI rollback to protected b5e74f9 passed four fresh EN/FA saved-answer/follow-up cases and
+four text-free audits; the same immutable candidate was re-promoted under new active guards.
+Final fresh candidate verification passed seven functional cases, four text-free chat audit
+events, three canonical live evidence/hash pairs and the auditable target-mismatch rejection.
+The final actual AI status requests took 59.468 seconds (EN) and 63.297 seconds (FA); these are
+individual observations, not latency percentiles or an optimal CPU benchmark. Strict TLS, new
+login, local-only browser requests, RTL/375-pixel display and collapsed unrelated evidence passed.
+Own QA transcripts/session were removed/revoked. Both protected metadata hashes were rechecked;
+only this task's transient rollback timers were stopped after acceptance. App and AI API
+`nextops-0.1.0-69c9260` remain active; protected b5e74f9 fallback and all historical failures remain.
+
+The actual four-request inference test observed one active/two queued: one answer completed in
+15.461 seconds, two waiters returned queue timeouts at 5.007/5.011 seconds and the excess request
+was rejected in 0.004 seconds. Counters returned to zero; a fresh correct answer completed in
+1.596 seconds. This is bounded admission/recovery evidence, not a sustained load benchmark.
+The actual pinned template/tokenizer counted 30,201 tokens for a 30,046-character synthetic input
+and rejected it against 16,384 plus a 2,048 output reservation before any generation call. This
+negative admission check does not qualify near-full-context generation, recall or latency.
+
+Technical semantics remain partial: an identifier-only Persian follow-up retained the correct
+ticket but added a sentence, both on this candidate and the restored baseline. The strict format
+failure remains a failure, separate from functional memory retention. The first native 64-token
+thinking answer exposed drafting; four revised 128-token final-envelope probes passed only short
+synthetic diagnostics. Thinking remains off. No new server-WAN/VM-reboot trial was run for this
+source revision; the dated b5e74f9 results below are preserved, not silently inherited or erased.
+
 ## Serving standard chat and theme b5e74f9 — 2026-09-30
 
 Exact app/AI source b5e74f9b384e65d7fa487d9aa14a7abb43b6576f passed all five CI jobs in

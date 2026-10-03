@@ -46,6 +46,12 @@ def test_release_status_manifest_is_valid_and_matches_ai_artifacts() -> None:
     assert "PASS:" in result.stdout
 
 
+def test_expanded_profile_revision_matches_the_serving_inference_api_record() -> None:
+    status = _manifest()
+    profile = json.loads((ROOT / "deploy/inference/expanded-chat-profile.json").read_text("utf-8"))
+    assert profile["source_commit"] == status["components"]["inference_api"]["source_commit"]
+
+
 def test_selected_model_identity_checks_all_fields_and_rejects_unqualified_selection() -> None:
     module = _status_module()
     baseline = yaml.safe_load((ROOT / "deploy/inference/qwen3-8b-q4-k-m.yaml").read_text("utf-8"))[

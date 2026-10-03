@@ -1,5 +1,21 @@
 # AI answer integrity
 
+## Current named-server scope safeguard — 2026-10-03
+
+Matched app/AI `69c9260` is live for controlled use. The reported Persian question about the AI
+server no longer receives another Zabbix host's health as its answer: narrow intent selects an
+existing approved target visibly, deterministic policy authorizes it, and the API rejects
+question/selection and collector-target mismatches. A focused summary reports only recorded
+Linux service/resource facts, their source/time and limitations; separate Zabbix evidence is not
+attributed to that server. Running services do not prove successful AI generation. See
+[UI](UI.md) and [exact test evidence](TESTING.md). This is source-scoped rendering, not training.
+
+The new thinking adapter bounds its request to 128 reasoning tokens and requires a complete,
+strict final-answer envelope, rejecting recognizable drafting/delimiters. Such checks are not
+proof against every possible reasoning leak. Both live thinking flags remain off. Failed native
+drafting and Persian format instructions remain failed; broad semantic and full-context
+generation acceptance are open. Historical checkpoints below retain their original dates.
+
 ## Serving named-unit safeguard — 2026-09-30
 
 810102f is live for controlled testing after exact-head CI, offline install, six authenticated

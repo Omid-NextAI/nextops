@@ -1,6 +1,6 @@
 # Bilingual operations console and design system
 
-## Named-server status repair candidate — 2026-10-03
+## Live named-server status repair — 2026-10-03
 
 The screenshot question “آخرین وضعیت سرور Ai رو بهم بگو” selected Live monitoring, whose
 configured snapshot covers a different Zabbix host. The candidate recognizes a narrowly scoped
@@ -16,7 +16,11 @@ recorded Linux service states, memory, load and uptime; running services do not 
 or application health. Zabbix retains its separate source/time/scope, with partial/stale warnings.
 Other authorized evidence stays collapsed until requested. No brand, palette, credential scope,
 collector, dependency or runtime change is introduced. Three new EN/FA/permission browser fixtures
-passed locally; deployed acceptance is not claimed at this candidate checkpoint.
+passed locally. The matched `69c9260` app/AI release passed seven final fresh live functional
+cases, audit/hash matching and exact b5e74f9 rollback. The owner's Persian AI-server question
+now retrieves that approved server's actual Linux evidence. The UI/UX workflow guided visible
+target selection and accessible status feedback; OCS assets remain unchanged. This repair is
+not model training, broad semantic acceptance or full production qualification.
 
 ## Live local theme switch — 2026-09-30
 
