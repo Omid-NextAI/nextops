@@ -1255,11 +1255,15 @@ def test_panel_is_local_bilingual_and_sets_browser_security_headers() -> None:
     assert "NextOps by OCS" in response.text
     assert 'id="appIcon"' in response.text
     assert "محیط کنترل‌شدهٔ ارزیابی کاربران" in javascript.text
-    assert "شرکت رایانه خدمات امید سیستم" in javascript.text
+    assert "شرکت رایانه خدمات امید" in javascript.text
     assert "data:image/jpeg;base64," in stylesheet.text
-    assert "--size-content-max: 1280px" in stylesheet.text
-    assert ".mode-field .mode-choice.active" in stylesheet.text
-    assert "linear-gradient(145deg, #0b3b42, #082d33 72%)" in stylesheet.text
+    workspace_css = client.get("/assets/workspace.css")
+    assert "margin-inline-start:238px" in workspace_css.text
+    assert "grid-template-columns:minmax(0,1fr) 392px" in workspace_css.text
+    for asset in ("login.css", "login-motion.js", "investigation-view.js"):
+        assert client.get(f"/assets/{asset}").status_code == 200
+    assert "Demo data" not in response.text
+    assert "frame-ancestors 'none'" in response.headers["content-security-policy"]
     assert "installBrandIcon" in javascript.text
     assert "max_output_tokens: 384" in javascript.text
     assert "زمان پردازش مدل محلی به پایان رسید" in javascript.text

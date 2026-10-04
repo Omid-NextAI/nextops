@@ -1,105 +1,29 @@
 <!doctype html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#007986">
-  <link id="appIcon" rel="icon" href="data:,">
-  <title>NextOps by OCS | Local Operations Intelligence</title>
-  <script src="/assets/theme.js?v=20260930-theme"></script>
-  <link rel="stylesheet" href="/assets/app.css?v=20261004-users">
-  <link rel="stylesheet" href="/assets/evidence.css?v=20260930-theme">
-  <script src="/assets/app.js?v=20261004-users" defer></script>
-</head>
-<body>
-  <a class="skip-link" href="#mainContent" data-i18n="skipMain">Skip to main content</a>
-
-  <header class="topbar">
-    <a class="brand" href="/" aria-label="NextOps by Omid System Computer Services">
-      <span class="ocs-logo ocs-logo-header" role="img" aria-label="Omid System Computer Services logo"></span>
-      <span class="brand-copy">
-        <span class="brand-product"><strong>NextOps</strong><i aria-hidden="true"></i><b>OCS</b></span>
-        <small data-i18n="brandTagline">Local operations intelligence</small>
-      </span>
-    </a>
-    <div class="top-actions">
-      <span class="environment"><span class="dot" aria-hidden="true"></span><span data-i18n="localEnvironment">Private local environment</span></span>
-      <button id="themeButton" class="quiet-button theme-button" type="button" aria-label="Dark theme" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/></svg><span>Dark theme</span></button>
-      <button id="languageButton" class="quiet-button" type="button" aria-label="Switch interface language">فارسی</button>
-      <button id="usersButton" class="quiet-button hidden" type="button" data-i18n="usersTitle">Users</button>
-      <button id="logoutButton" class="quiet-button hidden" type="button" data-i18n="logout">Sign out</button>
-    </div>
-  </header>
-
-  <main id="mainContent">
-    <section id="loginView" class="login-layout">
-      <div class="intro">
-        <div class="company-lockup">
-          <span class="ocs-logo ocs-logo-hero" role="img" aria-label="Omid System Computer Services logo"></span>
-          <span><small data-i18n="companyLabel">AN OCS TECHNOLOGY PLATFORM</small><strong data-i18n="companyName">Omid System Computer Services</strong></span>
-        </div>
-        <p class="eyebrow" data-i18n="evaluationLabel">CONTROLLED USER EVALUATION</p>
-        <h1 data-i18n="loginHeadline">Operational clarity,<br><span>kept inside your network.</span></h1>
-        <p class="lead" data-i18n="loginLead">A private, bilingual operations workspace for evidence-grounded infrastructure intelligence.</p>
-        <div class="trust-row" aria-label="Platform assurances">
-          <span><i aria-hidden="true"></i><strong data-i18n="trustOne">Local identity</strong><small data-i18n="trustOneText">Organization-controlled access</small></span>
-          <span><i aria-hidden="true"></i><strong data-i18n="trustTwo">Encrypted access</strong><small data-i18n="trustTwoText">Protected application path</small></span>
-          <span><i aria-hidden="true"></i><strong data-i18n="trustThree">CPU-only inference</strong><small data-i18n="trustThreeText">No cloud AI fallback</small></span>
-        </div>
-      </div>
-
-      <form id="loginForm" class="surface-card login-card" autocomplete="on">
-        <div class="card-accent" aria-hidden="true"></div>
-        <div class="card-heading">
-          <span class="icon-lock" aria-hidden="true"></span>
-          <div><p class="section-kicker" data-i18n="secureAccess">SECURE ACCESS</p><h2 data-i18n="welcome">Welcome to NextOps</h2><p data-i18n="credentialsPrompt">Enter your evaluation credentials.</p></div>
-        </div>
-        <label><span data-i18n="username">Username</span><input id="username" name="username" type="text" autocomplete="username" minlength="3" maxlength="64" required></label>
-        <label><span data-i18n="password">Password</span><input id="password" name="password" type="password" autocomplete="current-password" maxlength="256" required></label>
-        <p id="loginError" class="form-error" role="alert"></p>
-        <button class="primary-button" type="submit">
-          <span data-i18n="signIn">Sign in securely</span>
-          <svg class="button-arrow" aria-hidden="true" viewBox="0 0 20 20"><path d="M4 10h11m-4-4 4 4-4 4"/></svg>
-        </button>
-        <p class="privacy-note" data-i18n="privacyNote">Your session is stored only in this browser tab.</p>
-      </form>
-    </section>
-
-    <section id="workspaceView" class="workspace hidden">
-      <div class="workspace-heading">
-        <div class="workspace-title"><p class="eyebrow" data-i18n="workspaceLabel">NEXTOPS OPERATIONS WORKSPACE</p><h1 data-i18n="workspaceHeadline">Ask the local assistant</h1><p data-i18n="workspaceLead">Move from a direct question to evidence-grounded investigation without exposing infrastructure credentials.</p></div>
-        <div class="status-panel" aria-label="Service status">
-          <p class="status-title" data-i18n="serviceStatus">Service status</p>
-          <div class="status-cluster">
-            <span id="appStatus" class="status-pill ready"><i aria-hidden="true"></i><span data-i18n="appReady">Application ready</span></span>
-            <span id="aiStatus" class="status-pill checking"><i aria-hidden="true"></i><span data-i18n="aiChecking">Checking AI</span></span>
-            <span id="monitoringStatus" class="status-pill checking"><i aria-hidden="true"></i><span data-i18n="monitoringChecking">Checking monitoring</span></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="operator-layout">
-        <aside class="operator-rail" aria-labelledby="operatorHeading">
-          <button id="newChatButton" class="quiet-button new-chat-button" type="button"><span aria-hidden="true">＋</span><span data-i18n="newChat">New conversation</span></button>
-          <section id="savedChatsPanel" class="saved-chats hidden" aria-labelledby="savedChatsHeading">
+<html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#080F16"><link id="appIcon" rel="icon" href="data:,"><title>NextOps by OCS | Local Operations Intelligence</title>
+<script src="/assets/theme.js?v=20261004-reference"></script><link rel="stylesheet" href="/assets/app.css?v=20261004-reference"><link rel="stylesheet" href="/assets/evidence.css?v=20261004-reference"><link rel="stylesheet" href="/assets/workspace.css?v=20261004-reference"><link rel="stylesheet" href="/assets/login.css?v=20261004-reference"><script src="/assets/investigation-view.js?v=20261004-reference" defer></script><script src="/assets/login-motion.js?v=20261004-reference" defer></script><script src="/assets/app.js?v=20261004-reference" defer></script></head>
+<body data-authenticated="false"><svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 3H3v15h5l4 4 4-4h5Z"/><path d="M7 8h10M7 12h7"/></symbol><symbol id="i-pulse" viewBox="0 0 24 24"><path d="M2 12h5l3-8 4 16 3-8h5"/></symbol><symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6h.01M7 17h.01M14 7h3M14 18h3"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5v16M12 5C8 2 4 3 2 4v16c3-1 7-1 10 1 3-2 7-2 10-1V4c-2-1-6-2-10 1Z"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="m9 15 6-6M7 14l-2 2a3.5 3.5 0 0 0 5 5l4-4a3.5 3.5 0 0 0 0-5M17 10l2-2a3.5 3.5 0 0 0-5-5l-4 4a3.5 3.5 0 0 0 0 5"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="8" cy="7" r="3"/><circle cx="16" cy="17" r="3"/></symbol><symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 0 1 6 0c0 2-3 2-3 4M12 17h.01"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="m12 3 10 18H2Z"/><path d="M12 9v5M12 17h.01"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol><symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol><symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V3H3v13h5"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="m4 12 8-8 8 8M12 4v16"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/></symbol><symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol></defs></svg><a class="skip-link" href="#mainContent" data-i18n="skipMain">Skip to main content</a>
+<header class="topbar"><a class="brand" href="/" aria-label="NextOps by OCS"><span class="ocs-logo ocs-logo-header" role="img" aria-label="OCS company logo"></span><span class="brand-copy"><span class="brand-product"><strong>NextOps</strong><i aria-hidden="true"></i><b>OCS</b></span><small data-i18n="brandTagline">Local operations intelligence</small></span></a>
+<div class="workspace-tools auth-only hidden"><button id="navOpen" type="button" class="icon-button mobile-nav" aria-label="Open navigation"><svg class="ui-icon" aria-hidden="true"><use href="#i-menu"/></svg></button><button id="globalSearch" class="global-search" type="button"><svg class="ui-icon" aria-hidden="true"><use href="#i-search"/></svg><span data-ui="search">Search conversations and evidence…</span><kbd>Ctrl K</kbd></button><label class="environment-select"><span class="sr-only" data-ui="environment">Authorized environment</span><select id="environmentSelect"><option value="" data-ui="environment">Authorized environment</option></select></label><div class="status-panel" aria-label="Service status"><span id="appStatus" class="status-pill ready"><span data-i18n="appReady">Application ready</span></span><span id="aiStatus" class="status-pill checking"><span data-i18n="checking">Checking…</span></span><span id="monitoringStatus" class="status-pill checking"><span data-i18n="checking">Checking…</span></span></div></div>
+<div class="top-actions"><button id="languageButton" class="quiet-button" type="button" aria-label="Switch interface language">فارسی</button><button id="themeButton" class="quiet-button theme-button" type="button" aria-label="Dark theme" aria-pressed="false"><svg class="ui-icon" aria-hidden="true"><use href="#i-moon"/></svg><span>Dark theme</span></button><details id="profileMenu" class="profile-menu auth-only hidden"><summary aria-label="Account menu"><span id="profileInitial" class="avatar">U</span></summary><div class="profile-popup"><strong id="profileName"></strong><button id="usersButton" class="quiet-button hidden" type="button" data-i18n="usersTitle">Users</button><button id="logoutButton" class="quiet-button hidden" type="button" data-i18n="logout">Sign out</button></div></details></div></header>
+<aside id="appNav" class="app-nav auth-only hidden" aria-label="Main navigation"><div class="product-lockup"><span class="product-mark" aria-hidden="true">N</span><div><strong>NextOps</strong><small data-ui="productLine">Evidence for reliable operations</small></div><button id="navClose" class="icon-button drawer-close" type="button" aria-label="Close navigation"><svg class="ui-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div><nav><button type="button" class="nav-item" data-nav="overview"><svg class="ui-icon" aria-hidden="true"><use href="#i-grid"/></svg><span data-ui="overview">Overview</span></button>
+<button type="button" class="nav-item" data-nav="ask"><svg class="ui-icon" aria-hidden="true"><use href="#i-chat"/></svg><span data-ui="ask">Ask NextOps</span></button>
+<button type="button" class="nav-item selected" data-nav="investigations" aria-current="page"><svg class="ui-icon" aria-hidden="true"><use href="#i-pulse"/></svg><span data-ui="investigations">Investigations</span></button>
+<button type="button" class="nav-item" data-nav="infrastructure"><svg class="ui-icon" aria-hidden="true"><use href="#i-server"/></svg><span data-ui="infrastructure">Infrastructure</span></button>
+<button type="button" class="nav-item" data-nav="knowledge"><svg class="ui-icon" aria-hidden="true"><use href="#i-book"/></svg><span data-ui="knowledge">Knowledge</span></button>
+<button type="button" class="nav-item" data-nav="connectors"><svg class="ui-icon" aria-hidden="true"><use href="#i-link"/></svg><span data-ui="connectors">Connectors</span></button>
+<button type="button" class="nav-item" data-nav="settings"><svg class="ui-icon" aria-hidden="true"><use href="#i-settings"/></svg><span data-ui="settings">Settings</span></button></nav>
+<button id="newChatButton" type="button" class="quiet-button new-chat"><svg class="ui-icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-i18n="newChat">New conversation</span></button>          <section id="savedChatsPanel" class="saved-chats hidden" aria-labelledby="savedChatsHeading">
             <h2 id="savedChatsHeading" class="section-kicker" data-i18n="savedChats">YOUR CONVERSATIONS</h2>
             <p class="rail-help" data-i18n="savedPrivacy">Private to your account · retained for 30 days. Do not paste secrets.</p>
             <div id="savedChatsList"></div>
             <p id="savedChatsStatus" class="rail-help" role="status" aria-live="polite"></p>
             <button id="deleteChatButton" type="button" class="quiet-button hidden" data-i18n="deleteChat">Delete this conversation</button>
           </section>
-          <h2 id="operatorHeading" class="section-kicker" data-i18n="operatorTools">OPERATOR STARTERS</h2>
-          <p class="rail-help" data-i18n="starterHelp">Choose a starting point, then add your details.</p>
-          <button class="starter-link" type="button" data-starter="services"><span class="starter-symbol" aria-hidden="true">01</span><span data-i18n="starterServices">Servers &amp; services</span></button>
-          <button class="starter-link" type="button" data-starter="network"><span class="starter-symbol" aria-hidden="true">02</span><span data-i18n="starterNetwork">Network &amp; DNS</span></button>
-          <button class="starter-link" type="button" data-starter="firewall"><span class="starter-symbol" aria-hidden="true">03</span><span data-i18n="starterFirewall">Firewalls &amp; VPN</span></button>
-          <button class="starter-link" type="button" data-starter="security"><span class="starter-symbol" aria-hidden="true">04</span><span data-i18n="starterSecurity">Defensive security</span></button>
-          <div class="capability-note"><span class="section-kicker" data-i18n="connectedEvidence">AVAILABLE EVIDENCE</span><p data-i18n="capabilityText">Live: authorized Zabbix and Linux. Other devices: technical guidance only, not connected access.</p><span class="read-only-label" data-i18n="readOnlyTitle">Read-only by design</span></div>
-        </aside>
-        <div class="conversation-main">
-          <div id="conversationFeed" class="conversation-feed" role="region" aria-label="Conversation">
-            <section id="conversationWelcome" class="conversation-welcome">
+<div class="rail-bottom"><div class="organization-card"><svg class="ui-icon" aria-hidden="true"><use href="#i-lock"/></svg><strong data-ui="privateWorkspace">Private workspace</strong><p data-i18n="readOnlyTitle">Read-only by design</p><small data-i18n="evaluationLabel">CONTROLLED USER EVALUATION</small></div><button class="nav-item" type="button" data-nav="support"><svg class="ui-icon" aria-hidden="true"><use href="#i-help"/></svg><span data-ui="support">Help &amp; support</span></button><span class="rail-ocs">NextOps <small>by</small> OCS</span></div></aside><dialog id="navDialog" class="navigation-dialog" aria-label="Main navigation"></dialog>
+<main id="mainContent"><section id="loginView" class="login-layout" aria-labelledby="loginTitle"><div class="login-editorial"><div class="company-lockup"><span class="ocs-logo ocs-logo-hero" role="img" aria-label="OCS company logo"></span><div><strong>NextOps <span>by OCS</span></strong><small data-i18n="companyName">Omid Computer Services</small></div></div><p class="eyebrow" data-i18n="evaluationLabel">CONTROLLED USER EVALUATION</p><h1 id="loginTitle" data-i18n="loginHeadline">Operational clarity. Inside your network.</h1><p class="lead" data-i18n="loginLead">A private workspace for understanding infrastructure, investigating incidents, and working from evidence.</p><div class="gate-scene"><svg class="signal-scene" viewBox="0 0 700 580" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs><linearGradient id="gateTeal"><stop stop-color="#0090A0"/><stop offset=".55" stop-color="#78DFDD"/><stop offset="1" stop-color="#0090A0" stop-opacity=".3"/></linearGradient><linearGradient id="gateGold"><stop stop-color="#D0A840" stop-opacity=".3"/><stop offset=".65" stop-color="#D0A840"/><stop offset="1" stop-color="#F4DC94"/></linearGradient><radialGradient id="gateDepth"><stop stop-color="#0090A0" stop-opacity=".19"/><stop offset="1" stop-color="#0090A0" stop-opacity="0"/></radialGradient></defs><ellipse cx="374" cy="353" rx="265" ry="205" fill="url(#gateDepth)"/><g class="perspective-grid"><path d="M25 465 415 165M95 500 485 200M165 535 555 235M235 570 625 270M0 405l570 165M40 350l600 160M100 300l590 160M160 250l525 145"/></g><g class="network-routes"><path class="circuit" d="M36 186H214L300 290"/><circle class="service-node" cx="36" cy="186" r="5"/><circle class="signal signal-0" r="3"/><path class="circuit" d="M30 265H192L300 330"/><circle class="service-node" cx="30" cy="265" r="5"/><circle class="signal signal-1" r="3"/><path class="circuit" d="M54 354H208L300 370"/><circle class="service-node" cx="54" cy="354" r="5"/><circle class="signal signal-2" r="3"/><path class="circuit" d="M92 439H238L300 408"/><circle class="service-node" cx="92" cy="439" r="5"/><circle class="signal signal-3" r="3"/><path class="circuit" d="M142 496H286L365 440"/><circle class="service-node" cx="142" cy="496" r="5"/><circle class="signal signal-4" r="3"/><path class="circuit" d="M596 152H488L444 278"/><circle class="service-node" cx="596" cy="152" r="5"/><circle class="signal signal-5" r="3"/><path class="circuit" d="M660 253H570L469 322"/><circle class="service-node" cx="660" cy="253" r="5"/><circle class="signal signal-6" r="3"/><path class="circuit" d="M646 385H562L492 361"/><circle class="service-node" cx="646" cy="385" r="5"/><circle class="signal signal-7" r="3"/><path class="circuit" d="M610 474H533L475 402"/><circle class="service-node" cx="610" cy="474" r="5"/><circle class="signal signal-8" r="3"/></g><g class="gate-architecture"><path class="gate-shadow" d="m278 234 160 47 63 165-164-48Z"/><path class="gate-back" d="m278 162 160 47q10 3 14 13l56 149q4 12-7 9l-160-47q-10-3-14-13l-56-149q-4-12 7-9Z"/><path class="gate-front" d="m210 207 160 47q10 3 14 13l56 149q4 12-7 9l-160-47q-10-3-14-13l-56-149q-4-12 7-9Z"/><path class="gate-plate" d="m277 264 89 26 36 93-89-26Z"/><path class="gate-n" d="m306 288 20 50m-20-50 47 58m-20-51 20 51"/><path class="gate-edge" d="m210 207 160 47q10 3 14 13"/></g><g class="organized-nodes"><path d="m444 348 105 30 28 64M471 403l49 14 57 25"/><circle cx="549" cy="378" r="4"/><circle cx="577" cy="442" r="4"/></g></svg><div class="scene-caption"><span class="scene-rule"></span><span data-ui="signalGate">Omid Signal Gate · a decorative network abstraction</span></div></div><button id="motionButton" class="quiet-button motion-control" type="button" aria-pressed="false"><svg class="ui-icon" aria-hidden="true"><use href="#i-pause"/></svg><span data-ui="pauseMotion">Pause motion</span></button></div>
+<div class="login-form-region"><form id="loginForm" class="surface-card login-card" autocomplete="on"><div class="login-lock"><svg class="ui-icon" aria-hidden="true"><use href="#i-lock"/></svg></div><p class="section-kicker" data-i18n="secureAccess">SECURE ACCESS</p><h2 data-i18n="welcome">Welcome to NextOps</h2><p class="login-helper" data-i18n="credentialsPrompt">Use your organization-issued credentials.</p><label for="username" data-i18n="username">Username</label><input id="username" name="username" type="text" autocomplete="username" minlength="3" maxlength="64" required><label for="password" data-i18n="password">Password</label><div class="password-field"><input id="password" name="password" type="password" autocomplete="current-password" maxlength="256" required><button id="passwordVisibility" type="button" class="icon-button" aria-label="Show password" aria-pressed="false"><svg class="ui-icon" aria-hidden="true"><use href="#i-eye"/></svg></button></div><p id="loginError" class="form-error" role="alert" aria-live="polite"></p><button class="primary-button" type="submit"><span data-i18n="signIn">Sign in securely</span><svg class="ui-icon" aria-hidden="true"><use href="#i-chevron"/></svg></button><p class="privacy-note"><svg class="ui-icon" aria-hidden="true"><use href="#i-lock"/></svg><span data-i18n="privacyNote">Your session is stored only in this browser tab.</span></p></form><p class="login-boundary" data-ui="loginBoundary">Local identity. CPU-only inference. No cloud AI fallback.</p></div></section>
+<section id="workspaceView" class="workspace investigation-workspace hidden"><div class="investigation-center"><header class="investigation-header"><div class="breadcrumb"><span data-ui="investigations">Investigations</span><svg class="ui-icon" aria-hidden="true"><use href="#i-chevron"/></svg><span id="investigationRef" data-ui="newInvestigation">New investigation</span></div><div class="title-row"><h1 id="workspaceHeading" data-i18n="workspaceHeadline">Investigation workspace</h1><div class="header-actions"><button id="shareInvestigation" class="quiet-button" type="button" aria-label="Copy question"><svg class="ui-icon" aria-hidden="true"><use href="#i-copy"/></svg><span data-ui="copyQuestion">Copy question</span></button><button id="requestDetailsButton" class="icon-button" type="button" aria-label="Request details"><svg class="ui-icon" aria-hidden="true"><use href="#i-more"/></svg></button></div></div><div class="investigation-meta"><span id="openedTime" data-ui="notStarted">Not started</span><span id="sourceContext" data-ui="noEvidence">No evidence collected</span><span class="evaluation-badge" data-ui="evaluation">Controlled evaluation</span><span id="investigationState" class="state-badge" data-ui="readyToAsk">Ready to ask</span></div></header>
+<div class="summary-grid"><section class="summary-card"><span class="summary-icon alert"><svg class="ui-icon" aria-hidden="true"><use href="#i-alert"/></svg></span><h2 data-ui="activeAlerts">Active Alerts</h2><strong id="alertsValue">—</strong><p id="alertsValueHelp" data-ui="notAvailable">Not available</p></section><section class="summary-card"><span class="summary-icon server"><svg class="ui-icon" aria-hidden="true"><use href="#i-server"/></svg></span><h2 data-ui="affectedHosts">Affected Hosts</h2><strong id="hostsValue">—</strong><p id="hostsValueHelp" data-ui="notAvailable">Not available</p></section><section class="summary-card"><span class="summary-icon pulse"><svg class="ui-icon" aria-hidden="true"><use href="#i-pulse"/></svg></span><h2 data-ui="investigationStatus">Investigation Status</h2><strong id="investigationValue">—</strong><p id="investigationValueHelp" data-ui="notAvailable">Not available</p></section><section class="summary-card"><span class="summary-icon link"><svg class="ui-icon" aria-hidden="true"><use href="#i-link"/></svg></span><h2 data-ui="connectorHealth">Connector Health</h2><strong id="connectorValue">—</strong><p id="connectorValueHelp" data-ui="notAvailable">Not available</p></section></div><div id="conversationFeed" class="conversation-feed" role="region" aria-label="Conversation">            <section id="conversationWelcome" class="conversation-welcome">
               <span class="welcome-mark" aria-hidden="true">N<span>O</span>C / S<span>O</span>C</span>
               <h2 data-i18n="welcomeTitle">What can I help you investigate?</h2>
               <p data-i18n="welcomeHelp">Explain a problem, understand an alert, or plan safe diagnostics. Start with general advice; select a live mode when you need verified observations.</p>
@@ -110,16 +34,15 @@
                 <button type="button" class="starter-card" data-starter="security"><strong data-i18n="starterSecurity">Defensive security</strong><span data-i18n="starterSecurityHelp">Assess suspicious activity without assuming compromise.</span></button>
               </div>
             </section>
-            <div id="conversationHistory"></div>
-      <section id="resultCard" class="surface-card result-card hidden conversation-turn">
+<div id="conversationHistory"></div>      <section id="resultCard" class="surface-card result-card hidden conversation-turn">
         <div class="user-message"><span data-i18n="youAsked">You asked</span><p id="askedQuestion"></p></div>
         <div class="result-heading"><div><p class="eyebrow" data-i18n="assistantResponse">ASSISTANT RESPONSE</p><h2 id="responseTitle" data-i18n="generalResponseTitle">Direct local answer</h2></div><span id="evidenceBadge" class="evidence-badge" data-i18n="modelOnlyBadge">Local model · no live evidence</span></div>
-        <div id="answer" class="answer"></div>
-        <div class="answer-actions"><button id="copyAnswerButton" type="button" class="quiet-button" data-copy-answer data-i18n="copyAnswer">Copy answer</button><span class="turn-context" data-i18n="adviceNotExecution">Advice and observations · no action executed</span></div>
-        <p id="integrityNotice" class="integrity-notice" data-i18n="modelIntegrityNotice">Model-generated text has no live evidence; verify important facts independently.</p>
-        <p id="evidenceBrief" class="evidence-brief hidden"></p>
+        <div id="answer" class="answer"></div><div class="findings-grid" data-findings></div><div class="evidence-rows" data-evidence-rows></div><div class="followup-row"><button type="button" class="quiet-button" data-followup="evidence" data-ui="reviewEvidence">Review evidence</button><button type="button" class="quiet-button" data-followup="question" data-ui="nextQuestion">Ask a follow-up</button><div class="answer-actions"><button id="copyAnswerButton" type="button" class="quiet-button" data-copy-answer data-i18n="copyAnswer">Copy answer</button><span class="turn-context sr-only" data-i18n="adviceNotExecution">Advice and observations · no action executed</span></div><p id="integrityNotice" class="integrity-notice" data-i18n="modelIntegrityNotice">Model-generated text has no live evidence; verify important facts independently.</p></div>
+
+
+
         <details id="evidenceDetails" class="evidence-details"><summary data-i18n="showEvidence">View evidence and request details</summary>
-          <div id="evidencePanel" class="evidence-panel hidden">
+          <p id="evidenceBrief" class="evidence-brief hidden"></p><div id="evidencePanel" class="evidence-panel hidden">
             <div class="evidence-summary"><span><small data-i18n="source">Source</small><strong id="evidenceSource">—</strong></span><span><small data-i18n="host">Host</small><strong id="evidenceHost">—</strong></span><span><small data-i18n="collected">Collected</small><strong id="evidenceCollected">—</strong></span><span><small data-i18n="problems">Active problems</small><strong id="problemCount">—</strong></span><span><small data-i18n="coverage">Evidence coverage</small><strong id="evidenceCoverage">—</strong></span></div>
             <div id="metricList" class="metric-list"></div>
             <div id="incidentDetail" class="incident-detail hidden"></div>
@@ -134,12 +57,9 @@
             <span class="monitoring-meta hidden"><small data-i18n="auditEvent">Audit event</small><strong id="auditEventId">—</strong></span>
           </div>
         </details>
-      </section>
-          </div>
-
-      <div class="workspace-grid">
+      </section></div>
         <form id="assistantForm" class="surface-card prompt-card">
-          <div class="mode-field">
+          <details id="composerOptions" class="composer-options"><summary><svg class="ui-icon" aria-hidden="true"><use href="#i-settings"/></svg><span id="composerOptionsLabel" data-ui="investigationOptions">Investigation options</span></summary><div class="composer-option-panel"><div class="mode-field">
             <span class="field-label" data-i18n="answerMode">Answer mode</span>
             <div class="segmented-control" role="group" aria-label="Answer mode">
               <button type="button" class="choice mode-choice active" data-mode="general" data-i18n="generalMode" aria-pressed="true">General assistant</button>
@@ -178,36 +98,20 @@
             </div>
           </div>
 
-          <label class="prompt-label"><span data-i18n="question">Question</span><textarea id="question" maxlength="4000" required aria-keyshortcuts="Enter" data-i18n-placeholder="questionPlaceholder" placeholder="Explain a safe first response to a high CPU alert."></textarea></label>
+          </div></details><label class="prompt-label"><span data-i18n="question">Question</span><textarea id="question" maxlength="4000" required aria-keyshortcuts="Enter" data-i18n-placeholder="questionPlaceholder" placeholder="Explain a safe first response to a high CPU alert."></textarea></label>
           <div class="prompt-footer">
             <span><span id="characterCount">0 / 4000</span><span class="keyboard-hint" data-i18n="keyboardHint"> · Enter to send · Shift+Enter for a new line</span></span>
             <button id="askButton" class="primary-button compact-button" type="submit">
               <span data-i18n="askAssistant">Ask assistant</span>
-              <svg class="button-arrow" aria-hidden="true" viewBox="0 0 20 20"><path d="M4 10h11m-4-4 4 4-4 4"/></svg>
+              <svg class="ui-icon" aria-hidden="true"><use href="#i-send"/></svg>
             </button>
           </div>
           <p id="requestStatus" class="request-status" role="status" aria-live="polite"></p>
           <p id="contextNotice" class="context-notice" data-i18n="contextHelp">General follow-ups use up to two recent turns. Live requests fetch new evidence independently.</p>
           <p id="assistantError" class="form-error" role="alert"></p>
-        </form>
-
-        <details class="surface-card boundary-card">
-          <summary data-i18n="howEvidenceWorks">How evidence works</summary>
-          <div class="boundary-brand" aria-hidden="true"><span></span><span></span></div>
-          <p class="eyebrow" data-i18n="evidenceBoundary">EVIDENCE BOUNDARY</p>
-          <h2 data-i18n="liveEvidenceTitle">Intelligence with a clear source</h2>
-          <p data-i18n="liveEvidenceBody">NextOps keeps model generation, evidence access, and credentials inside separate protected boundaries.</p>
-          <div class="boundary-item"><span>01</span><div><strong data-i18n="boundaryLocal">Local processing</strong><p data-i18n="boundaryLocalText">No external model API is used.</p></div></div>
-          <div class="boundary-item"><span>02</span><div><strong data-i18n="boundaryAuth">Authenticated path</strong><p data-i18n="boundaryAuthText">The browser never receives the AI service credential.</p></div></div>
-          <div class="boundary-item"><span>03</span><div><strong data-i18n="boundaryZabbix">Qualified evidence</strong><p data-i18n="boundaryZabbixText">Read-only, source-qualified and timestamped.</p></div></div>
-          <div class="read-only-note"><span aria-hidden="true">RO</span><p><strong data-i18n="readOnlyTitle">Read-only by design</strong><small data-i18n="readOnlyText">This evaluation workspace cannot execute infrastructure changes.</small></p></div>
-        </details>
-      </div>
-        </div>
-      </div>
-      <p id="copyStatus" class="copy-status" role="status" aria-live="polite"></p>
-    </section>
-    <section id="usersView" class="workspace hidden" aria-labelledby="usersHeading">
+        </form><p id="copyStatus" class="copy-status" role="status" aria-live="polite"></p><section class="execution-trace" aria-labelledby="traceHeading"><div class="trace-title"><svg class="ui-icon" aria-hidden="true"><use href="#i-pulse"/></svg><h2 id="traceHeading" data-ui="executionTrace">Recorded execution</h2><span id="traceDuration"></span></div><ol id="traceStages"><li data-ui="noTrace">No completed request yet. Private model reasoning is not displayed.</li></ol></section></div>
+<div id="inspectorSlot" class="inspector-slot"><aside id="evidenceInspector" class="evidence-inspector" aria-labelledby="inspectorHeading"><header class="inspector-header"><h2 id="inspectorHeading" data-ui="evidence">Evidence</h2><div class="inspector-controls"><button id="evidencePrevious" class="icon-button previous" type="button" aria-label="Previous evidence"><svg class="ui-icon" aria-hidden="true"><use href="#i-chevron"/></svg></button><span id="evidencePosition">0 / 0</span><button id="evidenceNext" class="icon-button" type="button" aria-label="Next evidence"><svg class="ui-icon" aria-hidden="true"><use href="#i-chevron"/></svg></button><button id="evidenceClose" class="icon-button" type="button" aria-label="Close evidence"><svg class="ui-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div></header><div id="inspectorContent"></div><div class="inspector-data"><div class="inspector-tabs" role="tablist" aria-label="Evidence details"><button id="tab-raw" type="button" role="tab" data-tab="raw" aria-controls="panel-raw" aria-selected="true" tabindex="0" data-ui="raw">Raw data</button><button id="tab-related" type="button" role="tab" data-tab="related" aria-controls="panel-related" aria-selected="false" tabindex="-1" data-ui="related">Related</button><button id="tab-context" type="button" role="tab" data-tab="context" aria-controls="panel-context" aria-selected="false" tabindex="-1" data-ui="context">Context</button><button id="tab-visualize" type="button" role="tab" data-tab="visualize" aria-controls="panel-visualize" aria-selected="false" tabindex="-1" data-ui="visualize">Visualize</button></div><section id="panel-raw" class="inspector-tab-panel" role="tabpanel" aria-labelledby="tab-raw" tabindex="0"></section><section id="panel-related" class="inspector-tab-panel hidden" role="tabpanel" aria-labelledby="tab-related" tabindex="0"></section><section id="panel-context" class="inspector-tab-panel hidden" role="tabpanel" aria-labelledby="tab-context" tabindex="0"></section><section id="panel-visualize" class="inspector-tab-panel hidden" role="tabpanel" aria-labelledby="tab-visualize" tabindex="0"></section></div><section class="inspector-guidance"><h3 data-ui="evidenceBoundary">Evidence boundary</h3><p data-ui="evidenceBoundaryHelp">An observation is not a cause. Review freshness, scope and missing data before drawing conclusions.</p><span class="read-only-label" data-i18n="readOnlyTitle">Read-only by design</span></section></aside></div></section>
+<section id="destinationView" class="workspace destination-view hidden" aria-labelledby="destinationTitle"><h1 id="destinationTitle" tabindex="-1"></h1><p id="destinationHelp"></p><div id="destinationContent"></div><button id="destinationBack" class="quiet-button" type="button" data-ui="backInvestigation">Back to investigation</button></section>    <section id="usersView" class="workspace hidden" aria-labelledby="usersHeading">
       <div class="workspace-heading">
         <div><p class="eyebrow" data-i18n="usersKicker">LOCAL ACCESS CONTROL</p><h1 id="usersHeading" tabindex="-1" data-i18n="usersTitle">Users</h1><p data-i18n="usersLead">Manage local accounts. Every change is audited; no infrastructure permissions are granted.</p></div>
         <button id="usersBack" class="quiet-button" type="button" data-i18n="usersBack">Back to assistant</button>
@@ -240,8 +144,5 @@
         </div>
       </div>
     </section>
-  </main>
-
-  <footer><span class="footer-brand"><b>OCS</b><i aria-hidden="true"></i><strong>NextOps 0.1</strong></span><span data-i18n="footer">Private, controlled user-evaluation environment</span></footer>
-</body>
-</html>
+</main>
+<dialog id="evidenceDialog" class="evidence-dialog" aria-labelledby="inspectorHeading"></dialog><dialog id="searchDialog" class="search-dialog" aria-labelledby="searchHeading"><div class="dialog-heading"><h2 id="searchHeading" data-ui="searchTitle">Search this workspace</h2><button class="icon-button" type="button" data-close-dialog="searchDialog" aria-label="Close search"><svg class="ui-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div><label for="searchInput" data-ui="searchLabel">Conversation titles and collected evidence</label><input id="searchInput" type="search" autocomplete="off"><p class="rail-help" data-ui="searchScope">Search is local to this page. It does not query devices or execute actions.</p><div id="searchResults"></div></dialog><footer><span class="footer-brand"><b>OCS</b><strong>NextOps 0.1</strong></span><span data-i18n="footer">Private, controlled user-evaluation environment</span></footer></body></html>

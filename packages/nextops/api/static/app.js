@@ -34,7 +34,7 @@ const translations = {
     boundaryAuth: "Authenticated path", boundaryAuthText: "The browser never receives the AI service credential.",
     boundaryZabbix: "Qualified evidence", boundaryZabbixText: "Read-only, source-qualified and timestamped.",
     readOnlyTitle: "Read-only by design", readOnlyText: "This evaluation workspace cannot execute infrastructure changes.",
-    assistantResponse: "ASSISTANT RESPONSE", generalResponseTitle: "Direct local answer", responseTitle: "Evidence-grounded result",
+    assistantResponse: "NextOps", generalResponseTitle: "Direct local answer", responseTitle: "Evidence-grounded result",
     modelOnlyBadge: "Local model · no live evidence", liveEvidenceBadge: "Live Zabbix evidence", incidentEvidenceBadge: "Live Zabbix + Linux evidence",
     modelIntegrityNotice: "Model-generated text has no live evidence; verify important facts independently.",
     evidenceIntegrityNotice: "This answer passed bounded source checks, not a factual or relevance review. Verify it against the evidence below.",
@@ -284,7 +284,8 @@ byId("usersButton").addEventListener("click", () => {
 });
 byId("usersBack").addEventListener("click", () => {
   closeUserPassword(); byId("userCreateForm").reset();
-  byId("usersView").classList.add("hidden"); byId("workspaceView").classList.remove("hidden"); byId("usersButton").focus();
+  byId("usersView").classList.add("hidden"); byId("workspaceView").classList.remove("hidden");
+  queueMicrotask(() => { byId("profileMenu").open = true; byId("usersButton").focus(); });
 });
 byId("usersRefresh").addEventListener("click", () => refreshUsers());
 byId("usersPrevious").addEventListener("click", () => refreshUsers(Math.max(0, state.usersOffset - 50)));
@@ -404,6 +405,7 @@ const starters = {
 };
 
 function clearConversation() {
+  window.NextOpsView?.clear();
   state.conversationId = null;
   state.pendingMessage = null;
   state.history = [];
@@ -429,6 +431,8 @@ function setContextNotice(key) {
 }
 
 function setBusy(busy) {
+  window.NextOpsView?.busy(busy);
+  byId("cancelRequest")?.classList.toggle("hidden", !busy);
   state.busy = busy;
   byId("question").readOnly = busy;
   document.querySelectorAll("#askButton, #newChatButton, .mode-choice, .locale-choice, [data-starter], #languageButton, #incidentTarget, #thinkingMode, #deleteChatButton, .saved-chat-button").forEach(node => {
@@ -447,6 +451,7 @@ function archiveLastTurn() {
   archived.removeAttribute("id");
   archived.querySelectorAll("[id]").forEach(node => node.removeAttribute("id"));
   byId("conversationHistory").append(archived);
+  window.NextOpsView?.archive(latest, archived);
   // Bound DOM size independently of the server's durable transcript.
   while (byId("conversationHistory").children.length > 11) {
     byId("conversationHistory").firstElementChild.remove();
@@ -543,6 +548,7 @@ function installBrandIcon() {
 
 function applyLanguage(language) {
   state.language = language;
+  window.NextOpsView?.setLocale(language);
   try { localStorage.setItem("nextops-language", language); } catch { /* Tab-only preference. */ }
   document.documentElement.lang = language;
   document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
@@ -592,6 +598,9 @@ async function api(path, options = {}) {
 }
 
 function showLogin(message = "") {
+  window.NextOpsView?.session(null);
+  window.NextOpsMotion?.reset();
+  byId("destinationView").classList.add("hidden");
   state.epoch += 1;
   state.token = "";
   state.actor = null; state.users = []; state.usersOffset = 0; state.usersNext = null;
@@ -620,7 +629,7 @@ function showLogin(message = "") {
 function updateEvidenceBrief() {
   if (!state.lastEvidence) return;
   const { evidence, incident, focus } = state.lastEvidence;
-  const displayTime = value => new Date(value).toLocaleString(state.language === "fa" ? "fa-IR" : "en-GB");
+  const displayTime = value => new Date(value).toLocaleString(state.language === "fa" ? "fa-IR" : "en-GB", { timeZone: "UTC", timeZoneName: "short" });
   const scopeKey = incident ? ({ filesystems: "filesystemScope", file_listing: "fileScope", network: "networkScope", service: "serviceScope", network_service: "networkServiceScope" }[focus] || "incidentScope") : "monitoringScope";
   const fields = [
     ["sourceBrief", incident ? "Zabbix + Linux" : evidence.source_id ? `Zabbix · ${evidence.source_id} / ${evidence.target_id}` : "Zabbix", true],
@@ -649,6 +658,7 @@ async function showWorkspace() {
   const actor = await api("/api/v1/me");
   if (identityEpoch !== state.epoch || !state.token) return;
   state.actor = actor;
+  window.NextOpsView?.session(actor);
   byId("usersButton").classList.toggle("hidden", !actor.roles?.includes("admin"));
   byId("usersView").classList.add("hidden");
   byId("loginView").classList.add("hidden");
@@ -711,8 +721,9 @@ async function openSavedChat(id) {
       renderAnswer(message.assistant.answer, message.assistant.locale);
       byId("modelId").textContent = message.assistant.model_id;
       byId("tokenCount").textContent = message.assistant.completion_tokens;
-      byId("completedAt").textContent = new Date(message.assistant.completed_at).toLocaleString(state.language === "fa" ? "fa-IR" : "en-GB");
+      byId("completedAt").textContent = new Date(message.assistant.completed_at).toLocaleString(state.language === "fa" ? "fa-IR" : "en-GB", { timeZone: "UTC", timeZoneName: "short" });
       byId("requestId").textContent = message.assistant.request_id;
+      window.NextOpsView?.resumed(message.assistant, message.question);
       const key = message.assistant.integrity_status === "model_unverified" ? "modelIntegrityNotice" :
         message.assistant.integrity_status === "scope_redirect" ? "redirectIntegrityNotice" : "generalFallbackIntegrityNotice";
       byId("integrityNotice").dataset.i18n = key;
@@ -801,15 +812,18 @@ async function loadSourceCatalog() {
   byId("sourceCatalogNotice").textContent = translations[state.language][byId("sourceCatalogNotice").dataset.i18n];
   select.disabled = state.busy;
   populateSourceTargets();
+  window.NextOpsView?.catalog(state.sourceCatalog);
 }
 byId("monitoringSource").addEventListener("change", populateSourceTargets);
 
 async function loadIncidentTargets() {
+  const epoch = state.epoch;
   const select = byId("incidentTarget");
   select.disabled = true;
   select.replaceChildren();
   try {
     const response = await api("/api/v1/incidents/targets");
+    if (epoch !== state.epoch || !state.token) return;
     state.incidentTargets = response.targets || [];
     state.incidentTargets.forEach(targetId => {
       const option = document.createElement("option");
@@ -825,15 +839,20 @@ async function loadIncidentTargets() {
 }
 
 async function checkAi() {
+  const epoch = state.epoch;
   const pill = byId("aiStatus");
   try {
     const ready = await api("/api/v1/assistant/ready");
+    if (epoch !== state.epoch || !state.token) return;
+    window.NextOpsView?.health("ai", ready);
     const ok = ready.state === "ready";
     const statusKey = ok ? "aiReady" : "aiUnavailable";
     pill.className = `status-pill ${ok ? "ready" : "failed"}`;
     pill.querySelector("span").dataset.i18n = statusKey;
     pill.querySelector("span").textContent = translations[state.language][statusKey];
   } catch (_) {
+    if (epoch !== state.epoch || !state.token) return;
+    window.NextOpsView?.health("ai", null);
     pill.className = "status-pill failed";
     pill.querySelector("span").dataset.i18n = "aiUnavailable";
     pill.querySelector("span").textContent = translations[state.language].aiUnavailable;
@@ -841,15 +860,20 @@ async function checkAi() {
 }
 
 async function checkMonitoring() {
+  const epoch = state.epoch;
   const pill = byId("monitoringStatus");
   try {
     const summary = await api("/api/v1/monitoring/summary");
+    if (epoch !== state.epoch || !state.token) return;
+    window.NextOpsView?.health("connector", summary);
     const ok = summary.source === "zabbix";
     const statusKey = ok ? "monitoringReady" : "monitoringUnavailable";
     pill.className = `status-pill ${ok ? "ready" : "failed"}`;
     pill.querySelector("span").dataset.i18n = statusKey;
     pill.querySelector("span").textContent = translations[state.language][statusKey];
   } catch (_) {
+    if (epoch !== state.epoch || !state.token) return;
+    window.NextOpsView?.health("connector", null);
     pill.className = "status-pill failed";
     pill.querySelector("span").dataset.i18n = "monitoringUnavailable";
     pill.querySelector("span").textContent = translations[state.language].monitoringUnavailable;
@@ -860,7 +884,7 @@ function renderEvidence(evidence) {
   const locale = state.language === "fa" ? "fa-IR" : "en-GB";
   byId("evidenceSource").textContent = `Zabbix ${evidence.source_version}${evidence.source_id ? ` · ${evidence.source_id} / ${evidence.target_id}` : ""}`;
   byId("evidenceHost").textContent = evidence.host;
-  byId("evidenceCollected").textContent = new Date(evidence.collected_at).toLocaleString(locale);
+  byId("evidenceCollected").textContent = new Date(evidence.collected_at).toLocaleString(locale, { timeZone: "UTC", timeZoneName: "short" });
   byId("problemCount").textContent = evidence.active_problems.length;
   byId("evidenceCoverage").textContent = translations[state.language][evidence.is_partial ? "partial" : "complete"];
   byId("evidenceCoverage").title = evidence.partial_reasons.join(", ");
@@ -877,7 +901,7 @@ function renderEvidence(evidence) {
     const value = document.createElement("span");
     value.textContent = `${metric.value}${metric.units ? ` ${metric.units}` : ""}`;
     const time = document.createElement("small");
-    time.textContent = `${new Date(metric.measured_at).toLocaleString(locale)}${metric.stale ? ` · ${translations[state.language].stale}` : ""}`;
+    time.textContent = `${new Date(metric.measured_at).toLocaleString(locale, { timeZone: "UTC", timeZoneName: "short" })}${metric.stale ? ` · ${translations[state.language].stale}` : ""}`;
     item.append(title, value, time);
     list.append(item);
   });
@@ -934,7 +958,7 @@ function renderIncidentEvidence(evidence, focus = "overview", question = "") {
   renderEvidence(evidence.zabbix.summary);
   byId("evidenceSource").textContent = `Zabbix ${evidence.zabbix.source_version} + Linux ${evidence.linux.collector_version}`;
   byId("evidenceHost").textContent = `${evidence.zabbix.host} · ${evidence.linux.hostname}`;
-  byId("evidenceCollected").textContent = new Date(evidence.linux.collected_at).toLocaleString(locale);
+  byId("evidenceCollected").textContent = new Date(evidence.linux.collected_at).toLocaleString(locale, { timeZone: "UTC", timeZoneName: "short" });
   byId("evidenceCoverage").textContent = translations[state.language][evidence.is_partial ? "partial" : "complete"];
   byId("evidenceCoverage").title = evidence.partial_reasons.join(", ");
 
@@ -972,12 +996,12 @@ function renderIncidentEvidence(evidence, focus = "overview", question = "") {
     evidenceSection(translations[state.language].recentEvents, evidence.zabbix.events.map(event => ({
       label: event.name,
       value: event.state,
-      detail: new Date(event.occurred_at).toLocaleString(locale)
+      detail: new Date(event.occurred_at).toLocaleString(locale, { timeZone: "UTC", timeZoneName: "short" })
     }))),
     evidenceSection(translations[state.language].criticalJournal, evidence.linux.journal.map(entry => ({
       label: entry.unit,
       value: entry.message,
-      detail: new Date(entry.observed_at).toLocaleString(locale)
+      detail: new Date(entry.observed_at).toLocaleString(locale, { timeZone: "UTC", timeZoneName: "short" })
     })))
   );
   const networkSections = document.createElement("div");
@@ -1012,8 +1036,7 @@ function renderIncidentEvidence(evidence, focus = "overview", question = "") {
     } else {
       focused.className = "incident-sections";
       if (focus === "service" || focus === "network_service") {
-        const namedUnits = [...question.matchAll(/(?<![\w@.-])([A-Za-z0-9_@.-]+\.(?:service|socket|timer))(?![\w@.-])/gi)]
-          .map(match => match[1].toLocaleLowerCase("en-US"));
+        const namedUnits = window.NextOpsView.namedUnits(question);
         const selectedServices = namedUnits.length
           ? evidence.linux.services.filter(item => namedUnits.includes(item.unit.toLocaleLowerCase("en-US")))
           : evidence.linux.services;
@@ -1029,16 +1052,12 @@ function renderIncidentEvidence(evidence, focus = "overview", question = "") {
           focused.append(evidenceSection(translations[state.language].criticalJournal, selectedJournal.map(entry => ({
             label: entry.unit,
             value: entry.message,
-            detail: new Date(entry.observed_at).toLocaleString(locale)
+            detail: new Date(entry.observed_at).toLocaleString(locale, { timeZone: "UTC", timeZoneName: "short" })
           }))));
         }
       }
       if (focus === "network" || focus === "network_service") {
-        const requested = [
-          /\b(?:dns|resolvers?|nameservers?)\b|نام[‌-]?سرور|دی[‌-]?ان[‌-]?اس/i.test(question),
-          /\b(?:routes?|routing|gateway)\b|مسیر|دروازه/i.test(question),
-          /\b(?:ports?|sockets?|listen(?:ing)?)\b|پورت|سوکت|شنود/i.test(question)
-        ];
+        const requested = window.NextOpsView.networkGroups(question);
         const showAll = !requested.some(Boolean);
         networkSections.querySelectorAll(":scope > section").forEach((section, index) => {
           if (showAll || requested[index]) focused.append(section.cloneNode(true));
@@ -1138,8 +1157,10 @@ byId("loginForm").addEventListener("submit", async event => {
     sessionStorage.setItem("nextops-session", state.token);
     byId("password").value = "";
     await showWorkspace();
-  } catch (_) {
-    byId("loginError").textContent = translations[state.language].invalidLogin;
+  } catch (error) {
+    byId("loginError").textContent = error.status === 401 || error.status === 422
+      ? translations[state.language].invalidLogin
+      : window.NextOpsView.t(error.status === 429 ? "loginRate" : "loginService");
   } finally {
     button.disabled = false;
     button.removeAttribute("aria-busy");
@@ -1165,6 +1186,16 @@ byId("question").addEventListener("keydown", event => {
     if (!byId("askButton").disabled) byId("assistantForm").requestSubmit();
   }
 });
+let activeRequest = null;
+const cancelRequest = document.createElement("button");
+cancelRequest.id = "cancelRequest";
+cancelRequest.type = "button";
+cancelRequest.className = "quiet-button hidden";
+cancelRequest.dataset.ui = "cancelWait";
+cancelRequest.textContent = window.NextOpsView.t("cancelWait");
+cancelRequest.addEventListener("click", () => activeRequest?.abort());
+byId("assistantForm").querySelector(".prompt-footer").append(cancelRequest);
+
 byId("assistantForm").addEventListener("submit", async event => {
   event.preventDefault();
   if (state.busy) return;
@@ -1172,6 +1203,7 @@ byId("assistantForm").addEventListener("submit", async event => {
   errorNode.textContent = "";
   const question = byId("question").value;
   if (!question.trim()) { errorNode.textContent = translations[state.language].blankQuestion; return; }
+  byId("composerOptions").open = false;
   const namedTarget = requestedHostStatus(question);
   if (namedTarget && state.incidentTargets.includes(namedTarget) && !(state.answerMode === "monitoring" && byId("monitoringSource").value)) {
     byId("incidentTarget").value = namedTarget;
@@ -1180,6 +1212,8 @@ byId("assistantForm").addEventListener("submit", async event => {
   const epoch = state.epoch;
   setBusy(true);
   const started = performance.now();
+  const requestController = new AbortController();
+  activeRequest = requestController;
   byId("requestStatus").textContent = namedTarget && state.answerMode === "incident"
     ? `${translations[state.language].checkingNamedTarget} ${byId("incidentTarget").value}…`
     : translations[state.language].working;
@@ -1215,7 +1249,7 @@ byId("assistantForm").addEventListener("submit", async event => {
       state.pendingMessage = payload;
       path = `/api/v1/conversations/${state.conversationId}/messages`;
     }
-    const result = await api(path, { method: "POST", body: JSON.stringify(payload) });
+    const result = await api(path, { method: "POST", body: JSON.stringify(payload), signal: requestController.signal });
     if (epoch !== state.epoch) return; // A late result must not resurrect a signed-out session.
     const evidenceBacked = monitoring || incident;
     const assistant = saved ? result.message.assistant : evidenceBacked ? result.assistant : result;
@@ -1225,7 +1259,7 @@ byId("assistantForm").addEventListener("submit", async event => {
     renderAnswer(assistant.answer, assistant.locale);
     byId("modelId").textContent = assistant.model_id;
     byId("tokenCount").textContent = assistant.completion_tokens;
-    byId("completedAt").textContent = new Date(assistant.completed_at).toLocaleString(state.language === "fa" ? "fa-IR" : "en-GB");
+    byId("completedAt").textContent = new Date(assistant.completed_at).toLocaleString(state.language === "fa" ? "fa-IR" : "en-GB", { timeZone: "UTC", timeZoneName: "short" });
     byId("requestId").textContent = assistant.request_id;
     const integrityKeys = {
       model_unverified: "modelIntegrityNotice",
@@ -1234,7 +1268,7 @@ byId("assistantForm").addEventListener("submit", async event => {
       deterministic_focus: "focusedIntegrityNotice",
       scope_redirect: "redirectIntegrityNotice"
     };
-    let integrityKey = integrityKeys[assistant.integrity_status] || "modelIntegrityNotice";
+    let integrityKey = integrityKeys[assistant.integrity_status] || (evidenceBacked ? "unknownIntegrityNotice" : "modelIntegrityNotice");
     if (!evidenceBacked && assistant.integrity_status === "deterministic_fallback") integrityKey = "generalFallbackIntegrityNotice";
     if (assistant.limitations?.includes("host_inventory_unavailable")) integrityKey = "hostInventoryLimitNotice";
     if (assistant.limitations?.includes("requested_target_not_in_evidence")) integrityKey = "targetLimitNotice";
@@ -1275,6 +1309,7 @@ byId("assistantForm").addEventListener("submit", async event => {
         if (epoch !== state.epoch) return;
       } else rememberGeneralTurn(payload.question, assistant);
     }
+    window.NextOpsView?.render(assistant, evidenceBacked ? result : null, payload.question, incident, performance.now() - started);
     byId("conversationWelcome").classList.add("hidden");
     byId("resultCard").classList.remove("hidden");
     byId("question").value = "";
@@ -1292,13 +1327,33 @@ byId("assistantForm").addEventListener("submit", async event => {
     state.history = []; // Do not resolve a later follow-up against a failed request.
     if (error.status === 401) showLogin(translations[state.language].sessionExpired);
     else if (error.message === "incident.target_missing") errorNode.textContent = translations[state.language].noIncidentTargets;
-    else errorNode.textContent = safeRequestError(error);
+    else errorNode.textContent = error.name === "AbortError" ? window.NextOpsView.t("cancelNotice") : safeRequestError(error);
+    window.NextOpsView?.failed();
   } finally {
+    if (activeRequest === requestController) activeRequest = null;
     clearInterval(timer);
     if (epoch === state.epoch) setBusy(false);
   }
 });
 
+Object.assign(translations.en, {
+  unknownIntegrityNotice: "Response integrity was not reported; evidence alone does not prove answer accuracy.",
+  aiReady: "Local CPU ready",
+  companyName: "Omid Computer Services",
+  loginHeadline: "Operational clarity. Inside your network.",
+  loginLead: "A private workspace for understanding infrastructure, investigating incidents, and working from evidence.",
+  credentialsPrompt: "Use your organization-issued credentials.",
+  workspaceHeadline: "Investigation workspace"
+});
+Object.assign(translations.fa, {
+  unknownIntegrityNotice: "وضعیت کنترل پاسخ گزارش نشده است؛ شاهد به‌تنهایی درستی پاسخ را اثبات نمی‌کند.",
+  aiReady: "CPU محلی آماده است",
+  companyName: "شرکت رایانه خدمات امید",
+  loginHeadline: "دید روشن بر زیرساخت، درون شبکهٔ شما",
+  loginLead: "فضایی اختصاصی برای پایش زیرساخت، بررسی رخدادها و تصمیم‌گیری بر پایهٔ شواهد.",
+  credentialsPrompt: "اطلاعات ورود صادرشده از سوی سازمان را وارد کنید.",
+  workspaceHeadline: "محیط بررسی رخداد"
+});
 applyLanguage(state.language);
 installBrandIcon();
 setAnswerMode(state.answerMode);
