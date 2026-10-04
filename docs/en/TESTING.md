@@ -1,5 +1,22 @@
 # Testing, model evaluation and release evidence
 
+## Capability-v2 repair loop — 2026-10-04
+
+Source `bf33351b3af908cd2c8883335c29dab6af6684db` passed 520 local tests, 24 browser
+fixtures and all five CI jobs (37180851070), including PostgreSQL16/17. The new frozen
+16-case standard35 corpus completed in 2.911–84.770s with four exact checks passed; native
+generation used the unchanged profile/deadline, no thinking and no public transcript. Today's
+guest reports 80 vCPU/128769 MiB usable RAM, not the previous observation; quota/memory cap
+remain 18-equivalent/96 GiB. Protected record: `capability-v2-20261004`.
+
+Separate semantic review failed: EN proxy advice treated a listener as TCP reachability;
+FA proxy advice inferred connect/read timeout from elapsed time/socket states without sufficient
+protocol evidence. Coding test counts/exception handling improved; these examples do not prove
+general coding conformance (Python integer parsing also accepts formats outside plain digits).
+No promotion, deadline widening or retry occurred. A separately bounded application safeguard
+may reject such overclaims, visibly labelled fallback; that must not relabel these raw answers
+or qualify the broader capability candidate. Its serving-boundary acceptance is a separate task.
+
 ## Capability-v1 standard35 repair — 2026-10-03
 
 Source `c14550017b4fbc40e23747b8b961f32c2662b825`, code SHA-256

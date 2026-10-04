@@ -1,5 +1,17 @@
 # Project state / وضعیت پروژه
 
+Capability-v2, 2026-10-04 — source bf33351 passes 520 local tests/24 browser fixtures/all five
+CI jobs. Sixteen new standard35 final answers completed and four exact checks passed, but
+proxy diagnostic semantics still failed; no broader capability promotion. A separately qualified
+application-only safeguard is the next bounded deployment increment, not acceptance of this model
+repair. Live69/35/thinking-off remain. See [testing](en/TESTING.md).
+
+capability-v2 در ۴ اکتبر ۲۰۲۶ — کد bf33351، ۵۲۰ آزمون محلی، ۲۴ آزمون ساختگی مرورگر و پنج
+کنترل CI را گذراند. شانزده پاسخ تازهٔ معمولیِ مدل35 و چهار کنترل دقیق تکمیل شدند، اما معنای
+بررسی پراکسی هنوز شکست دارد؛ نامزد گسترده مستقر نشد. کنترل صرفاً برنامه‌ای با پذیرش مستقل،
+گام محدود بعدی است، نه تأیید اصلاح مدل. خدمت69/مدل35/استدلال خاموش ثابت‌اند.
+[آزمون](fa/TESTING.md) مبناست.
+
 AI capability repair, 2026-10-03 — source adds a versioned task-adaptive general policy,
 whole-pair history selection that skips oversized exchanges, an internal omission marker and
 18 fresh EN/FA cases with explicit semantic criteria. 502 local tests, strict types/lint,

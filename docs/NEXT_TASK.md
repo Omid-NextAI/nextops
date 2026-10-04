@@ -1,5 +1,17 @@
 # Next task / کار بعدی
 
+2026-10-04: preserve v2's 16 measured finals and failed proxy semantics. Next isolate an
+application-only diagnostic-integrity safeguard for reviewed overclaims and safe scenario intent.
+Qualify its final user-facing fallback/labels, live-state/mutation guards, audit and exact rollback
+on the existing standard profile. Do not deploy the broader unqualified capability-v2 provider or
+relabel raw failures. Newer actual guest resource observations supersede earlier point-in-time ones.
+
+۴ اکتبر ۲۰۲۶: شانزده پاسخ نسخهٔ دوم و شکستِ معنای پراکسی حفظ شود. کنترل مستقل و صرفاً
+برنامه‌ای برای ادعاهای بیش‌ازشاهدِ بررسی‌شده و قصد فرضی، از نامزد گسترده جدا شود. پاسخ نهایی،
+برچسب، کنترل وضعیت زنده و تغییر، ممیزی و بازگشت دقیق با نمایهٔ فعلی پذیرفته شوند. دستور
+گسترده و نپذیرفتهٔ capability-v2 مستقر و شکست خام موفق نامیده نشود. مشاهدهٔ تازهٔ واقعیِ
+منابع مهمان از مشاهدهٔ لحظه‌ایِ قبلی مقدم است.
+
 First unfinished checkpoint after capability-v1 — preserve the measured 18-case results and
 live69/35/thinking-off state. Design a bounded coding requirement-conformance and diagnostic-scope
 repair plus safe hypothetical-versus-live intent handling. FA code added unrequested range syntax
