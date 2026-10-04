@@ -1,12 +1,15 @@
-# Reference workspace and OCS login — source-only handoff
+# Reference workspace and OCS login — source and controlled live handoff
 
 [فارسی](../fa/REFERENCE_UI.md) · [Specification](../requirements/REFERENCE_UI_SPEC.md) · [UI history](UI.md)
 
 ## Scope and implementation
 
-Candidate branch: `codex/reference-dashboard`, inspected main baseline `625ca80`, 2026-10-04.
-The controlled live app/connector remain `2a7c8dc`; this change is not deployed and does not close
-model-quality, cold-start, reboot, recovery or production gates.
+Branch: `codex/reference-dashboard`, inspected main baseline `625ca80`, 2026-10-04.
+The owner subsequently authorized deployment: app `836b1ea` is serving, while connector `2a7c8dc`
+and AI/model remain unchanged. The [2026-10-05 live record](../requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md)
+records repaired CI/live failures, 47 passing local browser tests, five successful exact-source CI
+jobs, fresh real browser/audit checks and rollback/reapply. Model quality, server-WAN/cold-start,
+reboot, recovery and production gates are not closed by this visual release.
 
 The native HTML/CSS/JS frontend remains. `app.css` owns shared/OCS tokens; `workspace.css` owns
 authenticated violet/blue chrome; `login.css` and `login-motion.js` own the original signal gate.
@@ -138,9 +141,9 @@ calibrated confidence/thresholds, attachments, share-link, document retrieval an
 timings. These remain explicitly unavailable. No backend functionality was added to fill the image.
 Existing live checkpoints remain in [NEXT_TASK](../NEXT_TASK.md). Asset packaging uses the existing
 `static/*` wheel rule and existing offline installer, with no runtime download or security-policy change.
-Source rollback requires a reviewed revert/rebuild, not a live service change in this task.
-The Linux deployment bundle, live installer execution and runtime release manifest are not regenerated
-or promoted here; wheel/asset verification is not deployment acceptance.
+At the original source-only handoff, rollback meant a reviewed revert/rebuild and no live promotion
+had occurred. The later authorized app-only deployment/immutable rollback is recorded above;
+wheel/asset verification alone is still not deployment acceptance.
 
 ## Deployment preflight repair — 2026-10-05
 
@@ -149,7 +152,7 @@ Linux CI run passed quality/security and both PostgreSQL 16/17 jobs, but browser
 the sidebar footer covered saved-conversation deletion. The source repair prevents flex children
 from shrinking over their contents and adds short-viewport EN/FA pointer-reachability regression
 tests. This initial CI failure is retained, not relabelled as a pass. Fresh exact-head CI and live
-qualification remain required before promotion; no model change is part of this UI repair.
+qualification were subsequently completed as recorded above; no model change is part of this repair.
 
 The first guarded live trial of `9740868` passed login and the two-source/seven-target catalogue,
 but failed Users-to-assistant navigation: the open profile popup obscured Back. Exact rollback

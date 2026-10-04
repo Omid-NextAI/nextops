@@ -82,6 +82,14 @@ borders and base corporate colors are unchanged.
 
 ## Acceptance and rollback / پذیرش و بازگشت
 
+Subsequent owner-authorized deployment: [2026-10-05 record](REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md)
+documents real app `836b1ea` rollback/reapply, browser/audit acceptance and the explicit unrun gates.
+The original source-only scope and historical statements below describe the earlier handoff.
+
+استقرار مستقلِ بعدی با مجوز مالک در گزارش ۵ اکتبر ثبت است: بازگشت/استقرار دوبارهٔ واقعیِ
+`836b1ea`، پذیرش مرورگر/ممیزی و معیارهای اجرا‌نشده. دامنه و عبارت‌های تحویل صرفاً کدیِ زیر،
+سابقهٔ گام قبلی‌اند.
+
 See the paired [English record](../en/REFERENCE_UI.md) / [گزارش فارسی](../fa/REFERENCE_UI.md) for
 commands, results, screenshot paths and limits. Existing live acceptance is not overwritten.
 WAN-blocked browser fixtures prove local UI assets only, not real model/LAN/offline cold start.

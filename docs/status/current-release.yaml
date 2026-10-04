@@ -1,8 +1,8 @@
 ---
 $schema: ./release-status.schema.json
 schema_version: 2.2.0
-release_identifier: nextops-source-scoped-mcp-controlled-2026-10-04
-observed_at: '2026-10-04'
+release_identifier: nextops-reference-ui-controlled-2026-10-05
+observed_at: '2026-10-05'
 deployment_status: controlled_user_testing_not_production_accepted
 delivery_scope:
   profile: local_read_only_recovery_deferred
@@ -17,11 +17,11 @@ snapshot_restore_owner_attestation:
 repository:
   remote: Omid-NextAI/nextops
   branch: main  # Canonical integration branch; new source increments require reviewed PRs.
-  inspected_baseline_commit: 1f5eff7b0f8924755d5b2250c8ec29145f7df605
+  inspected_baseline_commit: 625ca80b83fbdb80d0fba4dc4e770b189b6d623c
 components:
   application:
-    release: nextops-0.1.0-2a7c8dc
-    source_commit: 2a7c8dc5dc99ebf203748380b7ab8ea7f89ac690
+    release: nextops-0.1.0-836b1ea
+    source_commit: 836b1eaa77e09505e2f97bdb4470d9bc101fadf1
   connector:
     release: nextops-0.1.0-2a7c8dc
     source_commit: 2a7c8dc5dc99ebf203748380b7ab8ea7f89ac690
@@ -50,14 +50,14 @@ components:
     name: Zabbix
     version: '7.0.31'
 current_application_qualification:
-  release: nextops-0.1.0-2a7c8dc
-  source_commit: 2a7c8dc5dc99ebf203748380b7ab8ea7f89ac690
+  release: nextops-0.1.0-836b1ea
+  source_commit: 836b1eaa77e09505e2f97bdb4470d9bc101fadf1
   scope: application_revision_sensitive
   gates:
     - id: current_app_bounded_live_functionality
       status: passed
       evidence:
-        - docs/requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md
+        - docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md
         - docs/en/TESTING.md
         - docs/fa/TESTING.md
     - id: current_app_held_out_answer_semantics
@@ -70,13 +70,13 @@ current_application_qualification:
     - id: current_app_exact_release_rollback
       status: passed
       evidence:
-        - docs/requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md
+        - docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_server_side_wan_isolation
-      status: passed
+      status: not_run
       evidence:
-        - docs/requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md
+        - docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_vm_reboot_cold_start
@@ -85,6 +85,14 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: reference_investigation_workspace_ocs_login
+    status: accepted_controlled
+    evidence:
+      - docs/requirements/REFERENCE_UI_SPEC.md
+      - docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md
+      - docs/en/REFERENCE_UI.md
+      - docs/fa/REFERENCE_UI.md
+      - tests/browser/test_reference_ui.py
   - id: local_admin_user_management
     status: implemented_unaccepted
     evidence:

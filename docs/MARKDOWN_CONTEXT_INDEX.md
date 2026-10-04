@@ -1,6 +1,6 @@
 # NextOps Markdown context index
 
-Updated: 2026-10-04
+Updated: 2026-10-05
 
 This is the durable inventory and routing map for project-owned Markdown. It lets an agent remember
 that every document exists without flooding each task with every file. The documentation validator
@@ -43,8 +43,9 @@ remaining task-specific sources. The repository skill
 ## Complete inventory
 
 - `docs/requirements/REFERENCE_UI_SPEC.md` — Bilingual bounded reference-workspace and original OCS login specification, security invariants and source rollback.
-- `docs/en/REFERENCE_UI.md` — English source-only UI preview, verification, intentional deviations and screenshot handoff.
-- `docs/fa/REFERENCE_UI.md` — Persian source-only UI preview, verification, intentional deviations and screenshot handoff.
+- `docs/en/REFERENCE_UI.md` — English UI preview, source verification, controlled live qualification and screenshot handoff.
+- `docs/fa/REFERENCE_UI.md` — Persian UI preview, source verification, controlled live qualification and screenshot handoff.
+- `docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md` — Bilingual exact app UI deployment, preserved failures, browser/audit/rollback evidence and unrun model/offline gates.
 
 - `docs/requirements/USER_MANAGEMENT_SPEC.md` — Bounded local admin account controls, immutable role profiles, audit/revocation and staged acceptance.
 

@@ -1,5 +1,14 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+UI-R01–06 controlled app delivery: [dated live record](REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md)
+binds `836b1ea` to exact-source CI, 47 fixture browser tests, real auth/saved-chat/source/evidence
+checks, durable audit/hash matching and tested prior-release rollback. Current-app server-WAN,
+cold-start and model/thinking quality are not passed by UI acceptance; historical results remain.
+
+تحویل محدودِ UI-R01–06: گزارش تاریخ‌دار، `836b1ea` را به CI همان کد، ۴۷ آزمون مرورگر ساختگی،
+بررسی واقعیِ هویت/گفتگو/منبع/شاهد، تطبیق ممیزی/هش و بازگشت دقیق متصل می‌کند. پذیرش رابط،
+WAN سرور/شروع سرد نسخهٔ جاری یا کیفیت مدل/استدلال را موفق نمی‌کند؛ شاهد تاریخی محفوظ است.
+
 UI-R01–06 source-only candidate: [reference UI specification](REFERENCE_UI_SPEC.md) maps existing
 offline/identity/evidence/bilingual requirements to the native shell, scoped presentation adapter,
 OCS motion, public asset tests and `tests/browser/test_reference_ui.py`. The paired handoff separates
