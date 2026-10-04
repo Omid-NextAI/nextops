@@ -151,6 +151,12 @@ from shrinking over their contents and adds short-viewport EN/FA pointer-reachab
 tests. This initial CI failure is retained, not relabelled as a pass. Fresh exact-head CI and live
 qualification remain required before promotion; no model change is part of this UI repair.
 
+The first guarded live trial of `9740868` passed login and the two-source/seven-target catalogue,
+but failed Users-to-assistant navigation: the open profile popup obscured Back. Exact rollback
+restored `2a7c8dc` with no failed services or schema/config changes. Close the menu on entering
+Users, retain focus restoration on return, and test both desktop widths in EN/FA before a new trial.
+The failed trial remains recorded separately from subsequent acceptance.
+
 ## Changed-file inventory
 
 - Frontend: `packages/nextops/api/static/index.html`, `app.css`, `app.js`, `evidence.css`, new

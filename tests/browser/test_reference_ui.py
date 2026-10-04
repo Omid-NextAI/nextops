@@ -27,6 +27,28 @@ def _options(page: Page) -> None:
 
 
 @pytest.mark.parametrize("locale", ["en", "fa"])
+@pytest.mark.parametrize("width", [1280, 1672])
+def test_users_navigation_closes_profile_menu_and_keeps_back_reachable(
+    browser_server: tuple[str, Any], locale: str, width: int
+) -> None:
+    base, _ = browser_server
+    with sync_playwright() as p:
+        browser = _launch_browser(p)
+        page = browser.new_page(viewport={"width": width, "height": 941})
+        _login(page, base)
+        if locale == "fa":
+            page.locator("#languageButton").click()
+        _profile_action(page, "#usersButton")
+        expect(page.locator("#usersView")).to_be_visible()
+        expect(page.locator("#profileMenu")).not_to_have_attribute("open", "")
+        expect(page.locator("#usersList li").first).to_be_visible()
+        page.locator("#usersBack").click()
+        expect(page.locator("#workspaceView")).to_be_visible()
+        expect(page.locator("#usersButton")).to_be_focused()
+        browser.close()
+
+
+@pytest.mark.parametrize("locale", ["en", "fa"])
 def test_saved_chat_controls_scroll_without_sidebar_footer_overlap(
     browser_server: tuple[str, Any], locale: str
 ) -> None:

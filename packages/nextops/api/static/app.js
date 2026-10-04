@@ -279,6 +279,7 @@ async function userMutation(path, method, payload) {
 
 byId("usersButton").addEventListener("click", () => {
   if (!state.actor?.roles.includes("admin")) return;
+  byId("profileMenu").open = false;
   byId("workspaceView").classList.add("hidden"); byId("usersView").classList.remove("hidden");
   byId("usersHeading").focus(); refreshUsers();
 });
