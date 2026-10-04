@@ -1,5 +1,21 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-10-04 — Connector VM MCP role / نقش MCP ماشین اتصال‌دهنده
+
+Clarify the existing connector VM as the canonical MCP gateway/isolated-runner host, consistent
+with master sections 5/12 and the owner's instruction. Specify authenticated cross-VM MCP,
+runner-only credentials and incremental reuse of existing drivers. HTTP is staged compatibility
+and rollback, not a permanent parallel platform or denial fallback. Align paired architecture/MCP
+guides, ADR addendum, specification, traceability and next task. Record three open MCP-01 review
+items before MCP-02. No code, lock, live service, release identity or acceptance gate is changed.
+
+نقش ماشین موجودِ اتصال‌دهنده به‌عنوان میزبان اصلیِ درگاه MCP و اجراکننده‌های جداگانه، مطابق
+بخش‌های ۵ و ۱۲ پرامپت و دستور مالک روشن شد. ارتباط احرازهویت‌شدهٔ MCP میان ماشین‌ها، اطلاعات
+ورود محدود به اجراکننده و استفادهٔ تدریجی از گردآورنده‌های موجود مشخص‌اند. HTTP مسیر سازگاری
+و بازگشتِ دورهٔ گذار است، نه سامانهٔ موازیِ دائمی یا جایگزین پس از رد درخواست. راهنماهای دوزبانه،
+پیوست تصمیم، مشخصات، ردیابی و گام بعد هم‌راستا شدند. سه مورد بازِ بازبینی MCP-01 پیش از MCP-02
+ثبت شدند. کد، قفل وابستگی، سرویس زنده، شناسهٔ انتشار و معیار پذیرش تغییر نکرده‌اند.
+
 ## 2026-10-04 — Source-scoped MCP foundation / پایهٔ MCP محدود به منبع
 
 Add optional official Python SDK 1.30.0, private source/target contracts, scoped reuse of the

@@ -6,6 +6,41 @@ MCP-02/03 اجرا نشده‌اند. این سند مجوز استقرار نی
 
 ## English
 
+### Connector-VM role and migration requirements
+
+Owner clarification, 2026-10-04: the existing connector VM must fulfil its originally specified
+MCP gateway role (active master sections 5 and 12). This increment evolves that boundary, not a
+separate permanent MCP platform beside a non-MCP connector. Reuse the working Zabbix/Linux drivers;
+no new VM, rebuild or new integration is authorized by this design clarification.
+
+The target design is app-owned policy/durable audit → authenticated MCP gateway on
+`nextops-connectors-ro` → separately identified isolated runner → approved target. Plan internal
+Streamable HTTP with verified TLS for the cross-VM MCP hop; local stdio remains a local runner
+option, not proof of remote transport. The gateway authenticates/rechecks and bounds calls but
+cannot grant model-requested privileges. Only the runner receives target credentials. Application
+use cases depend on inward-facing ports, not concrete connector/transport implementations.
+
+Migration tasks and acceptance:
+
+- Before MCP-02, resolve the open MCP-01 review findings in [PR 53](https://github.com/Omid-NextAI/nextops/pull/53):
+  audit cancellation during authorization, prove ownership of problem/event rows and restore
+  application-to-adapter dependency direction. Add regression tests; existing passes do not close
+  these findings. This documentation correction does not claim they are fixed.
+- MCP-02 composes the canonical gateway and isolated runners on the existing VM, with durable
+  application authorization/audit and trusted source selection. Test invalid audience/identity,
+  revoked scope, direct runner bypass, credential isolation, frame/log bounds and failed audit.
+- Map each existing operation incrementally to typed MCP tools without widening its scope.
+  The two Zabbix tools do not imply Linux or all eleven integration families are MCP-complete.
+- Preserve HTTP only during explicit compatibility/rollback. A compatibility adapter must share
+  the same authorization/audit boundary. No automatic legacy or alternate-source fallback after
+  denial/failure; at accepted cutover retire/disable the old interface and verify bypass denial.
+- MCP-03 tests the actual cross-VM hop, both Zabbix sources, fresh EN/FA UI evidence and audit,
+  WAN-denied startup/recovery and exact rollback of matched app/gateway/runner/configuration.
+  Retain verified prior artifacts; do not leave their endpoints active merely for rollback.
+
+Until those gates pass, the deployed HTTP service remains truthfully labelled HTTP. No live
+service, endpoint, credential or release identity changes in this design-only correction.
+
 ### Problem and requirements
 
 The working connector serves one Zabbix source. Adding another must not replace that source,
@@ -31,9 +66,10 @@ factory, not SDK requests/results, source manifests, exception text or model con
 
 ### Non-goals, threats and compatibility
 
-No replacement of the current HTTP connector, UI, model, inference profile, database schema or
-existing source. No HTTP-token exception, new host SSH, discovery, write tools, automatic group
-enrollment or cloud service. Treat source text as untrusted evidence. Test source/target
+MCP-01 does not replace the current HTTP connector, UI, model, inference profile, database schema or
+existing source; the subsequent gateway migration follows the requirements above. No HTTP-token
+exception, new host SSH, discovery, write tools, automatic group enrollment or cloud service.
+Treat source text as untrusted evidence. Test source/target
 substitution, duplicate IDs, forged scopes, malformed/oversized data, credential leaks, broken
 audit, overload, cancellation/drain and dependency recovery. MCP is not authorization.
 
@@ -43,7 +79,7 @@ audit, overload, cancellation/drain and dependency recovery. MCP is not authoriz
    optional official SDK adapter/client, protocol and isolation tests, paired guides and ADR.
 2. MCP-02: application-owned durable PostgreSQL authorization/audit composition, protected
    runner credential staging, source selection, protocol-frame/logging limits and process egress;
-   preserve the legacy routes.
+   preserve legacy behavior during the explicit compatibility/rollback window, not a permanent bypass.
 3. MCP-03: exact offline artifact provisioning, real runner/API and fresh EN/FA browser answers,
    evidence/audit correlation, unavailable-source isolation and guarded rollback.
 
@@ -58,6 +94,42 @@ promotion must preserve a compatible prior release/registry/credentials and veri
 Update both MCP guides, state, next task, release manifest, traceability and Markdown inventory.
 
 ## فارسی
+
+### نقش ماشین اتصال‌دهنده و الزامات مهاجرت
+
+تصریح مالک در ۴ اکتبر ۲۰۲۶: ماشین موجودِ اتصال‌دهنده باید همان نقش درگاه MCP را که در بخش‌های
+۵ و ۱۲ پرامپت فعال آمده است ایفا کند. این گام، همان مرز را تکمیل می‌کند؛ سامانهٔ دائمیِ دوم
+در کنار اتصال‌دهندهٔ غیر-MCP نمی‌سازد. گردآورنده‌های زبیکس و Linux حفظ و استفاده شوند؛ این
+تصریح طراحی، مجوز ساخت ماشین، بازسازی یا افزودن اتصال تازه نیست.
+
+در طرح مقصد، برنامه پس از کنترل سیاست و ممیزی ماندگار، درگاه احرازهویت‌شدهٔ MCP روی
+`nextops-connectors-ro` را فراخوانی می‌کند؛ درگاه به اجراکنندهٔ جداگانه و سپس مقصد مجاز متصل
+می‌شود. برای ارتباط MCP میان دو ماشین، Streamable HTTP داخلی با TLS معتبر در نظر گرفته شده
+است؛ stdio گزینهٔ محلیِ اجراکننده است، نه شاهد ارتباط راه دور. درگاه هویت و مجوز را دوباره
+می‌سنجد و فراخوانی را محدود می‌کند، اما به درخواست مدل اختیار تازه نمی‌دهد. اطلاعات ورود مقصد
+فقط به اجراکننده می‌رسد. کاربردهای برنامه به رابط‌های داخلی وابسته‌اند، نه پیاده‌سازی مستقیم
+اتصال‌دهنده یا انتقال.
+
+کارها و معیارهای مهاجرت:
+
+- پیش از MCP-02، موارد بازِ بازبینی MCP-01 در [PR 53](https://github.com/Omid-NextAI/nextops/pull/53)
+  رفع شوند: ثبت ممیزیِ لغو هنگام بررسی مجوز، اثبات تعلق سطرهای problem/event به مقصد و اصلاح
+  جهت وابستگی برنامه به سازگارساز. آزمون بازگشت خطا افزوده شود؛ موفقیت‌های قبلی این موارد را
+  نمی‌بندند. این اصلاح مستندات، رفع آن‌ها را ادعا نمی‌کند.
+- MCP-02 درگاه اصلی و اجراکننده‌های جداگانه را روی همان ماشین به مجوز و ممیزی ماندگار برنامه
+  و انتخاب معتبر منبع متصل می‌کند. هویت یا مخاطب نامعتبر، لغو دامنه، دور زدن مستقیم اجراکننده،
+  جداسازی اطلاعات ورود، سقف پیام/گزارش و شکست ممیزی آزموده شوند.
+- عملیات موجود، مرحله‌به‌مرحله و بدون گسترش اختیار به ابزار دارای نوع MCP نگاشت شوند. دو ابزار
+  زبیکس به معنی تکمیل MCP برای Linux یا هر یازده خانوادهٔ اتصال نیستند.
+- HTTP فقط در دورهٔ مشخصِ سازگاری و بازگشت حفظ شود. رابط سازگاری از همان مرز مجوز و ممیزی
+  بگذرد. پس از رد یا شکست، جایگزینی خودکارِ مسیر قدیمی یا منبع دیگر مجاز نیست. هنگام گذارِ
+  پذیرفته‌شده، رابط قدیمی غیرفعال و ردِ مسیر دورزن آزموده شود.
+- MCP-03 ارتباط واقعیِ میان ماشین‌ها، هر دو منبع زبیکس، شاهد و ممیزی تازه در رابط فارسی و
+  انگلیسی، شروع و ادامهٔ کار با WAN مسدود و بازگشت دقیقِ برنامه/درگاه/اجراکننده/پیکربندی را
+  می‌سنجد. فایل‌های معتبر قبلی حفظ شوند؛ صرفاً برای بازگشت، نقطهٔ دسترسی آن‌ها فعال نماند.
+
+تا پذیرش این معیارها، سرویس مستقر به‌درستی HTTP نامیده می‌شود. این اصلاحِ صرفاً طراحی، سرویس
+زنده، نقطهٔ دسترسی، اطلاعات ورود یا شناسهٔ انتشار را تغییر نمی‌دهد.
 
 ### مسئله و الزامات
 
@@ -83,8 +155,9 @@ SDK رسمی Python با مجوز MIT، به‌صورت وابستگی اختی�
 
 ### حدود، تهدیدها و پذیرش
 
-مسیر HTTP، رابط، مدل، نمایهٔ پردازش، ساختار پایگاه و منبع موجود تغییر نمی‌کنند. انتقال توکن روی
-HTTP، SSH سرور جدید، پویش آزاد، ابزار نوشتنی، عضویت خودکار گروه و سرویس ابری خارج از دامنه‌اند.
+در MCP-01 مسیر HTTP، رابط، مدل، نمایهٔ پردازش، ساختار پایگاه و منبع موجود تغییر نمی‌کنند؛ مهاجرت
+بعدی درگاه مطابق الزامات بالاست. انتقال توکن روی HTTP، SSH سرور جدید، پویش آزاد، ابزار نوشتنی،
+عضویت خودکار گروه و سرویس ابری خارج از دامنه‌اند.
 تعویض منبع و مقصد، شناسهٔ تکراری، دامنهٔ جعلی، دادهٔ خراب یا بزرگ، افشای اطلاعات ورود، شکست
 ممیزی، ازدحام، لغو و آزاد شدن واقعی ظرفیت و ادامه پس از خرابی آزموده می‌شوند. MCP مجوز نیست.
 

@@ -7,6 +7,27 @@ the live path. The broader gateway contract below is still planned. Source: mast
 sections 11–15 and 21, [bounded specification](../requirements/MULTI_SOURCE_MCP_SPEC.md) and
 [ADR 0010](../adr/0010-source-scoped-zabbix-mcp.md).
 
+## Placement and migration contract
+
+The existing `nextops-connectors-ro` VM is the intended MCP gateway/runner host, as required by
+master sections 5 and 12 and reaffirmed by the owner on 2026-10-04. Native MCP becomes its canonical
+application-facing contract. Zabbix and Linux remain scoped integration drivers behind the gateway,
+not an unrelated non-MCP connector beside a second platform. No extra VM is required.
+
+Plan authenticated internal Streamable HTTP over verified TLS between app and gateway. Local
+stdio is suitable only inside an appropriately isolated local process boundary; the MCP-01 stdio
+tests do not prove an app-to-connector-VM transport. MCP-02 must qualify caller identity/audience,
+origin handling where applicable, per-call scope, durable audit, frame limits and runner isolation
+before opening a listener. Gateway and runners use separate identities; target tokens stay with
+their runner, not the gateway, app or model.
+
+Keep the current serving HTTP release during staged migration and for exact rollback. A temporary
+compatibility adapter must enter the same deterministic authorization/audit boundary, never bypass
+it or silently substitute another source after a denial/failure. Retire or disable the old interface
+at the qualified cutover; retaining rollback artifacts does not require leaving a bypass reachable.
+Only implemented, separately qualified tools may be advertised; Linux MCP mapping and the remaining
+integration families are not completed by this two-tool Zabbix foundation.
+
 ## Implemented Zabbix subset
 
 The optional extra pins the official MIT-licensed [Python SDK v1.30.0](https://github.com/modelcontextprotocol/python-sdk/tree/v1.30.0)

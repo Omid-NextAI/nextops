@@ -1,5 +1,22 @@
 # Project state / وضعیت پروژه
 
+Design clarification, 2026-10-04: the existing connector VM is the intended MCP gateway/isolated
+runner host, not a parallel non-MCP platform. Master sections 5/12, paired architecture/MCP guides
+and ADR 0010 now explicitly align with the owner's clarification. The deployed connector is still
+HTTP; migration compatibility/rollback is temporary, not a permanent bypass. No live change or
+new acceptance is claimed. Three open [PR 53](https://github.com/Omid-NextAI/nextops/pull/53) findings
+(authorization cancellation audit, problem/event ownership and dependency direction) need repair
+and regression tests before MCP-02 composition. Prior test outcomes are preserved, not invalidated
+or treated as proof that these paths are safe.
+
+تصریح طراحی، ۴ اکتبر ۲۰۲۶: ماشین موجودِ اتصال‌دهنده میزبان موردنظرِ درگاه MCP و اجراکننده‌های
+جداگانه است، نه سامانهٔ غیر-MCP موازی. بخش‌های ۵ و ۱۲ پرامپت، راهنماهای دوزبانهٔ معماری/MCP و
+تصمیم 0010 با تصریح مالک هم‌راستا هستند. اتصال‌دهندهٔ مستقر هنوز HTTP است؛ سازگاری و بازگشت
+دورهٔ مهاجرت موقت‌اند، نه مسیر دورزن دائمی. تغییر زنده یا پذیرش تازه ادعا نمی‌شود. سه مورد بازِ
+[PR 53](https://github.com/Omid-NextAI/nextops/pull/53)، شامل ممیزی لغو هنگام مجوز، تعلق شواهد
+problem/event و جهت وابستگی، پیش از MCP-02 به اصلاح و آزمون بازگشت خطا نیاز دارند. نتایج
+آزمون قبلی حفظ‌اند، اما اثبات ایمنیِ این مسیرهای بررسی‌نشده نیستند.
+
 Source increment, 2026-10-04: MCP-01 adds a private, source-scoped Zabbix registry, typed
 results, mandatory per-call authorization/audit ports and optional official SDK 1.30.0 adapters.
 27 focused local tests include real SDK memory/stdio exchanges and explicit protocol cancellation

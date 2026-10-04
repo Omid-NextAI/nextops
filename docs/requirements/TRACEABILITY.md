@@ -1,5 +1,22 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Connector placement clarification (active sections 5/12; 2026-10-04):
+[architecture](../en/ARCHITECTURE.md), [Persian architecture](../fa/ARCHITECTURE.md), paired MCP
+guides, [ADR 0010](../adr/0010-source-scoped-zabbix-mcp.md) and
+[migration requirements](MULTI_SOURCE_MCP_SPEC.md) explicitly place the canonical MCP gateway
+and isolated runners on the existing connector VM. Application policy/durable audit and runner-only
+credentials remain required. Deployed HTTP is not MCP; cross-VM transport, compatibility cutover,
+runner isolation and bypass denial require MCP-02/03 tests. Three open MCP-01 review findings
+remain in NEXT_TASK; this documentation correction adds no runtime acceptance.
+
+تصریح جانمایی اتصال‌دهنده (بخش‌های فعال ۵ و ۱۲؛ ۴ اکتبر ۲۰۲۶):
+[معماری فارسی](../fa/ARCHITECTURE.md)، [نسخهٔ انگلیسی](../en/ARCHITECTURE.md)، راهنماهای MCP،
+[تصمیم 0010](../adr/0010-source-scoped-zabbix-mcp.md) و [الزامات مهاجرت](MULTI_SOURCE_MCP_SPEC.md)،
+درگاه اصلی و اجراکننده‌های جداگانه را روی ماشین موجود قرار می‌دهند. سیاست و ممیزی ماندگارِ
+برنامه و نگه‌داری اطلاعات ورود فقط نزد اجراکننده الزامی‌اند. HTTP مستقر، MCP نیست؛ انتقال میان
+ماشین‌ها، گذار از رابط سازگاری، جداسازی و رد مسیر دورزن به آزمون MCP-02/03 نیاز دارند. سه مورد
+بازِ بازبینی MCP-01 در NEXT_TASK باقی‌اند؛ این اصلاح مستندات، پذیرش عملیاتی اضافه نمی‌کند.
+
 MCP-01 (sections 11–15, 20–21; 2026-10-04): the
 [source-scoped specification](MULTI_SOURCE_MCP_SPEC.md) and
 [ADR 0010](../adr/0010-source-scoped-zabbix-mcp.md) map to typed source contracts, registry/scoped
