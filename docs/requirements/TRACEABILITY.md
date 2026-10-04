@@ -15,6 +15,41 @@ lock wait. Source testing is not deployed/offline acceptance; existing release i
 ممیزی، سقف/صفحه‌بندی و بررسی مجوز پس از
 انتظار قفل را می‌سنجند. آزمون کد، پذیرش زنده/آفلاین نیست؛ هویت انتشار مستقر ثابت می‌ماند.
 
+Connector placement clarification (active sections 5/12; 2026-10-04):
+[architecture](../en/ARCHITECTURE.md), [Persian architecture](../fa/ARCHITECTURE.md), paired MCP
+guides, [ADR 0010](../adr/0010-source-scoped-zabbix-mcp.md) and
+[migration requirements](MULTI_SOURCE_MCP_SPEC.md) explicitly place the canonical MCP gateway
+and isolated runners on the existing connector VM. Application policy/durable audit and runner-only
+credentials remain required. Deployed HTTP is not MCP; cross-VM transport, compatibility cutover,
+runner isolation and bypass denial require MCP-02/03 tests. Three open MCP-01 review findings
+remain in NEXT_TASK; this documentation correction adds no runtime acceptance.
+
+تصریح جانمایی اتصال‌دهنده (بخش‌های فعال ۵ و ۱۲؛ ۴ اکتبر ۲۰۲۶):
+[معماری فارسی](../fa/ARCHITECTURE.md)، [نسخهٔ انگلیسی](../en/ARCHITECTURE.md)، راهنماهای MCP،
+[تصمیم 0010](../adr/0010-source-scoped-zabbix-mcp.md) و [الزامات مهاجرت](MULTI_SOURCE_MCP_SPEC.md)،
+درگاه اصلی و اجراکننده‌های جداگانه را روی ماشین موجود قرار می‌دهند. سیاست و ممیزی ماندگارِ
+برنامه و نگه‌داری اطلاعات ورود فقط نزد اجراکننده الزامی‌اند. HTTP مستقر، MCP نیست؛ انتقال میان
+ماشین‌ها، گذار از رابط سازگاری، جداسازی و رد مسیر دورزن به آزمون MCP-02/03 نیاز دارند. سه مورد
+بازِ بازبینی MCP-01 در NEXT_TASK باقی‌اند؛ این اصلاح مستندات، پذیرش عملیاتی اضافه نمی‌کند.
+
+MCP-01 (sections 11–15, 20–21; 2026-10-04): the
+[source-scoped specification](MULTI_SOURCE_MCP_SPEC.md) and
+[ADR 0010](../adr/0010-source-scoped-zabbix-mcp.md) map to typed source contracts, registry/scoped
+transport, `SourceReader`, the optional official-SDK adapter and `tests/unit/test_source_mcp.py`.
+27 focused tests cover actual SDK memory/stdio protocol, duplicate host IDs across sources,
+authorization, group/target denial, audit failure, canonical provenance, bounded timeout/drain,
+explicit cancellation and source failure/recovery. Fixture ports are not durable audit or live
+source acceptance. MCP-02/03 remain not run; live component identities and failed thinking gates
+are preserved. [English](../en/MCP.md) and [Persian](../fa/MCP.md) describe the same limits.
+
+MCP-01 (بخش‌های ۱۱ تا ۱۵ و ۲۰ تا ۲۱؛ ۴ اکتبر ۲۰۲۶): [مشخصات منبع](MULTI_SOURCE_MCP_SPEC.md)
+و [تصمیم 0010](../adr/0010-source-scoped-zabbix-mcp.md) به قراردادِ دارای نوع، فهرست و انتقال
+محدود، `SourceReader`، لایهٔ اختیاری SDK رسمی و `tests/unit/test_source_mcp.py` متصل‌اند.
+۲۷ آزمون متمرکز، تبادل واقعیِ حافظه/stdio، شناسهٔ میزبان مشابه در دو منبع، مجوز، رد گروه/مقصد،
+شکست ممیزی، منشأ اصلی، مهلت و پایان واقعیِ کار، لغو صریح و خرابی/ادامهٔ منبع را پوشش می‌دهند.
+مرز ساختگی، ممیزی ماندگار یا پذیرش منبع زنده نیست. MCP-02/03 اجرا نشده‌اند؛ هویت زنده و شکست
+استدلال حفظ‌اند. راهنماهای [انگلیسی](../en/MCP.md) و [فارسی](../fa/MCP.md) همین حدود را دارند.
+
 Scoped diagnostic guard (sections 3, 9, 17, 25, 27; 2026-10-04): deployed `7ce9d29` maps
 supplied-scenario intent, transport overclaims, explicit certificate/name limits and stale-data
 absence limits to `tests/unit/test_general_transport_integrity.py` and `tests/api/test_app.py`.

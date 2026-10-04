@@ -18,6 +18,41 @@ passed CI; rejected model drafts remain unpromoted.
 منابع و اتصال‌دهنده تغییر نکردند. PR 53 جداگانه سه ایراد MCP را رفع کرد و CI موفق دارد؛
 پیش‌نویس‌های مدلِ ردشده ارتقا نیافته‌اند.
 
+## 2026-10-04 — Connector VM MCP role / نقش MCP ماشین اتصال‌دهنده
+
+Clarify the existing connector VM as the canonical MCP gateway/isolated-runner host, consistent
+with master sections 5/12 and the owner's instruction. Specify authenticated cross-VM MCP,
+runner-only credentials and incremental reuse of existing drivers. HTTP is staged compatibility
+and rollback, not a permanent parallel platform or denial fallback. Align paired architecture/MCP
+guides, ADR addendum, specification, traceability and next task. Record three open MCP-01 review
+items before MCP-02. No code, lock, live service, release identity or acceptance gate is changed.
+
+نقش ماشین موجودِ اتصال‌دهنده به‌عنوان میزبان اصلیِ درگاه MCP و اجراکننده‌های جداگانه، مطابق
+بخش‌های ۵ و ۱۲ پرامپت و دستور مالک روشن شد. ارتباط احرازهویت‌شدهٔ MCP میان ماشین‌ها، اطلاعات
+ورود محدود به اجراکننده و استفادهٔ تدریجی از گردآورنده‌های موجود مشخص‌اند. HTTP مسیر سازگاری
+و بازگشتِ دورهٔ گذار است، نه سامانهٔ موازیِ دائمی یا جایگزین پس از رد درخواست. راهنماهای دوزبانه،
+پیوست تصمیم، مشخصات، ردیابی و گام بعد هم‌راستا شدند. سه مورد بازِ بازبینی MCP-01 پیش از MCP-02
+ثبت شدند. کد، قفل وابستگی، سرویس زنده، شناسهٔ انتشار و معیار پذیرش تغییر نکرده‌اند.
+
+## 2026-10-04 — Source-scoped MCP foundation / پایهٔ MCP محدود به منبع
+
+Add optional official Python SDK 1.30.0, private source/target contracts, scoped reuse of the
+existing Zabbix reader, required authorization/audit ports and typed MCP client/server factories.
+27 focused local tests exercise actual memory/stdio protocol, source collisions, fail-closed
+audit, scope revocation, timeout/drain, explicit cancellation and unavailable-source recovery.
+Include the locked MCP extra in CI/audits; explicitly depend on the already locked AnyIO for
+cancellation-safe bounded audit waits. Preserve legacy routes and all live releases, model and
+thinking flags. Durable application composition, UI source selection, protected runner/egress
+and live/offline acceptance remain MCP-02/03; this change is not deployed.
+
+SDK رسمی Python نسخهٔ 1.30.0 به‌صورت اختیاری، قرارداد خصوصی منبع/مقصد، استفادهٔ محدود از
+گردآورندهٔ موجود، مرزهای الزامیِ مجوز/ممیزی و توابع ساختِ کارخواه و سرور MCP افزوده شدند.
+۲۷ آزمون محلی، پروتکل واقعی حافظه/stdio، تداخل شناسه‌ها، توقف در شکست ممیزی، لغو مجوز، مهلت
+و پایان واقعی، اعلان صریح لغو و ادامه پس از خرابی را می‌سنجند. وابستگی MCP در CI و ممیزی
+قفل و AnyIO موجود برای انتظار محدودِ ممیزی هنگام لغو صریح شد. مسیر قدیمی، انتشارهای زنده،
+مدل و گزینه‌های استدلال ثابت‌اند. اتصال ماندگار برنامه، انتخاب منبع در رابط، اجراکننده/خروجی
+شبکهٔ محافظت‌شده و پذیرش زنده/آفلاین در MCP-02/03 بازند؛ این تغییر مستقر نشده است.
+
 ## 2026-10-04 — Scoped diagnostic guard deployment / استقرار کنترل تشخیصیِ محدود
 
 Deploy matched app/AI `7ce9d29` after four rejected, exactly rolled-back candidates. Repair

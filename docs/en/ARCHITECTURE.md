@@ -31,6 +31,25 @@ Restricted storage <-> sanitized evidence / verified model files
 
 ## Responsibilities and enforceable boundaries
 
+### Existing connector VM is the MCP boundary
+
+The owner reaffirmed this placement on 2026-10-04. Master specification sections 5 and 12 and
+[the server plan](SERVER_PLAN.md) already assign the protected MCP gateway and isolated read-only
+runners to **the existing `nextops-connectors-ro` VM**. MCP is its intended application-facing
+interface, not a new VM or a permanent competing integration stack beside the connector.
+
+The intended path is application policy and durable audit → authenticated internal MCP gateway
+on the connector VM → isolated integration runner → approved target. The application remains the
+authorization authority; the gateway rechecks trusted identity/scope and enforces limits. Only the
+appropriate runner holds target credentials. Gateway and runners retain separate process/service
+identities on the same VM. The AI receives sanitized evidence, never credentials or direct access.
+
+Current deployment still uses the protected HTTP connector. MCP-01 supplies a local SDK foundation,
+not the cross-VM gateway deployment. MCP-02/03 migrate and qualify the existing boundary while
+reusing its Zabbix/Linux drivers. Retain HTTP only for explicit staged compatibility and exact
+rollback; do not relabel it MCP, leave a permanent bypass, or silently fall back to it on MCP denial.
+See [the migration requirements](../requirements/MULTI_SOURCE_MCP_SPEC.md).
+
 | Component | Owns | Must not receive/do |
 |---|---|---|
 | Web/API | Sessions, input validation, inventory views, run submission | Raw target credentials or direct connector access |

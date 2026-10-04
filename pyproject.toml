@@ -9,6 +9,7 @@ description = "Local-first infrastructure operations assistant"
 requires-python = ">=3.12,<3.13"
 dependencies = [
   "alembic>=1.16,<2",
+  "anyio>=4.15.1,<5",
   "argon2-cffi>=25.1,<26",
   "fastapi>=0.116,<1",
   "pydantic>=2.10,<3",
@@ -18,6 +19,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+mcp = ["mcp==1.30.0"]
 dev = [
   "httpx2>=2.13,<3",
   "jsonschema>=4.23,<5",

@@ -20,13 +20,70 @@ not authorization to import weights, change the runtime or dedicate all G10 reso
 46/51 ارتقا نیابند: شکست معنایی پاسخ خام، با کنترل محدودِ بعدی یا تغییر رابط رفع نمی‌شود.
 مقایسهٔ مدل مشاوره است، نه مجوز ورود وزن، تغییر runtime یا اختصاص همهٔ منابع G10.
 
+Review checkpoint, 2026-10-04: the three PR 53 code findings below are repaired and 39 focused
+local tests pass; obtain fresh CI/review on the repaired head. MCP-02 remains the next unfinished
+connector composition, followed by MCP-03. Owner-requested admin user management is a separate
+bounded application increment; do not label local UI/API tests as deployed user acceptance.
+
+گام بازبینی، ۴ اکتبر ۲۰۲۶: سه ایراد کدیِ PR 53 در ادامه اصلاح شده‌اند و ۳۹ آزمون متمرکز
+محلی موفق‌اند؛ CI و بازبینیِ تازهٔ commit اصلاح‌شده لازم است. MCP-02 همچنان نخستین اتصال
+عملیاتیِ ناتمام است و MCP-03 پس از آن قرار دارد. مدیریت کاربرانِ درخواستی مالک، گام محدود و
+جداگانهٔ برنامه است؛ آزمون محلی رابط/API به معنی پذیرش کاربران در استقرار زنده نیست.
+
+Owner connector-role clarification, 2026-10-04: migrate the existing connector VM to its canonical
+MCP gateway role, with isolated runners, rather than deploy a competing parallel stack. **First
+unfinished action: repair and regression-test the three open MCP-01 findings in
+[PR 53](https://github.com/Omid-NextAI/nextops/pull/53)**: audit cancellation during authorization,
+validate problem/event target ownership and restore application-owned ports/dependency direction.
+Then implement MCP-02 using the existing VM/drivers, verified-TLS authenticated cross-VM MCP,
+real durable app policy/audit and separate runner credentials/identities. HTTP is temporary
+compatibility/rollback only; no silent legacy fallback or direct runner bypass. Source-wide access
+and live/offline promotion still require the full criteria below. No infrastructure changed in
+this design correction; model/thinking priorities and failed gates remain unchanged.
+
+تصریح نقش اتصال‌دهنده، ۴ اکتبر ۲۰۲۶: همان ماشین موجود به نقش اصلیِ درگاه MCP با اجراکننده‌های
+جداگانه مهاجرت کند؛ سامانهٔ موازی ساخته نشود. **نخستین کار ناتمام، اصلاح و آزمون بازگشت خطای
+سه مورد بازِ MCP-01 در [PR 53](https://github.com/Omid-NextAI/nextops/pull/53) است**: ممیزی لغو
+هنگام بررسی مجوز، اعتبارسنجی تعلق problem/event به مقصد و اصلاح رابط‌های برنامه و جهت وابستگی.
+سپس MCP-02 با ماشین و گردآورنده‌های موجود، ارتباط MCP احرازهویت‌شده و TLS معتبر میان ماشین‌ها،
+سیاست/ممیزی ماندگار برنامه و هویت و اطلاعات ورود جداگانهٔ اجراکننده تکمیل شود. HTTP فقط مسیر
+موقتِ سازگاری و بازگشت است؛ جایگزینی پنهانِ مسیر قدیمی و دور زدن اجراکننده مجاز نیست. دسترسی
+تمام منابع و استقرار زنده/آفلاین به معیارهای کاملِ زیر نیاز دارند. در این اصلاح طراحی، زیرساخت
+تغییر نکرده است؛ اولویت‌های مدل/استدلال و معیارهای ناموفق ثابت‌اند.
+
+Current owner-prioritized checkpoint, 2026-10-04: continue the API-only second Zabbix source.
+MCP-01 source/contracts and 27 focused local SDK tests are complete; the legacy live source is
+unchanged. After the review repairs above, **the next composition step is MCP-02** in
+[the bounded specification](requirements/MULTI_SOURCE_MCP_SPEC.md): bind real application
+authorization and durable PostgreSQL audit, trusted source selection, protected per-source
+credentials/CA and runner launch, bounded protocol frames/sanitized logging and process egress.
+Reconcile all approved numeric group IDs and reader identity/expiry; the desktop HTTPS/API
+preflight does not prove all-group or runner access. No SSH/OS operation on the external source
+is authorized. MCP-03 then qualifies fresh EN/FA answers, offline startup, unavailable-source
+isolation, audits and exact rollback before live promotion. No anonymous launcher or default
+in-memory audit may stand in for that composition. The earlier context/thinking checkpoint below
+remains open but is deferred behind this explicit second-source request; do not enable thinking.
+
+گام جاری با اولویت مالک، ۴ اکتبر ۲۰۲۶: اتصال منبع دوم زبیکس صرفاً از راه API ادامه یابد.
+کد و قرارداد MCP-01 و ۲۷ آزمون متمرکزِ محلی SDK تکمیل‌اند؛ منبع زندهٔ قبلی ثابت است.
+پس از اصلاح موارد بازبینیِ بالا، **گام بعدیِ اتصال عملیاتی MCP-02** در
+[مشخصات محدود](requirements/MULTI_SOURCE_MCP_SPEC.md) است:
+مجوز واقعی برنامه و ممیزی ماندگار PostgreSQL، انتخاب معتبر منبع، اطلاعات ورود و CA جداگانهٔ
+محافظت‌شده، راه‌اندازی امن اجراکننده، سقف پیام/گزارش پالایش‌شده و خروجی شبکهٔ محدود متصل شوند.
+شناسهٔ عددیِ همهٔ گروه‌های مجاز و هویت/انقضای خواننده تطبیق یابند؛ پیش‌آزمون HTTPS/API در
+رایانهٔ توسعه، دسترسی تمام گروه‌ها یا فرایند اجراکننده را اثبات نمی‌کند. SSH یا عملیات سیستم‌عامل
+روی منبع بیرونی مجاز نیست. پیش از استقرار زنده، MCP-03 پاسخ تازهٔ دوزبانه، شروع آفلاین، جداسازی
+خرابی منبع، ممیزی و بازگشت دقیق را می‌سنجد. راه‌اندازی بی‌هویت یا ممیزی پیش‌فرضِ حافظه‌ای جای
+این اتصال را نمی‌گیرد. گام زمینه/استدلالِ زیر همچنان باز است، اما پس از درخواست صریحِ منبع دوم
+قرار دارد؛ استدلال فعال نشود.
+
 Completed checkpoint, 2026-10-04: scoped diagnostic guards `7ce9d29` are live for controlled
 users after exact CI/offline installs, 45 fresh functional cases, 36 text-free audits/nine hashes,
 bounded admission, four-guest WAN/proxy denial, process restart, exact69 rollback and final
 guarded re-promotion. [Evidence](en/TESTING.md). Do not repeat those accepted increment gates.
 Thinking remains off; PR51 and all four failed guard attempts are retained, not promoted.
 
-First unfinished checkpoint: measure native prefill and post-timeout slot drain, then propose a
+Deferred context/thinking checkpoint: measure native prefill and post-timeout slot drain, then propose a
 bounded context/thinking profile behind existing interfaces using fresh EN/FA semantic cases.
 The failed 14,336+2,048-token/120-second experiment is not accepted by a configured16K window.
 No timeout/queue enlargement, blind retry, new model/VM allocation or thinking enablement is
@@ -40,7 +97,7 @@ cold start, general held-out semantics, model lineage and full production accept
 [شاهد](fa/TESTING.md). معیارهای پذیرفته‌شدهٔ همین گام تکرار نشوند. استدلال خاموش است؛ PR51 و
 چهار تلاش ناموفقِ کنترل حفظ شده‌اند، نه مستقر.
 
-نخستین گام ناتمام: هزینهٔ پیش‌پردازش زمینه و زمان آزاد شدن جایگاه مدل پس از مهلت اندازه‌گیری
+گام فعلاً به‌تعویق‌افتادهٔ زمینه/استدلال: هزینهٔ پیش‌پردازش زمینه و زمان آزاد شدن جایگاه مدل پس از مهلت اندازه‌گیری
 و سپس نمایهٔ محدودِ زمینه/استدلال، پشت همان مرزهای موجود و با پرسش معناییِ تازهٔ دوزبانه پیشنهاد
 شود. تنظیم زمینهٔ16K، آزمون ناموفقِ ۱۴۳۳۶+۲۰۴۸ توکن در ۱۲۰ ثانیه را پذیرفته نمی‌کند. شکست
 آزمون، مجوز افزایش مهلت/صف، تکرار کورکورانه، مدل/VM تازه یا فعال کردن استدلال نیست. نمایهٔ

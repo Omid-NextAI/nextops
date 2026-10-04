@@ -21,5 +21,6 @@ implemented.
 | [0007](0007-forced-command-linux-connector.md) | Forced-command Linux diagnostics / عیب‌یابی Linux با فرمان اجباری |
 | [0008](0008-independent-recovery-repositories.md) | Independent database/file recovery repositories / مخزن‌های مستقل بازیابی پایگاه و فایل |
 | [0009](0009-owner-scoped-conversation-memory.md) | Owner-scoped local conversation memory / حافظهٔ محلی گفت‌وگو با دامنهٔ مالک |
+| [0010](0010-source-scoped-zabbix-mcp.md) | Additive source-scoped MCP; source only, not live promotion / MCP افزودهٔ محدود به منبع؛ فقط کد، نه استقرار زنده |
 
 A later decision should record context, options, consequences, evidence, status and superseded records in both languages. / تصمیم بعدی باید زمینه، گزینه، پیامد، شاهد، وضعیت و سند جایگزین‌شده را به هر دو زبان ثبت کند.

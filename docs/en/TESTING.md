@@ -18,6 +18,68 @@ requests and fail-closed behavior for missing/invalid/expired sessions or an una
 The 551-unit/33-integration local reruns passed after this repair; release still requires exact-head
 CI/review and separate live acceptance. No serving database grant or account changed.
 
+## MCP-01 source-scoped foundation — 2026-10-04
+
+On the Windows desktop, the additive [MCP specification](../requirements/MULTI_SOURCE_MCP_SPEC.md)
+passed 27 focused tests and the complete non-integration/non-browser suite: **552 passed,
+two POSIX-only skips, 43 deselected**. The latter exclusions are not acceptance passes.
+Ruff and strict mypy validate the typed adapter boundary. The official SDK exchanges are real
+memory and subprocess stdio protocol; downstream Zabbix, authorization and audit data are fixtures.
+The stdio child inherits only the SDK's minimal default environment and test encoding setting,
+not deployment credentials. Tests cover duplicate host IDs across two sources, forged input,
+scope/group/target denial, permission revocation, audit failure, mismatched/oversized results,
+canonical provenance, overload, timeout/drain, explicit protocol cancellation and recovery.
+An initial cancellation test failed because local wait cancellation emits no protocol notice;
+the corrected test sends the actual notice. The audit path is cancellation-shielded and bounded;
+an expired collection cannot initiate dependent reads after its native call drains.
+
+Reproduction after dependencies have been provisioned (no operational credentials):
+
+```text
+uv sync --offline --extra dev --extra mcp --frozen
+uv run --offline --frozen --extra dev --extra mcp pytest tests/unit/test_source_mcp.py -q
+uv run --offline --frozen --extra dev --extra mcp pytest -m "not integration and not browser" -q
+uv run --offline --frozen --extra dev --extra mcp ruff format --check packages migrations tests scripts deploy/installers
+uv run --offline --frozen --extra dev --extra mcp ruff check packages migrations tests scripts deploy/installers
+uv run --offline --frozen --extra dev --extra mcp mypy packages tests scripts deploy/installers
+uv run --offline --frozen --extra dev --extra mcp python -X utf8 scripts/check_docs.py
+uv run --offline --frozen --extra dev --extra mcp python scripts/check_release_status.py
+```
+
+The exact `mcp==1.30.0` extra is MIT licensed. Its reviewed lock adds SDK dependencies without
+upgrading existing baseline versions; AnyIO is made explicit at the already locked version.
+Pinned `pip-audit==2.10.1` on `uv export --frozen --extra dev --extra mcp --no-emit-project
+--no-hashes` reported no known vulnerabilities. That audit requires provision-time vulnerability
+data/network access; it is not an offline-runtime operation or proof of vulnerability absence.
+CI installs this extra explicitly in quality, PostgreSQL16/17 and browser jobs; CI results for
+this change are not inferred from local tests.
+
+Additional source qualification for `d53c2a0`: all five jobs in
+[CI 37206184531](https://github.com/Omid-NextAI/nextops/actions/runs/37206184531) passed,
+including Linux unit/protocol checks, existing real PostgreSQL16/17 integration, existing browser
+acceptance and full-history Gitleaks. Existing database/browser tests do not qualify the unbound
+MCP-02 ports or live second-source UI. A fresh isolated Windows environment installed all 25
+locked base dependencies from the existing provisioned wheelhouse using `uv pip install
+--offline --no-index --require-hashes`, then installed the built wheel with `--no-deps`.
+Isolated installed-code imports of the legacy app/connector and `uv pip check` passed with the
+MCP package absent. Wheel SHA-256:
+`24d06413143045bec3e27c2425465a55cd8481b242b0757132c2b7020586ea2c`.
+The first cache-only attempt failed for missing registry-cache artifacts; it did not download
+anything. The explicit existing wheelhouse resolved that provisioning-path issue. This proves
+base-package compatibility, not provisioning or WAN-disconnected operation of the new MCP path.
+
+Acceptance review: source isolation, deny-before-target access, mandatory audit ports, bounded
+collection, sanitized typed errors and local protocol tests **passed**. Durable PostgreSQL
+composition, private runner credential/CA ownership, protocol-frame/logging controls, egress
+and all-group identity/expiry qualification are **not_run** (MCP-02). New live EN/FA UI answers,
+WAN-disconnected startup/restart, production scope, load and exact deployment rollback are
+**not_run** (MCP-03). No new UI or model claim is made; existing language/timestamp contracts are
+preserved. There is no database migration or live release change. Omitting the optional path
+preserves the old connector; that compatibility is not a demonstrated live MCP rollback.
+
+The serving `7ce9d29` app/AI and `cdde129` connector, CPU-only model and disabled thinking remain
+unchanged. The dated live evidence below is retained, not silently inherited by this new source.
+
 ## Scoped diagnostic safeguard loop — 2026-10-04
 
 Candidate `7ce9d2969d6bea8186783c5ce04a1c93be811a97` passed 524 local unit/API/contract checks

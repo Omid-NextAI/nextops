@@ -29,6 +29,58 @@ CI نخستِ پنل پنج کنترل را گذراند؛ اصلاحِ بازب
 ناتمام‌اند. مشاهدهٔ مهمان ۸۰ vCPU آنلاین و ۱۳۵۰۲۴۵۹۹۰۴۰ بایت حافظهٔ قابل‌استفاده است، نه
 تخصیص تصویر قدیمی. منابع، اعتبارنامه، استقرار، مدل یا گزینهٔ استدلال تغییر نکردند.
 
+Review repair, 2026-10-04: PR 53's three source findings are repaired: cancellation during initial
+authorization now attempts bounded terminal audit; problem/event ownership is proven through
+bounded event/host linkage; application-owned registry/collector ports keep private connector
+configuration outside orchestration. All 39 focused tests passed locally. These are fixture-backed
+SDK/source checks, not live MCP or second-source acceptance. The historical findings below remain
+as context. Read-only server inspection found the original connector configuration only, no
+secondary endpoint or MCP unit; app/AI services and their existing tunnels are active. No live
+configuration or model changed.
+
+اصلاح بازبینی، ۴ اکتبر ۲۰۲۶: سه ایراد کدیِ PR 53 اصلاح شدند: لغو هنگام بررسی اولیهٔ مجوز،
+تلاش محدود برای ثبت ممیزی پایانی دارد؛ تعلق problem/event با پیوند محدود رویداد و میزبان
+اثبات می‌شود؛ رابط‌های فهرست و گردآوریِ متعلق به برنامه، تنظیم خصوصی اتصال‌دهنده را بیرون از
+منطق کاربرد نگه می‌دارند. هر ۳۹ آزمون متمرکز محلی موفق بود؛ این آزمون‌های SDK/کد با مقصد
+ساختگی، پذیرش MCP زنده یا منبع دوم نیستند. ایرادهای تاریخیِ زیر برای حفظ سابقه باقی‌اند.
+بازرسی فقط‌خواندنیِ سرور، تنها تنظیم منبع اولیه را یافت؛ نشانی منبع دوم و واحد MCP موجود نیست.
+برنامه، AI و تونل‌های موجود فعال‌اند. تنظیم زنده یا مدل تغییر نکرد.
+
+Design clarification, 2026-10-04: the existing connector VM is the intended MCP gateway/isolated
+runner host, not a parallel non-MCP platform. Master sections 5/12, paired architecture/MCP guides
+and ADR 0010 now explicitly align with the owner's clarification. The deployed connector is still
+HTTP; migration compatibility/rollback is temporary, not a permanent bypass. No live change or
+new acceptance is claimed. Three open [PR 53](https://github.com/Omid-NextAI/nextops/pull/53) findings
+(authorization cancellation audit, problem/event ownership and dependency direction) need repair
+and regression tests before MCP-02 composition. Prior test outcomes are preserved, not invalidated
+or treated as proof that these paths are safe.
+
+تصریح طراحی، ۴ اکتبر ۲۰۲۶: ماشین موجودِ اتصال‌دهنده میزبان موردنظرِ درگاه MCP و اجراکننده‌های
+جداگانه است، نه سامانهٔ غیر-MCP موازی. بخش‌های ۵ و ۱۲ پرامپت، راهنماهای دوزبانهٔ معماری/MCP و
+تصمیم 0010 با تصریح مالک هم‌راستا هستند. اتصال‌دهندهٔ مستقر هنوز HTTP است؛ سازگاری و بازگشت
+دورهٔ مهاجرت موقت‌اند، نه مسیر دورزن دائمی. تغییر زنده یا پذیرش تازه ادعا نمی‌شود. سه مورد بازِ
+[PR 53](https://github.com/Omid-NextAI/nextops/pull/53)، شامل ممیزی لغو هنگام مجوز، تعلق شواهد
+problem/event و جهت وابستگی، پیش از MCP-02 به اصلاح و آزمون بازگشت خطا نیاز دارند. نتایج
+آزمون قبلی حفظ‌اند، اما اثبات ایمنیِ این مسیرهای بررسی‌نشده نیستند.
+
+Source increment, 2026-10-04: MCP-01 adds a private, source-scoped Zabbix registry, typed
+results, mandatory per-call authorization/audit ports and optional official SDK 1.30.0 adapters.
+27 focused local tests include real SDK memory/stdio exchanges and explicit protocol cancellation
+with fixture downstream data; five-job CI and a fresh hash-locked offline Windows base-package
+installation without MCP also passed. This is not durable PostgreSQL, deployed runner, live second-source
+UI or offline acceptance. MCP-02 composition and MCP-03 operational qualification remain open.
+The existing controlled app/AI/connector identities below, model and thinking flags are unchanged.
+See [specification](requirements/MULTI_SOURCE_MCP_SPEC.md) and [MCP guide](en/MCP.md).
+
+گام کدیِ ۴ اکتبر ۲۰۲۶: MCP-01 فهرست خصوصی و محدود به منبعِ زبیکس، نتیجهٔ دارای نوع، مرزهای
+الزامیِ مجوز و ممیزیِ هر درخواست و لایه‌های اختیاری SDK رسمیِ 1.30.0 را افزود. ۲۷ آزمون متمرکز
+محلی، تبادل واقعی SDK در حافظه و stdio و اعلان صریحِ لغو را با دادهٔ ساختگی مقصد می‌سنجند.
+پنج کنترل CI و نصب تازهٔ آفلاینِ هش‌قفلِ بستهٔ پایه در Windows بدون MCP نیز موفق‌اند.
+این شاهد، پذیرش PostgreSQL ماندگار، اجراکنندهٔ مستقر، منبع دوم در رابط زنده یا آفلاین نیست.
+اتصال عملیاتی MCP-02 و پذیرش MCP-03 بازند. هویت‌های زندهٔ برنامه/AI/اتصال‌دهنده در ادامه، مدل
+و گزینه‌های استدلال تغییر نکرده‌اند. [مشخصات](requirements/MULTI_SOURCE_MCP_SPEC.md) و
+[راهنمای MCP](fa/MCP.md) را ببینید.
+
 Verified scoped deployment, 2026-10-04: app/AI `7ce9d29` now serve controlled users with the
 unchanged CPU-only35 model and disabled thinking. Five-job CI, 524 local checks, three fresh
 hash-locked offline installs, 45 functional browser cases across first/offline/exact69 rollback/
