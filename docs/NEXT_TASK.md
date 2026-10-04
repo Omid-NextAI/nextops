@@ -1,5 +1,29 @@
 # Next task / کار بعدی
 
+First unfinished checkpoint after the controlled `2a7c8dc` cutover: qualify source-answer usefulness
+for Internet-SLA/FortiGate without weakening integrity guards, and general instruction following
+against held-out EN/FA questions. Correct-source collection passed, but those two answers used
+transparent deterministic fallbacks and number-only formatting was inconsistent on the unchanged
+model. Keep the second Zabbix selectable; do not substitute another source on failure. See the
+[live record](requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md). Separately qualify live account
+mutations only with an explicitly authorized disposable account, full-system offline cold start/
+current-release VM reboot, and the five unobserved groups when actual read-only evidence is available.
+Do not silently promote failed model drafts, expand access, resize guests or claim production accepted.
+
+نخستین گام ناتمام پس از گذار کنترل‌شدهٔ `2a7c8dc`: کاربردپذیری پاسخ Internet-SLA/FortiGate
+بدون تضعیف کنترل صحت و پیروی از دستور در پرسش‌های تازهٔ فارسی/انگلیسی سنجیده شود. گردآوری
+از مقصد درست موفق بود، اما دو پاسخ جایگزینِ قطعی و شفاف بودند و قالب پاسخ صرفاً عددی در مدل
+بدون تغییر، یکسان نبود. منبع دوم قابل انتخاب بماند؛ در خرابی، منبع دیگر جای آن ننشیند.
+[گزارش زنده](requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md) مرجع است. تغییر حساب زنده فقط
+با حساب آزمایشیِ صریحاً مجاز، شروع سردِ کامل/reboot انتشار جاری و پنج گروه مشاهده‌نشده با
+شاهد واقعیِ فقط‌خواندنی جدا پذیرفته شوند. پیش‌نویس ناموفق مدل، گسترش دسترسی، تغییر منابع یا
+ادعای پذیرش تولید به‌صورت ضمنی مجاز نیست.
+
+## Historical checkpoints / گام‌های تاریخی
+
+The following prior next-action records are retained for history, not active deployment claims.
+رکوردهای کار بعدیِ پیشین برای حفظ سابقه‌اند؛ ادعای وضعیت جاری نیستند.
+
 First unfinished checkpoint, 2026-10-04: qualify the integrated MCP/user-panel candidate from
 [MCP-02/03 discovery plan](requirements/MCP_LIVE_DISCOVERY_SPEC.md). Obtain exact-head CI, build
 and prove the offline package, then execute the owner's bounded existing app/connector cutover

@@ -1,5 +1,34 @@
 # Project state / وضعیت پروژه
 
+Current controlled deployment, 2026-10-04: app and connector serve `2a7c8dc`. The existing connector
+VM is now the authenticated TLS MCP gateway/isolated runner; old HTTP is stopped/disabled, not a
+fallback. Approved source selection lists two sources/seven targets, with fresh secondary Zabbix
+EN/FA CPU answers, durable hash/audit matching, denial, source failure isolation, app/connector
+WAN-blocked restart and exact prior-release rollback/reapply. See the
+[dated qualification](requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md) for unsuccessful trials,
+latency, package identity and scope. Local checks: 646 non-browser plus 30 browser fixtures;
+exact runtime CI passed all five jobs including PostgreSQL 16/17. Users panel and additive migration
+0004 are deployed; live list/invalid-input checks passed, but account mutation acceptance is not run.
+Five empty secondary groups, broad model semantics, full-system cold start/reboot and production
+gates remain unfinished. AI/model/resources are unchanged; PRs 46/51 are not promoted.
+
+استقرار کنترل‌شدهٔ جاری، ۴ اکتبر ۲۰۲۶: برنامه و اتصال‌دهنده انتشار `2a7c8dc` را ارائه می‌کنند.
+همان ماشین اتصال‌دهنده اکنون درگاه MCP احرازشده با TLS و اجراکنندهٔ جداست؛ HTTP قبلی متوقف
+و غیرفعال است و مسیر جایگزین نیست. دو منبع و هفت مقصد مجاز، پاسخ تازهٔ دوزبانهٔ CPU از
+زبیکس دوم، تطبیق هش/ممیزی ماندگار، رد درخواست، جداسازی خرابی منبع، شروع خدمات برنامه و
+اتصال‌دهنده با WAN بسته و بازگشت/استقرار دوبارهٔ دقیق آزموده شدند.
+[گزارش پذیرش](requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md) شکست‌های اولیه، تأخیر، هویت
+بسته و حدود آزمون را ثبت می‌کند. ۶۴۶ آزمون غیرمرورگر و ۳۰ آزمون مرورگر ساختگی موفق‌اند؛
+پنج کنترل CI همان کد، شامل PostgreSQL 16/17، موفق بود. پنل کاربران و migration افزایشی 0004
+مستقرند؛ فهرست/رد ورودی زنده آزموده شد، نه تغییر حساب. پنج گروه خالی، کیفیت عمومی مدل،
+شروع سرد/reboot کل سامانه و معیارهای تولید ناتمام‌اند. AI/مدل/منابع ثابت و PRهای 46/51
+ارتقا نیافته‌اند.
+
+## Historical checkpoints / گام‌های تاریخی
+
+The dated records below describe their observation time; they do not override the current
+deployment above. / رکوردهای زیر وضعیت زمان خود را بیان می‌کنند، نه وضعیت استقرار جاری را.
+
 Current integration candidate, 2026-10-04: reviewed PR 53/54 foundations are composed on
 `codex/zabbix-mcp-live`. Canonical authenticated TLS MCP, separate peer-verified runner, current
 PostgreSQL source policy/audit, namespaced durable evidence and bilingual approved-source controls

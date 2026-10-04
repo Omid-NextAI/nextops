@@ -1,5 +1,16 @@
 # Testing, model evaluation and release evidence
 
+## Current MCP controlled deployment — 2026-10-04
+
+[Exact live record](../requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md) separates 646 passing
+non-browser checks, two Windows POSIX skips, 30 passing browser fixtures and five passing exact-code
+CI jobs from real source/browser/audit/failure/WAN-restart/rollback checks on `2a7c8dc`. Six new
+secondary Zabbix-host EN/FA generations passed bounded evidence checks. Additional-target reads
+passed but model answers were guarded fallbacks. User list/denial is live-tested, account mutations
+are not. WAN isolation covered app/connector only; current-release VM reboot/full cold start remains
+not run. Strict number-only/general semantics remain incomplete. Earlier dated records below are
+historical, not current deployment statements.
+
 ## Local admin account source candidate — 2026-10-04
 
 551 unit/API/contract checks passed with two Windows/POSIX skips. Fourteen focused restricted-role

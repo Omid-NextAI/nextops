@@ -1,7 +1,7 @@
 ---
 $schema: ./release-status.schema.json
 schema_version: 2.2.0
-release_identifier: nextops-scoped-diagnostic-guard-controlled-2026-10-04
+release_identifier: nextops-source-scoped-mcp-controlled-2026-10-04
 observed_at: '2026-10-04'
 deployment_status: controlled_user_testing_not_production_accepted
 delivery_scope:
@@ -20,11 +20,11 @@ repository:
   inspected_baseline_commit: 1f5eff7b0f8924755d5b2250c8ec29145f7df605
 components:
   application:
-    release: nextops-0.1.0-7ce9d29
-    source_commit: 7ce9d2969d6bea8186783c5ce04a1c93be811a97
+    release: nextops-0.1.0-2a7c8dc
+    source_commit: 2a7c8dc5dc99ebf203748380b7ab8ea7f89ac690
   connector:
-    release: nextops-0.1.0-cdde129
-    source_commit: cdde129950f60f9f18f3ef109cbf98f4217fc5e1
+    release: nextops-0.1.0-2a7c8dc
+    source_commit: 2a7c8dc5dc99ebf203748380b7ab8ea7f89ac690
   inference_api:
     release: nextops-0.1.0-7ce9d29
     source_commit: 7ce9d2969d6bea8186783c5ce04a1c93be811a97
@@ -50,13 +50,14 @@ components:
     name: Zabbix
     version: '7.0.31'
 current_application_qualification:
-  release: nextops-0.1.0-7ce9d29
-  source_commit: 7ce9d2969d6bea8186783c5ce04a1c93be811a97
+  release: nextops-0.1.0-2a7c8dc
+  source_commit: 2a7c8dc5dc99ebf203748380b7ab8ea7f89ac690
   scope: application_revision_sensitive
   gates:
     - id: current_app_bounded_live_functionality
       status: passed
       evidence:
+        - docs/requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md
         - docs/en/TESTING.md
         - docs/fa/TESTING.md
     - id: current_app_held_out_answer_semantics
@@ -69,11 +70,13 @@ current_application_qualification:
     - id: current_app_exact_release_rollback
       status: passed
       evidence:
+        - docs/requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_server_side_wan_isolation
       status: passed
       evidence:
+        - docs/requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_vm_reboot_cold_start
@@ -91,8 +94,9 @@ capabilities:
       - tests/browser/test_phase2_panel.py
 
   - id: source_scoped_zabbix_mcp
-    status: implemented_unaccepted
+    status: accepted_controlled
     evidence:
+      - docs/requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md
       - docs/requirements/MULTI_SOURCE_MCP_SPEC.md
       - docs/adr/0010-source-scoped-zabbix-mcp.md
       - packages/nextops/contracts/sources.py
@@ -263,8 +267,9 @@ capabilities:
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
   - id: local_admin_users_live_offline
-    status: not_run
+    status: partial
     evidence:
+      - docs/requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md
       - docs/requirements/USER_MANAGEMENT_SPEC.md
       - docs/en/TESTING.md
       - docs/fa/TESTING.md
@@ -281,13 +286,15 @@ acceptance_gates:
       - docs/en/TESTING.md
       - docs/fa/TESTING.md
   - id: mcp02_durable_application_runner_composition
-    status: not_run
+    status: passed
     evidence:
+      - docs/requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md
       - docs/requirements/MULTI_SOURCE_MCP_SPEC.md
       - docs/NEXT_TASK.md
   - id: mcp03_live_bilingual_offline_rollback
-    status: not_run
+    status: partial
     evidence:
+      - docs/requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md
       - docs/requirements/MULTI_SOURCE_MCP_SPEC.md
       - docs/NEXT_TASK.md
   - id: thinking_installed_adapter_bilingual_format

@@ -1,5 +1,23 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Controlled canonical MCP/source deployment — 2026-10-04 / استقرار محدود MCP و منابع
+
+Deploy app/connector `2a7c8dc` with verified-TLS MCP, separate peer-verified runner, binding-drift
+denial, durable PostgreSQL audit/provenance, bilingual approved-source controls and user panel.
+Disable legacy HTTP; retain exact rollback. Source-route timeout/rate-limit and installed-code
+header repairs are included. Fresh EN/FA secondary answers, failure isolation, app/connector WAN
+restart and rollback/reapply are recorded in the [live report](docs/requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md).
+Account mutation, five empty groups, general semantics and full-system cold start remain unaccepted;
+no model/resource change or production claim. Entries below retain their historical outcomes.
+
+برنامه/اتصال‌دهندهٔ `2a7c8dc` با MCP دارای TLS معتبر، اجراکنندهٔ جدا و UID تأییدشده، رد اختلاف
+پیکربندی، منشأ/ممیزی PostgreSQL، انتخاب دوزبانهٔ منابع مجاز و پنل کاربران مستقر شدند. HTTP
+قدیمی غیرفعال و بازگشت دقیق حفظ است. timeout/نرخ مسیر منبع و سربرگ هویت کد اصلاح شدند.
+پاسخ تازهٔ دوزبانهٔ منبع دوم، جداسازی خرابی، شروع برنامه/اتصال‌دهنده با WAN بسته و
+بازگشت/استقرار دوباره در [گزارش زنده](docs/requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md)
+ثبت‌اند. تغییر حساب، پنج گروه خالی، کیفیت عمومی مدل و شروع سرد کامل پذیرفته نشده‌اند؛ مدل/
+منابع تغییر نکرده و تولید ادعا نمی‌شود. ورودی‌های زیر سابقهٔ نتیجهٔ زمان خود را حفظ می‌کنند.
+
 ## Local user administration candidate — 2026-10-04 / نامزد مدیریت کاربران محلی
 
 Add admin-only scoped account listing/creation, non-admin status/password controls, fixed read-only

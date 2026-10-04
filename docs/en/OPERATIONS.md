@@ -2,6 +2,18 @@
 
 [فارسی](../fa/OPERATIONS.md) · [Index](INDEX.md)
 
+## Controlled MCP operations — 2026-10-04
+
+The existing connector guest serves `nextops-mcp.service` and `nextops-source-runner.service`;
+`nextops-connector.service` is disabled. App source selection and protected deployment identities
+are documented in [MCP](MCP.md) and the [live record](../requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md).
+For matched rollback restore connector release/SSH restrictions first, then app/tunnel/Nginx.
+Restart the app tunnel after connector restoration if the order differs; an existing SSH connection
+retains its earlier forwarding restrictions. Verify fresh authenticated primary evidence, not just
+healthz. Retain additive migration 0004 and accounts. Do not expose target tokens in the app/gateway,
+re-enable HTTP as an automatic fallback, or treat temporary WAN qualification as permanent firewall
+policy. Runtime/model and their rollback records are unchanged.
+
 **Status: the controlled services are installed and logical isolated restore has passed; no independent backup job or disaster-recovery procedure exists.** Restart, rollback, failure recovery, bounded load and socket-only restores of both PostgreSQL 16 databases passed. Independent storage, WAL/PITR, artifact recovery and disaster recovery remain open. See the [backup specification](BACKUP_RESTORE_SPEC.md) and [Stage 1 report](STAGE_1_COMPLETION_REPORT.md).
 
 ## Environments and service boundaries

@@ -1,5 +1,19 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Current source-composition evidence: [MCP live qualification](MCP_LIVE_QUALIFICATION_2026-10-04.md)
+maps MCP-02 durable policy/runner composition and bounded MCP-03 source/UI/audit/failure/restart/
+rollback outcomes to installed `2a7c8dc`, five exact-code CI jobs and 646 non-browser/30 browser
+fixture checks. Full-system offline cold start/reboot, empty groups and broad model semantics remain
+unfinished; user mutations are locally tested but not live accepted. The following dated candidate
+notes are historical, not statements that the deployed second-source selector is absent.
+
+شاهد جاریِ اتصال عملیاتی: [پذیرش MCP زنده](MCP_LIVE_QUALIFICATION_2026-10-04.md)، سیاست ماندگار/
+اجراکنندهٔ MCP-02 و نتیجهٔ محدودِ منبع/رابط/ممیزی/خرابی/شروع/بازگشتِ MCP-03 را به `2a7c8dc`
+نصب‌شده، پنج کنترل CI همان کد و ۶۴۶ آزمون غیرمرورگر/۳۰ مرورگر ساختگی متصل می‌کند. شروع سرد/
+reboot کامل، گروه خالی و کیفیت عمومی مدل ناتمام‌اند؛ تغییر کاربر محلی آزموده شده، نه پذیرفته
+در سرور زنده. یادداشت‌های نامزد در ادامه تاریخی‌اند؛ نبود انتخابگرِ منبع دوم در امروز را
+بیان نمی‌کنند.
+
 MCP-02 candidate: [approved discovery](MCP_LIVE_DISCOVERY_SPEC.md), ADR 0010, `deploy/mcp/`,
 `source_runtime.py`, `source_access.py`, `mcp_gateway.py`, source catalogue/provenance contracts,
 `test_mcp_live_gateway.py`, `test_source_access_postgresql.py` and bilingual browser controls.

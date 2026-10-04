@@ -2,8 +2,9 @@
 
 [فارسی](../fa/MCP.md) · [Index](INDEX.md)
 
-**Current candidate, 2026-10-04:** MCP-02 canonical gateway/isolated runner and approved source
-selection are implemented and locally tested; live promotion remains pending. See the
+**Current controlled deployment, 2026-10-04:** MCP-02 canonical gateway/isolated runner and approved
+source selection are live in `2a7c8dc`. See the
+[exact qualification and limits](../requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md),
 [bounded discovery plan](../requirements/MCP_LIVE_DISCOVERY_SPEC.md) and ADR 0010 composition addendum.
 The app's `/api/v1/monitoring/sources` lists authorized approved metadata; it does not scan or prove
 health. `/api/v1/monitoring/investigate` accepts an exact `source_id`/`target_id`, records durable
@@ -18,8 +19,20 @@ root-owned catalogues/registry, per-runner IP allowlists, TLS/SSH trust and matc
 gateway has no target credentials or target-LAN route. Its fsynced service journal supplements,
 not replaces, PostgreSQL user/investigation audit. Audit retention exhaustion fails closed.
 
-**Historical MCP-01 checkpoint:** additive source implementation, not deployed. The HTTP connector remains
-the live path. The broader gateway contract below is still planned. Source: master specification
+The app connects using authenticated Streamable HTTP/TLS over the existing verified SSH tunnel.
+Live target bindings require a canonical configuration digest, checked by app, gateway and runner;
+missing identities or drift fail closed. Source/target selection is from protected approved metadata,
+not automatic group enrollment. Two sources/seven targets are visible; three secondary hosts are
+qualified for read-only collection, not five empty groups. Fresh secondary Zabbix-host EN/FA answers,
+source failure isolation and app/connector WAN-blocked restart/rollback passed. The old HTTP
+service is disabled; full-system cold-start/reboot and broad answer semantics remain separate gates.
+Live service limits: two reads/no queue; client total 65 s, socket 60 s, native HTTPS 12 s and
+runner outer deadline 90 s. Native requests retain admission until actual drain. The source route
+shares the existing bounded 180-second Nginx assistant timeout and 12-requests/minute limiter.
+
+**Historical MCP-01 checkpoint:** at that checkpoint the additive source implementation was not
+deployed and HTTP was the live path. The broader future contract below is not all implemented.
+Source: master specification
 sections 11–15 and 21, [bounded specification](../requirements/MULTI_SOURCE_MCP_SPEC.md) and
 [ADR 0010](../adr/0010-source-scoped-zabbix-mcp.md).
 
@@ -41,10 +54,10 @@ Keep the current serving HTTP release during staged migration and for exact roll
 compatibility adapter must enter the same deterministic authorization/audit boundary, never bypass
 it or silently substitute another source after a denial/failure. Retire or disable the old interface
 at the qualified cutover; retaining rollback artifacts does not require leaving a bypass reachable.
-Only implemented, separately qualified tools may be advertised; Linux MCP mapping and the remaining
-integration families are not completed by this two-tool Zabbix foundation.
+Only implemented, separately qualified tools may be advertised. The current five-tool gateway maps
+the existing bounded primary/Linux reads; the remaining integration families are still future work.
 
-## Implemented Zabbix subset
+## Historical MCP-01 Zabbix subset
 
 The optional extra pins the official MIT-licensed [Python SDK v1.30.0](https://github.com/modelcontextprotocol/python-sdk/tree/v1.30.0)
 on its maintained 1.x line; it is not an automatic adoption of the latest major. AnyIO, already
@@ -79,11 +92,12 @@ a waiting queue or retry. Collection and individual authorization/audit waits ea
 prevents subsequent reads but cannot stop an in-flight native HTTPS request. Its admission slot
 is held until actual drain. A client wait cancellation is not a protocol cancellation notice.
 
-MCP-02 must supply **real durable PostgreSQL ports**, trusted caller/source selection, protected
+At the MCP-01 checkpoint, MCP-02 still had to supply **real durable PostgreSQL ports**, trusted caller/source selection, protected
 credential loading and runner launch, bounded protocol frames, safe SDK logging, and qualified
 process egress. MCP-03 must qualify offline provisioning, live bilingual browser answers, audit
 correlation, source failure and rollback. Fixture audits, desktop API probes and passed contracts
-do not satisfy those gates. No second source is available in the live UI yet.
+do not satisfy those gates. The current deployment and evidence are recorded above; the historical
+two-tool fixture alone never qualified a live source.
 
 ## Protocol versus application abstraction
 
