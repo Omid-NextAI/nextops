@@ -327,6 +327,28 @@ def test_bounded_tls_conclusion_uses_visible_application_scope(locale: str, ques
     assert "no_live_evidence" in body["limitations"]
 
 
+def test_supplied_certificate_name_validation_without_tls_keyword_has_bounded_scope() -> None:
+    client = TestClient(
+        create_app(FakeService(), FakeInferenceGateway("DNS resolution is healthy."))
+    )
+    response = client.post(
+        "/api/v1/assistant/generate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={
+            "locale": "en",
+            "question": "Suppose certificate and hostname validation succeed but an example API "
+            "returns HTTP 404. What can and cannot be concluded about whole-network and "
+            "application health? Two sentences, no follow-up question.",
+        },
+    )
+    assert response.status_code == 200
+    body = response.json()
+    assert body["integrity_status"] == "deterministic_fallback"
+    assert body["answer"].startswith("Under the supplied assumption,")
+    assert "encrypted exchange" not in body["answer"]
+    assert not body["live_monitoring_data"]
+
+
 @pytest.mark.parametrize(
     ("locale", "question"),
     [

@@ -193,6 +193,11 @@ _TLS_SCOPE_QUESTION = re.compile(
     r"چه\s*چیزی.{0,60}معلوم|آیا.{0,30}سلامت|سلامت.{0,20}(?:کل|شبکه)",
     re.IGNORECASE,
 )
+_SUPPLIED_TLS_OR_NAME_VALIDATION = re.compile(
+    r"\bTLS\b|\bcertificate.{0,50}(?:hostname|host\s+name|server\s+name)|"
+    r"گواهی.{0,40}نام\s*میزبان",
+    re.IGNORECASE,
+)
 
 
 def assure_general_answer(
@@ -222,7 +227,7 @@ def assure_general_answer(
     )
     supplied_tls_scope = bool(
         supplied_scenario
-        and re.search(r"\bTLS\b", request.question, re.IGNORECASE)
+        and _SUPPLIED_TLS_OR_NAME_VALIDATION.search(request.question)
         and _TLS_SCOPE_QUESTION.search(request.question)
     )
     requires_live_evidence = bool(
@@ -303,13 +308,13 @@ def assure_general_answer(
         )
     elif supplied_tls_scope and not requires_live_evidence and not unsafe_claim:
         answer = (
-            "در فرض توصیف‌شده، موفقیت TLS فقط همان ارتباط رمزنگاری‌شده و اعتبارسنجی‌هایی "
+            "در فرض توصیف‌شده، موفقیت TLS یا اعتبارسنجی گواهی و نام میزبان فقط بررسی‌هایی "
             "را پوشش می‌دهد که صریحاً بیان شده‌اند. از این مشاهده نمی‌توان روش حل نام DNS، "
             "سلامت کل شبکه، آمادگی همهٔ اجزای برنامه یا علت خطای API را نتیجه گرفت؛ "
             "هیچ بررسی زنده یا تغییری انجام نشده است."
             if request.locale == "fa"
-            else "Under the supplied assumption, TLS success covers only that encrypted "
-            "exchange and any explicitly stated validation checks. It does not establish "
+            else "Under the supplied assumption, TLS or certificate/hostname validation "
+            "success covers only the checks explicitly stated. It does not establish "
             "the DNS resolution method, overall network health, all application components' "
             "readiness or the API error's cause; no live check or change was performed."
         )

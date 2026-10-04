@@ -137,6 +137,17 @@ def test_general_collection_diagnostics_are_not_replaced_as_a_stale_scenario() -
     [
         ("en", "Suppose TLS succeeds; does that establish application health?"),
         ("fa", "فرض کن TLS موفق است؛ آیا سلامت برنامه ثابت می‌شود؟"),
+        (
+            "en",
+            "Suppose certificate and hostname validation succeed but an example API returns "
+            "HTTP 404. What can and cannot be concluded about whole-network "
+            "and application health?",
+        ),
+        (
+            "fa",
+            "در یک آزمون فرضی، اعتبارسنجی گواهی و نام میزبان موفق است ولی API خطا می‌دهد. "
+            "دربارهٔ سلامت کل شبکه و برنامه چه چیزی معلوم است؟",
+        ),
     ],
 )
 @pytest.mark.parametrize("finish", [FinishReason.STOP, FinishReason.LENGTH])

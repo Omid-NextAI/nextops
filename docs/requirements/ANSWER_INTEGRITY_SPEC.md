@@ -2,6 +2,19 @@
 
 ## Application-only safeguard increment — 2026-10-04
 
+Iteration 4 (`1a934e9`) passed thirteen functional cases, ten saved audits/three live hashes and
+bounded admission/recovery, but the English certificate/hostname question omitted the literal TLS
+keyword and missed the scope guard. Exact69 rollback completed. Iteration 5 covers that explicit
+validation wording in both languages, with API/unit regressions using the measured question.
+The fallback reports only stated checks; it must not invent an encrypted exchange when only
+certificate/name validation was supplied. Four failed source identities remain preserved.
+
+چرخهٔ چهارم (`1a934e9`) سیزده مورد کارکردی، ده ممیزی گفت‌وگو/سه هش شاهد و پذیرش/ادامهٔ محدود
+صف را گذراند، اما پرسش انگلیسیِ گواهی و نام میزبان، واژهٔ TLS نداشت و کنترل دامنه را نگرفت.
+بازگشت دقیق به69 انجام شد. چرخهٔ پنجم این بیان صریحِ اعتبارسنجی را در هر دو زبان، با آزمون
+واحد/APIِ پرسشِ اندازه‌گیری‌شده پوشش می‌دهد. پاسخ جایگزین فقط بررسیِ بیان‌شده را گزارش کند؛
+اگر فقط اعتبارسنجی گواهی/نام داده شده، ارتباط رمزنگاری‌شده ساخته نشود. چهار کد ناموفق حفظ‌اند.
+
 Iteration 3 (`e0a0fd8`) passed thirteen functional cases and the new stale-data guard, but review
 rejected a TLS-to-DNS-resolution inference. Exact69 rollback completed. Iteration 4 gives a
 visible application-owned scope statement only for anchored hypothetical TLS-conclusion questions.
