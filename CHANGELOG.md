@@ -1,5 +1,24 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-10-04 — Source-scoped MCP foundation / پایهٔ MCP محدود به منبع
+
+Add optional official Python SDK 1.30.0, private source/target contracts, scoped reuse of the
+existing Zabbix reader, required authorization/audit ports and typed MCP client/server factories.
+27 focused local tests exercise actual memory/stdio protocol, source collisions, fail-closed
+audit, scope revocation, timeout/drain, explicit cancellation and unavailable-source recovery.
+Include the locked MCP extra in CI/audits; explicitly depend on the already locked AnyIO for
+cancellation-safe bounded audit waits. Preserve legacy routes and all live releases, model and
+thinking flags. Durable application composition, UI source selection, protected runner/egress
+and live/offline acceptance remain MCP-02/03; this change is not deployed.
+
+SDK رسمی Python نسخهٔ 1.30.0 به‌صورت اختیاری، قرارداد خصوصی منبع/مقصد، استفادهٔ محدود از
+گردآورندهٔ موجود، مرزهای الزامیِ مجوز/ممیزی و توابع ساختِ کارخواه و سرور MCP افزوده شدند.
+۲۷ آزمون محلی، پروتکل واقعی حافظه/stdio، تداخل شناسه‌ها، توقف در شکست ممیزی، لغو مجوز، مهلت
+و پایان واقعی، اعلان صریح لغو و ادامه پس از خرابی را می‌سنجند. وابستگی MCP در CI و ممیزی
+قفل و AnyIO موجود برای انتظار محدودِ ممیزی هنگام لغو صریح شد. مسیر قدیمی، انتشارهای زنده،
+مدل و گزینه‌های استدلال ثابت‌اند. اتصال ماندگار برنامه، انتخاب منبع در رابط، اجراکننده/خروجی
+شبکهٔ محافظت‌شده و پذیرش زنده/آفلاین در MCP-02/03 بازند؛ این تغییر مستقر نشده است.
+
 ## 2026-10-04 — Scoped diagnostic guard deployment / استقرار کنترل تشخیصیِ محدود
 
 Deploy matched app/AI `7ce9d29` after four rejected, exactly rolled-back candidates. Repair

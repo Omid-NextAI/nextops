@@ -41,6 +41,9 @@ remaining task-specific sources. The repository skill
 
 ## Complete inventory
 
+- `docs/requirements/MULTI_SOURCE_MCP_SPEC.md` — Bilingual additive source-scoped MCP specification and staged acceptance.
+- `docs/adr/0010-source-scoped-zabbix-mcp.md` — Optional maintained SDK, scoped runner reuse and mandatory application ports.
+
 Each bullet uses a repository-relative path followed by its role. Keep the paths synchronized when a
 Markdown file is added, renamed, or removed.
 

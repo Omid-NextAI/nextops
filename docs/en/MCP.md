@@ -2,7 +2,51 @@
 
 [فارسی](../fa/MCP.md) · [Index](INDEX.md)
 
-**Status: proposed contract; no MCP server is implemented.** Source: master specification sections 11–15 and 21.
+**Status: MCP-01 additive source implementation, not deployed.** The existing HTTP connector remains
+the live path. The broader gateway contract below is still planned. Source: master specification
+sections 11–15 and 21, [bounded specification](../requirements/MULTI_SOURCE_MCP_SPEC.md) and
+[ADR 0010](../adr/0010-source-scoped-zabbix-mcp.md).
+
+## Implemented Zabbix subset
+
+The optional extra pins the official MIT-licensed [Python SDK v1.30.0](https://github.com/modelcontextprotocol/python-sdk/tree/v1.30.0)
+on its maintained 1.x line; it is not an automatic adoption of the latest major. AnyIO, already
+locked transitively, is now an explicit dependency for cancellation-safe bounded audit attempts.
+Provision dependencies before offline operation; neither the factory nor client installs anything.
+
+`create_source_mcp_server(reader, actor)` and `serve_source_stdio(reader, actor)` require a trusted
+actor and application authorization/audit ports. There is no standalone operational launcher or
+anonymous listener. Actual SDK initialization, discovery, structured calls, error handling,
+explicit cancellation notifications and subprocess stdio exchanges have fixture-backed tests.
+`McpSourceGateway` validates source, target, operation and correlation on every response.
+
+Two tools exist: `nextops_zabbix_summary` and `nextops_zabbix_incident_context`. Their closed input
+schema accepts only logical `source_id`, `target_id` and UUID `correlation_id`. Endpoint, token,
+actor roles and arbitrary method/parameters cannot be supplied through tool arguments. A private
+registry binds each source to organization/environment, verified HTTPS/CA, a separate credential
+reference, exact hosts and numeric approved groups. Limits: eight sources, sixteen targets per
+source, 32 group IDs, 64-KiB registry and 128-KiB canonical result. Windows ACL qualification is a
+trusted-launch requirement, not something the registry parser proves.
+
+The reused reader permits only `host.get`, `item.get`, `problem.get`, `history.get`, `event.get`
+and unauthenticated `apiinfo.version`. A fresh exact host/group check precedes dependent reads;
+history IDs must belong to items from that collection. Results retain source/target/correlation
+and the observed approved group intersection alongside the existing timestamps and evidence.
+This bounded exact-target subset is not complete host discovery or proof of access to every group.
+
+Authorization is rechecked before collection and before publication. Required audit intent
+precedes credential/transport creation; completion includes the canonical SHA-256. Malformed
+input/tool denials are audited without their raw text. At most two reads are admitted, without
+a waiting queue or retry. Collection and individual authorization/audit waits each default to
+30 seconds (maximum 60); the client has its own explicit 30-second wait. Cancellation/timeout
+prevents subsequent reads but cannot stop an in-flight native HTTPS request. Its admission slot
+is held until actual drain. A client wait cancellation is not a protocol cancellation notice.
+
+MCP-02 must supply **real durable PostgreSQL ports**, trusted caller/source selection, protected
+credential loading and runner launch, bounded protocol frames, safe SDK logging, and qualified
+process egress. MCP-03 must qualify offline provisioning, live bilingual browser answers, audit
+correlation, source failure and rollback. Fixture audits, desktop API probes and passed contracts
+do not satisfy those gates. No second source is available in the live UI yet.
 
 ## Protocol versus application abstraction
 

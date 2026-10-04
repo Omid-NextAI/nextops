@@ -1,5 +1,23 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+MCP-01 (sections 11–15, 20–21; 2026-10-04): the
+[source-scoped specification](MULTI_SOURCE_MCP_SPEC.md) and
+[ADR 0010](../adr/0010-source-scoped-zabbix-mcp.md) map to typed source contracts, registry/scoped
+transport, `SourceReader`, the optional official-SDK adapter and `tests/unit/test_source_mcp.py`.
+27 focused tests cover actual SDK memory/stdio protocol, duplicate host IDs across sources,
+authorization, group/target denial, audit failure, canonical provenance, bounded timeout/drain,
+explicit cancellation and source failure/recovery. Fixture ports are not durable audit or live
+source acceptance. MCP-02/03 remain not run; live component identities and failed thinking gates
+are preserved. [English](../en/MCP.md) and [Persian](../fa/MCP.md) describe the same limits.
+
+MCP-01 (بخش‌های ۱۱ تا ۱۵ و ۲۰ تا ۲۱؛ ۴ اکتبر ۲۰۲۶): [مشخصات منبع](MULTI_SOURCE_MCP_SPEC.md)
+و [تصمیم 0010](../adr/0010-source-scoped-zabbix-mcp.md) به قراردادِ دارای نوع، فهرست و انتقال
+محدود، `SourceReader`، لایهٔ اختیاری SDK رسمی و `tests/unit/test_source_mcp.py` متصل‌اند.
+۲۷ آزمون متمرکز، تبادل واقعیِ حافظه/stdio، شناسهٔ میزبان مشابه در دو منبع، مجوز، رد گروه/مقصد،
+شکست ممیزی، منشأ اصلی، مهلت و پایان واقعیِ کار، لغو صریح و خرابی/ادامهٔ منبع را پوشش می‌دهند.
+مرز ساختگی، ممیزی ماندگار یا پذیرش منبع زنده نیست. MCP-02/03 اجرا نشده‌اند؛ هویت زنده و شکست
+استدلال حفظ‌اند. راهنماهای [انگلیسی](../en/MCP.md) و [فارسی](../fa/MCP.md) همین حدود را دارند.
+
 Scoped diagnostic guard (sections 3, 9, 17, 25, 27; 2026-10-04): deployed `7ce9d29` maps
 supplied-scenario intent, transport overclaims, explicit certificate/name limits and stale-data
 absence limits to `tests/unit/test_general_transport_integrity.py` and `tests/api/test_app.py`.

@@ -1,5 +1,21 @@
 # Project state / وضعیت پروژه
 
+Source increment, 2026-10-04: MCP-01 adds a private, source-scoped Zabbix registry, typed
+results, mandatory per-call authorization/audit ports and optional official SDK 1.30.0 adapters.
+27 focused local tests include real SDK memory/stdio exchanges and explicit protocol cancellation
+with fixture downstream data. This is not durable PostgreSQL, deployed runner, live second-source
+UI or offline acceptance. MCP-02 composition and MCP-03 operational qualification remain open.
+The existing controlled app/AI/connector identities below, model and thinking flags are unchanged.
+See [specification](requirements/MULTI_SOURCE_MCP_SPEC.md) and [MCP guide](en/MCP.md).
+
+گام کدیِ ۴ اکتبر ۲۰۲۶: MCP-01 فهرست خصوصی و محدود به منبعِ زبیکس، نتیجهٔ دارای نوع، مرزهای
+الزامیِ مجوز و ممیزیِ هر درخواست و لایه‌های اختیاری SDK رسمیِ 1.30.0 را افزود. ۲۷ آزمون متمرکز
+محلی، تبادل واقعی SDK در حافظه و stdio و اعلان صریحِ لغو را با دادهٔ ساختگی مقصد می‌سنجند.
+این شاهد، پذیرش PostgreSQL ماندگار، اجراکنندهٔ مستقر، منبع دوم در رابط زنده یا آفلاین نیست.
+اتصال عملیاتی MCP-02 و پذیرش MCP-03 بازند. هویت‌های زندهٔ برنامه/AI/اتصال‌دهنده در ادامه، مدل
+و گزینه‌های استدلال تغییر نکرده‌اند. [مشخصات](requirements/MULTI_SOURCE_MCP_SPEC.md) و
+[راهنمای MCP](fa/MCP.md) را ببینید.
+
 Verified scoped deployment, 2026-10-04: app/AI `7ce9d29` now serve controlled users with the
 unchanged CPU-only35 model and disabled thinking. Five-job CI, 524 local checks, three fresh
 hash-locked offline installs, 45 functional browser cases across first/offline/exact69 rollback/

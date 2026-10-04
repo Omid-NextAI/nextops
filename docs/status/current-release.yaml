@@ -16,8 +16,8 @@ snapshot_restore_owner_attestation:
   evidence_review: pending
 repository:
   remote: Omid-NextAI/nextops
-  branch: main  # Canonical integration branch; guarded source/evidence is submitted through PR52.
-  inspected_baseline_commit: b538edebb2ea41f11f95ce49a5306f5b1425310f
+  branch: main  # Canonical integration branch; new source increments require reviewed PRs.
+  inspected_baseline_commit: 1f5eff7b0f8924755d5b2250c8ec29145f7df605
 components:
   application:
     release: nextops-0.1.0-7ce9d29
@@ -82,6 +82,18 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: source_scoped_zabbix_mcp
+    status: implemented_unaccepted
+    evidence:
+      - docs/requirements/MULTI_SOURCE_MCP_SPEC.md
+      - docs/adr/0010-source-scoped-zabbix-mcp.md
+      - packages/nextops/contracts/sources.py
+      - packages/nextops/connectors/sources.py
+      - packages/nextops/application/source_reads.py
+      - packages/nextops/connectors/mcp.py
+      - tests/unit/test_source_mcp.py
+      - docs/en/MCP.md
+      - docs/fa/MCP.md
   - id: scoped_diagnostic_scenario_guards
     status: accepted_controlled
     evidence:
@@ -236,6 +248,22 @@ capabilities:
       - deploy/systemd/nextops-certificate-check.timer
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
+  - id: mcp01_local_sdk_fixture_contracts
+    status: passed
+    evidence:
+      - tests/unit/test_source_mcp.py
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+  - id: mcp02_durable_application_runner_composition
+    status: not_run
+    evidence:
+      - docs/requirements/MULTI_SOURCE_MCP_SPEC.md
+      - docs/NEXT_TASK.md
+  - id: mcp03_live_bilingual_offline_rollback
+    status: not_run
+    evidence:
+      - docs/requirements/MULTI_SOURCE_MCP_SPEC.md
+      - docs/NEXT_TASK.md
   - id: thinking_installed_adapter_bilingual_format
     status: failed
     evidence:
