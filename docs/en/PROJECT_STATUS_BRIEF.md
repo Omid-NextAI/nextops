@@ -2,16 +2,20 @@
 
 [فارسی](../fa/PROJECT_STATUS_BRIEF.md) · [Documentation index](INDEX.md) · [Project state](../PROJECT_STATE.md) · [Next task](../NEXT_TASK.md)
 
-Updated: 2026-10-03
+Updated: 2026-10-04
 
-Current controlled workspace: matched app/AI `69c9260` fixes the AI-server/Zabbix-host mismatch
-while retaining 35B/CPU, saved standard chat, themes and OCS branding. Five-job CI, fresh offline
-installs, seven final live functional cases, audit/hash matching, exact b5e74f9 rollback and
-bounded queue recovery passed. Thinking remains disabled; Persian format quality and broad
-semantics remain partial. Full-context generation, sustained load and this source's WAN/VM
-acceptance are unrun. Earlier b5e74f9 offline/reboot evidence is retained separately. Independent
-recovery remains owner-deferred, not passed. The [release manifest](../status/current-release.yaml)
-is authoritative; this is live controlled use, not full production acceptance.
+Current controlled workspace: matched app/AI `7ce9d29` adds narrow diagnostic safeguards while
+retaining 35B/CPU, saved standard chat, themes and OCS branding. Five-job CI, 524 local checks,
+three fresh offline installs, 45 functional cases, 36 text-free audits/nine live hashes, bounded
+queue recovery, exact69 rollback and final re-promotion passed. All four guests denied external
+WAN/proxy traffic during fresh login, EN/FA generation and LAN evidence retrieval; native model,
+AI API and application restart also passed. Final UI/reload checks preserve the visible fallback
+notice. Four rejected candidates and broader PR51 failures remain recorded. Scoped app-owned
+answers do not certify raw-model accuracy. Thinking stays disabled; full-context quality/latency
+remain failed, broad semantics partial and this source's VM cold-start/sustained-load gates unrun.
+Earlier b5e74f9 reboot evidence is separately dated. Independent recovery remains owner-deferred,
+not passed. [Testing](TESTING.md) and the [release manifest](../status/current-release.yaml) are
+authoritative; live controlled use is not full production acceptance.
 
 Earlier 2026-09-30 checkpoint: app/API 810102f retains 35B/CPU, the exact OCS palette/logo and
 canonical evidence boundaries. Five CI jobs, fresh offline install, six live EN/FA browser cases,
@@ -61,8 +65,8 @@ The earlier application and AI API were `nextops-0.1.0-95c6e50`; connector remai
 `nextops-0.1.0-cdde129`. The clarity update preserves full questions, separates general and evidence
 instructions, and bounds answers at 384 tokens. Selected CPU model is Qwen3.5-35B-A3B Q4_K_M.
 Twelve API/browser cases each, eight audit/hash pairs, exact 8B/source rollback and six final
-re-promotion confirmations passed; full held-out quality is partial and exact-release
-server WAN isolation and VM cold start have not run. The current release retains the rejection of credential-bearing HTTP redirects;
+re-promotion confirmations passed; full held-out quality was partial and that historical release's
+server WAN isolation and VM cold start had not run. The current release retains the rejection of credential-bearing HTTP redirects;
 all four guests require key-only, non-root SSH and the
 AI host firewall is active. Zabbix Agent 2 is aligned at `7.0.31` on all four guests. The owner confirmed that recovery/restore resources, an approved
 project license, a named-recipient notification channel, replacement CA certificates and named
@@ -88,7 +92,7 @@ from the present local-delivery work queue, not passed or deleted.
 | Local CPU inference | Live and integrated | Pinned llama.cpp/Qwen, authenticated generation, eight-case bilingual integrity evaluation, cold restart, artifact rollback, cancellation/dependency recovery and five-minute bounded load passed in earlier controlled qualification | Approve production SLOs and complete independent recovery |
 | Zabbix | Live with restricted scope | Zabbix 7.0.31 and Agent 2 7.0.31 on all four guests, separate PostgreSQL, restricted reader, socket-only logical restore and certificate lifecycle triggers passed | Complete retention, independent backup, WAL/PITR and operator notification delivery |
 | Read-only connector | Live and least-privilege | Rootless loopback service, protected Zabbix credential, strict TLS, four distinct forced-command Linux keys and bounded composite evidence; denial, restart, rollback, guarded WAN and dependency-recovery cases passed | Complete production monitoring and independent recovery sign-off |
-| End-to-end user path | Controlled user testing | Fresh English/Persian browser answers with Zabbix/Linux evidence, deterministic integrity states, durable run/evidence/audit identifiers, WAN denial, RTL and session isolation passed in bounded campaigns | Run the current app's held-out semantics, exact rollback, server WAN and cold-start gates; complete independent recovery and operational sign-off |
+| End-to-end user path | Controlled user testing | Current-source fresh EN/FA answers, saved UI reloads, evidence/audit hashes, exact rollback and server WAN/process restart passed | Complete broad held-out semantics, current-source VM/full cold start, context/thinking qualification and operational sign-off; independent recovery remains deferred |
 
 ## Delivered user-testing capability
 

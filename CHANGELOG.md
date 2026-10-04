@@ -1,5 +1,23 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## 2026-10-04 — Scoped diagnostic guard deployment / استقرار کنترل تشخیصیِ محدود
+
+Deploy matched app/AI `7ce9d29` after four rejected, exactly rolled-back candidates. Repair
+supplied-scenario intent, reviewed transport/health overclaims and explicit TLS/certificate-name/
+missing-fresh-data scope limits with visibly application-owned answers. 524 local checks,
+five-job CI, three fresh offline installs, 45 functional cases, 36 text-free audits/nine live
+hashes, bounded admission, four-guest WAN/proxy denial, process restart, exact69 rollback and
+final re-promotion passed. Preserve model/runtime, OCS assets, schema, quotas and disabled
+thinking. No raw-model truth, full-context, VM cold-start or full production acceptance claim.
+
+برنامه و AI هماهنگِ `7ce9d29` پس از چهار نامزد ردشده با بازگشت دقیق مستقر شدند. قصدِ مثال
+فرضی، ادعاهای بررسی‌شدهٔ انتقال/سلامت و محدودیتِ صریحِ TLS، گواهی/نام و نبود دادهٔ تازه با
+پاسخ آشکارا برنامه‌ای اصلاح شدند. ۵۲۴ آزمون محلی، پنج کنترل CI، سه نصب تازهٔ آفلاین، ۴۵ مورد
+کارکردی، ۳۶ ممیزی بی‌متن/نه هش زنده، پذیرش محدود، منع WAN/پراکسی چهار مهمان، شروع دوبارهٔ
+فرایند، بازگشت دقیق به69 و استقرار نهایی موفق‌اند. مدل/runtime، دارایی‌های OCS، پایگاه، سهم
+منابع و استدلال خاموش حفظ شدند. حقیقتِ خام مدل، زمینهٔ کامل، شروع سرد VM یا پذیرش کامل تولید
+ادعا نمی‌شود.
+
 ## 2026-10-03 — Thinking requalification / سنجش دوبارهٔ استدلال
 
 Keep serving 69c9260 standard chat and thinking off. Add opt-in exact-prompt/local-token diagnostics,

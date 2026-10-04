@@ -19,6 +19,7 @@ MANIFEST = REPOSITORY_ROOT / "deploy" / "inference" / "qwen3-8b-q4-k-m.yaml"
     [
         ("thinking_enabled", True),
         ("max_queued_requests", 3),
+        ("request_reasoning_budget_tokens", 384),
         ("configured_context_tokens", 262144),
         ("qualification.thinking_semantics", "passed"),
         ("qualification.expanded_context_latency", "passed"),

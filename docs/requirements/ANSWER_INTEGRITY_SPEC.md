@@ -2,6 +2,22 @@
 
 ## Application-only safeguard increment — 2026-10-04
 
+Accepted bounded result: matched app/AI `7ce9d29` are live for controlled use after 524 local
+checks, five-job CI, three fresh offline installs, 45 functional browser cases, 36 text-free
+audits/nine live hashes, bounded admission/recovery, four-guest WAN/proxy denial, process restart,
+exact69 rollback and guarded re-promotion. Two actual UI/reload cases preserve the visible
+application-owned fallback notice. [Measured evidence](../en/TESTING.md) records exact artifacts
+and limitations. Current-source VM reboot/full cold start, thinking, near-full context and general
+model semantics are not accepted. Four failed attempts below remain history, not erased passes.
+
+نتیجهٔ محدودِ پذیرفته‌شده: برنامه و AI هماهنگِ `7ce9d29` پس از ۵۲۴ آزمون محلی، پنج کنترل CI،
+سه نصب تازهٔ آفلاین، ۴۵ مورد کارکردیِ مرورگر، ۳۶ ممیزیِ بی‌متن/نه هش زنده، پذیرش/ادامهٔ محدود،
+منع WAN/پراکسی چهار مهمان، شروع دوبارهٔ فرایند، بازگشت دقیق به69 و استقرار محافظت‌شده زنده‌اند.
+دو مورد واقعیِ رابط/بازکردن دوباره، هشدار آشکارِ پاسخ برنامه‌ای را حفظ کردند. [شاهد](../fa/TESTING.md)
+فایل دقیق و محدودیت را ثبت می‌کند. شروع دوبارهٔ VM/شروع کاملاً سردِ کد جاری، استدلال، زمینهٔ
+نزدیک ظرفیت کامل و معنای عمومیِ مدل پذیرفته نیستند. چهار تلاش ناموفقِ زیر سابقه‌اند، نه موفقیتِ
+بازنویسی‌شده.
+
 Iteration 4 (`1a934e9`) passed thirteen functional cases, ten saved audits/three live hashes and
 bounded admission/recovery, but the English certificate/hostname question omitted the literal TLS
 keyword and missed the scope guard. Exact69 rollback completed. Iteration 5 covers that explicit
@@ -93,7 +109,7 @@ retain immutable69 and its model/configuration. Failure rolls back this source, 
 شوند؛ شکست فقط این کد را برگرداند، نه گفت‌وگوها را. ابزار، اطلاعات ورود، دانلود، منابع و
 پایگاه تازه و اجرای کد مدل در دامنه نیستند.
 
-Status: app/API `nextops-0.1.0-95c6e50` serves controlled user testing with CPU-only 35B-A3B.
+Historical status: app/API `nextops-0.1.0-95c6e50` served controlled user testing with CPU-only 35B-A3B.
 Named live regressions and exact app/API/model rollback passed; full held-out semantics remain partial.
 Matched 14B development review failed. Verified 32B import failed its Persian evidence deadline,
 with semantic review partial. 30B-A3B import/deadline checks passed, but later Persian technical
