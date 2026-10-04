@@ -29,7 +29,10 @@ provisioning. Keep host/app/database/Zabbix capacity and storage-growth headroom
 does not imply that current co-resident services can safely lose their resources. No download,
 API fallback, architecture migration or new resource allocation is authorized by this comparison.
 
-## Current guest sizing and standard-chat profile — 2026-09-30
+The following sizing and qualification records are dated history, not the current guest allocation
+or a claim that VM cold start passed for the latest source.
+
+## Historical guest sizing and standard-chat profile — 2026-09-30
 
 After the owner's resource extension, authorized read-only guest preflight observes 64 vCPUs,
 193185 MiB usable RAM, zero swap use and one guest NUMA node/64 virtual sockets. This supersedes
@@ -42,7 +45,7 @@ not full-budget context quality/latency. 122B is pinned research, not downloaded
 
 [فارسی](../fa/CPU_AI.md) · [Index](INDEX.md)
 
-**Status: bounded CPU evidence and tested native profiles; full benchmark and production acceptance remain open.** Source: master specification sections 2, 9–10 and 21. Exact bounded restart/rollback observations are recorded below. Current-release WAN/VM cold start passed; sustained expanded-profile throughput, production behavior and independent restore remain unqualified.
+**Status: bounded CPU evidence and tested native profiles; full benchmark and production acceptance remain open.** Source: master specification sections 2, 9–10 and 21. Exact bounded restart/rollback observations are recorded below. Earlier dated profiles passed WAN/VM cold-start tests; latest `7ce9d29` has process/WAN evidence but no current-source VM reboot/cold-start acceptance. Sustained expanded-profile throughput, production behavior and independent restore remain unqualified.
 
 ## Current larger-model qualification — 2026-09-29
 
