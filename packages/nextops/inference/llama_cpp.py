@@ -299,6 +299,14 @@ class LlamaCppProvider:
                 "Do not add a follow-up question or a procedure unless needed or requested. "
                 "Write a finished answer within the total budget; never output internal reasoning."
             )
+        if request.purpose == "general":
+            system_prompt += (
+                " Interpret supplied hypothetical scenarios conditionally, never as live facts. "
+                "TLS success does not establish overall network health. "
+                "When the supplied information suffices, answer without a follow-up question. "
+                "An explicit fixed-length or identifier-only request takes priority over "
+                "optional diagnostic questions."
+            )
         # Qwen3 documents /no_think as its soft switch for non-thinking output:
         # https://github.com/QwenLM/Qwen3/blob/main/docs/source/run_locally/llama.cpp.md
         payload: dict[str, Any] = {

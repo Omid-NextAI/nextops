@@ -38,6 +38,8 @@ def response(answer: str) -> AssistantResponse:
         ("en", "Failure occurs immediately; this is a connect timeout."),
         ("fa", "سوکت گوش می‌دهد؛ این یعنی اتصال موفق است."),
         ("fa", "خطا بلافاصله رخ می‌دهد، پس احتمالاً connect timeout است."),
+        ("fa", "در این حالت، سلامت لایهٔ شبکه و رمزنگاری تأیید شده است."),
+        ("en", "The overall network is healthy."),
     ],
 )
 def test_reviewed_transport_overclaims_are_visible_fallbacks(
@@ -51,7 +53,7 @@ def test_reviewed_transport_overclaims_are_visible_fallbacks(
     assert not result.live_monitoring_data
     assert result.evidence_mode == "model_only"
     assert "model_output_may_be_incorrect" in result.limitations
-    assert "SYN-SENT" in result.answer
+    assert "SYN-SENT" in result.answer or "TLS" in result.answer
 
 
 @pytest.mark.parametrize(
@@ -65,6 +67,10 @@ def test_reviewed_transport_overclaims_are_visible_fallbacks(
         "CLOSE_WAIT alone does not indicate a read timeout.",
         "Timing alone cannot distinguish connect timeout from read timeout.",
         "SYN-SENT یعنی اتصال برقرار نشده است.",
+        "سلامت لایهٔ شبکه تأیید نشده است.",
+        "The overall network is not healthy based on this check alone.",
+        "If the overall network is healthy, check application readiness separately.",
+        "اگر سلامت شبکه تأیید شده باشد، وضعیت برنامه همچنان باید جدا سنجیده شود.",
     ],
 )
 def test_negative_or_properly_scoped_advice_is_preserved(answer: str) -> None:

@@ -2,6 +2,18 @@
 
 ## Application-only safeguard increment — 2026-10-04
 
+Iteration 1 (`b80758e`) passed thirteen functional browser cases, four text-free saved audits,
+three live evidence hashes and bounded queue recovery, but review found a new FA TLS-to-network-
+health overclaim. Exact69 app/AI rollback completed; it is not accepted. Iteration 2 adds scoped
+general guidance on conditional scenarios/no unnecessary follow-up and rejects this reviewed
+global-health wording. Requalify exact source; preserve all iteration-1 artifacts and scores.
+
+چرخهٔ نخست (`b80758e`) سیزده مورد کارکردیِ مرورگر، چهار ممیزی بی‌متن گفت‌وگو، سه هش شاهد
+زنده و ادامهٔ صف را گذراند، ولی بازبینی، ادعای تازهٔ فارسیِ سلامت شبکه از موفقیت TLS را یافت.
+بازگشت دقیقِ برنامه/AI به69 تکمیل شد؛ نامزد پذیرفته نیست. چرخهٔ دوم، راهنمای محدودِ شرطی و
+پرهیز از پرسش پیگیریِ غیرضروری و ردِ همین ادعای بررسی‌شده را اضافه می‌کند. کد دقیق دوباره
+پذیرفته و همهٔ فایل‌ها و امتیاز چرخهٔ نخست حفظ شوند.
+
 Owner-authorized repair/deployment loop, bounded scope: preserve the standard35 profile and
 existing provider guidance, memory quotas, schema, branding and disabled thinking. The broader
 capability-v2 source passed CI but failed raw proxy semantics in sixteen private new generations;

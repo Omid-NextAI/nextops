@@ -82,6 +82,12 @@ _SINGLE_CHECK_HEALTH = re.compile(
 )
 _HEALTH_NEGATION = re.compile(r"(?:\b(?:not|never|cannot)\b|نیست|نمی[‌ ]|نه\s)", re.IGNORECASE)
 _HEALTH_TRAILING_NEGATION = re.compile(r"^\s*(?:نیست|نمی[‌ ]|نخواهد)")
+_GLOBAL_NETWORK_HEALTH = re.compile(
+    r"(?:سلامت\s+(?:لایه[ٔ‌ ]*\s*)?شبکه.{0,60}"
+    r"(?:تأیید|تایید|اثبات|تضمین)\s*(?:شد(?:ه)?|می[‌ ]شود)|"
+    r"\b(?:overall|entire|whole)\s+network\b.{0,50}\b(?:is|was)\s+(?:healthy|secure)\b)",
+    re.IGNORECASE,
+)
 _TRANSPORT_OVERCLAIMS = (
     re.compile(
         r"\b(?:listener|listening|SYN-SENT)\b"
@@ -217,6 +223,15 @@ def assure_general_answer(
         for match in _SINGLE_CHECK_HEALTH.finditer(assistant.answer)
     )
     transport_overclaim = any(pattern.search(assistant.answer) for pattern in _TRANSPORT_OVERCLAIMS)
+    global_health_overclaim = any(
+        not re.search(
+            r"\b(?:if|assuming)\s+(?:the\s+)?$|اگر\s*$",
+            assistant.answer[max(0, m.start() - 20) : m.start()],
+            re.IGNORECASE,
+        )
+        and not re.match(r"\s*باشد", assistant.answer[m.end() :])
+        for m in _GLOBAL_NETWORK_HEALTH.finditer(assistant.answer)
+    )
     prompt_echo = _is_long_prompt_echo(request.question, assistant.answer)
     incomplete = assistant.finish_reason != FinishReason.STOP
     greeting_mismatch = bool(
@@ -234,6 +249,7 @@ def assure_general_answer(
         and not unsafe_claim
         and not single_check_health
         and not transport_overclaim
+        and not global_health_overclaim
         and not prompt_echo
         and not incomplete
         and not greeting_mismatch
@@ -275,6 +291,20 @@ def assure_general_answer(
     elif greeting_mismatch:
         answer = (
             "سلام! چطور می‌توانم کمک کنم؟" if request.locale == "fa" else "Hello! How can I help?"
+        )
+        integrity_status = "deterministic_fallback"
+        limitations = ("no_live_evidence", "model_output_may_be_incorrect")
+    elif global_health_overclaim and not requires_live_evidence and not unsafe_claim:
+        answer = (
+            "مدل دربارهٔ سلامت شبکه بیش‌ازحد نتیجه گرفت: موفقیت TLS فقط همان ارتباطِ فرض‌شده "
+            "را پوشش می‌دهد، نه سلامت کل شبکه، آمادگی برنامه یا پایگاه داده. وضعیت سایر لایه‌ها "
+            "و علت خطا بدون اندازه‌گیریِ متناسب نامعلوم است؛ این راهنمای عمومی است و هیچ "
+            "بررسی زنده یا تغییری انجام نشده است."
+            if request.locale == "fa"
+            else "The model overstated network health: TLS success covers only the stipulated "
+            "exchange, not overall network health, application or database readiness. Other "
+            "layers' state and the error's cause remain unknown without appropriately scoped "
+            "measurements; this is general guidance and no live check or change was performed."
         )
         integrity_status = "deterministic_fallback"
         limitations = ("no_live_evidence", "model_output_may_be_incorrect")
