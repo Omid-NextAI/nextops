@@ -1,5 +1,82 @@
 # Local CPU-only AI and capacity planning
 
+## Qwen 3.8 upgrade checkpoint — 2026-10-05
+
+The owner authorized an upgrade after the UI deployment, not unlimited resource allocation or
+automatic promotion. UI app `836b1ea` is live; the serving 35B model, runtime and disabled-thinking
+flag remain unchanged. No Qwen 3.8 weights were downloaded/imported or started.
+
+Fresh read-only guest preflight: 80 online vCPUs, 128769 MiB usable RAM (about 125.75 GiB), 108015
+MiB available at observation, no swap use, one visible guest NUMA node, 169557 MiB available on the
+model volume, and native-service MemoryMax **96 GiB**/CPU quota **18 equivalents**. Guest free space
+does not establish backing-datastore capacity or outstanding snapshot/thin commitments. The old
+owner screenshot and 500-GiB growth permission are not current observations. `nextops-server-operations`
+stops large import here until a fresh DS-C Storage view and co-resident growth budget are supplied.
+Do not delete snapshots, resize guests, assume spare host RAM, or change memory reservations to fit.
+
+Official models are real current releases, not renamed Qwen3.5 artifacts:
+
+| Option | Source facts and metadata | Current disposition |
+|---|---|---|
+| [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B) | Dense 27B; Apache-2.0; thinking controls | First lower-architecture-risk qualification candidate, not a proved improvement |
+| [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next) | 125B/6B active language part, plus 51B n-gram embedding and 4B MTP; `qwen4_exp`; Qwen Community License 1.0 | Larger experimental candidate; license and actual CPU loading must qualify |
+| [Qwen3.8-2.4T-A95B](https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B) | 2.4T total/95B active | Ideal four-bit weights alone are about 1.2 TB; outside this guest/budget |
+
+The last row is arithmetic, not a measured complete footprint. Active parameters do not eliminate
+stored weights. Larger parameter counts or vendor benchmarks do not establish more correct NextOps
+answers. The current pinned llama.cpp source declares `LLM_ARCH_QWEN4EXP`; that is **not a successful
+Flash-Next load/template/CPU test**. Do not claim either guaranteed compatibility or incompatibility
+from an enum. No runtime replacement is approved by this observation.
+
+### Pinned discovery metadata, not verified downloaded bytes
+
+Upstream 27B revision: `1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0`.
+[Unsloth GGUF conversion](https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/tree/4ca720788d1e01f1bff70c033e0d0028fd02e502)
+revision: `4ca720788d1e01f1bff70c033e0d0028fd02e502` (third-party quantizer, not official Qwen GGUF).
+`Qwen3.8-27B-Q8_0.gguf`: 29047086048 bytes, advertised SHA-256
+`a680f44a06920e5d689774823782006aa3acc8db95750323373b24139b67e348`.
+`Qwen3.8-27B-UD-Q4_K_M.gguf`: 16464440224 bytes, advertised SHA-256
+`322e194ff79741c7baa497c240f677f54b201b0efab44ca8e50f122b39123482`.
+
+Flash-Next upstream revision: `de4b8e4d43b917e7706784d8bb445c9af86a3540`.
+[Unsloth GGUF conversion](https://huggingface.co/unsloth/Qwen3.8-Flash-Next-GGUF/tree/38bb39ee97821de2c9009abb7e93950eec396e66)
+revision: `38bb39ee97821de2c9009abb7e93950eec396e66`. Metadata sums: UD-Q3_K_XL three shards total
+89986353824 bytes (about 83.81 GiB); UD-Q4_K_XL four shards total 111334654784 bytes (about
+103.69 GiB). Q4 already exceeds the 96-GiB service limit before KV/state/buffers. Q3's arithmetic
+headroom is not an accepted memory/quality/latency budget. Check every shard hash and conversion
+lineage before provisioning. Legal applicability/organizational approval of Flash's custom license
+is not established by this engineering review.
+
+### Bounded implementation and acceptance sequence
+
+Problem: improve EN/FA instruction following, technical/coding answers and useful bounded thinking
+without destabilizing the working local service. Non-goals: cloud/GPU inference, model-owned
+credentials, new tools/permissions, private reasoning storage, unlimited context/output or host resize.
+
+1. Resolve fresh backing capacity and growth/rollback staging; record the exact license, conversion
+   lineage, file hashes, template/tokenizer and immutable candidate manifest. No runtime download.
+2. Qualify 27B Q8 as an initial precision/compatibility trial. Consider larger Flash Q3 only after
+   custom-license review and measured complete memory fit. Do not import both speculatively.
+3. Use an isolated CPU-only qualification profile behind existing interfaces, explicit lifecycle,
+   protected rollback and unchanged production limits. Do not co-load an oversized candidate and
+   serving model beyond available guest memory. Benchmark before any runtime change.
+4. Compare frozen held-out EN/FA, arithmetic/formatting, DNS/network/firewall/service diagnostics,
+   coding tests, source/time/scope, stale/partial/missing evidence and injection/denial cases against
+   the baseline. Inspect raw final answers as well as guarded publication; no cloud evaluator.
+5. Test bounded thinking separately. Set trusted template behavior explicitly; discard private
+   reasoning and retain final-answer-only history. Default upstream thinking/history preservation
+   must not silently enable the public flag. Test all supported effort levels within resource and
+   deadline budgets; `xhigh` is not automatically the best usable profile.
+6. Record load/queue, latency, CPU/RAM/NUMA, restart, actual server-WAN and fresh EN/FA live evidence,
+   rollback/reapply and applicable VM cold-start gates. Keep one active/two queued requests. Promote
+   only after required semantic/privacy/deadline gates pass; failed cases remain recorded.
+
+Rollback: preserve the exact 35B artifact/runtime/app/profile and secrets; restore verified links
+and configuration, restart only affected services, then check new generation, auth, evidence and
+audit. No schema change is planned. Documentation must update this guide and its Persian pair,
+current state/next task, artifact manifest, tests and release-status evidence only for actual outcomes.
+See [conversation qualification](CONVERSATIONS.md) and [current next task](../NEXT_TASK.md).
+
 ## Model option review and fresh guest observation — 2026-10-04
 
 Read-only inspection now observes 80 online guest vCPUs and 135024599040 usable RAM bytes

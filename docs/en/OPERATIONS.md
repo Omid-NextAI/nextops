@@ -2,6 +2,16 @@
 
 [فارسی](../fa/OPERATIONS.md) · [Index](INDEX.md)
 
+## Current app-only UI release — 2026-10-05
+
+App `836b1ea` serves the reference UI; connector `2a7c8dc` and inference `7ce9d29` are unchanged.
+The [dated record](../requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md) identifies the
+immutable artifacts and tested app-only `2a7c8dc` rollback. Protected qualification scripts and
+reports are retained; the completed window's rollback timer is stopped. A future rollback requires
+a new authorized window and current checks, not blind reuse of an old timer. Do not perform the
+MCP gateway/runner rollback below for a presentation-only issue. No new migration or policy change
+is required for this UI release. Qwen upgrade remains a separate capacity/qualification checkpoint.
+
 ## Controlled MCP operations — 2026-10-04
 
 The existing connector guest serves `nextops-mcp.service` and `nextops-source-runner.service`;

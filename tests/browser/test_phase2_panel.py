@@ -479,9 +479,10 @@ def browser_server() -> Iterator[tuple[str, FastAPI]]:
 
 
 def _login(page: Page, base_url: str) -> None:
+    page.set_default_timeout(10000)
     page.goto(base_url, wait_until="networkidle")
     expect(page.locator(".ocs-logo-header")).to_be_visible()
-    expect(page.get_by_text("Omid System Computer Services")).to_be_visible()
+    expect(page.get_by_text("Omid Computer Services", exact=True)).to_be_visible()
     logo_background = str(
         page.locator(".ocs-logo-header").evaluate(
             "element => getComputedStyle(element).backgroundImage"
@@ -498,9 +499,26 @@ def _login(page: Page, base_url: str) -> None:
     page.locator("#languageButton").click()
     page.set_viewport_size({"width": 1280, "height": 900})
     page.locator("#loginForm").get_by_label("Username").fill("owner")
-    page.locator("#loginForm").get_by_label("Password").fill("test-password")
+    page.locator("#loginForm").get_by_label("Password", exact=True).fill("test-password")
     page.get_by_role("button", name="Sign in securely").click()
-    expect(page.get_by_role("heading", name="Ask the local assistant")).to_be_visible()
+    expect(page.get_by_role("heading", name="Investigation workspace", exact=True)).to_be_visible()
+    page.locator("#composerOptions summary").click()
+
+
+def _options(page: Page) -> None:
+    if not page.locator("#composerOptions").evaluate("e => e.open"):
+        page.locator("#composerOptions summary").click()
+
+
+def _mode(page: Page, mode: str) -> None:
+    _options(page)
+    page.locator(f'[data-mode="{mode}"]').click()
+
+
+def _profile_action(page: Page, selector: str) -> None:
+    if not page.locator(selector).is_visible():
+        page.locator("#profileMenu summary").click()
+    page.locator(selector).click()
 
 
 def _launch_browser(playwright: Any) -> Any:
@@ -525,6 +543,7 @@ def test_admin_users_create_status_password_and_localized_mobile_panel(
         _login(page, base_url)
         if locale == "fa":
             page.locator("#languageButton").click()
+        page.locator("#profileMenu summary").click()
         page.locator("#usersButton").focus()
         page.keyboard.press("Enter")
         expect(page.locator("#usersHeading")).to_be_focused()
@@ -581,11 +600,12 @@ def test_non_admin_has_no_user_controls_and_expired_admin_purges_panel(
         browser = _launch_browser(playwright)
         page = browser.new_page()
         _login(page, base_url)
+        page.locator("#profileMenu summary").click()
         expect(page.locator("#usersButton")).to_be_hidden()
-        page.locator("#logoutButton").click()
+        _profile_action(page, "#logoutButton")
         app.state.user_role = "admin"
         _login(page, base_url)
-        page.locator("#usersButton").click()
+        _profile_action(page, "#usersButton")
         expect(page.locator("#usersList .user-row")).to_have_count(1)
         page.locator("#userCreatePassword").fill("private form data only")
         app.state.users_expired = True
@@ -617,7 +637,7 @@ def test_user_conflict_is_not_retried_and_logout_rejects_late_account_response(
         browser = _launch_browser(playwright)
         page = browser.new_page()
         _login(page, base_url)
-        page.locator("#usersButton").click()
+        _profile_action(page, "#usersButton")
         expect(page.locator("#usersList .user-row")).to_have_count(2)
         app.state.users[-1]["credential_version"] = 2
         page.once("dialog", lambda dialog: dialog.accept())
@@ -631,7 +651,7 @@ def test_user_conflict_is_not_retried_and_logout_rejects_late_account_response(
         page.route("**/api/v1/users?offset=*", lambda route: captured.append(route))
         page.locator("#usersRefresh").click()
         expect(page.locator("#usersRefresh")).to_be_disabled()
-        page.locator("#logoutButton").click()
+        _profile_action(page, "#logoutButton")
         expect(page.locator("#usersList")).to_be_empty()
         assert len(captured) == 1
         captured[0].fulfill(json={"users": app.state.users, "next_offset": None})
@@ -679,7 +699,7 @@ def test_theme_toggle_persists_is_keyboard_accessible_and_keeps_brand(
         assert tokens["--brand-teal"] == "#0090a0"
         assert _contrast(tokens["--ink"], tokens["--surface"]) >= 4.5
         assert _contrast(tokens["--muted"], tokens["--surface"]) >= 4.5
-        expect(switch).to_have_css("color", "rgb(225, 188, 96)")
+        expect(switch).to_have_css("color", "rgb(242, 245, 250)")
         assert _contrast(tokens["--brand-gold-dark"], tokens["--surface"]) >= 4.5
         assert _contrast("#ffffff", tokens["--button-bg"]) >= 4.5
         page.reload(wait_until="networkidle")
@@ -740,6 +760,7 @@ def test_saved_chat_reload_followup_thinking_delete_and_logout(
         assert len(app.state.saved_chats) == 1
         first = app.state.general_requests[-1]
         assert "request_id" in first and "history" not in first and "max_output_tokens" not in first
+        _options(page)
         page.get_by_label("Response mode").select_option("thinking")
         page.get_by_label("Question", exact=True).fill("Give an example.")
         page.get_by_role("button", name="Ask assistant", exact=True).click()
@@ -758,7 +779,7 @@ def test_saved_chat_reload_followup_thinking_delete_and_logout(
         page.get_by_role("button", name="Delete this conversation").click()
         expect(page.locator("#savedChatsList")).to_be_empty()
         assert not app.state.saved_chats
-        page.get_by_role("button", name="Sign out").click()
+        _profile_action(page, "#logoutButton")
         expect(page.locator("#savedChatsPanel")).to_be_hidden()
         assert page.locator("#savedChatsList").text_content() == ""
         browser.close()
@@ -783,9 +804,10 @@ def test_saved_chat_persian_rtl_literal_title_and_live_memory_separation(
         assert page.locator("#savedChatsList img").count() == 0
         page.set_viewport_size({"width": 375, "height": 812})
         assert page.locator("html").get_attribute("dir") == "rtl"
+        page.locator("#navOpen").click()
         expect(page.locator("#savedChatsHeading")).to_be_visible()
         assert page.locator("#savedChatsPanel").evaluate(
-            "el => el.getBoundingClientRect().width >= 300"
+            "el => el.getBoundingClientRect().width >= 250"
         )
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
         assert page.locator(".saved-chat-button").evaluate(
@@ -794,8 +816,9 @@ def test_saved_chat_persian_rtl_literal_title_and_live_memory_separation(
         page.locator(".saved-chat-button").focus()
         assert page.locator(".saved-chat-button").evaluate("el => el === document.activeElement")
         page.screenshot(path="build/chat-ui-fa.png", full_page=True)
+        page.keyboard.press("Escape")
         page.emulate_media(reduced_motion="reduce")
-        page.get_by_role("button", name="پایش زنده", exact=True).click()
+        _mode(page, "monitoring")
         expect(page.locator("#thinkingField")).to_be_hidden()
         page.locator("#question").fill("وضعیت فعلی چیست؟")
         page.locator("#askButton").click()
@@ -818,29 +841,34 @@ def test_phase2_panel_supports_incident_evidence_and_persian_rtl(
         assert page.locator(".mode-choice.active").evaluate(
             "element => element.getBoundingClientRect().height >= 44"
         )
-        expect(page.get_by_text("How evidence works")).to_be_visible()
+        expect(page.locator("#workspaceHeading")).to_be_visible()
 
-        page.get_by_role("button", name="Incident investigation").click()
+        _mode(page, "incident")
         target = page.get_by_label("Investigation target")
         expect(target).to_be_visible()
         target.select_option("app")
-        page.get_by_label("Question").fill("Explain the current application condition.")
+        page.get_by_label("Question", exact=True).fill("Explain the current application condition.")
         page.get_by_role("button", name="Ask assistant").click()
 
         expect(page.get_by_text("Live Zabbix + Linux evidence")).to_be_visible()
         expect(page.locator("#askedQuestion")).to_have_text(
             "Explain the current application condition."
         )
-        page.locator("#evidenceDetails > summary").click()
-        expect(page.get_by_text("nextops-app.service")).to_be_visible()
-        expect(page.get_by_text("CPU pressure observed")).to_be_visible()
+        page.locator("#requestDetailsButton").click()
+        expect(
+            page.locator("#incidentDetail").get_by_text("nextops-app.service", exact=True)
+        ).to_be_visible()
+        expect(
+            page.locator("#incidentDetail").get_by_text("CPU pressure observed", exact=True)
+        ).to_be_visible()
         assert app.state.incident_requests[-1]["target_id"] == "app"
 
         page.locator("#languageButton").click()
-        expect(page.get_by_role("button", name="بررسی رخداد")).to_be_visible()
+        _options(page)
+        expect(page.get_by_role("button", name="بررسی رخداد", exact=True)).to_be_visible()
         expect(page.locator("#evidenceBrief")).to_contain_text("زمان گردآوری Linux")
         expect(page.get_by_text("شرکت رایانه خدمات امید سیستم")).to_be_hidden()
-        expect(page.locator(".brand").get_by_text("هوشمندی داخلی برای عملیات")).to_be_visible()
+        expect(page.locator(".topbar .product-lockup")).to_be_hidden()
         assert page.locator("html").get_attribute("dir") == "rtl"
 
         page.set_viewport_size({"width": 375, "height": 812})
@@ -853,7 +881,7 @@ def test_phase2_panel_supports_incident_evidence_and_persian_rtl(
         page.set_viewport_size({"width": 844, "height": 390})
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth") is True
 
-        page.get_by_role("button", name="خروج").click()
+        _profile_action(page, "#logoutButton")
         expect(page.get_by_role("button", name="ورود امن")).to_be_visible()
         assert page.evaluate("sessionStorage.getItem('nextops-session')") is None
         assert app.state.logout_requests == 1
@@ -870,9 +898,10 @@ def test_named_ai_host_status_selects_the_approved_target_not_the_zabbix_snapsho
         browser = _launch_browser(playwright)
         page = browser.new_page(viewport={"width": 1280, "height": 900})
         _login(page, base_url)
-        page.locator('[data-mode="monitoring"]').click()
+        _mode(page, "monitoring")
         if locale == "fa":
             page.locator("#languageButton").click()
+            _options(page)
             page.locator('[data-locale="fa"]').click()
         question = (
             "آخرین وضعیت سرور Ai رو بهم بگو"
@@ -889,7 +918,7 @@ def test_named_ai_host_status_selects_the_approved_target_not_the_zabbix_snapsho
         assert "history" not in app.state.incident_requests[-1]
         assert app.state.monitoring_requests == []
         assert app.state.general_requests == []
-        page.locator("#evidenceDetails > summary").click()
+        page.locator("#requestDetailsButton").click()
         expect(page.locator("#incidentDetail > div").first).to_contain_text("nextops-app.service")
         expect(page.locator("#incidentDetail > details")).not_to_have_attribute("open", "")
         expect(page.get_by_text("CPU pressure observed")).to_be_hidden()
@@ -907,13 +936,13 @@ def test_host_status_intent_does_not_grant_an_unlisted_target_or_route_advice(
         browser = _launch_browser(playwright)
         page = browser.new_page()
         _login(page, base_url)
-        page.locator('[data-mode="monitoring"]').click()
+        _mode(page, "monitoring")
         page.locator("#question").fill("Show the current status of the AI server.")
         page.locator("#askButton").click()
         expect(page.locator("#resultCard")).to_be_visible()
         assert app.state.incident_requests == []
         assert len(app.state.monitoring_requests) == 1
-        page.locator('[data-mode="general"]').click()
+        _mode(page, "general")
         page.locator("#question").fill("How can I check the AI server status?")
         page.locator("#askButton").click()
         expect(page.locator("#askedQuestion")).to_have_text("How can I check the AI server status?")
@@ -930,7 +959,7 @@ def test_general_fallback_notice_does_not_imply_live_evidence(
         browser = _launch_browser(playwright)
         page = browser.new_page(viewport={"width": 1280, "height": 900})
         _login(page, base_url)
-        page.get_by_label("Question").fill("Hi")
+        page.get_by_label("Question", exact=True).fill("Hi")
         page.get_by_role("button", name="Ask assistant").click()
 
         expect(page.locator("#answer")).to_have_text("Hello! How can I help?")
@@ -953,10 +982,10 @@ def test_file_request_is_honest_and_does_not_open_a_data_dump(
         browser = _launch_browser(playwright)
         page = browser.new_page(viewport={"width": 1280, "height": 900})
         _login(page, base_url)
-        page.get_by_role("button", name="Incident investigation").click()
+        _mode(page, "incident")
         page.get_by_label("Investigation target").select_option("app")
-        page.get_by_label("Question").fill("Only show the system files on app.")
-        page.get_by_label("Question").press("Enter")
+        page.get_by_label("Question", exact=True).fill("Only show the system files on app.")
+        page.get_by_label("Question", exact=True).press("Enter")
 
         expect(page.locator("#answer")).to_contain_text("cannot list system file names")
         expect(page.locator("#integrityNotice")).to_contain_text(
@@ -969,7 +998,7 @@ def test_file_request_is_honest_and_does_not_open_a_data_dump(
         assert page.locator("#askedQuestion").get_attribute("dir") == "auto"
         assert page.locator("#evidenceDetails").evaluate("element => element.open") is False
         expect(page.get_by_text("nextops-app.service")).to_be_hidden()
-        page.locator("#evidenceDetails > summary").click()
+        page.locator("#requestDetailsButton").click()
         expect(page.get_by_text("No system file names or contents were collected")).to_be_visible()
         expect(page.get_by_role("heading", name="Filesystems")).to_be_hidden()
         expect(page.get_by_text("nextops-app.service")).to_be_hidden()
@@ -999,6 +1028,7 @@ def test_answer_direction_uses_response_locale_not_first_strong_character(
         # The answer language is independent of the interface language.
         if locale == "en":
             page.locator("#languageButton").click()
+        _options(page)
         page.locator(f'.locale-choice[data-locale="{locale}"]').click()
         page.locator("#question").fill("Explain briefly.")
         page.locator("#askButton").click()
@@ -1024,9 +1054,9 @@ def test_file_only_question_hides_unrelated_evidence_until_explicit_expand(
         browser = _launch_browser(playwright)
         page = browser.new_page(viewport={"width": 1280, "height": 900})
         _login(page, base_url)
-        page.get_by_role("button", name="Incident investigation").click()
+        _mode(page, "incident")
         page.get_by_label("Investigation target").select_option("app")
-        page.get_by_label("Question").fill(
+        page.get_by_label("Question", exact=True).fill(
             "Show only system file and filesystem evidence for this host. "
             "Do not include CPU, memory, or unrelated Zabbix data."
         )
@@ -1034,7 +1064,7 @@ def test_file_only_question_hides_unrelated_evidence_until_explicit_expand(
 
         expect(page.locator("#answer")).to_contain_text("Approved filesystem capacity only")
         expect(page.locator("#evidenceBrief")).to_contain_text("Approved filesystem mounts only")
-        page.locator("#evidenceDetails > summary").click()
+        page.locator("#requestDetailsButton").click()
         expect(page.get_by_role("heading", name="Filesystems")).to_be_visible()
         expect(page.get_by_text("nextops-app.service")).to_be_hidden()
         expect(page.locator("#metricList").get_by_text("CPU idle time")).to_be_hidden()
@@ -1077,15 +1107,16 @@ def test_network_and_service_focus_hide_unrelated_evidence_until_explicit_expand
         browser = _launch_browser(playwright)
         page = browser.new_page(viewport={"width": 1280, "height": 900})
         _login(page, base_url)
-        page.get_by_role("button", name="Incident investigation").click()
+        _mode(page, "incident")
         page.get_by_label("Investigation target").select_option("app")
+        _options(page)
         page.locator(f'.locale-choice[data-locale="{locale}"]').click()
-        page.get_by_label("Question").fill(question)
+        page.get_by_label("Question", exact=True).fill(question)
         page.get_by_role("button", name="Ask assistant").click()
 
         expect(page.locator("#evidenceBrief")).to_contain_text(scope)
         expect(page.locator("#integrityNotice")).to_contain_text("deterministic")
-        page.locator("#evidenceDetails > summary").click()
+        page.locator("#requestDetailsButton").click()
         expect(page.get_by_role("heading", name=focused_heading)).to_be_visible()
         expect(page.get_by_role("heading", name=excluded_heading)).to_be_hidden()
         if scope == "Recorded network observations only":
@@ -1114,6 +1145,7 @@ def test_approved_source_selection_provenance_and_no_fallback(
         _login(page, base_url)
         if locale == "fa":
             page.locator("#languageButton").click()
+        _options(page)
         page.locator('[data-mode="monitoring"]').focus()
         page.keyboard.press("Enter")
         expect(page.locator("#sourceSelectionField")).to_be_visible()
@@ -1141,7 +1173,7 @@ def test_approved_source_selection_provenance_and_no_fallback(
         expect(page.locator("#askButton")).to_be_enabled()
         assert len(app.state.monitoring_requests) == count
         expect(page.locator("#monitoringSource")).to_have_value("secondary")
-        page.locator("#logoutButton").click()
+        _profile_action(page, "#logoutButton")
         expect(page.locator("#monitoringSource option")).to_have_count(0)
         expect(page.locator("#monitoringSourceTarget option")).to_have_count(0)
         browser.close()
@@ -1155,8 +1187,8 @@ def test_monitoring_host_inventory_limit_is_explained_in_browser(
         browser = _launch_browser(playwright)
         page = browser.new_page(viewport={"width": 1280, "height": 900})
         _login(page, base_url)
-        page.get_by_role("button", name="Live monitoring").click()
-        page.get_by_label("Question").fill(
+        _mode(page, "monitoring")
+        page.get_by_label("Question", exact=True).fill(
             "Which authorized Zabbix hosts are currently unavailable?"
         )
         page.get_by_role("button", name="Ask assistant").click()
@@ -1197,12 +1229,13 @@ def test_general_conversation_context_is_bounded_and_live_evidence_is_independen
         assert app.state.general_requests[1]["history"] == [
             {"question": "Explain DNS.", "answer": "DNS maps names to addresses."}
         ]
-        page.locator('[data-mode="monitoring"]').click()
+        _mode(page, "monitoring")
         page.locator("#question").fill("Which hosts are currently unavailable?")
         page.locator("#askButton").click()
+        page.locator("#requestDetailsButton").click()
         expect(page.locator("#evidenceBrief")).to_be_visible()
         assert "history" not in app.state.monitoring_requests[0]
-        page.locator('[data-mode="general"]').click()
+        _mode(page, "general")
         page.locator("#question").fill("Explain DNS TTL.")
         page.locator("#askButton").click()
         expect(page.locator("#conversationHistory .conversation-turn")).to_have_count(3)
@@ -1347,7 +1380,7 @@ def test_pending_logout_clears_private_turns_and_rejects_late_result(
             "document.getElementById('assistantForm').dispatchEvent("
             "new Event('submit', {cancelable: true}))"
         )
-        page.locator("#logoutButton").click()
+        _profile_action(page, "#logoutButton")
         expect(page.locator("#loginView")).to_be_visible()
         page.wait_for_timeout(850)  # Controlled fixture's delayed response, not a serving model.
         assert len(app.state.general_requests) == 1

@@ -1,5 +1,13 @@
 # Bilingual operations console and design system
 
+## Reference workspace and OCS Signal Gate — source candidate, 2026-10-04
+
+The new source-only design preserves the current vanilla stack and working contracts. Navigation,
+profile-based Users, composer options and the evidence inspector are reconstructed from the supplied
+reference; corporate login uses a separate original teal/gold signal gate. Missing API fields remain
+explicitly unavailable, not example facts. See [preview, checks and screenshots](REFERENCE_UI.md).
+This candidate is not deployed; the dated live records below retain their original scope.
+
 ## Live approved Zabbix selection — 2026-10-04
 
 Open **Live monitoring**, choose **Company Zabbix / SLA**, then an approved host and ask a fresh

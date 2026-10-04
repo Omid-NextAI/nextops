@@ -1,6 +1,16 @@
 # Testing, model evaluation and release evidence
 
-## Current MCP controlled deployment — 2026-10-04
+## Current reference UI deployment — 2026-10-05
+
+[Exact UI record](../requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md): app `836b1ea`,
+47 passing local fixture browser cases, five passing packaged-source CI jobs including PostgreSQL
+16/17, and actual TLS login/logout, saved-chat reload, two-source/seven-target discovery, EN/FA
+secondary generations and durable audit/hash matching. Exact app rollback/reapply passed. Failed
+initial CI/live trials and harness corrections are retained. No AI/model/schema/resource change.
+Browser public-network restriction is not server-WAN isolation; current-app WAN/reboot/cold-start
+are not newly passed. General/coding/strict-format semantic and thinking gates remain unfinished.
+
+## Historical MCP controlled deployment — 2026-10-04
 
 [Exact live record](../requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md) separates 646 passing
 non-browser checks, two Windows POSIX skips, 30 passing browser fixtures and five passing exact-code

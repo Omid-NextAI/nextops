@@ -1,5 +1,33 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Controlled reference UI deployment — 2026-10-05 / استقرار محدود رابط مرجع
+
+Deploy app `836b1ea` after repairing sidebar deletion/profile navigation and passing five exact-code
+CI jobs and 47 local browser tests. Fresh real login, saved-chat resume, both sources, EN/FA evidence
+and durable hash/audit matching passed; exact `2a7c8dc` rollback/reapply passed. The
+[dated record](docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md) preserves initial
+failures. Connector, AI/model, thinking, schema and resources remain unchanged. Qwen 3.8 discovery
+is not a model deployment; current capacity evidence is missing. No production claim is added.
+
+برنامهٔ `836b1ea` پس از اصلاح حذف گفتگو و پیمایش کاربران، پنج کنترل CI همان کد و ۴۷ آزمون
+مرورگر محلی مستقر شد. ورود تازه، ادامهٔ گفتگو، دو منبع، شاهد دوزبانه و تطبیق هش/ممیزی، سپس
+بازگشت دقیق و استقرار دوباره موفق بودند. شکست‌های اولیه در گزارش تاریخ‌دار حفظ‌اند.
+اتصال‌دهنده، AI/مدل، استدلال، طرح پایگاه و منابع ثابت‌اند. بررسی Qwen 3.8 استقرار مدل نیست؛
+شاهد ظرفیت جاری غایب است و ادعای پذیرش تولید افزوده نمی‌شود.
+
+## Reference UI — source-only candidate, 2026-10-04 / نامزد رابط مرجع در کد
+
+Reconstruct the investigation workspace in the existing native frontend; add the original OCS
+Signal Gate login, scoped product tokens, responsive evidence/navigation dialogs, safe diagnostic
+inspector, recorded execution display, motion preference and password visibility. Preserve auth,
+saved-chat ownership, evidence integrity, CSP, model and deployed release. See the
+[bounded handoff](docs/en/REFERENCE_UI.md). No deployment or production acceptance is claimed.
+
+محیط بررسی در فرانت‌اند فعلی بازسازی و ورود اختصاصی OCS، رنگ‌های محدود به محصول، کشوهای
+واکنش‌گرا، نمایش امن شاهد و مراحل ثبت‌شده، ترجیح حرکت و نمایش گذرواژه اضافه شد. هویت، مالکیت
+گفتگو، صحت شاهد، CSP، مدل و انتشار مستقر حفظ‌اند. [گزارش محدود](docs/fa/REFERENCE_UI.md)
+مرجع است؛ ادعای استقرار یا پذیرش محیط عملیاتی نداریم.
+
 ## Controlled canonical MCP/source deployment — 2026-10-04 / استقرار محدود MCP و منابع
 
 Deploy app/connector `2a7c8dc` with verified-TLS MCP, separate peer-verified runner, binding-drift

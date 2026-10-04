@@ -1,6 +1,21 @@
 # Next task / کار بعدی
 
-First unfinished checkpoint after the controlled `2a7c8dc` cutover: qualify source-answer usefulness
+The owner-requested UI deployment is complete at `836b1ea`; see the
+[exact live record](requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md). Next, obtain current
+DS-C free space and outstanding snapshot/thin/planned growth commitments before importing a Qwen 3.8
+candidate. The old screenshot and a 500-GiB growth allowance are not fresh capacity observations.
+The paired CPU guide records feasible candidates, pinned metadata and the separate thinking/privacy,
+quality, latency, offline and rollback gates. Do not enable thinking or relabel Qwen discovery as an
+upgrade. Preserve the working app, 35B model and existing policy while the import gate is unresolved.
+
+استقرار رابطِ درخواستی مالک با `836b1ea` تکمیل است؛ گزارش زندهٔ بالا مرجع است. گام بعد، دریافت
+فضای آزاد جاریِ DS-C و تعهد رشد snapshot، دیسک thin و نوشتن‌های برنامه‌ریزی‌شده، پیش از ورود
+نامزد Qwen 3.8 است. تصویر قدیمی و اجازهٔ رشد ۵۰۰ GiB مشاهدهٔ تازهٔ ظرفیت نیستند. راهنمای
+دوزبانهٔ CPU نامزدها، metadata ثابت و معیارهای جداگانهٔ استدلال/حریم خصوصی، کیفیت، تأخیر،
+آفلاین و بازگشت را ثبت می‌کند. استدلال فعال نشود و بررسی مدل، ارتقا نامیده نشود؛ برنامهٔ سالم،
+مدل 35B و سیاست موجود تا رفع این مانع حفظ شوند.
+
+Remaining answer-quality checkpoint after the controlled UI cutover: qualify source-answer usefulness
 for Internet-SLA/FortiGate without weakening integrity guards, and general instruction following
 against held-out EN/FA questions. Correct-source collection passed, but those two answers used
 transparent deterministic fallbacks and number-only formatting was inconsistent on the unchanged
@@ -10,7 +25,7 @@ mutations only with an explicitly authorized disposable account, full-system off
 current-release VM reboot, and the five unobserved groups when actual read-only evidence is available.
 Do not silently promote failed model drafts, expand access, resize guests or claim production accepted.
 
-نخستین گام ناتمام پس از گذار کنترل‌شدهٔ `2a7c8dc`: کاربردپذیری پاسخ Internet-SLA/FortiGate
+گام ناتمامِ کیفیت پاسخ پس از گذار کنترل‌شدهٔ رابط: کاربردپذیری پاسخ Internet-SLA/FortiGate
 بدون تضعیف کنترل صحت و پیروی از دستور در پرسش‌های تازهٔ فارسی/انگلیسی سنجیده شود. گردآوری
 از مقصد درست موفق بود، اما دو پاسخ جایگزینِ قطعی و شفاف بودند و قالب پاسخ صرفاً عددی در مدل
 بدون تغییر، یکسان نبود. منبع دوم قابل انتخاب بماند؛ در خرابی، منبع دیگر جای آن ننشیند.

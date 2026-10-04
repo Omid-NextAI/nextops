@@ -1,6 +1,44 @@
 # Project state / وضعیت پروژه
 
-Current controlled deployment, 2026-10-04: app and connector serve `2a7c8dc`. The existing connector
+Current controlled app, 2026-10-05 (Tehran): `836b1ea` serves the reference workspace/OCS login.
+Five exact-code CI jobs and 47 local browser tests passed. Fresh real login/logout, saved-chat
+reload/resume, both Zabbix sources, EN/FA generation, evidence selection and durable hash/audit
+matching passed. Exact `2a7c8dc` rollback/reapply passed; final rollback guard is stopped. The
+[dated UI record](requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md) retains failed trials
+and separates browser network restriction from unrun current-app server-WAN/VM cold-start tests.
+Connector remains `2a7c8dc`; AI API `7ce9d29`, runtime, Qwen3.5-35B-A3B, thinking-off and resources
+are unchanged. Qwen 3.8 official models/GGUF metadata were reviewed, not imported: fresh datastore
+free-space and snapshot/thin-growth commitments are required before the model trial. See the paired
+[CPU guide](en/CPU_AI.md) / [راهنمای CPU](fa/CPU_AI.md). This is not full production acceptance.
+
+برنامهٔ کنترل‌شدهٔ جاری، ۵ اکتبر ۲۰۲۶ به وقت تهران: `836b1ea` محیط مرجع و ورود OCS را ارائه
+می‌کند. پنج کنترل CI همان کد و ۴۷ آزمون مرورگر محلی موفق‌اند. ورود/خروج واقعی، ادامهٔ گفتگو
+پس از بارگذاری دوباره، دو منبع زبیکس، تولید دوزبانه، انتخاب شاهد و تطبیق هش/ممیزی موفق بودند.
+بازگشت دقیق به `2a7c8dc` و استقرار دوباره موفق و تایمر نهایی متوقف است. گزارش تاریخ‌دارِ بالا
+شکست‌ها را حفظ و محدودیت شبکهٔ مرورگر را از آزمون اجرا‌نشدهٔ WAN سرور/شروع سرد این نسخه
+جدا می‌کند. اتصال‌دهنده `2a7c8dc`، API هوش مصنوعی `7ce9d29`، runtime، مدل Qwen3.5، استدلالِ
+غیرفعال و منابع ثابت‌اند. مدل‌های رسمی و metadataِ Qwen 3.8 بررسی شدند، نه دریافت یا انتخاب؛
+پیش از آزمون مدل، فضای آزاد جاری و تعهد رشد snapshot/thin لازم است. پذیرش کامل تولید ادعا نمی‌شود.
+
+## Historical checkpoints / گام‌های تاریخی
+
+The dated records below describe their observation time; they do not override the current
+deployment above. / رکوردهای زیر وضعیت زمان خود را بیان می‌کنند، نه وضعیت استقرار جاری را.
+
+Source-only UI candidate, 2026-10-04: `codex/reference-dashboard` reconstructs the supplied
+investigation reference in the existing frontend and adds the original OCS Signal Gate login.
+Authentication, owner-scoped chats, read-only evidence, CSP and inference remain unchanged.
+See the [source handoff](en/REFERENCE_UI.md) / [گزارش فارسی](fa/REFERENCE_UI.md) for verification
+and deliberate missing-data states. No server operation/deployment is included; the current
+release identity and unfinished operational gates below remain authoritative.
+
+نامزد رابط در کد منبع، ۴ اکتبر ۲۰۲۶: شاخهٔ `codex/reference-dashboard` تصویر محیط بررسی را
+در فرانت‌اند فعلی بازسازی و ورود اختصاصی «دروازهٔ سیگنال امید» را اضافه می‌کند. احراز هویت،
+مالکیت گفتگو، شاهد فقط‌خواندنی، CSP و استنتاج ثابت‌اند. نتیجهٔ آزمون و نبودهای صریح در گزارش
+دوزبانهٔ بالا ثبت است؛ عملیات سرور یا استقرار انجام نشده و وضعیت زنده و معیارهای ناتمامِ زیر
+همچنان مرجع‌اند.
+
+Prior controlled deployment, 2026-10-04: app and connector served `2a7c8dc`. The existing connector
 VM is now the authenticated TLS MCP gateway/isolated runner; old HTTP is stopped/disabled, not a
 fallback. Approved source selection lists two sources/seven targets, with fresh secondary Zabbix
 EN/FA CPU answers, durable hash/audit matching, denial, source failure isolation, app/connector
@@ -12,7 +50,7 @@ exact runtime CI passed all five jobs including PostgreSQL 16/17. Users panel an
 Five empty secondary groups, broad model semantics, full-system cold start/reboot and production
 gates remain unfinished. AI/model/resources are unchanged; PRs 46/51 are not promoted.
 
-استقرار کنترل‌شدهٔ جاری، ۴ اکتبر ۲۰۲۶: برنامه و اتصال‌دهنده انتشار `2a7c8dc` را ارائه می‌کنند.
+استقرار کنترل‌شدهٔ پیشین، ۴ اکتبر ۲۰۲۶: برنامه و اتصال‌دهنده انتشار `2a7c8dc` را ارائه می‌کردند.
 همان ماشین اتصال‌دهنده اکنون درگاه MCP احرازشده با TLS و اجراکنندهٔ جداست؛ HTTP قبلی متوقف
 و غیرفعال است و مسیر جایگزین نیست. دو منبع و هفت مقصد مجاز، پاسخ تازهٔ دوزبانهٔ CPU از
 زبیکس دوم، تطبیق هش/ممیزی ماندگار، رد درخواست، جداسازی خرابی منبع، شروع خدمات برنامه و
@@ -23,11 +61,6 @@ gates remain unfinished. AI/model/resources are unchanged; PRs 46/51 are not pro
 مستقرند؛ فهرست/رد ورودی زنده آزموده شد، نه تغییر حساب. پنج گروه خالی، کیفیت عمومی مدل،
 شروع سرد/reboot کل سامانه و معیارهای تولید ناتمام‌اند. AI/مدل/منابع ثابت و PRهای 46/51
 ارتقا نیافته‌اند.
-
-## Historical checkpoints / گام‌های تاریخی
-
-The dated records below describe their observation time; they do not override the current
-deployment above. / رکوردهای زیر وضعیت زمان خود را بیان می‌کنند، نه وضعیت استقرار جاری را.
 
 Current integration candidate, 2026-10-04: reviewed PR 53/54 foundations are composed on
 `codex/zabbix-mcp-live`. Canonical authenticated TLS MCP, separate peer-verified runner, current
