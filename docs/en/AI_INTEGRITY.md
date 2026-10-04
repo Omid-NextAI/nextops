@@ -2,6 +2,11 @@
 
 ## Scoped diagnostic safeguard candidate — 2026-10-04
 
+The second candidate was rolled back after review rejected a stale-data collection-cause claim.
+Bounded supplied scenarios explicitly lacking fresh data now receive a visible application-owned
+limitation, not a raw model pass: absence alone establishes neither current health nor failure nor
+a collection fault. Actual-state and execution denials retain priority. Requalification is pending.
+
 Application-only candidate, not yet deployed: interpret bounded supplied scenarios without
 mislabeling them as fresh live facts. Mixed actual-state requests and unsupported execution claims
 remain redirected. Reject reviewed listener/SYN-SENT reachability and timeout-type overclaims with

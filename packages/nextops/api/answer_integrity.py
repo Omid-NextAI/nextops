@@ -182,6 +182,13 @@ _HOST_AVAILABILITY_QUESTION = re.compile(
 )
 
 
+_MISSING_FRESH_DATA_SCENARIO = re.compile(
+    r"\bno\s+(?:newer|recent|current|fresh)\s+(?:data|observations?|measurements?|evidence)\b|"
+    r"(?:داده|شواهد|اطلاعات)[^.!؟\n]{0,40}(?:تازه|جدید)[^.!؟\n]{0,30}(?:ندارد|نیست)",
+    re.IGNORECASE,
+)
+
+
 def assure_general_answer(
     request: AssistantRequest,
     assistant: AssistantResponse,
@@ -203,6 +210,9 @@ def assure_general_answer(
         _SUPPLIED_SCENARIO.search(request.question)
         and not explicit_current_fact
         and not _REAL_TARGET_REQUEST.search(request.question)
+    )
+    missing_fresh_scenario = bool(
+        supplied_scenario and _MISSING_FRESH_DATA_SCENARIO.search(request.question)
     )
     requires_live_evidence = bool(
         (
@@ -253,6 +263,7 @@ def assure_general_answer(
         and not prompt_echo
         and not incomplete
         and not greeting_mismatch
+        and not missing_fresh_scenario
     ):
         return assistant.model_copy(
             update={
@@ -291,6 +302,21 @@ def assure_general_answer(
     elif greeting_mismatch:
         answer = (
             "سلام! چطور می‌توانم کمک کنم؟" if request.locale == "fa" else "Hello! How can I help?"
+        )
+        integrity_status = "deterministic_fallback"
+        limitations = ("no_live_evidence", "model_output_may_be_incorrect")
+    elif missing_fresh_scenario and not requires_live_evidence and not unsafe_claim:
+        # A bounded hypothetical's absent fresh observations cannot establish a cause.
+        # This visible application-owned answer is not a raw model accuracy pass.
+        answer = (
+            "در این مثال، گزارش قدیمی فقط مشاهدهٔ ثبت‌شده در زمان خودش را بیان می‌کند، نه "
+            "وضعیت فعلی یا سلامت کامل سرویس را. نبود دادهٔ تازه به‌تنهایی سلامت، خرابی یا "
+            "اختلال در گردآوری را ثابت نمی‌کند؛ وضعیت و علت، بدون شاهد متناسب نامعلوم‌اند."
+            if request.locale == "fa"
+            else "In this scenario, an older report describes only the observation at its "
+            "recorded time, not present status or complete service health. Missing newer "
+            "data alone does not establish health, failure or a collection fault; current "
+            "state and cause remain unknown without appropriately scoped evidence."
         )
         integrity_status = "deterministic_fallback"
         limitations = ("no_live_evidence", "model_output_may_be_incorrect")

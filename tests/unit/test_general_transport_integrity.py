@@ -89,3 +89,44 @@ def test_new_guard_never_overrides_live_state_or_execution_denial() -> None:
         request, response("I restarted the server. A listener proves reachability.")
     )
     assert result.integrity_status == "scope_redirect"
+
+
+@pytest.mark.parametrize(
+    ("locale", "question"),
+    [
+        ("en", "A synthetic report recorded readiness 19 hours ago with no newer data."),
+        ("fa", "گزارش فرضی آمادگی سرویس را ثبت کرده و دادهٔ تازه‌تری ندارد."),
+    ],
+)
+@pytest.mark.parametrize("answer", ["Collection is faulty.", "The current state is unknown."])
+def test_missing_fresh_scenario_is_application_owned_not_a_causal_inference(
+    locale: Literal["en", "fa"], question: str, answer: str
+) -> None:
+    request = GeneralAssistantRequest(locale=locale, question=question)
+    result = assure_general_answer(request, response(answer).model_copy(update={"locale": locale}))
+    assert result.integrity_status == "deterministic_fallback"
+    assert result.evidence_mode == "model_only" and not result.live_monitoring_data
+    assert "no_live_evidence" in result.limitations
+    assert "does not establish" in result.answer or "ثابت نمی‌کند" in result.answer
+
+
+def test_missing_fresh_data_does_not_authorize_real_state_or_execution() -> None:
+    request = GeneralAssistantRequest(
+        locale="en",
+        question="A synthetic report has no newer data. Show my current server status.",
+    )
+    assert assure_general_answer(request, response("Unknown.")).integrity_status == "scope_redirect"
+    request = GeneralAssistantRequest(locale="en", question="A synthetic report has no newer data.")
+    assert (
+        assure_general_answer(request, response("I restarted the server.")).integrity_status
+        == "scope_redirect"
+    )
+
+
+def test_general_collection_diagnostics_are_not_replaced_as_a_stale_scenario() -> None:
+    request = GeneralAssistantRequest(
+        locale="en", question="Explain how to diagnose a failed collection pipeline."
+    )
+    answer = "Compare authorized collector logs and request timestamps."
+    result = assure_general_answer(request, response(answer))
+    assert result.answer == answer and result.integrity_status == "model_unverified"

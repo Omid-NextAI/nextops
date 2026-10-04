@@ -2,6 +2,22 @@
 
 ## Application-only safeguard increment — 2026-10-04
 
+Iteration 2 (`f05e222`) passed thirteen functional cases after a private harness corrected its
+conversation-creation expectation to HTTP201. Independent review rejected the Persian stale-data
+answer: absent newer data did not establish a collection fault. Exact69 app/AI rollback completed.
+Iteration 3 uses an application-owned, visibly labelled limitation for bounded supplied scenarios
+with no fresh observations: no current health, failure or collection cause can be inferred from
+absence alone. Correct raw model output is not claimed; mixed actual-state/execution denial wins.
+Keep both failed sources and the interrupted harness report; no wider profile or truth guarantee.
+
+چرخهٔ دوم (`f05e222`) پس از اصلاح انتظار ابزار خصوصی برای کد HTTP201 ایجاد گفت‌وگو، سیزده
+مورد کارکردی را گذراند. بازبینی مستقل، پاسخ فارسیِ دادهٔ قدیمی را رد کرد: نبود دادهٔ تازه،
+اختلال در گردآوری را ثابت نمی‌کند. برنامه و AI دقیقاً به69 بازگشتند. چرخهٔ سوم، برای مثال
+فرضیِ محدودِ بدون مشاهدهٔ تازه، محدودیت را با پاسخِ آشکارا برنامه‌ای بیان می‌کند: سلامت،
+خرابی یا علتِ گردآوری از نبود داده به‌تنهایی نتیجه نمی‌شود. درستیِ خروجی خام مدل ادعا نشود؛
+ردِ پرسش آمیخته با وضعیت واقعی و اجرای عملیات اولویت دارد. دو نامزد ناموفق و گزارش ابزارِ
+متوقف‌شده حفظ شوند؛ نمایهٔ گسترده‌تر یا تضمین حقیقت افزوده نمی‌شود.
+
 Iteration 1 (`b80758e`) passed thirteen functional browser cases, four text-free saved audits,
 three live evidence hashes and bounded queue recovery, but review found a new FA TLS-to-network-
 health overclaim. Exact69 app/AI rollback completed; it is not accepted. Iteration 2 adds scoped
