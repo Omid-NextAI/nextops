@@ -13,17 +13,21 @@ The repository now has typed policy/application boundaries, local identity, dura
 PostgreSQL state and audit, a bounded local CPU inference path, a bilingual browser UI,
 and read-only Zabbix/Linux connectors. Controlled releases serve user testing on the four
 existing role guests; the exact identities and gate results are in the
-[release manifest](../status/current-release.yaml). The current serving application fails
-its expanded answer-quality gate, and the corrected source candidate is not deployed.
+[release manifest](../status/current-release.yaml). Scoped diagnostic safeguards are deployed,
+but expanded raw-model semantics and thinking remain unaccepted. The additive MCP-01 source
+is locally tested, not deployed; see [MCP](MCP.md).
 Guarded Ubuntu package-layer scripts and desktop offline-bundle checks exist, but they do
 not grant another serving-host change or production acceptance. Phase 0 architecture was
 accepted on 2026-09-21; later infrastructure operations and acceptance gates remain
 separately controlled.
 
 For the current Python slice, install the generated lock with
-`uv sync --extra dev --frozen`, then run `uv run ruff format --check packages migrations
-tests scripts deploy/installers`, `uv run ruff check packages migrations tests scripts
-deploy/installers`, `uv run mypy packages tests scripts deploy/installers`, and `uv run pytest`.
+`uv sync --extra dev --extra mcp --frozen`, then use `uv run --frozen --extra dev --extra mcp`
+before each Ruff, mypy or pytest command. Ruff covers `packages migrations tests scripts
+deploy/installers`; mypy covers `packages tests scripts deploy/installers`. Run
+`pytest -m "not integration and not browser" -q` for the isolated local suite. Including the
+MCP extra is required for protocol-test collection; ordinary deployments still omit that extra.
+Add `--offline` only after dependencies are provisioned. See [exact checks](TESTING.md).
 Real database acceptance additionally requires an isolated PostgreSQL URL in
 `NEXTOPS_TEST_DATABASE_URL`; a skipped database suite is not a pass. Regenerate `uv.lock`
 only with reviewed dependency changes and run the pinned dependency audit before release

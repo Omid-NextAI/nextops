@@ -1,0 +1,59 @@
+[Unit]
+Description=NextOps authenticated MCP gateway (no target credentials)
+After=network-online.target nextops-source-runner.service
+Wants=network-online.target
+Requires=nextops-source-runner.service
+
+[Service]
+Type=simple
+User=nextops-gateway
+Group=nextops-gateway
+SupplementaryGroups=nextops-source-socket nextops-runtime-ro
+UMask=0077
+EnvironmentFile=/etc/nextops/mcp/gateway.env
+Environment=HTTP_PROXY=
+Environment=HTTPS_PROXY=
+Environment=ALL_PROXY=
+LoadCredential=mcp-service-secret:/etc/nextops/credentials/mcp-service-secret
+LoadCredential=mcp-tls-key:/etc/nextops/credentials/mcp-tls-key
+ExecStart=/srv/nextops/releases/current/venv/bin/uvicorn nextops.connectors.source_runtime:create_runtime_gateway_app --factory --host 127.0.0.1 --port 8101 --workers 1 --no-access-log --no-server-header --no-proxy-headers --limit-concurrency 16 --ssl-certfile /etc/nextops/mcp/gateway.crt --ssl-keyfile %d/mcp-tls-key
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=90s
+KillMode=mixed
+LimitCORE=0
+LimitNOFILE=512
+CPUQuota=100%
+MemoryHigh=192M
+MemoryMax=256M
+TasksMax=48
+StateDirectory=nextops/mcp
+StateDirectoryMode=0700
+ReadOnlyPaths=/srv/nextops/releases /etc/nextops/mcp
+InaccessiblePaths=/etc/nextops/credentials /etc/nextops/linux-targets.json /etc/nextops/nextops-connector.env /etc/nextops/ssh /etc/nextops/mcp/sources.json /etc/nextops/mcp/linux-targets.json /etc/nextops/mcp/linux_known_hosts /etc/nextops/mcp/runner.env
+ReadWritePaths=/var/lib/nextops/mcp
+IPAddressDeny=any
+IPAddressAllow=localhost
+RestrictAddressFamilies=AF_UNIX AF_INET
+CapabilityBoundingSet=
+AmbientCapabilities=
+NoNewPrivileges=yes
+PrivateDevices=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectProc=invisible
+ProtectClock=yes
+ProtectControlGroups=yes
+ProtectKernelLogs=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native
+
+[Install]
+WantedBy=multi-user.target

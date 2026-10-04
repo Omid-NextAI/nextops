@@ -63,6 +63,33 @@ TARGET_ID = UUID("40000000-0000-4000-8000-000000000001")
 RUN_ID = UUID("50000000-0000-4000-8000-000000000001")
 
 
+@pytest.mark.parametrize(
+    "method,path,payload",
+    [
+        ("GET", "/api/v1/users", None),
+        ("POST", "/api/v1/users", {"username": "reader", "password": "local fixture password"}),
+        ("PATCH", f"/api/v1/users/{ACTOR_ID}", {"is_active": False, "expected_version": 1}),
+        (
+            "POST",
+            f"/api/v1/users/{ACTOR_ID}/password",
+            {"new_password": "local fixture password", "expected_version": 1},
+        ),
+    ],
+)
+def test_user_admin_routes_require_bearer_and_fail_closed_without_service(
+    method: str,
+    path: str,
+    payload: dict[str, object] | None,
+) -> None:
+    client = TestClient(create_app(FakeService()))
+    assert client.request(method, path, json=payload).status_code == 401
+    response = client.request(
+        method, path, json=payload, headers={"Authorization": "Bearer fixture-only-token"}
+    )
+    assert response.status_code == 503
+    assert "local fixture password" not in response.text
+
+
 @pytest.mark.parametrize("locale", ["en", "fa"])
 @pytest.mark.parametrize("mode", ["general", "monitoring", "incident"])
 def test_full_question_tail_reaches_bounded_synthesis(locale: str, mode: str) -> None:

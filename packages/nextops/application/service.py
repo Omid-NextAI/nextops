@@ -41,6 +41,7 @@ from nextops.contracts.errors import ErrorCode
 from nextops.contracts.incidents import IncidentEvidence, IncidentInvestigationRequest
 from nextops.contracts.models import ActorContext, InvestigationRequest, Role, TargetReference
 from nextops.contracts.monitoring import MonitoringSummary
+from nextops.contracts.source_catalog import SourceAssistantRequest
 from nextops.domain.types import RiskClass
 from nextops.persistence.models import (
     AuditEvent,
@@ -623,6 +624,11 @@ class DurableAppService:
 
         now = self._now()
         request_hash = self._assistant_request_hash(request)
+        target_name = (
+            f"zabbix:{request.source_id}/{request.target_id}"
+            if isinstance(request, SourceAssistantRequest)
+            else LIVE_INVESTIGATION_TARGET_NAME
+        )
         idempotency_key = f"investigate:{correlation_id}"
         pending_error: ApplicationError | None = None
         record: RunRecord | None = None
@@ -652,7 +658,7 @@ class DurableAppService:
                             organization_id=actor.organization_id,
                             environment_id=actor.environment_id,
                             kind=LIVE_INVESTIGATION_TARGET_KIND,
-                            name=LIVE_INVESTIGATION_TARGET_NAME,
+                            name=target_name,
                             enabled=True,
                             created_at=now,
                         )
@@ -665,7 +671,7 @@ class DurableAppService:
                             select(Target).where(
                                 Target.organization_id == actor.organization_id,
                                 Target.environment_id == actor.environment_id,
-                                Target.name == LIVE_INVESTIGATION_TARGET_NAME,
+                                Target.name == target_name,
                             )
                         )
                     if (
@@ -697,6 +703,11 @@ class DurableAppService:
                             parameters={
                                 "max_output_tokens": request.max_output_tokens,
                                 "evidence_mode": "live_zabbix",
+                                **(
+                                    {"source_id": request.source_id, "target_id": request.target_id}
+                                    if isinstance(request, SourceAssistantRequest)
+                                    else {}
+                                ),
                             },
                             status=RunStatus.RUNNING.value,
                             created_at=now,

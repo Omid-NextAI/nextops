@@ -7,6 +7,7 @@ from pydantic import AwareDatetime, Field, model_validator
 
 from nextops.contracts.assistant import AssistantResponse
 from nextops.contracts.models import FrozenContract
+from nextops.contracts.sources_ids import LogicalSourceId, ZabbixObjectId
 
 MonitoringPartialReason = Literal[
     "metrics_truncated",
@@ -69,6 +70,9 @@ class MonitoringSummary(FrozenContract):
     """A current, attributable snapshot from the connector boundary."""
 
     source: Literal["zabbix"] = "zabbix"
+    source_id: LogicalSourceId | None = None
+    target_id: LogicalSourceId | None = None
+    host_group_ids: tuple[ZabbixObjectId, ...] = Field(default=(), max_length=32)
     source_version: str = Field(pattern=r"^7\.0\.\d+$")
     host: str = Field(min_length=1, max_length=128)
     collected_at: AwareDatetime
@@ -86,6 +90,10 @@ class MonitoringSummary(FrozenContract):
 
         if self.is_partial != bool(self.partial_reasons):
             raise ValueError("is_partial must match partial_reasons")
+        if (self.source_id is None) != (self.target_id is None) or bool(self.host_group_ids) != (
+            self.source_id is not None
+        ):
+            raise ValueError("selected-source provenance must be complete")
         return self
 
 

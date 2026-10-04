@@ -1,5 +1,76 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Controlled canonical MCP/source deployment — 2026-10-04 / استقرار محدود MCP و منابع
+
+Deploy app/connector `2a7c8dc` with verified-TLS MCP, separate peer-verified runner, binding-drift
+denial, durable PostgreSQL audit/provenance, bilingual approved-source controls and user panel.
+Disable legacy HTTP; retain exact rollback. Source-route timeout/rate-limit and installed-code
+header repairs are included. Fresh EN/FA secondary answers, failure isolation, app/connector WAN
+restart and rollback/reapply are recorded in the [live report](docs/requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md).
+Account mutation, five empty groups, general semantics and full-system cold start remain unaccepted;
+no model/resource change or production claim. Entries below retain their historical outcomes.
+
+برنامه/اتصال‌دهندهٔ `2a7c8dc` با MCP دارای TLS معتبر، اجراکنندهٔ جدا و UID تأییدشده، رد اختلاف
+پیکربندی، منشأ/ممیزی PostgreSQL، انتخاب دوزبانهٔ منابع مجاز و پنل کاربران مستقر شدند. HTTP
+قدیمی غیرفعال و بازگشت دقیق حفظ است. timeout/نرخ مسیر منبع و سربرگ هویت کد اصلاح شدند.
+پاسخ تازهٔ دوزبانهٔ منبع دوم، جداسازی خرابی، شروع برنامه/اتصال‌دهنده با WAN بسته و
+بازگشت/استقرار دوباره در [گزارش زنده](docs/requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md)
+ثبت‌اند. تغییر حساب، پنج گروه خالی، کیفیت عمومی مدل و شروع سرد کامل پذیرفته نشده‌اند؛ مدل/
+منابع تغییر نکرده و تولید ادعا نمی‌شود. ورودی‌های زیر سابقهٔ نتیجهٔ زمان خود را حفظ می‌کنند.
+
+## Local user administration candidate — 2026-10-04 / نامزد مدیریت کاربران محلی
+
+Add admin-only scoped account listing/creation, non-admin status/password controls, fixed read-only
+profiles, protected admins, version conflicts, atomic audit/session revocation and narrow grant
+0004. Route malformed JSON/body/path/query through authenticated, secret-free denial audit and
+fail closed when audit is unavailable. Preserve bilingual OCS branding/themes and local assets.
+Source-tested, not live or production
+accepted; no model/resource/connector changes. Separate PR 53 repaired its three MCP findings and
+passed CI; rejected model drafts remain unpromoted.
+
+فهرست/ایجاد حساب محدود به مدیر، کنترل وضعیت/گذرواژهٔ غیرمدیر، نقش‌های ثابت و فقط‌خواندنی،
+مدیر محافظت‌شده، تعارض نسخه، ممیزی/لغو نشست اتمی و مجوز محدود 0004 افزوده شد. رد JSON،
+بدنه، مسیر و پارامتر نامعتبر نیز پس از احراز هویت، بدون ثبت راز ممیزی می‌شود؛ نبود ممیزی
+به پاسخ موفق تبدیل نمی‌شود. نشان/تم و
+دارایی محلیِ OCS دوزبانه حفظ‌اند. کد آزموده شده، نه پذیرفته در استقرار زنده یا تولید؛ مدل،
+منابع و اتصال‌دهنده تغییر نکردند. PR 53 جداگانه سه ایراد MCP را رفع کرد و CI موفق دارد؛
+پیش‌نویس‌های مدلِ ردشده ارتقا نیافته‌اند.
+
+## 2026-10-04 — Connector VM MCP role / نقش MCP ماشین اتصال‌دهنده
+
+Clarify the existing connector VM as the canonical MCP gateway/isolated-runner host, consistent
+with master sections 5/12 and the owner's instruction. Specify authenticated cross-VM MCP,
+runner-only credentials and incremental reuse of existing drivers. HTTP is staged compatibility
+and rollback, not a permanent parallel platform or denial fallback. Align paired architecture/MCP
+guides, ADR addendum, specification, traceability and next task. Record three open MCP-01 review
+items before MCP-02. No code, lock, live service, release identity or acceptance gate is changed.
+
+نقش ماشین موجودِ اتصال‌دهنده به‌عنوان میزبان اصلیِ درگاه MCP و اجراکننده‌های جداگانه، مطابق
+بخش‌های ۵ و ۱۲ پرامپت و دستور مالک روشن شد. ارتباط احرازهویت‌شدهٔ MCP میان ماشین‌ها، اطلاعات
+ورود محدود به اجراکننده و استفادهٔ تدریجی از گردآورنده‌های موجود مشخص‌اند. HTTP مسیر سازگاری
+و بازگشتِ دورهٔ گذار است، نه سامانهٔ موازیِ دائمی یا جایگزین پس از رد درخواست. راهنماهای دوزبانه،
+پیوست تصمیم، مشخصات، ردیابی و گام بعد هم‌راستا شدند. سه مورد بازِ بازبینی MCP-01 پیش از MCP-02
+ثبت شدند. کد، قفل وابستگی، سرویس زنده، شناسهٔ انتشار و معیار پذیرش تغییر نکرده‌اند.
+
+## 2026-10-04 — Source-scoped MCP foundation / پایهٔ MCP محدود به منبع
+
+Add optional official Python SDK 1.30.0, private source/target contracts, scoped reuse of the
+existing Zabbix reader, required authorization/audit ports and typed MCP client/server factories.
+27 focused local tests exercise actual memory/stdio protocol, source collisions, fail-closed
+audit, scope revocation, timeout/drain, explicit cancellation and unavailable-source recovery.
+Include the locked MCP extra in CI/audits; explicitly depend on the already locked AnyIO for
+cancellation-safe bounded audit waits. Preserve legacy routes and all live releases, model and
+thinking flags. Durable application composition, UI source selection, protected runner/egress
+and live/offline acceptance remain MCP-02/03; this change is not deployed.
+
+SDK رسمی Python نسخهٔ 1.30.0 به‌صورت اختیاری، قرارداد خصوصی منبع/مقصد، استفادهٔ محدود از
+گردآورندهٔ موجود، مرزهای الزامیِ مجوز/ممیزی و توابع ساختِ کارخواه و سرور MCP افزوده شدند.
+۲۷ آزمون محلی، پروتکل واقعی حافظه/stdio، تداخل شناسه‌ها، توقف در شکست ممیزی، لغو مجوز، مهلت
+و پایان واقعی، اعلان صریح لغو و ادامه پس از خرابی را می‌سنجند. وابستگی MCP در CI و ممیزی
+قفل و AnyIO موجود برای انتظار محدودِ ممیزی هنگام لغو صریح شد. مسیر قدیمی، انتشارهای زنده،
+مدل و گزینه‌های استدلال ثابت‌اند. اتصال ماندگار برنامه، انتخاب منبع در رابط، اجراکننده/خروجی
+شبکهٔ محافظت‌شده و پذیرش زنده/آفلاین در MCP-02/03 بازند؛ این تغییر مستقر نشده است.
+
 ## 2026-10-04 — Scoped diagnostic guard deployment / استقرار کنترل تشخیصیِ محدود
 
 Deploy matched app/AI `7ce9d29` after four rejected, exactly rolled-back candidates. Repair

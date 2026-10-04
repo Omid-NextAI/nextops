@@ -15,15 +15,20 @@
 PostgreSQL، مسیر محدودِ مدل محلی روی CPU، رابط مرورگر دوزبانه و اتصال‌دهنده‌های
 فقط‌خواندنی Zabbix و Linux را دارد. انتشارهای کنترل‌شده روی چهار مهمان موجود برای
 آزمون کاربر در حال خدمت‌اند؛ شناسهٔ دقیق و نتیجهٔ هر معیار در
-[مانیفست انتشار](../status/current-release.yaml) آمده است. برنامهٔ مستقر معیار
-گسترش‌یافتهٔ کیفیت پاسخ را نمی‌گذراند و اصلاحِ موجود در کد هنوز مستقر نشده است.
+[مانیفست انتشار](../status/current-release.yaml) آمده است. کنترل تشخیصیِ محدود مستقر است، اما
+درستی عمومیِ متن خام مدل و استدلال پذیرفته نیستند. کد افزودهٔ MCP-01 محلی آزموده شده، نه
+مستقر؛ [راهنمای MCP](MCP.md) را ببینید.
 اسکریپت‌های محافظت‌شدهٔ بسته‌های Ubuntu و آزمون بستهٔ آفلاین روی میزکار وجود دارند،
 اما هیچ‌کدام مجوز تغییر تازهٔ سرور یا پذیرش تولید نیستند. معماری مرحلهٔ صفر در
 ۲۱ سپتامبر ۲۰۲۶ پذیرفته شد؛ عملیات و معیارهای بعدی مجوز و بررسی جداگانه می‌خواهند.
 
-برای برش Python فعلی، محیط با `uv sync --extra dev --frozen` نصب و سپس format و Ruff روی
-`packages`، `migrations`، `tests`، `scripts` و `deploy/installers`، mypy روی `packages`،
-`tests`، `scripts` و `deploy/installers` و در پایان pytest اجرا شود. پذیرش پایگاه به PostgreSQL جدا
+برای کد Python فعلی، محیط با `uv sync --extra dev --extra mcp --frozen` نصب و پیش از هر فرمان
+Ruff، mypy یا pytest، عبارت `uv run --frozen --extra dev --extra mcp` آورده شود. Ruff روی
+`packages migrations tests scripts deploy/installers` و mypy روی
+`packages tests scripts deploy/installers` اجرا شود. مجموعهٔ محلیِ جدا با
+`pytest -m "not integration and not browser" -q` اجرا می‌شود. وابستگی MCP برای بارگذاری آزمون
+پروتکل لازم است؛ استقرار معمولی همچنان بدون آن می‌ماند. فقط پس از آماده‌سازی وابستگی‌ها،
+`--offline` اضافه شود؛ [فرمان‌های دقیق](TESTING.md) را ببینید. پذیرش پایگاه به PostgreSQL جدا
 در `NEXTOPS_TEST_DATABASE_URL` نیاز دارد؛ suite ردشده با skip، قبولی نیست. `uv.lock` فقط
 همراه تغییر بازبینی‌شده تولید و audit وابستگی pin‌شده پیش از انتشار اجرا شود.
 

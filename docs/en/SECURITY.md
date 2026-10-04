@@ -21,6 +21,13 @@ Protect device credentials, administrative authority, incident evidence, approva
 
 ## Identity and policy
 
+Candidate user management rechecks the authoritative local session/current admin role inside every
+transaction. Only fixed read-only non-admin profiles can be created; admin identities, roles and
+scopes are immutable through this surface. Mutations revoke target sessions and share their audit
+transaction. Audit failure rolls the mutation back; UI hiding is not authorization. The additive
+0004 grant changes only account activation, not roles/scopes or append-only audit restrictions.
+No production deployment is claimed. See [bounded contract](../requirements/USER_MANAGEMENT_SPEC.md).
+
 Retain `viewer`, `operator`, `engineer`, and `admin`, combined with organization, environment, target and operation scopes. Default deny. Administrator status does not bypass audit or destructive-action controls. Start with one explicit organization scope; multi-tenant SaaS isolation is not a validated first-release capability.
 
 Preserve risk classes `READ_ONLY`, `LOW_RISK`, `MEDIUM_RISK`, `HIGH_RISK`, `CRITICAL`. Trusted versioned policy assigns risk. A read can still disclose secrets or overload equipment. MVP permits only bounded allowlisted diagnostics; all infrastructure mutations remain disabled.

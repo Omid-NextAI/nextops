@@ -40,6 +40,26 @@
   font-synthesis: none;
 }
 
+.users-layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.users-card { padding: 24px; min-width: 0; }
+.users-card h2 { margin: 0 0 16px; font-size: 20px; }
+.users-card-heading, .users-pagination, .user-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+.users-forms { display: grid; gap: 24px; min-width: 0; }
+.users-card label { display: block; margin: 16px 0 8px; color: var(--ink-soft); font-weight: 650; }
+.users-card :is(input:not([type="checkbox"]), select) { width: 100%; min-height: 44px; padding: 12px; border: 1px solid var(--line-strong); border-radius: 9px; color: var(--ink); background: var(--surface); font: inherit; font-size: 16px; }
+.users-card :is(input, select):focus-visible { outline: 3px solid var(--brand-teal-dark); outline-offset: 3px; }
+.users-list { padding: 0; margin: 20px 0; list-style: none; }
+.user-row { padding: 16px 0; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.user-row bdi { display: block; font-weight: 700; margin-bottom: 8px; }
+.user-row p { color: var(--ink-soft); margin: 8px 0; }
+.user-actions { justify-content: flex-start; }
+.user-actions button { min-height: 44px; }
+.user-actions .user-disable { color: var(--danger); }
+.users-card .users-confirm { display: flex; gap: 12px; align-items: flex-start; font-weight: 400; }
+.users-confirm input { width: 24px; height: 24px; flex: 0 0 24px; }
+.users-status { min-height: 24px; color: var(--brand-teal-dark); }
+@media (max-width: 800px) { .users-layout { grid-template-columns: minmax(0, 1fr); } .users-card { padding: 20px; } }
+
 /* Brand base colours and the embedded OCS mark are identical in both themes. */
 :root[data-theme="dark"] {
   --ink: #e7eff0;

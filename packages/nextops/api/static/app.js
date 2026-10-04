@@ -132,6 +132,7 @@ const state = {
   answerLocale: "en",
   answerMode: "general",
   incidentTargets: [],
+  sourceCatalog: [],
   lastEvidence: null,
   history: [],
   conversationsEnabled: false,
@@ -140,10 +141,163 @@ const state = {
   pendingMessage: null,
   busy: false,
   epoch: 0,
+  actor: null,
+  users: [],
+  usersOffset: 0,
+  usersNext: null,
+  usersBusy: false,
+  passwordUser: null,
   token: sessionStorage.getItem("nextops-session") || ""
 };
 const byId = id => document.getElementById(id);
+Object.assign(translations.en, {
+  monitoringSource: "Zabbix source", monitoringSourceTarget: "Approved host",
+  primaryOverview: "Primary Zabbix · default host", approvedCatalogHelp: "Approved inventory, not a live health check. Sending a question retrieves fresh evidence for this host.",
+  sourceCatalogUnavailable: "Additional-source catalogue is unavailable. The primary source remains selectable; no automatic fallback will occur.",
+  sourceTargetRequired: "Choose an approved host for this source."
+});
+Object.assign(translations.fa, {
+  monitoringSource: "منبع زبیکس", monitoringSourceTarget: "میزبان مجاز",
+  primaryOverview: "زبیکس اصلی · میزبان پیش‌فرض", approvedCatalogHelp: "این فهرست، مقصدهای مجاز را نشان می‌دهد، نه سلامت زندهٔ آن‌ها را. با ارسال پرسش، شاهد تازهٔ همان میزبان گردآوری می‌شود.",
+  sourceCatalogUnavailable: "فهرست منابع افزوده در دسترس نیست. منبع اصلی قابل انتخاب است؛ جایگزینی خودکار منبع انجام نمی‌شود.",
+  sourceTargetRequired: "برای این منبع، یک میزبان مجاز انتخاب کنید."
+});
 const resultTemplate = byId("resultCard").cloneNode(true);
+
+Object.assign(translations.en, {
+  usersTitle: "Users", usersKicker: "LOCAL ACCESS CONTROL", usersLead: "Manage local accounts. Every change is audited; no infrastructure permissions are granted.",
+  usersBack: "Back to assistant", usersAccounts: "Local accounts", usersRefresh: "Refresh", usersPrevious: "Previous", usersNext: "Next", usersCreate: "Create an account", usersRole: "Role",
+  usersViewer: "Viewer · Zabbix read", usersOperator: "Operator · Zabbix and Linux read", usersEngineer: "Engineer · Zabbix and Linux read", usersAdmin: "Administrator",
+  usersNameHelp: "3–64 lowercase Latin letters, digits, dots, hyphens or underscores; start with a letter.", usersInitialPassword: "Initial password", usersNewPassword: "New password", usersPasswordHelp: "14–256 characters. Deliver securely outside this panel; passwords are never listed.",
+  usersProtectedHelp: "Administrator accounts are protected. Role permissions are fixed and read-only.", usersProtected: "Protected administrator", usersActive: "Active", usersDisabled: "Disabled", usersDisable: "Disable account", usersEnable: "Enable account", usersReset: "Reset password", usersCancel: "Cancel",
+  usersResetConfirm: "I confirm: this revokes every session for the selected account.", usersChangeConfirm: "Change account status and revoke every session for", usersLoading: "Loading accounts…", usersSaving: "Saving the audited change…", usersSaved: "Change saved and audited.", usersEmpty: "No accounts on this page.",
+  usersConflict: "The account changed or its username already exists. Refresh the list before trying again.", usersDenied: "Administrator access is required; protected accounts cannot be changed here.", usersUnknown: "The request could not be confirmed. Refresh to check the account before retrying; do not repeat a password reset blindly."
+});
+Object.assign(translations.fa, {
+  usersTitle: "کاربران", usersKicker: "کنترل دسترسی محلی", usersLead: "حساب‌های محلی را مدیریت کنید. هر تغییر ممیزی می‌شود؛ مجوز تغییر زیرساخت اعطا نمی‌شود.",
+  usersBack: "بازگشت به دستیار", usersAccounts: "حساب‌های محلی", usersRefresh: "تازه‌سازی", usersPrevious: "قبلی", usersNext: "بعدی", usersCreate: "ایجاد حساب", usersRole: "نقش",
+  usersViewer: "بیننده · مشاهدهٔ Zabbix", usersOperator: "اپراتور · مشاهدهٔ Zabbix و Linux", usersEngineer: "کارشناس · مشاهدهٔ Zabbix و Linux", usersAdmin: "مدیر سامانه",
+  usersNameHelp: "۳ تا ۶۴ حرف کوچک لاتین، رقم، نقطه، خط تیره یا زیرخط؛ با حرف آغاز شود.", usersInitialPassword: "گذرواژهٔ اولیه", usersNewPassword: "گذرواژهٔ جدید", usersPasswordHelp: "۱۴ تا ۲۵۶ نویسه؛ از مسیر امن خارج از پنل تحویل دهید. گذرواژه در فهرست نمایش داده نمی‌شود.",
+  usersProtectedHelp: "حساب مدیر محافظت شده است. دسترسی نقش‌ها ثابت و فقط‌خواندنی است.", usersProtected: "مدیر محافظت‌شده", usersActive: "فعال", usersDisabled: "غیرفعال", usersDisable: "غیرفعال‌کردن حساب", usersEnable: "فعال‌کردن حساب", usersReset: "تنظیم گذرواژه", usersCancel: "انصراف",
+  usersResetConfirm: "تأیید می‌کنم: همهٔ نشست‌های حساب انتخاب‌شده لغو می‌شود.", usersChangeConfirm: "تغییر وضعیت حساب و لغو همهٔ نشست‌های", usersLoading: "در حال دریافت حساب‌ها…", usersSaving: "در حال ثبت تغییر و ممیزی…", usersSaved: "تغییر و ممیزی ثبت شد.", usersEmpty: "در این صفحه حسابی وجود ندارد.",
+  usersConflict: "حساب تغییر کرده یا نام کاربری تکراری است؛ پیش از تلاش دوباره فهرست را تازه‌سازی کنید.", usersDenied: "دسترسی مدیر لازم است؛ حساب محافظت‌شده از این بخش قابل تغییر نیست.", usersUnknown: "نتیجهٔ درخواست تأیید نشد. پیش از تکرار، فهرست را تازه‌سازی و وضعیت را بررسی کنید؛ تنظیم گذرواژه را بدون بررسی تکرار نکنید."
+});
+
+function closeUserPassword() {
+  state.passwordUser = null;
+  byId("userPasswordForm").reset();
+  byId("userPasswordName").textContent = "";
+  byId("userPasswordForm").classList.add("hidden");
+}
+
+function renderUsers() {
+  const t = translations[state.language];
+  byId("usersList").replaceChildren();
+  for (const user of state.users) {
+    const row = document.createElement("li"); row.className = "user-row";
+    const name = document.createElement("bdi"); name.dir = "ltr"; name.textContent = user.username;
+    const detail = document.createElement("p");
+    const roleLabels = { viewer: t.usersViewer, operator: t.usersOperator, engineer: t.usersEngineer, admin: t.usersAdmin };
+    detail.textContent = `${user.roles.map(role => roleLabels[role] || role).join(" · ")} · ${user.is_active ? t.usersActive : t.usersDisabled}`;
+    row.append(name, detail);
+    if (user.manageable) {
+      const actions = document.createElement("div"); actions.className = "user-actions";
+      const status = document.createElement("button"); status.type = "button"; status.className = `quiet-button ${user.is_active ? "user-disable" : ""}`; status.textContent = user.is_active ? t.usersDisable : t.usersEnable;
+      status.addEventListener("click", () => {
+        if (!state.usersBusy && window.confirm(`${translations[state.language].usersChangeConfirm} ${user.username}?`)) {
+          userMutation(`/api/v1/users/${user.identity_id}`, "PATCH", { is_active: !user.is_active, expected_version: user.credential_version });
+        }
+      });
+      const password = document.createElement("button"); password.type = "button"; password.className = "quiet-button"; password.textContent = t.usersReset;
+      password.addEventListener("click", () => {
+        closeUserPassword(); state.passwordUser = user;
+        byId("userPasswordName").textContent = user.username;
+        byId("userPasswordForm").classList.remove("hidden"); byId("userResetPassword").focus();
+      });
+      status.disabled = password.disabled = state.usersBusy;
+      actions.append(status, password); row.append(actions);
+    } else {
+      const protectedNote = document.createElement("p"); protectedNote.textContent = t.usersProtected; row.append(protectedNote);
+    }
+    byId("usersList").append(row);
+  }
+  byId("usersPrevious").disabled = state.usersBusy || state.usersOffset === 0;
+  byId("usersNext").disabled = state.usersBusy || state.usersNext === null;
+}
+
+function setUsersBusy(busy) {
+  state.usersBusy = busy;
+  byId("usersView").setAttribute("aria-busy", String(busy));
+  byId("usersView").querySelectorAll("input, select, button:not(#usersBack)").forEach(control => { control.disabled = busy; });
+  renderUsers();
+}
+
+function userError(error) {
+  const t = translations[state.language];
+  byId("usersError").textContent = error.status === 409 ? t.usersConflict : error.status === 403 ? t.usersDenied : t.usersUnknown;
+  byId("usersError").focus();
+}
+
+async function refreshUsers(offset = state.usersOffset) {
+  if (state.usersBusy) return false;
+  const epoch = state.epoch;
+  setUsersBusy(true); byId("usersError").textContent = "";
+  byId("usersStatus").textContent = translations[state.language].usersLoading;
+  try {
+    const page = await api(`/api/v1/users?offset=${offset}`);
+    if (epoch !== state.epoch) return false;
+    state.users = page.users; state.usersOffset = offset; state.usersNext = page.next_offset;
+    closeUserPassword(); renderUsers();
+    byId("usersStatus").textContent = page.users.length ? "" : translations[state.language].usersEmpty;
+    return true;
+  } catch (error) {
+    if (epoch === state.epoch && state.token) { byId("usersStatus").textContent = ""; userError(error); }
+    return false;
+  } finally { if (epoch === state.epoch) setUsersBusy(false); }
+}
+
+async function userMutation(path, method, payload) {
+  if (state.usersBusy) return;
+  const epoch = state.epoch;
+  byId("userCreatePassword").value = ""; byId("userResetPassword").value = "";
+  byId("userResetConfirm").checked = false;
+  setUsersBusy(true); byId("usersError").textContent = "";
+  byId("usersStatus").textContent = translations[state.language].usersSaving;
+  try {
+    await api(path, { method, body: JSON.stringify(payload) });
+    if (epoch !== state.epoch) return;
+    closeUserPassword(); byId("userCreateForm").reset();
+    setUsersBusy(false);
+    if (await refreshUsers()) {
+      byId("usersStatus").textContent = translations[state.language].usersSaved;
+      byId(path === "/api/v1/users" ? "userCreateName" : "usersRefresh").focus();
+    }
+  } catch (error) {
+    if (epoch === state.epoch && state.token) { byId("usersStatus").textContent = ""; userError(error); }
+  } finally { if (epoch === state.epoch) setUsersBusy(false); }
+}
+
+byId("usersButton").addEventListener("click", () => {
+  if (!state.actor?.roles.includes("admin")) return;
+  byId("workspaceView").classList.add("hidden"); byId("usersView").classList.remove("hidden");
+  byId("usersHeading").focus(); refreshUsers();
+});
+byId("usersBack").addEventListener("click", () => {
+  closeUserPassword(); byId("userCreateForm").reset();
+  byId("usersView").classList.add("hidden"); byId("workspaceView").classList.remove("hidden"); byId("usersButton").focus();
+});
+byId("usersRefresh").addEventListener("click", () => refreshUsers());
+byId("usersPrevious").addEventListener("click", () => refreshUsers(Math.max(0, state.usersOffset - 50)));
+byId("usersNext").addEventListener("click", () => { if (state.usersNext !== null) refreshUsers(state.usersNext); });
+byId("userResetCancel").addEventListener("click", closeUserPassword);
+byId("userCreateForm").addEventListener("submit", event => {
+  event.preventDefault(); userMutation("/api/v1/users", "POST", { username: byId("userCreateName").value, password: byId("userCreatePassword").value, role: byId("userCreateRole").value });
+});
+byId("userPasswordForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const user = state.passwordUser;
+  if (user && byId("userResetConfirm").checked) userMutation(`/api/v1/users/${user.identity_id}/password`, "POST", { new_password: byId("userResetPassword").value, expected_version: user.credential_version });
+});
 
 Object.assign(translations.en, {
   savedChats: "YOUR CONVERSATIONS", savedPrivacy: "Private to your account · retained for 30 days. Do not paste secrets.",
@@ -281,6 +435,8 @@ function setBusy(busy) {
     node.disabled = busy || (node.id === "incidentTarget" && !state.incidentTargets.length);
   });
   byId("askButton").toggleAttribute("aria-busy", busy);
+  byId("monitoringSource").disabled = busy;
+  byId("monitoringSourceTarget").disabled = busy || !byId("monitoringSource").value;
   byId("askButton").querySelector("span").textContent = translations[state.language][busy ? "working" : "askAssistant"];
 }
 
@@ -391,6 +547,7 @@ function applyLanguage(language) {
   document.documentElement.lang = language;
   document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
   window.NextOpsTheme.updateControl();
+  renderUsers();
   byId("copyStatus").textContent = "";
   byId("languageButton").textContent = language === "fa" ? "English" : "فارسی";
   byId("languageButton").setAttribute("aria-label", translations[language].languageToggleAria);
@@ -437,9 +594,17 @@ async function api(path, options = {}) {
 function showLogin(message = "") {
   state.epoch += 1;
   state.token = "";
+  state.actor = null; state.users = []; state.usersOffset = 0; state.usersNext = null;
+  state.usersBusy = false; closeUserPassword(); byId("userCreateForm").reset();
+  byId("usersList").replaceChildren(); byId("usersStatus").textContent = ""; byId("usersError").textContent = "";
+  byId("usersView").classList.add("hidden"); byId("usersButton").classList.add("hidden");
   state.lastEvidence = null;
   state.conversationsEnabled = false;
   state.thinkingEnabled = false;
+  state.sourceCatalog = [];
+  byId("monitoringSource").replaceChildren();
+  byId("monitoringSourceTarget").replaceChildren();
+  byId("sourceSelectionField").classList.add("hidden");
   byId("savedChatsList").replaceChildren();
   byId("savedChatsPanel").classList.add("hidden");
   byId("thinkingField").classList.add("hidden");
@@ -458,7 +623,7 @@ function updateEvidenceBrief() {
   const displayTime = value => new Date(value).toLocaleString(state.language === "fa" ? "fa-IR" : "en-GB");
   const scopeKey = incident ? ({ filesystems: "filesystemScope", file_listing: "fileScope", network: "networkScope", service: "serviceScope", network_service: "networkServiceScope" }[focus] || "incidentScope") : "monitoringScope";
   const fields = [
-    ["sourceBrief", incident ? "Zabbix + Linux" : "Zabbix", true],
+    ["sourceBrief", incident ? "Zabbix + Linux" : evidence.source_id ? `Zabbix · ${evidence.source_id} / ${evidence.target_id}` : "Zabbix", true],
     ...(incident ? [
       ["linuxCollected", displayTime(evidence.linux.collected_at), true],
       ["zabbixCollected", displayTime(evidence.zabbix.collected_at), true]
@@ -480,13 +645,19 @@ function updateEvidenceBrief() {
 }
 
 async function showWorkspace() {
-  await api("/api/v1/me");
+  const identityEpoch = state.epoch;
+  const actor = await api("/api/v1/me");
+  if (identityEpoch !== state.epoch || !state.token) return;
+  state.actor = actor;
+  byId("usersButton").classList.toggle("hidden", !actor.roles?.includes("admin"));
+  byId("usersView").classList.add("hidden");
   byId("loginView").classList.add("hidden");
   byId("workspaceView").classList.remove("hidden");
   byId("logoutButton").classList.remove("hidden");
   checkAi();
   checkMonitoring();
   loadIncidentTargets();
+  loadSourceCatalog();
   const epoch = state.epoch;
   try {
     const config = await api("/api/v1/conversations/config");
@@ -586,6 +757,53 @@ async function logout() {
   }
 }
 
+function populateSourceTargets() {
+  const source = state.sourceCatalog.find(item => item.source_id === byId("monitoringSource").value);
+  const select = byId("monitoringSourceTarget");
+  select.replaceChildren();
+  (source?.targets || []).forEach(target => {
+    const option = document.createElement("option");
+    option.value = target.target_id;
+    option.textContent = target.label;
+    option.dir = "auto";
+    select.append(option);
+  });
+  select.disabled = !source || state.busy;
+  select.classList.toggle("hidden", !source);
+  document.querySelector('label[for="monitoringSourceTarget"]').classList.toggle("hidden", !source);
+}
+async function loadSourceCatalog() {
+  const epoch = state.epoch;
+  const select = byId("monitoringSource");
+  select.replaceChildren();
+  const primary = document.createElement("option");
+  primary.value = "";
+  primary.dataset.i18n = "primaryOverview";
+  primary.textContent = translations[state.language].primaryOverview;
+  select.append(primary);
+  try {
+    const catalog = await api("/api/v1/monitoring/sources");
+    if (epoch !== state.epoch || !state.token) return;
+    state.sourceCatalog = catalog.sources || [];
+    state.sourceCatalog.forEach(source => {
+      const option = document.createElement("option");
+      option.value = source.source_id;
+      option.textContent = source.label;
+      option.dir = "auto";
+      select.append(option);
+    });
+    byId("sourceCatalogNotice").dataset.i18n = "approvedCatalogHelp";
+  } catch (error) {
+    if (epoch !== state.epoch || !state.token) return;
+    state.sourceCatalog = [];
+    byId("sourceCatalogNotice").dataset.i18n = "sourceCatalogUnavailable";
+  }
+  byId("sourceCatalogNotice").textContent = translations[state.language][byId("sourceCatalogNotice").dataset.i18n];
+  select.disabled = state.busy;
+  populateSourceTargets();
+}
+byId("monitoringSource").addEventListener("change", populateSourceTargets);
+
 async function loadIncidentTargets() {
   const select = byId("incidentTarget");
   select.disabled = true;
@@ -640,7 +858,7 @@ async function checkMonitoring() {
 
 function renderEvidence(evidence) {
   const locale = state.language === "fa" ? "fa-IR" : "en-GB";
-  byId("evidenceSource").textContent = `Zabbix ${evidence.source_version}`;
+  byId("evidenceSource").textContent = `Zabbix ${evidence.source_version}${evidence.source_id ? ` · ${evidence.source_id} / ${evidence.target_id}` : ""}`;
   byId("evidenceHost").textContent = evidence.host;
   byId("evidenceCollected").textContent = new Date(evidence.collected_at).toLocaleString(locale);
   byId("problemCount").textContent = evidence.active_problems.length;
@@ -875,6 +1093,7 @@ function setAnswerMode(mode) {
   byId("modeHelp").dataset.i18n = helpKey;
   byId("modeHelp").textContent = translations[state.language][helpKey];
   byId("incidentTargetField").classList.toggle("hidden", mode !== "incident");
+  byId("sourceSelectionField").classList.toggle("hidden", mode !== "monitoring");
   byId("thinkingField").classList.toggle("hidden", !state.thinkingEnabled || mode !== "general");
 }
 
@@ -954,7 +1173,7 @@ byId("assistantForm").addEventListener("submit", async event => {
   const question = byId("question").value;
   if (!question.trim()) { errorNode.textContent = translations[state.language].blankQuestion; return; }
   const namedTarget = requestedHostStatus(question);
-  if (namedTarget && state.incidentTargets.includes(namedTarget)) {
+  if (namedTarget && state.incidentTargets.includes(namedTarget) && !(state.answerMode === "monitoring" && byId("monitoringSource").value)) {
     byId("incidentTarget").value = namedTarget;
     setAnswerMode("incident");
   }
@@ -975,6 +1194,12 @@ byId("assistantForm").addEventListener("submit", async event => {
     const saved = !incident && !monitoring && state.conversationsEnabled;
     let path = incident ? "/api/v1/incidents/investigate" : monitoring ? "/api/v1/investigate" : "/api/v1/assistant/generate";
     let payload = { locale: state.answerLocale, question, max_output_tokens: 384 };
+    if (monitoring && byId("monitoringSource").value) {
+      if (!byId("monitoringSourceTarget").value) throw new Error(translations[state.language].sourceTargetRequired);
+      payload.source_id = byId("monitoringSource").value;
+      payload.target_id = byId("monitoringSourceTarget").value;
+      path = "/api/v1/monitoring/investigate";
+    }
     if (incident) payload.target_id = byId("incidentTarget").value;
     if (!monitoring && !incident && !saved && state.history.length) payload.history = state.history;
     if (saved) {

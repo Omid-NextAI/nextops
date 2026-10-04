@@ -1,5 +1,133 @@
 # Project state / وضعیت پروژه
 
+Current controlled deployment, 2026-10-04: app and connector serve `2a7c8dc`. The existing connector
+VM is now the authenticated TLS MCP gateway/isolated runner; old HTTP is stopped/disabled, not a
+fallback. Approved source selection lists two sources/seven targets, with fresh secondary Zabbix
+EN/FA CPU answers, durable hash/audit matching, denial, source failure isolation, app/connector
+WAN-blocked restart and exact prior-release rollback/reapply. See the
+[dated qualification](requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md) for unsuccessful trials,
+latency, package identity and scope. Local checks: 646 non-browser plus 30 browser fixtures;
+exact runtime CI passed all five jobs including PostgreSQL 16/17. Users panel and additive migration
+0004 are deployed; live list/invalid-input checks passed, but account mutation acceptance is not run.
+Five empty secondary groups, broad model semantics, full-system cold start/reboot and production
+gates remain unfinished. AI/model/resources are unchanged; PRs 46/51 are not promoted.
+
+استقرار کنترل‌شدهٔ جاری، ۴ اکتبر ۲۰۲۶: برنامه و اتصال‌دهنده انتشار `2a7c8dc` را ارائه می‌کنند.
+همان ماشین اتصال‌دهنده اکنون درگاه MCP احرازشده با TLS و اجراکنندهٔ جداست؛ HTTP قبلی متوقف
+و غیرفعال است و مسیر جایگزین نیست. دو منبع و هفت مقصد مجاز، پاسخ تازهٔ دوزبانهٔ CPU از
+زبیکس دوم، تطبیق هش/ممیزی ماندگار، رد درخواست، جداسازی خرابی منبع، شروع خدمات برنامه و
+اتصال‌دهنده با WAN بسته و بازگشت/استقرار دوبارهٔ دقیق آزموده شدند.
+[گزارش پذیرش](requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md) شکست‌های اولیه، تأخیر، هویت
+بسته و حدود آزمون را ثبت می‌کند. ۶۴۶ آزمون غیرمرورگر و ۳۰ آزمون مرورگر ساختگی موفق‌اند؛
+پنج کنترل CI همان کد، شامل PostgreSQL 16/17، موفق بود. پنل کاربران و migration افزایشی 0004
+مستقرند؛ فهرست/رد ورودی زنده آزموده شد، نه تغییر حساب. پنج گروه خالی، کیفیت عمومی مدل،
+شروع سرد/reboot کل سامانه و معیارهای تولید ناتمام‌اند. AI/مدل/منابع ثابت و PRهای 46/51
+ارتقا نیافته‌اند.
+
+## Historical checkpoints / گام‌های تاریخی
+
+The dated records below describe their observation time; they do not override the current
+deployment above. / رکوردهای زیر وضعیت زمان خود را بیان می‌کنند، نه وضعیت استقرار جاری را.
+
+Current integration candidate, 2026-10-04: reviewed PR 53/54 foundations are composed on
+`codex/zabbix-mcp-live`. Canonical authenticated TLS MCP, separate peer-verified runner, current
+PostgreSQL source policy/audit, namespaced durable evidence and bilingual approved-source controls
+are implemented. Local acceptance: 635 non-browser checks passed, two POSIX checks skipped on
+Windows; 30 real-browser fixture checks passed; strict Linux-target types passed. Live cutover,
+fresh second-source AI answers, offline restart and matched rollback are not yet accepted. The
+protected API-only preflight observed three hosts in three populated approved groups; five empty
+groups remain unobserved. No model/runtime, ESXi/resource or company account change is included.
+
+نامزد یکپارچه‌سازی جاری، ۴ اکتبر ۲۰۲۶: پایه‌های بازبینی‌شدهٔ PR 53/54 روی شاخهٔ
+`codex/zabbix-mcp-live` ترکیب شده‌اند. MCP احرازشده با TLS، اجراکنندهٔ جدا با کنترل UID همتا،
+سیاست/ممیزی جاری در PostgreSQL، شاهد ماندگار با منشأ مشخص و کنترل دوزبانهٔ منابع مجاز
+پیاده شده‌اند. ۶۳۵ آزمون غیرمرورگر موفق، دو آزمون POSIX در Windows اجرا نشده و ۳۰ آزمون
+مرورگر واقعی با شاهد ساختگی موفق‌اند؛ بررسی نوع برای Linux موفق است. گذار زنده، پاسخ تازهٔ
+AI از منبع دوم، شروع آفلاین و بازگشت هماهنگ هنوز پذیرفته نشده‌اند. پیش‌بررسی محافظت‌شدهٔ
+API سه میزبان در سه گروه مجازِ دارای عضو را مشاهده کرد؛ پنج گروه خالی مشاهده نشده‌اند.
+تغییر مدل، runtime، ESXi، منابع یا حساب شرکت در این گام نیست.
+
+Owner-requested user panel, 2026-10-04: admin-only scoped listing, fixed read-only account
+creation, non-admin activation and password reset are implemented with atomic audit/session
+revocation, stale-version denial and protected administrator identities. Bilingual OCS UI retains
+brand/theme and offline assets. Initial user-panel CI passed five jobs; a review repair now audits
+malformed JSON/body/path/query after fresh session/role checks and fails closed on audit failure.
+Local reruns passed 551 unit/API checks and 33 integration tests (14 focused user tests).
+This branch is a source candidate, not live. A separate PR 53
+repair (`bf983bf`) resolves its three MCP review findings with 39 focused tests and five passing
+CI jobs; it is not merged or deployed. PRs 46/51 remain rejected semantic experiments, not release
+approvals. Read-only live inspection found app/AI/tunnels active on the recorded releases, only the
+primary connector source and no MCP unit/secondary endpoint. The second token/CA remain protected
+desktop material; all-group reader permission and gateway/runner qualification remain unfinished.
+Guest observation is 80 online vCPUs and 135024599040 usable RAM bytes, not the older screenshot
+allocation. No resource, credential, deployment, model or thinking change was made.
+
+پنل درخواستی مالک، ۴ اکتبر ۲۰۲۶: فهرست محدود به دامنهٔ مدیر، ایجاد حساب با دسترسی ثابت و
+فقط‌خواندنی، تغییر وضعیت و تنظیم گذرواژهٔ غیرمدیر، با ممیزی/لغو نشست اتمی، رد نسخهٔ قدیمی و
+حفاظت از مدیر پیاده شده‌اند. رابط دوزبانهٔ OCS، نشان، تم و دارایی‌های آفلاین را حفظ می‌کند.
+CI نخستِ پنل پنج کنترل را گذراند؛ اصلاحِ بازبینی اکنون رد JSON، بدنه، مسیر و پارامتر نامعتبر
+را پس از بررسی تازهٔ نشست/نقش ممیزی و خرابی ممیزی را رد می‌کند. اجرای دوبارهٔ محلیِ ۵۵۱ آزمون
+واحد/API و ۳۳ آزمون یکپارچگی (۱۴ مورد متمرکزِ کاربران) موفق بود.
+این شاخه نامزد کدی است، نه استقرار زنده. اصلاح جداگانهٔ PR 53 با `bf983bf`، سه ایراد MCP را
+با ۳۹ آزمون متمرکز و پنج کنترل CI موفق رفع کرد؛ هنوز ادغام یا مستقر نشده است. PRهای 46/51
+آزمایش معناییِ ردشده‌اند، نه انتشار تأییدشده. بازرسی زندهٔ فقط‌خواندنی، برنامه/AI/تونل‌های
+فعال روی انتشار ثبت‌شده، تنها منبع اولیهٔ اتصال‌دهنده و نبود واحد MCP/نشانی منبع دوم را یافت.
+توکن/CA دوم در رایانهٔ توسعه محافظت‌شده‌اند؛ مجوز خوانندهٔ همهٔ گروه‌ها و پذیرش درگاه/اجراکننده
+ناتمام‌اند. مشاهدهٔ مهمان ۸۰ vCPU آنلاین و ۱۳۵۰۲۴۵۹۹۰۴۰ بایت حافظهٔ قابل‌استفاده است، نه
+تخصیص تصویر قدیمی. منابع، اعتبارنامه، استقرار، مدل یا گزینهٔ استدلال تغییر نکردند.
+
+Review repair, 2026-10-04: PR 53's three source findings are repaired: cancellation during initial
+authorization now attempts bounded terminal audit; problem/event ownership is proven through
+bounded event/host linkage; application-owned registry/collector ports keep private connector
+configuration outside orchestration. All 39 focused tests passed locally. These are fixture-backed
+SDK/source checks, not live MCP or second-source acceptance. The historical findings below remain
+as context. Read-only server inspection found the original connector configuration only, no
+secondary endpoint or MCP unit; app/AI services and their existing tunnels are active. No live
+configuration or model changed.
+
+اصلاح بازبینی، ۴ اکتبر ۲۰۲۶: سه ایراد کدیِ PR 53 اصلاح شدند: لغو هنگام بررسی اولیهٔ مجوز،
+تلاش محدود برای ثبت ممیزی پایانی دارد؛ تعلق problem/event با پیوند محدود رویداد و میزبان
+اثبات می‌شود؛ رابط‌های فهرست و گردآوریِ متعلق به برنامه، تنظیم خصوصی اتصال‌دهنده را بیرون از
+منطق کاربرد نگه می‌دارند. هر ۳۹ آزمون متمرکز محلی موفق بود؛ این آزمون‌های SDK/کد با مقصد
+ساختگی، پذیرش MCP زنده یا منبع دوم نیستند. ایرادهای تاریخیِ زیر برای حفظ سابقه باقی‌اند.
+بازرسی فقط‌خواندنیِ سرور، تنها تنظیم منبع اولیه را یافت؛ نشانی منبع دوم و واحد MCP موجود نیست.
+برنامه، AI و تونل‌های موجود فعال‌اند. تنظیم زنده یا مدل تغییر نکرد.
+
+Design clarification, 2026-10-04: the existing connector VM is the intended MCP gateway/isolated
+runner host, not a parallel non-MCP platform. Master sections 5/12, paired architecture/MCP guides
+and ADR 0010 now explicitly align with the owner's clarification. The deployed connector is still
+HTTP; migration compatibility/rollback is temporary, not a permanent bypass. No live change or
+new acceptance is claimed. Three open [PR 53](https://github.com/Omid-NextAI/nextops/pull/53) findings
+(authorization cancellation audit, problem/event ownership and dependency direction) need repair
+and regression tests before MCP-02 composition. Prior test outcomes are preserved, not invalidated
+or treated as proof that these paths are safe.
+
+تصریح طراحی، ۴ اکتبر ۲۰۲۶: ماشین موجودِ اتصال‌دهنده میزبان موردنظرِ درگاه MCP و اجراکننده‌های
+جداگانه است، نه سامانهٔ غیر-MCP موازی. بخش‌های ۵ و ۱۲ پرامپت، راهنماهای دوزبانهٔ معماری/MCP و
+تصمیم 0010 با تصریح مالک هم‌راستا هستند. اتصال‌دهندهٔ مستقر هنوز HTTP است؛ سازگاری و بازگشت
+دورهٔ مهاجرت موقت‌اند، نه مسیر دورزن دائمی. تغییر زنده یا پذیرش تازه ادعا نمی‌شود. سه مورد بازِ
+[PR 53](https://github.com/Omid-NextAI/nextops/pull/53)، شامل ممیزی لغو هنگام مجوز، تعلق شواهد
+problem/event و جهت وابستگی، پیش از MCP-02 به اصلاح و آزمون بازگشت خطا نیاز دارند. نتایج
+آزمون قبلی حفظ‌اند، اما اثبات ایمنیِ این مسیرهای بررسی‌نشده نیستند.
+
+Source increment, 2026-10-04: MCP-01 adds a private, source-scoped Zabbix registry, typed
+results, mandatory per-call authorization/audit ports and optional official SDK 1.30.0 adapters.
+27 focused local tests include real SDK memory/stdio exchanges and explicit protocol cancellation
+with fixture downstream data; five-job CI and a fresh hash-locked offline Windows base-package
+installation without MCP also passed. This is not durable PostgreSQL, deployed runner, live second-source
+UI or offline acceptance. MCP-02 composition and MCP-03 operational qualification remain open.
+The existing controlled app/AI/connector identities below, model and thinking flags are unchanged.
+See [specification](requirements/MULTI_SOURCE_MCP_SPEC.md) and [MCP guide](en/MCP.md).
+
+گام کدیِ ۴ اکتبر ۲۰۲۶: MCP-01 فهرست خصوصی و محدود به منبعِ زبیکس، نتیجهٔ دارای نوع، مرزهای
+الزامیِ مجوز و ممیزیِ هر درخواست و لایه‌های اختیاری SDK رسمیِ 1.30.0 را افزود. ۲۷ آزمون متمرکز
+محلی، تبادل واقعی SDK در حافظه و stdio و اعلان صریحِ لغو را با دادهٔ ساختگی مقصد می‌سنجند.
+پنج کنترل CI و نصب تازهٔ آفلاینِ هش‌قفلِ بستهٔ پایه در Windows بدون MCP نیز موفق‌اند.
+این شاهد، پذیرش PostgreSQL ماندگار، اجراکنندهٔ مستقر، منبع دوم در رابط زنده یا آفلاین نیست.
+اتصال عملیاتی MCP-02 و پذیرش MCP-03 بازند. هویت‌های زندهٔ برنامه/AI/اتصال‌دهنده در ادامه، مدل
+و گزینه‌های استدلال تغییر نکرده‌اند. [مشخصات](requirements/MULTI_SOURCE_MCP_SPEC.md) و
+[راهنمای MCP](fa/MCP.md) را ببینید.
+
 Verified scoped deployment, 2026-10-04: app/AI `7ce9d29` now serve controlled users with the
 unchanged CPU-only35 model and disabled thinking. Five-job CI, 524 local checks, three fresh
 hash-locked offline installs, 45 functional browser cases across first/offline/exact69 rollback/

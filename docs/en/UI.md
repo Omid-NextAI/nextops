@@ -1,5 +1,27 @@
 # Bilingual operations console and design system
 
+## Live approved Zabbix selection — 2026-10-04
+
+Open **Live monitoring**, choose **Company Zabbix / SLA**, then an approved host and ask a fresh
+question. The answer and evidence panel retain `secondary / target`, collection time, scope and
+partial/stale warnings. Primary and secondary are independent; failure never silently changes
+source. Catalogues show approval, not health. Three secondary hosts are listed; five empty groups
+remain unobserved. See [live qualification](../requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md).
+
+## Local user administration — controlled deployment, 2026-10-04
+
+Installed in `2a7c8dc`: administrators open **Users** from the existing header. List scoped
+accounts, create viewer/operator/engineer users, disable/re-enable non-admins or reset their
+passwords. A status change or reset revokes all target sessions. Passwords are never listed;
+deliver them through a protected channel, not Git/chat. Administrator accounts and fixed role
+scopes cannot be edited here. API policy, not button visibility, enforces this restriction.
+The screen preserves the OCS logo, palette, light/dark themes and locally served assets, with
+English/Persian, RTL/LTR, mobile reflow, explicit confirmation, keyboard focus and session-expiry
+cleanup. See [specification](../requirements/USER_MANAGEMENT_SPEC.md) for acceptance and rollback.
+Live list and malformed-input denial passed, including with app/connector WAN blocked. Account
+mutations passed restricted local PostgreSQL/browser tests, not live disposable-account acceptance;
+no owner/company account was changed for testing.
+
 ## Live named-server status repair — 2026-10-03
 
 The screenshot question “آخرین وضعیت سرور Ai رو بهم بگو” selected Live monitoring, whose

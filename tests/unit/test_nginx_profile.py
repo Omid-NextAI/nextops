@@ -17,7 +17,7 @@ def test_app_proxy_requires_tls_and_only_targets_loopback() -> None:
     assert "Strict-Transport-Security" in profile
     assert "limit_req zone=nextops_login" in profile
     assert "limit_req zone=nextops_assistant" in profile
-    assert "assistant/generate|investigate|incidents/investigate" in profile
+    assert "assistant/generate|investigate|monitoring/investigate|incidents/investigate" in profile
     assert "api/v1/(bootstrap|recovery)" in profile
     assert "docs|redoc|openapi" in profile
     assert "192.168." not in profile
@@ -35,9 +35,12 @@ def test_saved_generation_inherits_existing_bounded_inference_proxy_policy() -> 
     assert re.fullmatch(
         pattern, "/api/v1/conversations/12345678-1234-1234-1234-123456789abc/messages"
     )
+    assert re.fullmatch(pattern, "/api/v1/monitoring/investigate")
     for path in (
         "/api/v1/conversations",
         "/api/v1/conversations/config",
+        "/api/v1/monitoring/sources",
+        "/api/v1/monitoring/investigate/other",
         "/api/v1/conversations/not-a-uuid/messages",
         "/api/v1/conversations/12345678-1234-1234-1234-123456789abc/messages/other",
     ):

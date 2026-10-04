@@ -8,9 +8,9 @@
   <link id="appIcon" rel="icon" href="data:,">
   <title>NextOps by OCS | Local Operations Intelligence</title>
   <script src="/assets/theme.js?v=20260930-theme"></script>
-  <link rel="stylesheet" href="/assets/app.css?v=20260930-theme">
+  <link rel="stylesheet" href="/assets/app.css?v=20261004-users">
   <link rel="stylesheet" href="/assets/evidence.css?v=20260930-theme">
-  <script src="/assets/app.js?v=20260930-theme" defer></script>
+  <script src="/assets/app.js?v=20261004-users" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#mainContent" data-i18n="skipMain">Skip to main content</a>
@@ -27,6 +27,7 @@
       <span class="environment"><span class="dot" aria-hidden="true"></span><span data-i18n="localEnvironment">Private local environment</span></span>
       <button id="themeButton" class="quiet-button theme-button" type="button" aria-label="Dark theme" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/></svg><span>Dark theme</span></button>
       <button id="languageButton" class="quiet-button" type="button" aria-label="Switch interface language">فارسی</button>
+      <button id="usersButton" class="quiet-button hidden" type="button" data-i18n="usersTitle">Users</button>
       <button id="logoutButton" class="quiet-button hidden" type="button" data-i18n="logout">Sign out</button>
     </div>
   </header>
@@ -148,6 +149,13 @@
             <p id="modeHelp" class="mode-help" data-i18n="generalModeHelp">Answers the question directly without attaching Zabbix status.</p>
           </div>
 
+          <div id="sourceSelectionField" class="target-field hidden">
+            <label for="monitoringSource" data-i18n="monitoringSource">Zabbix source</label>
+            <select id="monitoringSource" disabled></select>
+            <label for="monitoringSourceTarget" data-i18n="monitoringSourceTarget">Approved host</label>
+            <select id="monitoringSourceTarget" disabled></select>
+            <p id="sourceCatalogNotice" role="status" aria-live="polite" data-i18n="approvedCatalogHelp">Approved inventory, not a live health check. Sending a question retrieves fresh evidence for this host.</p>
+          </div>
           <div id="incidentTargetField" class="target-field hidden">
             <label for="incidentTarget" data-i18n="incidentTarget">Investigation target</label>
             <select id="incidentTarget" name="incident_target" disabled></select>
@@ -198,6 +206,39 @@
         </div>
       </div>
       <p id="copyStatus" class="copy-status" role="status" aria-live="polite"></p>
+    </section>
+    <section id="usersView" class="workspace hidden" aria-labelledby="usersHeading">
+      <div class="workspace-heading">
+        <div><p class="eyebrow" data-i18n="usersKicker">LOCAL ACCESS CONTROL</p><h1 id="usersHeading" tabindex="-1" data-i18n="usersTitle">Users</h1><p data-i18n="usersLead">Manage local accounts. Every change is audited; no infrastructure permissions are granted.</p></div>
+        <button id="usersBack" class="quiet-button" type="button" data-i18n="usersBack">Back to assistant</button>
+      </div>
+      <p id="usersStatus" class="users-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      <p id="usersError" class="form-error" tabindex="-1" role="alert"></p>
+      <div class="users-layout">
+        <section class="surface-card users-card" aria-labelledby="usersListHeading">
+          <div class="users-card-heading"><h2 id="usersListHeading" data-i18n="usersAccounts">Local accounts</h2><button id="usersRefresh" type="button" class="quiet-button" data-i18n="usersRefresh">Refresh</button></div>
+          <p class="rail-help" data-i18n="usersProtectedHelp">Administrator accounts are protected. Role permissions are fixed and read-only.</p>
+          <ul id="usersList" class="users-list"></ul>
+          <div class="users-pagination"><button id="usersPrevious" type="button" class="quiet-button" data-i18n="usersPrevious">Previous</button><button id="usersNext" type="button" class="quiet-button" data-i18n="usersNext">Next</button></div>
+        </section>
+        <div class="users-forms">
+          <form id="userCreateForm" class="surface-card users-card">
+            <h2 data-i18n="usersCreate">Create an account</h2>
+            <label for="userCreateName" data-i18n="username">Username</label><input id="userCreateName" type="text" dir="ltr" autocomplete="off" minlength="3" maxlength="64" pattern="[a-z][a-z0-9_.-]{2,63}" aria-describedby="usersNameHelp" required>
+            <p id="usersNameHelp" class="rail-help" data-i18n="usersNameHelp">3–64 lowercase Latin letters, digits, dots, hyphens or underscores; start with a letter.</p>
+            <label for="userCreateRole" data-i18n="usersRole">Role</label><select id="userCreateRole"><option value="viewer" data-i18n="usersViewer">Viewer · Zabbix read</option><option value="operator" data-i18n="usersOperator">Operator · Zabbix and Linux read</option><option value="engineer" data-i18n="usersEngineer">Engineer · Zabbix and Linux read</option></select>
+            <label for="userCreatePassword" data-i18n="usersInitialPassword">Initial password</label><input id="userCreatePassword" type="password" dir="ltr" autocomplete="new-password" minlength="14" maxlength="256" aria-describedby="usersPasswordHelp" required>
+            <p id="usersPasswordHelp" class="rail-help" data-i18n="usersPasswordHelp">14–256 characters. Deliver securely outside this panel; passwords are never listed.</p>
+            <button class="primary-button" type="submit" data-i18n="usersCreate">Create an account</button>
+          </form>
+          <form id="userPasswordForm" class="surface-card users-card hidden">
+            <h2 data-i18n="usersReset">Reset password</h2><p><bdi id="userPasswordName" dir="ltr"></bdi></p>
+            <label for="userResetPassword" data-i18n="usersNewPassword">New password</label><input id="userResetPassword" type="password" dir="ltr" autocomplete="new-password" minlength="14" maxlength="256" required>
+            <label class="users-confirm"><input id="userResetConfirm" type="checkbox" required><span data-i18n="usersResetConfirm">I confirm: this revokes every session for the selected account.</span></label>
+            <div class="users-card-heading"><button class="quiet-button" type="submit" data-i18n="usersReset">Reset password</button><button id="userResetCancel" class="quiet-button" type="button" data-i18n="usersCancel">Cancel</button></div>
+          </form>
+        </div>
+      </div>
     </section>
   </main>
 

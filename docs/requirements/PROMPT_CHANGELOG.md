@@ -1,5 +1,25 @@
 # Prompt version history / تاریخچهٔ نسخه‌های پرامپت
 
+## Owner connector-role clarification — 2026-10-04
+
+The owner specifies that the existing connector VM must fulfil the MCP role from the original
+design. This reaffirms active master sections 5 and 12; the master body/version and immutable v2
+archive are unchanged. The canonical gateway and isolated runners share the existing connector VM,
+not a new permanent parallel stack. Keep application policy authoritative, target credentials
+runner-only, real MCP protocol and offline provisioning. Current HTTP is explicitly transitional
+compatibility/rollback, not relabelled MCP or a bypass. The design correction grants no new server
+mutation, acceptance waiver or production-readiness claim. See
+[the bounded requirements](MULTI_SOURCE_MCP_SPEC.md) and ADR 0010's dated clarification.
+
+مالک تصریح کرد که ماشین موجودِ اتصال‌دهنده باید نقش MCP را مطابق طرح اولیه ایفا کند. این
+دستور، بخش‌های ۵ و ۱۲ پرامپت فعال را تأکید می‌کند؛ متن و نسخهٔ پرامپت و بایگانی تغییرناپذیر v2
+ثابت‌اند. درگاه اصلی و اجراکننده‌های جداگانه روی همان ماشین قرار می‌گیرند، نه سامانهٔ موازیِ
+دائمی. مرجع مجوز، برنامه است؛ اطلاعات ورود مقصد فقط نزد اجراکننده می‌ماند و پروتکل واقعی MCP
+و آماده‌سازی آفلاین حفظ می‌شوند. HTTP فعلی صریحاً برای سازگاری و بازگشتِ دورهٔ گذار است؛ MCP
+نامیده نمی‌شود و مسیر دورزن نیست. اصلاح طراحی، مجوز تغییر تازهٔ سرور یا حذف معیار پذیرش و
+ادعای آمادگی تولید نمی‌دهد. [الزامات محدود](MULTI_SOURCE_MCP_SPEC.md) و پیوست تاریخ‌دارِ
+تصمیم 0010 مبنا هستند.
+
 ## Owner repair/deployment loop — 2026-10-04
 
 The owner requests gap repair and a loop to successful deployment. This authorizes bounded

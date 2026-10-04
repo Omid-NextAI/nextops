@@ -10,9 +10,24 @@ investigations now use the existing durable run and append-only audit model.
 
 ## Implemented durable subset
 
-New candidate, not deployed: migration 0003 adds owner-scoped general-chat tables and authenticated
-conversation APIs. Support-read roles have no transcript grant. See [reference](CONVERSATIONS.md)
-and ADR 0009; disable flags and preserve additive tables for ordinary source rollback.
+Local user administration is a source-only candidate, not deployed. `GET /api/v1/users?offset=0`
+returns at most 50 same-organization/environment accounts and `next_offset`. `POST /api/v1/users`
+accepts `{username,password,role}` with role viewer/operator/engineer. `PATCH
+/api/v1/users/{identity_id}` accepts `{is_active,expected_version}`; `POST
+/api/v1/users/{identity_id}/password` accepts `{new_password,expected_version}`. Each revalidates
+the bearer/current administrator inside its transaction, protects every administrator account and
+audits decisions, including schema/JSON/path/query rejections. Malformed input from a valid admin
+returns 422 only after denial audit; invalid sessions/non-admins return 401/403 and required audit
+failure returns 503. No submitted body or malformed identifier is audited. Status/password changes
+revoke all target sessions atomically. No role/scope
+editing or deletion exists. Migration 0004 grants only `identities.is_active` UPDATE. Responses
+are non-cacheable and secret-free. See [contract](../requirements/USER_MANAGEMENT_SPEC.md).
+
+Controlled saved standard chat is deployed, including migration 0003's owner-scoped tables and
+authenticated conversation APIs; thinking remains disabled. Support-read roles have no transcript
+grant. See [reference](CONVERSATIONS.md) and ADR 0009; preserve additive tables and audit/version
+history for ordinary source rollback. This does not imply acceptance of full-budget context or
+current-source VM cold start.
 
 Available in controlled 862d311 (introduced in b346c3e): `POST /api/v1/assistant/generate` accepts optional `history`, a
 closed array of at most two `{question, answer}` pairs. Each field is 1–2,000 characters; total

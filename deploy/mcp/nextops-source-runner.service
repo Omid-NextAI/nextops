@@ -1,0 +1,63 @@
+[Unit]
+Description=NextOps isolated read-only Zabbix/Linux runner
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=nextops-zabbix-ro
+Group=nextops-source-socket
+SupplementaryGroups=nextops-runtime-ro nextops-zabbix-ro
+UMask=0007
+EnvironmentFile=/etc/nextops/mcp/runner.env
+Environment=HTTP_PROXY=
+Environment=HTTPS_PROXY=
+Environment=ALL_PROXY=
+LoadCredential=zabbix-api-token:/etc/nextops/credentials/zabbix-api-token
+LoadCredential=zabbix-secondary-token:/etc/nextops/credentials/zabbix-secondary-token
+LoadCredential=linux-app-key:/etc/nextops/credentials/linux-app-key
+LoadCredential=linux-ai-key:/etc/nextops/credentials/linux-ai-key
+LoadCredential=linux-connector-key:/etc/nextops/credentials/linux-connector-key
+LoadCredential=linux-zabbix-key:/etc/nextops/credentials/linux-zabbix-key
+ExecStart=/srv/nextops/releases/current/venv/bin/python -m nextops.connectors.source_runtime
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=90s
+KillMode=mixed
+LimitCORE=0
+LimitNOFILE=512
+CPUQuota=100%
+MemoryHigh=192M
+MemoryMax=256M
+TasksMax=48
+RuntimeDirectory=nextops-source-runner
+RuntimeDirectoryMode=0750
+ReadOnlyPaths=/srv/nextops/releases /etc/nextops
+ReadWritePaths=/run/nextops-source-runner
+InaccessiblePaths=/etc/nextops/credentials /var/lib/nextops/mcp
+RestrictAddressFamilies=AF_UNIX AF_INET
+IPAddressDeny=any
+IPAddressAllow=localhost
+CapabilityBoundingSet=
+AmbientCapabilities=
+NoNewPrivileges=yes
+PrivateDevices=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectProc=invisible
+ProtectClock=yes
+ProtectControlGroups=yes
+ProtectKernelLogs=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native
+# A private drop-in MUST supply IPAddressDeny=any and exact approved LAN endpoints.
+
+[Install]
+WantedBy=multi-user.target
