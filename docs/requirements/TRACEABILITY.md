@@ -1,5 +1,16 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+UI-R01–06 source-only candidate: [reference UI specification](REFERENCE_UI_SPEC.md) maps existing
+offline/identity/evidence/bilingual requirements to the native shell, scoped presentation adapter,
+OCS motion, public asset tests and `tests/browser/test_reference_ui.py`. The paired handoff separates
+fixtures, PostgreSQL ownership tests and packaging from live acceptance. Existing release/gate
+records below are unchanged.
+
+نامزد کد UI-R01–06: [مشخصات رابط مرجع](REFERENCE_UI_SPEC.md)، الزامات فعلی آفلاین، هویت، شاهد
+و دوزبانگی را به پوستهٔ فعلی، نگاشت نمایشی، حرکت OCS و آزمون دارایی/مرورگر متصل می‌کند. گزارش
+دوزبانه، شاهد ساختگی، مالکیت PostgreSQL و بسته‌بندی را از پذیرش زنده جدا می‌داند. رکوردهای
+انتشار و معیارهای زیر بدون تغییرند.
+
 Current source-composition evidence: [MCP live qualification](MCP_LIVE_QUALIFICATION_2026-10-04.md)
 maps MCP-02 durable policy/runner composition and bounded MCP-03 source/UI/audit/failure/restart/
 rollback outcomes to installed `2a7c8dc`, five exact-code CI jobs and 646 non-browser/30 browser

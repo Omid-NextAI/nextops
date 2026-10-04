@@ -1,5 +1,18 @@
 # Project state / وضعیت پروژه
 
+Source-only UI candidate, 2026-10-04: `codex/reference-dashboard` reconstructs the supplied
+investigation reference in the existing frontend and adds the original OCS Signal Gate login.
+Authentication, owner-scoped chats, read-only evidence, CSP and inference remain unchanged.
+See the [source handoff](en/REFERENCE_UI.md) / [گزارش فارسی](fa/REFERENCE_UI.md) for verification
+and deliberate missing-data states. No server operation/deployment is included; the current
+release identity and unfinished operational gates below remain authoritative.
+
+نامزد رابط در کد منبع، ۴ اکتبر ۲۰۲۶: شاخهٔ `codex/reference-dashboard` تصویر محیط بررسی را
+در فرانت‌اند فعلی بازسازی و ورود اختصاصی «دروازهٔ سیگنال امید» را اضافه می‌کند. احراز هویت،
+مالکیت گفتگو، شاهد فقط‌خواندنی، CSP و استنتاج ثابت‌اند. نتیجهٔ آزمون و نبودهای صریح در گزارش
+دوزبانهٔ بالا ثبت است؛ عملیات سرور یا استقرار انجام نشده و وضعیت زنده و معیارهای ناتمامِ زیر
+همچنان مرجع‌اند.
+
 Current controlled deployment, 2026-10-04: app and connector serve `2a7c8dc`. The existing connector
 VM is now the authenticated TLS MCP gateway/isolated runner; old HTTP is stopped/disabled, not a
 fallback. Approved source selection lists two sources/seven targets, with fresh secondary Zabbix

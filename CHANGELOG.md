@@ -1,5 +1,18 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Reference UI — source-only candidate, 2026-10-04 / نامزد رابط مرجع در کد
+
+Reconstruct the investigation workspace in the existing native frontend; add the original OCS
+Signal Gate login, scoped product tokens, responsive evidence/navigation dialogs, safe diagnostic
+inspector, recorded execution display, motion preference and password visibility. Preserve auth,
+saved-chat ownership, evidence integrity, CSP, model and deployed release. See the
+[bounded handoff](docs/en/REFERENCE_UI.md). No deployment or production acceptance is claimed.
+
+محیط بررسی در فرانت‌اند فعلی بازسازی و ورود اختصاصی OCS، رنگ‌های محدود به محصول، کشوهای
+واکنش‌گرا، نمایش امن شاهد و مراحل ثبت‌شده، ترجیح حرکت و نمایش گذرواژه اضافه شد. هویت، مالکیت
+گفتگو، صحت شاهد، CSP، مدل و انتشار مستقر حفظ‌اند. [گزارش محدود](docs/fa/REFERENCE_UI.md)
+مرجع است؛ ادعای استقرار یا پذیرش محیط عملیاتی نداریم.
+
 ## Controlled canonical MCP/source deployment — 2026-10-04 / استقرار محدود MCP و منابع
 
 Deploy app/connector `2a7c8dc` with verified-TLS MCP, separate peer-verified runner, binding-drift

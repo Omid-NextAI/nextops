@@ -28,6 +28,7 @@ remaining task-specific sources. The repository skill
 | Local CPU inference | `docs/en/CPU_AI.md`, `OFFLINE_RUNTIME.md`, `TESTING.md`, pinned 8B/14B/32B/30B-A3B/Qwen3.5-35B-A3B artifact records, systemd model-selection profiles, current state/next task, and Persian pairs when human-facing text changes |
 | AI answer integrity | `docs/requirements/ANSWER_INTEGRITY_SPEC.md`, `docs/en/AI_INTEGRITY.md`, Persian pair, assistant contracts, answer-integrity policy, evaluation corpus, current release manifest, and private live evidence |
 | Conversational frontend and NOC/SOC guidance | `docs/requirements/NOC_SOC_WORKSPACE_SPEC.md`, `docs/en/UI.md`, Persian pair, `DATA_API.md`, assistant/context contracts, static assets, browser tests, integrity guide and current release manifest |
+| Reference-matched workspace and OCS login | `docs/requirements/REFERENCE_UI_SPEC.md`, `docs/en/REFERENCE_UI.md`, Persian pair, supplied design reference, static presentation/motion modules and isolated browser fixtures |
 | Persistent conversations and local thinking | `docs/en/CONVERSATION_MEMORY_SPEC.md`, `CONVERSATIONS.md`, Persian pairs, ADR 0009, conversation schema/API/tests, expanded-chat candidate profile and current release manifest |
 | Server, storage, or deployment | use `nextops-server-operations`; read the start checklist, matching dossier, installer guide, storage/offline/server guide, and current private change record |
 | Zabbix or connector work | Zabbix guide, integration guide, MCP/security/data contracts, matching dossiers, ZBX/OFF acceptance cases, and target-specific private evidence |
@@ -40,6 +41,10 @@ remaining task-specific sources. The repository skill
 | Release or GitHub workflow | `CONTRIBUTING.md`, `CHANGELOG.md`, `SECURITY.md`, `docs/en/DEVELOPMENT.md`, test guide, and GitHub templates |
 
 ## Complete inventory
+
+- `docs/requirements/REFERENCE_UI_SPEC.md` — Bilingual bounded reference-workspace and original OCS login specification, security invariants and source rollback.
+- `docs/en/REFERENCE_UI.md` — English source-only UI preview, verification, intentional deviations and screenshot handoff.
+- `docs/fa/REFERENCE_UI.md` — Persian source-only UI preview, verification, intentional deviations and screenshot handoff.
 
 - `docs/requirements/USER_MANAGEMENT_SPEC.md` — Bounded local admin account controls, immutable role profiles, audit/revocation and staged acceptance.
 

@@ -1,5 +1,13 @@
 # Next task / کار بعدی
 
+Separate source-only UI work: review the [reference UI handoff](en/REFERENCE_UI.md) and Persian
+pair before proposing any separately authorized deployment. This visual candidate does not advance
+or replace the first unfinished live checkpoint below, nor change model/connector/policy scope.
+
+کار جداگانهٔ رابط در کد منبع: پیش از پیشنهاد هر استقرارِ مستقل و مجاز، [گزارش رابط](fa/REFERENCE_UI.md)
+و نسخهٔ انگلیسی را بازبینی کنید. این نامزد بصری، گام زندهٔ ناتمامِ زیر را تکمیل یا جایگزین
+نمی‌کند و دامنهٔ مدل، اتصال‌دهنده یا سیاست را تغییر نمی‌دهد.
+
 First unfinished checkpoint after the controlled `2a7c8dc` cutover: qualify source-answer usefulness
 for Internet-SLA/FortiGate without weakening integrity guards, and general instruction following
 against held-out EN/FA questions. Correct-source collection passed, but those two answers used
