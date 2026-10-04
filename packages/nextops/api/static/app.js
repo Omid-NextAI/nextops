@@ -132,6 +132,7 @@ const state = {
   answerLocale: "en",
   answerMode: "general",
   incidentTargets: [],
+  sourceCatalog: [],
   lastEvidence: null,
   history: [],
   conversationsEnabled: false,
@@ -149,6 +150,18 @@ const state = {
   token: sessionStorage.getItem("nextops-session") || ""
 };
 const byId = id => document.getElementById(id);
+Object.assign(translations.en, {
+  monitoringSource: "Zabbix source", monitoringSourceTarget: "Approved host",
+  primaryOverview: "Primary Zabbix · default host", approvedCatalogHelp: "Approved inventory, not a live health check. Sending a question retrieves fresh evidence for this host.",
+  sourceCatalogUnavailable: "Additional-source catalogue is unavailable. The primary source remains selectable; no automatic fallback will occur.",
+  sourceTargetRequired: "Choose an approved host for this source."
+});
+Object.assign(translations.fa, {
+  monitoringSource: "منبع زبیکس", monitoringSourceTarget: "میزبان مجاز",
+  primaryOverview: "زبیکس اصلی · میزبان پیش‌فرض", approvedCatalogHelp: "این فهرست، مقصدهای مجاز را نشان می‌دهد، نه سلامت زندهٔ آن‌ها را. با ارسال پرسش، شاهد تازهٔ همان میزبان گردآوری می‌شود.",
+  sourceCatalogUnavailable: "فهرست منابع افزوده در دسترس نیست. منبع اصلی قابل انتخاب است؛ جایگزینی خودکار منبع انجام نمی‌شود.",
+  sourceTargetRequired: "برای این منبع، یک میزبان مجاز انتخاب کنید."
+});
 const resultTemplate = byId("resultCard").cloneNode(true);
 
 Object.assign(translations.en, {
@@ -422,6 +435,8 @@ function setBusy(busy) {
     node.disabled = busy || (node.id === "incidentTarget" && !state.incidentTargets.length);
   });
   byId("askButton").toggleAttribute("aria-busy", busy);
+  byId("monitoringSource").disabled = busy;
+  byId("monitoringSourceTarget").disabled = busy || !byId("monitoringSource").value;
   byId("askButton").querySelector("span").textContent = translations[state.language][busy ? "working" : "askAssistant"];
 }
 
@@ -586,6 +601,10 @@ function showLogin(message = "") {
   state.lastEvidence = null;
   state.conversationsEnabled = false;
   state.thinkingEnabled = false;
+  state.sourceCatalog = [];
+  byId("monitoringSource").replaceChildren();
+  byId("monitoringSourceTarget").replaceChildren();
+  byId("sourceSelectionField").classList.add("hidden");
   byId("savedChatsList").replaceChildren();
   byId("savedChatsPanel").classList.add("hidden");
   byId("thinkingField").classList.add("hidden");
@@ -604,7 +623,7 @@ function updateEvidenceBrief() {
   const displayTime = value => new Date(value).toLocaleString(state.language === "fa" ? "fa-IR" : "en-GB");
   const scopeKey = incident ? ({ filesystems: "filesystemScope", file_listing: "fileScope", network: "networkScope", service: "serviceScope", network_service: "networkServiceScope" }[focus] || "incidentScope") : "monitoringScope";
   const fields = [
-    ["sourceBrief", incident ? "Zabbix + Linux" : "Zabbix", true],
+    ["sourceBrief", incident ? "Zabbix + Linux" : evidence.source_id ? `Zabbix · ${evidence.source_id} / ${evidence.target_id}` : "Zabbix", true],
     ...(incident ? [
       ["linuxCollected", displayTime(evidence.linux.collected_at), true],
       ["zabbixCollected", displayTime(evidence.zabbix.collected_at), true]
@@ -638,6 +657,7 @@ async function showWorkspace() {
   checkAi();
   checkMonitoring();
   loadIncidentTargets();
+  loadSourceCatalog();
   const epoch = state.epoch;
   try {
     const config = await api("/api/v1/conversations/config");
@@ -737,6 +757,53 @@ async function logout() {
   }
 }
 
+function populateSourceTargets() {
+  const source = state.sourceCatalog.find(item => item.source_id === byId("monitoringSource").value);
+  const select = byId("monitoringSourceTarget");
+  select.replaceChildren();
+  (source?.targets || []).forEach(target => {
+    const option = document.createElement("option");
+    option.value = target.target_id;
+    option.textContent = target.label;
+    option.dir = "auto";
+    select.append(option);
+  });
+  select.disabled = !source || state.busy;
+  select.classList.toggle("hidden", !source);
+  document.querySelector('label[for="monitoringSourceTarget"]').classList.toggle("hidden", !source);
+}
+async function loadSourceCatalog() {
+  const epoch = state.epoch;
+  const select = byId("monitoringSource");
+  select.replaceChildren();
+  const primary = document.createElement("option");
+  primary.value = "";
+  primary.dataset.i18n = "primaryOverview";
+  primary.textContent = translations[state.language].primaryOverview;
+  select.append(primary);
+  try {
+    const catalog = await api("/api/v1/monitoring/sources");
+    if (epoch !== state.epoch || !state.token) return;
+    state.sourceCatalog = catalog.sources || [];
+    state.sourceCatalog.forEach(source => {
+      const option = document.createElement("option");
+      option.value = source.source_id;
+      option.textContent = source.label;
+      option.dir = "auto";
+      select.append(option);
+    });
+    byId("sourceCatalogNotice").dataset.i18n = "approvedCatalogHelp";
+  } catch (error) {
+    if (epoch !== state.epoch || !state.token) return;
+    state.sourceCatalog = [];
+    byId("sourceCatalogNotice").dataset.i18n = "sourceCatalogUnavailable";
+  }
+  byId("sourceCatalogNotice").textContent = translations[state.language][byId("sourceCatalogNotice").dataset.i18n];
+  select.disabled = state.busy;
+  populateSourceTargets();
+}
+byId("monitoringSource").addEventListener("change", populateSourceTargets);
+
 async function loadIncidentTargets() {
   const select = byId("incidentTarget");
   select.disabled = true;
@@ -791,7 +858,7 @@ async function checkMonitoring() {
 
 function renderEvidence(evidence) {
   const locale = state.language === "fa" ? "fa-IR" : "en-GB";
-  byId("evidenceSource").textContent = `Zabbix ${evidence.source_version}`;
+  byId("evidenceSource").textContent = `Zabbix ${evidence.source_version}${evidence.source_id ? ` · ${evidence.source_id} / ${evidence.target_id}` : ""}`;
   byId("evidenceHost").textContent = evidence.host;
   byId("evidenceCollected").textContent = new Date(evidence.collected_at).toLocaleString(locale);
   byId("problemCount").textContent = evidence.active_problems.length;
@@ -1026,6 +1093,7 @@ function setAnswerMode(mode) {
   byId("modeHelp").dataset.i18n = helpKey;
   byId("modeHelp").textContent = translations[state.language][helpKey];
   byId("incidentTargetField").classList.toggle("hidden", mode !== "incident");
+  byId("sourceSelectionField").classList.toggle("hidden", mode !== "monitoring");
   byId("thinkingField").classList.toggle("hidden", !state.thinkingEnabled || mode !== "general");
 }
 
@@ -1105,7 +1173,7 @@ byId("assistantForm").addEventListener("submit", async event => {
   const question = byId("question").value;
   if (!question.trim()) { errorNode.textContent = translations[state.language].blankQuestion; return; }
   const namedTarget = requestedHostStatus(question);
-  if (namedTarget && state.incidentTargets.includes(namedTarget)) {
+  if (namedTarget && state.incidentTargets.includes(namedTarget) && !(state.answerMode === "monitoring" && byId("monitoringSource").value)) {
     byId("incidentTarget").value = namedTarget;
     setAnswerMode("incident");
   }
@@ -1126,6 +1194,12 @@ byId("assistantForm").addEventListener("submit", async event => {
     const saved = !incident && !monitoring && state.conversationsEnabled;
     let path = incident ? "/api/v1/incidents/investigate" : monitoring ? "/api/v1/investigate" : "/api/v1/assistant/generate";
     let payload = { locale: state.answerLocale, question, max_output_tokens: 384 };
+    if (monitoring && byId("monitoringSource").value) {
+      if (!byId("monitoringSourceTarget").value) throw new Error(translations[state.language].sourceTargetRequired);
+      payload.source_id = byId("monitoringSource").value;
+      payload.target_id = byId("monitoringSourceTarget").value;
+      path = "/api/v1/monitoring/investigate";
+    }
     if (incident) payload.target_id = byId("incidentTarget").value;
     if (!monitoring && !incident && !saved && state.history.length) payload.history = state.history;
     if (saved) {

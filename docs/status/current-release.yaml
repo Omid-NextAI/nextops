@@ -102,6 +102,12 @@ capabilities:
       - tests/unit/test_source_mcp.py
       - docs/en/MCP.md
       - docs/fa/MCP.md
+      - docs/requirements/MCP_LIVE_DISCOVERY_SPEC.md
+      - packages/nextops/connectors/source_runtime.py
+      - packages/nextops/application/source_access.py
+      - packages/nextops/api/mcp_gateway.py
+      - tests/unit/test_mcp_live_gateway.py
+      - tests/integration/test_source_access_postgresql.py
   - id: scoped_diagnostic_scenario_guards
     status: accepted_controlled
     evidence:

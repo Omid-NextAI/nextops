@@ -1,15 +1,15 @@
 """Source-qualified requests and evidence; no credential or endpoint fields."""
 
-from typing import Annotated, Literal, Self
+from typing import Literal, Self
 from uuid import UUID
 
 from pydantic import Field, model_validator
 
 from nextops.contracts.models import FrozenContract
 from nextops.contracts.monitoring import MonitoringIncidentContext, MonitoringSummary
+from nextops.contracts.sources_ids import LogicalSourceId as LogicalSourceId
+from nextops.contracts.sources_ids import ZabbixObjectId as ZabbixObjectId
 
-LogicalSourceId = Annotated[str, Field(pattern=r"^[a-z][a-z0-9-]{1,31}$")]
-ZabbixObjectId = Annotated[str, Field(pattern=r"^[1-9][0-9]{0,19}$")]
 SourceReadOperation = Literal["summary", "incident_context"]
 
 

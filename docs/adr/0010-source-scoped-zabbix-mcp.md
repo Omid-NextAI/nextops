@@ -77,3 +77,65 @@ deployment remains unchanged. MCP-01 open review items and MCP-02/03 qualificati
 یا جایگزینی خودکار پس از رد MCP. مسیر سازگاری باید از همان مرز سیاست و ممیزی بگذرد و رابط
 قدیمی پس از گذارِ پذیرفته‌شده غیرفعال شود. استقرار HTTP فعلی ثابت است؛ موارد بازِ بازبینی
 MCP-01 و معیارهای MCP-02/03 همچنان باقی‌اند.
+
+## MCP-02 composition addendum / پیوست اتصال عملیاتی MCP-02
+
+### English
+
+Status: bounded source implementation, pending live qualification. See the
+[discovery specification](../requirements/MCP_LIVE_DISCOVERY_SPEC.md).
+
+Decision: the app uses a gateway-specific protected service bearer over verified loopback TLS
+inside the existing verified SSH tunnel. It never forwards the browser bearer or a target token.
+The gateway binds a fixed, deployment-owned service principal to the approved environment. The
+app remains authoritative for the current end user: PostgreSQL session/version/scope checks and
+mandatory access/investigation audit occur before collection and publication. Source and target
+identities survive in stored evidence and the prompt. The gateway's fsynced text-free journal is
+a supplemental service audit, linked by correlation, not a substitute for the app's user audit.
+
+A separate Linux UID owns the read runner. Its Unix socket checks the gateway peer UID; the gateway
+also checks the runner UID. Closed named reads reuse existing drivers, including primary Zabbix
+and Linux incidents. Only the runner gets target credentials and approved target egress; the
+gateway has loopback-only IP access and no target-secret/registry access. At most two runner reads
+execute, with bounded protocol frames, native request deadlines and no queue. The old HTTP unit
+is disabled only at a qualified cutover and retained for matched rollback, never fallback.
+
+Alternatives: a new distributed grant database would enlarge this read-only increment without
+adding end-user authority beyond the existing app. Forwarding user tokens creates an audience
+violation. Combining runner/gateway identities violates credential isolation. These are rejected.
+This private app-only bearer profile is not a general third-party OAuth service; external MCP
+clients or write operations require a separately reviewed authorization design.
+
+Consequences: a compromised app/service bearer remains a trusted-boundary compromise, limited to
+approved read-only tools and targets. Deployment must prove protected delivery and tunnel binding,
+group scoping, service isolation, durable audit, offline restart and matched rollback. Local tests
+alone cannot establish those facts. No new database schema beyond additive user migration 0004.
+
+### فارسی
+
+وضعیت: پیاده‌سازی محدود در کد؛ پذیرش زنده هنوز لازم است.
+[مشخصات کشف](../requirements/MCP_LIVE_DISCOVERY_SPEC.md) مرجع این گام است.
+
+تصمیم: برنامه، توکن خدمتِ اختصاصی درگاه را روی TLS معتبرِ loopback درون تونل SSH با هویت
+تأییدشده به کار می‌گیرد؛ توکن مرورگر یا مقصد ارسال نمی‌شود. هویت خدمت درگاه در استقرار به
+محیط مجاز محدود است. مرجع کاربر نهایی همچنان برنامه است: نشست، نسخهٔ اطلاعات ورود و دامنه
+در PostgreSQL بررسی و دسترسی/تحقیق پیش از گردآوری و انتشار ممیزی می‌شوند. شناسهٔ منبع و
+مقصد در شاهد ذخیره‌شده و پرامپت می‌ماند. دفتر بدون متن شاهد و با fsync درگاه، ممیزی تکمیلی
+خدمت است که با شناسهٔ هم‌بستگی پیوند می‌خورد؛ جایگزین ممیزی کاربر در برنامه نیست.
+
+اجراکننده UID جدا دارد. سوکت Unix آن UID درگاه را بررسی می‌کند و درگاه نیز UID اجراکننده
+را می‌سنجد. خواندن‌های بسته و نام‌دار، گردآورنده‌های فعلیِ زبیکس اصلی و بررسی Linux را حفظ
+می‌کنند. اطلاعات ورود و خروجی شبکهٔ مقصد فقط نزد اجراکننده‌اند؛ درگاه صرفاً loopback دارد و
+به اطلاعات ورود یا فهرست خصوصی مقصد دسترسی ندارد. حداکثر دو خواندن اجرا می‌شود؛ پیام، مهلت
+درخواست و خروجی محدودند و صفی وجود ندارد. unit قبلی HTTP فقط پس از گذار پذیرفته‌شده غیرفعال
+و برای بازگشتِ هماهنگ حفظ می‌شود، نه جایگزینی خودکار.
+
+گزینه‌های ردشده: پایگاه تازهٔ مجوز توزیع‌شده دامنهٔ این گام فقط‌خواندنی را بی‌دلیل گسترش
+می‌دهد؛ ارسال توکن کاربر با مخاطب آن ناسازگار است؛ یکی کردن هویت درگاه و اجراکننده جداسازی
+اطلاعات ورود را از بین می‌برد. این نمایهٔ خصوصیِ مختص برنامه، خدمت عمومی OAuth نیست؛ مشتری
+MCP بیرونی یا عملیات نوشتن به طراحی مجوزِ جدا و بازبینی‌شده نیاز دارد.
+
+پیامد: نفوذ به برنامه یا توکن خدمت، نفوذ به یک مرز اعتماد است، اما اختیار همچنان به ابزار
+فقط‌خواندنی و مقصد مجاز محدود می‌ماند. تحویل محافظت‌شده، تونل، دامنهٔ گروه، جداسازی خدمت،
+ممیزی ماندگار، شروع آفلاین و بازگشت هماهنگ باید در استقرار اثبات شوند. آزمون محلی این موارد
+را اثبات نمی‌کند. جز migration افزایشیِ مدیریت کاربر 0004، ساختار تازهٔ پایگاه لازم نیست.

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Awaitable, Callable
 from datetime import timedelta
 from typing import Any
 
@@ -16,22 +17,32 @@ from nextops.application.errors import ApplicationError
 from nextops.application.source_reads import MAX_SOURCE_EVIDENCE_BYTES, SourceReader
 from nextops.contracts.errors import ErrorCode
 from nextops.contracts.models import ActorContext
+from nextops.contracts.source_catalog import GatewayReadRequest, GatewayToolRequest
 from nextops.contracts.sources import SourceEvidence, SourceReadOperation, SourceReadRequest
 
 TOOLS: dict[str, SourceReadOperation] = {
     "nextops_zabbix_summary": "summary",
     "nextops_zabbix_incident_context": "incident_context",
 }
+COMPAT_TOOLS = {
+    "nextops_primary_summary": "primary_summary",
+    "nextops_primary_incident_context": "primary_incident_context",
+    "nextops_incident_evidence": "incident_evidence",
+}
 
 
-def create_source_mcp_server(reader: SourceReader, actor: ActorContext) -> Server[Any, Any]:
+def create_source_mcp_server(
+    reader: SourceReader,
+    actor: ActorContext,
+    compat_read: Callable[[GatewayReadRequest], Awaitable[dict[str, Any]]] | None = None,
+) -> Server[Any, Any]:
     """The trusted host supplies the actor and real application ports, never the LLM."""
     server: Server[Any, Any] = Server("nextops-zabbix-ro", version="1.0.0")
 
     # The pinned SDK decorators are untyped; adapter inputs/outputs remain typed.
     @server.list_tools()  # type: ignore[no-untyped-call, untyped-decorator]
     async def list_tools() -> list[Tool]:
-        return [
+        tools = [
             Tool(
                 name=name,
                 description=f"Bounded, authorized Zabbix {operation}.",
@@ -43,10 +54,44 @@ def create_source_mcp_server(reader: SourceReader, actor: ActorContext) -> Serve
             )
             for name, operation in TOOLS.items()
         ]
+        if compat_read is not None:
+            tools.extend(
+                Tool(
+                    name=name,
+                    description="Existing bounded read-only driver through the canonical gateway.",
+                    inputSchema=GatewayToolRequest.model_json_schema(),
+                    annotations=ToolAnnotations(
+                        readOnlyHint=True, destructiveHint=False, openWorldHint=False
+                    ),
+                )
+                for name in COMPAT_TOOLS
+            )
+        return tools
 
     @server.call_tool(validate_input=False)  # type: ignore[untyped-decorator]
     async def call_tool(name: str, arguments: dict[str, Any]) -> CallToolResult:
         try:
+            if compat_read is not None and name in COMPAT_TOOLS:
+                try:
+                    args = GatewayToolRequest.model_validate(arguments)
+                    legacy_request = GatewayReadRequest.model_validate(
+                        {
+                            **args.model_dump(),
+                            "operation": COMPAT_TOOLS[name],
+                        }
+                    )
+                except ValidationError:
+                    await reader.deny_protocol(actor, ErrorCode.INVALID_REQUEST)
+                    raise ApplicationError(
+                        ErrorCode.INVALID_REQUEST, "connector.mcp_input_invalid"
+                    ) from None
+                payload = await compat_read(legacy_request)
+                return CallToolResult(
+                    content=[
+                        TextContent(type="text", text=json.dumps(payload, ensure_ascii=False))
+                    ],
+                    structuredContent=payload,
+                )
             operation = TOOLS.get(name)
             if operation is None:
                 await reader.deny_protocol(actor, ErrorCode.POLICY_DENIED)

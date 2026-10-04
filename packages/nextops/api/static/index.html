@@ -149,6 +149,13 @@
             <p id="modeHelp" class="mode-help" data-i18n="generalModeHelp">Answers the question directly without attaching Zabbix status.</p>
           </div>
 
+          <div id="sourceSelectionField" class="target-field hidden">
+            <label for="monitoringSource" data-i18n="monitoringSource">Zabbix source</label>
+            <select id="monitoringSource" disabled></select>
+            <label for="monitoringSourceTarget" data-i18n="monitoringSourceTarget">Approved host</label>
+            <select id="monitoringSourceTarget" disabled></select>
+            <p id="sourceCatalogNotice" role="status" aria-live="polite" data-i18n="approvedCatalogHelp">Approved inventory, not a live health check. Sending a question retrieves fresh evidence for this host.</p>
+          </div>
           <div id="incidentTargetField" class="target-field hidden">
             <label for="incidentTarget" data-i18n="incidentTarget">Investigation target</label>
             <select id="incidentTarget" name="incident_target" disabled></select>

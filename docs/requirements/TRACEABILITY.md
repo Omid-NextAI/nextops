@@ -1,5 +1,16 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+MCP-02 candidate: [approved discovery](MCP_LIVE_DISCOVERY_SPEC.md), ADR 0010, `deploy/mcp/`,
+`source_runtime.py`, `source_access.py`, `mcp_gateway.py`, source catalogue/provenance contracts,
+`test_mcp_live_gateway.py`, `test_source_access_postgresql.py` and bilingual browser controls.
+635 non-browser checks and 30 fixture browser checks pass locally; live/offline/rollback remains
+pending. This is not automatic enrollment or production acceptance.
+
+نامزد MCP-02: [کشف مجاز](MCP_LIVE_DISCOVERY_SPEC.md)، تصمیم 0010، نمایه‌های `deploy/mcp/`،
+اجراکننده/درگاه، سیاست PostgreSQL، قرارداد منشأ و آزمون‌های پروتکل/پایگاه/مرورگر مبنا هستند.
+۶۳۵ آزمون غیرمرورگر و ۳۰ آزمون مرورگر با شاهد ساختگی محلی موفق‌اند؛ پذیرش زنده/آفلاین/بازگشت
+هنوز لازم است. این نتیجه ثبت خودکار مقصد یا پذیرش تولید نیست.
+
 Local admin accounts (sections 11–14/20; 2026-10-04):
 [bounded specification](USER_MANAGEMENT_SPEC.md) maps to closed user contracts, the transactional
 user service, grant 0004, API routes and bilingual UI. `test_user_contracts.py`, user API guards,

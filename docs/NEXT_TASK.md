@@ -1,5 +1,21 @@
 # Next task / کار بعدی
 
+First unfinished checkpoint, 2026-10-04: qualify the integrated MCP/user-panel candidate from
+[MCP-02/03 discovery plan](requirements/MCP_LIVE_DISCOVERY_SPEC.md). Obtain exact-head CI, build
+and prove the offline package, then execute the owner's bounded existing app/connector cutover
+with isolated identities, protected approved inventory and timed exact rollback. Require fresh
+EN/FA selected-source answers and durable provenance/audit, primary/Linux regression, denial,
+source failure isolation, offline restart and rollback. Keep five unobserved empty groups and
+failed model/production/recovery gates truthful; do not expand targets or promote PRs 46/51.
+
+نخستین گام ناتمام، ۴ اکتبر ۲۰۲۶: نامزد ترکیبیِ MCP و مدیریت کاربر طبق
+[برنامهٔ کشف MCP-02/03](requirements/MCP_LIVE_DISCOVERY_SPEC.md) پذیرفته شود. CI همان commit،
+ساخت و نصب آفلاینِ بسته لازم است؛ سپس گذار محدودِ درخواستی مالک روی ماشین‌های موجودِ برنامه
+و اتصال‌دهنده، با هویت جدا، فهرست محافظت‌شده و بازگشت دقیقِ زمان‌دار اجرا شود. پاسخ تازهٔ
+فارسی/انگلیسی از منبع انتخاب‌شده، منشأ/ممیزی ماندگار، عدم پسرفت مسیر اصلی/Linux، رد درخواست،
+جداسازی خرابی منبع، شروع آفلاین و بازگشت لازم‌اند. پنج گروه خالیِ مشاهده‌نشده و شکست معیارهای
+مدل، تولید و بازیابی پنهان نشوند؛ مقصد گسترش نیابد و PRهای 46/51 ارتقا نیابند.
+
 Current review checkpoint, 2026-10-04: complete exact-head CI/review of the bounded
 [user-management candidate](requirements/USER_MANAGEMENT_SPEC.md). Live/offline admin controls
 must include authenticated schema-denial audits (initial CI passed; the review gap is repaired).

@@ -2,7 +2,23 @@
 
 [فارسی](../fa/MCP.md) · [Index](INDEX.md)
 
-**Status: MCP-01 additive source implementation, not deployed.** The existing HTTP connector remains
+**Current candidate, 2026-10-04:** MCP-02 canonical gateway/isolated runner and approved source
+selection are implemented and locally tested; live promotion remains pending. See the
+[bounded discovery plan](../requirements/MCP_LIVE_DISCOVERY_SPEC.md) and ADR 0010 composition addendum.
+The app's `/api/v1/monitoring/sources` lists authorized approved metadata; it does not scan or prove
+health. `/api/v1/monitoring/investigate` accepts an exact `source_id`/`target_id`, records durable
+user audit and passes fresh namespaced evidence to local AI. The bilingual monitoring controls
+show source/host and preserve provenance; unavailable sources never fall back automatically.
+
+The MCP gateway exposes the two source reads plus `nextops_primary_summary`,
+`nextops_primary_incident_context` and `nextops_incident_evidence`. These compatibility tools use
+the same peer-verified isolated runner and scoped existing drivers, not the old HTTP service.
+`deploy/mcp/` contains protected systemd profiles. A private deployment must set exact UID bindings,
+root-owned catalogues/registry, per-runner IP allowlists, TLS/SSH trust and matched rollback. The
+gateway has no target credentials or target-LAN route. Its fsynced service journal supplements,
+not replaces, PostgreSQL user/investigation audit. Audit retention exhaustion fails closed.
+
+**Historical MCP-01 checkpoint:** additive source implementation, not deployed. The HTTP connector remains
 the live path. The broader gateway contract below is still planned. Source: master specification
 sections 11–15 and 21, [bounded specification](../requirements/MULTI_SOURCE_MCP_SPEC.md) and
 [ADR 0010](../adr/0010-source-scoped-zabbix-mcp.md).

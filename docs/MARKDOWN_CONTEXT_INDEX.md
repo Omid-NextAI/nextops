@@ -44,6 +44,7 @@ remaining task-specific sources. The repository skill
 - `docs/requirements/USER_MANAGEMENT_SPEC.md` — Bounded local admin account controls, immutable role profiles, audit/revocation and staged acceptance.
 
 - `docs/requirements/MULTI_SOURCE_MCP_SPEC.md` — Bilingual source-scoped MCP foundation, existing connector-VM migration and staged acceptance.
+- `docs/requirements/MCP_LIVE_DISCOVERY_SPEC.md` — Bilingual bounded canonical gateway/runner, approved discovery, live acceptance and rollback plan.
 - `docs/adr/0010-source-scoped-zabbix-mcp.md` — Optional maintained SDK, scoped runner reuse, application ports and connector-VM placement clarification.
 
 Each bullet uses a repository-relative path followed by its role. Keep the paths synchronized when a

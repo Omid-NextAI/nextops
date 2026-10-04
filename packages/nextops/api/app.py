@@ -1,7 +1,9 @@
 """Authenticated application API and bilingual user-testing panel."""
 
+import asyncio
 import json
 from collections.abc import Awaitable, Callable
+from hashlib import sha256
 from pathlib import Path
 from typing import Annotated, Any, Protocol
 from uuid import UUID, uuid4
@@ -32,6 +34,7 @@ from nextops.api.target_focus import requested_named_target
 from nextops.application.conversations import DurableConversationService, GenerationTicket
 from nextops.application.errors import ApplicationError
 from nextops.application.service import DurableAppService
+from nextops.application.source_access import DurableSourceAccess
 from nextops.application.users import DurableUserService, UserOperation
 from nextops.configuration import AppSettings
 from nextops.contracts.assistant import (
@@ -76,6 +79,8 @@ from nextops.contracts.monitoring import (
     MonitoringIncidentContext,
     MonitoringSummary,
 )
+from nextops.contracts.source_catalog import SourceAssistantRequest, SourceCatalog
+from nextops.contracts.sources import SourceReadRequest
 from nextops.contracts.users import (
     UserCreateRequest,
     UserPage,
@@ -85,6 +90,7 @@ from nextops.contracts.users import (
 )
 from nextops.inference.contracts import InferenceReadiness, ReadinessState
 from nextops.persistence.database import create_database_engine, create_session_factory
+from nextops.security.source_catalog import CatalogBindings, load_catalog
 
 
 class AppService(Protocol):
@@ -198,6 +204,9 @@ def create_app(
     conversation_service: DurableConversationService | None = None,
     conversation_thinking_enabled: bool = False,
     user_service: DurableUserService | None = None,
+    source_gateway: Any | None = None,
+    source_catalog: SourceCatalog | None = None,
+    source_access: DurableSourceAccess | None = None,
 ) -> FastAPI:
     """Build the API around an injected durable service."""
 
@@ -216,7 +225,13 @@ def create_app(
         except ValueError:
             correlation_id = uuid4()
         request.state.correlation_id = correlation_id
-        response = await call_next(request)
+        from nextops.api.request_context import CALL_CORRELATION
+
+        context_token = CALL_CORRELATION.set(correlation_id)
+        try:
+            response = await call_next(request)
+        finally:
+            CALL_CORRELATION.reset(context_token)
         response.headers["X-Correlation-ID"] = str(correlation_id)
         if request.url.path.startswith("/api/v1/users"):
             response.headers["Cache-Control"] = "no-store"
@@ -259,6 +274,14 @@ def create_app(
     ) -> JSONResponse:
         route = request.scope.get("route")
         operation = USER_VALIDATION_OPERATIONS.get(getattr(route, "name", ""))
+        if getattr(route, "name", "") == "source_investigation" and source_access is not None:
+            try:
+                token = current_token(await bearer(request))
+                await run_in_threadpool(
+                    source_access.record, token, _correlation_id(request), "failed"
+                )
+            except ApplicationError as audit_error:
+                return await application_error_handler(request, audit_error)
         if operation is not None:
             # FastAPI rejects malformed JSON/body/path/query before route invocation.
             # Match the trusted route name; never audit the untrusted error input/body.
@@ -532,6 +555,114 @@ def create_app(
                     raise
             raise
 
+    @app.get("/api/v1/monitoring/sources", response_model=SourceCatalog)
+    def monitoring_sources(
+        request: Request, token: Annotated[str, Depends(current_token)]
+    ) -> SourceCatalog:
+        if source_catalog is None or source_access is None:
+            # Still require a valid session before revealing deployment readiness.
+            service.authenticate(token)
+            raise ApplicationError(
+                ErrorCode.DEPENDENCY_UNAVAILABLE, "monitoring.sources_not_configured"
+            )
+        return source_access.catalog(token, _correlation_id(request), source_catalog)
+
+    @app.post("/api/v1/monitoring/investigate", response_model=InvestigationResponse)
+    async def source_investigation(
+        request: Request,
+        payload: SourceAssistantRequest,
+        token: Annotated[str, Depends(current_token)],
+    ) -> InvestigationResponse:
+        if source_catalog is None or source_access is None or source_gateway is None:
+            service.authenticate(token)
+            raise ApplicationError(
+                ErrorCode.DEPENDENCY_UNAVAILABLE, "monitoring.sources_not_configured"
+            )
+        correlation_id = _correlation_id(request)
+        service.authenticate(token)
+        try:
+            binding = CatalogBindings(source_catalog).resolve_binding(
+                payload.source_id, payload.target_id
+            )
+        except ApplicationError:
+            await run_in_threadpool(source_access.record, token, correlation_id, "failed")
+            raise
+        actor = await run_in_threadpool(
+            source_access.record, token, correlation_id, "started", binding
+        )
+        run = await run_in_threadpool(
+            service.create_live_investigation, actor, payload, correlation_id
+        )
+        if isinstance(run.result, LiveInvestigationResult):
+            return _investigation_response(run.result)
+        try:
+            if inference_gateway is None:
+                raise ApplicationError(
+                    ErrorCode.DEPENDENCY_UNAVAILABLE, "investigation.not_configured"
+                )
+            envelope = await source_gateway.read(
+                SourceReadRequest(
+                    source_id=payload.source_id,
+                    target_id=payload.target_id,
+                    correlation_id=correlation_id,
+                )
+            )
+            if (
+                envelope.source_id != payload.source_id
+                or envelope.target_id != payload.target_id
+                or envelope.correlation_id != correlation_id
+                or envelope.operation != "summary"
+                or not isinstance(envelope.evidence, MonitoringSummary)
+            ):
+                raise ApplicationError(
+                    ErrorCode.DEPENDENCY_UNAVAILABLE, "connector.mcp_source_mismatch"
+                )
+            evidence = MonitoringSummary.model_validate(
+                {
+                    **envelope.evidence.model_dump(),
+                    "source_id": envelope.source_id,
+                    "target_id": envelope.target_id,
+                    "host_group_ids": envelope.host_group_ids,
+                }
+            )
+            assistant = await inference_gateway.generate(
+                _grounded_prompt(payload, evidence), correlation_id
+            )
+            assistant = assure_monitoring_answer(payload, assistant, evidence)
+            digest = sha256(evidence.model_dump_json().encode()).hexdigest()
+            fresh_actor = await run_in_threadpool(
+                source_access.record, token, correlation_id, "completed", binding, digest
+            )
+            if fresh_actor != actor:
+                raise ApplicationError(ErrorCode.POLICY_DENIED, "connector.source_scope_changed")
+            result = await run_in_threadpool(
+                service.complete_live_investigation, fresh_actor, run.run_id, assistant, evidence
+            )
+            return _investigation_response(result)
+        except ApplicationError as error:
+            await run_in_threadpool(service.fail_live_investigation, actor, run.run_id, error)
+            raise
+        except asyncio.CancelledError:
+            from anyio import CancelScope
+
+            with CancelScope(shield=True):
+                await asyncio.wait_for(
+                    run_in_threadpool(
+                        service.fail_live_investigation,
+                        actor,
+                        run.run_id,
+                        ApplicationError(ErrorCode.TIMEOUT, "monitoring.source_cancelled"),
+                    ),
+                    5,
+                )
+            raise
+        except Exception:
+            safe_error = ApplicationError(
+                ErrorCode.DEPENDENCY_UNAVAILABLE, "monitoring.source_failed"
+            )
+            await run_in_threadpool(service.fail_live_investigation, actor, run.run_id, safe_error)
+            raise safe_error from None
+
     @app.post("/api/v1/investigate", response_model=InvestigationResponse)
     async def investigate(
         request: Request,
@@ -704,7 +835,7 @@ def create_runtime_app() -> FastAPI:
     session_factory = create_session_factory(engine)
     service = DurableAppService(session_factory, settings)
     inference_gateway = None
-    monitoring_gateway = None
+    monitoring_gateway: MonitoringGateway | None = None
     if settings.inference_base_url and settings.inference_service_secret:
         inference_gateway = LoopbackInferenceGateway(
             settings.inference_base_url,
@@ -717,6 +848,27 @@ def create_runtime_app() -> FastAPI:
             settings.connector_service_secret.get_secret_value(),
             settings.connector_timeout_seconds,
         )
+    source_gateway = None
+    source_catalog = None
+    import os
+
+    if os.environ.get("NEXTOPS_MCP_BASE_URL"):
+        from nextops.api.mcp_gateway import TlsMcpGateway
+        from nextops.security.deployment_credentials import deployment_secret
+
+        source_gateway = TlsMcpGateway(
+            os.environ["NEXTOPS_MCP_BASE_URL"],
+            Path(os.environ["NEXTOPS_MCP_CA_FILE"]),
+            deployment_secret(
+                value_variable="NEXTOPS_MCP_SERVICE_SECRET",
+                file_variable="NEXTOPS_MCP_SERVICE_SECRET_FILE",
+                credential_name="mcp-service-secret",
+            ),
+        )
+        source_catalog = load_catalog(Path(os.environ["NEXTOPS_SOURCE_CATALOG_FILE"]))
+        monitoring_gateway = (
+            source_gateway  # Cutover, never fallback to the old credential-bearing service.
+        )
     return create_app(
         service,
         inference_gateway,
@@ -725,6 +877,9 @@ def create_runtime_app() -> FastAPI:
         DurableConversationService(session_factory) if settings.conversations_enabled else None,
         settings.conversation_thinking_enabled,
         DurableUserService(session_factory),
+        source_gateway,
+        source_catalog,
+        DurableSourceAccess(session_factory),
     )
 
 

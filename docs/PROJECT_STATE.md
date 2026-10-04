@@ -1,5 +1,23 @@
 # Project state / وضعیت پروژه
 
+Current integration candidate, 2026-10-04: reviewed PR 53/54 foundations are composed on
+`codex/zabbix-mcp-live`. Canonical authenticated TLS MCP, separate peer-verified runner, current
+PostgreSQL source policy/audit, namespaced durable evidence and bilingual approved-source controls
+are implemented. Local acceptance: 635 non-browser checks passed, two POSIX checks skipped on
+Windows; 30 real-browser fixture checks passed; strict Linux-target types passed. Live cutover,
+fresh second-source AI answers, offline restart and matched rollback are not yet accepted. The
+protected API-only preflight observed three hosts in three populated approved groups; five empty
+groups remain unobserved. No model/runtime, ESXi/resource or company account change is included.
+
+نامزد یکپارچه‌سازی جاری، ۴ اکتبر ۲۰۲۶: پایه‌های بازبینی‌شدهٔ PR 53/54 روی شاخهٔ
+`codex/zabbix-mcp-live` ترکیب شده‌اند. MCP احرازشده با TLS، اجراکنندهٔ جدا با کنترل UID همتا،
+سیاست/ممیزی جاری در PostgreSQL، شاهد ماندگار با منشأ مشخص و کنترل دوزبانهٔ منابع مجاز
+پیاده شده‌اند. ۶۳۵ آزمون غیرمرورگر موفق، دو آزمون POSIX در Windows اجرا نشده و ۳۰ آزمون
+مرورگر واقعی با شاهد ساختگی موفق‌اند؛ بررسی نوع برای Linux موفق است. گذار زنده، پاسخ تازهٔ
+AI از منبع دوم، شروع آفلاین و بازگشت هماهنگ هنوز پذیرفته نشده‌اند. پیش‌بررسی محافظت‌شدهٔ
+API سه میزبان در سه گروه مجازِ دارای عضو را مشاهده کرد؛ پنج گروه خالی مشاهده نشده‌اند.
+تغییر مدل، runtime، ESXi، منابع یا حساب شرکت در این گام نیست.
+
 Owner-requested user panel, 2026-10-04: admin-only scoped listing, fixed read-only account
 creation, non-admin activation and password reset are implemented with atomic audit/session
 revocation, stale-version denial and protected administrator identities. Bilingual OCS UI retains

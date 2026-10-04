@@ -194,6 +194,8 @@ def _fixture_app() -> FastAPI:
     app.state.general_integrity = "deterministic_fallback"
     app.state.general_delay = 0.0
     app.state.monitoring_requests = []
+    app.state.source_failed = False
+    app.state.source_delay = 0.0
     app.state.saved_chats_enabled = False
     app.state.saved_chats = {}
     app.state.user_role = "admin"
@@ -365,6 +367,22 @@ def _fixture_app() -> FastAPI:
     async def summary() -> dict[str, Any]:
         return _summary()
 
+    @app.get("/api/v1/monitoring/sources")
+    async def source_catalog() -> dict[str, Any]:
+        return {
+            "schema_version": "1.0.0",
+            "discovery_mode": "approved_registry",
+            "sources": [
+                {
+                    "source_id": "secondary",
+                    "label": "Second Zabbix",
+                    "organization_id": str(uuid4()),
+                    "environment_id": str(uuid4()),
+                    "targets": [{"target_id": "sla", "label": "SLA <img src=x>"}],
+                }
+            ],
+        }
+
     @app.post("/api/v1/investigate")
     async def investigate(request: Request) -> dict[str, Any]:
         payload = await request.json()
@@ -393,6 +411,26 @@ def _fixture_app() -> FastAPI:
             "evidence_mode": "live_zabbix",
             "live_monitoring_data": True,
         }
+
+    @app.post("/api/v1/monitoring/investigate")
+    async def selected_source(request: Request) -> Any:
+        await asyncio.sleep(app.state.source_delay)
+        if app.state.source_failed:
+            return JSONResponse(
+                {
+                    "error": {
+                        "code": "dependency_unavailable",
+                        "message_key": "monitoring.source_failed",
+                    }
+                },
+                status_code=503,
+            )
+        result = await investigate(request)
+        payload = app.state.monitoring_requests[-1]
+        result["evidence"].update(
+            source_id=payload["source_id"], target_id=payload["target_id"], host_group_ids=["23"]
+        )
+        return result
 
     @app.get("/api/v1/incidents/targets")
     async def targets() -> dict[str, list[str]]:
@@ -1061,6 +1099,51 @@ def test_network_and_service_focus_hide_unrelated_evidence_until_explicit_expand
             expect(page.get_by_text("nginx.service")).to_be_visible()
         page.set_viewport_size({"width": 375, "height": 812})
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth") is True
+        browser.close()
+
+
+@pytest.mark.parametrize("locale", ["en", "fa"])
+def test_approved_source_selection_provenance_and_no_fallback(
+    browser_server: tuple[str, FastAPI],
+    locale: str,
+) -> None:
+    base_url, app = browser_server
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        _login(page, base_url)
+        if locale == "fa":
+            page.locator("#languageButton").click()
+        page.locator('[data-mode="monitoring"]').focus()
+        page.keyboard.press("Enter")
+        expect(page.locator("#sourceSelectionField")).to_be_visible()
+        expect(page.locator("#monitoringSource option")).to_have_count(2)
+        page.locator("#monitoringSource").select_option("secondary")
+        expect(page.locator("#monitoringSourceTarget")).to_have_value("sla")
+        assert page.locator("#monitoringSourceTarget img").count() == 0
+        page.locator("#question").fill(
+            "وضعیت میزبان انتخاب‌شده چیست؟"
+            if locale == "fa"
+            else "What is the selected host's status?"
+        )
+        page.locator("#askButton").click()
+        expect(page.locator("#evidenceSource")).to_contain_text("secondary / sla")
+        expect(page.locator("#evidenceBrief")).to_contain_text("secondary / sla")
+        assert app.state.monitoring_requests[-1]["source_id"] == "secondary"
+        assert page.locator("html").get_attribute("dir") == ("rtl" if locale == "fa" else "ltr")
+        page.set_viewport_size({"width": 375, "height": 812})
+        assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth") is True
+        app.state.source_failed = True
+        count = len(app.state.monitoring_requests)
+        page.locator("#question").fill("Another fresh status question")
+        page.locator("#askButton").click()
+        expect(page.locator("#assistantError")).not_to_be_empty()
+        expect(page.locator("#askButton")).to_be_enabled()
+        assert len(app.state.monitoring_requests) == count
+        expect(page.locator("#monitoringSource")).to_have_value("secondary")
+        page.locator("#logoutButton").click()
+        expect(page.locator("#monitoringSource option")).to_have_count(0)
+        expect(page.locator("#monitoringSourceTarget option")).to_have_count(0)
         browser.close()
 
 
