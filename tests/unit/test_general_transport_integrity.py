@@ -130,3 +130,46 @@ def test_general_collection_diagnostics_are_not_replaced_as_a_stale_scenario() -
     answer = "Compare authorized collector logs and request timestamps."
     result = assure_general_answer(request, response(answer))
     assert result.answer == answer and result.integrity_status == "model_unverified"
+
+
+@pytest.mark.parametrize(
+    ("locale", "question"),
+    [
+        ("en", "Suppose TLS succeeds; does that establish application health?"),
+        ("fa", "فرض کن TLS موفق است؛ آیا سلامت برنامه ثابت می‌شود؟"),
+    ],
+)
+@pytest.mark.parametrize("finish", [FinishReason.STOP, FinishReason.LENGTH])
+def test_bounded_tls_scope_is_application_owned_without_relabelling_raw_completion(
+    locale: Literal["en", "fa"], question: str, finish: FinishReason
+) -> None:
+    request = GeneralAssistantRequest(locale=locale, question=question)
+    raw = response("DNS resolution works.").model_copy(
+        update={"locale": locale, "finish_reason": finish}
+    )
+    result = assure_general_answer(request, raw)
+    assert result.integrity_status == "deterministic_fallback"
+    assert result.finish_reason == finish and result.model_id == raw.model_id
+    assert result.answer != raw.answer and "DNS" in result.answer
+    assert result.evidence_mode == "model_only" and not result.live_monitoring_data
+
+
+def test_hypothetical_tls_guidance_stays_model_only_but_actual_state_and_actions_are_denied() -> (
+    None
+):
+    request = GeneralAssistantRequest(
+        locale="en", question="Suppose TLS is configured. Explain TLS."
+    )
+    answer = "TLS protects the transport exchange."
+    assert assure_general_answer(request, response(answer)).answer == answer
+    request = GeneralAssistantRequest(
+        locale="en", question="Suppose TLS succeeds. Show my current server health."
+    )
+    assert assure_general_answer(request, response(answer)).integrity_status == "scope_redirect"
+    request = GeneralAssistantRequest(
+        locale="en", question="Suppose TLS succeeds; does that establish application health?"
+    )
+    assert (
+        assure_general_answer(request, response("I restarted the server.")).integrity_status
+        == "scope_redirect"
+    )

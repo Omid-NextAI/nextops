@@ -2,6 +2,22 @@
 
 ## Application-only safeguard increment — 2026-10-04
 
+Iteration 3 (`e0a0fd8`) passed thirteen functional cases and the new stale-data guard, but review
+rejected a TLS-to-DNS-resolution inference. Exact69 rollback completed. Iteration 4 gives a
+visible application-owned scope statement only for anchored hypothetical TLS-conclusion questions.
+Explicit validation supports the supplied exchange, not a DNS method or whole-network/backend
+health. Generic TLS guidance stays model-only; actual-state and execution denials retain priority.
+Preserve raw finish reason/model identity even when a completed but truncated response is replaced;
+timeouts and required-audit failures must not become successful model or application results.
+
+چرخهٔ سوم (`e0a0fd8`) سیزده مورد کارکردی و کنترل دادهٔ قدیمی را گذراند، اما بازبینی، نتیجه‌گیری
+حل نام DNS از اعتبارسنجی TLS را رد کرد؛ بازگشت دقیق به69 انجام شد. چرخهٔ چهارم فقط برای پرسشِ
+نتیجه‌گیری دربارهٔ فرض TLS، دامنه را با پاسخِ آشکارا برنامه‌ای بیان می‌کند. اعتبارسنجیِ بیان‌شده
+همان ارتباط را پوشش می‌دهد، نه روش DNS یا سلامت کل شبکه و اجزای پشتیبان. راهنمای عمومی TLS
+صرفاً مدل باقی می‌ماند؛ ردِ وضعیت واقعی و اجرای عملیات اولویت دارد. علت پایان و هویت مدلِ خام
+حتی در جایگزینیِ پاسخِ تکمیل‌شده ولی بریده حفظ شوند؛ پایان مهلت و شکست ممیزی به موفقیت تبدیل
+نشوند.
+
 Iteration 2 (`f05e222`) passed thirteen functional cases after a private harness corrected its
 conversation-creation expectation to HTTP201. Independent review rejected the Persian stale-data
 answer: absent newer data did not establish a collection fault. Exact69 app/AI rollback completed.

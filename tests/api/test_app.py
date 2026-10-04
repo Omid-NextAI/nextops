@@ -282,7 +282,6 @@ def test_live_or_followup_state_is_not_supplied_by_general_history(question: str
             "en",
             "A synthetic report says a service was active yesterday. Describe what is known now.",
         ),
-        ("en", "Suppose a TLS test succeeds. Does that establish database health?"),
         ("en", "A synthetic report says a service was ready last week. What is known now?"),
         ("fa", "در یک آزمون فرضی، TLS موفق است ولی برنامه HTTP 503 می‌دهد. سلامت آن ثابت است؟"),
         ("fa", "گزارش فرضی می‌گوید سرویس دیروز فعال بوده؛ اکنون چه چیزی از آن معلوم است؟"),
@@ -301,6 +300,30 @@ def test_supplied_scenario_remains_unverified_advice(locale: str, question: str)
     assert body["answer"] == answer
     assert body["integrity_status"] == "model_unverified"
     assert not body["live_monitoring_data"]
+    assert "no_live_evidence" in body["limitations"]
+
+
+@pytest.mark.parametrize(
+    ("locale", "question"),
+    [
+        ("en", "Suppose a TLS test succeeds. Does that establish database health?"),
+        ("fa", "فرض کن TLS موفق است؛ آیا سلامت برنامه ثابت می‌شود؟"),
+    ],
+)
+def test_bounded_tls_conclusion_uses_visible_application_scope(locale: str, question: str) -> None:
+    client = TestClient(
+        create_app(FakeService(), FakeInferenceGateway("DNS resolution is healthy."))
+    )
+    response = client.post(
+        "/api/v1/assistant/generate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={"locale": locale, "question": question},
+    )
+    assert response.status_code == 200
+    body = response.json()
+    assert body["integrity_status"] == "deterministic_fallback"
+    assert "DNS" in body["answer"] and body["answer"] != "DNS resolution is healthy."
+    assert body["evidence_mode"] == "model_only" and not body["live_monitoring_data"]
     assert "no_live_evidence" in body["limitations"]
 
 

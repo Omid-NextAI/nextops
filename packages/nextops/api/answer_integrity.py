@@ -187,6 +187,12 @@ _MISSING_FRESH_DATA_SCENARIO = re.compile(
     r"(?:داده|شواهد|اطلاعات)[^.!؟\n]{0,40}(?:تازه|جدید)[^.!؟\n]{0,30}(?:ندارد|نیست)",
     re.IGNORECASE,
 )
+_TLS_SCOPE_QUESTION = re.compile(
+    r"conclud|whole[ -]network|overall.{0,16}health|"
+    r"(?:establish|prove).{0,30}(?:health|readiness)|"
+    r"چه\s*چیزی.{0,60}معلوم|آیا.{0,30}سلامت|سلامت.{0,20}(?:کل|شبکه)",
+    re.IGNORECASE,
+)
 
 
 def assure_general_answer(
@@ -213,6 +219,11 @@ def assure_general_answer(
     )
     missing_fresh_scenario = bool(
         supplied_scenario and _MISSING_FRESH_DATA_SCENARIO.search(request.question)
+    )
+    supplied_tls_scope = bool(
+        supplied_scenario
+        and re.search(r"\bTLS\b", request.question, re.IGNORECASE)
+        and _TLS_SCOPE_QUESTION.search(request.question)
     )
     requires_live_evidence = bool(
         (
@@ -264,6 +275,7 @@ def assure_general_answer(
         and not incomplete
         and not greeting_mismatch
         and not missing_fresh_scenario
+        and not supplied_tls_scope
     ):
         return assistant.model_copy(
             update={
@@ -289,19 +301,17 @@ def assure_general_answer(
             "read_only_no_action_performed",
             "file_listing_unavailable",
         )
-    elif prompt_echo or incomplete:
+    elif supplied_tls_scope and not requires_live_evidence and not unsafe_claim:
         answer = (
-            "مدل محلی پاسخ قابل اتکایی تولید نکرد. پرسش را با عبارت‌بندی دقیق‌تر دوباره مطرح کنید؛ "
-            "برای وضعیت زیرساخت نیز یکی از حالت‌های دارای شاهد زنده را به کار ببرید."
+            "در فرض توصیف‌شده، موفقیت TLS فقط همان ارتباط رمزنگاری‌شده و اعتبارسنجی‌هایی "
+            "را پوشش می‌دهد که صریحاً بیان شده‌اند. از این مشاهده نمی‌توان روش حل نام DNS، "
+            "سلامت کل شبکه، آمادگی همهٔ اجزای برنامه یا علت خطای API را نتیجه گرفت؛ "
+            "هیچ بررسی زنده یا تغییری انجام نشده است."
             if request.locale == "fa"
-            else "The local model did not produce a reliable answer. Rephrase the question more "
-            "precisely, or use a live evidence mode for infrastructure state."
-        )
-        integrity_status = "deterministic_fallback"
-        limitations = ("no_live_evidence", "model_output_may_be_incorrect")
-    elif greeting_mismatch:
-        answer = (
-            "سلام! چطور می‌توانم کمک کنم؟" if request.locale == "fa" else "Hello! How can I help?"
+            else "Under the supplied assumption, TLS success covers only that encrypted "
+            "exchange and any explicitly stated validation checks. It does not establish "
+            "the DNS resolution method, overall network health, all application components' "
+            "readiness or the API error's cause; no live check or change was performed."
         )
         integrity_status = "deterministic_fallback"
         limitations = ("no_live_evidence", "model_output_may_be_incorrect")
@@ -317,6 +327,22 @@ def assure_general_answer(
             "recorded time, not present status or complete service health. Missing newer "
             "data alone does not establish health, failure or a collection fault; current "
             "state and cause remain unknown without appropriately scoped evidence."
+        )
+        integrity_status = "deterministic_fallback"
+        limitations = ("no_live_evidence", "model_output_may_be_incorrect")
+    elif prompt_echo or incomplete:
+        answer = (
+            "مدل محلی پاسخ قابل اتکایی تولید نکرد. پرسش را با عبارت‌بندی دقیق‌تر دوباره مطرح کنید؛ "
+            "برای وضعیت زیرساخت نیز یکی از حالت‌های دارای شاهد زنده را به کار ببرید."
+            if request.locale == "fa"
+            else "The local model did not produce a reliable answer. Rephrase the question more "
+            "precisely, or use a live evidence mode for infrastructure state."
+        )
+        integrity_status = "deterministic_fallback"
+        limitations = ("no_live_evidence", "model_output_may_be_incorrect")
+    elif greeting_mismatch:
+        answer = (
+            "سلام! چطور می‌توانم کمک کنم؟" if request.locale == "fa" else "Hello! How can I help?"
         )
         integrity_status = "deterministic_fallback"
         limitations = ("no_live_evidence", "model_output_may_be_incorrect")
