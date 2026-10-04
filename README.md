@@ -7,7 +7,16 @@
 Owner update (2026-09-26): the owner tested an ESXi VM snapshot restore. Its dated result has
 not been reviewed here; independent database backup and restore gates remain unpassed.
 
-Current controlled repair (2026-10-03): app/AI API `69c9260` fixes the reported AI-server question
+Current controlled repair (2026-10-04): app/AI API `7ce9d29` adds bounded hypothetical-scenario
+and transport/stale-data safeguards while preserving fresh evidence, saved chat and OCS branding.
+Five CI jobs, 524 local checks, three offline installs, 45 functional browser cases, 36 text-free
+audits/nine live hashes, bounded queue recovery, four-guest WAN/proxy denial, process restart,
+exact69 rollback and final re-promotion passed. Limits are visibly application-owned, not model
+training or unrestricted factual accuracy. Thinking stays off; full-context/VM cold-start and
+general semantic acceptance remain open. See [the record](docs/en/TESTING.md) and authoritative
+[release status](docs/status/current-release.yaml). Live controlled use is not full production acceptance.
+
+Earlier controlled repair (2026-10-03): app/AI API `69c9260` fixes the reported AI-server question
 by visibly selecting the existing approved target, returning that server's actual Linux state
 and keeping Zabbix scope separate. Five CI jobs, offline installs, seven final live functional
 cases, audit/hash matching, exact b5e74f9 rollback and bounded queue recovery passed. Branding,

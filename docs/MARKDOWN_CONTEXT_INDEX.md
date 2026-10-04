@@ -1,6 +1,6 @@
 # NextOps Markdown context index
 
-Updated: 2026-09-29
+Updated: 2026-10-04
 
 This is the durable inventory and routing map for project-owned Markdown. It lets an agent remember
 that every document exists without flooding each task with every file. The documentation validator

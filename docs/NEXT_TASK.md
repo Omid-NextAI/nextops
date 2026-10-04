@@ -1,5 +1,35 @@
 # Next task / کار بعدی
 
+Completed checkpoint, 2026-10-04: scoped diagnostic guards `7ce9d29` are live for controlled
+users after exact CI/offline installs, 45 fresh functional cases, 36 text-free audits/nine hashes,
+bounded admission, four-guest WAN/proxy denial, process restart, exact69 rollback and final
+guarded re-promotion. [Evidence](en/TESTING.md). Do not repeat those accepted increment gates.
+Thinking remains off; PR51 and all four failed guard attempts are retained, not promoted.
+
+First unfinished checkpoint: measure native prefill and post-timeout slot drain, then propose a
+bounded context/thinking profile behind existing interfaces using fresh EN/FA semantic cases.
+The failed 14,336+2,048-token/120-second experiment is not accepted by a configured16K window.
+No timeout/queue enlargement, blind retry, new model/VM allocation or thinking enablement is
+authorized by a failed test. Any new operational profile requires a scoped change record and
+matched rollback, history/audit/contention/offline qualification. Current-source VM reboot/full
+cold start, general held-out semantics, model lineage and full production acceptance remain open.
+
+گام تکمیل‌شدهٔ ۴ اکتبر ۲۰۲۶: کنترل تشخیصیِ `7ce9d29` پس از CI و نصب دقیق آفلاین، ۴۵ مورد
+کارکردیِ تازه، ۳۶ ممیزی بی‌متن/نه هش، پذیرش محدود صف، منع WAN/پراکسی چهار مهمان، شروع دوبارهٔ
+فرایند، بازگشت دقیق به69 و استقرار دوبارهٔ محافظت‌شده، برای کاربران کنترل‌شده زنده است.
+[شاهد](fa/TESTING.md). معیارهای پذیرفته‌شدهٔ همین گام تکرار نشوند. استدلال خاموش است؛ PR51 و
+چهار تلاش ناموفقِ کنترل حفظ شده‌اند، نه مستقر.
+
+نخستین گام ناتمام: هزینهٔ پیش‌پردازش زمینه و زمان آزاد شدن جایگاه مدل پس از مهلت اندازه‌گیری
+و سپس نمایهٔ محدودِ زمینه/استدلال، پشت همان مرزهای موجود و با پرسش معناییِ تازهٔ دوزبانه پیشنهاد
+شود. تنظیم زمینهٔ16K، آزمون ناموفقِ ۱۴۳۳۶+۲۰۴۸ توکن در ۱۲۰ ثانیه را پذیرفته نمی‌کند. شکست
+آزمون، مجوز افزایش مهلت/صف، تکرار کورکورانه، مدل/VM تازه یا فعال کردن استدلال نیست. نمایهٔ
+عملیاتی تازه، رکورد تغییر محدود و پذیرش هماهنگ بازگشت، سابقه/ممیزی، اشتغال و آفلاین می‌خواهد.
+شروع دوبارهٔ VM/شروع کاملاً سردِ کد جاری، معنای مستقلِ عمومی، منشأ مدل و پذیرش کامل تولید بازند.
+
+The following next-task records are dated history, not instructions to repeat accepted work.
+رکوردهای کار بعدی در ادامه تاریخی‌اند، نه دستور تکرار کار پذیرفته‌شده.
+
 First unfinished checkpoint, 2026-10-03 — preserve live standard `69c9260` and both disabled
 thinking flags. The installed 128-token/full-envelope adapter's digit-format and actual near-16K
 deadline gates failed. Do not relabel these as unrun or passed, repeat a timed-out native call

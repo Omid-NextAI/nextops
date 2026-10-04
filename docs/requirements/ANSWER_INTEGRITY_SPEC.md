@@ -1,6 +1,115 @@
 # Answer integrity specification
 
-Status: app/API `nextops-0.1.0-95c6e50` serves controlled user testing with CPU-only 35B-A3B.
+## Application-only safeguard increment — 2026-10-04
+
+Accepted bounded result: matched app/AI `7ce9d29` are live for controlled use after 524 local
+checks, five-job CI, three fresh offline installs, 45 functional browser cases, 36 text-free
+audits/nine live hashes, bounded admission/recovery, four-guest WAN/proxy denial, process restart,
+exact69 rollback and guarded re-promotion. Two actual UI/reload cases preserve the visible
+application-owned fallback notice. [Measured evidence](../en/TESTING.md) records exact artifacts
+and limitations. Current-source VM reboot/full cold start, thinking, near-full context and general
+model semantics are not accepted. Four failed attempts below remain history, not erased passes.
+
+نتیجهٔ محدودِ پذیرفته‌شده: برنامه و AI هماهنگِ `7ce9d29` پس از ۵۲۴ آزمون محلی، پنج کنترل CI،
+سه نصب تازهٔ آفلاین، ۴۵ مورد کارکردیِ مرورگر، ۳۶ ممیزیِ بی‌متن/نه هش زنده، پذیرش/ادامهٔ محدود،
+منع WAN/پراکسی چهار مهمان، شروع دوبارهٔ فرایند، بازگشت دقیق به69 و استقرار محافظت‌شده زنده‌اند.
+دو مورد واقعیِ رابط/بازکردن دوباره، هشدار آشکارِ پاسخ برنامه‌ای را حفظ کردند. [شاهد](../fa/TESTING.md)
+فایل دقیق و محدودیت را ثبت می‌کند. شروع دوبارهٔ VM/شروع کاملاً سردِ کد جاری، استدلال، زمینهٔ
+نزدیک ظرفیت کامل و معنای عمومیِ مدل پذیرفته نیستند. چهار تلاش ناموفقِ زیر سابقه‌اند، نه موفقیتِ
+بازنویسی‌شده.
+
+Iteration 4 (`1a934e9`) passed thirteen functional cases, ten saved audits/three live hashes and
+bounded admission/recovery, but the English certificate/hostname question omitted the literal TLS
+keyword and missed the scope guard. Exact69 rollback completed. Iteration 5 covers that explicit
+validation wording in both languages, with API/unit regressions using the measured question.
+The fallback reports only stated checks; it must not invent an encrypted exchange when only
+certificate/name validation was supplied. Four failed source identities remain preserved.
+
+چرخهٔ چهارم (`1a934e9`) سیزده مورد کارکردی، ده ممیزی گفت‌وگو/سه هش شاهد و پذیرش/ادامهٔ محدود
+صف را گذراند، اما پرسش انگلیسیِ گواهی و نام میزبان، واژهٔ TLS نداشت و کنترل دامنه را نگرفت.
+بازگشت دقیق به69 انجام شد. چرخهٔ پنجم این بیان صریحِ اعتبارسنجی را در هر دو زبان، با آزمون
+واحد/APIِ پرسشِ اندازه‌گیری‌شده پوشش می‌دهد. پاسخ جایگزین فقط بررسیِ بیان‌شده را گزارش کند؛
+اگر فقط اعتبارسنجی گواهی/نام داده شده، ارتباط رمزنگاری‌شده ساخته نشود. چهار کد ناموفق حفظ‌اند.
+
+Iteration 3 (`e0a0fd8`) passed thirteen functional cases and the new stale-data guard, but review
+rejected a TLS-to-DNS-resolution inference. Exact69 rollback completed. Iteration 4 gives a
+visible application-owned scope statement only for anchored hypothetical TLS-conclusion questions.
+Explicit validation supports the supplied exchange, not a DNS method or whole-network/backend
+health. Generic TLS guidance stays model-only; actual-state and execution denials retain priority.
+Preserve raw finish reason/model identity even when a completed but truncated response is replaced;
+timeouts and required-audit failures must not become successful model or application results.
+
+چرخهٔ سوم (`e0a0fd8`) سیزده مورد کارکردی و کنترل دادهٔ قدیمی را گذراند، اما بازبینی، نتیجه‌گیری
+حل نام DNS از اعتبارسنجی TLS را رد کرد؛ بازگشت دقیق به69 انجام شد. چرخهٔ چهارم فقط برای پرسشِ
+نتیجه‌گیری دربارهٔ فرض TLS، دامنه را با پاسخِ آشکارا برنامه‌ای بیان می‌کند. اعتبارسنجیِ بیان‌شده
+همان ارتباط را پوشش می‌دهد، نه روش DNS یا سلامت کل شبکه و اجزای پشتیبان. راهنمای عمومی TLS
+صرفاً مدل باقی می‌ماند؛ ردِ وضعیت واقعی و اجرای عملیات اولویت دارد. علت پایان و هویت مدلِ خام
+حتی در جایگزینیِ پاسخِ تکمیل‌شده ولی بریده حفظ شوند؛ پایان مهلت و شکست ممیزی به موفقیت تبدیل
+نشوند.
+
+Iteration 2 (`f05e222`) passed thirteen functional cases after a private harness corrected its
+conversation-creation expectation to HTTP201. Independent review rejected the Persian stale-data
+answer: absent newer data did not establish a collection fault. Exact69 app/AI rollback completed.
+Iteration 3 uses an application-owned, visibly labelled limitation for bounded supplied scenarios
+with no fresh observations: no current health, failure or collection cause can be inferred from
+absence alone. Correct raw model output is not claimed; mixed actual-state/execution denial wins.
+Keep both failed sources and the interrupted harness report; no wider profile or truth guarantee.
+
+چرخهٔ دوم (`f05e222`) پس از اصلاح انتظار ابزار خصوصی برای کد HTTP201 ایجاد گفت‌وگو، سیزده
+مورد کارکردی را گذراند. بازبینی مستقل، پاسخ فارسیِ دادهٔ قدیمی را رد کرد: نبود دادهٔ تازه،
+اختلال در گردآوری را ثابت نمی‌کند. برنامه و AI دقیقاً به69 بازگشتند. چرخهٔ سوم، برای مثال
+فرضیِ محدودِ بدون مشاهدهٔ تازه، محدودیت را با پاسخِ آشکارا برنامه‌ای بیان می‌کند: سلامت،
+خرابی یا علتِ گردآوری از نبود داده به‌تنهایی نتیجه نمی‌شود. درستیِ خروجی خام مدل ادعا نشود؛
+ردِ پرسش آمیخته با وضعیت واقعی و اجرای عملیات اولویت دارد. دو نامزد ناموفق و گزارش ابزارِ
+متوقف‌شده حفظ شوند؛ نمایهٔ گسترده‌تر یا تضمین حقیقت افزوده نمی‌شود.
+
+Iteration 1 (`b80758e`) passed thirteen functional browser cases, four text-free saved audits,
+three live evidence hashes and bounded queue recovery, but review found a new FA TLS-to-network-
+health overclaim. Exact69 app/AI rollback completed; it is not accepted. Iteration 2 adds scoped
+general guidance on conditional scenarios/no unnecessary follow-up and rejects this reviewed
+global-health wording. Requalify exact source; preserve all iteration-1 artifacts and scores.
+
+چرخهٔ نخست (`b80758e`) سیزده مورد کارکردیِ مرورگر، چهار ممیزی بی‌متن گفت‌وگو، سه هش شاهد
+زنده و ادامهٔ صف را گذراند، ولی بازبینی، ادعای تازهٔ فارسیِ سلامت شبکه از موفقیت TLS را یافت.
+بازگشت دقیقِ برنامه/AI به69 تکمیل شد؛ نامزد پذیرفته نیست. چرخهٔ دوم، راهنمای محدودِ شرطی و
+پرهیز از پرسش پیگیریِ غیرضروری و ردِ همین ادعای بررسی‌شده را اضافه می‌کند. کد دقیق دوباره
+پذیرفته و همهٔ فایل‌ها و امتیاز چرخهٔ نخست حفظ شوند.
+
+Owner-authorized repair/deployment loop, bounded scope: preserve the standard35 profile and
+existing provider guidance, memory quotas, schema, branding and disabled thinking. The broader
+capability-v2 source passed CI but failed raw proxy semantics in sixteen private new generations;
+it remains unpromoted in PR51. This increment does not qualify that source or erase its failures.
+
+Repair supplied-scenario classification while mixed actual-state requests remain redirected.
+Reject reviewed listener/SYN-SENT-to-reachability overclaims with a visible deterministic fallback,
+not invented evidence or a silently rewritten model pass. Negative scoped explanations must stay
+usable. Lexical safeguards are limited coverage, not proof of all technical facts. No generated-code
+execution, new tools, credentials, downloads, model/resource change or schema migration.
+
+Plan: source/API regressions and paired guides; locked CI/PG16/17; fresh hash-locked offline package;
+protected source staging; matched EN/FA browser/API, saved follow-up, current-state/mutation denial,
+source identity/text-free audit, bounded admission/recovery, current-source offline process start and
+exact69 rollback; guarded re-promotion only after those increment gates pass. Preserve failed broader
+semantics/full-context gates and separately unrun production gates. Use a timed rollback guard;
+retain immutable69 and its model/configuration. Failure rolls back this source, not transcripts.
+
+دامنهٔ محدودِ چرخهٔ اصلاح و استقرارِ مجازِ مالک: نمایهٔ معمولی مدل35، دستور فعلی مدل، سهم
+سابقه، پایگاه، هویت بصری و استدلال خاموش حفظ شوند. کد گستردهٔ capability-v2 با وجود CI موفق،
+در شانزده تولید خصوصیِ تازه، معنای پراکسی را نپذیرفت و در PR51 مستقر نشده است؛ این گام آن
+کد را تأیید و شکست را حذف نمی‌کند. قصدِ مثال فرضی اصلاح شود، ولی پرسش آمیخته با وضعیت واقعی
+همچنان به مسیر شاهد هدایت شود. ادعای بررسی‌شدهٔ تبدیل شنود/SYN-SENT به دسترسی، با پاسخ
+جایگزین قطعی و برچسب آشکار رد شود، نه شاهد ساختگی یا موفقیت پنهانِ مدل. توضیح منفی و محدود
+قابل‌استفاده بماند. کنترل واژگانی پوشش محدود دارد و تضمین همهٔ واقعیت‌های فنی نیست.
+
+ترتیب پذیرش: آزمون کد/API و راهنمای دوزبانه؛ CI و PostgreSQL16/17؛ بستهٔ تازهٔ آفلاین و
+هش‌قفل؛ آماده‌سازی خصوصی؛ آزمون هماهنگ مرورگر/API فارسی و انگلیسی، ادامهٔ سابقه، ردِ ادعای
+وضعیت و اجرای تغییر، هویت کد/ممیزی بی‌متن، صف و ادامهٔ محدود پس از خطا، شروع آفلاینِ همین
+نسخه و بازگشت دقیق به69؛ سپس استقرار دوبارهٔ محافظت‌شده. شکست معنا/زمینهٔ کامل و معیارهای
+تولیدِ اجرا‌نشده محفوظ بمانند. بازگشت زمان‌دار و نسخهٔ تغییرناپذیر69 با مدل/تنظیم ثابت حفظ
+شوند؛ شکست فقط این کد را برگرداند، نه گفت‌وگوها را. ابزار، اطلاعات ورود، دانلود، منابع و
+پایگاه تازه و اجرای کد مدل در دامنه نیستند.
+
+Historical status: app/API `nextops-0.1.0-95c6e50` served controlled user testing with CPU-only 35B-A3B.
 Named live regressions and exact app/API/model rollback passed; full held-out semantics remain partial.
 Matched 14B development review failed. Verified 32B import failed its Persian evidence deadline,
 with semantic review partial. 30B-A3B import/deadline checks passed, but later Persian technical

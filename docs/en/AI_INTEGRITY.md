@@ -1,6 +1,34 @@
 # AI answer integrity
 
-## Current named-server scope safeguard — 2026-10-03
+## Deployed scoped diagnostic safeguards — 2026-10-04
+
+Matched app/AI `7ce9d29` now serve controlled users. The bounded supplied-scenario classifier
+does not label hypothetical premises as fresh infrastructure evidence; mixed actual-state and
+unsupported execution requests still redirect. Reviewed listener/SYN-SENT reachability,
+timeout-type and blanket-health overclaims receive a visible `deterministic_fallback`; scoped
+negative explanations remain `model_unverified`. Lexical rules are limited coverage, not an
+arbitrary fact checker or authorization mechanism.
+
+Anchored supplied TLS or explicit certificate/hostname validation conclusion questions receive
+a visibly application-owned statement limited to the stated checks. It does not infer DNS method,
+whole-network health, backend readiness or a cause for an API error; certificate/name validation
+alone is not rewritten as an encrypted exchange. Bounded supplied scenarios explicitly lacking
+fresh data likewise state that absence alone proves neither health, failure nor a collection
+fault. Generic technical guidance is not replaced. Both scoped answers remain `model_only`,
+without live evidence, and preserve raw finish reason/model identity. They are application guard
+passes, not raw-model semantic passes or model training.
+
+Four earlier candidates failed independent review and were exactly rolled back to69; their
+reports and the broader unpromoted PR51 failures remain protected. This candidate passed exact
+CI/offline installs, 45 functional cases across first/offline/rollback/final campaigns, 36
+text-free audits, nine live hash pairs, bounded queue recovery, four-guest WAN/proxy denial and
+actual app/native-model/API restart. Final UI/reload checks verified the fallback notice. See
+[the measured record](TESTING.md). No generated code is executed; model/runtime, deadlines,
+queues, history quotas, schema and OCS assets are unchanged. Thinking remains off. Current-source
+VM reboot/full cold start, near-full-context generation and broad technical quality are not
+accepted. Historical records below do not change the current release identity.
+
+## Earlier named-server scope safeguard — 2026-10-03
 
 Matched app/AI `69c9260` is live for controlled use. The reported Persian question about the AI
 server no longer receives another Zabbix host's health as its answer: narrow intent selects an

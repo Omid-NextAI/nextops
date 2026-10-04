@@ -1,5 +1,33 @@
 # Project state / وضعیت پروژه
 
+Verified scoped deployment, 2026-10-04: app/AI `7ce9d29` now serve controlled users with the
+unchanged CPU-only35 model and disabled thinking. Five-job CI, 524 local checks, three fresh
+hash-locked offline installs, 45 functional browser cases across first/offline/exact69 rollback/
+final campaigns, 36 text-free completion audits, nine live hash pairs and bounded admission/
+recovery passed. Server-side WAN/proxy denial on all four guests and actual app/native-model/API
+restart passed with fresh login, answers and LAN evidence. Two final actual UI fallback/reload
+cases passed. Only owned transient network/rollback guards were removed; immutable69 remains.
+Four failed candidates were exactly rolled back and retained before this accepted repair. Narrow
+supplied-scenario limits are visibly application-owned, not raw model truth guarantees. Broader
+PR51 tuning remains unpromoted. This source has no VM reboot/full cold-start acceptance; full
+context, thinking, general semantic quality and production acceptance remain open. Details and
+exact hashes: [testing](en/TESTING.md); identity: [release manifest](status/current-release.yaml).
+
+استقرار محدودِ تأییدشده، ۴ اکتبر ۲۰۲۶: برنامه و AI نسخهٔ `7ce9d29` با همان مدل35 صرفاً CPU
+و استدلال خاموش، برای کاربران کنترل‌شده زنده‌اند. پنج کنترل CI، ۵۲۴ آزمون محلی، سه نصب تازهٔ
+آفلاینِ هش‌قفل، ۴۵ مورد کارکردیِ مرورگر در مراحل نخست/آفلاین/بازگشت دقیق به69/نهایی، ۳۶ ممیزیِ
+تکمیلِ بی‌متن، نه جفت هشِ زنده و پذیرش/ادامهٔ محدود صف موفق بودند. منع WAN/پراکسی چهار مهمان
+و شروع واقعیِ دوبارهٔ برنامه، مدل و API با ورود، پاسخ تازه و شاهد شبکهٔ داخلی موفق بود؛ دو
+بررسی نهاییِ رابط و بارگذاری دوبارهٔ پاسخ جایگزین نیز گذشتند. فقط محافظ‌های موقتِ همین آزمون
+حذف شدند؛ نسخهٔ تغییرناپذیر69 باقی است. چهار نامزد ناموفق پیش از این اصلاح پذیرفته‌شده، دقیقاً
+بازگردانده و حفظ شدند. محدودیتِ مثالِ فرضی آشکارا پاسخ برنامه است، نه تضمین حقیقتِ خام مدل.
+تنظیم گستردهٔ PR51 مستقر نشده است. شروع دوبارهٔ VM و شروع کاملاً سردِ این کد پذیرفته نیست؛
+زمینهٔ کامل، استدلال، کیفیت عمومیِ معنا و پذیرش تولید بازند. جزئیات و هش در [آزمون](fa/TESTING.md)
+و هویت جاری در [رکورد انتشار](status/current-release.yaml) ثبت‌اند.
+
+The following records are dated history; they do not override the verified identity above.
+رکوردهای زیر سابقهٔ تاریخ‌دارند و هویت تأییدشدهٔ بالا را تغییر نمی‌دهند.
+
 Thinking requalification, 2026-10-03 — standard app/AI `69c9260` are unchanged and live.
 Eight installed-adapter short EN/FA requests completed, but Persian digit-only formatting failed.
 A real 14,336-token input plus 2,048 output reservation failed at the fixed 120-second deadline;

@@ -15,6 +15,8 @@ from unittest.mock import patch
 import yaml
 from jsonschema import Draft202012Validator
 
+from nextops.inference.llama_cpp import THINKING_BUDGET_TOKENS
+
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -50,6 +52,7 @@ def test_expanded_profile_revision_matches_the_serving_inference_api_record() ->
     status = _manifest()
     profile = json.loads((ROOT / "deploy/inference/expanded-chat-profile.json").read_text("utf-8"))
     assert profile["source_commit"] == status["components"]["inference_api"]["source_commit"]
+    assert profile["request_reasoning_budget_tokens"] == THINKING_BUDGET_TOKENS
 
 
 def test_selected_model_identity_checks_all_fields_and_rejects_unqualified_selection() -> None:

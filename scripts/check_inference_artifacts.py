@@ -127,6 +127,7 @@ def validate_chat_candidates(directory: Path) -> None:
         "standard_total_output_tokens": 1024,
         "thinking_total_output_tokens": 2048,
         "runtime_reasoning_budget_tokens": 384,
+        "request_reasoning_budget_tokens": 128,
         "max_active_requests": 1,
         "max_queued_requests": 2,
         "max_conversations_per_identity": 50,

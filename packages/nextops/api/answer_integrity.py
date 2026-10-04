@@ -50,6 +50,28 @@ _EXPLICIT_CURRENT_FACT_QUESTION = re.compile(
     r"(?:وضعیت.{0,60}(?:چیست|چگونه\s*است)|آیا.{0,60}(?:اکنون|فعلی|الان)))",
     re.IGNORECASE,
 )
+# Narrow interpretation of a supplied scenario, never permission to inspect a target.
+# Matching a marker alone cannot override a mixed explicit live-state request.
+_SUPPLIED_SCENARIO = re.compile(
+    r"^\s*(?:in\s+(?:a|this)\s+(?:synthetic|hypothetical|example)\b|"
+    r"a\s+(?:synthetic|hypothetical)\s+(?:report|test|lookup|tcp|tls)\b|"
+    r"suppose\b|"
+    r"(?:در\s+(?:یک\s+)?(?:آزمون|مثال|گزارش)\s+(?:فرضی|آزمایشی)|"
+    r"فرض\s*کن(?:ید)?\b|گزارش\s+فرضی))",
+    re.IGNORECASE,
+)
+_REAL_TARGET_REQUEST = re.compile(
+    r"(?:\b(?:my|our|actual|real|production|company)\b.{0,80}"
+    r"\b(?:server|service|system|database|network|firewall|status|state|health)\b|"
+    r"(?:^|[?;.]\s*|\band\s+)(?:show|check|inspect|fetch|retrieve|confirm|verify|tell|report)"
+    r"\b.{0,80}"
+    r"\b(?:current|now|today|live|actual|real|production|my|our)\b|"
+    r"(?:سرور|سرویس|شبکه|برنامه|وضعیت|سلامت).{0,40}"
+    r"(?<!\w)(?:من|ما|واقعی|شرکت|عملیاتی)(?!\w)|"
+    r"(?:نشان\s*بده|تأیید\s*کن|بررسی\s*کن|گزارش\s*بده).{0,60}"
+    r"(?<!\w)(?:فعلی|الان|اکنون|واقعی|زنده|من|ما)(?!\w))",
+    re.IGNORECASE,
+)
 _SINGLE_CHECK_HEALTH = re.compile(
     r"(?:\b(?:successful|succeeds|success)\b.{0,80}\b(?:means|proves|confirms)\b"
     r".{0,45}\b(?:network|system|service|server)\b.{0,25}\b(?:healthy|secure|safe)\b|"
@@ -60,6 +82,42 @@ _SINGLE_CHECK_HEALTH = re.compile(
 )
 _HEALTH_NEGATION = re.compile(r"(?:\b(?:not|never|cannot)\b|نیست|نمی[‌ ]|نه\s)", re.IGNORECASE)
 _HEALTH_TRAILING_NEGATION = re.compile(r"^\s*(?:نیست|نمی[‌ ]|نخواهد)")
+_GLOBAL_NETWORK_HEALTH = re.compile(
+    r"(?:سلامت\s+(?:لایه[ٔ‌ ]*\s*)?شبکه.{0,60}"
+    r"(?:تأیید|تایید|اثبات|تضمین)\s*(?:شد(?:ه)?|می[‌ ]شود)|"
+    r"\b(?:overall|entire|whole)\s+network\b.{0,50}\b(?:is|was)\s+(?:healthy|secure)\b)",
+    re.IGNORECASE,
+)
+_TRANSPORT_OVERCLAIMS = (
+    re.compile(
+        r"\b(?:listener|listening|SYN-SENT)\b"
+        r"(?:(?!\n\s*\d+[.)]\s).){0,900}?"
+        r"(?<!not )(?<!never )(?<!cannot )(?<!doesn't )"
+        r"\b(?:proves?|confirms?|establish(?:es)?|means)\b"
+        r".{0,90}?\b(?:reachab(?:le|ility)|(?:completed|established|successful)\s+"
+        r"(?:TCP\s+)?connection)\b",
+        re.IGNORECASE | re.DOTALL,
+    ),
+    re.compile(
+        r"\b(?:immediately|milliseconds|ESTABLISHED|CLOSE_WAIT|TIME_WAIT)\b"
+        r".{0,100}?\b(?:means|indicates|is|likely)\b.{0,60}?"
+        r"\b(?:connect|read)[ _-]+timeout\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"(?:شنود|گوش\s*می[‌ ]دهد|SYN-SENT).{0,150}?"
+        r"(?:اثبات\s*می[‌ ]کند|تأیید\s*می[‌ ]کند|یعنی)"
+        r".{0,60}?(?:دسترسی[‌ ]پذیر|اتصال.{0,12}(?:برقرار|موفق))"
+        r"(?!\s*(?:نیست|نشده|نمی[‌ ]))",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"(?:بلافاصله|میلی[‌ ]?ثانیه|ESTABLISHED|CLOSE_WAIT|TIME_WAIT).{0,120}?"
+        r"(?:احتمالاً|نشانه|یعنی|نشان\s*می[‌ ]دهد).{0,40}?"
+        r"(?:connect|read)[ _-]+timeout",
+        re.IGNORECASE,
+    ),
+)
 _UNSAFE_EXECUTION_CLAIMS = (
     re.compile(
         r"\b(?:i|we)\s+(?:have\s+)?(?:successfully\s+)?(?:restarted|rebooted|deployed|"
@@ -124,6 +182,24 @@ _HOST_AVAILABILITY_QUESTION = re.compile(
 )
 
 
+_MISSING_FRESH_DATA_SCENARIO = re.compile(
+    r"\bno\s+(?:newer|recent|current|fresh)\s+(?:data|observations?|measurements?|evidence)\b|"
+    r"(?:داده|شواهد|اطلاعات)[^.!؟\n]{0,40}(?:تازه|جدید)[^.!؟\n]{0,30}(?:ندارد|نیست)",
+    re.IGNORECASE,
+)
+_TLS_SCOPE_QUESTION = re.compile(
+    r"conclud|whole[ -]network|overall.{0,16}health|"
+    r"(?:establish|prove).{0,30}(?:health|readiness)|"
+    r"چه\s*چیزی.{0,60}معلوم|آیا.{0,30}سلامت|سلامت.{0,20}(?:کل|شبکه)",
+    re.IGNORECASE,
+)
+_SUPPLIED_TLS_OR_NAME_VALIDATION = re.compile(
+    r"\bTLS\b|\bcertificate.{0,50}(?:hostname|host\s+name|server\s+name)|"
+    r"گواهی.{0,40}نام\s*میزبان",
+    re.IGNORECASE,
+)
+
+
 def assure_general_answer(
     request: AssistantRequest,
     assistant: AssistantResponse,
@@ -135,7 +211,25 @@ def assure_general_answer(
         and any(_OPERATIONAL_SUBJECT_MARKERS.search(turn.question) for turn in request.history)
     )
     direct_subject = bool(_OPERATIONAL_SUBJECT_MARKERS.search(request.question))
-    explicit_current_fact = bool(_EXPLICIT_CURRENT_FACT_QUESTION.search(request.question))
+    explicit_current_fact = any(
+        # A question about what is *known* in a supplied scenario does not ask us
+        # to inspect infrastructure. Every other explicit clause retains priority.
+        not re.fullmatch(r"[?;.\s]*what is known now", match.group(), re.IGNORECASE)
+        for match in _EXPLICIT_CURRENT_FACT_QUESTION.finditer(request.question)
+    )
+    supplied_scenario = bool(
+        _SUPPLIED_SCENARIO.search(request.question)
+        and not explicit_current_fact
+        and not _REAL_TARGET_REQUEST.search(request.question)
+    )
+    missing_fresh_scenario = bool(
+        supplied_scenario and _MISSING_FRESH_DATA_SCENARIO.search(request.question)
+    )
+    supplied_tls_scope = bool(
+        supplied_scenario
+        and _SUPPLIED_TLS_OR_NAME_VALIDATION.search(request.question)
+        and _TLS_SCOPE_QUESTION.search(request.question)
+    )
     requires_live_evidence = bool(
         (
             (
@@ -145,6 +239,7 @@ def assure_general_answer(
             or (explicit_current_fact and direct_subject)
         )
         and (not _DIAGNOSTIC_GUIDANCE_QUESTION.search(request.question) or explicit_current_fact)
+        and not supplied_scenario
     )
     file_request = bool(_SYSTEM_FILE_REQUEST.search(request.question))
     unsafe_claim = _contains_unsafe_execution_claim(assistant.answer)
@@ -152,6 +247,16 @@ def assure_general_answer(
         not _HEALTH_NEGATION.search(match.group())
         and not _HEALTH_TRAILING_NEGATION.search(assistant.answer[match.end() : match.end() + 16])
         for match in _SINGLE_CHECK_HEALTH.finditer(assistant.answer)
+    )
+    transport_overclaim = any(pattern.search(assistant.answer) for pattern in _TRANSPORT_OVERCLAIMS)
+    global_health_overclaim = any(
+        not re.search(
+            r"\b(?:if|assuming)\s+(?:the\s+)?$|اگر\s*$",
+            assistant.answer[max(0, m.start() - 20) : m.start()],
+            re.IGNORECASE,
+        )
+        and not re.match(r"\s*باشد", assistant.answer[m.end() :])
+        for m in _GLOBAL_NETWORK_HEALTH.finditer(assistant.answer)
     )
     prompt_echo = _is_long_prompt_echo(request.question, assistant.answer)
     incomplete = assistant.finish_reason != FinishReason.STOP
@@ -169,9 +274,13 @@ def assure_general_answer(
         and not file_request
         and not unsafe_claim
         and not single_check_health
+        and not transport_overclaim
+        and not global_health_overclaim
         and not prompt_echo
         and not incomplete
         and not greeting_mismatch
+        and not missing_fresh_scenario
+        and not supplied_tls_scope
     ):
         return assistant.model_copy(
             update={
@@ -197,6 +306,35 @@ def assure_general_answer(
             "read_only_no_action_performed",
             "file_listing_unavailable",
         )
+    elif supplied_tls_scope and not requires_live_evidence and not unsafe_claim:
+        answer = (
+            "در فرض توصیف‌شده، موفقیت TLS یا اعتبارسنجی گواهی و نام میزبان فقط بررسی‌هایی "
+            "را پوشش می‌دهد که صریحاً بیان شده‌اند. از این مشاهده نمی‌توان روش حل نام DNS، "
+            "سلامت کل شبکه، آمادگی همهٔ اجزای برنامه یا علت خطای API را نتیجه گرفت؛ "
+            "هیچ بررسی زنده یا تغییری انجام نشده است."
+            if request.locale == "fa"
+            else "Under the supplied assumption, TLS or certificate/hostname validation "
+            "success covers only the checks explicitly stated. It does not establish "
+            "the DNS resolution method, overall network health, all application components' "
+            "readiness or the API error's cause; no live check or change was performed."
+        )
+        integrity_status = "deterministic_fallback"
+        limitations = ("no_live_evidence", "model_output_may_be_incorrect")
+    elif missing_fresh_scenario and not requires_live_evidence and not unsafe_claim:
+        # A bounded hypothetical's absent fresh observations cannot establish a cause.
+        # This visible application-owned answer is not a raw model accuracy pass.
+        answer = (
+            "در این مثال، گزارش قدیمی فقط مشاهدهٔ ثبت‌شده در زمان خودش را بیان می‌کند، نه "
+            "وضعیت فعلی یا سلامت کامل سرویس را. نبود دادهٔ تازه به‌تنهایی سلامت، خرابی یا "
+            "اختلال در گردآوری را ثابت نمی‌کند؛ وضعیت و علت، بدون شاهد متناسب نامعلوم‌اند."
+            if request.locale == "fa"
+            else "In this scenario, an older report describes only the observation at its "
+            "recorded time, not present status or complete service health. Missing newer "
+            "data alone does not establish health, failure or a collection fault; current "
+            "state and cause remain unknown without appropriately scoped evidence."
+        )
+        integrity_status = "deterministic_fallback"
+        limitations = ("no_live_evidence", "model_output_may_be_incorrect")
     elif prompt_echo or incomplete:
         answer = (
             "مدل محلی پاسخ قابل اتکایی تولید نکرد. پرسش را با عبارت‌بندی دقیق‌تر دوباره مطرح کنید؛ "
@@ -210,6 +348,40 @@ def assure_general_answer(
     elif greeting_mismatch:
         answer = (
             "سلام! چطور می‌توانم کمک کنم؟" if request.locale == "fa" else "Hello! How can I help?"
+        )
+        integrity_status = "deterministic_fallback"
+        limitations = ("no_live_evidence", "model_output_may_be_incorrect")
+    elif global_health_overclaim and not requires_live_evidence and not unsafe_claim:
+        answer = (
+            "مدل دربارهٔ سلامت شبکه بیش‌ازحد نتیجه گرفت: موفقیت TLS فقط همان ارتباطِ فرض‌شده "
+            "را پوشش می‌دهد، نه سلامت کل شبکه، آمادگی برنامه یا پایگاه داده. وضعیت سایر لایه‌ها "
+            "و علت خطا بدون اندازه‌گیریِ متناسب نامعلوم است؛ این راهنمای عمومی است و هیچ "
+            "بررسی زنده یا تغییری انجام نشده است."
+            if request.locale == "fa"
+            else "The model overstated network health: TLS success covers only the stipulated "
+            "exchange, not overall network health, application or database readiness. Other "
+            "layers' state and the error's cause remain unknown without appropriately scoped "
+            "measurements; this is general guidance and no live check or change was performed."
+        )
+        integrity_status = "deterministic_fallback"
+        limitations = ("no_live_evidence", "model_output_may_be_incorrect")
+    elif transport_overclaim and not requires_live_evidence and not unsafe_claim:
+        answer = (
+            "راهنمای مدل، نتیجه‌ای فراتر از بررسی توصیف‌شده گرفت. سوکتِ در حال شنود یا "
+            "SYN-SENT، اتصال کامل TCP، موفقیت TLS یا آمادگی برنامه را ثابت نمی‌کند. برای "
+            "تفکیک connect timeout و read timeout، مرحلهٔ دقیق خطا را در لاگ پراکسی برای "
+            "همان درخواست بررسی و در میزبانِ درست یک درخواست فقط‌خواندنی با مهلت‌های محدود "
+            "اتصال و پاسخ مقایسه کنید. زمان سپری‌شده، وضعیت سوکت یا نبودِ رکورد لاگ به‌تنهایی "
+            "نوع timeout یا علت ریشه‌ای را ثابت نمی‌کند. این راهنمای عمومی است؛ هیچ بررسی "
+            "زنده یا تغییری انجام نشده است."
+            if request.locale == "fa"
+            else "The model's advice exceeded the described check. A listener or SYN-SENT socket "
+            "does not establish a completed TCP connection, TLS success or application readiness. "
+            "To distinguish connect and read timeout, inspect the proxy's exact error phase for "
+            "that request and compare a bounded read-only request from the correct host with "
+            "separate connection and response deadlines. Elapsed time, socket state or missing "
+            "logs alone do not establish timeout type or root cause. This is general guidance; "
+            "no live check or change was performed."
         )
         integrity_status = "deterministic_fallback"
         limitations = ("no_live_evidence", "model_output_may_be_incorrect")

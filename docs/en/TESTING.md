@@ -1,6 +1,76 @@
 # Testing, model evaluation and release evidence
 
-## Full thinking-adapter requalification — 2026-10-03
+## Scoped diagnostic safeguard loop — 2026-10-04
+
+Candidate `7ce9d2969d6bea8186783c5ce04a1c93be811a97` passed 524 local unit/API/contract checks
+(two Windows POSIX skips; 43 integration/browser cases excluded locally), lint, strict types and
+the 126-document/38-pair checker. All five jobs passed in
+[CI 37185116587](https://github.com/Omid-NextAI/nextops/actions/runs/37185116587), including real
+PostgreSQL16/17, browser and Gitleaks. Fresh hash-locked, no-index installations in Ubuntu24.04
+WSL and both existing guests passed dependency checks and unprivileged installed-code probes.
+Wheel SHA-256: `8dfecb6b9a422ad0a2be3240797cbad05f15f46d52aa84973d7031780be66816`;
+installed application digest: `32fd417abde79c6f10fbe6dd74cf6eadde8be3e0df3012c636763a1e81e7cd17`.
+Matched live qualification passed and app/AI `nextops-0.1.0-7ce9d29` were re-promoted for
+controlled users. Fresh strict-TLS Edge campaigns passed 13 first, 13 offline, four exact69
+rollback and 15 final functional cases: **45 total**, including EN/FA saved follow-ups, fresh
+authorized AI-target evidence, missing-target limits, mixed actual-state redirection and two
+actual UI fallback/reload checks. Read-only database checks matched **36 text-free completion
+audits and nine canonical live evidence/hash pairs** across those campaigns; target-question
+mismatch failures were audited. Only tracked owned QA chats and their temporary sessions were
+deleted/revoked. Scoped scenario outputs were independently inspected: application-owned limits
+passed, not raw-model semantic certification.
+
+The current-source four-request admission check observed one active/two queued requests:
+200 in 8.022 seconds, two queue 504s in 5.014/5.015 seconds and a fourth-request 429 in 0.010
+seconds; a fresh recovery answer completed in 1.029 seconds and both counters returned to zero.
+This is bounded admission/recovery, not sustained-load acceptance. On all four guests, an owned
+temporary output policy blocked external IPv4/IPv6 and the configured installation proxy while
+retaining the management LAN. Fresh browser assets, login, EN/FA local generation and new real
+Zabbix evidence passed while that denial was checked before and after the campaign. The native
+model, AI API and application processes restarted under the block: observed readiness recovery
+was 27 seconds for model/API and two seconds for the app; AI-status requests took 69.734/71.437
+seconds. This is actual server-side WAN/proxy denial and process restart, not physical router
+disconnection, a new VM reboot or page-cache-free cold-start acceptance. PostgreSQL, connector
+and Zabbix restarts were not repeated for this source.
+
+Exact69 wrapper rollback passed four fresh EN/FA answers and four audits before final guarded
+re-promotion. Final AI-status requests took 63.703/69.266 seconds. Exact wheel/code probes,
+runtime/model hashes, healthy services and idle admission counters were rechecked. Only owned
+temporary WAN tables/cleanup timers and final rollback timers were removed/stopped; protected
+prior releases, raw reports and other firewall policy remain intact. Current guest observations
+were 80 vCPUs and 128769 MiB usable RAM, not a resource change made by this loop or a NUMA optimum.
+The model remains Qwen3.5-35B-A3B, context16384, 16 threads, one slot and thinking disabled.
+The descriptive expanded-chat metadata now matches source7ce and distinguishes the native
+384-token default from the installed disabled adapter's 128-token request contract; neither
+running setting changed. Standard offline answers passed, enabled-thinking did not run.
+Post-recording tests caught a stale source and conflated native/request budget metadata. The
+corrected record and strict budget/source regressions restore 525 local passes (two Windows
+skips; 43 deselected), not a weakened invariant or a new serving package.
+
+The owner-authorized bounded loop preserved four failed attempts: b80758e passed thirteen
+functional cases, four saved-chat audits/three live hashes and admission recovery, but overclaimed
+Persian network health from TLS; f05e222 passed thirteen corrected functional cases but inferred a
+collection fault from missing newer data; e0a0fd8 passed thirteen functional cases and the stale
+guard, but inferred DNS resolution from hostname validation; 1a934e9 passed thirteen functional
+cases, ten saved audits/three hashes and bounded admission, but the certificate-name question
+without the literal TLS keyword missed its guard. Each source was exactly rolled back
+to app/AI69 before another candidate. A private tester also incorrectly expected HTTP200 rather
+than the established HTTP201 conversation-creation result; its interrupted seven-case report is
+retained, not an application defect or acceptance pass. One possible empty untracked QA chat was
+left untouched rather than deleting unproven user rows. Raw private reports and failure reasons
+remain protected; broader capability-v2 technical failures in PR51 are not promoted or erased.
+
+The current increment adds narrow hypothetical-scenario interpretation, reviewed transport/global
+health overclaim rejection and visible application-owned limitations for supplied TLS-conclusion
+and missing-fresh-data scenarios. These answers are `deterministic_fallback`, `model_only`, not
+fresh evidence or raw model accuracy passes. Generic guidance, actual-state/action denial, source
+identity, raw finish reason and credential/policy boundaries remain intact. No generated code is
+executed. Model/runtime, queue/deadline, memory quotas, proxy, schema and OCS assets are unchanged;
+thinking stays off. Current-source VM reboot, sustained load, near-full-context quality and general
+semantic certification are not accepted by this narrow loop. Prior dated results below remain
+historical, not silently inherited.
+
+## Historical thinking-adapter requalification — 2026-10-03
 
 The serving app/AI remain `69c9260`; neither thinking flag, release link, model/runtime, proxy,
 schema, resources nor service lifecycle changed. Read-only preflight matched both releases,

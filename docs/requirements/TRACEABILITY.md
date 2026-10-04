@@ -1,5 +1,21 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Scoped diagnostic guard (sections 3, 9, 17, 25, 27; 2026-10-04): deployed `7ce9d29` maps
+supplied-scenario intent, transport overclaims, explicit certificate/name limits and stale-data
+absence limits to `tests/unit/test_general_transport_integrity.py` and `tests/api/test_app.py`.
+45 fresh functional cases, 36 text-free audits/nine hashes, exact69 rollback, bounded admission
+and four-guest WAN/process-restart evidence passed; two actual UI/reload checks preserve labels.
+Application-owned fallback is not raw model accuracy, authorization or thinking acceptance.
+[Testing](../en/TESTING.md) preserves all four rejected candidates and broader semantic failures.
+
+کنترل تشخیصیِ محدود (بخش‌های ۳، ۹، ۱۷، ۲۵ و ۲۷؛ ۴ اکتبر ۲۰۲۶): نسخهٔ مستقرِ `7ce9d29`،
+قصد فرضی، ادعای انتقال، محدودیت صریح گواهی/نام و نبود دادهٔ تازه را به آزمون واحدِ
+`tests/unit/test_general_transport_integrity.py` و `tests/api/test_app.py` وصل می‌کند. ۴۵
+مورد کارکردیِ تازه، ۳۶ ممیزی بی‌متن/نه هش، بازگشت دقیق به69، پذیرش محدود و منع WAN/شروع
+فرایند در چهار مهمان موفق‌اند؛ دو آزمون واقعیِ رابط/بازکردن دوباره، برچسب را حفظ کردند. پاسخ
+جایگزینِ برنامه‌ای، درستی خام مدل، اختیار اجرا یا پذیرش استدلال نیست. [آزمون](../fa/TESTING.md)،
+چهار نامزد ردشده و شکست معنایی گسترده‌تر را حفظ می‌کند.
+
 CM-05/CM-06 requalification, 2026-10-03: installed 69c9260 thinking digit-format and real
 near-16K deadline failed. Source-only envelope/format hardening maps to expanded-inference tests;
 the opt-in exact-prompt/token runner maps to `tests/unit/test_thinking_qualification.py`.

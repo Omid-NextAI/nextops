@@ -1,8 +1,8 @@
 ---
 $schema: ./release-status.schema.json
 schema_version: 2.2.0
-release_identifier: nextops-named-server-status-controlled-2026-10-03
-observed_at: '2026-10-03'
+release_identifier: nextops-scoped-diagnostic-guard-controlled-2026-10-04
+observed_at: '2026-10-04'
 deployment_status: controlled_user_testing_not_production_accepted
 delivery_scope:
   profile: local_read_only_recovery_deferred
@@ -16,18 +16,18 @@ snapshot_restore_owner_attestation:
   evidence_review: pending
 repository:
   remote: Omid-NextAI/nextops
-  branch: main
-  inspected_baseline_commit: 01671dc9c2feda562b79a07a1d38c663dbea2b94
+  branch: main  # Canonical integration branch; guarded source/evidence is submitted through PR52.
+  inspected_baseline_commit: b538edebb2ea41f11f95ce49a5306f5b1425310f
 components:
   application:
-    release: nextops-0.1.0-69c9260
-    source_commit: 69c9260c23f6cf85bb9678e8dc7fe1a4448ec3e2
+    release: nextops-0.1.0-7ce9d29
+    source_commit: 7ce9d2969d6bea8186783c5ce04a1c93be811a97
   connector:
     release: nextops-0.1.0-cdde129
     source_commit: cdde129950f60f9f18f3ef109cbf98f4217fc5e1
   inference_api:
-    release: nextops-0.1.0-69c9260
-    source_commit: 69c9260c23f6cf85bb9678e8dc7fe1a4448ec3e2
+    release: nextops-0.1.0-7ce9d29
+    source_commit: 7ce9d2969d6bea8186783c5ce04a1c93be811a97
   inference_runtime:
     name: llama.cpp
     source_tag: v0.4.1
@@ -50,8 +50,8 @@ components:
     name: Zabbix
     version: '7.0.31'
 current_application_qualification:
-  release: nextops-0.1.0-69c9260
-  source_commit: 69c9260c23f6cf85bb9678e8dc7fe1a4448ec3e2
+  release: nextops-0.1.0-7ce9d29
+  source_commit: 7ce9d2969d6bea8186783c5ce04a1c93be811a97
   scope: application_revision_sensitive
   gates:
     - id: current_app_bounded_live_functionality
@@ -72,7 +72,7 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_server_side_wan_isolation
-      status: not_run
+      status: passed
       evidence:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
@@ -82,6 +82,17 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: scoped_diagnostic_scenario_guards
+    status: accepted_controlled
+    evidence:
+      - docs/requirements/ANSWER_INTEGRITY_SPEC.md
+      - docs/en/AI_INTEGRITY.md
+      - docs/fa/AI_INTEGRITY.md
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
+      - packages/nextops/api/answer_integrity.py
+      - tests/unit/test_general_transport_integrity.py
+      - tests/api/test_app.py
   - id: named_server_status_scope_repair
     status: accepted_controlled
     evidence:
