@@ -26,6 +26,35 @@ def _options(page: Page) -> None:
         page.locator("#composerOptions summary").click()
 
 
+@pytest.mark.parametrize("locale", ["en", "fa"])
+def test_saved_chat_controls_scroll_without_sidebar_footer_overlap(
+    browser_server: tuple[str, Any], locale: str
+) -> None:
+    base, app = browser_server
+    app.state.saved_chats_enabled = True
+    with sync_playwright() as p:
+        browser = _launch_browser(p)
+        page = browser.new_page(viewport={"width": 1280, "height": 600})
+        _login(page, base)
+        if locale == "fa":
+            page.locator("#languageButton").click()
+        page.locator("#question").fill("A saved conversation for sidebar reflow")
+        page.locator("#askButton").click()
+        expect(page.locator("#askedQuestion")).to_have_text(
+            "A saved conversation for sidebar reflow"
+        )
+        page.locator("#deleteChatButton").scroll_into_view_if_needed()
+        assert page.locator("#deleteChatButton").evaluate(
+            "e=>{const r=e.getBoundingClientRect();return e.contains("
+            "document.elementFromPoint(r.x+r.width/2,r.y+r.height/2))}"
+        )
+        page.on("dialog", lambda dialog: dialog.accept())
+        page.locator("#deleteChatButton").click()
+        expect(page.locator("#savedChatsList")).to_be_empty()
+        assert not app.state.saved_chats
+        browser.close()
+
+
 @pytest.mark.parametrize(
     "width,height", [(1672, 941), (1440, 900), (1280, 800), (768, 1024), (390, 844)]
 )

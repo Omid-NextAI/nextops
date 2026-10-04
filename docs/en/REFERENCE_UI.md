@@ -142,6 +142,15 @@ Source rollback requires a reviewed revert/rebuild, not a live service change in
 The Linux deployment bundle, live installer execution and runtime release manifest are not regenerated
 or promoted here; wheel/asset verification is not deployment acceptance.
 
+## Deployment preflight repair — 2026-10-05
+
+The owner subsequently authorized deployment followed by a separate Qwen upgrade. PR 56's first
+Linux CI run passed quality/security and both PostgreSQL 16/17 jobs, but browser acceptance failed:
+the sidebar footer covered saved-conversation deletion. The source repair prevents flex children
+from shrinking over their contents and adds short-viewport EN/FA pointer-reachability regression
+tests. This initial CI failure is retained, not relabelled as a pass. Fresh exact-head CI and live
+qualification remain required before promotion; no model change is part of this UI repair.
+
 ## Changed-file inventory
 
 - Frontend: `packages/nextops/api/static/index.html`, `app.css`, `app.js`, `evidence.css`, new
