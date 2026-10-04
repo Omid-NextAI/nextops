@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Annotated, Any, Protocol
 from uuid import UUID, uuid4
 
-from fastapi import Depends, FastAPI, Header, Request
+from fastapi import Depends, FastAPI, Header, Query, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -32,6 +32,7 @@ from nextops.api.target_focus import requested_named_target
 from nextops.application.conversations import DurableConversationService, GenerationTicket
 from nextops.application.errors import ApplicationError
 from nextops.application.service import DurableAppService
+from nextops.application.users import DurableUserService
 from nextops.configuration import AppSettings
 from nextops.contracts.assistant import (
     AssistantRequest,
@@ -74,6 +75,13 @@ from nextops.contracts.monitoring import (
     InvestigationResponse,
     MonitoringIncidentContext,
     MonitoringSummary,
+)
+from nextops.contracts.users import (
+    UserCreateRequest,
+    UserPage,
+    UserPasswordRequest,
+    UserRecord,
+    UserStatusRequest,
 )
 from nextops.inference.contracts import InferenceReadiness, ReadinessState
 from nextops.persistence.database import create_database_engine, create_session_factory
@@ -183,6 +191,7 @@ def create_app(
     incident_target_ids: tuple[str, ...] = (),
     conversation_service: DurableConversationService | None = None,
     conversation_thinking_enabled: bool = False,
+    user_service: DurableUserService | None = None,
 ) -> FastAPI:
     """Build the API around an injected durable service."""
 
@@ -203,6 +212,8 @@ def create_app(
         request.state.correlation_id = correlation_id
         response = await call_next(request)
         response.headers["X-Correlation-ID"] = str(correlation_id)
+        if request.url.path.startswith("/api/v1/users"):
+            response.headers["Cache-Control"] = "no-store"
         if (
             request.url.path in ANSWER_PATHS
             or (
@@ -329,6 +340,45 @@ def create_app(
     @app.get("/api/v1/me", response_model=ActorContext)
     def me(actor: Annotated[ActorContext, Depends(current_actor)]) -> ActorContext:
         return actor
+
+    def users() -> DurableUserService:
+        if user_service is None:
+            raise ApplicationError(ErrorCode.DEPENDENCY_UNAVAILABLE, "users.unavailable")
+        return user_service
+
+    @app.get("/api/v1/users", response_model=UserPage)
+    def list_users(
+        request: Request,
+        token: Annotated[str, Depends(current_token)],
+        offset: Annotated[int, Query(ge=0, le=500)] = 0,
+    ) -> UserPage:
+        return users().list(token, _correlation_id(request), offset)
+
+    @app.post("/api/v1/users", response_model=UserRecord, status_code=201)
+    def create_user(
+        request: Request,
+        payload: UserCreateRequest,
+        token: Annotated[str, Depends(current_token)],
+    ) -> UserRecord:
+        return users().create(token, _correlation_id(request), payload)
+
+    @app.patch("/api/v1/users/{identity_id}", response_model=UserRecord)
+    def change_user_status(
+        request: Request,
+        identity_id: UUID,
+        payload: UserStatusRequest,
+        token: Annotated[str, Depends(current_token)],
+    ) -> UserRecord:
+        return users().change_status(token, _correlation_id(request), identity_id, payload)
+
+    @app.post("/api/v1/users/{identity_id}/password", response_model=UserRecord)
+    def reset_user_password(
+        request: Request,
+        identity_id: UUID,
+        payload: UserPasswordRequest,
+        token: Annotated[str, Depends(current_token)],
+    ) -> UserRecord:
+        return users().reset_password(token, _correlation_id(request), identity_id, payload)
 
     @app.get("/api/v1/assistant/ready", response_model=InferenceReadiness)
     async def assistant_readiness(
@@ -646,6 +696,7 @@ def create_runtime_app() -> FastAPI:
         settings.incident_target_ids,
         DurableConversationService(session_factory) if settings.conversations_enabled else None,
         settings.conversation_thinking_enabled,
+        DurableUserService(session_factory),
     )
 
 

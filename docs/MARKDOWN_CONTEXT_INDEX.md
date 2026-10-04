@@ -41,6 +41,8 @@ remaining task-specific sources. The repository skill
 
 ## Complete inventory
 
+- `docs/requirements/USER_MANAGEMENT_SPEC.md` — Bounded local admin account controls, immutable role profiles, audit/revocation and staged acceptance.
+
 Each bullet uses a repository-relative path followed by its role. Keep the paths synchronized when a
 Markdown file is added, renamed, or removed.
 
