@@ -1,5 +1,14 @@
 # Project state / وضعیت پروژه
 
+2026-10-04 scoped safeguard candidate: application-only scenario intent and reviewed transport
+overclaim rejection. 501 local tests and offline replay of the two failed capability-v2 proxy
+answers pass the limited guard checks; this does not qualify raw model semantics. Broader tuning
+stays unpromoted in PR51. Existing69/35/thinking-off remains live pending matched qualification.
+
+نامزد محدودِ ۴ اکتبر ۲۰۲۶: قصد فرضی و ردِ ادعای بررسی‌شدهٔ انتقال، صرفاً در برنامه اصلاح شد.
+۵۰۱ آزمون محلی و بازپخش دو پاسخ ناموفق پراکسی، کنترل محدود را گذراندند؛ معنای خام مدل تأیید
+نشده است. تنظیم گسترده در PR51 مستقر نشده؛ خدمت69/مدل35/استدلال خاموش تا پذیرش ثابت است.
+
 Thinking requalification, 2026-10-03 — standard app/AI `69c9260` are unchanged and live.
 Eight installed-adapter short EN/FA requests completed, but Persian digit-only formatting failed.
 A real 14,336-token input plus 2,048 output reservation failed at the fixed 120-second deadline;

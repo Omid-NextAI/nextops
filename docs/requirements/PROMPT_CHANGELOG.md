@@ -1,5 +1,16 @@
 # Prompt version history / تاریخچهٔ نسخه‌های پرامپت
 
+## Owner repair/deployment loop — 2026-10-04
+
+The owner requests gap repair and a loop to successful deployment. This authorizes bounded
+existing-guest qualification and guarded release with exact rollback, not blind retries or waived
+security/offline/accuracy gates. After capability-v2 raw diagnostic failures, isolate an
+application-only safeguard; do not promote that broader failed provider/history candidate.
+
+مالک رفع کاستی و چرخه تا استقرار موفق را خواسته است. آزمون محدود در مهمان موجود و انتشار
+محافظت‌شده با بازگشت دقیق مجاز است، نه تکرار کور یا حذف معیار امنیت/آفلاین/درستی. پس از شکست
+تشخیصیِ خام نسخهٔ دوم، کنترل صرفاً برنامه‌ای جدا شود؛ دستور/سابقهٔ گستردهٔ ناموفق مستقر نشود.
+
 ## Owner live-chat/theme instruction — 2026-09-30
 
 The owner explicitly requests the work needed to take the conversation candidate live and a dark

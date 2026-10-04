@@ -1,5 +1,41 @@
 # Answer integrity specification
 
+## Application-only safeguard increment — 2026-10-04
+
+Owner-authorized repair/deployment loop, bounded scope: preserve the standard35 profile and
+existing provider guidance, memory quotas, schema, branding and disabled thinking. The broader
+capability-v2 source passed CI but failed raw proxy semantics in sixteen private new generations;
+it remains unpromoted in PR51. This increment does not qualify that source or erase its failures.
+
+Repair supplied-scenario classification while mixed actual-state requests remain redirected.
+Reject reviewed listener/SYN-SENT-to-reachability overclaims with a visible deterministic fallback,
+not invented evidence or a silently rewritten model pass. Negative scoped explanations must stay
+usable. Lexical safeguards are limited coverage, not proof of all technical facts. No generated-code
+execution, new tools, credentials, downloads, model/resource change or schema migration.
+
+Plan: source/API regressions and paired guides; locked CI/PG16/17; fresh hash-locked offline package;
+protected source staging; matched EN/FA browser/API, saved follow-up, current-state/mutation denial,
+source identity/text-free audit, bounded admission/recovery, current-source offline process start and
+exact69 rollback; guarded re-promotion only after those increment gates pass. Preserve failed broader
+semantics/full-context gates and separately unrun production gates. Use a timed rollback guard;
+retain immutable69 and its model/configuration. Failure rolls back this source, not transcripts.
+
+دامنهٔ محدودِ چرخهٔ اصلاح و استقرارِ مجازِ مالک: نمایهٔ معمولی مدل35، دستور فعلی مدل، سهم
+سابقه، پایگاه، هویت بصری و استدلال خاموش حفظ شوند. کد گستردهٔ capability-v2 با وجود CI موفق،
+در شانزده تولید خصوصیِ تازه، معنای پراکسی را نپذیرفت و در PR51 مستقر نشده است؛ این گام آن
+کد را تأیید و شکست را حذف نمی‌کند. قصدِ مثال فرضی اصلاح شود، ولی پرسش آمیخته با وضعیت واقعی
+همچنان به مسیر شاهد هدایت شود. ادعای بررسی‌شدهٔ تبدیل شنود/SYN-SENT به دسترسی، با پاسخ
+جایگزین قطعی و برچسب آشکار رد شود، نه شاهد ساختگی یا موفقیت پنهانِ مدل. توضیح منفی و محدود
+قابل‌استفاده بماند. کنترل واژگانی پوشش محدود دارد و تضمین همهٔ واقعیت‌های فنی نیست.
+
+ترتیب پذیرش: آزمون کد/API و راهنمای دوزبانه؛ CI و PostgreSQL16/17؛ بستهٔ تازهٔ آفلاین و
+هش‌قفل؛ آماده‌سازی خصوصی؛ آزمون هماهنگ مرورگر/API فارسی و انگلیسی، ادامهٔ سابقه، ردِ ادعای
+وضعیت و اجرای تغییر، هویت کد/ممیزی بی‌متن، صف و ادامهٔ محدود پس از خطا، شروع آفلاینِ همین
+نسخه و بازگشت دقیق به69؛ سپس استقرار دوبارهٔ محافظت‌شده. شکست معنا/زمینهٔ کامل و معیارهای
+تولیدِ اجرا‌نشده محفوظ بمانند. بازگشت زمان‌دار و نسخهٔ تغییرناپذیر69 با مدل/تنظیم ثابت حفظ
+شوند؛ شکست فقط این کد را برگرداند، نه گفت‌وگوها را. ابزار، اطلاعات ورود، دانلود، منابع و
+پایگاه تازه و اجرای کد مدل در دامنه نیستند.
+
 Status: app/API `nextops-0.1.0-95c6e50` serves controlled user testing with CPU-only 35B-A3B.
 Named live regressions and exact app/API/model rollback passed; full held-out semantics remain partial.
 Matched 14B development review failed. Verified 32B import failed its Persian evidence deadline,

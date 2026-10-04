@@ -1,5 +1,15 @@
 # Next task / کار بعدی
 
+First checkpoint, 2026-10-04: qualify the application-only diagnostic safeguard through exact
+offline package/CI, matched EN/FA API/browser/history/audit, bounded admission/recovery, offline
+process restart and exact69 rollback; then guarded re-promotion. Preserve raw capability-v2
+semantic failures and the unpromoted broader PR51. No thinking/model/resource change.
+
+گام نخستِ ۴ اکتبر ۲۰۲۶: کنترل صرفاً برنامه‌ای با بستهٔ دقیق آفلاین و CI، API/مرورگر/سابقه/
+ممیزیِ دوزبانه، صف و ادامهٔ محدود، شروع دوبارهٔ آفلاین و بازگشت دقیق به69 پذیرفته و سپس
+محافظت‌شده دوباره مستقر شود. شکست خام capability-v2 و نامزد گستردهٔ نپذیرفتهٔ PR51 حفظ
+شوند. استدلال، مدل یا منابع تغییر نکنند.
+
 First unfinished checkpoint, 2026-10-03 — preserve live standard `69c9260` and both disabled
 thinking flags. The installed 128-token/full-envelope adapter's digit-format and actual near-16K
 deadline gates failed. Do not relabel these as unrun or passed, repeat a timed-out native call

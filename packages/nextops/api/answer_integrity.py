@@ -50,6 +50,28 @@ _EXPLICIT_CURRENT_FACT_QUESTION = re.compile(
     r"(?:وضعیت.{0,60}(?:چیست|چگونه\s*است)|آیا.{0,60}(?:اکنون|فعلی|الان)))",
     re.IGNORECASE,
 )
+# Narrow interpretation of a supplied scenario, never permission to inspect a target.
+# Matching a marker alone cannot override a mixed explicit live-state request.
+_SUPPLIED_SCENARIO = re.compile(
+    r"^\s*(?:in\s+(?:a|this)\s+(?:synthetic|hypothetical|example)\b|"
+    r"a\s+(?:synthetic|hypothetical)\s+(?:report|test|lookup|tcp|tls)\b|"
+    r"suppose\b|"
+    r"(?:در\s+(?:یک\s+)?(?:آزمون|مثال|گزارش)\s+(?:فرضی|آزمایشی)|"
+    r"فرض\s*کن(?:ید)?\b|گزارش\s+فرضی))",
+    re.IGNORECASE,
+)
+_REAL_TARGET_REQUEST = re.compile(
+    r"(?:\b(?:my|our|actual|real|production|company)\b.{0,80}"
+    r"\b(?:server|service|system|database|network|firewall|status|state|health)\b|"
+    r"(?:^|[?;.]\s*|\band\s+)(?:show|check|inspect|fetch|retrieve|confirm|verify|tell|report)"
+    r"\b.{0,80}"
+    r"\b(?:current|now|today|live|actual|real|production|my|our)\b|"
+    r"(?:سرور|سرویس|شبکه|برنامه|وضعیت|سلامت).{0,40}"
+    r"(?<!\w)(?:من|ما|واقعی|شرکت|عملیاتی)(?!\w)|"
+    r"(?:نشان\s*بده|تأیید\s*کن|بررسی\s*کن|گزارش\s*بده).{0,60}"
+    r"(?<!\w)(?:فعلی|الان|اکنون|واقعی|زنده|من|ما)(?!\w))",
+    re.IGNORECASE,
+)
 _SINGLE_CHECK_HEALTH = re.compile(
     r"(?:\b(?:successful|succeeds|success)\b.{0,80}\b(?:means|proves|confirms)\b"
     r".{0,45}\b(?:network|system|service|server)\b.{0,25}\b(?:healthy|secure|safe)\b|"
@@ -60,6 +82,36 @@ _SINGLE_CHECK_HEALTH = re.compile(
 )
 _HEALTH_NEGATION = re.compile(r"(?:\b(?:not|never|cannot)\b|نیست|نمی[‌ ]|نه\s)", re.IGNORECASE)
 _HEALTH_TRAILING_NEGATION = re.compile(r"^\s*(?:نیست|نمی[‌ ]|نخواهد)")
+_TRANSPORT_OVERCLAIMS = (
+    re.compile(
+        r"\b(?:listener|listening|SYN-SENT)\b"
+        r"(?:(?!\n\s*\d+[.)]\s).){0,900}?"
+        r"(?<!not )(?<!never )(?<!cannot )(?<!doesn't )"
+        r"\b(?:proves?|confirms?|establish(?:es)?|means)\b"
+        r".{0,90}?\b(?:reachab(?:le|ility)|(?:completed|established|successful)\s+"
+        r"(?:TCP\s+)?connection)\b",
+        re.IGNORECASE | re.DOTALL,
+    ),
+    re.compile(
+        r"\b(?:immediately|milliseconds|ESTABLISHED|CLOSE_WAIT|TIME_WAIT)\b"
+        r".{0,100}?\b(?:means|indicates|is|likely)\b.{0,60}?"
+        r"\b(?:connect|read)[ _-]+timeout\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"(?:شنود|گوش\s*می[‌ ]دهد|SYN-SENT).{0,150}?"
+        r"(?:اثبات\s*می[‌ ]کند|تأیید\s*می[‌ ]کند|یعنی)"
+        r".{0,60}?(?:دسترسی[‌ ]پذیر|اتصال.{0,12}(?:برقرار|موفق))"
+        r"(?!\s*(?:نیست|نشده|نمی[‌ ]))",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"(?:بلافاصله|میلی[‌ ]?ثانیه|ESTABLISHED|CLOSE_WAIT|TIME_WAIT).{0,120}?"
+        r"(?:احتمالاً|نشانه|یعنی|نشان\s*می[‌ ]دهد).{0,40}?"
+        r"(?:connect|read)[ _-]+timeout",
+        re.IGNORECASE,
+    ),
+)
 _UNSAFE_EXECUTION_CLAIMS = (
     re.compile(
         r"\b(?:i|we)\s+(?:have\s+)?(?:successfully\s+)?(?:restarted|rebooted|deployed|"
@@ -135,7 +187,17 @@ def assure_general_answer(
         and any(_OPERATIONAL_SUBJECT_MARKERS.search(turn.question) for turn in request.history)
     )
     direct_subject = bool(_OPERATIONAL_SUBJECT_MARKERS.search(request.question))
-    explicit_current_fact = bool(_EXPLICIT_CURRENT_FACT_QUESTION.search(request.question))
+    explicit_current_fact = any(
+        # A question about what is *known* in a supplied scenario does not ask us
+        # to inspect infrastructure. Every other explicit clause retains priority.
+        not re.fullmatch(r"[?;.\s]*what is known now", match.group(), re.IGNORECASE)
+        for match in _EXPLICIT_CURRENT_FACT_QUESTION.finditer(request.question)
+    )
+    supplied_scenario = bool(
+        _SUPPLIED_SCENARIO.search(request.question)
+        and not explicit_current_fact
+        and not _REAL_TARGET_REQUEST.search(request.question)
+    )
     requires_live_evidence = bool(
         (
             (
@@ -145,6 +207,7 @@ def assure_general_answer(
             or (explicit_current_fact and direct_subject)
         )
         and (not _DIAGNOSTIC_GUIDANCE_QUESTION.search(request.question) or explicit_current_fact)
+        and not supplied_scenario
     )
     file_request = bool(_SYSTEM_FILE_REQUEST.search(request.question))
     unsafe_claim = _contains_unsafe_execution_claim(assistant.answer)
@@ -153,6 +216,7 @@ def assure_general_answer(
         and not _HEALTH_TRAILING_NEGATION.search(assistant.answer[match.end() : match.end() + 16])
         for match in _SINGLE_CHECK_HEALTH.finditer(assistant.answer)
     )
+    transport_overclaim = any(pattern.search(assistant.answer) for pattern in _TRANSPORT_OVERCLAIMS)
     prompt_echo = _is_long_prompt_echo(request.question, assistant.answer)
     incomplete = assistant.finish_reason != FinishReason.STOP
     greeting_mismatch = bool(
@@ -169,6 +233,7 @@ def assure_general_answer(
         and not file_request
         and not unsafe_claim
         and not single_check_health
+        and not transport_overclaim
         and not prompt_echo
         and not incomplete
         and not greeting_mismatch
@@ -210,6 +275,26 @@ def assure_general_answer(
     elif greeting_mismatch:
         answer = (
             "سلام! چطور می‌توانم کمک کنم؟" if request.locale == "fa" else "Hello! How can I help?"
+        )
+        integrity_status = "deterministic_fallback"
+        limitations = ("no_live_evidence", "model_output_may_be_incorrect")
+    elif transport_overclaim and not requires_live_evidence and not unsafe_claim:
+        answer = (
+            "راهنمای مدل، نتیجه‌ای فراتر از بررسی توصیف‌شده گرفت. سوکتِ در حال شنود یا "
+            "SYN-SENT، اتصال کامل TCP، موفقیت TLS یا آمادگی برنامه را ثابت نمی‌کند. برای "
+            "تفکیک connect timeout و read timeout، مرحلهٔ دقیق خطا را در لاگ پراکسی برای "
+            "همان درخواست بررسی و در میزبانِ درست یک درخواست فقط‌خواندنی با مهلت‌های محدود "
+            "اتصال و پاسخ مقایسه کنید. زمان سپری‌شده، وضعیت سوکت یا نبودِ رکورد لاگ به‌تنهایی "
+            "نوع timeout یا علت ریشه‌ای را ثابت نمی‌کند. این راهنمای عمومی است؛ هیچ بررسی "
+            "زنده یا تغییری انجام نشده است."
+            if request.locale == "fa"
+            else "The model's advice exceeded the described check. A listener or SYN-SENT socket "
+            "does not establish a completed TCP connection, TLS success or application readiness. "
+            "To distinguish connect and read timeout, inspect the proxy's exact error phase for "
+            "that request and compare a bounded read-only request from the correct host with "
+            "separate connection and response deadlines. Elapsed time, socket state or missing "
+            "logs alone do not establish timeout type or root cause. This is general guidance; "
+            "no live check or change was performed."
         )
         integrity_status = "deterministic_fallback"
         limitations = ("no_live_evidence", "model_output_may_be_incorrect")
