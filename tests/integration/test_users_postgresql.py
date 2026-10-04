@@ -250,6 +250,171 @@ def test_protected_admin_duplicates_extra_fields_and_stale_edit(
     )
 
 
+def test_malformed_user_requests_have_authenticated_secret_free_denial_audits(
+    user_app: tuple[TestClient, str, DurableAppService],
+    app_session_factory: sessionmaker[Session],
+) -> None:
+    client, token, service = user_app
+    user = add_user(client, token)
+    viewer = service.login(
+        LoginRequest(username="reader", password=PASSWORD), uuid4()
+    ).session.access_token
+    target_id = user["identity_id"]
+    calls = [
+        ("GET", "/api/v1/users?offset=-1", None, "list", None),
+        ("GET", "/api/v1/users?offset=invalid", None, "list", None),
+        (
+            "POST",
+            "/api/v1/users",
+            {"username": "invalid", "password": PASSWORD, "scopes": ["users.manage"]},
+            "create",
+            None,
+        ),
+        (
+            "POST",
+            "/api/v1/users",
+            {"username": "invalid", "password": PASSWORD, "role": "admin"},
+            "create",
+            None,
+        ),
+        (
+            "POST",
+            "/api/v1/users",
+            {"username": "invalid", "password": "short-secret"},
+            "create",
+            None,
+        ),
+        (
+            "PATCH",
+            "/api/v1/users/invalid-identity",
+            {"is_active": False, "expected_version": 1},
+            "status",
+            None,
+        ),
+        (
+            "PATCH",
+            f"/api/v1/users/{target_id}",
+            {"is_active": "false", "expected_version": 1},
+            "status",
+            target_id,
+        ),
+        (
+            "POST",
+            "/api/v1/users/invalid-identity/password",
+            {"new_password": PASSWORD, "expected_version": 1},
+            "password_reset",
+            None,
+        ),
+        (
+            "POST",
+            f"/api/v1/users/{target_id}/password",
+            {"new_password": PASSWORD, "expected_version": -1},
+            "password_reset",
+            target_id,
+        ),
+        (
+            "POST",
+            f"/api/v1/users/{target_id}/password",
+            {"new_password": "short-secret", "expected_version": 1},
+            "password_reset",
+            target_id,
+        ),
+    ]
+    correlations = []
+    for method, path, payload, operation, audited_target in calls:
+        for bearer_token, status, code in (
+            (token, 422, ErrorCode.INVALID_REQUEST),
+            (viewer, 403, ErrorCode.POLICY_DENIED),
+        ):
+            response = client.request(method, path, headers=headers(bearer_token), json=payload)
+            assert response.status_code == status, response.text
+            assert response.headers["Cache-Control"] == "no-store"
+            assert all(secret not in response.text for secret in (PASSWORD, "short-secret"))
+            correlation = response.headers["X-Correlation-ID"]
+            correlations.append(correlation)
+            with app_session_factory() as session:
+                audit = session.scalar(
+                    select(AuditEvent).where(AuditEvent.correlation_id == correlation)
+                )
+                assert audit is not None and audit.outcome == "denied"
+                assert audit.event_type == f"identity.users.{operation}"
+                assert audit.details == {
+                    "target_identity_id": audited_target,
+                    "error_code": code.value,
+                }
+    # JSON parsing can fail even before dependency resolution; it is audited too.
+    response = client.post(
+        "/api/v1/users",
+        headers={**headers(token), "Content-Type": "application/json"},
+        content='{"password":"malformed-secret"',
+    )
+    assert response.status_code == 422 and "malformed-secret" not in response.text
+    correlations.append(response.headers["X-Correlation-ID"])
+    with app_session_factory() as session:
+        audits = list(
+            session.scalars(select(AuditEvent).where(AuditEvent.correlation_id.in_(correlations)))
+        )
+        assert len(audits) == 21 and all(audit.outcome == "denied" for audit in audits)
+        details = str([audit.details for audit in audits])
+        assert all(
+            secret not in details
+            for secret in (
+                PASSWORD,
+                "short-secret",
+                "malformed-secret",
+                token,
+                viewer,
+                "invalid-identity",
+            )
+        )
+        row = session.get(Identity, target_id)
+        assert row is not None and row.is_active and row.credential_version == 1
+
+
+def test_malformed_user_requests_fail_closed_without_valid_session_or_audit(
+    user_app: tuple[TestClient, str, DurableAppService],
+    app_session_factory: sessionmaker[Session],
+    migrated_postgres: tuple[str, Engine],
+) -> None:
+    client, token, _ = user_app
+    payload = {"password": "never-audit-this-secret"}
+    for supplied_headers in ({}, headers("invalid-bearer")):
+        assert (
+            client.post("/api/v1/users", headers=supplied_headers, json=payload).status_code == 401
+        )
+
+    def reject_audit(session: Session, *args: Any) -> None:
+        if any(
+            isinstance(row, AuditEvent) and row.event_type.startswith("identity.users.")
+            for row in session.new
+        ):
+            raise SQLAlchemyError("fixture audit unavailable")
+
+    event.listen(app_session_factory, "before_flush", reject_audit)
+    try:
+        response = client.post("/api/v1/users", headers=headers(token), json=payload)
+        assert response.status_code == 503 and payload["password"] not in response.text
+    finally:
+        event.remove(app_session_factory, "before_flush", reject_audit)
+    _, engine = migrated_postgres
+    from nextops.persistence.models import Session as SessionModel
+
+    with engine.begin() as connection:
+        connection.execute(
+            update(SessionModel).values(expires_at=datetime.now(UTC) - timedelta(seconds=1))
+        )
+    assert client.get("/api/v1/users?offset=invalid", headers=headers(token)).status_code == 401
+    with app_session_factory() as session:
+        assert (
+            session.scalar(
+                select(func.count())
+                .select_from(AuditEvent)
+                .where(AuditEvent.event_type.like("identity.users.%"))
+            )
+            == 0
+        )
+
+
 def test_cross_environment_is_not_listed_or_mutable(
     user_app: tuple[TestClient, str, DurableAppService],
     app_session_factory: sessionmaker[Session],

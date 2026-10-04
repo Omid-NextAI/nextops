@@ -2,7 +2,7 @@
 
 from collections.abc import Callable
 from datetime import UTC, datetime
-from typing import TypeVar
+from typing import Literal, TypeVar
 from uuid import UUID, uuid4
 
 from sqlalchemy import func, select, text, update
@@ -23,6 +23,7 @@ from nextops.persistence.models import Session as SessionModel
 from nextops.security.secrets import PasswordService, hash_opaque_token
 
 T = TypeVar("T")
+UserOperation = Literal["list", "create", "status", "password_reset"]
 MAX_USERS = 500
 ROLE_SCOPES = {
     "viewer": ["runs.read", "zabbix.read"],
@@ -143,6 +144,20 @@ class DurableUserService:
             created_at=identity.created_at,
             manageable="admin" not in identity.roles,
         )
+
+    def reject_invalid_request(
+        self,
+        token: str,
+        correlation_id: UUID,
+        operation: UserOperation,
+        target_id: UUID | None,
+    ) -> None:
+        """Audit a schema rejection through the same fresh session/role transaction."""
+
+        def execute(session: Session, actor: Identity, now: datetime) -> None:
+            raise ApplicationError(ErrorCode.INVALID_REQUEST, "request.validation_failed")
+
+        self._run(token, correlation_id, operation, target_id, execute)
 
     def list(self, token: str, correlation_id: UUID, offset: int = 0) -> UserPage:
         if not 0 <= offset <= MAX_USERS:

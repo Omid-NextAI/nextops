@@ -2,6 +2,8 @@
 
 Current review checkpoint, 2026-10-04: complete exact-head CI/review of the bounded
 [user-management candidate](requirements/USER_MANAGEMENT_SPEC.md). Live/offline admin controls
+must include authenticated schema-denial audits (initial CI passed; the review gap is repaired).
+They
 require a guarded migration/release window and explicitly authorized disposable account; do not
 test by changing the owner/company users. PR 53's three code findings are repaired (`bf983bf`,
 five passing CI jobs); canonical connector MCP composition and full second-source group/reader
@@ -11,7 +13,8 @@ not authorization to import weights, change the runtime or dedicate all G10 reso
 
 گام جاریِ بازبینی، ۴ اکتبر ۲۰۲۶: CI و بازبینیِ همان commit
 [نامزد مدیریت کاربران](requirements/USER_MANAGEMENT_SPEC.md) تکمیل شود. کنترل زنده/آفلاینِ
-مدیر به پنجرهٔ محافظت‌شدهٔ migration/انتشار و حساب آزمایشیِ صریحاً مجاز نیاز دارد؛ کاربران
+مدیر باید ممیزیِ رد ورودی نامعتبر پس از احراز هویت را هم پوشش دهد (CI نخست موفق و ایراد
+بازبینی رفع شده است). پنجرهٔ محافظت‌شدهٔ migration/انتشار و حساب آزمایشیِ صریحاً مجاز لازم‌اند؛ کاربران
 مالک/شرکت برای آزمون تغییر نکنند. سه ایراد کدیِ PR 53 رفع شده‌اند (`bf983bf`، پنج کنترل CI
 موفق)؛ اتصال عملیاتیِ MCP اصلی و پذیرش خواننده/همهٔ گروه‌های منبع دوم ناتمام است. PRهای
 46/51 ارتقا نیابند: شکست معنایی پاسخ خام، با کنترل محدودِ بعدی یا تغییر رابط رفع نمی‌شود.

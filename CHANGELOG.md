@@ -4,12 +4,16 @@
 
 Add admin-only scoped account listing/creation, non-admin status/password controls, fixed read-only
 profiles, protected admins, version conflicts, atomic audit/session revocation and narrow grant
-0004. Preserve bilingual OCS branding/themes and local assets. Source-tested, not live or production
+0004. Route malformed JSON/body/path/query through authenticated, secret-free denial audit and
+fail closed when audit is unavailable. Preserve bilingual OCS branding/themes and local assets.
+Source-tested, not live or production
 accepted; no model/resource/connector changes. Separate PR 53 repaired its three MCP findings and
 passed CI; rejected model drafts remain unpromoted.
 
 فهرست/ایجاد حساب محدود به مدیر، کنترل وضعیت/گذرواژهٔ غیرمدیر، نقش‌های ثابت و فقط‌خواندنی،
-مدیر محافظت‌شده، تعارض نسخه، ممیزی/لغو نشست اتمی و مجوز محدود 0004 افزوده شد. نشان/تم و
+مدیر محافظت‌شده، تعارض نسخه، ممیزی/لغو نشست اتمی و مجوز محدود 0004 افزوده شد. رد JSON،
+بدنه، مسیر و پارامتر نامعتبر نیز پس از احراز هویت، بدون ثبت راز ممیزی می‌شود؛ نبود ممیزی
+به پاسخ موفق تبدیل نمی‌شود. نشان/تم و
 دارایی محلیِ OCS دوزبانه حفظ‌اند. کد آزموده شده، نه پذیرفته در استقرار زنده یا تولید؛ مدل،
 منابع و اتصال‌دهنده تغییر نکردند. PR 53 جداگانه سه ایراد MCP را رفع کرد و CI موفق دارد؛
 پیش‌نویس‌های مدلِ ردشده ارتقا نیافته‌اند.

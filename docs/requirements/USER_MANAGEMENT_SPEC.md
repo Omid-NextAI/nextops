@@ -21,7 +21,11 @@ through these routes. Existing protected administrator recovery remains authorit
 No deletion, administrator creation/promotion, role/scope editing, bulk action, invitation, SMTP,
 infrastructure credential access or model tool access. UI visibility is not authorization. Deny
 cross-scope, expired/revoked/disabled/non-admin callers and reject extra input fields. Never return
-or audit password/hash/token values. Audit every authenticated decision; mutation and success audit
+or audit password/hash/token values. Audit every authenticated decision, including malformed JSON,
+body, path and query rejections. Authenticate/recheck the role before returning validation errors;
+an expired session is 401, a non-admin is 403, a valid admin's invalid schema is 422 and an
+unavailable required audit is 503. Only a parsed target UUID/error code reaches this denial audit.
+Mutation and success audit
 commit together or roll back together. Fail closed on database/audit errors. Serialize bounded
 creation checks and revalidate permissions after waiting for locks. Do not retry uncertain mutations
 automatically. Only the `is_active` column gains an additive application UPDATE grant; roles,
@@ -32,7 +36,8 @@ scopes and audit history retain their existing restrictions.
 1. Add closed contracts and a separate service using existing tables; add reversible grant 0004.
 2. Wire authenticated API and bilingual, responsive admin screen, preserving logo/palette/themes.
 3. Test missing/denied sessions, cross-scope IDs, protected admins, duplicates, quota/pagination,
-   concurrent stale edits, revocation, secret-free responses/audit and atomic audit-failure rollback.
+   concurrent stale edits, revocation, schema-denial audits, secret-free responses/audit and atomic
+   audit-failure rollback.
 4. Run PostgreSQL 16/17, API, real-browser EN/FA/RTL/LTR/mobile/theme/keyboard/logout tests and CI.
 5. Document routes, policy, deployment status and rollback; retain the release manifest's live IDs.
 
@@ -67,7 +72,10 @@ connector, VM or production-readiness claim changes with this increment.
 حذف، ایجاد یا ارتقای مدیر، ویرایش نقش و دسترسی، اقدام گروهی، دعوت، SMTP، دسترسی به اطلاعات
 ورود زیرساخت و ابزار مدل خارج از دامنه‌اند. دیده‌شدن دکمه مجوز نیست. شناسهٔ خارج از دامنه و
 نشست منقضی، لغوشده، غیرفعال یا غیرمدیر رد شوند؛ فیلد اضافی پذیرفته نشود. گذرواژه، hash و
-توکن در پاسخ یا ممیزی نیایند. تصمیم دربارهٔ کاربر احرازهویت‌شده ممیزی شود؛ تغییر و ممیزی
+توکن در پاسخ یا ممیزی نیایند. تصمیم دربارهٔ کاربر احرازهویت‌شده، از جمله رد JSON، بدنه،
+مسیر یا پارامتر نامعتبر، ممیزی شود. پیش از پاسخ اعتبارسنجی، نشست و نقش دوباره بررسی شوند:
+نشست منقضی 401، غیرمدیر 403، ورودی نامعتبرِ مدیر معتبر 422 و نبود ممیزی الزامی 503 است.
+در ممیزی این رد فقط UUID معتبرِ مقصد و کد خطا ثبت شوند. تغییر و ممیزی
 موفقیت در یک تراکنش ثبت یا هر دو بازگردانده شوند. خطای پایگاه/ممیزی به موفقیت تبدیل نشود.
 کنترل سقف ایجاد سریالی و مجوز پس از انتظار قفل دوباره بررسی شود؛ تغییر مبهم خودکار تکرار
 نشود. فقط مجوز UPDATE ستون `is_active` به نقش برنامه افزوده می‌شود؛ محدودیت نقش‌ها،
@@ -78,7 +86,8 @@ connector, VM or production-readiness claim changes with this increment.
 ۱. قرارداد بسته، سرویس جدا با جدول‌های موجود و migration برگشت‌پذیرِ مجوز 0004 افزوده شود.
 ۲. API محافظت‌شده و نمای مدیریت دوزبانه و واکنش‌گرا، با حفظ لوگو، رنگ‌ها و تم‌ها متصل شوند.
 ۳. نبود/رد نشست، دامنهٔ نادرست، مدیر محافظت‌شده، نام تکراری، سقف/صفحه‌بندی، ویرایش هم‌زمان
-قدیمی، لغو نشست، نبود راز در پاسخ/ممیزی و بازگشت اتمی هنگام خطای ممیزی آزموده شوند.
+قدیمی، لغو نشست، ممیزیِ رد ورودی نامعتبر، نبود راز در پاسخ/ممیزی و بازگشت اتمی هنگام خطای
+ممیزی آزموده شوند.
 ۴. PostgreSQL 16/17، API، مرورگر واقعی، فارسی/انگلیسی، RTL/LTR، موبایل، تم، صفحه‌کلید و خروج
 در CI بررسی شوند.
 ۵. مسیرها، سیاست، وضعیت استقرار و بازگشت مستند شوند؛ هویت انتشار زنده در manifest ثابت بماند.

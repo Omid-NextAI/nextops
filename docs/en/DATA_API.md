@@ -16,7 +16,10 @@ accepts `{username,password,role}` with role viewer/operator/engineer. `PATCH
 /api/v1/users/{identity_id}` accepts `{is_active,expected_version}`; `POST
 /api/v1/users/{identity_id}/password` accepts `{new_password,expected_version}`. Each revalidates
 the bearer/current administrator inside its transaction, protects every administrator account and
-audits decisions. Status/password changes revoke all target sessions atomically. No role/scope
+audits decisions, including schema/JSON/path/query rejections. Malformed input from a valid admin
+returns 422 only after denial audit; invalid sessions/non-admins return 401/403 and required audit
+failure returns 503. No submitted body or malformed identifier is audited. Status/password changes
+revoke all target sessions atomically. No role/scope
 editing or deletion exists. Migration 0004 grants only `identities.is_active` UPDATE. Responses
 are non-cacheable and secret-free. See [contract](../requirements/USER_MANAGEMENT_SPEC.md).
 

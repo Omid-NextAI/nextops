@@ -3,7 +3,10 @@
 Owner-requested user panel, 2026-10-04: admin-only scoped listing, fixed read-only account
 creation, non-admin activation and password reset are implemented with atomic audit/session
 revocation, stale-version denial and protected administrator identities. Bilingual OCS UI retains
-brand/theme and offline assets. This branch is a source candidate, not live. A separate PR 53
+brand/theme and offline assets. Initial user-panel CI passed five jobs; a review repair now audits
+malformed JSON/body/path/query after fresh session/role checks and fails closed on audit failure.
+Local reruns passed 551 unit/API checks and 33 integration tests (14 focused user tests).
+This branch is a source candidate, not live. A separate PR 53
 repair (`bf983bf`) resolves its three MCP review findings with 39 focused tests and five passing
 CI jobs; it is not merged or deployed. PRs 46/51 remain rejected semantic experiments, not release
 approvals. Read-only live inspection found app/AI/tunnels active on the recorded releases, only the
@@ -15,6 +18,9 @@ allocation. No resource, credential, deployment, model or thinking change was ma
 پنل درخواستی مالک، ۴ اکتبر ۲۰۲۶: فهرست محدود به دامنهٔ مدیر، ایجاد حساب با دسترسی ثابت و
 فقط‌خواندنی، تغییر وضعیت و تنظیم گذرواژهٔ غیرمدیر، با ممیزی/لغو نشست اتمی، رد نسخهٔ قدیمی و
 حفاظت از مدیر پیاده شده‌اند. رابط دوزبانهٔ OCS، نشان، تم و دارایی‌های آفلاین را حفظ می‌کند.
+CI نخستِ پنل پنج کنترل را گذراند؛ اصلاحِ بازبینی اکنون رد JSON، بدنه، مسیر و پارامتر نامعتبر
+را پس از بررسی تازهٔ نشست/نقش ممیزی و خرابی ممیزی را رد می‌کند. اجرای دوبارهٔ محلیِ ۵۵۱ آزمون
+واحد/API و ۳۳ آزمون یکپارچگی (۱۴ مورد متمرکزِ کاربران) موفق بود.
 این شاخه نامزد کدی است، نه استقرار زنده. اصلاح جداگانهٔ PR 53 با `bf983bf`، سه ایراد MCP را
 با ۳۹ آزمون متمرکز و پنج کنترل CI موفق رفع کرد؛ هنوز ادغام یا مستقر نشده است. PRهای 46/51
 آزمایش معناییِ ردشده‌اند، نه انتشار تأییدشده. بازرسی زندهٔ فقط‌خواندنی، برنامه/AI/تونل‌های

@@ -32,7 +32,7 @@ from nextops.api.target_focus import requested_named_target
 from nextops.application.conversations import DurableConversationService, GenerationTicket
 from nextops.application.errors import ApplicationError
 from nextops.application.service import DurableAppService
-from nextops.application.users import DurableUserService
+from nextops.application.users import DurableUserService, UserOperation
 from nextops.configuration import AppSettings
 from nextops.contracts.assistant import (
     AssistantRequest,
@@ -182,6 +182,12 @@ ANSWER_PATHS = frozenset(
     {"/api/v1/assistant/generate", "/api/v1/investigate", "/api/v1/incidents/investigate"}
 )
 APP_CODE_SHA256 = installed_code_digest(Path(__file__).resolve().parents[1])
+USER_VALIDATION_OPERATIONS: dict[str, UserOperation] = {
+    "list_users": "list",
+    "create_user": "create",
+    "change_user_status": "status",
+    "reset_user_password": "password_reset",
+}
 
 
 def create_app(
@@ -251,6 +257,28 @@ def create_app(
     async def validation_error_handler(
         request: Request, error: RequestValidationError
     ) -> JSONResponse:
+        route = request.scope.get("route")
+        operation = USER_VALIDATION_OPERATIONS.get(getattr(route, "name", ""))
+        if operation is not None:
+            # FastAPI rejects malformed JSON/body/path/query before route invocation.
+            # Match the trusted route name; never audit the untrusted error input/body.
+            try:
+                token = current_token(await bearer(request))
+                raw_target = request.path_params.get("identity_id")
+                try:
+                    target_id = UUID(str(raw_target)) if raw_target is not None else None
+                except ValueError:
+                    target_id = None
+                await run_in_threadpool(
+                    users().reject_invalid_request,
+                    token,
+                    _correlation_id(request),
+                    operation,
+                    target_id,
+                )
+            except ApplicationError as audit_error:
+                if audit_error.code is not ErrorCode.INVALID_REQUEST:
+                    return await application_error_handler(request, audit_error)
         safe_errors = [
             {
                 "location": ".".join(str(part) for part in item["loc"]),

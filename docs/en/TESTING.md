@@ -2,15 +2,21 @@
 
 ## Local admin account source candidate — 2026-10-04
 
-551 unit/API/contract checks passed with two Windows/POSIX skips. Twelve focused restricted-role
-user-management checks and the complete 31-test integration suite passed in an isolated local
+551 unit/API/contract checks passed with two Windows/POSIX skips. Fourteen focused restricted-role
+user-management checks and the complete 33-test integration suite passed in an isolated local
 PostgreSQL 18.6 lab; this extra-major test is not a substitute for CI PostgreSQL 16/17. All 28
 browser cases passed with one POSIX collector skip, including four new user-panel cases, EN/FA,
 RTL/LTR/mobile/themes/keyboard, protected admins, confirmation, expired-session cleanup, conflict
 without retry and late-response rejection after logout. Desktop/mobile Persian screenshots were
 visually inspected. Local fixture responses are not live server acceptance. No operational user,
 credential, deployment, model or resource changed. The [specification](../requirements/USER_MANAGEMENT_SPEC.md)
-keeps exact CI, live/offline and guarded rollback gates distinct.
+keeps exact CI, live/offline and guarded rollback gates distinct. Initial `e52e26d` passed all five
+jobs in [CI 37211703570](https://github.com/Omid-NextAI/nextops/actions/runs/37211703570). Review then
+found missing audits on FastAPI schema rejection. The repair routes malformed JSON/body/path/query
+through the same session/role transaction; tests assert 21 secret-free denials across admin/viewer
+requests and fail-closed behavior for missing/invalid/expired sessions or an unavailable audit.
+The 551-unit/33-integration local reruns passed after this repair; release still requires exact-head
+CI/review and separate live acceptance. No serving database grant or account changed.
 
 ## Scoped diagnostic safeguard loop — 2026-10-04
 
