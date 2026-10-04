@@ -1,5 +1,15 @@
 # Next task / کار بعدی
 
+Review checkpoint, 2026-10-04: the three PR 53 code findings below are repaired and 39 focused
+local tests pass; obtain fresh CI/review on the repaired head. MCP-02 remains the next unfinished
+connector composition, followed by MCP-03. Owner-requested admin user management is a separate
+bounded application increment; do not label local UI/API tests as deployed user acceptance.
+
+گام بازبینی، ۴ اکتبر ۲۰۲۶: سه ایراد کدیِ PR 53 در ادامه اصلاح شده‌اند و ۳۹ آزمون متمرکز
+محلی موفق‌اند؛ CI و بازبینیِ تازهٔ commit اصلاح‌شده لازم است. MCP-02 همچنان نخستین اتصال
+عملیاتیِ ناتمام است و MCP-03 پس از آن قرار دارد. مدیریت کاربرانِ درخواستی مالک، گام محدود و
+جداگانهٔ برنامه است؛ آزمون محلی رابط/API به معنی پذیرش کاربران در استقرار زنده نیست.
+
 Owner connector-role clarification, 2026-10-04: migrate the existing connector VM to its canonical
 MCP gateway role, with isolated runners, rather than deploy a competing parallel stack. **First
 unfinished action: repair and regression-test the three open MCP-01 findings in

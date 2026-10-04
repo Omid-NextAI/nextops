@@ -15,10 +15,17 @@ from uuid import UUID
 from pydantic import Field, model_validator
 
 from nextops.application.errors import ApplicationError
-from nextops.connectors.zabbix import ZabbixTransport
+from nextops.connectors.zabbix import ZabbixReadClient, ZabbixTransport
 from nextops.contracts.errors import ErrorCode
 from nextops.contracts.models import FrozenContract
-from nextops.contracts.sources import LogicalSourceId, ZabbixObjectId
+from nextops.contracts.sources import (
+    LogicalSourceId,
+    SourceEvidence,
+    SourceReadBinding,
+    SourceReadOperation,
+    SourceReadRequest,
+    ZabbixObjectId,
+)
 
 MAX_REGISTRY_BYTES = 65_536
 READ_METHODS = frozenset(
@@ -134,6 +141,51 @@ class ZabbixSourceRegistry(FrozenContract):
                         return source, target
         raise ApplicationError(ErrorCode.POLICY_DENIED, "connector.source_target_denied")
 
+    def resolve_binding(self, source_id: str, target_id: str) -> SourceReadBinding:
+        source, target = self.resolve(source_id, target_id)
+        return SourceReadBinding(
+            source_id=source.source_id,
+            target_id=target.target_id,
+            organization_id=source.organization_id,
+            environment_id=source.environment_id,
+        )
+
+
+class ZabbixSourceCollector:
+    """Outer adapter owns private endpoints and reader construction, not application policy."""
+
+    def __init__(
+        self,
+        registry: ZabbixSourceRegistry,
+        transport_factory: Callable[[ZabbixSource], ZabbixTransport],
+    ) -> None:
+        self._registry = registry
+        self._transport_factory = transport_factory
+
+    async def collect(
+        self,
+        request: SourceReadRequest,
+        operation: SourceReadOperation,
+        *,
+        stopped: Callable[[], bool],
+    ) -> SourceEvidence:
+        source, target = self._registry.resolve(request.source_id, request.target_id)
+        transport = ScopedZabbixTransport(
+            source, target, self._transport_factory(source), stopped=stopped
+        )
+        client = ZabbixReadClient(target.host, transport)
+        evidence = (
+            await client.summary() if operation == "summary" else await client.incident_context()
+        )
+        return SourceEvidence(
+            source_id=source.source_id,
+            target_id=target.target_id,
+            correlation_id=request.correlation_id,
+            operation=operation,
+            host_group_ids=transport.verified_group_ids,
+            evidence=evidence,
+        )
+
 
 def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     result: dict[str, Any] = {}
@@ -195,6 +247,13 @@ class ScopedZabbixTransport:
                 raise ApplicationError(ErrorCode.POLICY_DENIED, "connector.zabbix_scope_denied")
             if method == "item.get":
                 bound["output"] = [*params["output"], "hostid"]
+            if method in {"problem.get", "event.get"}:
+                bound.update(source=0, object=0)
+                bound["output"] = list(
+                    dict.fromkeys([*params["output"], "eventid", "objectid", "source", "object"])
+                )
+                if method == "event.get":
+                    bound["selectHosts"] = ["hostid"]
         result = await self._transport.call(method, bound)
         if self._stopped():
             # A timed-out native request may finish; never start its dependent reads.
@@ -238,4 +297,65 @@ class ScopedZabbixTransport:
                 for point in result
             ):
                 raise ApplicationError(ErrorCode.DEPENDENCY_UNAVAILABLE, "connector.source_invalid")
+        elif method in {"problem.get", "event.get"}:
+            limit = params.get("limit")
+            if (
+                not isinstance(limit, int)
+                or not 1 <= limit <= 101
+                or not isinstance(result, list)
+                or len(result) > limit
+                or any(not isinstance(row, dict) for row in result)
+            ):
+                raise ApplicationError(ErrorCode.DEPENDENCY_UNAVAILABLE, "connector.source_invalid")
+            if method == "problem.get" and result:
+                # problem.get cannot return selectHosts. Resolve the exact bounded event
+                # identities through the already allowlisted event.get ownership relation.
+                if any(not _valid_object_id(row.get("eventid")) for row in result):
+                    raise ApplicationError(
+                        ErrorCode.DEPENDENCY_UNAVAILABLE, "connector.source_invalid"
+                    )
+                events = await self.call(
+                    "event.get",
+                    {
+                        "hostids": [self._target.host_id],
+                        "eventids": [row["eventid"] for row in result],
+                        "source": 0,
+                        "object": 0,
+                        "output": ["eventid", "objectid", "source", "object"],
+                        "limit": len(result),
+                    },
+                )
+                identities = {row["eventid"]: row["objectid"] for row in events}
+                if len(identities) != len(result) or any(
+                    not _valid_object_id(row.get("objectid"))
+                    or row.get("source") != "0"
+                    or row.get("object") != "0"
+                    or identities.get(row["eventid"]) != row["objectid"]
+                    for row in result
+                ):
+                    raise ApplicationError(ErrorCode.POLICY_DENIED, "connector.zabbix_scope_denied")
+            elif method == "event.get":
+                if len({row.get("eventid") for row in result}) != len(result) or any(
+                    not _valid_object_id(row.get("eventid"))
+                    or not _valid_object_id(row.get("objectid"))
+                    or row.get("source") != "0"
+                    or row.get("object") != "0"
+                    or not isinstance(row.get("hosts"), list)
+                    or not 1 <= len(row["hosts"]) <= 32
+                    or any(
+                        not isinstance(host, dict) or host.get("hostid") != self._target.host_id
+                        for host in row["hosts"]
+                    )
+                    for row in result
+                ):
+                    raise ApplicationError(ErrorCode.POLICY_DENIED, "connector.zabbix_scope_denied")
         return result
+
+
+def _valid_object_id(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and value.isascii()
+        and value.isdecimal()
+        and (1 <= len(value) <= 20 and not value.startswith("0"))
+    )

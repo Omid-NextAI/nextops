@@ -1,5 +1,22 @@
 # Project state / وضعیت پروژه
 
+Review repair, 2026-10-04: PR 53's three source findings are repaired: cancellation during initial
+authorization now attempts bounded terminal audit; problem/event ownership is proven through
+bounded event/host linkage; application-owned registry/collector ports keep private connector
+configuration outside orchestration. All 39 focused tests passed locally. These are fixture-backed
+SDK/source checks, not live MCP or second-source acceptance. The historical findings below remain
+as context. Read-only server inspection found the original connector configuration only, no
+secondary endpoint or MCP unit; app/AI services and their existing tunnels are active. No live
+configuration or model changed.
+
+اصلاح بازبینی، ۴ اکتبر ۲۰۲۶: سه ایراد کدیِ PR 53 اصلاح شدند: لغو هنگام بررسی اولیهٔ مجوز،
+تلاش محدود برای ثبت ممیزی پایانی دارد؛ تعلق problem/event با پیوند محدود رویداد و میزبان
+اثبات می‌شود؛ رابط‌های فهرست و گردآوریِ متعلق به برنامه، تنظیم خصوصی اتصال‌دهنده را بیرون از
+منطق کاربرد نگه می‌دارند. هر ۳۹ آزمون متمرکز محلی موفق بود؛ این آزمون‌های SDK/کد با مقصد
+ساختگی، پذیرش MCP زنده یا منبع دوم نیستند. ایرادهای تاریخیِ زیر برای حفظ سابقه باقی‌اند.
+بازرسی فقط‌خواندنیِ سرور، تنها تنظیم منبع اولیه را یافت؛ نشانی منبع دوم و واحد MCP موجود نیست.
+برنامه، AI و تونل‌های موجود فعال‌اند. تنظیم زنده یا مدل تغییر نکرد.
+
 Design clarification, 2026-10-04: the existing connector VM is the intended MCP gateway/isolated
 runner host, not a parallel non-MCP platform. Master sections 5/12, paired architecture/MCP guides
 and ADR 0010 now explicitly align with the owner's clarification. The deployed connector is still

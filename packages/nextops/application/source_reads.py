@@ -14,16 +14,14 @@ from anyio import CancelScope
 from pydantic import AwareDatetime, Field, model_validator
 
 from nextops.application.errors import ApplicationError
-from nextops.connectors.sources import (
-    ScopedZabbixTransport,
-    ZabbixSource,
-    ZabbixSourceRegistry,
-    ZabbixSourceTarget,
-)
-from nextops.connectors.zabbix import ZabbixReadClient, ZabbixTransport
 from nextops.contracts.errors import ErrorCode
 from nextops.contracts.models import ActorContext, FrozenContract
-from nextops.contracts.sources import SourceEvidence, SourceReadOperation, SourceReadRequest
+from nextops.contracts.sources import (
+    SourceEvidence,
+    SourceReadBinding,
+    SourceReadOperation,
+    SourceReadRequest,
+)
 
 MAX_SOURCE_EVIDENCE_BYTES = 131_072
 
@@ -53,9 +51,21 @@ class SourceAuditEvent(FrozenContract):
 class SourceAuthorization(Protocol):
     """Revalidate live caller permission; never supplied through tool arguments."""
 
-    async def authorize(
-        self, actor: ActorContext, source: ZabbixSource, target: ZabbixSourceTarget
-    ) -> None: ...
+    async def authorize(self, actor: ActorContext, binding: SourceReadBinding) -> None: ...
+
+
+class SourceRegistry(Protocol):
+    def resolve_binding(self, source_id: str, target_id: str) -> SourceReadBinding: ...
+
+
+class SourceCollector(Protocol):
+    async def collect(
+        self,
+        request: SourceReadRequest,
+        operation: SourceReadOperation,
+        *,
+        stopped: Callable[[], bool],
+    ) -> SourceEvidence: ...
 
 
 class SourceAudit(Protocol):
@@ -69,10 +79,10 @@ class SourceReader:
 
     def __init__(
         self,
-        registry: ZabbixSourceRegistry,
+        registry: SourceRegistry,
         authorize: SourceAuthorization,
         audit: SourceAudit,
-        transport_factory: Callable[[ZabbixSource], ZabbixTransport],
+        collector: SourceCollector,
         *,
         deadline_seconds: float = 30.0,
         max_active: int = 2,
@@ -82,7 +92,7 @@ class SourceReader:
         self._registry = registry
         self._authorize = authorize
         self._audit = audit
-        self._transport_factory = transport_factory
+        self._collector = collector
         self._deadline = deadline_seconds
         self._admission = asyncio.Semaphore(max_active)
 
@@ -104,11 +114,9 @@ class SourceReader:
         with CancelScope(shield=True):
             await asyncio.wait_for(self._audit.record(event), self._deadline)
 
-    async def _check_permission(
-        self, actor: ActorContext, source: ZabbixSource, target: ZabbixSourceTarget
-    ) -> None:
+    async def _check_permission(self, actor: ActorContext, binding: SourceReadBinding) -> None:
         try:
-            await asyncio.wait_for(self._authorize.authorize(actor, source, target), self._deadline)
+            await asyncio.wait_for(self._authorize.authorize(actor, binding), self._deadline)
         except TimeoutError:
             raise ApplicationError(
                 ErrorCode.TIMEOUT, "connector.source_authorization_timeout"
@@ -137,14 +145,17 @@ class SourceReader:
             )
 
         try:
-            source, target = self._registry.resolve(request.source_id, request.target_id)
+            binding = self._registry.resolve_binding(request.source_id, request.target_id)
             if (
                 "zabbix.read" not in actor.scopes
-                or actor.organization_id != source.organization_id
-                or actor.environment_id != source.environment_id
+                or actor.organization_id != binding.organization_id
+                or actor.environment_id != binding.environment_id
             ):
                 raise ApplicationError(ErrorCode.POLICY_DENIED, "connector.source_scope_denied")
-            await self._check_permission(actor, source, target)
+            await self._check_permission(actor, binding)
+        except asyncio.CancelledError:
+            await self._record(event("cancelled", ErrorCode.TIMEOUT))
+            raise
         except ApplicationError as error:
             await self._record(event("denied", error.code))
             raise
@@ -153,18 +164,31 @@ class SourceReader:
             raise ApplicationError(
                 ErrorCode.OVERLOADED, "connector.source_overloaded", retryable=True
             )
-        await self._admission.acquire()
+        try:
+            await self._admission.acquire()
+        except asyncio.CancelledError:
+            await self._record(event("cancelled", ErrorCode.TIMEOUT))
+            raise
         task: asyncio.Task[SourceEvidence] | None = None
         stop_collection = asyncio.Event()
         try:
             await self._record(event("started"))
             task = asyncio.create_task(
-                self._collect(source, target, request, operation, stop_collection)
+                self._collector.collect(request, operation, stopped=stop_collection.is_set)
             )
             try:
                 evidence = await asyncio.wait_for(asyncio.shield(task), self._deadline)
                 # Role/scope revocation during collection cannot publish an old grant.
-                await self._check_permission(actor, source, target)
+                await self._check_permission(actor, binding)
+                if (
+                    evidence.source_id != request.source_id
+                    or evidence.target_id != request.target_id
+                    or evidence.correlation_id != request.correlation_id
+                    or evidence.operation != operation
+                ):
+                    raise ApplicationError(
+                        ErrorCode.DEPENDENCY_UNAVAILABLE, "connector.source_invalid"
+                    )
                 payload = json.dumps(
                     evidence.model_dump(mode="json"),
                     sort_keys=True,
@@ -180,10 +204,6 @@ class SourceReader:
                 raise ApplicationError(
                     ErrorCode.TIMEOUT, "connector.source_timeout", retryable=True
                 ) from None
-            except asyncio.CancelledError:
-                stop_collection.set()
-                await self._record(event("cancelled", ErrorCode.TIMEOUT))
-                raise
             except ApplicationError:
                 raise
             except Exception:
@@ -192,6 +212,10 @@ class SourceReader:
                 ) from None
             await self._record(event("completed", digest=hashlib.sha256(payload).hexdigest()))
             return evidence
+        except asyncio.CancelledError:
+            stop_collection.set()
+            await self._record(event("cancelled", ErrorCode.TIMEOUT))
+            raise
         except ApplicationError as error:
             await self._record(event("failed", error.code))
             raise
@@ -208,27 +232,3 @@ class SourceReader:
         if not task.cancelled():
             task.exception()  # retrieve, never log raw exception text
         self._admission.release()
-
-    async def _collect(
-        self,
-        source: ZabbixSource,
-        target: ZabbixSourceTarget,
-        request: SourceReadRequest,
-        operation: SourceReadOperation,
-        stop_collection: asyncio.Event,
-    ) -> SourceEvidence:
-        transport = ScopedZabbixTransport(
-            source, target, self._transport_factory(source), stopped=stop_collection.is_set
-        )
-        client = ZabbixReadClient(target.host, transport)
-        evidence = (
-            await client.summary() if operation == "summary" else await client.incident_context()
-        )
-        return SourceEvidence(
-            source_id=source.source_id,
-            target_id=target.target_id,
-            correlation_id=request.correlation_id,
-            operation=operation,
-            host_group_ids=transport.verified_group_ids,
-            evidence=evidence,
-        )

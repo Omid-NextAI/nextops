@@ -27,9 +27,14 @@ from pydantic import ValidationError
 from nextops.application.errors import ApplicationError
 from nextops.application.source_reads import SourceAuditEvent, SourceReader
 from nextops.connectors.mcp import McpSourceGateway, create_source_mcp_server
-from nextops.connectors.sources import ScopedZabbixTransport, ZabbixSource, ZabbixSourceRegistry
+from nextops.connectors.sources import (
+    ScopedZabbixTransport,
+    ZabbixSource,
+    ZabbixSourceCollector,
+    ZabbixSourceRegistry,
+)
 from nextops.contracts.models import ActorContext, Role
-from nextops.contracts.sources import SourceReadRequest
+from nextops.contracts.sources import SourceReadBinding, SourceReadRequest
 
 ORG, ENV, SUBJECT = uuid4(), uuid4(), uuid4()
 ACTOR = ActorContext(
@@ -63,7 +68,7 @@ class Authorization:
         self.calls = 0
         self.revoke_after: int | None = None
 
-    async def authorize(self, actor: ActorContext, item: ZabbixSource, target: Any) -> None:
+    async def authorize(self, actor: ActorContext, binding: SourceReadBinding) -> None:
         from nextops.contracts.errors import ErrorCode
 
         self.calls += 1
@@ -147,7 +152,11 @@ def setup_reader(
     }
     return (
         SourceReader(
-            registry, auth, audit, lambda item: entries[item.source_id], deadline_seconds=deadline
+            registry,
+            auth,
+            audit,
+            ZabbixSourceCollector(registry, lambda item: entries[item.source_id]),
+            deadline_seconds=deadline,
         ),
         audit,
         auth,
@@ -156,6 +165,91 @@ def setup_reader(
 
 def request(source_id: str = "primary", target_id: str = "server") -> SourceReadRequest:
     return SourceReadRequest(source_id=source_id, target_id=target_id, correlation_id=uuid4())
+
+
+def test_cancellation_during_initial_authorization_is_audited_without_target_io() -> None:
+    async def check() -> None:
+        entered = asyncio.Event()
+
+        class BlockingAuthorization(Authorization):
+            async def authorize(self, actor: ActorContext, binding: SourceReadBinding) -> None:
+                entered.set()
+                await asyncio.Event().wait()
+
+        registry = ZabbixSourceRegistry(sources=(source(),))
+        audit, transport = Audit(), Transport()
+        reader = SourceReader(
+            registry,
+            BlockingAuthorization(),
+            audit,
+            ZabbixSourceCollector(registry, lambda _: transport),
+        )
+        intent = request()
+        task = asyncio.create_task(reader.read(ACTOR, intent, "summary"))
+        await asyncio.wait_for(entered.wait(), 2)
+        task.cancel()
+        with pytest.raises(asyncio.CancelledError):
+            await task
+        assert [event.outcome for event in audit.events] == ["cancelled"]
+        assert audit.events[0].request == intent
+        assert not transport.calls
+
+    asyncio.run(check())
+
+
+@pytest.mark.parametrize("method", ["problem.get", "event.get"])
+@pytest.mark.parametrize("fault", [None, "wrong_host", "missing_hosts", "wrong_object", "missing"])
+def test_problem_and_event_ownership_is_proven_before_publication(
+    method: str, fault: str | None
+) -> None:
+    async def check() -> None:
+        class EventTransport(Transport):
+            async def call(self, called: str, params: dict[str, Any]) -> Any:
+                if called not in {"problem.get", "event.get"}:
+                    return await super().call(called, params)
+                self.calls.append((called, params))
+                row: dict[str, Any] = {
+                    "eventid": "30001",
+                    "objectid": "40001",
+                    "source": "0",
+                    "object": "0",
+                }
+                if called == "event.get":
+                    assert params["selectHosts"] == ["hostid"]
+                    if fault == "missing":
+                        return []
+                    row["hosts"] = [{"hostid": "99999" if fault == "wrong_host" else "10084"}]
+                    if fault == "missing_hosts":
+                        del row["hosts"]
+                    if fault == "wrong_object":
+                        row["object"] = "1"
+                return [row]
+
+        transport = EventTransport()
+        item = source()
+        scoped = ScopedZabbixTransport(item, item.targets[0], transport)
+        await scoped.call("host.get", {"filter": {"host": [item.targets[0].host]}})
+        params = {"hostids": ["10084"], "output": ["name"], "limit": 25}
+        if fault is not None and (method == "problem.get" or fault != "missing"):
+            with pytest.raises(ApplicationError):
+                await scoped.call(method, params)
+        else:
+            rows = await scoped.call(method, params)
+            assert len(rows) == (0 if fault == "missing" else 1)
+        assert {called for called, _ in transport.calls} <= {"host.get", "problem.get", "event.get"}
+
+    asyncio.run(check())
+
+
+def test_source_application_does_not_import_outer_connector_adapters() -> None:
+    import ast
+
+    path = Path(__file__).resolve().parents[2] / "packages/nextops/application/source_reads.py"
+    tree = ast.parse(path.read_text(encoding="utf-8"))
+    assert not any(
+        isinstance(node, ast.ImportFrom) and (node.module or "").startswith("nextops.connectors")
+        for node in ast.walk(tree)
+    )
 
 
 @pytest.mark.parametrize("operation", ["summary", "incident_context"])

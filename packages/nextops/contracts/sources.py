@@ -13,6 +13,15 @@ ZabbixObjectId = Annotated[str, Field(pattern=r"^[1-9][0-9]{0,19}$")]
 SourceReadOperation = Literal["summary", "incident_context"]
 
 
+class SourceReadBinding(FrozenContract):
+    """Credential-free policy binding supplied by a trusted registry adapter."""
+
+    source_id: LogicalSourceId
+    target_id: LogicalSourceId
+    organization_id: UUID
+    environment_id: UUID
+
+
 class SourceReadRequest(FrozenContract):
     """Only logical identifiers and correlation, never URLs/methods/roles."""
 
