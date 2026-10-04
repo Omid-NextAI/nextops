@@ -13,6 +13,12 @@ session before collection and again before publication; durable PostgreSQL inves
 is mandatory. The gateway additionally fsyncs text-free service/correlation/source audit records.
 No browser or model receives service credentials. No automatic source fallback is permitted.
 
+Bind app, gateway and runner manifests with an opaque canonical SHA-256 over each exact source
+and target configuration (tenant, environment, endpoint, CA/credential references, host and groups).
+Carry and verify this identity through MCP and the peer-verified socket before collection and
+publication. Reject missing live catalogue identities and drift; logical names alone are insufficient.
+This metadata digest is not a secret, artifact signature or replacement for verified TLS.
+
 Discovery means listing approved, immutable logical source/target metadata, not scanning networks,
 auto-enrolling groups or granting new access. Display an approved catalogue separately from live
 health. Empty/unobserved groups are not qualified. Namespace selected-source provenance in stored
@@ -56,6 +62,12 @@ This bounded increment extends MCP-01's discovery non-goal; it does not authoriz
 تحقیق در PostgreSQL الزامی است. درگاه نیز رخدادهای بدون متن شاهد را با شناسهٔ هم‌بستگی،
 منبع و هش، به‌صورت ماندگار و با fsync ثبت می‌کند. اطلاعات ورود به مرورگر یا مدل نمی‌رسند.
 جایگزینی خودکار منبع ممنوع است.
+
+فهرست برنامه، درگاه و اجراکننده با SHA-256 قطعیِ پیکربندی دقیقِ هر منبع و مقصد پیوند داده شود:
+سازمان، محیط، نشانی، مرجع گواهی و اطلاعات ورود، میزبان و گروه‌ها. این هویت از MCP و سوکت
+با UID تأییدشده عبور کند و پیش از گردآوری و انتشار کنترل شود. نبود هویت در فهرست زنده یا
+اختلاف پیکربندی موجب رد درخواست شود؛ نام منطقی به‌تنهایی کافی نیست. هش فراداده نه محرمانه
+است، نه امضای فایل، و جایگزین TLS معتبر نیز نیست.
 
 کشف در این گام، نمایش فهرست تغییرناپذیرِ منابع و مقصدهای تأییدشده است؛ نه پویش شبکه، ثبت
 خودکار گروه یا افزایش دسترسی. فهرست مجاز از سلامت زنده جدا نمایش داده شود. گروه خالی یا

@@ -197,6 +197,7 @@ class McpSourceGateway:
                 or result.target_id != request.target_id
                 or result.correlation_id != request.correlation_id
                 or result.operation != operation
+                or result.binding_sha256 != request.binding_sha256
             ):
                 raise ApplicationError(
                     ErrorCode.DEPENDENCY_UNAVAILABLE, "connector.mcp_source_mismatch"

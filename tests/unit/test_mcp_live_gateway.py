@@ -15,7 +15,7 @@ from nextops.connectors.source_runtime import DrainingZabbixTransport, create_ga
 from nextops.contracts.models import ActorContext, Role
 from nextops.contracts.monitoring import MonitoringSummary
 from nextops.contracts.source_catalog import GatewayReadRequest, SourceCatalog
-from nextops.contracts.sources import SourceEvidence
+from nextops.contracts.sources import SourceEvidence, SourceReadRequest
 from nextops.security.source_catalog import load_catalog
 
 
@@ -139,7 +139,7 @@ def test_catalogue_is_credential_free_and_not_live_health(tmp_path: Path) -> Non
                 "label": "Second Zabbix",
                 "organization_id": uuid4(),
                 "environment_id": uuid4(),
-                "targets": [{"target_id": "sla", "label": "SLA"}],
+                "targets": [{"target_id": "sla", "label": "SLA", "binding_sha256": "a" * 64}],
             },
         )
     )
@@ -171,6 +171,61 @@ def test_selected_source_summary_requires_complete_provenance() -> None:
             metrics=(),
             active_problems=(),
         )
+
+
+@pytest.mark.parametrize(
+    "changed",
+    [
+        "organization_id",
+        "environment_id",
+        "api_url",
+        "credential_name",
+        "approved_group_ids",
+        "targets",
+    ],
+)
+def test_runner_binding_drift_is_denied_before_transport(changed: str) -> None:
+    from test_source_mcp import source
+
+    from nextops.application.errors import ApplicationError
+    from nextops.connectors.sources import ZabbixSourceCollector, ZabbixSourceRegistry
+
+    original = source()
+    first = ZabbixSourceRegistry(sources=(original,))
+    values: dict[str, Any] = {
+        "organization_id": uuid4(),
+        "environment_id": uuid4(),
+        "api_url": "https://different.example.invalid/api_jsonrpc.php",
+        "credential_name": "different-token",
+        "approved_group_ids": ("2", "3"),
+        "targets": ({**original.targets[0].model_dump(), "host_id": "10085"},),
+    }
+    drifted = ZabbixSourceRegistry.model_validate(
+        {"sources": [{**original.model_dump(), changed: values[changed]}]}
+    )
+    transport = AsyncMock()
+    collector = ZabbixSourceCollector(drifted, lambda _: transport)
+    intent = SourceReadRequest(
+        source_id="primary",
+        target_id="server",
+        correlation_id=uuid4(),
+        binding_sha256=first.binding_digest("primary", "server"),
+    )
+    with pytest.raises(ApplicationError, match="source_binding_mismatch"):
+        asyncio.run(collector.collect(intent, "summary", stopped=lambda: False))
+    assert not transport.call.called
+
+
+@pytest.mark.parametrize("operation", ["summary", "incident_context", "incident_evidence"])
+def test_invalid_compat_evidence_has_safe_typed_error(operation: str, tmp_path: Path) -> None:
+    from nextops.api.mcp_gateway import TlsMcpGateway
+    from nextops.application.errors import ApplicationError
+
+    gateway = TlsMcpGateway("https://localhost:18100/mcp/", tmp_path / "ca.crt", "a" * 64)
+    gateway._compat = AsyncMock(return_value={"invalid": "fixture"})  # type: ignore[method-assign]
+    args = ("app",) if operation == "incident_evidence" else ()
+    with pytest.raises(ApplicationError, match="mcp_output_invalid"):
+        asyncio.run(getattr(gateway, operation)(*args))
 
 
 def test_native_read_cancellation_waits_for_actual_drain() -> None:

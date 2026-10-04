@@ -150,6 +150,10 @@ class SourceReader:
                 "zabbix.read" not in actor.scopes
                 or actor.organization_id != binding.organization_id
                 or actor.environment_id != binding.environment_id
+                or (
+                    binding.binding_sha256 is not None
+                    and request.binding_sha256 != binding.binding_sha256
+                )
             ):
                 raise ApplicationError(ErrorCode.POLICY_DENIED, "connector.source_scope_denied")
             await self._check_permission(actor, binding)
@@ -185,6 +189,7 @@ class SourceReader:
                     or evidence.target_id != request.target_id
                     or evidence.correlation_id != request.correlation_id
                     or evidence.operation != operation
+                    or evidence.binding_sha256 != request.binding_sha256
                 ):
                     raise ApplicationError(
                         ErrorCode.DEPENDENCY_UNAVAILABLE, "connector.source_invalid"

@@ -55,7 +55,9 @@ def source_app(
                 "label": "Secondary Zabbix",
                 "organization_id": bootstrap.organization_id,
                 "environment_id": bootstrap.environment_id,
-                "targets": [{"target_id": "sla", "label": "Fixture SLA"}],
+                "targets": [
+                    {"target_id": "sla", "label": "Fixture SLA", "binding_sha256": "a" * 64}
+                ],
             },
         )
     )
@@ -68,6 +70,7 @@ def source_app(
             correlation_id=request.correlation_id,
             operation="summary",
             host_group_ids=("23",),
+            binding_sha256=request.binding_sha256,
             evidence=MonitoringSummary(
                 source_version="7.0.29",
                 host="Fixture SLA",
@@ -148,17 +151,18 @@ def test_fresh_source_question_has_namespaced_durable_evidence(
         )
         assert run.parameters["source_id"] == "secondary"
         assert run.result is not None and run.result["evidence"]["source_id"] == "secondary"
-        assert (
-            session.scalar(
-                select(AuditEvent).where(AuditEvent.event_type == "monitoring.source.completed")
-            )
-            is not None
+        completed = session.scalar(
+            select(AuditEvent).where(AuditEvent.event_type == "monitoring.source.completed")
         )
+        assert completed is not None
+        assert completed.details["evidence_sha256"] == result["evidence_sha256"]
+        assert completed.details["evidence_sha256"] == run.result["evidence_sha256"]
     assert gateway.read.await_count == 1
 
 
 def test_unknown_source_and_malformed_request_do_not_call_runner(
     source_app: tuple[TestClient, str, AsyncMock, AsyncMock],
+    app_session_factory: sessionmaker[Session],
 ) -> None:
     client, token, gateway, _ = source_app
     for payload, expected in [
@@ -173,6 +177,11 @@ def test_unknown_source_and_malformed_request_do_not_call_runner(
         assert response.status_code == expected, response.text
     assert gateway.read.await_count == 0
     assert client.get("/api/v1/monitoring/sources").status_code == 401
+    with app_session_factory() as session:
+        failed = session.scalars(
+            select(AuditEvent).where(AuditEvent.event_type == "monitoring.source.failed")
+        ).all()
+        assert len(failed) == 2 and all(event.outcome == "failed" for event in failed)
 
 
 def test_revocation_during_generation_blocks_publication(
@@ -196,6 +205,26 @@ def test_revocation_during_generation_blocks_publication(
     )
     assert response.status_code == 401
     assert gateway.read.await_count == 1
+
+
+def test_runner_binding_mismatch_never_reaches_model(
+    source_app: tuple[TestClient, str, AsyncMock, AsyncMock],
+) -> None:
+    client, token, gateway, ai = source_app
+    original = gateway.read.side_effect
+
+    async def drift(request: Any) -> SourceEvidence:
+        evidence: SourceEvidence = await original(request)
+        return evidence.model_copy(update={"binding_sha256": "b" * 64})
+
+    gateway.read.side_effect = drift
+    response = client.post(
+        "/api/v1/monitoring/investigate",
+        headers={"Authorization": f"Bearer {token}"},
+        json={"locale": "en", "question": "status", "source_id": "secondary", "target_id": "sla"},
+    )
+    assert response.status_code == 503
+    assert ai.generate.await_count == 0
 
 
 def test_required_access_audit_failure_blocks_collection(

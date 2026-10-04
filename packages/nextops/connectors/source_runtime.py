@@ -42,7 +42,7 @@ from nextops.contracts.errors import ErrorCode
 from nextops.contracts.incidents import IncidentEvidence
 from nextops.contracts.models import ActorContext, Role
 from nextops.contracts.monitoring import MonitoringIncidentContext, MonitoringSummary
-from nextops.contracts.source_catalog import GatewayReadRequest
+from nextops.contracts.source_catalog import GatewayReadRequest, SourceCatalog
 from nextops.contracts.sources import (
     SourceEvidence,
     SourceReadBinding,
@@ -148,9 +148,16 @@ class ServiceAuthorization:
 
 
 class UnixRunnerClient:
-    def __init__(self, path: Path, runner_uid: int, audit: DurableGatewayAudit) -> None:
+    def __init__(
+        self,
+        path: Path,
+        runner_uid: int,
+        audit: DurableGatewayAudit,
+        catalog: SourceCatalog | None = None,
+    ) -> None:
         self.path, self.runner_uid, self.audit = path, runner_uid, audit
         self._active = asyncio.Semaphore(2)
+        self.catalog = catalog
 
     async def call(self, request: GatewayReadRequest) -> dict[str, Any]:
         if self._active.locked():
@@ -217,6 +224,17 @@ class UnixRunnerClient:
     async def compat_read(self, request: GatewayReadRequest) -> dict[str, Any]:
         await self.audit.compat(request, "started")
         try:
+            if self.catalog is not None:
+                binding = CatalogBindings(self.catalog).resolve_binding(
+                    "primary", request.target_id or "zabbix"
+                )
+                if (
+                    request.binding_sha256 is None
+                    or request.binding_sha256 != binding.binding_sha256
+                ):
+                    raise ApplicationError(
+                        ErrorCode.POLICY_DENIED, "connector.source_binding_mismatch"
+                    )
             payload = await self.call(request)
             digest = sha256(
                 json.dumps(
@@ -293,7 +311,10 @@ def create_runtime_gateway_app() -> FastAPI:
     )
     audit = DurableGatewayAudit(Path(os.environ["NEXTOPS_MCP_AUDIT_FILE"]))
     client = UnixRunnerClient(
-        Path(os.environ["NEXTOPS_RUNNER_SOCKET"]), int(os.environ["NEXTOPS_RUNNER_UID"]), audit
+        Path(os.environ["NEXTOPS_RUNNER_SOCKET"]),
+        int(os.environ["NEXTOPS_RUNNER_UID"]),
+        audit,
+        catalog,
     )
     reader = SourceReader(
         CatalogBindings(catalog), ServiceAuthorization(actor), audit, client, deadline_seconds=60
@@ -348,6 +369,12 @@ async def serve_runner() -> None:
         )
     )
     primary_source = next(s for s in registry.sources if s.source_id == "primary")
+    if (
+        settings.zabbix_api_url != primary_source.api_url
+        or settings.zabbix_ca_file != primary_source.ca_file
+        or primary_source.credential_name != "zabbix-api-token"
+    ):
+        raise ValueError("primary runtime configuration must match the immutable registry")
     primary_target = next(t for t in primary_source.targets if t.host == settings.zabbix_host)
     linux_client = None
     linux_registry = None
@@ -383,12 +410,31 @@ async def serve_runner() -> None:
                         | IncidentEvidence
                     )
                     try:
+                        binding_source = (
+                            request.source_id
+                            if request.operation.startswith("source_")
+                            else "primary"
+                        )
+                        binding_target = (
+                            request.target_id
+                            if request.target_id is not None
+                            else primary_target.target_id
+                        )
+                        if (
+                            request.binding_sha256 is None
+                            or request.binding_sha256
+                            != registry.binding_digest(binding_source or "", binding_target)
+                        ):
+                            raise ApplicationError(
+                                ErrorCode.POLICY_DENIED, "connector.source_binding_mismatch"
+                            )
                         if request.operation.startswith("source_"):
                             evidence = await collector.collect(
                                 SourceReadRequest(
                                     source_id=request.source_id,
                                     target_id=request.target_id,
                                     correlation_id=request.correlation_id,
+                                    binding_sha256=request.binding_sha256,
                                 ),
                                 "summary"
                                 if request.operation == "source_summary"
@@ -401,6 +447,7 @@ async def serve_runner() -> None:
                                     source_id="primary",
                                     target_id=primary_target.target_id,
                                     correlation_id=request.correlation_id,
+                                    binding_sha256=request.binding_sha256,
                                 ),
                                 "summary"
                                 if request.operation == "primary_summary"

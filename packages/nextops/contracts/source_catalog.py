@@ -7,12 +7,13 @@ from pydantic import Field, model_validator
 
 from nextops.contracts.assistant import AssistantRequest
 from nextops.contracts.models import FrozenContract
-from nextops.contracts.sources import LogicalSourceId, SourceReadBinding
+from nextops.contracts.sources import BindingDigest, LogicalSourceId, SourceReadBinding
 
 
 class CatalogTarget(FrozenContract):
     target_id: LogicalSourceId
     label: str = Field(min_length=1, max_length=128)
+    binding_sha256: BindingDigest | None = None
 
 
 class CatalogSource(FrozenContract):
@@ -38,14 +39,14 @@ class SourceCatalog(FrozenContract):
 
     def resolve_binding(self, source_id: str, target_id: str) -> SourceReadBinding:
         for source in self.sources:
-            if source.source_id == source_id and any(
-                t.target_id == target_id for t in source.targets
-            ):
+            target = next((t for t in source.targets if t.target_id == target_id), None)
+            if source.source_id == source_id and target is not None:
                 return SourceReadBinding(
                     source_id=source_id,
                     target_id=target_id,
                     organization_id=source.organization_id,
                     environment_id=source.environment_id,
+                    binding_sha256=target.binding_sha256,
                 )
         raise KeyError("unapproved source/target")
 
@@ -68,6 +69,7 @@ class GatewayReadRequest(FrozenContract):
     correlation_id: UUID
     source_id: LogicalSourceId | None = None
     target_id: LogicalSourceId | None = None
+    binding_sha256: BindingDigest | None = None
 
     @model_validator(mode="after")
     def bind_operation(self) -> Self:
@@ -86,3 +88,4 @@ class GatewayReadRequest(FrozenContract):
 class GatewayToolRequest(FrozenContract):
     correlation_id: UUID
     target_id: LogicalSourceId | None = None
+    binding_sha256: BindingDigest | None = None

@@ -1,6 +1,6 @@
 """Source-qualified requests and evidence; no credential or endpoint fields."""
 
-from typing import Literal, Self
+from typing import Annotated, Literal, Self
 from uuid import UUID
 
 from pydantic import Field, model_validator
@@ -11,6 +11,7 @@ from nextops.contracts.sources_ids import LogicalSourceId as LogicalSourceId
 from nextops.contracts.sources_ids import ZabbixObjectId as ZabbixObjectId
 
 SourceReadOperation = Literal["summary", "incident_context"]
+BindingDigest = Annotated[str, Field(pattern=r"^[0-9a-f]{64}$")]
 
 
 class SourceReadBinding(FrozenContract):
@@ -20,6 +21,7 @@ class SourceReadBinding(FrozenContract):
     target_id: LogicalSourceId
     organization_id: UUID
     environment_id: UUID
+    binding_sha256: BindingDigest | None = None
 
 
 class SourceReadRequest(FrozenContract):
@@ -28,6 +30,7 @@ class SourceReadRequest(FrozenContract):
     source_id: LogicalSourceId
     target_id: LogicalSourceId
     correlation_id: UUID
+    binding_sha256: BindingDigest | None = None
 
 
 class SourceEvidence(FrozenContract):
@@ -38,6 +41,7 @@ class SourceEvidence(FrozenContract):
     operation: SourceReadOperation
     correlation_id: UUID
     host_group_ids: tuple[ZabbixObjectId, ...] = Field(min_length=1, max_length=32)
+    binding_sha256: BindingDigest | None = None
     evidence: MonitoringSummary | MonitoringIncidentContext
 
     @model_validator(mode="after")

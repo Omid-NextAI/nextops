@@ -10,7 +10,7 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 from unittest.mock import AsyncMock
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 import pytest
 from mcp import ClientSession, McpError, StdioServerParameters
@@ -36,7 +36,7 @@ from nextops.connectors.sources import (
 from nextops.contracts.models import ActorContext, Role
 from nextops.contracts.sources import SourceReadBinding, SourceReadRequest
 
-ORG, ENV, SUBJECT = uuid4(), uuid4(), uuid4()
+ORG, ENV, SUBJECT = (UUID(int=value) for value in (101, 102, 103))
 ACTOR = ActorContext(
     subject_id=SUBJECT,
     organization_id=ORG,
@@ -164,7 +164,11 @@ def setup_reader(
 
 
 def request(source_id: str = "primary", target_id: str = "server") -> SourceReadRequest:
-    return SourceReadRequest(source_id=source_id, target_id=target_id, correlation_id=uuid4())
+    registry = ZabbixSourceRegistry(sources=(source(), source("secondary", host="میزبان دوم")))
+    digest = registry.binding_digest(source_id, target_id) if source_id != "missing" else "0" * 64
+    return SourceReadRequest(
+        source_id=source_id, target_id=target_id, correlation_id=uuid4(), binding_sha256=digest
+    )
 
 
 def test_cancellation_during_initial_authorization_is_audited_without_target_io() -> None:

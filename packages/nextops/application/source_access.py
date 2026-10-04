@@ -75,7 +75,11 @@ class DurableSourceAccess:
                         actor_id=identity.id,
                         correlation_id=correlation_id,
                         event_type=f"monitoring.source.{outcome}",
-                        outcome="denied" if pending else "accepted",
+                        outcome="denied"
+                        if pending
+                        else "failed"
+                        if outcome == "failed"
+                        else "accepted",
                         details={
                             "source_id": binding.source_id if binding else None,
                             "target_id": binding.target_id if binding else None,

@@ -34,7 +34,10 @@ def load_catalog(path: Path) -> SourceCatalog:
             raw = stream.read(65_537)
         if len(raw) > 65_536:
             raise ValueError()
-        return SourceCatalog.model_validate(json.loads(raw, object_pairs_hook=unique))
+        catalog = SourceCatalog.model_validate(json.loads(raw, object_pairs_hook=unique))
+        if any(t.binding_sha256 is None for s in catalog.sources for t in s.targets):
+            raise ValueError("live catalogue requires immutable binding identities")
+        return catalog
     except (OSError, ValueError):
         raise ValueError("approved source catalogue invalid or unavailable") from None
 

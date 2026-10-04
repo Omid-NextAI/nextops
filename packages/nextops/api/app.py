@@ -605,6 +605,7 @@ def create_app(
                     source_id=payload.source_id,
                     target_id=payload.target_id,
                     correlation_id=correlation_id,
+                    binding_sha256=binding.binding_sha256,
                 )
             )
             if (
@@ -612,6 +613,7 @@ def create_app(
                 or envelope.target_id != payload.target_id
                 or envelope.correlation_id != correlation_id
                 or envelope.operation != "summary"
+                or envelope.binding_sha256 != binding.binding_sha256
                 or not isinstance(envelope.evidence, MonitoringSummary)
             ):
                 raise ApplicationError(
@@ -629,7 +631,14 @@ def create_app(
                 _grounded_prompt(payload, evidence), correlation_id
             )
             assistant = assure_monitoring_answer(payload, assistant, evidence)
-            digest = sha256(evidence.model_dump_json().encode()).hexdigest()
+            digest = sha256(
+                json.dumps(
+                    evidence.model_dump(mode="json"),
+                    sort_keys=True,
+                    separators=(",", ":"),
+                    ensure_ascii=False,
+                ).encode("utf-8")
+            ).hexdigest()
             fresh_actor = await run_in_threadpool(
                 source_access.record, token, correlation_id, "completed", binding, digest
             )
@@ -856,6 +865,7 @@ def create_runtime_app() -> FastAPI:
         from nextops.api.mcp_gateway import TlsMcpGateway
         from nextops.security.deployment_credentials import deployment_secret
 
+        source_catalog = load_catalog(Path(os.environ["NEXTOPS_SOURCE_CATALOG_FILE"]))
         source_gateway = TlsMcpGateway(
             os.environ["NEXTOPS_MCP_BASE_URL"],
             Path(os.environ["NEXTOPS_MCP_CA_FILE"]),
@@ -864,8 +874,8 @@ def create_runtime_app() -> FastAPI:
                 file_variable="NEXTOPS_MCP_SERVICE_SECRET_FILE",
                 credential_name="mcp-service-secret",
             ),
+            source_catalog,
         )
-        source_catalog = load_catalog(Path(os.environ["NEXTOPS_SOURCE_CATALOG_FILE"]))
         monitoring_gateway = (
             source_gateway  # Cutover, never fallback to the old credential-bearing service.
         )

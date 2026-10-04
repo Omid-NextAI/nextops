@@ -14,6 +14,7 @@ from uuid import uuid4
 import httpx
 from mcp import ClientSession
 from mcp.client.streamable_http import streamable_http_client
+from pydantic import ValidationError
 
 from nextops.api.request_context import CALL_CORRELATION
 from nextops.application.errors import ApplicationError
@@ -21,7 +22,7 @@ from nextops.connectors.mcp import COMPAT_TOOLS, McpSourceGateway
 from nextops.contracts.errors import ErrorCode
 from nextops.contracts.incidents import IncidentEvidence
 from nextops.contracts.monitoring import MonitoringIncidentContext, MonitoringSummary
-from nextops.contracts.source_catalog import GatewayReadRequest
+from nextops.contracts.source_catalog import GatewayReadRequest, SourceCatalog
 from nextops.contracts.sources import SourceEvidence, SourceReadOperation, SourceReadRequest
 
 MAX_HTTP_REPLY_BYTES = 524_288  # MCP contains both structured and text copies of bounded evidence.
@@ -60,7 +61,9 @@ class BoundedTlsTransport(httpx.AsyncBaseTransport):
 
 
 class TlsMcpGateway:
-    def __init__(self, url: str, ca: Path, secret: str) -> None:
+    def __init__(
+        self, url: str, ca: Path, secret: str, catalog: SourceCatalog | None = None
+    ) -> None:
         origin = urlsplit(url)
         if (
             origin.scheme != "https"
@@ -74,6 +77,7 @@ class TlsMcpGateway:
         ):
             raise ValueError("fixed verified HTTPS MCP endpoint required")
         self._url, self._ca, self._secret = url, ca, secret
+        self._catalog = catalog
         self._active = asyncio.Semaphore(2)
 
     async def _invoke(
@@ -139,16 +143,32 @@ class TlsMcpGateway:
         return SourceEvidence.model_validate(result)
 
     async def _compat(self, operation: str, target_id: str | None = None) -> dict[str, Any]:
+        digest = None
+        if self._catalog is not None:
+            try:
+                digest = self._catalog.resolve_binding(
+                    "primary", target_id or "zabbix"
+                ).binding_sha256
+            except KeyError:
+                raise ApplicationError(
+                    ErrorCode.POLICY_DENIED, "connector.source_target_denied"
+                ) from None
         request = GatewayReadRequest.model_validate(
             {
                 "operation": operation,
                 "target_id": target_id,
                 "correlation_id": CALL_CORRELATION.get() or uuid4(),
+                "binding_sha256": digest,
             }
         )
         tool = next(name for name, value in COMPAT_TOOLS.items() if value == operation)
         result = await self._invoke(
-            tool, {"target_id": target_id, "correlation_id": str(request.correlation_id)}
+            tool,
+            {
+                "target_id": target_id,
+                "correlation_id": str(request.correlation_id),
+                "binding_sha256": digest,
+            },
         )
         try:
             if (
@@ -164,12 +184,29 @@ class TlsMcpGateway:
             ) from None
 
     async def summary(self) -> MonitoringSummary:
-        return MonitoringSummary.model_validate(await self._compat("primary_summary"))
+        try:
+            return MonitoringSummary.model_validate(await self._compat("primary_summary"))
+        except ValidationError:
+            raise ApplicationError(
+                ErrorCode.DEPENDENCY_UNAVAILABLE, "connector.mcp_output_invalid"
+            ) from None
 
     async def incident_context(self) -> MonitoringIncidentContext:
-        return MonitoringIncidentContext.model_validate(
-            await self._compat("primary_incident_context")
-        )
+        try:
+            return MonitoringIncidentContext.model_validate(
+                await self._compat("primary_incident_context")
+            )
+        except ValidationError:
+            raise ApplicationError(
+                ErrorCode.DEPENDENCY_UNAVAILABLE, "connector.mcp_output_invalid"
+            ) from None
 
     async def incident_evidence(self, target_id: str) -> IncidentEvidence:
-        return IncidentEvidence.model_validate(await self._compat("incident_evidence", target_id))
+        try:
+            return IncidentEvidence.model_validate(
+                await self._compat("incident_evidence", target_id)
+            )
+        except ValidationError:
+            raise ApplicationError(
+                ErrorCode.DEPENDENCY_UNAVAILABLE, "connector.mcp_output_invalid"
+            ) from None

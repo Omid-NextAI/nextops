@@ -7,6 +7,7 @@ import os
 import stat
 import sys
 from collections.abc import Callable
+from hashlib import sha256
 from pathlib import Path
 from typing import Any, Literal, Self
 from urllib.parse import urlsplit
@@ -148,7 +149,23 @@ class ZabbixSourceRegistry(FrozenContract):
             target_id=target.target_id,
             organization_id=source.organization_id,
             environment_id=source.environment_id,
+            binding_sha256=self.binding_digest(source_id, target_id),
         )
+
+    def binding_digest(self, source_id: str, target_id: str) -> str:
+        """Opaque identity commits endpoint, tenant, trust/credential references and exact scope."""
+        source, target = self.resolve(source_id, target_id)
+        return sha256(
+            json.dumps(
+                {
+                    "source": source.model_dump(mode="json", exclude={"targets"}),
+                    "target": target.model_dump(mode="json"),
+                },
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=False,
+            ).encode("utf-8")
+        ).hexdigest()
 
 
 class ZabbixSourceCollector:
@@ -170,6 +187,9 @@ class ZabbixSourceCollector:
         stopped: Callable[[], bool],
     ) -> SourceEvidence:
         source, target = self._registry.resolve(request.source_id, request.target_id)
+        digest = self._registry.binding_digest(request.source_id, request.target_id)
+        if request.binding_sha256 is not None and request.binding_sha256 != digest:
+            raise ApplicationError(ErrorCode.POLICY_DENIED, "connector.source_binding_mismatch")
         transport = ScopedZabbixTransport(
             source, target, self._transport_factory(source), stopped=stopped
         )
@@ -183,6 +203,7 @@ class ZabbixSourceCollector:
             correlation_id=request.correlation_id,
             operation=operation,
             host_group_ids=transport.verified_group_ids,
+            binding_sha256=digest if request.binding_sha256 is not None else None,
             evidence=evidence,
         )
 
