@@ -1,5 +1,18 @@
 # Prompt version history / تاریخچهٔ نسخه‌های پرامپت
 
+## Owner repair/guarded deployment loop — 2026-10-04
+
+"fix gaps then and start a loop till deploying successfully" authorizes bounded source repair,
+protected qualification and guarded promotion on the existing guests with exact rollback, once
+applicable gates pass. Record each attempt and preserve failed results. It does not authorize
+blind retries, waived accuracy/offline/security gates, resource/model changes or a new recovery
+architecture. See [increment 2](../en/AI_CAPABILITY_SPEC.md).
+
+دستور مالک برای «رفع کاستی‌ها و ادامهٔ چرخه تا استقرار موفق»، اصلاح محدود کد، سنجش خصوصی
+و استقرار محافظت‌شده در مهمان‌های موجود با بازگشت دقیق را پس از پذیرش معیارهای مربوط مجاز
+می‌کند. هر تلاش ثبت و شکست محفوظ بماند. تکرار کور، حذف معیار درستی/آفلاین/امنیت، تغییر
+منابع یا مدل و معماری تازهٔ بازیابی مجاز نشده‌اند. [گام دوم](../fa/AI_CAPABILITY_SPEC.md).
+
 ## Owner Qwen3.6 comparison instruction — 2026-10-03
 
 The owner says "do your suggestions" after a recommendation to stage Qwen3.6-35B-A3B, preserve

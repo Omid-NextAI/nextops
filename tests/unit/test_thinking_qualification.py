@@ -174,13 +174,19 @@ def test_timeout_stops_without_retry_or_feature_enablement(
     assert "reasoning_content" not in output.read_text()
 
 
-@pytest.mark.parametrize("scope", ["short", "capabilities"])
+@pytest.mark.parametrize("scope", ["short", "capabilities", "repair"])
 def test_complete_native_diagnostics_still_exit_partial_not_accepted(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, scope: str
 ) -> None:
     runner = module()
     tmp_path.chmod(0o700)
-    cases = runner.short_cases() if scope == "short" else runner.capability_cases(True)
+    cases = (
+        runner.short_cases()
+        if scope == "short"
+        else runner.repair_cases(True)
+        if scope == "repair"
+        else runner.capability_cases(True)
+    )
     answers = iter(
         [exact or "Synthetic completion; not semantic acceptance." for _, _, exact in cases]
     )
@@ -217,6 +223,25 @@ def test_complete_native_diagnostics_still_exit_partial_not_accepted(
     assert len(report["cases"]) == len(cases) and report["status"] == "partial"
     assert report["semantic_review"] == "pending" and report["flags_changed"] is False
     if scope == "capabilities":
-        assert report["corpus_revision"] == report["advisory_policy_revision"] == "capability-v1"
+        assert report["corpus_revision"] == "capability-v1"
+        assert report["advisory_policy_revision"] == runner.ADVISORY_POLICY_REVISION
         assert len(report["corpus_sha256"]) == 64
         assert report["semantic_criteria"] == runner.CAPABILITY_REVIEW_CRITERIA
+    if scope == "repair":
+        assert report["corpus_revision"] == "capability-v2"
+        assert report["semantic_criteria"] == runner.REPAIR_REVIEW_CRITERIA
+
+
+def test_v2_corpus_is_new_bilingual_bounded_and_frozen_before_generation() -> None:
+    runner = module()
+    cases = runner.repair_cases(False)
+    assert len(cases) == 16
+    assert sum(exact is not None for _, _, exact in cases) == 4
+    assert all(
+        not payload.thinking and payload.max_output_tokens == 1024 for _, payload, _ in cases
+    )
+    assert {payload.locale for _, payload, _ in cases} == {"en", "fa"}
+    assert {name.rsplit("-", 1)[-1] for name, _, _ in cases} == set(runner.REPAIR_REVIEW_CRITERIA)
+    previous = {name for name, _, _ in runner.capability_cases(False)}
+    assert previous.isdisjoint(name for name, _, _ in cases)
+    assert all("parse_port" not in payload.prompt for _, payload, _ in cases)

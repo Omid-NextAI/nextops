@@ -22,6 +22,10 @@ def test_shared_policy_has_task_adaptive_and_calibrated_guidance(
     assert "TCP can recover packet loss" in prompt
     assert "Do not advise unrequested public exposure" in prompt
     assert "An old observation is not current status" in prompt
+    assert "Missing log entries do not prove" in prompt
+    assert "only the specified input grammar" in prompt
+    assert "exact requested test count" in prompt
+    assert "not abandoned drafts" in prompt
     assert "Never expand an answer into a full procedure" not in prompt
     assert ("smaller legacy response budget" in prompt) is not detailed
     assert ("Use saved conversation only" in prompt) is detailed

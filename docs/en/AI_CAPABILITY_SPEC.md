@@ -16,6 +16,29 @@ for this revision were not run after the prerequisite failure.
 
 ## Problem and baseline
 
+## Increment 2 plan — 2026-10-04
+
+The owner requests gap repair and an iterative qualification-to-deployment loop. Preserve v1
+results; do not retry unchanged failures or relabel tuned cases as independent. First repair
+diagnostic intent classification (a supplied hypothetical is not a request to inspect our live
+hosts), with mixed live requests still redirected. Strengthen coding requirement conformance:
+no invented input grammar, exact requested test count and correctly handled expected errors.
+Checks must describe their actual scope, including absence of a log entry not proving a cause.
+Freeze a new EN/FA corpus before local generation; this is engineering evaluation, not an external
+benchmark. Tests cover malicious mixed questions, unsupported execution and existing live guards.
+No schema, dependency, model, thinking, resource or branding change is planned.
+
+Run the locked tests/CI, then an authorized protected standard35 probe with fresh guest preflight.
+Inspect final answers and code statically, never execute model code on a credential-bearing host.
+Each failed iteration records its cause and stop/recovery observations; only a justified new
+revision/corpus may follow. A passing semantic prerequisite permits matched application/browser,
+history/audit/admission, recovery, offline start and exact rollback checks before guarded release
+promotion. This authorizes the bounded existing-guest release workflow, not bypassing gates or
+automatic indefinite retries. Deployment uses the existing offline installer and retained exact
+69c9260 rollback. A real unavailable prerequisite stops that operation, not independent code work.
+
+### Original v1 baseline
+
 The owner asks for stronger answers, coding, technical solutions and conversational context.
 The completed 56-request comparison found technical overclaims in both 35B models, with and
 without thinking. More RAM, a larger model or a longer context is not evidence of correctness.

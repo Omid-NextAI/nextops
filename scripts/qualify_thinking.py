@@ -22,6 +22,8 @@ from nextops.api.app import APP_CODE_SHA256, _general_prompt
 from nextops.application.errors import ApplicationError
 from nextops.contracts.conversations import ConversationAssistantRequest, SavedContextTurn
 from nextops.inference.advisory_prompt import ADVISORY_POLICY_REVISION
+from nextops.inference.capability_repair_cases import QUESTIONS as REPAIR_QUESTIONS
+from nextops.inference.capability_repair_cases import REVIEW_CRITERIA as REPAIR_REVIEW_CRITERIA
 from nextops.inference.configuration import LlamaCppSettings
 from nextops.inference.contracts import InferenceRequest, ModelId
 from nextops.inference.llama_cpp import LlamaCppProvider, UrllibJsonTransport
@@ -317,6 +319,42 @@ def capability_cases(thinking: bool) -> list[tuple[str, InferenceRequest, str | 
     return cases
 
 
+def repair_cases(thinking: bool) -> list[tuple[str, InferenceRequest, str | None]]:
+    """Frozen capability-v2 questions; v1 cases and scores remain unchanged."""
+    cases: list[tuple[str, InferenceRequest, str | None]] = []
+    for locale in LOCALES:
+        for name, question in zip(
+            tuple(REPAIR_REVIEW_CRITERIA)[:6], REPAIR_QUESTIONS[locale], strict=True
+        ):
+            cases.append(
+                (f"{locale}-repair-{name}", request(locale, question, thinking=thinking), None)
+            )
+        history = (
+            SavedContextTurn(question="My synthetic reference is MAPLE-2854.", answer="Noted."),
+        )
+        question = (
+            "Return only my reference identifier."
+            if locale == "en"
+            else "فقط شناسهٔ مرجع من را بنویس."
+        )
+        cases.append(
+            (
+                f"{locale}-repair-recall",
+                request(locale, question, history, thinking=thinking),
+                "MAPLE-2854",
+            )
+        )
+        question = (
+            "Return only the digits for 147 divided by 7."
+            if locale == "en"
+            else "فقط رقم‌های حاصل 147 تقسیم بر 7 را بنویس."
+        )
+        cases.append(
+            (f"{locale}-repair-arithmetic", request(locale, question, thinking=thinking), "21")
+        )
+    return cases
+
+
 def context_request(locale: Literal["en", "fa"], filler_pairs: int) -> InferenceRequest:
     code = "EARLY-846" if locale == "en" else "EARLY-957"
     history = (
@@ -454,11 +492,13 @@ async def qualify(args: argparse.Namespace) -> int:
         cases = short_cases(thinking)
     elif args.scope == "technical":
         cases = technical_cases(thinking)
-    elif args.scope == "capabilities":
-        cases = capability_cases(thinking)
+    elif args.scope in {"capabilities", "repair"}:
+        cases = repair_cases(thinking) if args.scope == "repair" else capability_cases(thinking)
         report["advisory_policy_revision"] = ADVISORY_POLICY_REVISION
-        report["corpus_revision"] = "capability-v1"
-        report["semantic_criteria"] = CAPABILITY_REVIEW_CRITERIA
+        report["corpus_revision"] = "capability-v2" if args.scope == "repair" else "capability-v1"
+        report["semantic_criteria"] = (
+            REPAIR_REVIEW_CRITERIA if args.scope == "repair" else CAPABILITY_REVIEW_CRITERIA
+        )
         report["corpus_sha256"] = sha256(
             json.dumps(
                 [
@@ -575,7 +615,9 @@ def main() -> int:
     parser.add_argument("--expected-app-code-sha256", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument(
-        "--scope", choices=("short", "technical", "context", "capabilities"), required=True
+        "--scope",
+        choices=("short", "technical", "context", "capabilities", "repair"),
+        required=True,
     )
     parser.add_argument("--mode", choices=("standard", "thinking"), default="thinking")
     parser.add_argument("--model", choices=(MODEL, QWEN36), default=MODEL)
