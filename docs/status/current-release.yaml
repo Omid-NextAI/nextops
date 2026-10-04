@@ -82,6 +82,13 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: local_admin_user_management
+    status: implemented_unaccepted
+    evidence:
+      - docs/requirements/USER_MANAGEMENT_SPEC.md
+      - packages/nextops/application/users.py
+      - tests/integration/test_users_postgresql.py
+      - tests/browser/test_phase2_panel.py
   - id: scoped_diagnostic_scenario_guards
     status: accepted_controlled
     evidence:
@@ -236,6 +243,12 @@ capabilities:
       - deploy/systemd/nextops-certificate-check.timer
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
+  - id: local_admin_users_live_offline
+    status: not_run
+    evidence:
+      - docs/requirements/USER_MANAGEMENT_SPEC.md
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
   - id: thinking_installed_adapter_bilingual_format
     status: failed
     evidence:

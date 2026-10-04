@@ -140,10 +140,151 @@ const state = {
   pendingMessage: null,
   busy: false,
   epoch: 0,
+  actor: null,
+  users: [],
+  usersOffset: 0,
+  usersNext: null,
+  usersBusy: false,
+  passwordUser: null,
   token: sessionStorage.getItem("nextops-session") || ""
 };
 const byId = id => document.getElementById(id);
 const resultTemplate = byId("resultCard").cloneNode(true);
+
+Object.assign(translations.en, {
+  usersTitle: "Users", usersKicker: "LOCAL ACCESS CONTROL", usersLead: "Manage local accounts. Every change is audited; no infrastructure permissions are granted.",
+  usersBack: "Back to assistant", usersAccounts: "Local accounts", usersRefresh: "Refresh", usersPrevious: "Previous", usersNext: "Next", usersCreate: "Create an account", usersRole: "Role",
+  usersViewer: "Viewer · Zabbix read", usersOperator: "Operator · Zabbix and Linux read", usersEngineer: "Engineer · Zabbix and Linux read", usersAdmin: "Administrator",
+  usersNameHelp: "3–64 lowercase Latin letters, digits, dots, hyphens or underscores; start with a letter.", usersInitialPassword: "Initial password", usersNewPassword: "New password", usersPasswordHelp: "14–256 characters. Deliver securely outside this panel; passwords are never listed.",
+  usersProtectedHelp: "Administrator accounts are protected. Role permissions are fixed and read-only.", usersProtected: "Protected administrator", usersActive: "Active", usersDisabled: "Disabled", usersDisable: "Disable account", usersEnable: "Enable account", usersReset: "Reset password", usersCancel: "Cancel",
+  usersResetConfirm: "I confirm: this revokes every session for the selected account.", usersChangeConfirm: "Change account status and revoke every session for", usersLoading: "Loading accounts…", usersSaving: "Saving the audited change…", usersSaved: "Change saved and audited.", usersEmpty: "No accounts on this page.",
+  usersConflict: "The account changed or its username already exists. Refresh the list before trying again.", usersDenied: "Administrator access is required; protected accounts cannot be changed here.", usersUnknown: "The request could not be confirmed. Refresh to check the account before retrying; do not repeat a password reset blindly."
+});
+Object.assign(translations.fa, {
+  usersTitle: "کاربران", usersKicker: "کنترل دسترسی محلی", usersLead: "حساب‌های محلی را مدیریت کنید. هر تغییر ممیزی می‌شود؛ مجوز تغییر زیرساخت اعطا نمی‌شود.",
+  usersBack: "بازگشت به دستیار", usersAccounts: "حساب‌های محلی", usersRefresh: "تازه‌سازی", usersPrevious: "قبلی", usersNext: "بعدی", usersCreate: "ایجاد حساب", usersRole: "نقش",
+  usersViewer: "بیننده · مشاهدهٔ Zabbix", usersOperator: "اپراتور · مشاهدهٔ Zabbix و Linux", usersEngineer: "کارشناس · مشاهدهٔ Zabbix و Linux", usersAdmin: "مدیر سامانه",
+  usersNameHelp: "۳ تا ۶۴ حرف کوچک لاتین، رقم، نقطه، خط تیره یا زیرخط؛ با حرف آغاز شود.", usersInitialPassword: "گذرواژهٔ اولیه", usersNewPassword: "گذرواژهٔ جدید", usersPasswordHelp: "۱۴ تا ۲۵۶ نویسه؛ از مسیر امن خارج از پنل تحویل دهید. گذرواژه در فهرست نمایش داده نمی‌شود.",
+  usersProtectedHelp: "حساب مدیر محافظت شده است. دسترسی نقش‌ها ثابت و فقط‌خواندنی است.", usersProtected: "مدیر محافظت‌شده", usersActive: "فعال", usersDisabled: "غیرفعال", usersDisable: "غیرفعال‌کردن حساب", usersEnable: "فعال‌کردن حساب", usersReset: "تنظیم گذرواژه", usersCancel: "انصراف",
+  usersResetConfirm: "تأیید می‌کنم: همهٔ نشست‌های حساب انتخاب‌شده لغو می‌شود.", usersChangeConfirm: "تغییر وضعیت حساب و لغو همهٔ نشست‌های", usersLoading: "در حال دریافت حساب‌ها…", usersSaving: "در حال ثبت تغییر و ممیزی…", usersSaved: "تغییر و ممیزی ثبت شد.", usersEmpty: "در این صفحه حسابی وجود ندارد.",
+  usersConflict: "حساب تغییر کرده یا نام کاربری تکراری است؛ پیش از تلاش دوباره فهرست را تازه‌سازی کنید.", usersDenied: "دسترسی مدیر لازم است؛ حساب محافظت‌شده از این بخش قابل تغییر نیست.", usersUnknown: "نتیجهٔ درخواست تأیید نشد. پیش از تکرار، فهرست را تازه‌سازی و وضعیت را بررسی کنید؛ تنظیم گذرواژه را بدون بررسی تکرار نکنید."
+});
+
+function closeUserPassword() {
+  state.passwordUser = null;
+  byId("userPasswordForm").reset();
+  byId("userPasswordName").textContent = "";
+  byId("userPasswordForm").classList.add("hidden");
+}
+
+function renderUsers() {
+  const t = translations[state.language];
+  byId("usersList").replaceChildren();
+  for (const user of state.users) {
+    const row = document.createElement("li"); row.className = "user-row";
+    const name = document.createElement("bdi"); name.dir = "ltr"; name.textContent = user.username;
+    const detail = document.createElement("p");
+    const roleLabels = { viewer: t.usersViewer, operator: t.usersOperator, engineer: t.usersEngineer, admin: t.usersAdmin };
+    detail.textContent = `${user.roles.map(role => roleLabels[role] || role).join(" · ")} · ${user.is_active ? t.usersActive : t.usersDisabled}`;
+    row.append(name, detail);
+    if (user.manageable) {
+      const actions = document.createElement("div"); actions.className = "user-actions";
+      const status = document.createElement("button"); status.type = "button"; status.className = `quiet-button ${user.is_active ? "user-disable" : ""}`; status.textContent = user.is_active ? t.usersDisable : t.usersEnable;
+      status.addEventListener("click", () => {
+        if (!state.usersBusy && window.confirm(`${translations[state.language].usersChangeConfirm} ${user.username}?`)) {
+          userMutation(`/api/v1/users/${user.identity_id}`, "PATCH", { is_active: !user.is_active, expected_version: user.credential_version });
+        }
+      });
+      const password = document.createElement("button"); password.type = "button"; password.className = "quiet-button"; password.textContent = t.usersReset;
+      password.addEventListener("click", () => {
+        closeUserPassword(); state.passwordUser = user;
+        byId("userPasswordName").textContent = user.username;
+        byId("userPasswordForm").classList.remove("hidden"); byId("userResetPassword").focus();
+      });
+      status.disabled = password.disabled = state.usersBusy;
+      actions.append(status, password); row.append(actions);
+    } else {
+      const protectedNote = document.createElement("p"); protectedNote.textContent = t.usersProtected; row.append(protectedNote);
+    }
+    byId("usersList").append(row);
+  }
+  byId("usersPrevious").disabled = state.usersBusy || state.usersOffset === 0;
+  byId("usersNext").disabled = state.usersBusy || state.usersNext === null;
+}
+
+function setUsersBusy(busy) {
+  state.usersBusy = busy;
+  byId("usersView").setAttribute("aria-busy", String(busy));
+  byId("usersView").querySelectorAll("input, select, button:not(#usersBack)").forEach(control => { control.disabled = busy; });
+  renderUsers();
+}
+
+function userError(error) {
+  const t = translations[state.language];
+  byId("usersError").textContent = error.status === 409 ? t.usersConflict : error.status === 403 ? t.usersDenied : t.usersUnknown;
+  byId("usersError").focus();
+}
+
+async function refreshUsers(offset = state.usersOffset) {
+  if (state.usersBusy) return false;
+  const epoch = state.epoch;
+  setUsersBusy(true); byId("usersError").textContent = "";
+  byId("usersStatus").textContent = translations[state.language].usersLoading;
+  try {
+    const page = await api(`/api/v1/users?offset=${offset}`);
+    if (epoch !== state.epoch) return false;
+    state.users = page.users; state.usersOffset = offset; state.usersNext = page.next_offset;
+    closeUserPassword(); renderUsers();
+    byId("usersStatus").textContent = page.users.length ? "" : translations[state.language].usersEmpty;
+    return true;
+  } catch (error) {
+    if (epoch === state.epoch && state.token) { byId("usersStatus").textContent = ""; userError(error); }
+    return false;
+  } finally { if (epoch === state.epoch) setUsersBusy(false); }
+}
+
+async function userMutation(path, method, payload) {
+  if (state.usersBusy) return;
+  const epoch = state.epoch;
+  byId("userCreatePassword").value = ""; byId("userResetPassword").value = "";
+  byId("userResetConfirm").checked = false;
+  setUsersBusy(true); byId("usersError").textContent = "";
+  byId("usersStatus").textContent = translations[state.language].usersSaving;
+  try {
+    await api(path, { method, body: JSON.stringify(payload) });
+    if (epoch !== state.epoch) return;
+    closeUserPassword(); byId("userCreateForm").reset();
+    setUsersBusy(false);
+    if (await refreshUsers()) {
+      byId("usersStatus").textContent = translations[state.language].usersSaved;
+      byId(path === "/api/v1/users" ? "userCreateName" : "usersRefresh").focus();
+    }
+  } catch (error) {
+    if (epoch === state.epoch && state.token) { byId("usersStatus").textContent = ""; userError(error); }
+  } finally { if (epoch === state.epoch) setUsersBusy(false); }
+}
+
+byId("usersButton").addEventListener("click", () => {
+  if (!state.actor?.roles.includes("admin")) return;
+  byId("workspaceView").classList.add("hidden"); byId("usersView").classList.remove("hidden");
+  byId("usersHeading").focus(); refreshUsers();
+});
+byId("usersBack").addEventListener("click", () => {
+  closeUserPassword(); byId("userCreateForm").reset();
+  byId("usersView").classList.add("hidden"); byId("workspaceView").classList.remove("hidden"); byId("usersButton").focus();
+});
+byId("usersRefresh").addEventListener("click", () => refreshUsers());
+byId("usersPrevious").addEventListener("click", () => refreshUsers(Math.max(0, state.usersOffset - 50)));
+byId("usersNext").addEventListener("click", () => { if (state.usersNext !== null) refreshUsers(state.usersNext); });
+byId("userResetCancel").addEventListener("click", closeUserPassword);
+byId("userCreateForm").addEventListener("submit", event => {
+  event.preventDefault(); userMutation("/api/v1/users", "POST", { username: byId("userCreateName").value, password: byId("userCreatePassword").value, role: byId("userCreateRole").value });
+});
+byId("userPasswordForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const user = state.passwordUser;
+  if (user && byId("userResetConfirm").checked) userMutation(`/api/v1/users/${user.identity_id}/password`, "POST", { new_password: byId("userResetPassword").value, expected_version: user.credential_version });
+});
 
 Object.assign(translations.en, {
   savedChats: "YOUR CONVERSATIONS", savedPrivacy: "Private to your account · retained for 30 days. Do not paste secrets.",
@@ -391,6 +532,7 @@ function applyLanguage(language) {
   document.documentElement.lang = language;
   document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
   window.NextOpsTheme.updateControl();
+  renderUsers();
   byId("copyStatus").textContent = "";
   byId("languageButton").textContent = language === "fa" ? "English" : "فارسی";
   byId("languageButton").setAttribute("aria-label", translations[language].languageToggleAria);
@@ -437,6 +579,10 @@ async function api(path, options = {}) {
 function showLogin(message = "") {
   state.epoch += 1;
   state.token = "";
+  state.actor = null; state.users = []; state.usersOffset = 0; state.usersNext = null;
+  state.usersBusy = false; closeUserPassword(); byId("userCreateForm").reset();
+  byId("usersList").replaceChildren(); byId("usersStatus").textContent = ""; byId("usersError").textContent = "";
+  byId("usersView").classList.add("hidden"); byId("usersButton").classList.add("hidden");
   state.lastEvidence = null;
   state.conversationsEnabled = false;
   state.thinkingEnabled = false;
@@ -480,7 +626,12 @@ function updateEvidenceBrief() {
 }
 
 async function showWorkspace() {
-  await api("/api/v1/me");
+  const identityEpoch = state.epoch;
+  const actor = await api("/api/v1/me");
+  if (identityEpoch !== state.epoch || !state.token) return;
+  state.actor = actor;
+  byId("usersButton").classList.toggle("hidden", !actor.roles?.includes("admin"));
+  byId("usersView").classList.add("hidden");
   byId("loginView").classList.add("hidden");
   byId("workspaceView").classList.remove("hidden");
   byId("logoutButton").classList.remove("hidden");

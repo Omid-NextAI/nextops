@@ -1,5 +1,28 @@
 # Project state / وضعیت پروژه
 
+Owner-requested user panel, 2026-10-04: admin-only scoped listing, fixed read-only account
+creation, non-admin activation and password reset are implemented with atomic audit/session
+revocation, stale-version denial and protected administrator identities. Bilingual OCS UI retains
+brand/theme and offline assets. This branch is a source candidate, not live. A separate PR 53
+repair (`bf983bf`) resolves its three MCP review findings with 39 focused tests and five passing
+CI jobs; it is not merged or deployed. PRs 46/51 remain rejected semantic experiments, not release
+approvals. Read-only live inspection found app/AI/tunnels active on the recorded releases, only the
+primary connector source and no MCP unit/secondary endpoint. The second token/CA remain protected
+desktop material; all-group reader permission and gateway/runner qualification remain unfinished.
+Guest observation is 80 online vCPUs and 135024599040 usable RAM bytes, not the older screenshot
+allocation. No resource, credential, deployment, model or thinking change was made.
+
+پنل درخواستی مالک، ۴ اکتبر ۲۰۲۶: فهرست محدود به دامنهٔ مدیر، ایجاد حساب با دسترسی ثابت و
+فقط‌خواندنی، تغییر وضعیت و تنظیم گذرواژهٔ غیرمدیر، با ممیزی/لغو نشست اتمی، رد نسخهٔ قدیمی و
+حفاظت از مدیر پیاده شده‌اند. رابط دوزبانهٔ OCS، نشان، تم و دارایی‌های آفلاین را حفظ می‌کند.
+این شاخه نامزد کدی است، نه استقرار زنده. اصلاح جداگانهٔ PR 53 با `bf983bf`، سه ایراد MCP را
+با ۳۹ آزمون متمرکز و پنج کنترل CI موفق رفع کرد؛ هنوز ادغام یا مستقر نشده است. PRهای 46/51
+آزمایش معناییِ ردشده‌اند، نه انتشار تأییدشده. بازرسی زندهٔ فقط‌خواندنی، برنامه/AI/تونل‌های
+فعال روی انتشار ثبت‌شده، تنها منبع اولیهٔ اتصال‌دهنده و نبود واحد MCP/نشانی منبع دوم را یافت.
+توکن/CA دوم در رایانهٔ توسعه محافظت‌شده‌اند؛ مجوز خوانندهٔ همهٔ گروه‌ها و پذیرش درگاه/اجراکننده
+ناتمام‌اند. مشاهدهٔ مهمان ۸۰ vCPU آنلاین و ۱۳۵۰۲۴۵۹۹۰۴۰ بایت حافظهٔ قابل‌استفاده است، نه
+تخصیص تصویر قدیمی. منابع، اعتبارنامه، استقرار، مدل یا گزینهٔ استدلال تغییر نکردند.
+
 Verified scoped deployment, 2026-10-04: app/AI `7ce9d29` now serve controlled users with the
 unchanged CPU-only35 model and disabled thinking. Five-job CI, 524 local checks, three fresh
 hash-locked offline installs, 45 functional browser cases across first/offline/exact69 rollback/

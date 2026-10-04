@@ -1,5 +1,16 @@
 # Bilingual operations console and design system
 
+## Local user administration candidate — 2026-10-04
+
+Source-only, not deployed: administrators open **Users** from the existing header. List scoped
+accounts, create viewer/operator/engineer users, disable/re-enable non-admins or reset their
+passwords. A status change or reset revokes all target sessions. Passwords are never listed;
+deliver them through a protected channel, not Git/chat. Administrator accounts and fixed role
+scopes cannot be edited here. API policy, not button visibility, enforces this restriction.
+The screen preserves the OCS logo, palette, light/dark themes and locally served assets, with
+English/Persian, RTL/LTR, mobile reflow, explicit confirmation, keyboard focus and session-expiry
+cleanup. See [specification](../requirements/USER_MANAGEMENT_SPEC.md) for acceptance and rollback.
+
 ## Live named-server status repair — 2026-10-03
 
 The screenshot question “آخرین وضعیت سرور Ai رو بهم بگو” selected Live monitoring, whose

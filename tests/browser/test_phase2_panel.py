@@ -15,7 +15,7 @@ from uuid import uuid4
 import pytest
 import uvicorn
 from fastapi import FastAPI, Request
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import Page, expect, sync_playwright
@@ -196,6 +196,61 @@ def _fixture_app() -> FastAPI:
     app.state.monitoring_requests = []
     app.state.saved_chats_enabled = False
     app.state.saved_chats = {}
+    app.state.user_role = "admin"
+    app.state.user_requests = []
+    app.state.users_expired = False
+    app.state.users = [
+        {
+            "identity_id": str(uuid4()),
+            "username": "owner",
+            "roles": ["admin"],
+            "is_active": True,
+            "credential_version": 1,
+            "created_at": NOW,
+            "manageable": False,
+        }
+    ]
+
+    @app.get("/api/v1/users")
+    async def users_list() -> Any:
+        if app.state.users_expired:
+            return JSONResponse(status_code=401, content={"error": {"code": "unauthenticated"}})
+        return {"users": app.state.users, "next_offset": None}
+
+    @app.post("/api/v1/users", status_code=201)
+    async def users_create(request: Request) -> dict[str, Any]:
+        payload = await request.json()
+        app.state.user_requests.append(payload)
+        user = {
+            "identity_id": str(uuid4()),
+            "username": payload["username"],
+            "roles": [payload["role"]],
+            "is_active": True,
+            "credential_version": 1,
+            "created_at": NOW,
+            "manageable": True,
+        }
+        app.state.users.append(user)
+        return user
+
+    @app.patch("/api/v1/users/{identity_id}")
+    async def users_status(identity_id: str, request: Request) -> Any:
+        payload = await request.json()
+        app.state.user_requests.append(payload)
+        user = next(u for u in app.state.users if u["identity_id"] == identity_id)
+        if payload["expected_version"] != user["credential_version"]:
+            return JSONResponse(status_code=409, content={"error": {"code": "conflict"}})
+        user["is_active"] = payload["is_active"]
+        user["credential_version"] += 1
+        return user
+
+    @app.post("/api/v1/users/{identity_id}/password")
+    async def users_password(identity_id: str, request: Request) -> dict[str, Any]:
+        payload = await request.json()
+        app.state.user_requests.append(payload)
+        user = next(u for u in app.state.users if u["identity_id"] == identity_id)
+        user["credential_version"] += 1
+        return dict(user)
 
     @app.get("/api/v1/conversations/config")
     async def chat_config() -> dict[str, bool]:
@@ -272,8 +327,8 @@ def _fixture_app() -> FastAPI:
         }
 
     @app.get("/api/v1/me")
-    async def me() -> dict[str, str]:
-        return {"status": "authenticated"}
+    async def me() -> dict[str, Any]:
+        return {"status": "authenticated", "roles": [app.state.user_role]}
 
     @app.post("/api/v1/logout", status_code=204)
     async def logout() -> None:
@@ -404,8 +459,8 @@ def _login(page: Page, base_url: str) -> None:
     assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth") is True
     page.locator("#languageButton").click()
     page.set_viewport_size({"width": 1280, "height": 900})
-    page.get_by_label("Username").fill("owner")
-    page.get_by_label("Password").fill("test-password")
+    page.locator("#loginForm").get_by_label("Username").fill("owner")
+    page.locator("#loginForm").get_by_label("Password").fill("test-password")
     page.get_by_role("button", name="Sign in securely").click()
     expect(page.get_by_role("heading", name="Ask the local assistant")).to_be_visible()
 
@@ -415,6 +470,136 @@ def _launch_browser(playwright: Any) -> Any:
         return playwright.chromium.launch()
     except PlaywrightError:
         return playwright.chromium.launch(channel="chrome")
+
+
+@pytest.mark.parametrize("locale", ["en", "fa"])
+def test_admin_users_create_status_password_and_localized_mobile_panel(
+    browser_server: tuple[str, FastAPI],
+    tmp_path: Path,
+    locale: str,
+) -> None:
+    base_url, app = browser_server
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        requests: list[str] = []
+        page.on("request", lambda request: requests.append(request.url))
+        _login(page, base_url)
+        if locale == "fa":
+            page.locator("#languageButton").click()
+        page.locator("#usersButton").focus()
+        page.keyboard.press("Enter")
+        expect(page.locator("#usersHeading")).to_be_focused()
+        expect(page.locator("#usersList .user-row")).to_have_count(1)
+        assert page.locator("#usersList button").count() == 0  # Protected administrator.
+        page.locator("#userCreateName").fill("reader")
+        page.locator("#userCreateRole").select_option("operator")
+        page.locator("#userCreatePassword").fill("browser fixture password")
+        page.locator("#userCreateForm button").click()
+        expect(page.locator("#usersList .user-row")).to_have_count(2)
+        expect(page.locator("#userCreatePassword")).to_have_value("")
+        assert app.state.user_requests[0]["role"] == "operator"
+        row = page.locator("#usersList .user-row").filter(has_text="reader")
+        page.once("dialog", lambda dialog: dialog.accept())
+        row.locator("button").first.click()
+        expect(row).to_contain_text("غیرفعال" if locale == "fa" else "Disabled")
+        page.once("dialog", lambda dialog: dialog.accept())
+        row.locator("button").first.click()
+        expect(row).to_contain_text("فعال" if locale == "fa" else "Active")
+        row.locator("button").nth(1).click()
+        expect(page.locator("#userResetPassword")).to_be_focused()
+        expect(page.locator("#userPasswordName")).to_have_text("reader")
+        page.locator("#userResetPassword").fill("new browser fixture password")
+        page.locator("#userResetConfirm").check()
+        page.locator("#userPasswordForm button[type=submit]").click()
+        expect(page.locator("#userPasswordForm")).to_be_hidden()
+        expect(page.locator("#userResetPassword")).to_have_value("")
+        assert len(app.state.user_requests) == 4
+        page.locator("#themeButton").click()
+        page.screenshot(
+            path=str(tmp_path / f"users-{locale}-desktop.png"),
+            full_page=True,
+            animations="disabled",
+        )
+        page.set_viewport_size({"width": 375, "height": 812})
+        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth") is True
+        assert page.locator("html").get_attribute("dir") == ("rtl" if locale == "fa" else "ltr")
+        page.screenshot(
+            path=str(tmp_path / f"users-{locale}-mobile.png"), full_page=True, animations="disabled"
+        )
+        assert all(url.startswith(base_url) or url.startswith("data:") for url in requests)
+        page.locator("#usersBack").click()
+        expect(page.locator("#usersButton")).to_be_focused()
+        expect(page.locator("#workspaceView")).to_be_visible()
+        browser.close()
+
+
+def test_non_admin_has_no_user_controls_and_expired_admin_purges_panel(
+    browser_server: tuple[str, FastAPI],
+) -> None:
+    base_url, app = browser_server
+    app.state.user_role = "viewer"
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page()
+        _login(page, base_url)
+        expect(page.locator("#usersButton")).to_be_hidden()
+        page.locator("#logoutButton").click()
+        app.state.user_role = "admin"
+        _login(page, base_url)
+        page.locator("#usersButton").click()
+        expect(page.locator("#usersList .user-row")).to_have_count(1)
+        page.locator("#userCreatePassword").fill("private form data only")
+        app.state.users_expired = True
+        page.locator("#usersRefresh").click()
+        expect(page.locator("#loginView")).to_be_visible()
+        expect(page.locator("#usersView")).to_be_hidden()
+        expect(page.locator("#usersList")).to_be_empty()
+        expect(page.locator("#userCreatePassword")).to_have_value("")
+        assert page.evaluate("sessionStorage.getItem('nextops-session')") is None
+        browser.close()
+
+
+def test_user_conflict_is_not_retried_and_logout_rejects_late_account_response(
+    browser_server: tuple[str, FastAPI],
+) -> None:
+    base_url, app = browser_server
+    app.state.users.append(
+        {
+            "identity_id": str(uuid4()),
+            "username": "reader",
+            "roles": ["viewer"],
+            "is_active": True,
+            "credential_version": 1,
+            "created_at": NOW,
+            "manageable": True,
+        }
+    )
+    with sync_playwright() as playwright:
+        browser = _launch_browser(playwright)
+        page = browser.new_page()
+        _login(page, base_url)
+        page.locator("#usersButton").click()
+        expect(page.locator("#usersList .user-row")).to_have_count(2)
+        app.state.users[-1]["credential_version"] = 2
+        page.once("dialog", lambda dialog: dialog.accept())
+        page.locator("#usersList .user-row").filter(has_text="reader").locator(
+            "button"
+        ).first.click()
+        expect(page.locator("#usersError")).to_contain_text("Refresh")
+        expect(page.locator("#usersError")).to_be_focused()
+        assert len(app.state.user_requests) == 1
+        captured: list[Any] = []
+        page.route("**/api/v1/users?offset=*", lambda route: captured.append(route))
+        page.locator("#usersRefresh").click()
+        expect(page.locator("#usersRefresh")).to_be_disabled()
+        page.locator("#logoutButton").click()
+        expect(page.locator("#usersList")).to_be_empty()
+        assert len(captured) == 1
+        captured[0].fulfill(json={"users": app.state.users, "next_offset": None})
+        expect(page.locator("#usersList")).to_be_empty()
+        expect(page.locator("#usersView")).to_be_hidden()
+        browser.close()
 
 
 @pytest.mark.parametrize("locale", ["en", "fa"])

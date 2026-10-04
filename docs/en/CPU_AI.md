@@ -1,5 +1,34 @@
 # Local CPU-only AI and capacity planning
 
+## Model option review and fresh guest observation — 2026-10-04
+
+Read-only inspection now observes 80 online guest vCPUs and 135024599040 usable RAM bytes
+(about 125.75 GiB), with the recorded Qwen3.5-35B-A3B runtime/model links active. This is a guest
+observation, not proof of saved ESXi allocation or spare host capacity; it supersedes the older
+point-in-time sizing below. No resources, runtime, model or thinking flags were changed.
+
+The official [MiMo-V2.6-Pro-RL card](https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL)
+reports 1.02T total/42B active parameters, 1M context and MIT licensing. The official
+[Kimi K3 card](https://huggingface.co/moonshotai/Kimi-K3) reports 2.8T total/104B active,
+1048576 context, native MXFP4 and its own license. K3 also expects preserved thinking history;
+NextOps currently saves only final answers, so this is an interface/privacy design consideration,
+not permission to start storing private reasoning.
+
+Arithmetic inference, **not measured requirements**: ideal four-bit weights alone are about
+510 GB/475 GiB for MiMo and 1400 GB/1304 GiB for K3, before metadata, KV/state, activations,
+runtime and other guests. Active parameters reduce computation, not total stored weights. K3's
+lower bound already leaves inadequate headroom on the documented host; MiMo might fit a larger
+reviewed lab allocation, but usable CPU latency, artifact size and compatibility are unproven.
+Neither is a qualified drop-in for the pinned CPU-only runtime. Advertised context is not an
+accepted application budget, and vendor benchmarks do not establish Persian/NOC correctness.
+
+Recommendation: preserve the serving model; first qualify an auditable CPU-compatible artifact
+with frozen EN/FA/coding/live-evidence cases, measured latency/NUMA/memory, cold start, offline
+behavior and exact rollback. Review license, source/revision/hash and conversion code before any
+provisioning. Keep host/app/database/Zabbix capacity and storage-growth headroom; “all G10 resources”
+does not imply that current co-resident services can safely lose their resources. No download,
+API fallback, architecture migration or new resource allocation is authorized by this comparison.
+
 ## Current guest sizing and standard-chat profile — 2026-09-30
 
 After the owner's resource extension, authorized read-only guest preflight observes 64 vCPUs,

@@ -10,6 +10,16 @@ investigations now use the existing durable run and append-only audit model.
 
 ## Implemented durable subset
 
+Local user administration is a source-only candidate, not deployed. `GET /api/v1/users?offset=0`
+returns at most 50 same-organization/environment accounts and `next_offset`. `POST /api/v1/users`
+accepts `{username,password,role}` with role viewer/operator/engineer. `PATCH
+/api/v1/users/{identity_id}` accepts `{is_active,expected_version}`; `POST
+/api/v1/users/{identity_id}/password` accepts `{new_password,expected_version}`. Each revalidates
+the bearer/current administrator inside its transaction, protects every administrator account and
+audits decisions. Status/password changes revoke all target sessions atomically. No role/scope
+editing or deletion exists. Migration 0004 grants only `identities.is_active` UPDATE. Responses
+are non-cacheable and secret-free. See [contract](../requirements/USER_MANAGEMENT_SPEC.md).
+
 New candidate, not deployed: migration 0003 adds owner-scoped general-chat tables and authenticated
 conversation APIs. Support-read roles have no transcript grant. See [reference](CONVERSATIONS.md)
 and ADR 0009; disable flags and preserve additive tables for ordinary source rollback.

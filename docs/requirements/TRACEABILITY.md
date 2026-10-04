@@ -1,5 +1,18 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Local admin accounts (sections 11–14/20; 2026-10-04):
+[bounded specification](USER_MANAGEMENT_SPEC.md) maps to closed user contracts, the transactional
+user service, grant 0004, API routes and bilingual UI. `test_user_contracts.py`, user API guards,
+`test_users_postgresql.py` and user-panel browser cases cover denial, protected admins, immutable
+profiles, scope, session revocation, audit rollback, quota/pagination and permission recheck after
+lock wait. Source testing is not deployed/offline acceptance; existing release identities remain.
+
+حساب‌های محلیِ مدیر (بخش‌های ۱۱ تا ۱۴/۲۰؛ ۴ اکتبر ۲۰۲۶):
+[مشخصات محدود](USER_MANAGEMENT_SPEC.md) به قرارداد بسته، سرویس تراکنشی، مجوز 0004، API و
+رابط دوزبانه وصل است. آزمون قرارداد، کنترل API، PostgreSQL کاربران و مرورگر پنل، رد دسترسی،
+مدیر محافظت‌شده، نقش ثابت، دامنه، لغو نشست، بازگشت ممیزی، سقف/صفحه‌بندی و بررسی مجوز پس از
+انتظار قفل را می‌سنجند. آزمون کد، پذیرش زنده/آفلاین نیست؛ هویت انتشار مستقر ثابت می‌ماند.
+
 Scoped diagnostic guard (sections 3, 9, 17, 25, 27; 2026-10-04): deployed `7ce9d29` maps
 supplied-scenario intent, transport overclaims, explicit certificate/name limits and stale-data
 absence limits to `tests/unit/test_general_transport_integrity.py` and `tests/api/test_app.py`.

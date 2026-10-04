@@ -1,5 +1,17 @@
 # Testing, model evaluation and release evidence
 
+## Local admin account source candidate — 2026-10-04
+
+551 unit/API/contract checks passed with two Windows/POSIX skips. Twelve focused restricted-role
+user-management checks and the complete 31-test integration suite passed in an isolated local
+PostgreSQL 18.6 lab; this extra-major test is not a substitute for CI PostgreSQL 16/17. All 28
+browser cases passed with one POSIX collector skip, including four new user-panel cases, EN/FA,
+RTL/LTR/mobile/themes/keyboard, protected admins, confirmation, expired-session cleanup, conflict
+without retry and late-response rejection after logout. Desktop/mobile Persian screenshots were
+visually inspected. Local fixture responses are not live server acceptance. No operational user,
+credential, deployment, model or resource changed. The [specification](../requirements/USER_MANAGEMENT_SPEC.md)
+keeps exact CI, live/offline and guarded rollback gates distinct.
+
 ## Scoped diagnostic safeguard loop — 2026-10-04
 
 Candidate `7ce9d2969d6bea8186783c5ce04a1c93be811a97` passed 524 local unit/API/contract checks
