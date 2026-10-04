@@ -12,7 +12,7 @@ from sqlalchemy import event, select, update
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session, sessionmaker
 
-from nextops.api.app import create_app
+from nextops.api.app import APP_CODE_SHA256, create_app
 from nextops.application.service import DurableAppService
 from nextops.application.source_access import DurableSourceAccess
 from nextops.configuration import AppSettings
@@ -137,6 +137,7 @@ def test_fresh_source_question_has_namespaced_durable_evidence(
         },
     )
     assert response.status_code == 200, response.text
+    assert response.headers["X-NextOps-App-Code-SHA256"] == APP_CODE_SHA256
     result = response.json()
     assert (
         result["evidence"]["source_id"] == "secondary" and result["evidence"]["target_id"] == "sla"

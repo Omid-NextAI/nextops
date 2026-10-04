@@ -185,7 +185,12 @@ STATUS_BY_ERROR = {
 INVESTIGATION_MAX_OUTPUT_TOKENS = 384
 GENERAL_ASSISTANT_MAX_OUTPUT_TOKENS = 384
 ANSWER_PATHS = frozenset(
-    {"/api/v1/assistant/generate", "/api/v1/investigate", "/api/v1/incidents/investigate"}
+    {
+        "/api/v1/assistant/generate",
+        "/api/v1/investigate",
+        "/api/v1/incidents/investigate",
+        "/api/v1/monitoring/investigate",
+    }
 )
 APP_CODE_SHA256 = installed_code_digest(Path(__file__).resolve().parents[1])
 USER_VALIDATION_OPERATIONS: dict[str, UserOperation] = {
