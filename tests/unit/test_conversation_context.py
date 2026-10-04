@@ -1,5 +1,6 @@
 """Meaningful context, provenance, privacy, and reasoning-budget invariants."""
 
+import json
 from datetime import UTC, datetime
 from uuid import uuid4
 
@@ -8,14 +9,15 @@ from pydantic import ValidationError
 
 from nextops.api.answer_integrity import assure_general_answer
 from nextops.api.app import _general_prompt
-from nextops.application.conversations import select_context
+from nextops.application.conversations import DurableConversationService, select_context
 from nextops.contracts.assistant import AssistantResponse, GeneralAssistantRequest
 from nextops.contracts.conversations import (
     ConversationAssistantRequest,
     ConversationMessageRequest,
     SavedMessage,
 )
-from nextops.inference.contracts import FinishReason, InferenceRequest
+from nextops.inference.contracts import FinishReason, InferenceRequest, ModelId
+from nextops.persistence.conversations import ConversationMessage
 
 
 def assistant(answer: str = "General guidance only.") -> AssistantResponse:
@@ -64,6 +66,79 @@ def test_oversized_pair_is_not_silently_clipped() -> None:
     context, omitted = select_context([message(1, answer="پ" * 16_000)])
     assert not context
     assert omitted
+
+
+def test_oversized_recent_pair_does_not_erase_older_usable_history() -> None:
+    messages = [message(n, question=f"Question {n}") for n in range(1, 9)]
+    messages.append(message(9, answer="پ" * 16_000))
+    context, omitted = select_context(messages)
+    assert [turn.question for turn in context] == [f"Question {n}" for n in range(3, 9)]
+    assert omitted
+    assert all(turn.answer == "DNS maps names." for turn in context)
+
+
+def test_selection_skips_nonfitting_pairs_without_clipping_or_reordering() -> None:
+    messages = [message(n, question=f"Question {n}", answer="ی" * 3_800) for n in range(1, 5)]
+    messages.extend([message(5, answer="x" * 16_000), message(6, question="latest", answer="z")])
+    context, omitted = select_context(messages)
+    assert [turn.question for turn in context] == [
+        "Question 2",
+        "Question 3",
+        "Question 4",
+        "latest",
+    ]
+    assert len(json.dumps([turn.model_dump() for turn in context], ensure_ascii=False)) <= 12_000
+    assert [turn.answer for turn in context] == ["ی" * 3_800] * 3 + ["z"]
+    assert omitted
+
+
+def test_context_marker_is_explicit_without_changing_transcripts_or_budget() -> None:
+    original = message(1, question="My reference was omitted.", answer="پ" * 16_000)
+    before = original.model_dump_json()
+    context, omitted = select_context([original])
+    payload = ConversationAssistantRequest(
+        locale="fa", question="شناسه چه بود؟", history=context, history_omitted=omitted
+    )
+    prompt = _general_prompt(payload)
+    assert "Some prior exchanges were omitted" in prompt.question
+    assert "Do not infer missing identifiers" in prompt.question
+    assert prompt.max_output_tokens == 1024 and prompt.detailed and not prompt.thinking
+    assert original.model_dump_json() == before
+    assert (
+        "Some prior exchanges were omitted"
+        not in _general_prompt(
+            ConversationAssistantRequest(locale="en", question="Explain DNS.")
+        ).question
+    )
+
+
+@pytest.mark.parametrize(
+    "model", ["nextops-qwen3-5-35b-a3b-q4-k-m", "nextops-qwen3-6-35b-a3b-q4-k-m"]
+)
+def test_staged_transcript_reader_preserves_old_and_candidate_model_identity(
+    model: ModelId,
+) -> None:
+    response = AssistantResponse.model_validate(assistant().model_dump() | {"model_id": model})
+    record = ConversationMessage(
+        request_id=response.request_id,
+        sequence=1,
+        question="DNS چیست؟",
+        assistant=response.model_dump(mode="json"),
+        thinking_requested=False,
+        context_turns=0,
+        context_omitted=False,
+        created_at=response.completed_at,
+    )
+    saved = DurableConversationService._message(record)
+    assert saved.assistant == response
+    assert SavedMessage.model_validate_json(saved.model_dump_json()) == saved
+    assert select_context([saved])[0][0].answer == response.answer
+    assert not saved.assistant.live_monitoring_data
+
+
+def test_candidate_support_does_not_permit_an_arbitrary_transcript_model() -> None:
+    with pytest.raises(ValidationError):
+        AssistantResponse.model_validate(assistant().model_dump() | {"model_id": "remote-model"})
 
 
 def test_rejected_answers_are_not_followup_facts() -> None:
@@ -137,7 +212,13 @@ def test_durable_prompt_keeps_literal_unicode_and_untrusted_boundaries() -> None
 
 
 @pytest.mark.parametrize(
-    "extra", [{"history": []}, {"roles": ["admin"]}, {"max_output_tokens": 99999}]
+    "extra",
+    [
+        {"history": []},
+        {"roles": ["admin"]},
+        {"max_output_tokens": 99999},
+        {"history_omitted": False},
+    ],
 )
 def test_browser_cannot_supply_memory_policy_or_budget(extra: dict[str, object]) -> None:
     with pytest.raises(ValidationError):

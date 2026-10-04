@@ -17,6 +17,7 @@ LARGER_CANDIDATE = "qwen3-14b-q4-k-m.candidate.json"
 LARGER_32B_CANDIDATE = "qwen3-32b-q4-k-m.candidate.json"
 LARGER_MOE_CANDIDATE = "qwen3-30b-a3b-q4-k-m.candidate.json"
 LARGER_QWEN35_CANDIDATE = "qwen3-5-35b-a3b-q4-k-m.candidate.json"
+QWEN36_CANDIDATE = "qwen3-6-35b-a3b-q4-k-m.candidate.json"
 
 
 class ArtifactValidationError(RuntimeError):
@@ -89,6 +90,7 @@ def validate_repository(repository_root: Path) -> dict[str, Any]:
         (LARGER_32B_CANDIDATE, "model-32b-candidate.schema.json"),
         (LARGER_MOE_CANDIDATE, "model-30b-a3b-candidate.schema.json"),
         (LARGER_QWEN35_CANDIDATE, "model-35b-a3b-candidate.schema.json"),
+        (QWEN36_CANDIDATE, "model-qwen36-35b-a3b-candidate.schema.json"),
     ):
         try:
             larger_schema = json.loads((directory / schema_name).read_text("utf-8"))

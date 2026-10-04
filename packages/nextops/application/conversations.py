@@ -42,18 +42,20 @@ def select_context(messages: list[SavedMessage]) -> tuple[tuple[SavedContextTurn
     """Select whole recent pairs, never clipped text or rejected/generated evidence."""
     eligible = [
         SavedContextTurn(question=m.question, answer=m.assistant.answer)
-        for m in messages
+        for m in messages[-MAX_TURNS:]
         if m.assistant.evidence_mode == "model_only"
         and m.assistant.integrity_status == "model_unverified"
     ]
     selected: list[SavedContextTurn] = []
-    for turn in reversed(eligible[-6:]):
+    for turn in reversed(eligible):
+        if len(selected) == 6:
+            break
         candidate = [turn, *selected]
         if (
             len(json.dumps([t.model_dump() for t in candidate], ensure_ascii=False))
             > CONTEXT_CHARACTERS
         ):
-            break
+            continue
         selected = candidate
     return tuple(selected), len(selected) < len(messages)
 
@@ -356,6 +358,7 @@ class DurableConversationService:
                     locale=payload.locale,
                     question=payload.question,
                     history=context,
+                    history_omitted=omitted,
                     thinking=payload.thinking,
                     max_output_tokens=2_048 if payload.thinking else 1_024,
                 ),

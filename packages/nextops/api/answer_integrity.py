@@ -50,6 +50,27 @@ _EXPLICIT_CURRENT_FACT_QUESTION = re.compile(
     r"(?:وضعیت.{0,60}(?:چیست|چگونه\s*است)|آیا.{0,60}(?:اکنون|فعلی|الان)))",
     re.IGNORECASE,
 )
+# Narrow interpretation of a supplied scenario, never permission to inspect a target.
+# Matching a marker alone cannot override a mixed explicit live-state request.
+_SUPPLIED_SCENARIO = re.compile(
+    r"^\s*(?:in\s+(?:a|this)\s+(?:synthetic|hypothetical|example)\b|"
+    r"a\s+(?:synthetic|hypothetical)\s+(?:report|test|lookup|tcp|tls)\b|"
+    r"suppose\b|"
+    r"(?:در\s+(?:یک\s+)?(?:آزمون|مثال|گزارش)\s+(?:فرضی|آزمایشی)|"
+    r"فرض\s*کن(?:ید)?\b|گزارش\s+فرضی))",
+    re.IGNORECASE,
+)
+_REAL_TARGET_REQUEST = re.compile(
+    r"(?:\b(?:my|our|actual|real|production|company)\b.{0,80}"
+    r"\b(?:server|service|system|database|network|firewall|status|state|health)\b|"
+    r"(?:^|[?;.]\s*|\band\s+)(?:show|check|inspect|fetch|retrieve|confirm|verify|tell|report)"
+    r"\b.{0,80}"
+    r"\b(?:current|now|today|live|actual|real|production|my|our)\b|"
+    r"(?:سرور|سرویس|شبکه|برنامه|وضعیت|سلامت).{0,40}(?:من|ما|واقعی|شرکت|عملیاتی)|"
+    r"(?:نشان\s*بده|تأیید\s*کن|بررسی\s*کن|گزارش\s*بده).{0,60}"
+    r"(?:فعلی|الان|اکنون|واقعی|زنده|من|ما))",
+    re.IGNORECASE,
+)
 _SINGLE_CHECK_HEALTH = re.compile(
     r"(?:\b(?:successful|succeeds|success)\b.{0,80}\b(?:means|proves|confirms)\b"
     r".{0,45}\b(?:network|system|service|server)\b.{0,25}\b(?:healthy|secure|safe)\b|"
@@ -135,7 +156,17 @@ def assure_general_answer(
         and any(_OPERATIONAL_SUBJECT_MARKERS.search(turn.question) for turn in request.history)
     )
     direct_subject = bool(_OPERATIONAL_SUBJECT_MARKERS.search(request.question))
-    explicit_current_fact = bool(_EXPLICIT_CURRENT_FACT_QUESTION.search(request.question))
+    explicit_current_fact = any(
+        # A question about what is *known* in a supplied scenario does not ask us
+        # to inspect infrastructure. Every other explicit clause retains priority.
+        not re.fullmatch(r"[?;.\s]*what is known now", match.group(), re.IGNORECASE)
+        for match in _EXPLICIT_CURRENT_FACT_QUESTION.finditer(request.question)
+    )
+    supplied_scenario = bool(
+        _SUPPLIED_SCENARIO.search(request.question)
+        and not explicit_current_fact
+        and not _REAL_TARGET_REQUEST.search(request.question)
+    )
     requires_live_evidence = bool(
         (
             (
@@ -145,6 +176,7 @@ def assure_general_answer(
             or (explicit_current_fact and direct_subject)
         )
         and (not _DIAGNOSTIC_GUIDANCE_QUESTION.search(request.question) or explicit_current_fact)
+        and not supplied_scenario
     )
     file_request = bool(_SYSTEM_FILE_REQUEST.search(request.question))
     unsafe_claim = _contains_unsafe_execution_claim(assistant.answer)

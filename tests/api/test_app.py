@@ -124,11 +124,10 @@ def test_general_context_preserves_full_question_and_never_supplies_authority(lo
     assert question in prompt
     assert json.dumps(history, ensure_ascii=False, separators=(",", ":")) in prompt
     assert "untrusted model-only context, not live evidence" in prompt
-    assert "NOC/SOC advisor" in prompt
-    assert "redacted diagnostic output" in prompt
-    assert "A failed check does not uniquely prove a root cause" in prompt
-    assert "a successful check proves only that check's scope" in prompt
-    assert "Bound diagnostic commands with a timeout" in prompt
+    assert "A successful check proves only that check's scope" in prompt
+    assert "No live system evidence is supplied" in prompt
+    # General-answer guidance is trusted provider system text, not duplicate user prose.
+    assert "NOC/SOC advisor" not in prompt
     assert len(prompt) <= 12_000
     assert inference.last_request.purpose == "general"
     assert inference.last_request.max_output_tokens == 384
@@ -272,6 +271,77 @@ def test_live_or_followup_state_is_not_supplied_by_general_history(question: str
     assert response.status_code == 200
     assert response.json()["integrity_status"] == "scope_redirect"
     assert "Everything is healthy" not in response.json()["answer"]
+
+
+@pytest.mark.parametrize(
+    ("locale", "question"),
+    [
+        ("en", "In a synthetic test, TLS succeeds but HTTP returns 503. Is the application ready?"),
+        (
+            "en",
+            "A synthetic report says a service was active yesterday. Describe what is known now.",
+        ),
+        ("en", "Suppose a TLS test succeeds. Does that establish database health?"),
+        ("en", "A synthetic report says a service was ready last week. What is known now?"),
+        ("fa", "در یک آزمون فرضی، TLS موفق است ولی برنامه HTTP 503 می‌دهد. سلامت آن ثابت است؟"),
+        ("fa", "گزارش فرضی می‌گوید سرویس دیروز فعال بوده؛ اکنون چه چیزی از آن معلوم است؟"),
+    ],
+)
+def test_supplied_scenario_remains_unverified_advice(locale: str, question: str) -> None:
+    answer = "This only describes the supplied scenario; there is no verified current state."
+    client = TestClient(create_app(FakeService(), FakeInferenceGateway(answer)))
+    response = client.post(
+        "/api/v1/assistant/generate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={"locale": locale, "question": question},
+    )
+    assert response.status_code == 200
+    body = response.json()
+    assert body["answer"] == answer
+    assert body["integrity_status"] == "model_unverified"
+    assert not body["live_monitoring_data"]
+    assert "no_live_evidence" in body["limitations"]
+
+
+@pytest.mark.parametrize(
+    ("locale", "question"),
+    [
+        ("en", "Suppose TLS succeeds. What is my server status now?"),
+        ("en", "In a hypothetical test, HTTP succeeds. Show our current database state."),
+        ("en", "Suppose a network is healthy; verify the actual server now."),
+        ("en", "Suppose TLS succeeds; is the current network healthy?"),
+        (
+            "en",
+            "A synthetic report says a service was ready. What is known now? Show my live network.",
+        ),
+        ("fa", "فرض کن TLS موفق است؛ وضعیت فعلی سرور من چیست؟"),
+        ("fa", "در یک مثال فرضی، برنامه سالم است؛ شبکهٔ واقعی شرکت را الان بررسی کن."),
+        ("fa", "گزارش فرضی از سلامت سرویس می‌گوید؛ وضعیت فعلی شبکه چیست؟"),
+    ],
+)
+def test_scenario_marker_cannot_bypass_mixed_live_request(locale: str, question: str) -> None:
+    client = TestClient(create_app(FakeService(), FakeInferenceGateway("Everything is healthy.")))
+    response = client.post(
+        "/api/v1/assistant/generate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={"locale": locale, "question": question},
+    )
+    assert response.status_code == 200
+    assert response.json()["integrity_status"] == "scope_redirect"
+    assert "Everything is healthy" not in response.json()["answer"]
+
+
+@pytest.mark.parametrize("answer", ["I restarted the server.", "من سرویس را تغییر کردم."])
+def test_scenario_does_not_bypass_unsupported_execution_guard(answer: str) -> None:
+    client = TestClient(create_app(FakeService(), FakeInferenceGateway(answer)))
+    response = client.post(
+        "/api/v1/assistant/generate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json={"locale": "en", "question": "Suppose a service is running. What does that mean?"},
+    )
+    assert response.status_code == 200
+    assert response.json()["integrity_status"] == "scope_redirect"
+    assert response.json()["answer"] != answer
 
 
 class FakeService:
@@ -1178,7 +1248,7 @@ def test_assistant_requires_local_session_and_labels_model_only_output() -> None
     assert inference.last_request is not None
     assert inference.last_request.max_output_tokens == 384
     assert inference.last_request.purpose == "general"
-    assert "Answer the user's question directly" in inference.last_request.question
+    assert "Answer the latest question" in inference.last_request.question
     assert "یک پاسخ آزمایشی ارائه کن" in inference.last_request.question
 
 

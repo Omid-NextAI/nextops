@@ -2,7 +2,13 @@
 
 [فارسی](../fa/SECURITY.md) · [Index](INDEX.md)
 
-**Status: required control set with a tested source-level subset.** Local identity, server-derived scopes, deterministic denial, secret checks, append-restricted audit and inference service authentication are implemented; complete gateway, connector, deployment and remediation controls remain unimplemented. Source: master specification sections 11–14, 18 and 20–21. See also the [repository security policy](../../SECURITY.md).
+**Status: controlled read-only deployment, not complete production acceptance.** Local identity,
+server-derived scope, deterministic denial, secret checks, append-restricted audit, authenticated
+AI and isolated read-only gateway/connectors are implemented; measured gates and serving revisions
+are in the [release manifest](../status/current-release.yaml). Future remediation and open production
+gates remain unaccepted. Model instructions are neither authorization nor a guarantee of accuracy.
+Source: master specification sections 11–14, 18 and 20–21. See the
+[repository security policy](../../SECURITY.md). Dated records below retain their original scope.
 
 ## Trust model
 

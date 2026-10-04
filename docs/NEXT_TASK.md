@@ -1,5 +1,97 @@
 # Next task / کار بعدی
 
+2026-10-04: preserve v2's 16 measured finals and failed proxy semantics. Next isolate an
+application-only diagnostic-integrity safeguard for reviewed overclaims and safe scenario intent.
+Qualify its final user-facing fallback/labels, live-state/mutation guards, audit and exact rollback
+on the existing standard profile. Do not deploy the broader unqualified capability-v2 provider or
+relabel raw failures. Newer actual guest resource observations supersede earlier point-in-time ones.
+
+۴ اکتبر ۲۰۲۶: شانزده پاسخ نسخهٔ دوم و شکستِ معنای پراکسی حفظ شود. کنترل مستقل و صرفاً
+برنامه‌ای برای ادعاهای بیش‌ازشاهدِ بررسی‌شده و قصد فرضی، از نامزد گسترده جدا شود. پاسخ نهایی،
+برچسب، کنترل وضعیت زنده و تغییر، ممیزی و بازگشت دقیق با نمایهٔ فعلی پذیرفته شوند. دستور
+گسترده و نپذیرفتهٔ capability-v2 مستقر و شکست خام موفق نامیده نشود. مشاهدهٔ تازهٔ واقعیِ
+منابع مهمان از مشاهدهٔ لحظه‌ایِ قبلی مقدم است.
+
+First unfinished checkpoint after capability-v1 — preserve the measured 18-case results and
+live69/35/thinking-off state. Design a bounded coding requirement-conformance and diagnostic-scope
+repair plus safe hypothetical-versus-live intent handling. FA code added unrequested range syntax
+and an unhandled invalid assertion; four offline guard replays became generic redirects. Do not
+execute model code on a credential-bearing host, repeat this set as a held-out pass, enable thinking,
+switch models or widen budgets. Freeze new EN/FA cases before generation. Only passing semantics
+permit matched app/history/audit/admission, longer-context recovery and current-source WAN/cold-start/
+exact rollback. See [the bounded increment](en/AI_CAPABILITY_SPEC.md); older failed gates remain failed.
+
+نخستین گام ناتمام پس از capability-v1 — نتیجهٔ ۱۸ مورد و خدمت69/مدل35 با استدلال خاموش حفظ
+شوند. اصلاح محدودِ انطباق کد با درخواست و حدود بررسی تشخیصی، همراه تفکیک امنِ پرسش فرضی و
+وضعیت زنده طراحی شود. کد فارسی، قالب محدوده و assert نامعتبرِ بدون رسیدگی اضافه کرد؛ چهار
+پاسخ در بازپخش آفلاین به پیام عمومی تبدیل شدند. کد مدل در میزبان دارای اطلاعات ورود اجرا
+نشود؛ همین مجموعه آزمون مستقلِ موفق نام نگیرد؛ استدلال، مدل یا سقف بی‌پذیرش تغییر نکند.
+پرسش تازهٔ دوزبانه پیش از تولید ثابت شود. فقط پذیرش معنا، آزمون هماهنگ برنامه/سابقه/ممیزی/صف،
+ادامه پس از خرابیِ زمینهٔ بلندتر و WAN/شروع سرد/بازگشت دقیقِ کد فعلی را مجاز می‌کند.
+[گام محدود](fa/AI_CAPABILITY_SPEC.md) مبناست؛ شکست قبلی حفظ می‌شود.
+
+Earlier checkpoint and outcomes / گام قبلی و نتیجه:
+
+First unfinished checkpoint, after the 2026-10-03 four-profile comparison — keep standard
+`69c9260`/Qwen3.5 live and both thinking flags off. Full candidate hashes/import/CPU load and
+56 bounded requests are complete; do not repeat them as missing. Technical correctness failed
+for both models in both modes. Design a bounded grounding/calibration repair for permit-log,
+transport/TLS/application distinctions, packet-loss uncertainty, stale facts and unrequested
+exposure advice. Preserve the frozen original scores; use new untuned EN/FA acceptance questions
+and source tests for any repair. Do not deploy Qwen3.6 or widen deadlines/queues to hide failure.
+Near-budget context/recovery follows only a passing semantic prerequisite; matched user-facing
+history/audit/admission, offline/cold-start and exact transcript-compatible rollback remain unrun.
+No disk resize or 122B import: the owner's 500-GiB total growth bound includes candidate staging,
+and the 900-GiB reserve/3-TB project ceiling remain. Refresh datastore capacity for a new window.
+Review [results](en/TESTING.md) and [specification](en/MODEL_UPGRADE_SPEC.md). Existing production
+gates and earlier real timeout failures are not waived. This comparison does not prove training
+is needed or either model is qualified for production accuracy.
+
+نخستین گام ناتمام پس از مقایسهٔ چهار نمایه در ۳ اکتبر ۲۰۲۶ — خدمت معمولی `69c9260`/Qwen3.5
+زنده و هر دو گزینهٔ استدلال خاموش بمانند. هش کامل، ورود و بارگذاری نامزد و ۵۶ درخواست محدود
+تکمیل شده‌اند و دوباره کار ناتمام شمرده نشوند. درستی فنی در هر دو مدل و هر دو حالت شکست
+خورد. اصلاحی محدود برای اتکا به شاهد و حدود ادعا طراحی شود: تفاوت مجوز فایروال، اتصال TCP،
+TLS و سلامت برنامه، عدم قطعیتِ افت بسته، دادهٔ قدیمی و توصیهٔ ناخواستهٔ بازکردن دسترسی. نتیجهٔ
+مجموعهٔ ثابت اولیه حفظ شود؛ هر اصلاح با آزمون کد و پرسش‌های تازهٔ دوزبانه که از پیش برای پاسخ
+مدل تنظیم نشده‌اند سنجیده شود. Qwen3.6 مستقر و مهلت یا صف برای پوشاندن شکست افزایش نیابد.
+زمینهٔ نزدیک سقف و ادامه پس از خرابی فقط بعد از پذیرش معنا آزموده شوند؛ مرز هماهنگ کاربر،
+سابقه، ممیزی، صف، آفلاین/شروع سرد و بازگشت دقیقِ سازگار هنوز اجرا نشده‌اند. افزایش دیسک یا
+ورود 122B مجاز نیست؛ بودجهٔ مجموعِ رشدِ ۵۰۰ GiB، فایل‌های موقت نامزد را هم شامل می‌شود و
+حاشیهٔ ۹۰۰ GiB و سقف سه‌ترابایتی حفظ‌اند. برای پنجرهٔ تازه، ظرفیت datastore دوباره بررسی شود.
+[نتایج](fa/TESTING.md) و [مشخصات](fa/MODEL_UPGRADE_SPEC.md) مبنا هستند. معیارهای تولید و شکست
+واقعیِ پیشینِ مهلت لغو نشده‌اند. این مقایسه نه ضرورت آموزش مدل را اثبات می‌کند، نه درستیِ
+عملیاتیِ هیچ‌یک را.
+
+Earlier preparation checkpoint, now completed through the bounded comparison:
+گام قبلیِ آماده‌سازی که اکنون تا مقایسهٔ محدود تکمیل شده است:
+
+First unfinished checkpoint, Qwen3.6 owner instruction 2026-10-03 — finish the explicit pinned
+desktop artifact verification and finish the AI disk placement/snapshot/thin-growth checks before
+AI import. The received overview shows rounded SSD 3.49 TB total/1.52 TB free, not those commitments.
+Then follow [MODEL_UPGRADE_SPEC](en/MODEL_UPGRADE_SPEC.md): isolated CPU load,
+equivalent-profile standard/thinking technical comparison, separate EN/FA factual review and
+near-budget context/recovery. Only passing prerequisites permit matched app/browser/history/audit,
+offline package/start and exact rollback qualification before a guarded switch. Keep serving69/
+current35 and both thinking flags off. Source alias/fixtures or a published benchmark do not
+authorize promotion. No 122B import, VM resize or architecture/recovery replacement is included.
+The earlier real 16K timeout/semantic failures remain failed; do not rerun them blindly or widen
+deadlines/queues. Native completion must be reconciled after any timeout. Production remains unaccepted.
+
+نخستین گام ناتمام پس از دستور Qwen3.6 در ۳ اکتبر ۲۰۲۶ — تمامیت فایل ثابتِ دسکتاپ کامل بررسی
+و پیش از ورود به AI، محل دیسک و رشد snapshot و تعهد thin بررسی شود. تصویر دریافت‌شده، SSD
+با ظرفیت تقریبی ۳٫۴۹ TB و فضای آزاد ۱٫۵۲ TB را نشان می‌دهد، نه این تعهدها. سپس
+[مشخصات ارتقای مدل](fa/MODEL_UPGRADE_SPEC.md) اجرا شود: بارگذاری جداگانهٔ CPU،
+مقایسهٔ فنیِ معمولی و استدلالی با سقف همسان، بازبینی مستقلِ ادعای دوزبانه و زمینهٔ نزدیک سقف و
+ادامه پس از خرابی. فقط موفقیت پیش‌نیاز، آزمون هماهنگ برنامه، مرورگر، سابقه و ممیزی، بسته و شروع
+آفلاین و بازگشت دقیق را پیش از تغییر محافظت‌شده مجاز می‌کند. خدمت69، مدل35 و خاموش بودن هر دو
+گزینهٔ استدلال حفظ شوند. شناسه و آزمون ساختگی یا امتیاز منتشرشده اجازهٔ استقرار نیست. دریافت
+122B، افزایش منابع VM یا جایگزینی معماری و بازیابی در دامنه نیست. شکست واقعیِ مهلت 16K و
+معنای پاسخ حفظ شود؛ بدون بررسی یا با افزایش مهلت و صف تکرار نشود. پس از پایان مهلت، پایان
+واقعیِ کار مدل بررسی شود. محیط عملیاتی همچنان پذیرفته نیست.
+
+Earlier instructions below remain dated history, not a prohibition on the newly authorized comparison.
+دستورهای زیر سابقهٔ تاریخ‌دارند، نه منعِ مقایسه‌ای که اکنون مجاز شده است.
+
 First unfinished checkpoint, 2026-10-03 — preserve live standard `69c9260` and both disabled
 thinking flags. The installed 128-token/full-envelope adapter's digit-format and actual near-16K
 deadline gates failed. Do not relabel these as unrun or passed, repeat a timed-out native call

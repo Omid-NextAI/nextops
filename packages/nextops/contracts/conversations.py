@@ -20,6 +20,7 @@ class ConversationAssistantRequest(AssistantRequest):
 
     max_output_tokens: int = Field(default=1_024, ge=32, le=2_048)
     history: tuple[SavedContextTurn, ...] = Field(default=(), max_length=6)
+    history_omitted: bool = False
     thinking: bool = False
 
     @model_validator(mode="after")

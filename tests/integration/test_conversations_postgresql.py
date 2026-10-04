@@ -19,7 +19,7 @@ from nextops.contracts.assistant import AssistantResponse, SynthesisRequest
 from nextops.contracts.conversations import ConversationMessageRequest, SavedMessage
 from nextops.contracts.durable import BootstrapRequest, LoginRequest
 from nextops.contracts.errors import ErrorCode
-from nextops.inference.contracts import InferenceReadiness
+from nextops.inference.contracts import InferenceReadiness, ModelId
 from nextops.persistence.conversations import Conversation, ConversationMessage
 from nextops.persistence.models import AuditEvent, Identity
 
@@ -91,6 +91,32 @@ def completed(store: DurableConversationService, token: str) -> tuple[object, Sa
     return chat, store.complete(token, ticket, assistant("DNS maps names."), uuid4())
 
 
+@pytest.mark.parametrize(
+    "model", ["nextops-qwen3-5-35b-a3b-q4-k-m", "nextops-qwen3-6-35b-a3b-q4-k-m"]
+)
+def test_model_identity_survives_restricted_database_write_and_new_reader(
+    chats: tuple[DurableAppService, DurableConversationService, str],
+    app_session_factory: sessionmaker[Session],
+    model: ModelId,
+) -> None:
+    _, store, token = chats
+    chat = store.create(token, "en", uuid4())
+    ticket = store.begin(token, chat.conversation_id, payload(), uuid4())
+    assert isinstance(ticket, GenerationTicket)
+    response = AssistantResponse.model_validate(assistant().model_dump() | {"model_id": model})
+    saved = store.complete(token, ticket, response, uuid4())
+    restarted = DurableConversationService(app_session_factory)
+    page = restarted.get(token, chat.conversation_id, uuid4())
+    assert page.messages == (saved,)
+    assert page.messages[0].assistant.model_id == model
+    with app_session_factory() as session:
+        persisted = session.get(
+            ConversationMessage, (chat.conversation_id, ticket.payload.request_id)
+        )
+        assert persisted is not None and persisted.assistant["model_id"] == model
+    # This source reader is compatible; it does not prove an old deployed parser can roll back.
+
+
 def test_persistence_restart_replay_conflict_and_audit(
     chats: tuple[DurableAppService, DurableConversationService, str],
     app_session_factory: sessionmaker[Session],
@@ -127,6 +153,33 @@ def test_persistence_restart_replay_conflict_and_audit(
         "conversation.replayed",
     }
     assert "سامانه" not in str([a.details for a in audit])
+
+
+def test_history_omission_reaches_generation_and_atomic_saved_metadata(
+    chats: tuple[DurableAppService, DurableConversationService, str],
+    app_session_factory: sessionmaker[Session],
+) -> None:
+    _, store, token = chats
+    chat = store.create(token, "en", uuid4())
+    for question, answer in [
+        ("My reference is REF-LOCAL-4.", "Noted."),
+        ("Long example", "پ" * 16_000),
+    ]:
+        ticket = store.begin(token, chat.conversation_id, payload(question), uuid4())
+        assert isinstance(ticket, GenerationTicket)
+        store.complete(token, ticket, assistant(answer), uuid4())
+    restarted = DurableConversationService(app_session_factory)
+    followup = restarted.begin(
+        token, chat.conversation_id, payload("What was my reference?"), uuid4()
+    )
+    assert isinstance(followup, GenerationTicket)
+    assert followup.context.history_omitted and followup.context_omitted
+    assert [turn.question for turn in followup.context.history] == ["My reference is REF-LOCAL-4."]
+    saved = restarted.complete(token, followup, assistant("REF-LOCAL-4"), uuid4())
+    assert saved.context_omitted and saved.context_turns == 1
+    page = restarted.get(token, chat.conversation_id, uuid4())
+    assert page.messages[-1] == saved
+    assert page.messages[1].assistant.answer == "پ" * 16_000
 
 
 def test_other_identity_including_admin_cannot_access_delete_or_generate(
