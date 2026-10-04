@@ -248,6 +248,11 @@ capabilities:
       - deploy/systemd/nextops-certificate-check.timer
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
+  - id: mcp01_offline_windows_base_package_compatibility
+    status: passed
+    evidence:
+      - docs/en/TESTING.md
+      - docs/fa/TESTING.md
   - id: mcp01_local_sdk_fixture_contracts
     status: passed
     evidence:

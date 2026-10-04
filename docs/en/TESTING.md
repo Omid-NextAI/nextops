@@ -36,6 +36,20 @@ data/network access; it is not an offline-runtime operation or proof of vulnerab
 CI installs this extra explicitly in quality, PostgreSQL16/17 and browser jobs; CI results for
 this change are not inferred from local tests.
 
+Additional source qualification for `d53c2a0`: all five jobs in
+[CI 37206184531](https://github.com/Omid-NextAI/nextops/actions/runs/37206184531) passed,
+including Linux unit/protocol checks, existing real PostgreSQL16/17 integration, existing browser
+acceptance and full-history Gitleaks. Existing database/browser tests do not qualify the unbound
+MCP-02 ports or live second-source UI. A fresh isolated Windows environment installed all 25
+locked base dependencies from the existing provisioned wheelhouse using `uv pip install
+--offline --no-index --require-hashes`, then installed the built wheel with `--no-deps`.
+Isolated installed-code imports of the legacy app/connector and `uv pip check` passed with the
+MCP package absent. Wheel SHA-256:
+`24d06413143045bec3e27c2425465a55cd8481b242b0757132c2b7020586ea2c`.
+The first cache-only attempt failed for missing registry-cache artifacts; it did not download
+anything. The explicit existing wheelhouse resolved that provisioning-path issue. This proves
+base-package compatibility, not provisioning or WAN-disconnected operation of the new MCP path.
+
 Acceptance review: source isolation, deny-before-target access, mandatory audit ports, bounded
 collection, sanitized typed errors and local protocol tests **passed**. Durable PostgreSQL
 composition, private runner credential/CA ownership, protocol-frame/logging controls, egress
