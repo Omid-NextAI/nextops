@@ -1,5 +1,19 @@
 # Next task / کار بعدی
 
+Source prompt follow-up is implemented/tested, not deployed: preserve generic provenance/type-order
+instructions, immutable payload-capture tests and unchanged short/evidence prompt hashes. The
+immediate native comparison must still use exact `f6cff8f` so passive waiting is the only runtime
+setting changed. After that trial is reconciled/reviewed, package and hash this new source for a
+separate frozen semantic retest; do not mix attribution, reuse a failed gate or enable thinking.
+Source tests (967 passed/two POSIX skips) do not complete model or live application acceptance.
+
+پیگیری راهنمای مدل در کد پیاده‌سازی و آزموده شده، نه مستقر: دستور عمومیِ منشأ/ترتیب کنترل
+نوع، آزمون ثبت مستقلِ ورودی و هش ثابتِ راهنمای کوتاه/شاهد حفظ شوند. مقایسهٔ بومیِ فوری همچنان
+کد دقیقِ `f6cff8f` را به‌کار برد تا انتظار غیرفعال تنها تنظیم تغییر‌یافتهٔ runtime باشد.
+پس از تطبیق/بازبینی آن آزمون، کد تازه جدا بسته‌بندی و هش شود و دوباره با پرسش ثابت سنجیده
+شود؛ اثر تغییرها مخلوط، مجوز ناموفق دوباره استفاده و استدلال فعال نشود. ۹۶۷ آزمون موفقِ
+کد/دو مورد POSIX اجرا‌نشده، پذیرش مدل یا برنامهٔ زنده نیست.
+
 Immediate checkpoint after the failed physical-batch512 Q5 run: preserve six passes/six failures/
 four not-run cases and the reconciled cleanup. Exact `ead5e30` source CI passed five jobs; do not
 repeat the repaired import tests as an unfinished gate. Review the distinct private

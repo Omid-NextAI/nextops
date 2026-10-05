@@ -1,5 +1,17 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Generic detailed-answer instructions and immutable test captures — 2026-10-05
+
+Strengthen generic provenance/type-order guidance only in detailed answers; preserve short/evidence
+prompts, frozen questions, limits and security controls. Repair the reviewer-found mutable capture
+gap with deep snapshots and a mutation regression. 118 focused/967 source tests passed, two POSIX
+skips; full formatting/lint/types passed. Native quality/deployment remain unrun for this source.
+
+راهنمای عمومیِ منشأ/ترتیب کنترل نوع فقط در پاسخ تفصیلی تقویت شد؛ راهنمای کوتاه/شاهد، پرسش
+ثابت، حدود و کنترل امنیتی حفظ‌اند. خلأ ثبت تغییرپذیرِ یافته‌شده در بازبینی، با تصویر مستقل
+و آزمون تغییر اصلاح شد. ۱۱۸ آزمون مرتبط/۹۶۷ آزمون کد موفق و دو مورد POSIX اجرا‌نشده‌اند؛
+قالب/lint/نوع کامل موفق‌اند. کیفیت بومی/استقرار این کد اجرا‌نشده است.
+
 ## Q5 physical-batch512 failed qualification record — 2026-10-05
 
 Record the distinct frozen native trial: eleven finals, a 120002-ms Persian stale-evidence timeout,

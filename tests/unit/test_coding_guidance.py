@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
+from copy import deepcopy
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Literal
@@ -132,7 +133,7 @@ class PromptTransport:
         timeout_seconds: float,
     ) -> dict[str, Any]:
         assert timeout_seconds <= 120.0
-        self.calls.append((path, payload))
+        self.calls.append((path, deepcopy(payload)))
         if path == "/apply-template":
             return {"prompt": "Synthetic rendered prompt, not a native template result"}
         if path == "/tokenize":
@@ -202,12 +203,23 @@ def test_detailed_general_coding_guidance_is_trusted_and_not_frozen_answer_coach
     assert "When providing code" in system
     assert "specified input/output types and edge cases" in system
     assert "unexpected or adversarial values before" in system
+    assert "validate the required type first, then apply value rules" in system
+    assert "Check branch order, short-circuiting and return types" in system
     assert "overload equality" in system and "Boolean values satisfy integer type checks" in system
     assert "Do not silently widen the accepted input contract" in system
     assert "without claiming execution" in system
-    assert all(term not in system for term in ("is_allowed", "host.get", "item.get"))
+    assert all(
+        term not in system
+        for term in ("is_allowed", "host.get", "item.get", "LAB-", "91%", "2026-10-01")
+    )
     assert f"natural professional {locale}" in system
     assert "Separate observations, hypotheses and safe next checks" in system
+    assert "source, observation/collection times, scope and stale/partial limits" in system
+    assert "Reported completed steps stay observations" in system
+    assert "not proof of independent verification" in system
+    assert "unmeasured steps and current states remain unknown" in system
+    assert "Do not invent intermediary topology" in system
+    assert "have not executed anything and cannot change systems" in system
     assert "never output internal reasoning" in system
     assert "optional diagnostic questions" in system
     assert payload["messages"][-1]["content"].startswith("Synthetic request:")
@@ -222,6 +234,29 @@ def test_detailed_general_coding_guidance_is_trusted_and_not_frozen_answer_coach
         "/tokenize",
         "/v1/chat/completions",
     ]
+    # Real template admission must count the same trusted instructions that are sent
+    # to generation; these in-memory fixtures do not prove native instruction following.
+    assert transport.calls[0][1]["messages"] == payload["messages"]
+    assert transport.calls[0][1]["chat_template_kwargs"] == payload["chat_template_kwargs"]
+
+
+def test_prompt_fixture_snapshots_preserve_admitted_payload_after_later_mutation() -> None:
+    transport = PromptTransport(BASELINE_MODEL)
+    payload: dict[str, Any] = {
+        "messages": [{"role": "system", "content": "Synthetic admitted instructions."}],
+        "chat_template_kwargs": {"enable_thinking": False},
+    }
+    asyncio.run(transport.post_json("/apply-template", payload, {}, 5.0))
+    payload["messages"][0]["content"] = "Synthetic later mutation, not a model response."
+    payload["chat_template_kwargs"]["enable_thinking"] = True
+    asyncio.run(transport.post_json("/v1/chat/completions", payload, {}, 120.0))
+    admitted = transport.calls[0][1]
+    generated = transport.calls[1][1]
+    assert admitted["messages"][0]["content"] == "Synthetic admitted instructions."
+    assert admitted["chat_template_kwargs"] == {"enable_thinking": False}
+    assert generated["messages"][0]["content"] == payload["messages"][0]["content"]
+    assert generated["chat_template_kwargs"] == {"enable_thinking": True}
+    assert admitted != generated
 
 
 @pytest.mark.parametrize("locale", ["en", "fa"])
@@ -261,6 +296,7 @@ def test_detailed_thinking_preserves_existing_final_only_controls(
     assert set(schema["properties"]) == {"answer"}
     assert payload["max_tokens"] == 384
     assert transport.calls[0][1]["chat_template_kwargs"] == payload["chat_template_kwargs"]
+    assert transport.calls[0][1]["messages"] == payload["messages"]
 
 
 def test_independent_proposals_do_not_replace_frozen_questions_or_claim_a_model_pass() -> None:

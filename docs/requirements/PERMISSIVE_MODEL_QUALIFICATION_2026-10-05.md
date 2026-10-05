@@ -9,6 +9,27 @@ The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 
 ## English
 
+### Generic detailed-answer source repair — not deployed
+
+Only the detailed system prompt changes: retain supplied source, observation/collection times,
+authorized scope and stale/partial limits; keep reported observations explicitly distinct from
+independent verification; avoid invented intermediaries; validate required types before value
+rules and review branch order/return types. No fixture answer, hostname, method allowlist or
+network-specific expected result is inserted. Short-general/evidence prompt hashes, frozen corpus,
+request routes, template/privacy controls, policy, context/output/deadlines and serving releases
+remain unchanged. This is instruction design, not model training or a deterministic security boundary.
+
+Independent review identified mutable references in the in-memory fixture's captured requests.
+Deep-copy snapshots and an explicit later-mutation regression now make template/generation parity
+checks meaningful; this was a test gap, not an observed production mutation. Main commands passed
+**118 focused tests**, **967 non-browser/non-integration tests, two POSIX skips, 126 deselected
+in 25.34 seconds**, full formatting/lint and Linux-target Mypy on 142 files. The existing AnyIO
+deprecation remains. Exact preceding `2553288` CI passed five jobs
+([run](https://github.com/Omid-NextAI/nextops/actions/runs/37355015326)); it is not CI or native
+acceptance for this later source repair. Scheduling comparison retains exact `f6cff8f`; new source
+must be separately packaged/pinned and tested, including the frozen and independent questions.
+No failed standard gate, thinking enablement, live cutover or readiness claim follows from source tests.
+
 ### Distinct physical-batch512 trial — completed 18:08 UTC
 
 The separate `20261005-q5-f6-ub512-standard-001` native trial retained exact `f6cff8f`, the frozen
@@ -463,6 +484,26 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### اصلاح عمومیِ کد راهنمای پاسخ تفصیلی — مستقر نشده
+
+فقط راهنمای سیستمیِ پاسخ تفصیلی تغییر می‌کند: منبع ارسالی، زمان مشاهده/گردآوری، دامنهٔ مجاز
+و محدودیتِ کهنه/ناقص حفظ شوند؛ گزارشِ مشاهده صریحاً از تأیید مستقل جدا بماند؛ واسط ساخته
+نشود؛ نوع لازم پیش از قواعد مقدار کنترل و ترتیب شاخه/نوع خروجی بررسی شود. پاسخِ دادهٔ
+آزمایشی، نام میزبان، روش‌های مجازِ خاص یا نتیجهٔ موردانتظارِ شبکه در راهنما درج نشده‌اند.
+هش راهنمای کوتاهِ عمومی/شاهد، پرسش ثابت، مسیر درخواست، کنترل قالب/حریم خصوصی، سیاست، حدود
+زمینه/خروجی/مهلت و نسخهٔ زنده ثابت‌اند. این طراحی دستور است، نه آموزش مدل یا مرز امنیتیِ قطعی.
+
+بازبین مستقل، ارجاع تغییرپذیر در ورودیِ ثبت‌شدهٔ آزمون درون‌حافظه‌ای را یافت. اکنون تصویر
+مستقل و آزمون صریحِ تغییر بعدی، مقایسهٔ ورودی قالب/تولید را معتبر می‌کنند؛ این خلأ آزمون
+بود، نه تغییر مشاهده‌شده در محیط عملیاتی. فرمان اصلی **۱۱۸ آزمون مرتبط** و **۹۶۷ آزمون
+غیرمرورگری/غیرپایگاهیِ موفق، دو مورد POSIX اجرا‌نشده و ۱۲۶ مورد خارج از انتخاب در ۲۵٫۳۴
+ثانیه**، قالب/lint کامل و mypy با هدف Linux برای ۱۴۲ فایل را تأیید کرد. هشدار قدیمی AnyIO
+باقی است. پنج کنترل CI کد پیشینِ `2553288` موفق‌اند
+([اجرا](https://github.com/Omid-NextAI/nextops/actions/runs/37355015326))؛ این CI یا پذیرش بومیِ
+اصلاح بعدی نیست. مقایسهٔ زمان‌بندی، `f6cff8f` دقیق را حفظ می‌کند؛ کد تازه جدا بسته‌بندی/
+هویت‌گذاری و با پرسش ثابت و مستقل آزموده شود. آزمون کد، مجوز استفاده از تأیید ناموفقِ
+استاندارد، فعال‌سازی استدلال، تغییر زنده یا ادعای آمادگی نمی‌دهد.
 
 ### آزمون مستقلِ batch فیزیکیِ ۵۱۲ — پایان در ساعت ۱۸:۰۸ UTC
 

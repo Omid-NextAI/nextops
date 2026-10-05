@@ -1,5 +1,26 @@
 # Project state / وضعیت پروژه
 
+New source-only detailed-answer repair, 2026-10-05: generic instructions now explicitly preserve
+supplied provenance/limits without claiming independent verification, avoid invented intermediary
+topology, and validate required types before value operations. Short-general and evidence prompts,
+frozen questions, template controls, limits, policy and serving releases are unchanged. Independent
+review found a mutable test-capture gap; deep snapshots plus a mutation regression now cover it.
+Main checks: 118 focused tests and 967 non-browser/non-integration tests passed, two POSIX skips,
+126 deselected in 25.34 seconds; formatting/lint and 142-file Linux-target Mypy passed. This is
+not model training, a native-answer pass or deployment. Preceding exact `2553288` CI passed five
+jobs; CI for this later source increment remains separate. Continue isolated scheduling qualification
+with frozen `f6cff8f`, then a separately pinned comparison of this changed source.
+
+اصلاح تازه و صرفاً کدِ پاسخ تفصیلی، در ۵ اکتبر ۲۰۲۶: راهنمای عمومی اکنون حفظ صریحِ منشأ/
+محدودیت دادهٔ ارسالی، بدون ادعای تأیید مستقل، پرهیز از توپولوژیِ واسطِ ساختگی و کنترل نوع
+پیش از عملیات مقدار را می‌خواهد. راهنمای کوتاهِ عمومی/شاهد، پرسش ثابت، کنترل قالب، حدود،
+سیاست و نسخه‌های زنده تغییر نکردند. بازبین مستقل خلأ ثبت ورودیِ تغییرپذیر در آزمون را یافت؛
+تصویر مستقل از ورودی و آزمون تغییر بعدی آن را پوشش می‌دهند. کنترل اصلی: ۱۱۸ آزمون مرتبط
+و ۹۶۷ آزمون غیرمرورگری/غیرپایگاهی موفق، دو مورد POSIX اجرا‌نشده و ۱۲۶ مورد خارج از انتخاب،
+در ۲۵٫۳۴ ثانیه؛ قالب/lint و mypy با هدف Linux برای ۱۴۲ فایل موفق‌اند. این آموزش مدل، پذیرش
+پاسخ بومی یا استقرار نیست. پنج کنترل CI کد پیشینِ `2553288` موفق‌اند؛ CI این گام بعدی جداست.
+آزمون مستقلِ زمان‌بندی با `f6cff8f` ثابت ادامه یابد، سپس مقایسهٔ جدا با هویت دقیقِ کد تازه انجام شود.
+
 Latest isolated Q5 result, 2026-10-05 at 18:08 UTC: the distinct physical-batch512 trial used the
 same exact `f6cff8f` source, frozen corpus, 32 threads/16K/384 output/120-second deadline and no
 thinking. Eleven finals returned; Persian stale/partial evidence timed out at 120002 ms and four

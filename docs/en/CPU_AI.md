@@ -1,5 +1,16 @@
 # Local CPU-only AI and capacity planning
 
+## Detailed-answer source follow-up — not deployed
+
+The generic detailed prompt explicitly retains source/observation/collection/scope and stale/partial
+limits, distinguishes reported from independently verified observations, and requires type checks
+before value operations. It does not contain fixture answers or change the frozen corpus, short/
+evidence prompts, template flags, context/output/deadlines or policy. Captured-payload tests now
+snapshot nested values and detect later mutation, rather than comparing shared mutable references.
+118 focused and 967 source tests passed (two POSIX skips); actual generated-answer improvement
+remains unrun. The passive-wait comparison keeps exact `f6cff8f`; this later source needs its own
+pinned semantic/privacy/context/app/offline/rollback qualification before deployment or selection.
+
 ## Distinct Q5 physical-batch512 result — 2026-10-05
 
 The separate exact-`f6cff8f` standard trial loaded in 7856 ms at 32 threads/16K/384 output/
