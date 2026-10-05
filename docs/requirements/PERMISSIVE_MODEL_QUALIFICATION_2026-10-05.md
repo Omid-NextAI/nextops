@@ -89,14 +89,33 @@ not accepted public capabilities. Schema-valid metadata is not complete-artifact
 
 At this record, protected range provisioning is **in progress and partial**, under supervision.
 No complete Q5 shard set has passed full size/hash verification. Partial ranges, successful HTTP
-responses or range-local hashes are not a verified model. Transfers use the existing proxy chain
-and pinned TLS-verified source; no unattended continuation or runtime download is implied.
+responses or range-local hashes are not a verified model. Initial guest transfers used the existing
+proxy chain; the subsequent finite desktop-to-protected-guest route retains pinned TLS/source
+verification. No unattended continuation or runtime download is implied.
 
 The first eight-stream window completed 17179869184 bytes (16 GiB). A bounded 16-stream
 comparison hit the 240-second transfer deadline; after all workers stopped, reconciliation found
 74 authenticated ranges totalling 19864223744 bytes and six incomplete attempts totalling
 1142509656 bytes retained separately. Provisioning returned to finite eight-stream windows.
 This is a transfer failure/resource comparison, not an AI request deadline or full artifact hash.
+
+A later protected desktop reconciliation retained **95 complete transport ranges / 25501368320
+bytes**. Two completed duplicates matched their existing protected hashes; two additional complete
+bodies had exact HTTP 206/Content-Range/size and local hashes but their original curl exit results
+were not recorded. That limitation remains explicit; none is a full upstream artifact hash. A
+subsequent four-way window failed all four transfers (three connection timeouts and one partial
+body); its partial data and diagnostics were retained. IPv4 probes did not establish an advantage.
+
+The corrected whole-file signed-CDN pilot reused one connection for sequential, bounded 256-MiB
+ranges. Two ranges completed in **16.086 / 21.380 seconds**; the next four in **21.915 / 19.706 /
+14.084 / 12.711 seconds**. This is a finite transport observation, not a sustained throughput or
+model benchmark. At **13:38 UTC**, the guest had **101 canonical transport ranges / 27111981056
+bytes**; baseline readiness was idle/ready, swap unused and failed units zero. Signed URLs/headers
+stay in protected temporary provisioning records, never Git or runtime configuration. The
+[Hub download endpoint guidance](https://huggingface.co/docs/hub/models-downloading) informed the
+explicit CDN allowlist. Pinned commit/whole-file metadata, exact ranges, local-to-root hash
+reconciliation and all three complete upstream SHA-256 gates remain required. Transfer-window
+completion is not model acceptance or an unattended continuation promise.
 
 Observed guest: **80 vCPUs, 257905 MiB usable RAM (about 251.86 GiB), three guest NUMA nodes**.
 The added protected 400-GiB volume is already prepared; do not format it again. Guest NUMA does
@@ -247,14 +266,31 @@ schema سخت‌گیرانهٔ مستقل، اعتبارسنج فایل و آز�
 
 در زمان این گزارش، دریافت محافظت‌شدهٔ بخش‌ها **در حال اجرا و ناقص** است و نظارت می‌شود. مجموعهٔ
 کامل Q5 هنوز اندازه/هش کاملِ موفق ندارد. بخش ناقص، پاسخ HTTP موفق یا هشِ بخش، مدل تأییدشده نیست.
-انتقال از زنجیرهٔ پراکسی موجود و منبع ثابت با TLS معتبر انجام می‌شود؛ ادامهٔ بدون نظارت یا دریافت
-زمان اجرا از این مشاهده استنباط نشود.
+دریافت نخست روی مهمان از زنجیرهٔ پراکسی موجود انجام شد؛ مسیر بعدیِ محدود از دسکتاپ به مهمانِ
+محافظت‌شده نیز نسخهٔ ثابت و TLS معتبر را کنترل می‌کند. ادامهٔ بدون نظارت یا دریافت زمان اجرا از
+این مشاهده استنباط نشود.
 
 نخستین پنجرهٔ هشت‌انتقالی، ۱۷۱۷۹۸۶۹۱۸۴ بایت، یعنی ۱۶ GiB را کامل کرد. مقایسهٔ محدود با
 ۱۶ انتقال از مهلت ۲۴۰ ثانیهٔ دریافت گذشت. پس از توقف همهٔ فرایندهای انتقال، تطبیق، ۷۴ بخش
 با هش محلی و مجموع ۱۹۸۶۴۲۲۳۷۴۴ بایت و شش تلاش ناقص با مجموع ۱۱۴۲۵۰۹۶۵۶ بایت را نشان داد؛
 تلاش‌های ناقص جدا حفظ شدند. آماده‌سازی به پنجره‌های محدودِ هشت‌انتقالی برگشت. این شکست دریافت
 و مقایسهٔ منابع است، نه مهلت درخواست AI یا هش کامل مدل.
+
+در تطبیق بعدیِ محافظت‌شدهٔ دسکتاپ، **۹۵ بخش کامل انتقال با مجموع ۲۵۵۰۱۳۶۸۳۲۰ بایت** حفظ شد.
+دو نسخهٔ تکراری با هشِ بخشِ موجود تطبیق داشتند؛ دو بدنهٔ کامل دیگر پاسخ 206، Content-Range،
+اندازه و هش محلیِ دقیق داشتند، اما کد خروج اصلی curl ثبت نشده بود. این محدودیت صریح است و هیچ‌کدام
+هش کامل فایل اصلی نیستند. پنجرهٔ چهارانتقالیِ بعدی در هر چهار تلاش شکست خورد: سه مهلت اتصال و یک
+بدنهٔ ناقص؛ دادهٔ ناقص و تشخیص‌ها حفظ شدند. آزمون IPv4 نیز برتری آن را ثابت نکرد.
+
+آزمون اصلاح‌شدهٔ نشانی امضاشدهٔ CDN برای فایل کامل، یک اتصال را میان دریافت‌های متوالی و محدودِ
+۲۵۶ MiB بازاستفاده کرد. دو بخش در **۱۶٫۰۸۶ و ۲۱٫۳۸۰ ثانیه** و چهار بخش بعدی در **۲۱٫۹۱۵،
+۱۹٫۷۰۶، ۱۴٫۰۸۴ و ۱۲٫۷۱۱ ثانیه** کامل شدند. این مشاهدهٔ محدود انتقال است، نه توان پایدار یا
+معیار کارایی مدل. در **۱۳:۳۸ UTC**، مهمان **۱۰۱ بخش اصلیِ انتقال با مجموع ۲۷۱۱۱۹۸۱۰۵۶ بایت**
+داشت؛ خط مبنا آماده و بی‌درخواست، swap بدون مصرف و تعداد واحدهای ناموفق صفر بود. نشانی/سرآیند
+امضاشده فقط در رکورد موقت و محافظت‌شدهٔ آماده‌سازی می‌ماند، نه در Git یا تنظیم زمان اجرا.
+[راهنمای رسمی دریافت Hub](https://huggingface.co/docs/hub/models-downloading) مبنای فهرست صریح
+CDN بود. کنترل commit/فرادادهٔ فایل کامل، بازهٔ دقیق، تطبیق هش محلی با نسخهٔ root و SHA-256 کاملِ
+هر سه فایل همچنان الزامی‌اند. پایان پنجرهٔ انتقال، پذیرش مدل یا وعدهٔ ادامهٔ بدون نظارت نیست.
 
 مشاهدهٔ مهمان: **۸۰ vCPU، حافظهٔ قابل‌استفادهٔ ۲۵۷۹۰۵ MiB، حدود ۲۵۱٫۸۶ GiB و سه گرهٔ NUMA
 مهمان**. حجم محافظت‌شدهٔ ۴۰۰ GiB قبلاً آماده شده و دوباره قالب‌بندی نشود. NUMA مهمان، جای‌گیری
