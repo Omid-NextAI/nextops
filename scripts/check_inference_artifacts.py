@@ -55,6 +55,15 @@ def _format_path(parts: Any) -> str:
     return rendered or "<root>"
 
 
+def _unique_json_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("duplicate artifact metadata field")
+        result[key] = value
+    return result
+
+
 def validate_repository(repository_root: Path) -> dict[str, Any]:
     """Validate the exact candidate set and its immutable source metadata."""
 
@@ -89,12 +98,16 @@ def validate_repository(repository_root: Path) -> dict[str, Any]:
         (LARGER_32B_CANDIDATE, "model-32b-candidate.schema.json"),
         (LARGER_MOE_CANDIDATE, "model-30b-a3b-candidate.schema.json"),
         (LARGER_QWEN35_CANDIDATE, "model-35b-a3b-candidate.schema.json"),
+        ("qwen3-8-flash-next-q8.candidate.json", "model-flash-next-candidate.schema.json"),
     ):
         try:
             larger_schema = json.loads((directory / schema_name).read_text("utf-8"))
-            larger = json.loads((directory / candidate_name).read_text("utf-8"))
+            larger = json.loads(
+                (directory / candidate_name).read_text("utf-8"),
+                object_pairs_hook=_unique_json_object,
+            )
             Draft202012Validator.check_schema(larger_schema)
-        except (OSError, json.JSONDecodeError) as error:
+        except (OSError, ValueError) as error:
             raise ArtifactValidationError(
                 f"cannot parse larger candidate metadata: {error}"
             ) from error
@@ -257,6 +270,11 @@ def main() -> int:
     except ArtifactValidationError as error:
         print(f"FAIL: {error}", file=sys.stderr)
         return 1
+    flash = json.loads(
+        (repository_root / "deploy/inference/qwen3-8-flash-next-q8.candidate.json").read_text(
+            "utf-8"
+        )
+    )
     print(
         "PASS: inference candidate metadata is schema-valid; "
         f"status={document['status']}; runtime_binary_built="
@@ -266,7 +284,10 @@ def main() -> int:
         f"{document['evidence']['controlled_service_installed']}; "
         f"bilingual_quality_review_passed="
         f"{document['evidence']['bilingual_quality_review_passed']}; "
-        f"benchmark_run={document['evidence']['benchmark_run']}."
+        f"benchmark_run={document['evidence']['benchmark_run']}; "
+        f"flash_status={flash['status']}; "
+        f"flash_complete_import={flash['qualification']['artifact_import']}; "
+        f"flash_selection_allowed={flash['deployment_selection_allowed']}."
     )
     return 0
 
