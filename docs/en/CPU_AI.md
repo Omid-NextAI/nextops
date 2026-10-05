@@ -1,5 +1,22 @@
 # Local CPU-only AI and capacity planning
 
+## Actual Qwen 3.8 trial outcome — 2026-10-05
+
+[Dated measurements](../requirements/QWEN38_QUALIFICATION_2026-10-05.md): the single pinned
+27B Q8 artifact is imported, size/hash verified and protected but **unselected**. Actual GGUF/template
+and CPU loading at 16K passed. Four strict digit/short-recall cases passed per profile; native-only
+thinking arithmetic passed in both languages. That is not complete coding, technical-thinking,
+saved-chat or live-evidence acceptance. Both baseline/candidate missed an explicit non-string coding
+invariant; candidate near-context recall (15360 input tokens) exceeded the 120-second deadline.
+
+Candidate network answers took 69–74 seconds at 16 threads, 48–66 seconds at 32 threads, versus
+12–20 seconds on the serving model in these single samples. Final trial RSS was about 30.15 GiB,
+with zero swap; small cgroup accounting excluded precharged model page cache and is not full memory
+fit. No comprehensive throughput, latency percentile or physical NUMA optimum is established.
+The trial is stopped/removed; verified candidate/logs remain and ~27.05 GiB of exact temporary
+duplicate parts was reclaimed. Serving 35B/runtime/limits, VM configuration and public thinking-off
+are unchanged. Do not promote this slower failed-context profile just because host resources exist.
+
 ## Fresh capacity and Qwen 3.8 trial — 2026-10-05
 
 The owner now supplies fresh DS-C/host screenshots and states no space is reserved and resources

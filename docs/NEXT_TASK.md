@@ -1,21 +1,26 @@
 # Next task / کار بعدی
 
 The owner-requested UI deployment is complete at `836b1ea`; see the
-[exact live record](requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md). Fresh DS-C/host
-screenshots and the owner's no-reserved-space statement now resolve the earlier capacity stop for
-one bounded 27B Q8 trial. Finish exact-byte/hash provisioning, actual GGUF/template and protected
-CPU loading, then frozen EN/FA usefulness/format/coding and separate thinking/privacy/deadline
-checks under the [qualification packet](requirements/QWEN38_QUALIFICATION_SPEC.md). Preserve the
-working 35B/app/policy, source-qualified identity and rollback. No automatic Flash import, VM resize,
-public thinking enablement or discovery-as-upgrade claim. Do not request supplied totals again.
+[exact live record](requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md). The capacity
+stop and single 27B Q8 import/template/protected CPU-load tasks are complete; do not repeat them.
+The [actual trial](requirements/QWEN38_QUALIFICATION_2026-10-05.md) failed strict non-string coding
+and near-16K context/deadline qualification. Repair/expand the bounded evaluation corpus and review
+measured quantization/thread/topology options before another profile, preserving the frozen
+regressions and 120-second deadline. Public thinking stays off and the serving 35B/app/policy remains
+unchanged. Thinking/evidence/queue/WAN/rollback must pass matched application acceptance before
+selection. A larger Flash trial is separate: review its custom license, CPU compatibility, full memory
+fit and saved guest/topology settings before any resize/import. No automatic promotion, all-host
+allocation, repeated capacity request or discovery-as-upgrade claim.
 
-استقرار رابطِ درخواستی مالک با `836b1ea` تکمیل است؛ گزارش زندهٔ بالا مرجع است. تصاویر تازهٔ
-DS-C/میزبان و اعلام نبود فضای رزروشده، مانع قبلیِ ظرفیت را برای یک آزمون محدودِ 27B Q8 رفع
-کرده‌اند. آماده‌سازی با اندازه/هش کامل، قالب واقعی و بارگذاری محافظت‌شدهٔ CPU تکمیل و سپس
-کیفیت/قالب/کدنویسیِ ثابت در دو زبان و معیار جداگانهٔ استدلال/حریم خصوصی/مهلت طبق بستهٔ پذیرش
-بالا سنجیده شوند. مدل 35B، برنامه، سیاست و بازگشت سالم حفظ شوند. ورود خودکار Flash، افزایش
-ماشین، فعال‌سازی استدلال عمومی یا نامیدن بررسی به‌عنوان ارتقا مجاز نیست. مجموع‌های ارسالی
-دوباره درخواست نشوند.
+استقرار رابط با `836b1ea` تکمیل است؛ گزارش زندهٔ بالا مرجع است. مانع ظرفیت، ورود یک فایل 27B Q8،
+قالب واقعی و بارگذاری محافظت‌شدهٔ CPU تکمیل‌اند و تکرار نشوند. گزارش آزمون واقعی بالا، شکست
+کدنویسیِ ورودی غیررشته‌ای و مهلت/زمینهٔ نزدیک 16K را ثبت می‌کند. مجموعهٔ ارزیابی محدود تکمیل
+و گزینهٔ سنجیدهٔ کمّی‌سازی/رشته/توپولوژی پیش از نمایهٔ بعدی بررسی شود؛ پرسش ثابت و مهلت
+۱۲۰ ثانیه حفظ شوند. استدلال عمومی خاموش و مدل 35B، برنامه و سیاست زنده ثابت بمانند. پذیرش
+هماهنگِ استدلال/شاهد/صف/WAN/بازگشت پیش از انتخاب لازم است. آزمون Flash بزرگ‌تر جداست:
+مجوز اختصاصی، سازگاری CPU، مصرف کامل و تنظیم ذخیره‌شدهٔ مهمان/توپولوژی پیش از افزایش/ورود
+بررسی شوند. ارتقای خودکار، تخصیص همهٔ میزبان، درخواست دوبارهٔ ظرفیت یا نامیدن بررسی به‌عنوان
+ارتقا مجاز نیست.
 
 Remaining answer-quality checkpoint after the controlled UI cutover: qualify source-answer usefulness
 for Internet-SLA/FortiGate without weakening integrity guards, and general instruction following

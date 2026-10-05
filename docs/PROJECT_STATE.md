@@ -1,5 +1,24 @@
 # Project state / وضعیت پروژه
 
+Controlled Qwen 3.8 result, 2026-10-05: pinned 27B Q8 full-file verification, actual GGUF/template
+and isolated CPU loading passed. The [dated trial](requirements/QWEN38_QUALIFICATION_2026-10-05.md)
+records eight fixed-order standard samples per profile, four native-only thinking arithmetic samples,
+16/32-thread timings, a strict non-string coding invariant failure and a 15360-token context
+deadline failure at 120163 ms. This profile is **not selected**. Trial process/listener and ephemeral
+unit were stopped/removed; exact duplicate download parts were reclaimed after a complete rehash,
+with the immutable candidate and private logs retained. No serving-model/VM/resource or public
+thinking change. App `836b1ea`, AI `7ce9d29`, connector `2a7c8dc` and 35B remain unchanged. Five
+CI jobs passed at source `e39e2c9`; source success is not candidate application/model acceptance.
+
+نتیجهٔ آزمون کنترل‌شدهٔ Qwen 3.8 در ۵ اکتبر: هش کاملِ 27B Q8، قالب/metadata واقعی و بارگذاری
+مستقل CPU موفق بود. گزارش تاریخ‌دار بالا، هشت نمونهٔ استاندارد ثابت برای هر نمایه، چهار نمونهٔ
+محاسباتیِ استدلال صرفاً native، زمان‌های ۱۶/۳۲ رشته، شکست معیار کدنویسی برای ورودی غیررشته‌ای
+و شکست مهلت زمینهٔ ۱۵۳۶۰ توکنی در ۱۲۰۱۶۳ میلی‌ثانیه را ثبت می‌کند. نامزد **انتخاب نشده است**.
+فرایند/listener و خدمت موقت متوقف/حذف و فقط بخش‌های تکراریِ دریافت، پس از هش کامل پاک شدند؛
+نامزد تغییرناپذیر و log خصوصی حفظ‌اند. مدل زنده، ماشین، منابع و استدلال عمومی تغییر نکردند؛
+برنامهٔ `836b1ea`، AI با `7ce9d29`، اتصال‌دهندهٔ `2a7c8dc` و مدل 35B ثابت‌اند. پنج کنترل CI
+کد `e39e2c9` موفق‌اند؛ موفقیت کد، پذیرش مدل/برنامهٔ نامزد نیست.
+
 New resource/model increment, 2026-10-05: the owner supplied fresh DS-C/host screenshots and
 reports no reserved space. The earlier missing-capacity checkpoint is resolved for one bounded
 27B Q8 precision trial, not for unlimited host consumption. Direct AI preflight confirms 80 online

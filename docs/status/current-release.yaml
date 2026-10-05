@@ -89,6 +89,7 @@ capabilities:
     status: experimental
     evidence:
       - docs/requirements/QWEN38_QUALIFICATION_SPEC.md
+      - docs/requirements/QWEN38_QUALIFICATION_2026-10-05.md
       - deploy/inference/qwen3-8-27b-q8.candidate.json
       - tests/unit/test_expanded_inference.py
       - tests/unit/test_inference_artifacts.py
