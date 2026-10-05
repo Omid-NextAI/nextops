@@ -1,5 +1,27 @@
 # Project state / وضعیت پروژه
 
+Current Q5 checkpoint, 2026-10-05 at 17:29 UTC: all 74 protected transport ranges were assembled;
+the complete 19771509664-byte Qwen3.8-27B UD-Q5_K_M artifact matched its pinned upstream SHA-256.
+An independent root-private reader rehashed it and verified actual GGUF3/qwen35 metadata and the
+9993-byte template; immutable candidate storage is complete, not model selection. The distinct
+32-thread/16K standard trial loaded in 7179 ms and verified protected eight-library mappings,
+but its first `en-format` case failed at 120010 ms without an answer; fifteen cases were not run.
+Cleanup confirmed unit/process/listener absence and unchanged baseline readiness. No standard
+approval or thinking/context/application/offline gate follows. All five exact-`e6af416` CI jobs
+passed; this is source verification, not model acceptance.
+App `3d92b71`, inference `7ce9d29`, serving 35B, public thinking-off and production status are unchanged.
+
+گام جاری Q5 در ۵ اکتبر ۲۰۲۶، ساعت ۱۷:۲۹ UTC: هر ۷۴ بخش انتقال محافظت‌شده به هم پیوستند؛
+فایل کاملِ ۱۹۷۷۱۵۰۹۶۶۴ بایتی Qwen3.8-27B UD-Q5_K_M با SHA-256 ثابتِ منبع اصلی مطابق است.
+خوانندهٔ مستقل و خصوصیِ root، هش کامل، فرادادهٔ واقعی GGUF3/qwen35 و قالب ۹۹۹۳ بایتی را
+بررسی کرد؛ نگهداری نامزدِ محافظت‌شده تکمیل است، نه انتخاب مدل. آزمون مستقل استاندارد با
+۳۲ رشته و زمینهٔ 16K در ۷۱۷۹ میلی‌ثانیه بارگذاری و نگاشت هشت کتابخانهٔ محافظت‌شده بررسی شد؛
+اما نخستین پرسش `en-format` در ۱۲۰۰۱۰ میلی‌ثانیه بدون پاسخ از مهلت گذشت؛ پانزده مورد اجرا
+نشد. پاک‌سازی، نبود واحد/فرایند/listener و آمادگیِ ثابتِ خط مبنا را تأیید کرد. تأیید استاندارد
+یا پذیرش استدلال/زمینه/برنامه/آفلاین حاصل نشده است. هر پنج کنترل CI کد دقیقِ `e6af416` موفق‌اند؛
+این بررسی کد است، نه پذیرش مدل.
+برنامهٔ `3d92b71`، استنتاج `7ce9d29`، مدل زندهٔ 35B، خاموشی استدلال عمومی و وضعیت تولید ثابت‌اند.
+
 New runtime-review source, 2026-10-05: a read-only protected native-tree checker/schema and 90
 explicit filesystem-simulation tests are implemented. Main checks: 962 source tests/two POSIX
 skips, 156 related tests and lint/types/docs passed. Actual Linux-root verification passed nine

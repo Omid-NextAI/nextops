@@ -1,5 +1,23 @@
 # Next task / کار بعدی
 
+Current Q5 checkpoint: complete upstream hash, actual GGUF/template and protected candidate storage
+are verified. Its frozen 32-thread/16K standard trial failed the first case at 120010 ms without
+an answer; cleanup passed and fifteen cases remain not run. Investigate bounded CPU/prefill behavior
+before a justified distinct profile. Do not repeat the completed import/failed profile, widen the
+deadline or create a standard/thinking gate. The recorded live
+app/inference releases lack exact Q5 contracts; later matched packages/profiles must be qualified,
+not changed by an alias-only cutover. Thinking, real near-context, app/evidence/audit/WAN and rollback
+remain required before selection. Preserve failed Q8 records and the working 35B baseline.
+
+گام جاری Q5: هش کاملِ منبع اصلی، GGUF/قالب واقعی و نگهداری نامزدِ محافظت‌شده تأیید شدند.
+آزمون ثابتِ استاندارد با ۳۲ رشته و زمینهٔ 16K در نخستین مورد، بدون پاسخ و در ۱۲۰۰۱۰ میلی‌ثانیه
+شکست خورد؛ پاک‌سازی موفق و پانزده مورد اجرا‌نشده‌اند. پیش از نمایهٔ مستقلِ دارای توجیه، رفتار
+محدود CPU/پردازش ورودی بررسی شود. دریافت تکمیل‌شده یا نمایهٔ ناموفق تکرار، مهلت طولانی‌تر و
+تأیید استاندارد/استدلال ساخته نشود. نسخهٔ برنامه/استنتاج زنده
+قرارداد هویت دقیق Q5 ندارد؛ بسته/نمایهٔ هماهنگِ بعدی باید پذیرفته شود، نه صرفاً تغییر نام مدل.
+استدلال، زمینهٔ واقعیِ نزدیک سقف، برنامه/شاهد/ممیزی/WAN و بازگشت پیش از انتخاب لازم‌اند.
+شکست Q8 و خط مبنای سالمِ 35B حفظ شوند.
+
 Current native-tree checkpoint: read-only source and actual nine-file/fourteen-alias root verification
 passed without runtime changes. Bind the reviewed inventory/checker hashes to the private Q5 trial;
 verify actual mappings separately and retain unrun ELF/build/system/model/application/offline gates.

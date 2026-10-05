@@ -1,13 +1,57 @@
 # Permissively licensed model qualification / پذیرش فنی مدل با مجوز آزاد
 
-Date: **2026-10-05**. Status: **partial Q5 provisioning, retained failed Q8 retest; no model cutover**.
-تاریخ: **۵ اکتبر ۲۰۲۶**. وضعیت: **دریافت ناقص Q5، ثبت آزمون دوبارهٔ ناموفق Q8؛ بدون تغییر مدل زنده**.
+Date: **2026-10-05**. Status: **Q5 import verified, standard deadline failed; no model cutover**.
+تاریخ: **۵ اکتبر ۲۰۲۶**. وضعیت: **دریافت Q5 تأیید شد، مهلت استاندارد ناموفق؛ بدون تغییر مدل زنده**.
 
 [English CPU guide](../en/CPU_AI.md) / [راهنمای فارسی CPU](../fa/CPU_AI.md).
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
 ## English
+
+### Complete Q5 import and failed standard trial — 17:29 UTC
+
+All **74 canonical ranges** were assembled in order under a finite 600-second guard. The complete
+**19771509664-byte** Qwen3.8-27B UD-Q5_K_M file matched upstream SHA-256
+`2de73110cb254cbf09b54b717578dadff12ef1194e7271527e68202f39ba4bfd`.
+An independent root-private, isolated, unoptimized reader rehashed the full file and verified
+GGUF3/qwen35, 866 tensors, 50 metadata fields and its actual **9993-byte** template, SHA-256
+`12827f24b742ea4e80cdc12dbcf9622227056b9f797252a3149263d4f9aaadce`.
+Metadata-report SHA is `61cf24f041bfc5c9deccf2c87994e5c2602e8392d4c623f7ddf4bff5f95d8ea5`;
+main integrity/license/template-only review SHA is
+`50a8b1df9ac03eede179068f60bffadfac6b9df2a3320a6fb1a36bda2b65f9e8`.
+Protected service-readable candidate storage and retained Apache attribution passed; no stable
+model link/service changed. Conversion-source verification remains unavailable, not assumed.
+262144-token context metadata is not accepted context. A local synthetic Jinja check could not
+run because Jinja2 was absent; no dependency was installed or synthetic pass claimed.
+
+The distinct exact-`f6cff8f` native standard trial used **32 threads, 16K context, 384 output tokens,
+120 seconds per case**, unchanged frozen questions and no thinking/preservation. A pinned read-only
+runtime-tree check and actual eight-library mapping observation passed; load took **7179 ms**.
+Its **first `en-format` request timed out at 120010 ms without any final response**. Fifteen cases
+were not run. No answer-quality judgment or native prompt/generation timing is available for that
+request; neither latency cause nor improvement is inferred. Final native report SHA:
+`d850b24bb8fb82c815e39d77856df39a041dc199ea69b5dcc6975782f0557ece`; controller SHA:
+`8ad8427bd76a478b2ae6862cc456fbe2233a4ecabe21fc0fd761bd73d209a00e`.
+The corrected offline finite reviewer recorded the deadline failure and fifteen missing cases;
+its report SHA is `7b56759b9f76385ee446f73bb7bf9a67d8f21e7d2872e85c1bb7ea01a3a9a587`.
+
+102 completed resource/readiness samples showed maximum RSS/PSS **21546288/21536039 KiB**,
+minimum guest available memory **240877864 KiB**, no process swap or observed OOM kill and ready/idle
+baseline. Cgroup peak **2694422528 bytes** excludes already charged shared/cache pages and is not
+complete model-memory accounting. Native timing observation remained unavailable because no
+response returned; allowlisted numeric instrumentation passed 112 isolated synthetic helper checks,
+not CPU/model acceptance. No private reasoning was retained. The trial unit/process/listener are
+reconciled absent; live baseline PID/restart count and readiness stayed unchanged. No timer remains.
+
+Standard approval was not created; thinking, actual near-context, matched application/evidence/audit,
+queue/failure/WAN/restart and model rollback remain unrun for Q5. Investigate prefill/CPU behavior
+before a justified distinct bounded profile; do not repeat this profile or widen its deadline.
+Recorded live app `3d92b71` and inference `7ce9d29` lack exact Q5 contracts. Future matched packages
+need their own source/profile identity and acceptance; changing only the native alias cannot work.
+All five exact-`e6af416` CI jobs passed, including PostgreSQL16/17, browser, quality and secrets
+([run](https://github.com/Omid-NextAI/nextops/actions/runs/37344860004)); this is source acceptance,
+not generated answers or deployment. Live 35B/public thinking-off and production status remain.
 
 ### Protected runtime-tree source and controlled read-only outcome
 
@@ -342,6 +386,44 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### دریافت کامل Q5 و آزمون استانداردِ ناموفق — ساعت ۱۷:۲۹ UTC
+
+هر **۷۴ بخش اصلی** به‌ترتیب و با محافظ محدودِ ۶۰۰ ثانیه به هم پیوستند. فایل کاملِ
+**۱۹۷۷۱۵۰۹۶۶۴ بایتی** Qwen3.8-27B UD-Q5_K_M با SHA-256 منبع اصلیِ درج‌شده در انگلیسی
+مطابق است. خوانندهٔ مستقل، خصوصیِ root، جداشده و بدون بهینه‌سازی، هش کامل را دوباره سنجید و
+GGUF3/qwen35، تعداد ۸۶۶ tensor، پنجاه فیلد فراداده و قالب واقعیِ **۹۹۹۳ بایتی** را تأیید کرد.
+هش گزارش فراداده و بازبینی اصلیِ صرفاً هویت/مجوز/کنترل قالب در بخش انگلیسی ثبت‌اند. نگهداری
+نامزدِ محافظت‌شده و قابل‌خواندن برای سرویس، همراه انتساب Apache موفق است؛ پیوند ثابت مدل یا
+خدمت زنده تغییر نکرد. نسخهٔ منبع تبدیل همچنان تأیید نشده و فرض نمی‌شود. ظرفیت ۲۶۲۱۴۴ توکنیِ
+فراداده، زمینهٔ پذیرفته‌شده نیست. بررسی محلیِ ساختگی با Jinja به دلیل نبود Jinja2 اجرا نشد؛
+وابستگی نصب یا موفقیتِ ساختگی اعلام نشد.
+
+آزمون مستقلِ استانداردِ بومی با کد دقیقِ `f6cff8f`، **۳۲ رشته، زمینهٔ 16K، سقف ۳۸۴ توکن خروجی
+و مهلت ۱۲۰ ثانیه برای هر پرسش** داشت؛ پرسش ثابت تغییر نکرد و استدلال/حفظ آن خاموش بود.
+بررسی ثابتِ فقط‌خواندنیِ درخت runtime و نگاشت واقعیِ هشت کتابخانه موفق و بارگذاری **۷۱۷۹
+میلی‌ثانیه** بود. **نخستین درخواست `en-format` در ۱۲۰۰۱۰ میلی‌ثانیه بدون پاسخ نهایی از مهلت
+گذشت**؛ پانزده مورد اجرا نشد. کیفیت پاسخ یا زمانِ ورودی/تولید native برای این درخواست
+در دسترس نیست؛ علت تأخیر یا بهبود از این نتیجه استنباط نمی‌شود. هش گزارش نهایی/کنترل‌کننده
+در بخش انگلیسی ثبت است. بازبین آفلاینِ محدود و اصلاح‌شده، شکست مهلت و پانزده پرسش غایب را
+ثبت کرد؛ هش آن نیز در انگلیسی آمده است.
+
+صدودو نمونهٔ کاملِ منابع/آمادگی، بیشینهٔ RSS/PSS برابر **۲۱۵۴۶۲۸۸/۲۱۵۳۶۰۳۹ KiB**، کمینهٔ
+حافظهٔ در دسترس مهمان **۲۴۰۸۷۷۸۶۴ KiB**، نبود swap فرایند یا OOM مشاهده‌شده و آمادگیِ
+بدون درخواستِ خط مبنا را نشان دادند. بیشینهٔ cgroup برابر **۲۶۹۴۴۲۲۵۲۸ بایت**، صفحهٔ مشترک/
+کشِ از قبل حساب‌شده را شامل نمی‌شود و مصرف کامل حافظهٔ مدل نیست. چون پاسخ دریافت نشد، زمان
+native ناموجود ماند؛ ابزار صرفاً عددی، ۱۱۲ بررسی مستقلِ ساختگیِ تابع کمکی را پذیرفت، نه
+پذیرش CPU/مدل. استدلال خصوصی نگه‌داری نشد. نبود واحد/فرایند/listener آزمون تطبیق داده شد؛
+شناسهٔ فرایند، شمار restart و آمادگیِ خط مبنای زنده ثابت‌اند. تایمری باقی نیست.
+
+تأیید استاندارد ساخته نشد؛ استدلال، زمینهٔ واقعیِ نزدیک سقف، برنامه/شاهد/ممیزی هماهنگ، صف/
+خرابی/WAN/راه‌اندازی مجدد و بازگشت مدل برای Q5 اجرا‌نشده‌اند. پیش از نمایهٔ محدود و مستقلِ
+دارای توجیه، پردازش ورودی/CPU بررسی شود؛ این نمایه تکرار یا مهلتش طولانی‌تر نشود. برنامهٔ
+زندهٔ `3d92b71` و استنتاج `7ce9d29` قرارداد هویت دقیق Q5 ندارند؛ بستهٔ هماهنگِ بعدی به هویت
+کد/نمایه و پذیرش مستقل نیاز دارد و تغییر نام native به‌تنهایی کافی نیست. هر پنج کنترل CI کد
+دقیقِ `e6af416`، شامل PostgreSQL16/17، مرورگر، کیفیت و اطلاعات محرمانه موفق‌اند (پیوند در
+انگلیسی)؛ این پذیرش کد است، نه پاسخ تولیدشده یا استقرار. مدل زندهٔ 35B، خاموشی استدلال
+عمومی و وضعیت تولید ثابت‌اند.
 
 ### کد بررسی درخت runtime و نتیجهٔ کنترل‌شدهٔ فقط‌خواندنی
 

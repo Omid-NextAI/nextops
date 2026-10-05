@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "status": "provisioning_unselected",
+  "status": "verified_candidate_unselected",
   "model_id": "nextops-qwen3-8-27b-ud-q5-k-m",
   "source_repository": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF",
   "source_revision": "4ca720788d1e01f1bff70c033e0d0028fd02e502",
@@ -29,11 +29,11 @@
   "max_active_requests": 1,
   "max_queued_requests": 2,
   "qualification": {
-    "artifact_import": "partial",
-    "actual_gguf_metadata": "not_run",
+    "artifact_import": "passed",
+    "actual_gguf_metadata": "passed",
     "template_tokenization": "not_run",
-    "cpu_load": "not_run",
-    "standard_semantics": "not_run",
+    "cpu_load": "passed",
+    "standard_semantics": "failed",
     "thinking_semantics_privacy": "not_run",
     "expanded_context_latency": "not_run",
     "latency_resource_comparison": "not_run",

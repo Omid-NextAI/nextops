@@ -1,5 +1,21 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Complete protected Qwen3.8 Q5 import — 2026-10-05
+
+Record verified complete upstream hash and actual GGUF/template for the distinct 27B UD-Q5_K_M
+candidate; all 74 ranges and incomplete transport history are retained. Protected candidate storage
+does not select a model. The private 32-thread/16K standard trial loaded but failed its first request
+at 120010 ms; fifteen cases were not run. Cleanup passed; no standard/thinking gate was created.
+Context and matched application/offline/rollback remain unrun. Exact `e6af416` CI
+passed five jobs. Serving app/inference/35B/public thinking and production status are unchanged.
+
+هش کاملِ منبع اصلی و GGUF/قالب واقعیِ نامزد مستقلِ 27B UD-Q5_K_M ثبت شد؛ هر ۷۴ بخش و
+سابقهٔ انتقال ناقص محفوظ‌اند. نگهداری نامزدِ محافظت‌شده، انتخاب مدل نیست. آزمون خصوصیِ
+استاندارد با ۳۲ رشته و زمینهٔ 16K بارگذاری شد، اما نخستین درخواست در ۱۲۰۰۱۰ میلی‌ثانیه ناموفق
+بود؛ پانزده مورد اجرا نشد. پاک‌سازی موفق است؛ مجوز استاندارد/استدلال ساخته نشد. زمینه و پذیرش
+هماهنگِ برنامه/آفلاین/بازگشت اجرا‌نشده‌اند. پنج کنترل CI کد دقیقِ `e6af416` موفق‌اند. برنامه/
+استنتاج زنده، 35B، استدلال عمومی و وضعیت تولید تغییر نکردند.
+
 ## Read-only protected runtime-tree review — 2026-10-05
 
 Add a strict private inventory schema/POSIX-root verifier for exact files/aliases, hashes,

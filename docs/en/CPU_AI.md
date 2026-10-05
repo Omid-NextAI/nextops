@@ -1,5 +1,22 @@
 # Local CPU-only AI and capacity planning
 
+## Complete Q5 candidate import — 2026-10-05
+
+All 74 canonical ranges of the separate **Qwen3.8-27B UD-Q5_K_M** candidate were assembled.
+The complete 19771509664-byte file matches its pinned upstream SHA-256; a protected independent
+reader rehashed it and extracted actual GGUF3/qwen35 metadata and the 9993-byte template. Candidate
+storage is protected and service-readable; no stable model link or serving service changed.
+The template's 262144-token metadata is not accepted context. A distinct private standard trial
+ran at 32 threads/16K/120 seconds per case after a 7179-ms load and exact protected project
+mapping checks. Its first `en-format` case timed out at 120010 ms without an answer; fifteen cases
+were not run, and cleanup confirmed unit/process/listener absence and unchanged baseline readiness.
+The failed standard report creates no thinking gate. Numeric-only native timing fields
+are diagnostic, not time-to-first-token or model reasoning; none were returned for this timeout.
+Keep all failed Q8/Q5 records and unrun
+thinking/context/matched-app/WAN/rollback gates. The live 35B model and public thinking-off remain.
+All five exact-`e6af416` source CI jobs passed; neither CI nor artifact identity qualifies answers.
+See the [paired qualification record](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
 ## Protected native runtime-tree verification
 
 `scripts/check_native_runtime_bundle.py` checks a private inventory and its independently reviewed
