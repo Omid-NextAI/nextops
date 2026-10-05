@@ -1,5 +1,71 @@
 # Project state / وضعیت پروژه
 
+Current provisioning checkpoint — **2026-10-06; not model acceptance**: exact `293164e` passed
+all five CI jobs in [run 37378458739](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739).
+The reviewed 122B importer is installed root-owned/mode `0400`, with exact source parity;
+main/independent definition checks passed. The first desktop window
+`resume-20261006-639268346254710321` failed at `remote_begin`, before any range download or root
+start/result record. Read-only reconciliation confirmed stopped transport/absent open handles
+and unchanged serving PIDs 2187/2197, restart counts 0/0 and ready/idle state. Isolated runner
+tests identified the missing `ProgramData` variable; a distinct reviewed v2 desktop helper and
+read-only reconciliation passed. Window `resume-20261006-639268352065353249` **completed one
+range**, index 133/268435456 bytes, with protected receipts, recoverable canonical data,
+verified-duplicate cleanup and unchanged baseline. The subsequent v2 window
+`resume-20261006-639268355159703524` completed indexes **134–137**, each 268435456 bytes;
+root finish/stopped reconciliation and the original ready/idle baseline passed. The current
+canonical total is **138 ranges/37044092928 bytes**, not complete-shard verification; the prior
+134-range snapshot remains historical. The v3 helper passed 430 preparation checks, then its
+first actual window `resume-20261006-639268362479556681` failed at `finite_download`, exit 1,
+zero accepted ranges. Root stopped/baseline reconciliation was reported true; the failed bodies
+are retained and the canonical count is unchanged. No speed gain or import is claimed. The
+distinct serial window `resume-20261006-639268366509946555` completed indexes **138–140**,
+each 268435456 bytes, at **22:40:16 UTC**, with root finish/stopped/baseline checks passed.
+The latest canonical total is **141 ranges/37849399296 bytes**; seven first-shard ranges remain,
+not a complete-shard result. No later range or transfer-performance cause is claimed. The
+protected one-shard assembler and its newly prepared desktop wrapper remain local-only/unrun;
+peer wrapper checks passed 387 mocks, not actual assembly or permission to run. Typed 122B
+source registration is implemented/tested, not deployed or accepted:
+main reported 1094 source passes/two POSIX skips/126 deselected in 25.99 seconds; lint, format and
+Linux-target types passed. The existing AnyIO warning remains recorded. A broad directory secret
+scan included ignored trees and reported 18 findings, not a pass. Main's separate new
+staged-change Gitleaks check passed exit 0, not a clean-directory claim. Keep the protected
+broad-scan report and triage separate from that narrower result and the earlier CI pass.
+Live 35B/public thinking-off remain unchanged. See the [paired record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+گام جاریِ آماده‌سازی — **۶ اکتبر ۲۰۲۶؛ نه پذیرش مدل**: پنج کنترل CI کد دقیقِ `293164e` در
+[اجرای 37378458739](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739) موفق‌اند.
+ابزار بررسی‌شدهٔ دریافت 122B با مالکیت root و حالت `0400`، با برابری دقیقِ کد نصب شده؛
+کنترل‌های تعریفیِ اصلی/مستقل موفق‌اند. نخستین پنجرهٔ رایانهٔ کاربر با شناسهٔ
+`resume-20261006-639268346254710321` در `remote_begin`، پیش از دریافت هر بخش و ایجاد رکورد
+شروع/نتیجهٔ root شکست خورد. تطبیق صرفاً خواندنی، توقف انتقال، نبود handle باز و ثبات
+PIDهای 2187/2197، شمار راه‌اندازی مجدد 0/0 و وضعیت آماده/بی‌درخواست را تأیید کرد. آزمون
+جداگانهٔ محیط اجرا، نبود متغیر `ProgramData` را مشخص کرد؛ ابزار مستقلِ نسخهٔ دوم و تطبیق
+صرفاً خواندنی موفق‌اند. پنجرهٔ `resume-20261006-639268352065353249` **یک بخش** با اندیس
+۱۳۳/۲۶۸۴۳۵۴۵۶ بایت را کامل کرد؛ رسید محافظت‌شده، دادهٔ اصلیِ قابل‌بازیابی، حذف نسخهٔ تکراریِ
+تأییدشده و ثبات خط مبنا ثبت شدند. پنجرهٔ بعدیِ نسخهٔ دوم با شناسهٔ
+`resume-20261006-639268355159703524` اندیس‌های **۱۳۴ تا ۱۳۷**، هر یک ۲۶۸۴۳۵۴۵۶ بایت، را
+کامل کرد؛ پایان root، تطبیق توقف و خط مبنای اصلیِ آماده/بی‌درخواست موفق‌اند. مجموع جاری
+**۱۳۸ بخش/۳۷۰۴۴۰۹۲۹۲۸ بایت** است، نه تأیید فایل کامل؛ ثبتِ ۱۳۴بخشیِ قبلی سابقه است.
+ابزار مستقلِ نسخهٔ سوم، ۴۳۰ کنترل آماده‌سازی را گذراند؛ سپس نخستین پنجرهٔ واقعیِ آن با
+شناسهٔ `resume-20261006-639268362479556681` در `finite_download`، با کد خروج ۱ و صفر بخش
+پذیرفته‌شده شکست خورد. تطبیق root برای توقف/خط مبنا با مقدار درست گزارش شد؛ بدنه‌های
+ناموفق حفظ‌اند و شمار اصلی تغییر نکرد. بهبود سرعت یا دریافت پذیرفته‌شده ادعا نمی‌شود.
+پنجرهٔ سریالِ مستقلِ `resume-20261006-639268366509946555` اندیس‌های **۱۳۸ تا ۱۴۰**، هر یک
+۲۶۸۴۳۵۴۵۶ بایت، را در ساعت **۲۲:۴۰:۱۶ UTC** با پایان root/تطبیق توقف/ثبات خط مبنا کامل
+کرد. مجموع جدید **۱۴۱ بخش/۳۷۸۴۹۳۹۹۲۹۶ بایت** است؛ هفت بخشِ فایل اول باقی‌اند، نه تأیید
+فایل کامل. بخش بعدی یا علت کاراییِ انتقال ادعا نمی‌شود.
+ابزار محافظت‌شدهٔ تجمیع یک فایل و ابزار تازهٔ اجرای رایانهٔ کاربر فقط محلی/اجرا‌نشده‌اند؛
+۳۸۷ کنترل شبیه‌سازیِ ابزار اجرا در بررسی مستقل موفق‌اند، نه تجمیع واقعی یا مجوز اجرا.
+ثبت نوع‌دارِ 122B در کد پیاده‌سازی/آزموده شده، نه مستقر یا پذیرفته:
+بازبین اصلی ۱۰۹۴ موفق/دو مورد POSIX اجرا‌نشده/۱۲۶ انتخاب‌نشده در ۲۵٫۹۹ ثانیه ثبت کرد؛
+کنترل lint، قالب و نوع برای Linux موفق‌اند. هشدار قبلیِ AnyIO حفظ شده است. بررسی گستردهٔ
+اطلاعات محرمانه، درخت‌های ignored را نیز خواند و ۱۸ یافته ثبت کرد، نه نتیجهٔ موفق. بررسی
+مستقلِ تغییرهای staged با Gitleaks در اجرای اصلی با کد خروج صفر موفق شد، نه پاک بودن کل
+پوشه. گزارش محافظت‌شدهٔ بررسی گسترده و تعیین تکلیف آن جدا از نتیجهٔ محدود و CI قبلی حفظ شوند.
+35B زنده و خاموشی استدلال عمومی ثابت‌اند؛ گزارش دوزبانهٔ بالا مرجع است.
+
+Prior native checkpoint — historical / گام بومیِ پیشین — سابقه:
+
 Latest completed native checkpoint, **2026-10-05 at 21:36:41.463473 UTC**: the distinct
 `20261006-q5-b94-ub512-noblas-numa-standard-001` trial failed. Fourteen stopped finals returned;
 English hypothesis timed out at **120001 ms**, Persian hypothesis was not run. Main/independent

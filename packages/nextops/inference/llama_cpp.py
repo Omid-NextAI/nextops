@@ -341,6 +341,11 @@ class LlamaCppProvider:
             # https://huggingface.co/Qwen/Qwen3.5-35B-A3B#instruct-or-non-thinking-mode
             payload["messages"][-1]["content"] = request.prompt
             payload["chat_template_kwargs"] = {"enable_thinking": request.thinking}
+        if self._settings.model_id == "nextops-qwen3-5-122b-a10b-q5-k-m":
+            # Unselected Qwen3.5 candidate: use a hard standard-mode control, never
+            # Qwen3's soft suffix. Actual GGUF/template qualification is separate.
+            payload["messages"][-1]["content"] = request.prompt
+            payload["chat_template_kwargs"] = {"enable_thinking": False}
         if self._settings.model_id in {
             "nextops-qwen3-8-27b-q8-0",
             "nextops-qwen3-8-27b-ud-q5-k-m",

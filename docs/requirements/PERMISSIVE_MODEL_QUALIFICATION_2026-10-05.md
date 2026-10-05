@@ -7,7 +7,153 @@ Date: **2026-10-05**. Status: **Q5 import verified; distinct standard trials fai
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
+Latest update: **2026-10-06 — 141 retained 122B transport ranges; no complete-shard or model acceptance**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶ — ۱۴۱ بخش انتقالیِ 122B حفظ‌شده؛ بدون پذیرش فایل کامل یا مدل**.
+
 ## English
+
+### Bounded 122B resumption and desktop-runner correction — 2026-10-06 checkpoint
+
+Exact `293164e` passed all five CI jobs in
+[run 37378458739](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739), verified by
+main. These are source/CI results, not model, transfer or production acceptance; they precede
+the separate typed 122B source increment below:
+
+| Verified CI job | Exact job record |
+| --- | --- |
+| Browser | [111993800323](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739/job/111993800323) |
+| PostgreSQL 16 | [111993800700](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739/job/111993800700) |
+| PostgreSQL 17 | [111993800738](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739/job/111993800738) |
+| Secret scanning | [111993800806](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739/job/111993800806) |
+| Quality | [111993800809](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739/job/111993800809) |
+
+The self-contained importer is **30964 bytes**, SHA
+`2f03c33bd7fcc113fd906064c05e97ea6c68acdb6ff293e829114eab52f63d46`;
+it was installed root-owned/mode `0400` with exact source parity. Main/independent review and
+**825 definition/mock/static checks** passed. Its finite begin scan freshly hashes retained
+canonical data; completion receipts precede removal of only fully verified transport duplicates.
+Failed/ambiguous inputs, canonical data and old records remain preserved. A range receipt is not
+the upstream full-shard hash, model acceptance or selection.
+
+The original **23397-byte** desktop helper, SHA
+`73915db249cb577c45a515814d9e11bfe6910db111d76490d15e615c1db8855e`, ran window
+`resume-20261006-639268346254710321`. It **failed at `remote_begin` before any range download**;
+the matching root start/result records were absent. Manual read-only reconciliation confirmed
+stopped transport and absent open handles, serving PIDs **2187/2197**, restart counts **0/0** and
+ready/idle state unchanged. This is a preserved tooling failure, not a failed model answer or a
+successful import. No mutation was blindly retried.
+
+Sixteen isolated local `ssh -V` environment cases isolated the missing `ProgramData` variable:
+adding only that variable changed exit **255 to 0**; all thirteen other single additions failed,
+while all fourteen additions passed. This identifies the reviewed local runner dependency, not
+server authentication, a network-policy bypass or model readiness. A distinct **23537-byte v2**
+desktop helper, SHA `2af46805a3fc38cd839ee5736e7ed1da35fe4996aa730f1d9a4494a8bababcce`,
+adds `ProgramData` and safe cleanup for its associated process. Main's **406 preparation checks**
+and read-only reconciliation passed. Window `resume-20261006-639268352065353249` **completed
+one range**, index **133**, **268435456 bytes**, with one connection and recorded transfer
+time **125.417843 seconds**. Its SHA is
+`0fe6c003debc1113ad5e5bd403f91889fbc11c58d36d08ba331e807734ed3d62`.
+Required remote/root receipts, verified-duplicate cleanup and unchanged original ready/idle
+baseline passed. Successful desktop/inbox transport duplicates were removed only after those
+checks; recoverable canonical data remain. That window's point-in-time total was **134 canonical
+ranges/35970351104 bytes**, not a complete upstream shard. The historical **133 ranges/35701915648
+bytes**, failed attempts and private records remain preserved; they do not replace fresh scans,
+receipts or current capacity checks.
+
+The subsequent four-range v2 window `resume-20261006-639268355159703524` completed exit **0**.
+Root finish, stopped reconciliation and original ready/idle baseline checks passed. All four
+ranges were **268435456 bytes**, giving a new point-in-time total of **138 canonical ranges /
+37044092928 bytes**. Recorded transfer observations, not a model benchmark or TTFT:
+
+| Range index | Download seconds | New connections | Connection ID |
+| --- | --- | --- | --- |
+| 134 | 122.576945 | 1 | 0 |
+| 135 | 127.673512 | 0 | 0 |
+| 136 | 124.415473 | 0 | 0 |
+| 137 | 127.964134 | 0 | 0 |
+
+No complete upstream shard or later range is accepted from this arithmetic. Preserve the
+134-range snapshot as the earlier window's result. A distinct **23571-byte v3** desktop helper,
+SHA `ba7e4fcbce22cd32d037b9c1565b18d614321750ca4fcaa5fd12cfdf03178ca1`, and **11336-byte**
+checker, SHA `baaa7bfc2a2dc45265ff090924f968032635001eb043ddda06ff5ff3c1f70d25`, remain
+distinct reviewed artifacts. Main fully read both and passed **430 local preparation checks**
+before the first actual attempt. The prepared profile uses one curl invocation, parallel maximum **4**,
+each transfer's unchanged **180-second** limit and an outer process bound of **185–200 seconds**
+for one to four ranges. Actual window `resume-20261006-639268362479556681` failed at
+`finite_download`, exit **1**, with **zero accepted ranges**; the recorded
+`remote_stopped_baseline_reconciled` value is true. Index **138** returned **268435456 body
+bytes/754 header bytes** with exact HTTP 206 content range; indexes **139–141** returned zero
+body/header bytes. Neither size nor that header accepts the body or verifies its upstream hash.
+The failed inputs and record are retained; canonical data remain **138 ranges/37044092928 bytes**.
+Observed desktop free space was **5227692032 bytes**. There is no accepted speed gain, complete
+import or blind retry from that failed window.
+
+Distinct serial window `resume-20261006-639268366509946555` subsequently completed exit **0**
+at **22:40:16 UTC**, with root finish/stopped/baseline checks passed. Indexes **138–140** were
+each **268435456 bytes**, giving **141 canonical ranges/37849399296 bytes**. Seven ranges of
+the first shard remain; no upstream full-shard hash is accepted. Recorded observations:
+
+| Range index | Download seconds | New connections | Connection ID |
+| --- | --- | --- | --- |
+| 138 | 14.299453 | 1 | 0 |
+| 139 | 12.994863 | 0 | 0 |
+| 140 | 12.894428 | 0 | 0 |
+
+Index 138's accepted SHA is
+`925697e6ac3e0f46cef0ffc99afd833717aa4042bf72090339c2198742eae13f`. Independent hashing of
+the preserved failed-v3 body matched this SHA; that failed input was not deleted or promoted by
+its size/header. These measurements do not establish a cause or benefit of parallelism, model
+performance or a future-window result. Fresh receipt, capacity, ownership and cleanup gates
+remain required.
+
+The separate protected one-shard assembler remains **local-only, unuploaded and unrun**:
+**48745 bytes**, SHA `14ce5d8a1f6ee1345bdd4c1c15bdd79f38ed05bc988eb440a8b7b0a77ee111bc`.
+Main/independent full-file review and **671 pure/mock checks** passed; the independent reviewer
+also passed **414 additional definition/mock/static checks**. These did not execute its
+entrypoint, actual fork, file worker, host, network or model. Its whole-model budget accounts
+for remaining canonical downloads, remaining assembled files and **32 GiB headroom**; failed
+partials remain charged to actual free space. It keeps both inherited locks until the owned
+worker is confirmed stopped/reaped. A completed status requires full upstream hashing/reread,
+protected same-volume publication, durable results and unchanged ready/idle baseline. Internal
+limits are **900 seconds work plus 30 seconds reconciliation**; a separately reviewed external
+wrapper and actual assembly are still **not run**. The prepared desktop wrapper is **26301
+bytes**, SHA `60d8fe770110860517f766a81aa33c8544b217a559d03ee02f9e01c0bbd0efb8`; its
+**21160-byte** definition-only checker has SHA
+`562cf00088d0a9d82c53e85a40c3d28eca9ee72d590594ac9cf374c0872178a0`. Main/independent
+full-file review and **387 declaration/parser/static/mock checks** passed. Its configured
+**1980-second** overall bound permits one primary call and at most one distinct read-only
+reconciliation, never an assembly retry. No operational wrapper entrypoint, host or child
+process was invoked by these checks. Exact final pins and actual execution still require
+separate review/authorization. Static/mocked checks do not prove current root ownership,
+storage capacity, I/O timing or actual worker cleanup.
+
+Typed Qwen3.5-122B-A10B registration is implemented/tested in the source checkout, **not deployed
+or accepted**. Main reviewed all four changed source/test files. The author reported **41 new
+tests/126 focused passes**; main's separate full source suite passed **1094 tests, two POSIX
+skips, 126 deselected, one existing AnyIO deprecation warning, 25.99 seconds**. Main's lint,
+format (**141 files already formatted**) and Linux-target types (**141 files**) passed.
+Exact main commands, recorded results rather than model/production tests:
+
+```powershell
+$env:PYTHONUTF8='1'
+.venv\Scripts\python.exe -m pytest -m 'not integration and not browser' -q
+.venv\Scripts\ruff.exe check packages tests scripts
+.venv\Scripts\ruff.exe format --check packages tests scripts
+.venv\Scripts\mypy.exe --platform linux packages tests scripts
+```
+
+No selection profile, release checker, default model, source prompt or serving configuration
+changed. These source fixtures do not execute the native 122B model or establish live acceptance.
+A broad Gitleaks directory scan also traversed ignored dependency/generated trees and reported
+**18 findings**; it did **not pass**. Its protected report and triage remain separate from the
+earlier exact-`293164e` CI secret-scanning pass. Findings are not dismissed as verified false
+positives here. Main's separate **new staged-change Gitleaks scan passed exit 0**, using
+`gitleaks git --pre-commit --staged --redact --no-banner --log-level warn`.
+That narrower result does not turn the broad directory scan into a pass or dismiss its findings.
+Do not relabel it Qwen3.8, overlap transport with native benchmarks, weaken deadlines, overwrite
+failed records or infer thinking/context approval. Live 35B/public thinking-off remain unchanged.
+Full artifact/GGUF/template/load, standard semantics, final-only thinking/privacy, measured
+context and matched app/evidence/audit/queue/failure/WAN/restart/cold-start/rollback remain separate.
 
 ### Completed NUMA comparison — failed at 21:36 UTC; no selection
 
@@ -736,6 +882,146 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### ادامهٔ دریافت محدود 122B و اصلاح محیط اجرای رایانهٔ کاربر — گام ۶ اکتبر ۲۰۲۶
+
+پنج کنترل CI کد دقیقِ `293164e` در
+[اجرای 37378458739](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739)، به تأیید
+بازبین اصلی، موفق‌اند. این نتایجِ کد/CI، پذیرش مدل، انتقال یا محیط تولید نیستند؛ پیش از
+تغییر مستقلِ کد نوع‌دارِ 122B در پایین ثبت شده‌اند:
+
+| کنترل CI تأییدشده | رکورد دقیق اجرا |
+| --- | --- |
+| مرورگر | [111993800323](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739/job/111993800323) |
+| PostgreSQL 16 | [111993800700](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739/job/111993800700) |
+| PostgreSQL 17 | [111993800738](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739/job/111993800738) |
+| بررسی اطلاعات محرمانه | [111993800806](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739/job/111993800806) |
+| کیفیت | [111993800809](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739/job/111993800809) |
+
+ابزار مستقلِ دریافت **۳۰۹۶۴ بایت** است و هش آن
+`2f03c33bd7fcc113fd906064c05e97ea6c68acdb6ff293e829114eab52f63d46` است؛ با مالکیت root و
+حالت `0400` و برابری دقیقِ کد نصب شد. بازبینی اصلی/مستقل و **۸۲۵ کنترل تعریفی/شبیه‌سازی/
+ایستا** موفق‌اند. پیمایش محدودِ آغاز، بخش‌های اصلیِ قبلی را تازه هش‌سنجی می‌کند؛ رسید
+تکمیل، پیش از حذفِ صرفاً نسخه‌های انتقالیِ تکراریِ کاملاً تأییدشده ثبت می‌شود. ورودی
+ناموفق/مبهم، دادهٔ اصلی و رکوردهای پیشین حفظ می‌شوند. رسید یک بخش، هشِ منبع اصلیِ فایل
+کامل، پذیرش مدل یا انتخاب آن نیست.
+
+ابزار اصلیِ رایانهٔ کاربر با اندازهٔ **۲۳۳۹۷ بایت** و هش
+`73915db249cb577c45a515814d9e11bfe6910db111d76490d15e615c1db8855e`، پنجرهٔ
+`resume-20261006-639268346254710321` را اجرا کرد. **پیش از دریافت هر بخش در `remote_begin`
+شکست خورد**؛ رکوردهای متناظرِ شروع/نتیجهٔ root وجود نداشتند. تطبیق دستی و صرفاً خواندنی،
+توقف انتقال و نبود handle باز، PIDهای **2187/2197**، شمار راه‌اندازی مجدد **0/0** و ثبات
+وضعیت آماده/بی‌درخواست را تأیید کرد. این شکستِ ابزار حفظ شده است، نه پاسخ ناموفق مدل یا
+دریافت موفق. تغییر به‌صورت کور تکرار نشد.
+
+شانزده حالتِ جداگانهٔ محلی برای محیط `ssh -V`، نبود متغیر `ProgramData` را مشخص کردند:
+افزودن فقط این متغیر، کد خروج را از **۲۵۵ به صفر** تغییر داد؛ هر سیزده افزودن تک‌متغیرهٔ
+دیگر شکست خوردند و افزودن هر چهارده متغیر موفق بود. این وابستگیِ بررسی‌شدهٔ محیط اجرای
+محلی است، نه تأیید ورود سرور، دورزدن سیاست شبکه یا آمادگی مدل. ابزار مستقلِ **نسخهٔ دوم
+با ۲۳۵۳۷ بایت** و هش `2af46805a3fc38cd839ee5736e7ed1da35fe4996aa730f1d9a4494a8bababcce`،
+`ProgramData` و پاک‌سازی امنِ فرایند مرتبط با خودش را اضافه می‌کند. **۴۰۶ کنترل آماده‌سازی**
+بازبین اصلی و تطبیق صرفاً خواندنی موفق‌اند. پنجرهٔ
+`resume-20261006-639268352065353249` **یک بخش** با اندیس **۱۳۳**، اندازهٔ **۲۶۸۴۳۵۴۵۶
+بایت**، یک اتصال و زمان ثبت‌شدهٔ انتقالِ **۱۲۵٫۴۱۷۸۴۳ ثانیه** را کامل کرد. هش آن
+`0fe6c003debc1113ad5e5bd403f91889fbc11c58d36d08ba331e807734ed3d62` است.
+رسیدهای الزامیِ راه دور/root، حذف نسخهٔ تکراریِ تأییدشده و ثبات خط مبنای آماده/بی‌درخواستِ
+اصلی موفق‌اند. نسخه‌های انتقالیِ موفقِ رایانهٔ کاربر/inbox فقط پس از همین بررسی‌ها حذف
+شدند؛ دادهٔ اصلیِ قابل‌بازیابی باقی است. مجموع لحظه‌ای آن پنجره **۱۳۴ بخش اصلی/۳۵۹۷۰۳۵۱۱۰۴
+بایت** بود، نه فایل کاملِ تأییدشده از منبع اصلی. سابقهٔ **۱۳۳ بخش/۳۵۷۰۱۹۱۵۶۴۸ بایت**، تلاش‌های
+ناموفق و رکوردهای خصوصی حفظ‌اند؛ جایگزین پیمایش تازه، رسید یا بررسی جاری ظرفیت نیستند.
+
+پنجرهٔ چهاربخشیِ بعدیِ نسخهٔ دوم با شناسهٔ `resume-20261006-639268355159703524` با کد
+خروج **صفر** کامل شد. پایان root، تطبیق توقف و خط مبنای اصلیِ آماده/بی‌درخواست موفق‌اند.
+هر چهار بخش **۲۶۸۴۳۵۴۵۶ بایت** بودند؛ مجموع لحظه‌ایِ تازه **۱۳۸ بخش اصلی/۳۷۰۴۴۰۹۲۹۲۸
+بایت** است. ثبتِ انتقال در زیر، سنجش مدل یا زمان نخستین توکن نیست:
+
+| اندیس بخش | ثانیهٔ دریافت | اتصال تازه | شناسهٔ اتصال |
+| --- | --- | --- | --- |
+| 134 | 122.576945 | 1 | 0 |
+| 135 | 127.673512 | 0 | 0 |
+| 136 | 124.415473 | 0 | 0 |
+| 137 | 127.964134 | 0 | 0 |
+
+این جمع، پذیرش فایل کاملِ منبع اصلی یا بخش بعدی نیست. ثبتِ ۱۳۴بخشی به‌عنوان نتیجهٔ
+پنجرهٔ قبلی حفظ شود. ابزار مستقلِ **نسخهٔ سوم با ۲۳۵۷۱ بایت** و هش
+`ba7e4fcbce22cd32d037b9c1565b18d614321750ca4fcaa5fd12cfdf03178ca1` و بازبین **۱۱۳۳۶
+بایتی** با هش `baaa7bfc2a2dc45265ff090924f968032635001eb043ddda06ff5ff3c1f70d25`،
+artifactهای مستقلِ بررسی‌شده‌اند. بازبین اصلی، پیش از نخستین تلاش واقعی، هر دو را کامل
+خواند و **۴۳۰ کنترل آماده‌سازی محلی** را گذراند. نمایهٔ آماده‌شده، تنها یک فراخوانی curl، حداکثر **چهار**
+انتقال موازی، مهلت ثابتِ **۱۸۰ ثانیه** برای هر انتقال و حد بیرونیِ فرایند **۱۸۵ تا ۲۰۰
+ثانیه** برای یک تا چهار بخش دارد. پنجرهٔ واقعیِ `resume-20261006-639268362479556681` در
+`finite_download` با کد خروج **۱** و **صفر بخش پذیرفته‌شده** شکست خورد؛ مقدار ثبت‌شدهٔ
+`remote_stopped_baseline_reconciled` درست است. اندیس **۱۳۸**، **۲۶۸۴۳۵۴۵۶ بایت بدنه/۷۵۴
+بایت header** با محدودهٔ دقیقِ HTTP 206 برگرداند؛ بدنه/header اندیس‌های **۱۳۹ تا ۱۴۱** صفر
+بایت بود. اندازه یا این header، پذیرش بدنه یا تأیید هش منبع اصلی نیست. ورودی‌ها و رکورد
+ناموفق حفظ‌اند؛ دادهٔ اصلی **۱۳۸ بخش/۳۷۰۴۴۰۹۲۹۲۸ بایت** باقی ماند. فضای آزاد مشاهده‌شدهٔ
+رایانهٔ کاربر **۵۲۲۷۶۹۲۰۳۲ بایت** بود. بهبود سرعت، دریافت کامل یا تکرار کور پذیرفته نیست.
+
+پنجرهٔ سریالِ مستقلِ `resume-20261006-639268366509946555` سپس در ساعت **۲۲:۴۰:۱۶ UTC** با
+کد خروج **۰** و پایان root/تطبیق توقف/ثبات خط مبنای موفق کامل شد. اندیس‌های **۱۳۸ تا ۱۴۰**،
+هر یک **۲۶۸۴۳۵۴۵۶ بایت**، مجموع را به **۱۴۱ بخش/۳۷۸۴۹۳۹۹۲۹۶ بایت** رساندند. هفت بخشِ فایل
+اول باقی‌اند؛ هش کاملِ منبع اصلی پذیرفته نشده است. مشاهده‌های ثبت‌شده:
+
+| اندیس بخش | ثانیهٔ دریافت | اتصال تازه | شناسهٔ اتصال |
+| --- | --- | --- | --- |
+| 138 | 14.299453 | 1 | 0 |
+| 139 | 12.994863 | 0 | 0 |
+| 140 | 12.894428 | 0 | 0 |
+
+هش پذیرفته‌شدهٔ اندیس ۱۳۸ برابر
+`925697e6ac3e0f46cef0ffc99afd833717aa4042bf72090339c2198742eae13f` است. هش‌سنجی مستقلِ
+بدنهٔ حفظ‌شدهٔ نسخهٔ سومِ ناموفق نیز همین هش را داشت؛ آن ورودی ناموفق حذف یا با اتکا به
+اندازه/header پذیرفته نشد. این اندازه‌گیری، علت یا فایدهٔ موازی‌سازی، کارایی مدل یا نتیجهٔ
+پنجرهٔ آینده را ثابت نمی‌کند. کنترل تازهٔ رسید، ظرفیت، مالکیت و پاک‌سازی همچنان لازم است.
+
+ابزار مستقل و محافظت‌شدهٔ تجمیع یک فایل، **فقط محلی، بارگذاری‌نشده و اجرا‌نشده** است:
+**۴۸۷۴۵ بایت** با هش `14ce5d8a1f6ee1345bdd4c1c15bdd79f38ed05bc988eb440a8b7b0a77ee111bc`.
+بازبینی کاملِ اصلی/مستقل و **۶۷۱ کنترل خالص/شبیه‌سازی** موفق‌اند؛ بازبین مستقل **۴۱۴ کنترل
+اضافیِ تعریفی/شبیه‌سازی/ایستا** را نیز گذرانده است. در این بررسی، ورودی اجرای اصلی، fork
+واقعی، worker فایل، میزبان، شبکه یا مدل اجرا نشده‌اند. بودجهٔ کل مدل، بخش‌های اصلیِ
+دریافت‌نشده، فایل‌های تجمیع‌نشده و **۳۲ GiB حاشیهٔ عملیاتی** را حساب می‌کند؛ فایل‌های ناقصِ
+ناموفق همچنان از فضای آزاد واقعی کسرند. هر دو قفلِ به‌ارث‌رسیده تا تأیید توقف و جمع‌آوری
+فرایند worker حفظ می‌شوند. وضعیت تکمیل به هش کامل و بازخوانی منبع اصلی، ثبت محافظت‌شده
+روی همان volume، نتیجهٔ ماندگار و ثبات خط مبنای آماده/بی‌درخواست نیاز دارد. حد داخلی،
+**۹۰۰ ثانیه کار و ۳۰ ثانیه تطبیق** است؛ ابزار اجرای بیرونیِ دارای بازبینی جدا و تجمیع واقعی
+هنوز **اجرا نشده‌اند**. ابزار آماده‌شدهٔ رایانهٔ کاربر **۲۶۳۰۱ بایت** با هش
+`60d8fe770110860517f766a81aa33c8544b217a559d03ee02f9e01c0bbd0efb8` و بازبین تعریفیِ
+**۲۱۱۶۰ بایتی** آن با هش
+`562cf00088d0a9d82c53e85a40c3d28eca9ee72d590594ac9cf374c0872178a0` هستند. بازبینی کاملِ
+اصلی/مستقل و **۳۸۷ کنترل تعریفی/تجزیه/ایستا/شبیه‌سازی** موفق‌اند. حد تنظیم‌شدهٔ کل،
+**۱۹۸۰ ثانیه** است و تنها یک فراخوانی اصلی و حداکثر یک تطبیق صرفاً خواندنیِ مستقل را
+اجازه می‌دهد، نه تکرار تجمیع. این کنترل‌ها ورودی عملیاتی ابزار اجرا، میزبان یا فرایند فرزند
+را فراخوانی نکردند. هش دقیقِ نهایی و اجرای واقعی همچنان به بازبینی/مجوز جدا نیاز دارند.
+کنترل ایستا/شبیه‌سازی، مالکیت جاریِ root، ظرفیت، زمان ورودی‌وخروجی یا پاک‌سازی واقعیِ worker
+را ثابت نمی‌کند.
+
+ثبت نوع‌دارِ Qwen3.5-122B-A10B در checkout کد پیاده‌سازی/آزموده شده، **نه مستقر یا پذیرفته**
+است. بازبین اصلی هر چهار فایل تغییرکردهٔ کد/آزمون را خواند. عامل نویسنده **۴۱ آزمون تازه/
+۱۲۶ موفقِ مرتبط** گزارش کرد؛ مجموعهٔ کامل و مستقلِ کد در بررسی اصلی **۱۰۹۴ موفق، دو مورد
+POSIX اجرا‌نشده، ۱۲۶ انتخاب‌نشده، یک هشدار قبلیِ منسوخ‌شدن AnyIO، ۲۵٫۹۹ ثانیه** ثبت کرد.
+کنترل lint، قالب (**۱۴۱ فایل با قالب صحیحِ قبلی**) و نوع برای Linux (**۱۴۱ فایل**) در بررسی
+اصلی موفق‌اند. فرمان‌های دقیقِ اجراشدهٔ بازبین اصلی، نتایج ثبت‌شده‌اند نه آزمون مدل/تولید:
+
+```powershell
+$env:PYTHONUTF8='1'
+.venv\Scripts\python.exe -m pytest -m 'not integration and not browser' -q
+.venv\Scripts\ruff.exe check packages tests scripts
+.venv\Scripts\ruff.exe format --check packages tests scripts
+.venv\Scripts\mypy.exe --platform linux packages tests scripts
+```
+
+نمایهٔ انتخاب، کنترل انتشار، مدل پیش‌فرض، پرامپت کد یا تنظیم زنده تغییر نکردند. این داده‌های
+آزمایشیِ کد، مدل بومیِ 122B را اجرا و پذیرش زنده را ثابت نمی‌کنند. بررسی گستردهٔ پوشه با
+Gitleaks، درخت‌های dependency/generated از نوع ignored را نیز خواند و **۱۸ یافته** ثبت
+کرد؛ نتیجه **موفق نیست**. گزارش محافظت‌شده و تعیین تکلیف آن جدا از نتیجهٔ موفقِ CI کد
+دقیقِ `293164e` حفظ‌اند. یافته‌ها در این سند، خطای مثبتِ کاذبِ تأییدشده فرض و کنار گذاشته
+نمی‌شوند. **بررسی مستقلِ تغییرهای staged با Gitleaks در اجرای اصلی با کد خروج صفر موفق
+شد**؛ فرمان دقیق در بخش انگلیسی ثبت است. این نتیجهٔ محدود، بررسی گستردهٔ پوشه را موفق
+نمی‌کند و یافته‌های آن را کنار نمی‌گذارد. مدل Qwen3.8 نامیده
+نشود؛ انتقال و سنجش بومی هم‌زمان اجرا، مهلت ضعیف، رکورد ناموفق بازنویسی یا تأیید استدلال/
+زمینه استنباط نشود. 35B زنده و خاموشی استدلال عمومی ثابت‌اند. معیارهای فایل/GGUF/قالب/
+بارگذاری، معنای استاندارد، استدلال با خروجی نهایی/حریم خصوصی، زمینهٔ سنجیده و برنامه/شاهد/
+ممیزی/صف/خرابی/WAN/راه‌اندازی/شروع سرد/بازگشت جدا باقی می‌مانند.
 
 ### مقایسهٔ پایان‌یافتهٔ NUMA — ناموفق در ساعت ۲۱:۳۶ UTC؛ بدون انتخاب مدل
 

@@ -54,6 +54,12 @@ class LlamaCppSettings(BaseModel):
             raise ValueError(
                 "the unselected Qwen3.8 Q5 candidate is bounded to 16K and 120 seconds"
             )
+        if self.model_id == "nextops-qwen3-5-122b-a10b-q5-k-m" and (
+            self.context_tokens > 16_384 or self.request_timeout_seconds > 120.0
+        ):
+            raise ValueError(
+                "the unselected Qwen3.5 122B candidate is bounded to 16K and 120 seconds"
+            )
         if self.thinking_enabled and (
             not self.expanded_chat_enabled or self.model_id != "nextops-qwen3-5-35b-a3b-q4-k-m"
         ):

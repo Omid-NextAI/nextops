@@ -1,5 +1,40 @@
 # Local CPU-only AI and capacity planning
 
+Current provisioning checkpoint — **2026-10-06**: exact `293164e` passed all five CI jobs in
+[run 37378458739](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739). The reviewed
+122B importer is installed root-owned/mode `0400` with exact source parity; 825 main/independent
+definition checks passed. Initial window `resume-20261006-639268346254710321` failed at
+`remote_begin`, before any download/root start/result record. Read-only reconciliation confirmed
+stopped transport/absent open handles and unchanged 35B PIDs/restarts/ready-idle state. Isolated
+SSH runner tests identified missing `ProgramData`; the distinct v2 desktop helper passed 406
+preparation checks and read-only reconciliation. Window `resume-20261006-639268352065353249`
+completed one 268435456-byte range, index 133; protected receipts, verified-duplicate cleanup and
+unchanged baseline passed. The subsequent v2 window `resume-20261006-639268355159703524`
+completed indexes 134–137, each 268435456 bytes, with root finish/stopped/baseline checks passed.
+Current canonical data total 138 ranges/37044092928 bytes, not a full-shard result; the 134-range
+snapshot is history. V3 passed 430 local preparation checks but first window
+`resume-20261006-639268362479556681` failed at `finite_download`, exit 1/zero accepted ranges;
+root stopped/baseline reconciliation was reported true. Canonical data stayed unchanged,
+failed bodies remain retained, and no transfer-speed gain or blind retry is accepted.
+Distinct serial window `resume-20261006-639268366509946555` completed indexes 138–140, each
+268435456 bytes, at 22:40:16 UTC with root finish/stopped/baseline checks passed. Latest
+canonical data total **141 ranges/37849399296 bytes**; seven first-shard ranges remain, not a
+complete-shard result. No later range or transfer-performance cause is claimed.
+The one-shard assembler remains local-only/unuploaded/unrun despite
+671 pure/mock checks and 414 independent checks. Its prepared desktop wrapper passed 387 peer
+mocks; exact final execution review and actual assembly remain separate and unrun.
+Typed 122B registration is implemented/tested, not deployed or accepted. Main's source suite
+passed 1094 tests/two POSIX skips/126 deselected in 25.99 seconds; lint/format/Linux-target types
+passed, with one existing AnyIO warning retained. A broad directory secret scan included ignored
+trees and reported 18 findings, not a pass. Main's separate new staged-change Gitleaks check
+passed exit 0; keep its limited scope, the protected broad-scan report and earlier CI distinct.
+This is an Apache
+Qwen3.5-122B-A10B alternative, not a Qwen3.8 rename. Preserve failed records, live 35B and public
+thinking-off; artifact, model, context and matched app/offline/rollback gates remain separate.
+See the [paired record](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+## Prior completed native comparison — historical
+
 Latest completed comparison: the exact-`b94a84c` Q5 no-BLAS NUMA trial ended failed at
 **21:36:41.463473 UTC on 2026-10-05**. Fourteen stopped finals returned; English hypothesis
 timed out at **120001 ms**, Persian hypothesis was not run. Main/independent review agree on

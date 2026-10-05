@@ -1,5 +1,59 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Bounded 122B provisioning and runner correction — 2026-10-06 checkpoint
+
+Exact `293164e` passed all five CI jobs. The reviewed root-owned `0400` importer has exact
+source parity; the initial desktop window failed at `remote_begin` before any range download
+or root start/result records. Read-only reconciliation confirmed stopped transport and unchanged
+35B readiness. Isolated environment cases identified missing `ProgramData`; a distinct v2 helper
+passed 406 preparation checks and read-only reconciliation. Its first finite window completed one
+268435456-byte range, index 133, with protected receipts and verified-duplicate cleanup; the
+canonical total was 134 ranges/35970351104 bytes. The subsequent four-range v2 window completed
+indexes 134–137 with root finish/stopped/baseline checks passed: 138 ranges/37044092928 bytes,
+not a completed upstream import. V3 passed 430 preparation checks, then its first actual window
+failed at `finite_download`, exit 1/zero accepted ranges; root stopped/baseline reconciliation was
+reported true and canonical data stayed unchanged. Failed bodies are preserved; no speed gain or
+blind retry follows.
+The distinct serial window `resume-20261006-639268366509946555` completed indexes 138–140,
+each 268435456 bytes, with root finish/stopped/baseline checks passed at 22:40:16 UTC. Latest
+canonical data total 141 ranges/37849399296 bytes; seven first-shard ranges remain, not
+complete-shard acceptance, a future-window result or a transfer-performance cause.
+The separate local-only/unuploaded/unrun one-shard assembler passed 671
+pure/mock checks plus 414 independent checks; its prepared wrapper passed 387 peer mocks but
+actual assembly remains unrun. Typed 122B registration is implemented/tested, not deployed:
+1094 source passes/two POSIX skips/126 deselected in 25.99 seconds; lint/format/Linux types passed,
+with one existing AnyIO warning retained. Broad directory secret scanning included ignored trees
+and reported 18 findings, not a pass; its protected report is retained. Main's separate
+`gitleaks git --pre-commit --staged --redact --no-banner --log-level warn` check passed exit 0.
+This is the new staged-change result, not a clean-directory claim.
+Failed records remain preserved; no serving model, public thinking or acceptance setting changed.
+
+پنج کنترل CI کد دقیقِ `293164e` موفق‌اند. ابزار بررسی‌شدهٔ دریافت با مالکیت root و حالت
+`0400`، برابری دقیقِ کد دارد؛ نخستین پنجرهٔ رایانهٔ کاربر در `remote_begin`، پیش از دریافت
+هر بخش یا رکورد شروع/نتیجهٔ root شکست خورد. تطبیق صرفاً خواندنی، توقف انتقال و ثبات
+آمادگی 35B را تأیید کرد. آزمون جداگانهٔ محیط، نبود `ProgramData` را مشخص کرد؛ ابزار مستقلِ
+نسخهٔ دوم، ۴۰۶ کنترل آماده‌سازی و تطبیق صرفاً خواندنی را گذراند. نخستین پنجرهٔ محدود، یک
+بخشِ ۲۶۸۴۳۵۴۵۶ بایتی با اندیس ۱۳۳ را با رسید محافظت‌شده و حذف نسخهٔ تکراریِ تأییدشده کامل
+کرد؛ شمار آن گام ۱۳۴ بخش/۳۵۹۷۰۳۵۱۱۰۴ بایت بود. پنجرهٔ چهاربخشیِ بعدی، اندیس‌های ۱۳۴ تا
+۱۳۷ را با پایان root/تطبیق توقف/ثبات خط مبنا کامل کرد: ۱۳۸ بخش/۳۷۰۴۴۰۹۲۹۲۸ بایت، نه
+دریافت کامل از منبع اصلی. نسخهٔ سوم ۴۳۰ کنترل آماده‌سازی را گذراند؛ سپس نخستین پنجرهٔ
+واقعیِ آن در `finite_download` با کد خروج ۱/صفر بخش پذیرفته‌شده شکست خورد؛ تطبیق root برای
+توقف/خط مبنا با مقدار درست گزارش شد و دادهٔ اصلی ثابت ماند. بدنه‌های ناموفق حفظ‌اند؛
+بهبود سرعت یا تکرار کور حاصل نمی‌شود.
+پنجرهٔ سریالِ مستقلِ `resume-20261006-639268366509946555` اندیس‌های ۱۳۸ تا ۱۴۰، هر یک
+۲۶۸۴۳۵۴۵۶ بایت، را در ساعت ۲۲:۴۰:۱۶ UTC با پایان root/تطبیق توقف/ثبات خط مبنا کامل کرد.
+مجموع جدید ۱۴۱ بخش/۳۷۸۴۹۳۹۹۲۹۶ بایت است؛ هفت بخشِ فایل اول باقی‌اند، نه پذیرش فایل کامل،
+نتیجهٔ پنجرهٔ آینده یا علت کاراییِ انتقال. ابزار مستقلِ تجمیع یک فایل فقط محلی،
+بارگذاری‌نشده و اجرا‌نشده است؛ ۶۷۱ کنترل خالص/شبیه‌سازی و ۴۱۴ کنترل مستقل موفق‌اند؛
+ابزار اجرای آماده‌شده ۳۸۷ کنترل شبیه‌سازیِ مستقل را گذراند، اما تجمیع واقعی اجرا نشده است.
+ثبت نوع‌دارِ 122B پیاده‌سازی/آزموده شده، نه
+مستقر: ۱۰۹۴ موفق/دو مورد POSIX اجرا‌نشده/۱۲۶ انتخاب‌نشده در ۲۵٫۹۹ ثانیه؛ کنترل lint/قالب/
+نوع برای Linux موفق و یک هشدار قبلیِ AnyIO حفظ است. بررسی گستردهٔ اطلاعات محرمانه،
+درخت‌های ignored را نیز خواند و ۱۸ یافته ثبت کرد، نه نتیجهٔ موفق؛ گزارش محافظت‌شده حفظ
+است. بررسی مستقلِ تغییرهای staged با فرمان Gitleaks بالا در اجرای اصلی با کد خروج صفر
+موفق شد؛ این نتیجه، ادعای پاک بودن کل پوشه نیست. رکوردهای ناموفق حفظ‌اند؛ مدل زنده،
+استدلال عمومی و تنظیم پذیرش تغییر نکردند.
+
 ## Completed NUMA comparison remains failed — 2026-10-05
 
 The distinct exact-`b94a84c` Q5 no-BLAS NUMA trial ended at 21:36:41.463473 UTC: fourteen

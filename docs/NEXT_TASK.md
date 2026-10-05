@@ -1,5 +1,75 @@
 # Next task / کار بعدی
 
+Current provisioning task — **2026-10-06**: continue only with a separately authorized finite
+window after fresh guards. The four-range v2 window `resume-20261006-639268355159703524`
+completed indexes 134–137, each 268435456 bytes, with root finish/stopped/baseline checks passed.
+Current canonical transport data total 138 ranges/37044092928 bytes, not complete-shard
+verification. The prior one-range v2 window/index133 and 134-range snapshot remain history.
+The distinct v3 helper passed 430 preparation checks but first actual window
+`resume-20261006-639268362479556681` failed at `finite_download`, exit 1/zero accepted ranges;
+root stopped/baseline reconciliation was reported true. Preserve that failure and its unaccepted
+bodies; inspect the bounded transport cause before any distinct repaired window, not a blind
+retry or size/header-only import. No speed gain is accepted. Do not credit later ranges before
+protected receipts or rerun completed windows. Distinct serial window
+`resume-20261006-639268366509946555` completed indexes 138–140, each 268435456 bytes, with
+root finish/stopped/baseline checks passed at 22:40:16 UTC. Latest canonical data total **141
+ranges/37849399296 bytes**; seven first-shard ranges remain, with no complete-shard acceptance
+or future-window credit. Freshly reconcile capacity/receipts before the next authorized window. Preserve
+the first window's `remote_begin` failure before any
+downloads/root records and its read-only stopped/idle reconciliation. The reviewed `ProgramData`
+runner correction is isolated tooling, not model acceptance. Exact `293164e` passed all five CI
+jobs in [run 37378458739](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739).
+After each finite window, check capacity, receipts and owned-process/handle reconciliation;
+there is no blind mutation retry or concurrent download/native benchmark. Review a bounded
+external execution before using the local-only/unuploaded/unrun one-shard assembler. Its 671
+pure/mock checks plus 414 independent checks and the new wrapper's 387 peer mocks do not prove
+assembly; reconcile its exact final review/pins before any separately authorized execution. The typed 122B source
+increment passed main's 1094 source tests/two POSIX skips/126 deselected in 25.99 seconds and
+lint/format/Linux-target types; one existing AnyIO warning remains. The broad directory secret
+scan reported 18 findings after including ignored trees; retain its protected report, do not
+claim a clean directory scan. Main's separate new staged-change Gitleaks check passed exit 0;
+retain that narrower scope. Qualify its exact package
+separately before any deployment or selection. Full upstream hashes, actual
+GGUF/template/load, semantics, final-only thinking/privacy, measured context and matched
+app/evidence/audit/queue/failure/WAN/restart/cold-start/rollback remain distinct gates. Live
+35B/public thinking-off remain unchanged; do not relabel this Qwen3.5 candidate as Qwen3.8.
+
+کار جاریِ آماده‌سازی — **۶ اکتبر ۲۰۲۶**: ادامه فقط در پنجرهٔ محدودِ دارای مجوز جدا و پس
+از کنترل تازه باشد. پنجرهٔ چهاربخشیِ نسخهٔ دوم با شناسهٔ
+`resume-20261006-639268355159703524` اندیس‌های ۱۳۴ تا ۱۳۷، هر یک ۲۶۸۴۳۵۴۵۶ بایت، را
+کامل کرد؛ پایان root/تطبیق توقف/خط مبنا موفق‌اند. دادهٔ اصلی اکنون ۱۳۸ بخش/۳۷۰۴۴۰۹۲۹۲۸
+بایت است، نه تأیید فایل کامل. پنجرهٔ تک‌بخشیِ قبلی/اندیس ۱۳۳ و ثبتِ ۱۳۴بخشی سابقه‌اند.
+ابزار مستقلِ نسخهٔ سوم ۴۳۰ کنترل آماده‌سازی را گذراند، اما نخستین پنجرهٔ واقعیِ آن با
+شناسهٔ `resume-20261006-639268362479556681` در `finite_download`، با کد خروج ۱/صفر بخش
+پذیرفته‌شده شکست خورد؛ تطبیق root برای توقف/خط مبنا با مقدار درست گزارش شد. شکست و
+بدنه‌های پذیرفته‌نشده حفظ و پیش از پنجرهٔ اصلاح‌شدهٔ مستقل، علت انتقال به‌صورت محدود بررسی
+شود؛ تکرار کور یا دریافت بر پایهٔ اندازه/header تنها مجاز نیست. بهبود سرعت پذیرفته نیست.
+پیش از رسید محافظت‌شده، بخش بعدی پذیرفته و پنجرهٔ کامل‌شده تکرار نشود.
+پنجرهٔ سریالِ مستقلِ `resume-20261006-639268366509946555` اندیس‌های ۱۳۸ تا ۱۴۰، هر یک
+۲۶۸۴۳۵۴۵۶ بایت، را در ساعت ۲۲:۴۰:۱۶ UTC با پایان root/تطبیق توقف/ثبات خط مبنا کامل کرد.
+مجموع جدید **۱۴۱ بخش/۳۷۸۴۹۳۹۹۲۹۶ بایت** است؛ هفت بخشِ فایل اول باقی‌اند، بدون پذیرش فایل
+کامل یا اعتباردادن به پنجرهٔ آینده. پیش از پنجرهٔ مجاز بعدی، ظرفیت/رسیدها تازه تطبیق داده شوند. شکست
+نخستین پنجره در `remote_begin` پیش از
+هر دریافت/رکورد root و تطبیق صرفاً خواندنیِ توقف/بی‌درخواستی حفظ شوند. اصلاح بررسی‌شدهٔ
+`ProgramData` در محیط اجرا، ابزار مستقل است نه پذیرش مدل. پنج کنترل CI کد دقیقِ `293164e`
+در [اجرای 37378458739](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739) موفق‌اند.
+پس از هر پنجرهٔ محدود، ظرفیت، رسیدها و توقف فرایند/نبود handle متعلق به همان اجرا بررسی
+شوند؛ تکرار کورِ تغییر یا دریافت هم‌زمان با سنجش بومی مجاز نیست. پیش از استفاده از ابزار
+محلی/بارگذاری‌نشده/اجرا‌نشدهٔ تجمیع یک فایل، اجرای بیرونیِ محدود بازبینی شود؛ ۶۷۱ کنترل
+خالص/شبیه‌سازی، ۴۱۴ کنترل مستقل و ۳۸۷ کنترل شبیه‌سازیِ مستقلِ ابزار اجرای تازه، تجمیع
+واقعی را ثابت نمی‌کنند؛ پیش از اجرای دارای مجوز جدا، بازبینی نهایی/هش دقیق تطبیق داده شود. تغییر نوع‌دارِ کد
+122B در بررسی اصلی ۱۰۹۴ موفق/دو مورد POSIX اجرا‌نشده/۱۲۶ انتخاب‌نشده در ۲۵٫۹۹ ثانیه و
+کنترل lint/قالب/نوع برای Linux را گذراند؛ یک هشدار قبلیِ AnyIO حفظ است. بررسی گستردهٔ
+اطلاعات محرمانه پس از خواندن درخت‌های ignored، ۱۸ یافته ثبت کرد؛ گزارش محافظت‌شده حفظ،
+پاک بودن کل پوشه ادعا نشود. کنترل مستقلِ تغییرهای staged با Gitleaks در اجرای اصلی با کد
+خروج صفر موفق شد؛ دامنهٔ محدود همین نتیجه حفظ شود. بستهٔ دقیق آن پیش
+از استقرار یا انتخاب جدا پذیرفته شود. هش کامل، GGUF/قالب/بارگذاری، معنا،
+استدلال با خروجی نهایی/حریم خصوصی، زمینهٔ سنجیده و برنامه/شاهد/ممیزی/صف/خرابی/WAN/
+راه‌اندازی/شروع سرد/بازگشت معیارهای جدا هستند. 35B زنده/خاموشی استدلال عمومی ثابت‌اند؛
+این نامزد Qwen3.5، Qwen3.8 نامیده نشود.
+
+Prior native checkpoint — historical / گام بومیِ پیشین — سابقه:
+
 Current checkpoint: the distinct NUMA trial ended failed at **21:36:41.463473 UTC on 2026-10-05**;
 fourteen stopped finals, English hypothesis timeout **120001 ms**, Persian hypothesis not run.
 Main/independent review agree on **nine passes/six failures/one not run**. Cleanup and unchanged
