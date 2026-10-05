@@ -1,5 +1,19 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Read-only protected runtime-tree review — 2026-10-05
+
+Add a strict private inventory schema/POSIX-root verifier for exact files/aliases, hashes,
+ownership/permissions and stable metadata; no execution, installation or acceptance toggle.
+962 source tests/two POSIX skips and 156 related tests passed. Actual unchanged runtime-tree
+verification passed nine files/fourteen aliases. Tree identity/simulations are not build/model/
+offline/deployment acceptance; serving runtime/model/public thinking are unchanged.
+
+طرح سختِ فهرست خصوصی/بازبین POSIX با root برای مجموعهٔ دقیقِ فایل/پیوند، هش، مالکیت/مجوز
+و پایداری فراداده اضافه شد؛ اجرا، نصب یا گزینهٔ پذیرش ندارد. ۹۶۲ آزمون کد موفق/دو مورد POSIX
+اجرا‌نشده و ۱۵۶ آزمون مرتبط موفق‌اند؛ بررسی واقعیِ درخت بدون تغییر، نه فایل/چهارده پیوند را
+تأیید کرد. هویت درخت/شبیه‌سازی، پذیرش ساخت/مدل/آفلاین/استقرار نیست؛ runtime، مدل زنده و
+استدلال عمومی ثابت‌اند.
+
 ## Guard-order review repair and failed Q8 follow-up — 2026-10-05
 
 Track non-string input provenance in the bounded AST reviewer and reject equality, membership,

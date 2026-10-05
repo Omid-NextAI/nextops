@@ -1,5 +1,19 @@
 # Local CPU-only AI and capacity planning
 
+## Protected native runtime-tree verification
+
+`scripts/check_native_runtime_bundle.py` checks a private inventory and its independently reviewed
+SHA-256 under POSIX root. The strict schema is `deploy/inference/native-runtime-bundle.schema.json`.
+Exact files/aliases, hashes, root ownership, modes, no-follow traversal, hardlinks, work bounds and
+stable metadata are checked; it executes/installs nothing and writes no report or selection state.
+Main checks passed 962 source tests/two POSIX skips and 156 related tests, with lint/types/docs.
+The 90 new filesystem tests are explicit simulations; actual Windows verification is denied.
+Controlled Linux-root verification passed nine regular files, one directory, fourteen aliases and
+18761200 bytes without runtime changes; the live 35B PID/restart count and idle readiness stayed
+unchanged. Tree identity is not signature/build provenance, complete ELF/system dependencies,
+effective unit/maps, performance, model quality, WAN/cold start or deployment acceptance.
+Keep private inventories and operational paths outside Git; see the paired record below.
+
 ## Latest bounded diagnostic — 2026-10-05
 
 The exact-`f6cff8f` Q8 retest failed coding, source/scope preservation and an English hypothesis

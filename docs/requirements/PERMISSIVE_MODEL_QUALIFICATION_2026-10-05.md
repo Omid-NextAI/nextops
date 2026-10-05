@@ -9,6 +9,28 @@ The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 
 ## English
 
+### Protected runtime-tree source and controlled read-only outcome
+
+Main reviewed the new verifier/schema/tests: 962 source tests/two POSIX skips, 156 related tests,
+lint/format/Linux-target types passed. The 90 new filesystem tests explicitly simulate UID/stat/FD;
+actual Windows invocation refuses verification. No execution, installer, report write or selection
+toggle exists. The independent private inventory SHA is
+`2c23c5fadfe2082bb5b86440145229600351d0bb6198877e3b9edb88fc076ba3`; root-staged checker SHA is
+`07af3b988a8e5c7d8be5db8b19091efc49d1a8a36009430c1890b37e16094d86`.
+Actual isolated Linux-root verification passed nine regular files, one directory, fourteen aliases,
+18761200 bytes. Live 35B stayed idle with unchanged PID/restart count; no runtime bytes/links/service
+changed. Effective unit/maps, ELF/system dependencies, build/signature provenance, CPU/model quality,
+WAN/offline and deployment are explicitly outside this tree check's acceptance.
+
+Two preparation failures are retained: the first capture compared access time and stopped after
+reading; corrected identity excludes access time but includes modification/change timestamps.
+A decimal-versus-octal mode expression stopped before protected record installation; corrected
+octal preflight and immutable record installation passed. Neither showed changed runtime content.
+This inventory pins observed protected bytes, not upstream signature or full build attestation;
+historical runtime-manifest limitations remain. Five exact-`01637a1` CI jobs passed for the preceding
+coding-review increment, not this later source. The finite transfer retained range 62's incomplete
+HTTP-206 body/curl timeout (180003 ms); other ranges remained acknowledged. No full Q5 hash yet.
+
 ### Exact-source checks and isolated qualification follow-up
 
 All five CI jobs for exact source `f6cff8f` passed: quality, browser, PostgreSQL 16,
@@ -320,6 +342,28 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### کد بررسی درخت runtime و نتیجهٔ کنترل‌شدهٔ فقط‌خواندنی
+
+عامل اصلی ابزار/طرح/آزمون تازه را بررسی کرد: ۹۶۲ آزمون کد موفق/دو مورد POSIX اجرا‌نشده،
+۱۵۶ آزمون مرتبط و lint/قالب/نوع برای Linux موفق‌اند. ۹۰ آزمون تازه صریحاً UID/stat/FD ساختگی
+دارند؛ فراخوانی واقعی در Windows بررسی را رد می‌کند. اجرا، نصب، نوشتن گزارش یا گزینهٔ انتخاب
+وجود ندارد. SHA فهرست خصوصیِ مستقل برابر
+`2c23c5fadfe2082bb5b86440145229600351d0bb6198877e3b9edb88fc076ba3` و ابزار آماده‌شده نزد root
+برابر `07af3b988a8e5c7d8be5db8b19091efc49d1a8a36009430c1890b37e16094d86` است. بررسی واقعی با
+Python جداشده و root در Linux، نه فایل عادی، یک پوشه، چهارده پیوند و ۱۸۷۶۱۲۰۰ بایت را تأیید
+کرد. 35B زنده بی‌درخواست و شناسهٔ فرایند/شمار restart ثابت ماند؛ بایت/پیوند runtime یا خدمت
+تغییر نکرد. واحد/نگاشت واقعی، وابستگی ELF/سیستم، منشأ ساخت/امضا، کیفیت CPU/مدل، WAN/آفلاین
+و استقرار صریحاً بیرون پذیرش این کنترل درخت‌اند.
+
+دو شکست آماده‌سازی محفوظ‌اند: گردآوری نخست، زمان دسترسی را مقایسه کرد و پس از خواندن متوقف
+شد؛ هویت صحیح، زمان دسترسی را حذف و زمان تغییر محتوا/فراداده را حفظ می‌کند. عبارت ده‌دهی
+به‌جای هشت‌هشتیِ مجوز، پیش از نصب رکورد محافظت‌شده متوقف شد؛ پیش‌بررسی صحیح و نصب رکوردِ
+غیرقابل‌بازنویسی موفق بودند. هیچ‌کدام تغییر محتوای runtime را نشان نداد. فهرست، بایت
+محافظت‌شدهٔ مشاهده‌شده را ثابت می‌کند، نه امضای بالادست یا گواهی کامل ساخت؛ محدودیت تاریخی
+فهرست runtime حفظ است. پنج کنترل CI کد دقیقِ `01637a1` برای اصلاح پیشین بازبین موفق‌اند، نه
+کد بعدی این گام. انتقال محدود، بدنهٔ ناقص HTTP-206 و مهلت curl بخش ۶۲ در ۱۸۰۰۰۳ میلی‌ثانیه
+را حفظ کرد؛ بخش‌های دیگر تأییدشده ماندند. هش کامل Q5 هنوز تأیید نشده است.
 
 ### کنترل کد دقیق و پیگیری آزمونِ جداشده
 

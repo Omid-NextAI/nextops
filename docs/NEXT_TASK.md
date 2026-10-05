@@ -1,5 +1,19 @@
 # Next task / کار بعدی
 
+Current native-tree checkpoint: read-only source and actual nine-file/fourteen-alias root verification
+passed without runtime changes. Bind the reviewed inventory/checker hashes to the private Q5 trial;
+verify actual mappings separately and retain unrun ELF/build/system/model/application/offline gates.
+The finite transfer retained range 62's incomplete HTTP-206 body/180003-ms curl timeout while other
+ranges were acknowledged. Reconcile/finish fresh bounded windows before any full-artifact claim;
+no concurrent desktop controllers or automatic thinking/model selection.
+
+گام جاریِ درخت بومی: ابزار فقط‌خواندنی و بررسی واقعیِ root برای نه فایل/چهارده پیوند بدون
+تغییر runtime موفق‌اند. هش بازبینی‌شدهٔ فهرست/ابزار به آزمون خصوصی Q5 متصل، نگاشت واقعی جدا
+بررسی و معیار اجرا‌نشدهٔ ELF/ساخت/سیستم/مدل/برنامه/آفلاین حفظ شود. انتقال محدود، بدنهٔ ناقص
+HTTP-206 و مهلت curl بخش ۶۲ در ۱۸۰۰۰۳ میلی‌ثانیه را حفظ کرد؛ بخش‌های دیگر تأیید شدند.
+پیش از ادعای فایل کامل، تطبیق/پنجرهٔ تازهٔ محدود تکمیل شود؛ کنترل‌کنندهٔ هم‌زمان یا انتخاب
+خودکار استدلال/مدل مجاز نیست.
+
 Current diagnostic checkpoint: the separate exact-`f6cff8f` Q8 standard retest failed and its
 unit/process/listener are reconciled stopped. Do not repeat that profile or create a thinking gate.
 Complete the **separate pinned Q5** import (48 canonical ranges/12 GiB recorded; complete hash

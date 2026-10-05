@@ -1,5 +1,19 @@
 # Project state / وضعیت پروژه
 
+New runtime-review source, 2026-10-05: a read-only protected native-tree checker/schema and 90
+explicit filesystem-simulation tests are implemented. Main checks: 962 source tests/two POSIX
+skips, 156 related tests and lint/types/docs passed. Actual Linux-root verification passed nine
+files/fourteen aliases without runtime changes; live 35B stayed idle without restart. Five preceding
+exact-`01637a1` CI jobs passed, not CI for this later source. Tree identity is not build/model/offline/
+deployment acceptance. Q5 remains partial; no public thinking or serving-model change occurred.
+
+کد تازهٔ بررسی runtime در ۵ اکتبر: ابزار/طرح فقط‌خواندنیِ درخت بومی و ۹۰ آزمون صریحِ شبیه‌سازی
+فایل‌سیستم پیاده شدند. کنترل اصلی: ۹۶۲ آزمون کد موفق/دو مورد POSIX اجرا‌نشده، ۱۵۶ آزمون مرتبط
+و lint/نوع/مستندات موفق‌اند. بررسی واقعیِ root در Linux، نه فایل/چهارده پیوند را بدون تغییر
+runtime تأیید کرد؛ 35B بی‌درخواست و بدون restart ماند. پنج کنترل CI پیشینِ کد دقیق `01637a1`
+موفق‌اند، نه CI کد بعدی این گام. هویت درخت، پذیرش ساخت/مدل/آفلاین/استقرار نیست. Q5 ناقص و
+استدلال عمومی/مدل زنده ثابت‌اند.
+
 Latest diagnostic, 2026-10-05: the distinct exact-`f6cff8f` Q8 standard retest failed coding,
 source/scope preservation and the 120-second hypothesis deadline. Fourteen final answers were
 recorded; the final Persian hypothesis was not run. Trial cleanup and unchanged baseline readiness
