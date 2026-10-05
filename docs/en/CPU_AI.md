@@ -1,14 +1,22 @@
 # Local CPU-only AI and capacity planning
 
-The distinct no-BLAS standard trial ended failed at 20:55:02 UTC on 2026-10-05: fourteen finals,
+The distinct `b94a84c` no-BLAS standard retest ended failed at 21:14:22 UTC on 2026-10-05:
+eleven stopped finals, Persian stale/partial deadline failure at 120234 ms, four cases not run.
+Main/independent review agree on seven passes/five failures/four not run. Source/date/collection
+time are now preserved in EN evidence, but explicit authorized scope is still omitted. Both network
+answers and FA coding fail. Load/controller took 6621/567205 ms; owned cleanup and unchanged live
+35B readiness passed. Exact `f9a4a83` CI passed all five jobs. A distinct reviewed NUMA comparison
+started at 21:23:44 UTC, loaded in 6002 ms and is in progress, not an optimum or acceptance;
+no live model, context or thinking setting changed.
+
+The earlier `f6cff8f` no-BLAS standard trial ended failed at 20:55:02 UTC: fourteen finals,
 English hypothesis timeout at 120003 ms, Persian hypothesis not run. Protected packaging/static
 closure/tree checks and actual seven-library/no-BLAS maps passed within their stated scope; owned
 cleanup and unchanged live baseline passed. First EN/FA native prefill took 22428.166/19713.992 ms
 for 359/369 uncached tokens; later observed generation was about 1.18–1.20 tokens/second. Warm-cache,
 build and instrumentation differences limit attribution; these are not TTFT, optimum, thinking or
 near-context acceptance. Main/independent review agree on nine passes/six failures/one not run; no
-live model/profile changed. A separately pinned `b94a84c` standard retest started at 21:04:55 UTC,
-loaded in 6621 ms and is in progress; do not infer its outcome.
+live model/profile changed. Preserve that dated failure separately from the retest above.
 
 Fresh build003 completed offline in 130332 ms at 20:20:41 UTC on 2026-10-05, with unchanged
 serving baseline and reconciled cleanup. All eight read-only-inspected ELF outputs have literal

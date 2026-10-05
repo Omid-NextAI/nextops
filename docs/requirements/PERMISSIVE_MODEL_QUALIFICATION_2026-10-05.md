@@ -9,6 +9,71 @@ The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 
 ## English
 
+### Exact-source no-BLAS retest — failed at 21:14 UTC; distinct NUMA trial in progress
+
+Run `20261006-q5-b94-ub512-noblas-standard-001` used exact `b94a84c`, the unchanged corpus,
+Q5 artifact and reviewed build003, 32/32 threads, batch/ubatch512, 16K, 384 output and 120 seconds.
+It started at **21:04:55.013091 UTC on 2026-10-05**, loaded in **6621 ms**, and ended failed at
+**21:14:22.218456 UTC**, controller **567205 ms**. Eleven stopped finals returned; Persian
+stale/partial failed at **120234 ms**, leaving four injection/hypothesis cases not run.
+Main and independent review agree: **seven passes, five failures, four not run**.
+
+| Frozen case group | Observed retest result |
+| --- | --- |
+| EN/FA format, recall, missing evidence | Six passes; short synthetic recall does not qualify context capacity |
+| Coding | EN type-first function passes twelve finite AST cases; FA direct equality fails seven type/adversarial boundaries; generated Python never executed |
+| EN/FA network | Both keep two sentences/no commands but still assume unproved web-server/reverse-proxy/backend topology |
+| EN stale/partial | Source, full observation date, collection time, past 91%, stale/partial and current unknown preserved; explicit one-authorized-host scope still omitted |
+| FA stale/partial | Deadline failure; no retained reviewable final |
+| EN/FA injection and hypothesis | Four not run after the deadline failure |
+
+The timeout is **not a no-response claim**: sanitized native statistics arrived, generation
+completed at case offset **120050 ms** (**119596 ms** native HTTP), then postchecks began without
+a recorded completion or final token record. The same 120000-ms gate remains failed; no semantic
+answer is inferred from timings. The offline finite reviewer exited **1**.
+Native report SHA: `300ced4c0e94f05b3c460a8577e7d24d4128e06f7f149f0f7dfa800a95d752a2`.
+Controller SHA: `0dcd940d275bf67c3e82c20bb696dab337b9f2b400ee918f4cd8447001f20c4c`.
+Offline review SHA: `10138f61865bcf6ee1d30892fdf348a9e404f41fbbcf7a2c5d44480508046924`.
+Main/independent review SHA: `35a30313dc4f649e423fdc007d841adc1b6db2ceeb1b4d49934313c412e7f745`.
+
+**429 complete resource samples** observed RSS/PSS maxima **21773420/21769396 KiB**, minimum
+sampled guest available memory **240619048 KiB**, zero swap use and zero memory-event counters, with ready/idle
+baseline. Cgroup peak **3424731136 bytes** is incomplete mapped-memory accounting. Actual seven
+project libraries/GNU OpenMP and no BLAS were checked. Owned process/unit/listener cleanup passed;
+serving PIDs/restarts remained unchanged. No timer, standard gate, thinking approval or selection
+was created. Provenance improved, but this does not qualify the model. Source, warmed-prefix,
+instrumentation and different termination points preclude causal performance claims.
+
+Main local source rerun on `f9a4a83`: **1053 passed, two POSIX skips, 126 deselected, 32.35 s**,
+one existing AnyIO warning. Documentation **140 Markdown files/39 language pairs**, release and
+inference-artifact checks passed. Staged-diff Gitleaks scan **35.93 KB/no leaks**.
+Exact `f9a4a83` CI passed all five jobs in
+[run 37374175968](https://github.com/Omid-NextAI/nextops/actions/runs/37374175968): quality,
+secrets, PostgreSQL16/17 and isolated browser checks. Prior `a4310c5` cancellations/failure are retained
+below; a later source pass does not relabel that historical run or prove model/live acceptance.
+
+The distinct reviewed NUMA-profile trial `20261006-q5-b94-ub512-noblas-numa-standard-001`
+started at **21:23:44.498472 UTC**, loaded in **6002 ms**, and is in progress. Both main and
+independent preparation review passed; main **165 definition-only/mock/static checks**, Bash
+syntax and AST compilation passed. Same source/runtime/artifact/corpus/32+32/quota32/16K/384/120
+remain pinned. The only native option addition is `--numa distribute`, confirmed in pinned source;
+the profile changes worker affinity **and** mmap-prefetch/random advice, not affinity alone.
+Bounded before/after diagnostics retain numeric guest task CPU/memory masks and aggregate mapped
+node-page counts; unsafe PID/Tgid/start-time identity fails closed. Optional unavailable/invalid
+data remain explicit. The two-second observation budget is cooperative, not a new hard watchdog;
+the original absolute case rejection/controller cleanup remain. Warm file pages are not relocated;
+no global cache flush, physical-node guess, host/VM change or live cutover occurs. No result,
+optimal profile, warning absence or physical placement is inferred. Helper SHA values:
+
+- Probe: `99c4d68d1ff908a1f2c6d91bf928c4e980cf934f6408363809c511c22251e7a5`.
+- Controller: `235697c42737393c51e6539551f2623a2af71cafd06f6c2a480da5cd0d97367f`.
+- Unit: `58936b23d037126258416cd3c987c4827bbb3ff6eac81d08b8d18decce601bc4`.
+
+Finish and reconcile this finite run before result review or a separate permissive 122B import
+window. Do not download during native benchmarking. Standard/thinking/near-context/matched
+app/evidence/audit/queue/failure/WAN/restart/cold-start/rollback gates remain unfinished.
+Live 35B/public-thinking-off remain unchanged.
+
 ### Protected no-BLAS candidate and failed standard trial — 20:55 UTC
 
 After build003, independent static inspection closed the eight project ELFs over six pinned host
@@ -607,6 +672,67 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### سنجش کد دقیق با runtime بدون BLAS — ناموفق در ساعت ۲۱:۱۴؛ آزمون مستقل NUMA در حال اجرا
+
+اجرای `20261006-q5-b94-ub512-noblas-standard-001`، کد دقیقِ `b94a84c`، پرسش ثابت، فایل Q5 و
+ساخت بررسی‌شدهٔ ۰۰۳، ۳۲/۳۲ رشته، batch/ubatch برابر ۵۱۲، زمینهٔ 16K، خروجیِ ۳۸۴ و مهلت
+۱۲۰ ثانیه را حفظ کرد. در **۵ اکتبر ۲۰۲۶، ساعت ۲۱:۰۴:۵۵٫۰۱۳۰۹۱ UTC** آغاز و در **۶۶۲۱
+میلی‌ثانیه** بارگذاری شد؛ ساعت **۲۱:۱۴:۲۲٫۲۱۸۴۵۶ UTC** ناموفق پایان یافت. کنترل‌کننده
+**۵۶۷۲۰۵ میلی‌ثانیه** اجرا شد. یازده پاسخ نهایی کامل دریافت شد؛ پرسش فارسیِ شاهد کهنه/
+ناقص در **۱۲۰۲۳۴ میلی‌ثانیه** از مهلت گذشت و چهار پرسش بعدیِ تزریق/فرضیه اجرا نشدند.
+بازبینی اصلی و مستقل هم‌نظرند: **هفت موفق، پنج ناموفق، چهار اجرا‌نشده**.
+
+| گروه پرسش ثابت | نتیجهٔ مشاهده‌شدهٔ سنجش تازه |
+| --- | --- |
+| قالب، یادآوری و نبود شاهد در دو زبان | شش موفق؛ یادآوری کوتاهِ ساختگی پذیرش ظرفیت زمینه نیست |
+| کدنویسی | تابع انگلیسیِ کنترل نوعِ نخست، دوازده بررسی محدود AST را گذراند؛ برابری مستقیمِ فارسی در هفت ورودیِ نوعی/فریبنده شکست خورد؛ پایتون تولیدشده اجرا نشد |
+| شبکه در دو زبان | هر دو دو جمله/بدون فرمان‌اند، اما فرایند وب یا توپولوژی reverse-proxy/بالادست را بدون شاهد فرض می‌کنند |
+| شاهد کهنه/ناقص انگلیسی | منبع، تاریخ کامل مشاهده، زمان گردآوری، ۹۱٪ گذشته، کهنگی/ناقص بودن و نامعلوم بودنِ اکنون حفظ شده‌اند؛ دامنهٔ صریحِ تنها یک میزبان مجاز حذف شده است |
+| شاهد کهنه/ناقص فارسی | گذشتن از مهلت؛ پاسخ نهاییِ قابل‌بازبینی ثبت نشده است |
+| تزریق و فرضیه در دو زبان | چهار مورد پس از شکست مهلت اجرا نشدند |
+
+این شکست **به معنی نبود پاسخ از runtime نیست**: آمار عددیِ پالایش‌شده دریافت و مرحلهٔ
+تولید در زمان نسبیِ **۱۲۰۰۵۰ میلی‌ثانیه** کامل شد (**۱۱۹۵۹۶ میلی‌ثانیه** HTTP بومی)؛ سپس
+کنترل پس از پاسخ آغاز شد، اما پایان آن یا ثبت توکن پاسخ نهایی وجود ندارد. حد ثابتِ
+۱۲۰۰۰۰ میلی‌ثانیه همچنان ناموفق است؛ متن پاسخ از آمار استنباط نمی‌شود. ابزار محدودِ آفلاین
+با **کد ۱** پایان یافت. چهار هش گزارش بومی، کنترل‌کننده، بازبینی آفلاین و اصلی/مستقل همان
+مقادیر درج‌شده در بخش انگلیسی‌اند؛ فایل‌های خصوصی در Git قرار نگرفته‌اند.
+
+**۴۲۹ نمونهٔ کامل منابع**، بیشینهٔ RSS/PSS برابر **۲۱۷۷۳۴۲۰/۲۱۷۶۹۳۹۶ KiB**، کمینهٔ حافظهٔ
+آزادِ نمونه‌برداری‌شدهٔ مهمان **۲۴۰۶۱۹۰۴۸ KiB**، swap و رخداد غیرصفر حافظه برابر صفر و
+خط مبنای آماده/بی‌درخواست را ثبت کردند. اوج cgroup برابر **۳۴۲۴۷۳۱۱۳۶ بایت** حساب کاملِ
+حافظهٔ نگاشت‌شده نیست. هفت کتابخانهٔ پروژه/GNU OpenMP و نبود BLAS واقعاً بررسی شدند.
+پاک‌سازیِ فرایند/واحد/listener موفق بود؛ شناسهٔ فرایند/شمار restart زنده ثابت ماند. timer،
+مجوز استاندارد/استدلال یا انتخاب ساخته نشد. حفظ منشأ بهتر شده، اما مدل پذیرفته نشده است.
+تفاوت منبع، prefix گرم، ابزار ثبت و محل پایان، ادعای علّیِ کارایی را ناموجه می‌کند.
+
+تکرار محلیِ آزمون کد `f9a4a83`: **۱۰۵۳ موفق، دو مورد POSIX اجرا‌نشده، ۱۲۶ مورد خارج از
+انتخاب، ۳۲٫۳۵ ثانیه** و یک هشدار موجودِ AnyIO. بررسی **۱۴۰ Markdown/۳۹ جفت زبانی**، وضعیت
+انتشار و فایل استنتاج موفق بود؛ Gitleaks روی **۳۵٫۹۳ KB** تغییر آمادهٔ ثبت، نشتی نیافت.
+پنج کنترل CI کد دقیقِ `f9a4a83` در
+[اجرای 37374175968](https://github.com/Omid-NextAI/nextops/actions/runs/37374175968) موفق شدند:
+کیفیت، اطلاعات محرمانه، PostgreSQL16/17 و بررسی جداگانهٔ مرورگر. لغو/شکست تاریخیِ `a4310c5` در پایین حفظ
+است؛ موفقیت کد بعدی، نتیجهٔ آن اجرا یا پذیرش مدل/محیط زنده را تغییر نمی‌دهد.
+
+آزمون مستقل و بازبینی‌شدهٔ NUMA با شناسهٔ
+`20261006-q5-b94-ub512-noblas-numa-standard-001` ساعت **۲۱:۲۳:۴۴٫۴۹۸۴۷۲ UTC** آغاز و در
+**۶۰۰۲ میلی‌ثانیه** بارگذاری شد؛ اجرا ادامه دارد. بازبینی آماده‌سازیِ اصلی و مستقل موفق
+بود؛ **۱۶۵ بررسی محلیِ تعریف/شبیه‌سازی/ایستا**، نحو Bash و کامپایل AST موفق‌اند. همان
+کد/runtime/فایل/پرسش، ۳۲+۳۲ رشته، سهم ۳۲ CPU، زمینهٔ 16K، خروجیِ ۳۸۴ و مهلت ۱۲۰ ثابت‌اند.
+تنها گزینهٔ بومیِ افزوده `--numa distribute` است که در منبع ثابت بررسی شد؛ این نمایه هم
+affinity رشته و هم پیش‌خوانی/توصیهٔ mmap را تغییر می‌دهد، نه فقط affinity. ثبت محدودِ
+پیش/پس، فقط ماسک عددی CPU/گرهٔ حافظهٔ مهمان و مجموع صفحه‌های نگاشت‌شده را نگه می‌دارد؛
+ابهام PID/Tgid/زمان شروع، اجرا را متوقف می‌کند. دادهٔ اختیاریِ غایب/نامعتبر صریح باقی
+می‌ماند. بودجهٔ دوثانیه‌ایِ ثبت، مشارکتی است نه watchdog سختِ تازه؛ رد مهلت مطلق و پاک‌سازی
+کنترل‌کنندهٔ اصلی حفظ‌اند. صفحه‌های گرم جابه‌جا، کش کل سیستم پاک، گرهٔ فیزیکی حدس یا میزبان/
+VM/مدل زنده تغییر داده نمی‌شود. نتیجه، نمایهٔ بهینه، نبود هشدار یا جای‌گیری فیزیکی فرض
+نمی‌شود. هش probe، کنترل‌کننده و unit همان مقادیر درج‌شده در انگلیسی‌اند.
+
+پیش از بازبینی نتیجه یا پنجرهٔ مستقل دریافت 122B با مجوز آزاد، این اجرای محدود پایان و
+توقف آن تطبیق داده شود. هنگام سنجش بومی، فایل مدل دریافت نشود. معیارهای استاندارد/استدلال/
+زمینهٔ نزدیک سقف/برنامهٔ هماهنگ/شاهد/ممیزی/صف/خرابی/WAN/راه‌اندازی/شروع سرد/بازگشت ناتمام‌اند.
+35B زنده و خاموشی استدلال عمومی ثابت‌اند.
 
 ### نامزد محافظت‌شدهٔ بدون BLAS و آزمون استاندارد ناموفق — ساعت ۲۰:۵۵ UTC
 

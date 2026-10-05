@@ -1,26 +1,28 @@
 # Project state / وضعیت پروژه
 
-Latest native checkpoint, 2026-10-05 at 20:55:02 UTC: the protected no-BLAS candidate trial returned
-fourteen final answers, then failed English hypothesis at 120003 ms; Persian hypothesis was not run.
-Its 6701-ms startup, seven actual project-library mappings with no BLAS, unchanged baseline and owned
-cleanup are recorded. Static dependency closure, protected fourteen-file/twelve-alias packaging and
-explicit v1.1 tree verification passed; these are not semantic or deployment acceptance. The offline
-finite checker exited 1; main/independent answer review agree on nine passes/six failures/one not run.
-Live 35B/public-thinking-off
-are unchanged. See the [paired record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
-The separately reviewed exact-`b94a84c` semantic retest started at 21:04:55 UTC, loaded in 6621 ms
-and remains in progress; no result or acceptance is inferred.
+Latest native checkpoint, 2026-10-05 at 21:14:22 UTC: the distinct exact-`b94a84c` no-BLAS retest
+failed after eleven stopped finals. Persian stale/partial exceeded the unchanged 120-second gate
+at 120234 ms; four later injection/hypothesis cases were not run. Main/independent review agree on
+seven passes/five failures/four not run. EN evidence preserves source/date/collection time now, but
+loses authorized scope; both network answers and FA coding still fail. Startup took 6621 ms,
+controller 567205 ms; owned cleanup, seven actual project libraries/no BLAS and unchanged ready/idle
+baseline passed in their recorded scopes. The earlier `f6cff8f` failure remains preserved. Exact
+`f9a4a83` CI passed all five jobs, including PostgreSQL16/17 and isolated browser checks; this is source
+evidence, not candidate acceptance. Live 35B/public-thinking-off remain unchanged. A separately
+reviewed NUMA comparison started at 21:23:44 UTC, loaded in 6002 ms and is in progress, not accepted. See the
+[paired record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
 
-گام تازهٔ اجرای بومی، در ۵ اکتبر ۲۰۲۶ ساعت ۲۰:۵۵:۰۲ UTC: نامزد محافظت‌شدهٔ بدون BLAS،
-چهارده پاسخ نهایی داد و سپس پرسش انگلیسیِ فرضیه در ۱۲۰۰۰۳ میلی‌ثانیه از مهلت گذشت؛ پرسش
-فارسیِ آن اجرا نشد. بارگذاری ۶۷۰۱ میلی‌ثانیه‌ای، نگاشت واقعیِ هفت کتابخانه بدون BLAS، حفظ
-خط مبنا و پاک‌سازیِ متعلق به آزمون ثبت شدند. بررسی ایستای وابستگی، بسته‌بندی محافظت‌شدهٔ
-چهارده فایل/دوازده پیوند و کنترل واقعیِ نسخهٔ ۱٫۱ موفق‌اند؛ این‌ها پذیرش معنایی یا استقرار
-نیستند. ابزار محدودِ آفلاین با کد ۱ پایان یافت؛ بازبین اصلی/مستقل، نه موفق/شش ناموفق/یک
-اجرا‌نشده ثبت کردند. 35B زنده و خاموشی
-استدلال عمومی ثابت‌اند. گزارش دوزبانهٔ بالا مرجع است.
-سنجش معناییِ مستقل و بازبینی‌شده با کد دقیقِ `b94a84c` ساعت ۲۱:۰۴:۵۵ UTC آغاز شد؛ بارگذاری
-۶۶۲۱ میلی‌ثانیه طول کشید و اجرا ادامه دارد. نتیجه یا پذیرش فرض نمی‌شود.
+گام تازهٔ اجرای بومی در ۵ اکتبر ۲۰۲۶، ساعت ۲۱:۱۴:۲۲ UTC: سنجش مستقلِ بدون BLAS با کد
+دقیقِ `b94a84c` پس از یازده پاسخ نهایی کامل ناموفق شد. پرسش فارسیِ شاهد کهنه/ناقص در
+۱۲۰۲۳۴ میلی‌ثانیه از حد ثابتِ ۱۲۰ ثانیه گذشت؛ چهار پرسش بعدیِ تزریق/فرضیه اجرا نشدند.
+بازبینی اصلی/مستقل، هفت موفق/پنج ناموفق/چهار اجرا‌نشده ثبت کردند. پاسخ انگلیسیِ شاهد
+اکنون منبع/تاریخ/زمان گردآوری را حفظ می‌کند، اما دامنهٔ مجاز را حذف می‌کند؛ دو پاسخ شبکه
+و کدنویسی فارسی همچنان ناموفق‌اند. بارگذاری ۶۶۲۱ و اجرای کنترل‌کننده ۵۶۷۲۰۵ میلی‌ثانیه
+طول کشید؛ پاک‌سازی، نگاشت واقعیِ هفت کتابخانه بدون BLAS و حفظ آمادگیِ خط مبنای بی‌درخواست
+در دامنهٔ ثبت‌شده موفق‌اند. شکست قبلیِ `f6cff8f` حفظ است. پنج کنترل CI کد دقیقِ `f9a4a83`،
+شامل PostgreSQL16/17 و بررسی جداگانهٔ مرورگر، موفق شدند؛ این شاهد کد است نه پذیرش نامزد. 35B زنده و خاموشی
+استدلال عمومی ثابت‌اند. مقایسهٔ مستقل و بازبینی‌شدهٔ NUMA ساعت ۲۱:۲۳:۴۴ UTC آغاز و در
+۶۰۰۲ میلی‌ثانیه بارگذاری شد؛ اجرا ادامه دارد و پذیرفته نشده است. گزارش دوزبانهٔ بالا مرجع است.
 
 Previous build checkpoint — historical:
 

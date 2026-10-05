@@ -1,24 +1,32 @@
 # Next task / کار بعدی
 
-Current checkpoint: the no-BLAS standard trial ended failed at 20:55:02 UTC on 2026-10-05.
-Fourteen final answers returned; English hypothesis timed out at 120003 ms and Persian hypothesis
-was not run. Protected candidate packaging, static dependency closure, actual tree verification and
-seven-library/no-BLAS mapping checks passed within their stated scopes. Owned cleanup and unchanged
-live 35B readiness passed. Main/independent review agree on nine passes/six failures/one not run.
-The reviewed distinct `b94a84c` no-BLAS retest started at 21:04:55 UTC, loaded in 6621 ms and is
-running with the same corpus/profile/deadline. Finish and reconcile it before independent final-answer
-review; no failed result authorizes
-thinking, expanded context or selection. Matched app/evidence/audit/WAN/restart/rollback remain separate.
+Current checkpoint: the distinct `b94a84c` no-BLAS standard retest ended failed at 21:14:22 UTC
+on 2026-10-05. Eleven stopped finals returned; Persian stale/partial exceeded the unchanged
+120-second gate at 120234 ms, then four injection/hypothesis cases were not run. Main/independent
+review agree on seven passes/five failures/four not run. EN evidence now preserves source and times
+but still omits authorized scope; network topology and FA coding remain failed. Owned cleanup and
+unchanged live 35B readiness passed. Exact `f9a4a83` CI passed all five jobs; this is source evidence,
+not model acceptance. Preserve all prior trials. The separately reviewed NUMA-profile comparison
+started at 21:23:44 UTC, loaded in 6002 ms and is in progress. Finish and reconcile it before
+independent answer review: same pins, corpus, 32/32 threads, 16K, 384 output and 120 seconds,
+only `--numa distribute` plus bounded numeric diagnostics. Never flush global caches, guess physical
+nodes, widen the deadline or select a failed candidate. Thinking, near-context and matched
+app/evidence/audit/WAN/restart/rollback remain separate; qualify the permissive 122B alternative
+independently, without simultaneous download and native benchmarking.
 
-گام جاری: آزمون استانداردِ بدون BLAS در ۵ اکتبر ۲۰۲۶، ساعت ۲۰:۵۵:۰۲ UTC ناموفق پایان یافت.
-چهارده پاسخ نهایی دریافت شد؛ پرسش انگلیسیِ فرضیه در ۱۲۰۰۰۳ میلی‌ثانیه از مهلت گذشت و پرسش
-فارسیِ آن اجرا نشد. بسته‌بندی محافظت‌شده، بررسی ایستای وابستگی، کنترل واقعیِ درخت و نگاشت
-هفت کتابخانه بدون BLAS در دامنهٔ خود موفق‌اند. پاک‌سازیِ متعلق به آزمون و حفظ آمادگیِ 35B
-زنده موفق‌اند. بازبینی اصلی/مستقل، نه موفق/شش ناموفق/یک اجرا‌نشده ثبت کردند.
-سنجش مستقل و بازبینی‌شدهٔ `b94a84c` با runtime بدون BLAS و همان پرسش/نمایه/مهلت، ساعت
-۲۱:۰۴:۵۵ UTC آغاز شد؛ بارگذاری ۶۶۲۱ میلی‌ثانیه طول کشید و اجرا ادامه دارد. پیش از بازبینی
-مستقلِ پاسخ نهایی، اجرای محدود و تطبیق توقف آن کامل شود؛ شکست، مجوز استدلال، زمینهٔ بزرگ‌تر یا انتخاب نیست. پذیرش
-هماهنگِ برنامه/شاهد/ممیزی/WAN/راه‌اندازی/بازگشت جدا باقی می‌ماند.
+گام جاری: سنجش مستقلِ استاندارد با کد `b94a84c` و runtime بدون BLAS در ۵ اکتبر ۲۰۲۶، ساعت
+۲۱:۱۴:۲۲ UTC ناموفق پایان یافت. یازده پاسخ نهایی کامل شد؛ پرسش فارسیِ شاهد کهنه/ناقص در
+۱۲۰۲۳۴ میلی‌ثانیه از حد ثابتِ ۱۲۰ ثانیه گذشت و چهار پرسش بعدیِ تزریق/فرضیه اجرا نشدند.
+بازبینی اصلی/مستقل، هفت موفق/پنج ناموفق/چهار اجرا‌نشده ثبت کردند. شاهد انگلیسی اکنون منبع
+و زمان‌ها را حفظ می‌کند، اما دامنهٔ مجاز را حذف می‌کند؛ فرض توپولوژی شبکه و کدنویسی فارسی
+نیز ناموفق‌اند. پاک‌سازی و حفظ آمادگیِ 35B زنده موفق‌اند. پنج کنترل CI کد دقیقِ `f9a4a83`
+موفق شدند؛ این شاهد کد است، نه پذیرش مدل. آزمون‌های پیشین حفظ شوند. مقایسهٔ مستقل و
+بازبینی‌شدهٔ NUMA ساعت ۲۱:۲۳:۴۴ UTC آغاز و در ۶۰۰۲ میلی‌ثانیه بارگذاری شد؛ اجرا ادامه دارد.
+پیش از بازبینی مستقلِ پاسخ، اجرا پایان و توقف آن تطبیق داده شود: همان هش/پرسش، ۳۲/۳۲
+رشته، 16K، خروجیِ ۳۸۴ و مهلتِ ۱۲۰ ثانیه؛ فقط `--numa distribute` و ثبت عددیِ محدود افزوده
+شده‌اند. کش کل سیستم پاک، گرهٔ فیزیکی حدس، مهلت طولانی یا نامزد ناموفق انتخاب نشود.
+استدلال، زمینهٔ نزدیک سقف و برنامه/شاهد/ممیزی/WAN/راه‌اندازی/بازگشت جدا باقی می‌مانند؛
+گزینهٔ 122B با مجوز آزاد، مستقل و بدون دریافت هم‌زمان با سنجش بومی صلاحیت‌سنجی شود.
 
 ## Prior checkpoints — historical / گام‌های پیشین — سوابق
 

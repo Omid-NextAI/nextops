@@ -1,5 +1,23 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Retained exact-source no-BLAS result and distinct NUMA preparation — 2026-10-05
+
+The `b94a84c` retest ended failed at 21:14:22 UTC: eleven stopped finals, Persian stale/partial
+timeout at 120234 ms, four cases not run. Main/independent review agree on seven passes/five
+failures/four not run. Source/time preservation improved, but authorized scope, topology and FA
+coding still fail. Cleanup and unchanged baseline passed. Exact `f9a4a83` CI passed five jobs.
+A separately reviewed NUMA comparison started at 21:23:44 UTC, loaded in 6002 ms and is in progress,
+not performance/model acceptance.
+No live model, context or thinking setting changed; prior failures remain preserved.
+
+سنجش `b94a84c` ساعت ۲۱:۱۴:۲۲ UTC ناموفق پایان یافت: یازده پاسخ نهایی کامل، گذشتن پرسش
+فارسیِ شاهد کهنه/ناقص از مهلت در ۱۲۰۲۳۴ میلی‌ثانیه و چهار مورد اجرا‌نشده. بازبینی اصلی/
+مستقل، هفت موفق/پنج ناموفق/چهار اجرا‌نشده ثبت کردند. حفظ منبع/زمان بهتر شد، اما دامنهٔ
+مجاز، توپولوژی و کدنویسی فارسی همچنان ناموفق‌اند. پاک‌سازی و حفظ خط مبنا موفق‌اند. پنج
+کنترل CI کد دقیقِ `f9a4a83` موفق شدند. مقایسهٔ مستقل و بازبینی‌شدهٔ NUMA ساعت ۲۱:۲۳:۴۴ UTC
+آغاز و در ۶۰۰۲ میلی‌ثانیه بارگذاری شد؛ اجرا ادامه دارد، نه پذیرش کارایی/مدل. مدل، زمینه و
+تنظیم استدلالِ زنده تغییر نکردند؛ شکست‌های پیشین حفظ‌اند.
+
 ## Protected no-BLAS packaging and retained native trial failure — 2026-10-05
 
 Static ELF/system closure, protected candidate packaging and actual v1.1 integrity verification
