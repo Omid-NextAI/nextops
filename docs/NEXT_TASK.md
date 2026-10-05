@@ -1,20 +1,20 @@
 # Next task / کار بعدی
 
-New source-only UI follow-up: qualify the 88-browser-test evidence-aging increment with exact-head
-CI and offline packaging, then guarded app-only deployment/real audit and exact `f169875` rollback.
-Preserve the preceding fixture-login failure record; never substitute fixture coverage for live
-acceptance. The offline 122B planner is prepared/not-run and does not enable thinking or a profile.
+Latest UI follow-up is complete at `3d92b71`: 88 browser tests, exact-head CI, offline packaging,
+guarded real browser/audit, actual five-minute aging and exact `f169875` rollback/reapply passed.
+Both guards are stopped. Preserve the preceding fixture-login failure and do not repeat this
+completed increment. The offline 122B planner is prepared/not-run and enables no thinking/profile.
 Continue supervised pinned import in finite windows; retained failed retry files need distinct
 batch paths. Local range hashes/unique coverage are not complete upstream shard acceptance.
 
-پیگیری تازهٔ رابط فقط در کد است: گام تازگی شاهد با ۸۸ آزمون مرورگر، CI همان کد و بسته‌بندی آفلاین
-سنجیده شود؛ سپس استقرار محدودِ برنامه، ممیزی واقعی و بازگشت دقیق به `f169875` جدا پذیرفته شوند.
-شکست ورودِ آزمایشیِ پیشین حفظ و آزمون ساختگی جای پذیرش زنده ننشیند. برنامه‌ریز 122B آماده و
+پیگیری تازهٔ رابط با `3d92b71` تکمیل است: ۸۸ آزمون مرورگر، CI همان کد، بسته‌بندی آفلاین،
+مرورگر/ممیزی واقعی، گذشت واقعیِ پنج دقیقه و بازگشت دقیق به `f169875`/استقرار دوباره موفق‌اند.
+هر دو محافظ متوقف‌اند. شکست ورودِ آزمایشیِ پیشین حفظ و گام تکمیل‌شده تکرار نشود. برنامه‌ریز 122B آماده و
 اجرا‌نشده است؛ استدلال یا نمایه را فعال نمی‌کند. ورود ثابت تحت نظارت، در پنجره‌های محدود ادامه
 یابد؛ فایلِ شکست محفوظ به مسیر جداگانه برای هر نوبت نیاز دارد. هش محلیِ بخش و پوشش یکتای دریافت،
 پذیرش هش کاملِ فایل اصلی نیستند.
 
-Current owner-directed checkpoint, 2026-10-05: the motion/panel repair app `f169875` is now serving;
+Earlier owner-directed checkpoint, 2026-10-05: the motion/panel repair app `f169875` served;
 70 local browser tests, exact-source CI, real browser/audit and `836b1ea` rollback/reapply passed
 in the [UI repair record](requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md). Do not redeploy
 this completed increment merely to repeat it. Continue the supervised pinned Apache Qwen3.5-122B-A10B
@@ -26,7 +26,7 @@ files/license limitations remain. The extra 48-thread 27B coding timeout is fail
 Maintain the serving 35B rollback and bounded OS/application headroom. No automatic live model or
 thinking selection before matched app/evidence/audit/offline/rollback gates pass.
 
-گام جاریِ درخواستی مالک در ۵ اکتبر: برنامهٔ اصلاح حرکت/پنل با `f169875` زنده است؛ ۷۰ آزمون
+گام پیشینِ درخواستی مالک در ۵ اکتبر: برنامهٔ اصلاح حرکت/پنل با `f169875` زنده شد؛ ۷۰ آزمون
 مرورگر محلی، CI همان کد، مرورگر/ممیزی واقعی و بازگشت دقیق به `836b1ea`/استقرار دوباره، طبق
 گزارش اصلاح رابط بالا موفق‌اند. گام تکمیل‌شده صرفاً برای تکرار دوباره مستقر نشود. دریافت محدودِ
 Qwen3.5-122B-A10B Q5 با مجوز Apache، تحت نظارت و روی حجم بزرگِ آماده ادامه یابد؛ شکست‌های

@@ -1,5 +1,17 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Evidence-aging follow-up — controlled live, 2026-10-05
+
+App `3d92b71` passed five exact-source CI jobs, offline install, first/final real browser/audit,
+actual collection-time aging without requery/focus change and exact `f169875` rollback/reapply.
+Final identity/unit/readiness passed and both guards stopped. The dated repair record retains
+prior fixture failures. No model, thinking, credential, schema, resource or production-status change.
+
+برنامهٔ `3d92b71` پنج کنترل CI همان کد، نصب آفلاین، مرورگر/ممیزی نخست/نهایی، قدیمی‌شدن واقعی
+شاهد بدون گردآوری/تغییر تمرکز و بازگشت دقیق به `f169875`/استقرار دوباره را پذیرفت. هویت/واحد/
+آمادگی نهایی موفق و هر دو محافظ متوقف‌اند. شکست ساختگیِ پیشین در گزارش محفوظ است. مدل،
+استدلال، اعتبارنامه، طرح پایگاه، منابع و وضعیت پذیرش تولید تغییر نکردند.
+
 ## Evidence freshness and offline qualification tooling — source, 2026-10-05
 
 Age selected evidence without requery/focus loss, remove duplicate partial labels, bound timer

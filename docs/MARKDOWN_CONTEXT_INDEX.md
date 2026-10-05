@@ -52,7 +52,7 @@ remaining task-specific sources. The repository skill
 - `docs/en/REFERENCE_UI.md` — English UI preview, source verification, controlled live qualification and screenshot handoff.
 - `docs/fa/REFERENCE_UI.md` — Persian UI preview, source verification, controlled live qualification and screenshot handoff.
 - `docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md` — Bilingual exact app UI deployment, preserved failures, browser/audit/rollback evidence and unrun model/offline gates.
-- `docs/requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md` — Bilingual exact responsive UI repair deployment, 70 browser regressions, real generation/audit and rollback/reapply; model and unrun offline gates unchanged.
+- `docs/requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md` — Bilingual exact responsive/aging UI deployments, retained 70/88 browser records, actual collection-time aging, generation/audit and exact rollback/reapply; model and unrun offline gates unchanged.
 
 - `docs/requirements/USER_MANAGEMENT_SPEC.md` — Bounded local admin account controls, immutable role profiles, audit/revocation and staged acceptance.
 

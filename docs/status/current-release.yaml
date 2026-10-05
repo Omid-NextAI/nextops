@@ -1,7 +1,7 @@
 ---
 $schema: ./release-status.schema.json
 schema_version: 2.2.0
-release_identifier: nextops-ui-repair-controlled-2026-10-05
+release_identifier: nextops-ui-freshness-controlled-2026-10-05
 observed_at: '2026-10-05'
 deployment_status: controlled_user_testing_not_production_accepted
 delivery_scope:
@@ -20,8 +20,8 @@ repository:
   inspected_baseline_commit: 625ca80b83fbdb80d0fba4dc4e770b189b6d623c
 components:
   application:
-    release: nextops-0.1.0-f169875
-    source_commit: f169875f17ff7bc3f751517cea6f17242c2f36e5
+    release: nextops-0.1.0-3d92b71
+    source_commit: 3d92b71d6456d95a530142424fbb69ae0d0d29d8
   connector:
     release: nextops-0.1.0-2a7c8dc
     source_commit: 2a7c8dc5dc99ebf203748380b7ab8ea7f89ac690
@@ -50,8 +50,8 @@ components:
     name: Zabbix
     version: '7.0.31'
 current_application_qualification:
-  release: nextops-0.1.0-f169875
-  source_commit: f169875f17ff7bc3f751517cea6f17242c2f36e5
+  release: nextops-0.1.0-3d92b71
+  source_commit: 3d92b71d6456d95a530142424fbb69ae0d0d29d8
   scope: application_revision_sensitive
   gates:
     - id: current_app_bounded_live_functionality

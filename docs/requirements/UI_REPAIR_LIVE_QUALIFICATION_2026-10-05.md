@@ -1,6 +1,80 @@
 # Login motion and panel repair — live qualification / پذیرش زندهٔ اصلاح حرکت ورود و پنل
 
-## English
+## Latest evidence-aging follow-up — controlled live `3d92b71`
+
+Observed 2026-10-05, after the earlier cutover retained below. App `nextops-0.1.0-3d92b71`
+is serving from source `3d92b71d6456d95a530142424fbb69ae0d0d29d8`.
+
+- Wheel SHA-256: `8134d3d06d386159105cc90ceb359edecc5ee99466e333c5798bab27abec02ed`.
+- Source archive SHA-256: `7aeb5ddb09f4002c75dfd6d3121941f3f161a140781bb63ca7393c9e332eb93c`.
+- Installed code: `0784792aeaeffa70d37a6aff39984954f5fba794cd2949d8e231e0de8fa2cfa3`.
+- Exact retained rollback: `f169875f17ff7bc3f751517cea6f17242c2f36e5`, code
+  `122e318660baea6cde8668e3b903e1abc65077a0f9efe91f0c92ff8a99b071ab`.
+
+The selected observation ages from its original collection time without recollection. Duplicate
+partial labels are removed; one visibility-aware timer preserves focus, tabs, raw data and provenance.
+A single polite contextual status announces a visible aging transition. Lifecycle regression covers
+hidden/unmounted/closed/account/logout/page states and archived response selection.
+
+Local combined source: **738 passed/two POSIX skips/126 deselected in 25.38s**; one existing AnyIO
+warning remains. Exact browser command with JUnit output in the paired UI guides: **88 passed in
+280.26s**. Preserve the preceding **87/88** fixture-login availability failure and four-case passing
+diagnostic rerun; its precise transport cause was not reproduced. No timeout/retry/auth bypass
+was added. [Exact-source CI 37311195442](https://github.com/Omid-NextAI/nextops/actions/runs/37311195442)
+passed all five jobs, including actual PostgreSQL 16/17 integration and security checks. Offline
+packaging includes all nine assets, no fixture, the same 40 locked dependencies plus the app,
+network-isolated install and successful 41-distribution checks. Gitleaks found no staged secrets.
+
+First real trial, read-only durable audit, exact `f169875` rollback with fresh login/CPU answer and
+final reapply passed. Both candidate trials used **actual elapsed collection time**, not a modified
+browser clock, to verify five-minute aging: unchanged collected time/raw/context/selection, no POST
+requery, unchanged keyboard focus and the contextual announcement. Final fresh request latencies
+were **4.750s** saved DNS, **41.703s** secondary English and **48.844s** secondary Persian. Each trial
+matched one chat-completion audit and two durable investigation/evidence hash pairs. Real browser
+origin restriction recorded zero external requests/page errors. Main inspected final login and EN/FA
+viewport screenshots; operational screenshots/reports stay protected outside Git.
+
+Final immutable code/package, stable service unit, readiness and zero failed units passed. Both
+rollback timers are stopped; the final guard stopped **after** browser/audit acceptance. Only the app
+restarted. Connector, inference API, 35B model, public thinking-off, resources, schema, credentials,
+permissions and CSP are unchanged. Full server WAN/cold start, load, independent recovery, broad
+model semantics and human screen-reader review remain separate unfinished gates.
+
+<div dir="rtl">
+
+### پیگیری تازهٔ تازگی شاهد — انتشار زندهٔ کنترل‌شدهٔ `3d92b71`
+
+در ۵ اکتبر ۲۰۲۶، پس از گذار پیشینِ محفوظ در پایین، برنامهٔ `nextops-0.1.0-3d92b71` از commit
+کاملِ بخش انگلیسی زنده شد. هش دقیق wheel، بایگانی، کد نصب‌شده و انتشارِ بازگشت `f169875`
+در همان بخش ثبت‌اند. شاهد انتخاب‌شده بر پایهٔ زمان اصلی گردآوری قدیمی می‌شود، نه گردآوری تازه.
+برچسب ناقص تکرار نمی‌شود؛ تنها یک تایمرِ وابسته به نمایش، تمرکز، زبانه، دادهٔ خام و منشأ را
+حفظ می‌کند. یک اعلانِ آرام و زمینه‌دار، تغییر قابل‌مشاهده را گزارش می‌کند. پنهان/جدا/بسته‌شدن،
+بخش حساب، خروج، چرخهٔ صفحه و انتخابِ پاسخ پیشین در پسرفت پوشش دارند.
+
+کد ترکیبی ۷۳۸ موفق، دو مورد POSIX اجرا‌نشده و ۱۲۶ مورد خارج از انتخاب در 25.38s داشت؛ هشدار
+پیشین AnyIO باقی است. مرورگر نهایی ۸۸ موفق در 280.26s ثبت کرد. شکست پیشینِ ورودِ آزمایشیِ
+۸۷ از ۸۸ و بازآزمایی موفقِ چهار مورد حفظ‌اند؛ علت دقیق انتقال تکرار نشد و مهلت، تکرار خودکار
+یا دورزدن ورود اضافه نشد. CI همان کد با پیوند بالا، هر پنج کنترل، از جمله PostgreSQL واقعی
+16/17 و امنیت را پذیرفت. هر نه دارایی بدون دادهٔ ساختگی بسته‌بندی و ۴۰ وابستگیِ قفل‌شده به‌همراه
+برنامه، در فضای نام شبکهٔ جدا و آفلاین نصب شدند؛ کنترل هر ۴۱ توزیع موفق و رازسنجی بدون راز بود.
+
+آزمون واقعی نخست، ممیزی فقط‌خواندنی، بازگشت دقیق به `f169875` همراه ورود/پاسخ تازه و استقرار
+دوبارهٔ نهایی موفق بودند. هر دو آزمون نامزد، گذشت واقعیِ پنج دقیقه از گردآوری را سنجیدند؛ ساعت
+مرورگر دست‌کاری نشد. زمان اصلی، دادهٔ خام، زمینه، انتخاب و تمرکز ثابت، درخواست POST تازه صفر
+و اعلان زمینه‌دار موفق بود. تأخیر نهایی DNS برابر ۴٫۷۵۰، زبیکس دوم انگلیسی ۴۱٫۷۰۳ و فارسی
+۴۸٫۸۴۴ ثانیه شد. هر آزمون، ممیزی یک گفتگوی تازه و دو جفتِ بررسی/هش شاهد را تطبیق داد.
+درخواست خارجی و خطای صفحه صفر بود. عامل اصلی تصویر نهایی ورود و نمای فارسی/انگلیسی را دید؛
+تصویر و گزارش عملیاتی در فضای خصوصی و بیرون Git می‌مانند.
+
+هویت تغییرناپذیرِ کد/بسته، ثابت‌بودن واحد، آمادگی و نبود واحد ناموفق تأیید شدند. هر دو تایمر
+بازگشت متوقف‌اند؛ محافظ نهایی تنها پس از موفقیت مرورگر/ممیزی متوقف شد. فقط برنامه restart شد.
+اتصال‌دهنده، API استنتاج، مدل 35B، خاموشی استدلال عمومی، منابع، طرح پایگاه، اعتبارنامه، مجوز و
+CSP ثابت‌اند. WAN سرور/شروع سرد، بار، بازیابی مستقل، معنای گستردهٔ مدل و بازبینی انسانی با
+صفحه‌خوان همچنان معیارهای جدا و ناتمام‌اند.
+
+</div>
+
+## English — earlier motion/panel cutover
 
 Observed 2026-10-05 (Tehran), under the owner's explicit UI repair/deployment request. Three actual
 subagents handled login motion, panel quality and permissive-model review; the principal agent
@@ -114,7 +188,7 @@ recovery are not newly passed. Model provisioning is recorded separately in the
 
 <div dir="rtl">
 
-## فارسی
+## فارسی — گذار پیشینِ حرکت و پنل
 
 این رکورد در ۵ اکتبر ۲۰۲۶ به وقت تهران، در چارچوب درخواست صریح مالک برای اصلاح و استقرار رابط
 ثبت شد. سه عامل واقعی، حرکت ورود، کیفیت پنل و بررسی مجوز مدل را بر عهده داشتند؛ عامل اصلی

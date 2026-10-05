@@ -1,21 +1,25 @@
 # Project state / وضعیت پروژه
 
-Source follow-up, 2026-10-05: selected-evidence aging/partial labels and contextual accessibility
+Latest controlled app, 2026-10-05: `3d92b71` is serving after the selected-evidence aging/partial labels and contextual accessibility
 announcements passed 88 browser tests; the earlier 87/88 fixture-login failure remains recorded
 with unconfirmed transport cause. Current combined source passed 738 non-browser/non-integration
 tests/two POSIX skips, lint/types and documentation checks. The offline 122B qualification planner
 prepares frozen standard/thinking/16K/conditional-32K tests but runs no model and accepts no capacity.
 See paired [UI guidance](en/REFERENCE_UI.md) / [راهنمای رابط](fa/REFERENCE_UI.md) and the permissive
-packet below. This follow-up is not deployed; `f169875` remains the serving app.
+packet below. Exact-source CI, offline install, first/final real browser/audit, actual five-minute
+aging and exact `f169875` rollback/reapply passed. Final code/package/unit/readiness checks passed;
+both guards are stopped. Model/public thinking and unrun server-WAN/cold-start gates are unchanged.
 
-پیگیری کد در ۵ اکتبر: سن‌گذاری شاهد انتخاب‌شده، برچسب ناقص و اعلانِ دسترس‌پذیرِ زمینه‌دار،
+انتشار محدودِ تازه در ۵ اکتبر: برنامهٔ `3d92b71` زنده است. سن‌گذاری شاهد انتخاب‌شده، برچسب ناقص و اعلانِ دسترس‌پذیرِ زمینه‌دار،
 ۸۸ آزمون مرورگر موفق داشتند؛ شکست پیشینِ ۸۷ از ۸۸ و علت انتقالِ تأییدنشده حفظ است. کد ترکیبی
 جاری ۷۳۸ آزمون غیرمرورگر/غیرintegration موفق، دو مورد POSIX اجرا‌نشده و کنترل lint/نوع/مستندات
 داشت. برنامه‌ریز آفلاین 122B، پرسش ثابتِ پاسخ استاندارد/استدلال/16K/32K مشروط را آماده می‌کند؛
 مدل را اجرا یا ظرفیت را پذیرفته اعلام نمی‌کند. دو راهنمای رابط و گزارش مجوز آزادِ زیر مرجع‌اند.
-این پیگیری مستقر نشده و برنامهٔ زنده همچنان `f169875` است.
+CI همان کد، نصب آفلاین، مرورگر/ممیزی واقعیِ نخست/نهایی، گذشت واقعیِ پنج دقیقه و بازگشت دقیق به
+`f169875`/استقرار دوباره موفق‌اند. هویت کد/بسته/واحد و آمادگی تأیید و هر دو محافظ متوقف‌اند.
+مدل، استدلال عمومی و معیارهای اجرا‌نشدهٔ WAN سرور/شروع سرد ثابت‌اند.
 
-Current owner-directed UI repair/permissive alternative, 2026-10-05: app `f169875` is serving after
+Earlier owner-directed UI repair/permissive alternative, 2026-10-05: app `f169875` served after
 70 local browser regressions, 716 non-browser/non-integration tests (two POSIX skips), all five
 exact-source CI jobs and real browser/audit checks. Three actual subagents repaired responsive login
 motion, mobile composer, keyboard/navigation/locale/evidence presentation and reviewed licenses.
@@ -29,9 +33,9 @@ partial provisioning, not loaded/selected; do not label it 3.8 or resume full cu
 import. See the [permissive packet](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
 Public thinking, VM resources and full production-acceptance status are unchanged.
 
-گام جاریِ درخواستی مالک در ۵ اکتبر: برنامهٔ `f169875` پس از ۷۰ آزمون مرورگر محلی، ۷۱۶ آزمون
+گام پیشینِ درخواستی مالک در ۵ اکتبر: برنامهٔ `f169875` پس از ۷۰ آزمون مرورگر محلی، ۷۱۶ آزمون
 غیرمرورگر/غیرintegration (دو مورد POSIX اجرا‌نشده)، پنج کنترل CI همان کد و بررسی واقعی مرورگر/
-ممیزی زنده است. سه عامل واقعی، حرکت ورودِ واکنش‌گرا، کادر پرسش موبایل، پیمایش/تمرکز/زبان و
+ممیزی زنده شد. سه عامل واقعی، حرکت ورودِ واکنش‌گرا، کادر پرسش موبایل، پیمایش/تمرکز/زبان و
 نمایش شاهد را اصلاح و مجوزها را بررسی کردند. پاک‌سازی DOM پنهان هنگام خروج و همگامی جزئیات
 درخواست موفق‌اند. بازگشت دقیق به `836b1ea` و استقرار دوباره، کنترل هویت/واحد/آمادگی نهایی موفق
 و محافظ نهایی متوقف است. گزارش اصلاح رابط در بالا، شکست ابزار و نبود آزمون WAN سرور/شروع
