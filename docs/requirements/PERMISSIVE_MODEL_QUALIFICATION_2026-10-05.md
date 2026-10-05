@@ -9,6 +9,45 @@ The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 
 ## English
 
+### Passive-wait trial — failed and reconciled at 18:48 UTC
+
+Distinct run `20261005-q5-f6-ub512-passive-standard-001` retained the pinned Q5/model/runtime,
+exact `f6cff8f` source, frozen corpus, 32/32 threads, batch/ubatch512, 16K, 384 output and
+120-second deadline. Only the runtime waiting-policy setting became `OMP_WAIT_POLICY=PASSIVE`;
+bounded environment/maps/counter instrumentation was also added. Effective settings and absence
+of a spin-count override were checked. Load took **7777 ms**, controller **326809 ms**. Both
+format answers were stopped `0`: **73373/77074 ms** total, **72777/76471 ms** generation. English
+networking timed out at **120002 ms**, without a final; **thirteen subsequent cases were not run**.
+Main, independent and offline finite reviews agree: **two passes, one failure, thirteen not run**.
+No standard gate, thinking approval or selection was created. The owned unit/process/listener are
+absent, no timer was created, and live baseline identity/restart count/ready-idle state stayed unchanged.
+
+Native report SHA: `e8f833f25ff85774d9eb5ea457f4a1c762126533ff5b97aa30f4f01e69dacbad`.
+Controller SHA: `31fafa2ed383dc8c9134aec7911302968f659d6a9d40f28ba8e514444b6b601e`.
+Offline review SHA: `8a995862943798ba8bbc000da268190466ae5a2a698e16ca5db6ae92a24e1bbd`.
+The offline command exited **1**, retaining failure, not a successful acceptance.
+**227 completed samples** observed maximum RSS/PSS **22126412/22116125 KiB**, minimum sampled
+guest available memory **240255992 KiB**, no swap/nonzero memory events and ready/idle baseline.
+Cgroup peak **3775467520 bytes** is not complete mapped-memory accounting. Completed native
+prompt statistics **71443.388/74621.617 ms** are not TTFT. CPU deltas reconcile before/after but
+are non-atomic; switches cover the leader only and aggregate throttled time is not elapsed downtime.
+The timeout has only a before snapshot: no fabricated postcheck/delta. Added instrumentation and
+ordered warm-cache conditions prevent clean causal or optimal-profile claims. Prior failures stay retained.
+
+Exact `b94a84c` CI passed all five jobs
+([run](https://github.com/Omid-NextAI/nextops/actions/runs/37356458309)). Offline checkout/archive/
+wheel/root-staging code digest is `5f15f07569c2172c13488eebbf887984ce7ebcc5aeeb076bad7ee9791200c346`;
+archive SHA `cf56328d933a75a3f05fe343ac1d36577e0e81ef7d7514325e910f72364a72fb`, wheel SHA
+`4c16fa526cd415b5f2ca0fba66fff1b698649e99910bc58434fe2bad1abe7315`. Packaging is not deployment.
+The prepared b94 passive comparison remains unrun and deferred rather than blindly repeating this
+failed profile. Review a separate unprivileged, offline no-BLAS build at the same native commit,
+retaining applicable CPU flags and serving/rollback artifacts. The pinned BLAS code can repeat
+quantized-weight conversion before eligible SGEMM operations; removing that route is a testable
+hypothesis, not proof of faster CPU execution ([implementation](https://raw.githubusercontent.com/ggml-org/llama.cpp/b29c606e28a01b1bc8c1351026a0fa6e616bf6c4/ggml/src/ggml-blas/ggml-blas.cpp)).
+No build-time UI/SSL/OpenMP source fetching, GPU/remote backend, context/deadline widening or
+semantic-gate reuse is permitted. Actual build/ELF/system/mapping/performance and later b94
+semantic/thinking/context/app/offline/rollback qualification remain separate.
+
 ### Generic detailed-answer source repair — not deployed
 
 Only the detailed system prompt changes: retain supplied source, observation/collection times,
@@ -484,6 +523,46 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### آزمون انتظار غیرفعال — ناموفق؛ تطبیق نهایی در ساعت ۱۸:۴۸ UTC
+
+اجرای مستقلِ `20261005-q5-f6-ub512-passive-standard-001`، فایل/runtime ثابت Q5، کد دقیقِ
+`f6cff8f`، پرسش ثابت، ۳۲/۳۲ رشته، batch/ubatch برابر ۵۱۲، زمینهٔ 16K، خروجیِ ۳۸۴ و مهلتِ
+۱۲۰ ثانیه را حفظ کرد. فقط تنظیم زمان اجرا به `OMP_WAIT_POLICY=PASSIVE` تغییر کرد؛ ابزار
+محدودِ محیط/نگاشت/شمارنده نیز افزوده شد. تنظیم واقعی و نبود جایگزین شمار spin بررسی شدند.
+بارگذاری **۷۷۷۷** و کل کنترل‌کننده **۳۲۶۸۰۹ میلی‌ثانیه** طول کشید. هر دو پاسخ قالب، `0` با
+پایان عادی بودند: **۷۳۳۷۳/۷۷۰۷۴ میلی‌ثانیه** کل و **۷۲۷۷۷/۷۶۴۷۱ میلی‌ثانیه** تولید. پرسش
+انگلیسیِ شبکه بدون پاسخ نهایی در **۱۲۰۰۰۲ میلی‌ثانیه** از مهلت گذشت؛ **سیزده مورد بعدی اجرا
+نشد**. بازبینی اصلی/مستقل/آفلاین هم‌نظرند: **دو موفق، یک ناموفق، سیزده اجرا‌نشده**. مجوز
+استاندارد/استدلال یا انتخاب ساخته نشد. واحد/فرایند/listener آزمون باقی نمانده، timer ساخته
+نشده و هویت فرایند/شمار restart/آمادگیِ بیکارِ خط مبنا ثابت‌اند.
+
+هش گزارش بومی: `e8f833f25ff85774d9eb5ea457f4a1c762126533ff5b97aa30f4f01e69dacbad`.
+هش کنترل‌کننده: `31fafa2ed383dc8c9134aec7911302968f659d6a9d40f28ba8e514444b6b601e`.
+هش بازبینی آفلاین: `8a995862943798ba8bbc000da268190466ae5a2a698e16ca5db6ae92a24e1bbd`.
+فرمان آفلاین با کد **۱**، شکست را حفظ کرد؛ پذیرش موفق نبود. **۲۲۷ نمونهٔ کامل** بیشینهٔ
+RSS/PSS **۲۲۱۲۶۴۱۲/۲۲۱۱۶۱۲۵ KiB**، کمینهٔ حافظهٔ آزادِ نمونه‌برداری‌شدهٔ مهمان **۲۴۰۲۵۵۹۹۲
+KiB**، نبود swap/رخداد غیرصفر حافظه و آمادگیِ بیکار را ثبت کردند. بیشینهٔ cgroup برابر
+**۳۷۷۵۴۶۷۵۲۰ بایت**، حساب کامل حافظهٔ نگاشت‌شده نیست. زمان پردازش ورودیِ بومی
+**۷۱۴۴۳٫۳۸۸/۷۴۶۲۱٫۶۱۷ میلی‌ثانیه**، زمان نخستین توکن نیست. اختلاف شمارنده با قبل/بعد مطابق
+است اما غیراتمی؛ شمار تعویض زمینه فقط رهبر فرایند را پوشش می‌دهد و زمان تجمیعیِ محدودشدن
+CPU، مدت توقف واقعی نیست. مورد ناموفق فقط نمونهٔ پیشین دارد؛ کنترل بعدی/اختلاف ساخته نشده
+است. ابزار افزوده و ترتیب اجرا/کش گرم، ادعای علت یا نمایهٔ بهینه را نامعتبر می‌کنند؛ شکست‌های
+پیشین حفظ‌اند.
+
+پنج کنترل CI کد دقیقِ `b94a84c` موفق‌اند
+([اجرا](https://github.com/Omid-NextAI/nextops/actions/runs/37356458309)). هش کد در checkout/
+بایگانی/wheel/نگهداری root برابر `5f15f07569c2172c13488eebbf887984ce7ebcc5aeeb076bad7ee9791200c346`؛
+هش بایگانی `cf56328d933a75a3f05fe343ac1d36577e0e81ef7d7514325e910f72364a72fb` و wheel
+`4c16fa526cd415b5f2ca0fba66fff1b698649e99910bc58434fe2bad1abe7315` است. بسته‌بندی، استقرار نیست.
+مقایسهٔ غیرفعالِ آمادهٔ b94 اجرا نشده و به‌جای تکرار کورِ نمایهٔ ناموفق، به تعویق افتاده است.
+ساخت مستقلِ بدون BLAS، بدون دسترسی مدیریتی و آفلاین، روی همان commit بومی بررسی شود؛ تنظیم
+CPU و فایل زنده/بازگشت حفظ شوند. کد ثابت BLAS می‌تواند پیش از SGEMM مجاز، تبدیل وزنِ
+کوانتیزه را تکرار کند؛ حذف آن مسیر، فرضیهٔ سنجش‌پذیر است نه شاهد سرعت بیشتر
+([پیاده‌سازی](https://raw.githubusercontent.com/ggml-org/llama.cpp/b29c606e28a01b1bc8c1351026a0fa6e616bf6c4/ggml/src/ggml-blas/ggml-blas.cpp)).
+دریافت UI/SSL/OpenMP هنگام ساخت، backend گرافیکی/بیرونی، افزایش زمینه/مهلت یا استفادهٔ دوباره
+از مجوز معنایی مجاز نیست. پذیرش واقعیِ ساخت/ELF/سیستم/نگاشت/کارایی و سپس معنا/استدلال/زمینه/
+برنامه/آفلاین/بازگشتِ b94 همچنان جدا هستند.
 
 ### اصلاح عمومیِ کد راهنمای پاسخ تفصیلی — مستقر نشده
 

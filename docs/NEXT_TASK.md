@@ -1,5 +1,22 @@
 # Next task / کار بعدی
 
+Current checkpoint: the passive-wait Q5 trial is reconciled and failed (two passes/one timeout/
+thirteen not run). Do not repeat that profile or widen the deadline. Exact `b94a84c` CI and protected
+offline source packaging passed, but its prepared passive comparison is unrun and deferred while
+the runtime bottleneck is investigated. Review a distinct offline, unprivileged, WAN-denied
+CPU-only no-BLAS build at the same pinned commit; preserve serving/rollback artifacts and all
+other applicable flags. Verify source/build/dependency identities before any finite comparison.
+Then qualify generated answers, final-only thinking, measured context and matched app/offline/
+rollback separately; no failed gate may authorize selection.
+
+گام جاری: آزمون انتظار غیرفعال Q5 پایان یافته و تطبیق داده شده، اما ناموفق است: دو مورد موفق،
+یک گذشتن از مهلت و سیزده مورد اجرا‌نشده. همان نمایه تکرار یا مهلت طولانی‌تر نشود. CI دقیقِ
+`b94a84c` و بسته‌بندی آفلاینِ محافظت‌شده موفق‌اند؛ مقایسهٔ غیرفعالِ آمادهٔ آن اجرا نشده و تا
+بررسی گلوگاه runtime به تعویق افتاده است. ساخت مستقلِ بدون BLAS، آفلاین، بدون دسترسی مدیریتی
+و بدون WAN، روی همان commit ثابتِ CPU بررسی شود؛ فایل زنده/بازگشت و دیگر تنظیم‌های مرتبط حفظ
+شوند. پیش از مقایسهٔ محدود، هویت منبع/ساخت/وابستگی تأیید شود. سپس پاسخ واقعی، استدلال با نمایش
+صرفاً پاسخ نهایی، زمینهٔ سنجیده و برنامه/آفلاین/بازگشت جدا پذیرفته شوند؛ شکست، مجوز انتخاب نیست.
+
 Source prompt follow-up is implemented/tested, not deployed: preserve generic provenance/type-order
 instructions, immutable payload-capture tests and unchanged short/evidence prompt hashes. The
 immediate native comparison must still use exact `f6cff8f` so passive waiting is the only runtime

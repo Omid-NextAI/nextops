@@ -1,5 +1,22 @@
 # Project state / وضعیت پروژه
 
+Latest isolated Q5 outcome, 2026-10-05 at 18:48 UTC: the distinct passive-wait trial failed after
+two exact format passes. English networking timed out at 120002 ms; thirteen later cases were not
+run. Main/independent review and the offline checker agree. Its owned process/unit/listener are
+absent, baseline PID/restart count and ready/idle state unchanged, no standard/thinking gate created.
+The separately pinned `b94a84c` source archive/wheel/root staging passed code-digest parity and all
+five exact CI jobs ([run](https://github.com/Omid-NextAI/nextops/actions/runs/37356458309)); its native
+retest remains unrun. A no-BLAS build of the same pinned CPU runtime is a reviewed experiment,
+not an accepted optimization or live runtime change. See the [paired record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+تازه‌ترین نتیجهٔ مستقل Q5، در ۵ اکتبر ۲۰۲۶ ساعت ۱۸:۴۸ UTC: آزمون جداگانهٔ انتظار غیرفعال
+پس از دو پاسخ دقیقِ قالب، ناموفق شد. پرسش انگلیسیِ شبکه در ۱۲۰۰۰۲ میلی‌ثانیه از مهلت گذشت؛
+سیزده مورد بعدی اجرا نشد. بازبینی اصلی/مستقل و ابزار آفلاین هم‌نظرند. فرایند، واحد و listener
+آزمون باقی نمانده؛ شناسهٔ فرایند/شمار restart و آمادگیِ بیکار خط مبنا ثابت‌اند و مجوز استاندارد/
+استدلال ساخته نشد. برابری هش کد در بایگانی/بسته/نگهداری محافظت‌شدهٔ `b94a84c` و پنج کنترل CI
+همان کد در اجرای بالا موفق‌اند؛ آزمون بومیِ آن اجرا‌نشده است. ساخت بدون BLAS از همان runtime
+ثابتِ CPU، آزمایشی بررسی‌شده است، نه بهینه‌سازیِ پذیرفته‌شده یا تغییر runtime زنده. گزارش بالا مرجع است.
+
 New source-only detailed-answer repair, 2026-10-05: generic instructions now explicitly preserve
 supplied provenance/limits without claiming independent verification, avoid invented intermediary
 topology, and validate required types before value operations. Short-general and evidence prompts,

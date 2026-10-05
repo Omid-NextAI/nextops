@@ -1,5 +1,19 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Retained Q5 passive-wait failure and exact source CI — 2026-10-05
+
+The distinct passive trial returned two exact format finals, then timed out at 120002 ms on English
+networking; thirteen cases remain not run. Cleanup and unchanged serving baseline passed. No
+optimization, standard/thinking approval or live selection is claimed. Exact `b94a84c` CI passed
+five jobs; offline source packaging/staging matched code digests. Its native comparison remains
+unrun; a separately reviewed no-BLAS CPU build is an experiment, not a serving-runtime replacement.
+
+آزمون مستقلِ انتظار غیرفعال، دو پاسخ دقیقِ قالب داد و سپس پرسش انگلیسیِ شبکه در ۱۲۰۰۰۲
+میلی‌ثانیه از مهلت گذشت؛ سیزده مورد اجرا‌نشده‌اند. پاک‌سازی و حفظ خط مبنای زنده موفق‌اند.
+بهینه‌سازی، تأیید استاندارد/استدلال یا انتخاب زنده ادعا نمی‌شود. پنج کنترل CI کد دقیقِ
+`b94a84c` موفق و هش کدِ بسته‌بندی/نگهداری آفلاین مطابق است. مقایسهٔ بومی آن اجرا نشده؛ ساخت
+مستقلِ بدون BLAS روی CPU، آزمایش بررسی‌شده است نه جایگزینی runtime زنده.
+
 ## Generic detailed-answer instructions and immutable test captures — 2026-10-05
 
 Strengthen generic provenance/type-order guidance only in detailed answers; preserve short/evidence

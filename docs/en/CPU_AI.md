@@ -1,5 +1,18 @@
 # Local CPU-only AI and capacity planning
 
+## Passive-wait result and next runtime experiment — 2026-10-05
+
+The distinct exact-`f6cff8f` Q5 trial used passive OpenMP waiting with verified process settings.
+EN/FA format finals took 73373/77074 ms; English networking timed out at 120002 ms without a
+final, leaving thirteen cases unrun. No improvement or standard approval follows. Cleanup and
+unchanged live baseline passed. 227 completed samples observed RSS/PSS maxima 22126412/22116125
+KiB and no swap/OOM; cgroup peak is not full mapped-memory accounting. Numeric CPU deltas are
+non-atomic, not cause or downtime. Added instrumentation/warm-cache conditions limit comparisons.
+Exact `b94a84c` CI passed five jobs and offline package/staging code digests matched; generated
+answers remain unrun. The separate CPU no-BLAS build hypothesis keeps the same pinned source,
+protects serving/rollback artifacts and disables build downloads. It is not accepted or selected.
+See the [paired record](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
 ## Detailed-answer source follow-up — not deployed
 
 The generic detailed prompt explicitly retains source/observation/collection/scope and stale/partial
