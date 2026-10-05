@@ -1,17 +1,22 @@
 # Next task / کار بعدی
 
-Current owner-directed checkpoint, 2026-10-05: qualify and guard-deploy the assembled motion/panel
-repairs without changing auth/policy/model. Continue the supervised pinned Apache Qwen3.5-122B-A10B
-Q5 range import on the already prepared large volume; verify all complete shards before actual
+Current owner-directed checkpoint, 2026-10-05: the motion/panel repair app `f169875` is now serving;
+70 local browser tests, exact-source CI, real browser/audit and `836b1ea` rollback/reapply passed
+in the [UI repair record](requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md). Do not redeploy
+this completed increment merely to repeat it. Continue the supervised pinned Apache Qwen3.5-122B-A10B
+Q5 range import on the already prepared large volume; reconcile retained transport failures and
+verify all complete shards before actual
 metadata/load and frozen EN/FA thinking/context/coding acceptance. The [permissive packet](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md)
 supersedes Flash as the active import choice for customer-facing qualification; historical Flash
 files/license limitations remain. The extra 48-thread 27B coding timeout is failed, not a promotion.
 Maintain the serving 35B rollback and bounded OS/application headroom. No automatic live model or
 thinking selection before matched app/evidence/audit/offline/rollback gates pass.
 
-گام جاریِ درخواستی مالک در ۵ اکتبر: اصلاح حرکت/پنل پس از آزمون ترکیبی، با محافظ بازگشت مستقر
-شود؛ ورود، سیاست و مدل تغییر نکنند. دریافت محدودِ Qwen3.5-122B-A10B Q5 با مجوز Apache، تحت
-نظارت و روی حجم بزرگِ آماده ادامه یابد؛ پیش از metadata/بارگذاری و پذیرش ثابتِ فارسی/انگلیسی
+گام جاریِ درخواستی مالک در ۵ اکتبر: برنامهٔ اصلاح حرکت/پنل با `f169875` زنده است؛ ۷۰ آزمون
+مرورگر محلی، CI همان کد، مرورگر/ممیزی واقعی و بازگشت دقیق به `836b1ea`/استقرار دوباره، طبق
+گزارش اصلاح رابط بالا موفق‌اند. گام تکمیل‌شده صرفاً برای تکرار دوباره مستقر نشود. دریافت محدودِ
+Qwen3.5-122B-A10B Q5 با مجوز Apache، تحت نظارت و روی حجم بزرگِ آماده ادامه یابد؛ شکست‌های
+انتقال و بخش‌های محفوظ تطبیق داده شوند. پیش از metadata/بارگذاری و پذیرش ثابتِ فارسی/انگلیسی
 برای استدلال، زمینه و کدنویسی، همهٔ فایل‌های کامل تأیید شوند. گزارش مجوز آزادِ بالا، نامزد فعال
 برای پذیرش مشتری را جایگزین Flash می‌کند؛ فایل‌ها و محدودیت مجوز تاریخیِ Flash حفظ‌اند.
 مهلت‌گذریِ تازهٔ 27B در ۴۸ رشته، شکست است نه مجوز ارتقا. مدل 35B برای بازگشت و حاشیهٔ محدود

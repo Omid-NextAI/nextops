@@ -5,10 +5,11 @@
 ## Scope and implementation
 
 Branch: `codex/reference-dashboard`, inspected main baseline `625ca80`, 2026-10-04.
-The owner subsequently authorized deployment: app `836b1ea` is serving, while connector `2a7c8dc`
-and AI/model remain unchanged. The [2026-10-05 live record](../requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md)
-records repaired CI/live failures, 47 passing local browser tests, five successful exact-source CI
-jobs, fresh real browser/audit checks and rollback/reapply. Model quality, server-WAN/cold-start,
+The owner subsequently authorized deployment: repaired app `f169875` is serving, while connector
+`2a7c8dc` and AI/model remain unchanged. The [latest live repair record](../requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md)
+records 70 passing local browser tests, 716 non-browser tests/two skips, five successful exact-source
+CI jobs, fresh real browser/audit checks and exact `836b1ea` rollback/reapply. The [earlier UI record](../requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md)
+retains the original 47-test deployment and repaired failures. Model quality, server-WAN/cold-start,
 reboot, recovery and production gates are not closed by this visual release.
 
 The native HTML/CSS/JS frontend remains. `app.css` owns shared/OCS tokens; `workspace.css` owns
@@ -43,14 +44,16 @@ request details are disabled. Archived observations are labelled as previous-res
 not a fresh collection. Displayed raw JSON remains complete after allowlisted field redaction and
 matches Copy. These are presentation repairs, not new monitoring or model capabilities.
 
-At this source checkpoint the assembled browser suite passed **69 tests in 222.22s**. Ruff,
+The initial assembled checkpoint passed 69 browser tests. After hidden-DOM logout cleanup and
+native request-details synchronization, the final suite passed **70 tests in 224.05s**. Ruff,
 formatting and strict Linux-target types passed (135 source files). Both dark/light capture passes
 cover the five specified viewport sizes and EN/FA, with no page overflow, JavaScript errors, failed
 assets or third-party requests. Additional GPU-disabled motion checks measured all nine moving
 packets in desktop English/Persian and the light theme. Screenshots are local ignored artifacts in
 `artifacts/ui-panel-quality/pass-2-dark/`, `pass-2-light/` and
-`artifacts/ui-reference/login-motion-repair/`. Fixture coverage is not live deployment or full
-server-WAN acceptance; the serving release remains `836b1ea` until a separately recorded cutover.
+`artifacts/ui-reference/login-motion-repair/`. Fixture coverage is not full server-WAN acceptance.
+The separate guarded `f169875` cutover/real checks are recorded above. The editable [Figma repair board](https://www.figma.com/design/WyrJzqOl3llpnZEondHPCK?node-id=3-2)
+documents product tokens and component/motion states; its font substitutes do not change app assets.
 
 After login, open investigation options beside the composer for mode, approved source/target,
 answer language and the existing response-mode flag. Enter sends; Shift+Enter adds a line; IME

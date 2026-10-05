@@ -1,5 +1,18 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Guarded UI repair deployment — 2026-10-05 / استقرار محافظت‌شدهٔ اصلاح رابط
+
+App `f169875` is serving after 70 browser regressions, 716 non-browser/non-integration tests/two
+POSIX skips, five exact-source CI jobs and fresh real login/chat/EN/FA secondary evidence/audit
+checks. Exact `836b1ea` rollback/reapply passed; the final timer is stopped. The
+[dated repair record](docs/requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md) retains failed
+harness attempts. No connector/model/public thinking/schema/resource or production-status change.
+
+برنامهٔ `f169875` پس از ۷۰ آزمون مرورگر، ۷۱۶ آزمون غیرمرورگر/غیرintegration و دو مورد POSIX
+اجرا‌نشده، پنج کنترل CI همان کد و ورود/گفتگو/شاهد دوزبانه/ممیزی تازه زنده است. بازگشت دقیق به
+`836b1ea` و استقرار دوباره موفق و تایمر نهایی متوقف است. گزارش تاریخ‌دار، شکست ابزار آزمون را
+حفظ می‌کند. اتصال‌دهنده، مدل، استدلال عمومی، طرح پایگاه، منابع و وضعیت پذیرش تولید تغییر نکردند.
+
 ## Motion/panel repair and permissive model preparation — 2026-10-05
 
 Repair responsive login motion, mobile input/control separation, focus, locale/evidence selection,

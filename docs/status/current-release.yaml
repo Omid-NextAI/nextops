@@ -1,7 +1,7 @@
 ---
 $schema: ./release-status.schema.json
 schema_version: 2.2.0
-release_identifier: nextops-reference-ui-controlled-2026-10-05
+release_identifier: nextops-ui-repair-controlled-2026-10-05
 observed_at: '2026-10-05'
 deployment_status: controlled_user_testing_not_production_accepted
 delivery_scope:
@@ -20,8 +20,8 @@ repository:
   inspected_baseline_commit: 625ca80b83fbdb80d0fba4dc4e770b189b6d623c
 components:
   application:
-    release: nextops-0.1.0-836b1ea
-    source_commit: 836b1eaa77e09505e2f97bdb4470d9bc101fadf1
+    release: nextops-0.1.0-f169875
+    source_commit: f169875f17ff7bc3f751517cea6f17242c2f36e5
   connector:
     release: nextops-0.1.0-2a7c8dc
     source_commit: 2a7c8dc5dc99ebf203748380b7ab8ea7f89ac690
@@ -50,14 +50,14 @@ components:
     name: Zabbix
     version: '7.0.31'
 current_application_qualification:
-  release: nextops-0.1.0-836b1ea
-  source_commit: 836b1eaa77e09505e2f97bdb4470d9bc101fadf1
+  release: nextops-0.1.0-f169875
+  source_commit: f169875f17ff7bc3f751517cea6f17242c2f36e5
   scope: application_revision_sensitive
   gates:
     - id: current_app_bounded_live_functionality
       status: passed
       evidence:
-        - docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md
+        - docs/requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md
         - docs/en/TESTING.md
         - docs/fa/TESTING.md
     - id: current_app_held_out_answer_semantics
@@ -70,13 +70,13 @@ current_application_qualification:
     - id: current_app_exact_release_rollback
       status: passed
       evidence:
-        - docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md
+        - docs/requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_server_side_wan_isolation
       status: not_run
       evidence:
-        - docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md
+        - docs/requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_vm_reboot_cold_start
@@ -113,9 +113,12 @@ capabilities:
     evidence:
       - docs/requirements/REFERENCE_UI_SPEC.md
       - docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md
+      - docs/requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md
       - docs/en/REFERENCE_UI.md
       - docs/fa/REFERENCE_UI.md
       - tests/browser/test_reference_ui.py
+      - tests/browser/test_login_motion_regression.py
+      - tests/browser/test_panel_quality_regression.py
   - id: local_admin_user_management
     status: implemented_unaccepted
     evidence:

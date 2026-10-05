@@ -1,25 +1,30 @@
 # Project state / وضعیت پروژه
 
-Owner-directed permissive alternative/UI repair, 2026-10-05: three real subagents repaired login
-motion visibility, mobile composer, keyboard/navigation/locale and evidence presentation, and reviewed
-model licenses. The assembled source browser checkpoint passed 69 tests; a subsequent hidden-DOM
-logout cleanup and request-details state repair are being revalidated. The serving app remains
-`836b1ea` until separately recorded guarded qualification. Qwen3.8 27B's new 48-thread/native-thinking
-coding sample failed the 120-second deadline at 120102 ms and was stopped/verified; baseline 35B
-remains ready. The owner requests a permissive alternative for Bank/customer access. Pinned Apache
-Qwen3.5-122B-A10B Q5_K_M is in supervised partial provisioning, not loaded or selected; do not label
-it 3.8 or resume full custom-license Flash import. See the [dated record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md)
-and paired UI guides. No public thinking, VM, serving-model or production-acceptance change.
+Current owner-directed UI repair/permissive alternative, 2026-10-05: app `f169875` is serving after
+70 local browser regressions, 716 non-browser/non-integration tests (two POSIX skips), all five
+exact-source CI jobs and real browser/audit checks. Three actual subagents repaired responsive login
+motion, mobile composer, keyboard/navigation/locale/evidence presentation and reviewed licenses.
+Hidden-DOM logout cleanup and native request-details state passed. Exact `836b1ea` rollback/reapply
+and final identity/unit/readiness checks passed; the final guard is stopped. The [UI repair record](requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md)
+preserves failed harness attempts and separates browser-origin restriction from unrun server-WAN/
+cold-start gates. Connector `2a7c8dc`, inference API `7ce9d29` and serving 35B remain unchanged.
+Qwen3.8 27B's new 48-thread/native-thinking coding sample failed the 120-second deadline at
+120102 ms and was stopped/verified. Pinned Apache Qwen3.5-122B-A10B Q5_K_M remains supervised
+partial provisioning, not loaded/selected; do not label it 3.8 or resume full custom-license Flash
+import. See the [permissive packet](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+Public thinking, VM resources and full production-acceptance status are unchanged.
 
-گام درخواستی مالک در ۵ اکتبر: سه عامل واقعی، نمایش حرکت ورود، کادر پرسش موبایل، پیمایش/
-تمرکز/زبان و ارائهٔ شاهد را اصلاح و مجوز مدل‌ها را بررسی کردند. گام کدِ ترکیبی، ۶۹ آزمون مرورگر
-موفق داشت؛ پاک‌سازی DOM پنهان هنگام خروج و همگامی وضعیت جزئیات درخواست سپس افزوده شده و
-دوباره آزموده می‌شوند. برنامهٔ زنده تا ثبت پذیرش محافظت‌شده همان `836b1ea` است. نمونهٔ تازهٔ
-کدنویسی 27B با ۴۸ رشته و استدلال native، در ۱۲۰۱۰۲ میلی‌ثانیه از مهلت ۱۲۰ ثانیه گذشت؛ توقف
-آن تأیید و مدل سالم 35B آماده ماند. مالک برای دسترسی بانک/مشتری، نامزدِ مجوز آزاد خواسته است.
-Qwen3.5-122B-A10B Q5_K_M با مجوز Apache، در دریافت ناقص و تحت نظارت است، نه بارگذاری یا
-انتخاب؛ 3.8 نامیده نشود و ورود کامل Flash با مجوز اختصاصی ادامه نیابد. گزارش تاریخ‌دار بالا
-و راهنمای دوزبانهٔ رابط مرجع‌اند. استدلال عمومی، ماشین، مدل زنده یا پذیرش تولید تغییر نکرده است.
+گام جاریِ درخواستی مالک در ۵ اکتبر: برنامهٔ `f169875` پس از ۷۰ آزمون مرورگر محلی، ۷۱۶ آزمون
+غیرمرورگر/غیرintegration (دو مورد POSIX اجرا‌نشده)، پنج کنترل CI همان کد و بررسی واقعی مرورگر/
+ممیزی زنده است. سه عامل واقعی، حرکت ورودِ واکنش‌گرا، کادر پرسش موبایل، پیمایش/تمرکز/زبان و
+نمایش شاهد را اصلاح و مجوزها را بررسی کردند. پاک‌سازی DOM پنهان هنگام خروج و همگامی جزئیات
+درخواست موفق‌اند. بازگشت دقیق به `836b1ea` و استقرار دوباره، کنترل هویت/واحد/آمادگی نهایی موفق
+و محافظ نهایی متوقف است. گزارش اصلاح رابط در بالا، شکست ابزار و نبود آزمون WAN سرور/شروع
+سرد را جدا نگه می‌دارد. اتصال‌دهندهٔ `2a7c8dc`، API استنتاجِ `7ce9d29` و مدل زندهٔ 35B ثابت‌اند.
+نمونهٔ تازهٔ کدنویسی 27B با ۴۸ رشته و استدلال native در ۱۲۰۱۰۲ میلی‌ثانیه از مهلت گذشت؛ توقف
+آن تأیید شد. Qwen3.5-122B-A10B Q5_K_M با مجوز Apache در دریافت ناقصِ تحت نظارت است، نه
+بارگذاری یا انتخاب؛ 3.8 نامیده نشود و ورود کامل Flash با مجوز اختصاصی ادامه نیابد. گزارش مجوز
+آزادِ بالا مرجع است. استدلال عمومی، منابع ماشین و وضعیت پذیرش کامل تولید تغییر نکرده‌اند.
 
 Flash-Next preparation, 2026-10-05: after the owner-managed resize, direct AI checks show 80 vCPUs,
 three guest NUMA nodes and 257905 MiB usable RAM. Only the identified blank added 400-GiB disk was
@@ -78,7 +83,7 @@ unchanged. No VM resize, production-readiness claim or model-quality acceptance 
 کد افزوده‌اند. برنامهٔ `836b1ea`، AI با `7ce9d29`، مدل 35B و گزینه‌های عمومی ثابت‌اند. افزایش
 ماشین، پذیرش کیفیت مدل یا آمادگی تولید از این گام استنباط نشود.
 
-Current controlled app, 2026-10-05 (Tehran): `836b1ea` serves the reference workspace/OCS login.
+Earlier controlled app, 2026-10-05 (Tehran): `836b1ea` served the reference workspace/OCS login.
 Five exact-code CI jobs and 47 local browser tests passed. Fresh real login/logout, saved-chat
 reload/resume, both Zabbix sources, EN/FA generation, evidence selection and durable hash/audit
 matching passed. Exact `2a7c8dc` rollback/reapply passed; final rollback guard is stopped. The
@@ -89,8 +94,8 @@ are unchanged. At the earlier pre-import checkpoint, Qwen 3.8 metadata was revie
 the new resource/model increment above supersedes that checkpoint's missing capacity. See the paired
 [CPU guide](en/CPU_AI.md) / [راهنمای CPU](fa/CPU_AI.md). This is not full production acceptance.
 
-برنامهٔ کنترل‌شدهٔ جاری، ۵ اکتبر ۲۰۲۶ به وقت تهران: `836b1ea` محیط مرجع و ورود OCS را ارائه
-می‌کند. پنج کنترل CI همان کد و ۴۷ آزمون مرورگر محلی موفق‌اند. ورود/خروج واقعی، ادامهٔ گفتگو
+برنامهٔ کنترل‌شدهٔ پیشین، ۵ اکتبر ۲۰۲۶ به وقت تهران: `836b1ea` محیط مرجع و ورود OCS را ارائه
+می‌کرد. پنج کنترل CI همان کد و ۴۷ آزمون مرورگر محلی موفق‌اند. ورود/خروج واقعی، ادامهٔ گفتگو
 پس از بارگذاری دوباره، دو منبع زبیکس، تولید دوزبانه، انتخاب شاهد و تطبیق هش/ممیزی موفق بودند.
 بازگشت دقیق به `2a7c8dc` و استقرار دوباره موفق و تایمر نهایی متوقف است. گزارش تاریخ‌دارِ بالا
 شکست‌ها را حفظ و محدودیت شبکهٔ مرورگر را از آزمون اجرا‌نشدهٔ WAN سرور/شروع سرد این نسخه
