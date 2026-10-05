@@ -1,5 +1,20 @@
 # Project state / وضعیت پروژه
 
+Source follow-up, 2026-10-05: selected-evidence aging/partial labels and contextual accessibility
+announcements passed 88 browser tests; the earlier 87/88 fixture-login failure remains recorded
+with unconfirmed transport cause. Current combined source passed 738 non-browser/non-integration
+tests/two POSIX skips, lint/types and documentation checks. The offline 122B qualification planner
+prepares frozen standard/thinking/16K/conditional-32K tests but runs no model and accepts no capacity.
+See paired [UI guidance](en/REFERENCE_UI.md) / [راهنمای رابط](fa/REFERENCE_UI.md) and the permissive
+packet below. This follow-up is not deployed; `f169875` remains the serving app.
+
+پیگیری کد در ۵ اکتبر: سن‌گذاری شاهد انتخاب‌شده، برچسب ناقص و اعلانِ دسترس‌پذیرِ زمینه‌دار،
+۸۸ آزمون مرورگر موفق داشتند؛ شکست پیشینِ ۸۷ از ۸۸ و علت انتقالِ تأییدنشده حفظ است. کد ترکیبی
+جاری ۷۳۸ آزمون غیرمرورگر/غیرintegration موفق، دو مورد POSIX اجرا‌نشده و کنترل lint/نوع/مستندات
+داشت. برنامه‌ریز آفلاین 122B، پرسش ثابتِ پاسخ استاندارد/استدلال/16K/32K مشروط را آماده می‌کند؛
+مدل را اجرا یا ظرفیت را پذیرفته اعلام نمی‌کند. دو راهنمای رابط و گزارش مجوز آزادِ زیر مرجع‌اند.
+این پیگیری مستقر نشده و برنامهٔ زنده همچنان `f169875` است.
+
 Current owner-directed UI repair/permissive alternative, 2026-10-05: app `f169875` is serving after
 70 local browser regressions, 716 non-browser/non-integration tests (two POSIX skips), all five
 exact-source CI jobs and real browser/audit checks. Three actual subagents repaired responsive login

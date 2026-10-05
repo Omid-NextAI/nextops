@@ -28,6 +28,30 @@ retrieval and fresh infrastructure evidence remain distinct.
 
 ## Use and preview
 
+### Evidence aging follow-up — source qualified, not yet deployed
+
+The selected observation now ages from its original collection time without another request.
+One visibility-aware deadline timer stops on close, unmount, hidden page, account view and logout;
+reopening recalculates age. Explicit stale status takes precedence, partial labels are not duplicated,
+and a single polite contextual announcement reports a visible aging transition. Selection, tab,
+focus, raw data and provenance remain unchanged. This is presentation freshness, not a new collection.
+
+The exact final command `.venv/Scripts/python.exe -m pytest tests/browser -q
+--junitxml=artifacts/ui-panel-quality/shell-followup/browser-results.xml` passed **88 tests in
+280.26s**, including 18 added regressions. Retain the preceding **87/88** fixture-login availability
+failure: its transport cause was not reproduced by the bounded four-case diagnostic rerun or the
+complete rerun. No retry, longer timeout or authentication bypass was added. The current combined
+source passed 738 non-browser/non-integration tests, two POSIX skips, Ruff and Linux-target types
+(137 files). Existing PG 16/17 CI evidence belongs to its recorded commit, not this follow-up.
+
+Twenty revised sanitized viewport captures and `shell-report.json` are in
+`artifacts/ui-panel-quality/shell-followup/`. EN/FA dark/light at 1672×941 and scroll 0/900 preserve
+238px navigation, 64px topbar and a 392px inspector track; zero page overflow, JavaScript errors,
+external requests or aging-triggered queries were recorded. Main review inspected EN dark and FA
+light captures. Automated status/keyboard checks do not replace human screen-reader review.
+Asset versions are `20261005-freshness`; the verified live app remains `f169875` until a separate
+exact-source CI, package, guarded browser/audit and rollback qualification succeeds.
+
 ### Motion and panel repair checkpoint — 2026-10-05
 
 The desktop packets already moved in a fresh browser; the reported failure exposed two real

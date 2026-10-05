@@ -30,13 +30,33 @@
   };
   let locale = "en", authenticated = false, entries = [], selected = -1, last = null, catalog = [], model = "", returnFocus = null, selectedCard = null, requestFailed = false, connectorAvailable = null;
   let turnEvidence = new WeakMap(), restoreNavFocus = true, destination = "investigations";
+  const freshnessWindow = 300000;
+  let freshnessTimer = null, pageActive = true;
   const t = key => copy[locale][key] || key;
   const safe = value => String(value ?? "").slice(0, 6000).replace(/\b(Bearer\s+)\S+/gi,"$1[redacted]").replace(/((?:password|passwd|secret|api[_-]?token|authorization)\s*[:=]\s*)[^\s,;]+/gi,"$1[redacted]");
   function node(tag, text, className) { const n = document.createElement(tag); if (text !== undefined) n.textContent = safe(text); if (className) n.className = className; return n; }
   function icon(name) { const n = document.createElementNS("http://www.w3.org/2000/svg", "svg"); n.setAttribute("class", "ui-icon"); n.setAttribute("aria-hidden", "true"); const use = document.createElementNS(n.namespaceURI,"use"); use.setAttribute("href",`#i-${name}`); n.append(use); return n; }
   function time(value) { const date = new Date(value); return Number.isFinite(date.getTime()) ? date.toLocaleString(locale === "fa" ? "fa-IR" : "en-GB", {timeZone:"UTC",timeZoneName:"short",hour12:false}) : t("notReported"); }
   function text(id, value) { const n=el(id); if (n) { n.removeAttribute("data-ui"); n.textContent=value; } }
-  function status(entry) { if (!entry) return "missing"; if (entry.stale || Date.now()-Date.parse(entry.collected)>300000) return "stale"; if (entry.partial) return "partial"; return entry.observed ? "fresh" : "missing"; }
+  function status(entry) { if (!entry) return "missing"; if (entry.stale || Date.now()-Date.parse(entry.collected)>freshnessWindow) return "stale"; if (entry.partial) return "partial"; return entry.observed ? "fresh" : "missing"; }
+  function freshnessLabel(entry) { const state=status(entry); return `${t(state)}${entry.partial&&state!=="partial"?` · ${t("partial")}`:""}`; }
+  function stopFreshnessTimer() { if(freshnessTimer!==null)clearTimeout(freshnessTimer); freshnessTimer=null; }
+  function refreshFreshness() {
+    stopFreshnessTimer();
+    const inspector=el("evidenceInspector"), entry=entries[selected];
+    if(!authenticated || !pageActive || document.hidden || !entry || !inspector?.isConnected || el("workspaceView").classList.contains("hidden") || !inspector.getClientRects().length)return;
+    const badge=el("inspectorContent").querySelector(".freshness"), label=el("inspectorContent").querySelector("[data-evidence-freshness]");
+    if(!badge || !label)return;
+    const state=status(entry), agingTransition=state==="stale"&&!entry.stale&&!badge.classList.contains("stale");
+    badge.textContent=t(state);badge.className=`freshness ${state}`;
+    if(state==="stale"&&!entry.stale)badge.title=t("older");else badge.removeAttribute("title");
+    label.textContent=freshnessLabel(entry);
+    if(agingTransition)el("evidenceFreshnessStatus").textContent=`${t("freshness")}: ${freshnessLabel(entry)}. ${t("older")}.`;
+    // Age this already-collected observation, never query again or replace its data.
+    // One visible selection owns at most one timer; stale entries need no polling.
+    const remaining=Date.parse(entry.collected)+freshnessWindow-Date.now()+1;
+    if(!entry.stale && Number.isFinite(remaining) && remaining>0)freshnessTimer=setTimeout(refreshFreshness,Math.min(remaining,freshnessWindow));
+  }
   function namedUnits(question) {return [...question.matchAll(/(?<![\w@.-])([A-Za-z0-9_@.-]+\.(?:service|socket|timer))(?![\w@.-])/gi)].map(m=>m[1].toLocaleLowerCase("en-US"));}
   function networkGroups(question) {return [/\b(?:dns|resolvers?|nameservers?)\b|نام[‌-]?سرور|دی[‌-]?ان[‌-]?اس/i.test(question),/\b(?:routes?|routing|gateway)\b|مسیر|دروازه/i.test(question),/\b(?:ports?|sockets?|listen(?:ing)?)\b|پورت|سوکت|شنود/i.test(question)];}
   // Only closed diagnostic fields from existing public contracts enter the inspector. Never raw API objects.
@@ -84,13 +104,14 @@
     const summary=incident ? evidence.zabbix.summary : evidence;
     [["pulse","observedChange",t("noChange")],["server","hostsFinding",`${t("scopedHost")} ${incident ? evidence.linux.hostname : summary.host}. ${t("noAffected")}.`],["search","possibleExplanation",t("noHypothesis")],["check","nextChecks",t("noChecks")]].forEach(([i,title,body])=>{ const c=node("section",undefined,"finding-card"); const h=node("h3"); h.append(icon(i),node("span",t(title))); c.append(h,node("p",body)); grid.append(c); });
   }
-  function showEmpty() { const root=el("inspectorContent"); root.replaceChildren(); const box=node("div",undefined,"evidence-empty"); box.append(node("h3",t("noSelected")),node("p",t("selectEvidence"))); root.append(box); el("panel-raw").replaceChildren(node("p",t("noEvidence"))); ["related","context","visualize"].forEach(k=>el(`panel-${k}`).replaceChildren(node("p",t("notAvailable")))); text("evidencePosition",`0 / ${entries.length}`); el("evidencePrevious").disabled=true; el("evidenceNext").disabled=true; }
+  function showEmpty() { stopFreshnessTimer(); const root=el("inspectorContent"); root.replaceChildren(); const box=node("div",undefined,"evidence-empty"); box.append(node("h3",t("noSelected")),node("p",t("selectEvidence"))); root.append(box); el("panel-raw").replaceChildren(node("p",t("noEvidence"))); ["related","context","visualize"].forEach(k=>el(`panel-${k}`).replaceChildren(node("p",t("notAvailable")))); text("evidencePosition",`0 / ${entries.length}`); el("evidencePrevious").disabled=true; el("evidenceNext").disabled=true; }
   function select(index, open=false, origin=null) {
     if(!authenticated || !entries[index]) return;
     selected=index; returnFocus=origin || returnFocus;
     const entry=entries[index], state=status(entry), root=el("inspectorContent"); root.replaceChildren();
     const card=node("section",undefined,"evidence-detail-card"); const badge=node("span",t(state),`freshness ${state}`); if(state==="stale"&&!entry.stale) badge.title=t("older"); card.append(badge,node("h3",entry.title));
-    const dl=node("dl"); [["source",entry.source],["observed",time(entry.observed)],["collected",time(entry.collected)],["host",entry.host],["metric",entry.metric || t("notReported")],["value",entry.value],["threshold",t("notReported")],["severity",Number.isInteger(entry.severity)?String(entry.severity):t("notReported")],["freshness",`${t(state)}${entry.partial?` · ${t("partial")}`:""}`],["scope",entry.scope]].forEach(([key,value])=>{ const dt=node("dt",t(key)),dd=node("dd"); const b=node("bdi",value); b.dir=["host","metric","scope"].includes(key)?"ltr":"auto"; dd.append(b); dl.append(dt,dd); }); card.append(dl); root.append(card);
+    const announcement=node("span",undefined,"sr-only");announcement.id="evidenceFreshnessStatus";announcement.setAttribute("role","status");announcement.setAttribute("aria-live","polite");announcement.setAttribute("aria-atomic","true");card.append(announcement);
+    const dl=node("dl"); [["source",entry.source],["observed",time(entry.observed)],["collected",time(entry.collected)],["host",entry.host],["metric",entry.metric || t("notReported")],["value",entry.value],["threshold",t("notReported")],["severity",Number.isInteger(entry.severity)?String(entry.severity):t("notReported")],["freshness",freshnessLabel(entry)],["scope",entry.scope]].forEach(([key,value])=>{ const dt=node("dt",t(key)),dd=node("dd"); const b=node("bdi",value); b.dir=["host","metric","scope"].includes(key)?"ltr":"auto"; if(key==="freshness")b.dataset.evidenceFreshness=""; dd.append(b); dl.append(dt,dd); }); card.append(dl); root.append(card);
     const raw=el("panel-raw"), actions=node("div",undefined,"raw-actions"), button=node("button",t("copyRaw"),"quiet-button"); button.type="button"; button.id="copyRaw"; button.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(JSON.stringify(entry.raw,null,2));text("rawCopyStatus",t("copied"));}catch(_){text("rawCopyStatus",t("copyFailed"));}}); actions.append(node("span",t("rawNotice")),button); const pre=node("pre"), code=node("code");pre.dir="ltr";pre.tabIndex=0;pre.setAttribute("role","region");pre.setAttribute("aria-label",t("raw"));
     // Values were already bounded/redacted by adapt(). Do not clip the serialized object a
     // second time: that produces invalid JSON and makes the displayed data differ from Copy.
@@ -108,6 +129,7 @@
     document.querySelectorAll(".conversation-turn [data-evidence-index]").forEach(n=>n.setAttribute("aria-current",String(n.closest(".conversation-turn")===selectedCard && Number(n.dataset.evidenceIndex)===index)));
     if(open&&matchMedia("(max-width:1449px)").matches) { el("evidenceDialog").append(el("evidenceInspector")); if(!el("evidenceDialog").open)el("evidenceDialog").showModal(); el("evidenceClose").focus(); }
     else if(open) { el("inspectorSlot").classList.remove("inspector-closed"); el("evidenceInspector").focus({preventScroll:true}); }
+    refreshFreshness();
   }
   function renderTrace(assistant, result, elapsed, saved) {
     const list=el("traceStages");list.replaceChildren();
@@ -141,6 +163,7 @@
     el("modelStatusLabel").textContent=t("localModel");el("modelStatusLabel").title=assistant.model_id || t("localModel");
   }
   function clear() {
+    stopFreshnessTimer();
     entries=[];selected=-1;last=null;returnFocus=null;selectedCard=null;turnEvidence=new WeakMap();requestFailed=false;["evidenceDialog","searchDialog","navDialog"].forEach(id=>{if(el(id).open)el(id).close();});el("inspectorSlot").append(el("evidenceInspector"));document.body.append(el("appNav"));el("profileMenu").open=false;el("inspectorSlot").classList.remove("inspector-closed");
     ["searchInput"].forEach(id=>el(id).value="");el("searchResults").replaceChildren();
     el("resultCard").querySelector(".user-message").removeAttribute("data-user-initial");
@@ -218,10 +241,19 @@
   document.addEventListener("click",event=>{if(!event.target.closest("#composerOptions"))el("composerOptions").open=false;if(!event.target.closest("#profileMenu, #usersBack"))el("profileMenu").open=false;});
   document.addEventListener("keydown",event=>{if(event.key==="Escape" && el("composerOptions").open){el("composerOptions").open=false;el("composerOptions").querySelector("summary").focus();}});
   el("usersButton").addEventListener("click",()=>el("destinationView").classList.add("hidden"));
-  matchMedia("(min-width:1450px)").addEventListener("change",event=>{if(event.matches&&el("evidenceDialog").open)el("evidenceDialog").close();});
+  matchMedia("(min-width:1450px)").addEventListener("change",event=>{if(event.matches&&el("evidenceDialog").open)el("evidenceDialog").close();refreshFreshness();});
   matchMedia("(min-width:1101px)").addEventListener("change",event=>{if(event.matches&&el("navDialog").open)el("navDialog").close();});
   const modelLabel=node("span",t("localModel"),"model-status-label");modelLabel.id="modelStatusLabel";el("assistantForm").querySelector(".prompt-footer").prepend(modelLabel);
   const attachment=node("button",undefined,"icon-button attachment-control");attachment.type="button";attachment.disabled=true;attachment.title=t("attachmentUnavailable");attachment.setAttribute("aria-label",t("attachmentUnavailable"));attachment.append(icon("plus"));el("assistantForm").prepend(attachment);
+  document.addEventListener("visibilitychange",refreshFreshness);
+  window.addEventListener("pagehide",()=>{pageActive=false;stopFreshnessTimer();});
+  window.addEventListener("pageshow",()=>{pageActive=true;refreshFreshness();});
+  // Watch only container visibility/mount changes, not evidence content or the whole page.
+  // This includes the existing account view and the responsive evidence drawer.
+  const freshnessVisibility=new MutationObserver(refreshFreshness);
+  freshnessVisibility.observe(el("workspaceView"),{attributes:true,attributeFilter:["class"]});
+  freshnessVisibility.observe(el("inspectorSlot"),{attributes:true,attributeFilter:["class"],childList:true});
+  freshnessVisibility.observe(el("evidenceDialog"),{attributes:true,attributeFilter:["open"],childList:true});
   window.NextOpsView={session,setLocale,render,clear,navigate,t,namedUnits,networkGroups,
     catalog(sources){if(authenticated)catalog=sources;},
     health(kind,ready){if(!authenticated)return;if(kind==="ai"){model=ready?.model_id || "";el("modelStatusLabel").textContent=t("localModel");el("modelStatusLabel").title=model || t("localModel");}else{connectorAvailable=!!ready;text("connectorValue",t(ready?"reachable":"unavailable"));text("connectorValueHelp",t("engineUnknown"));}},

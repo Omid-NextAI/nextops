@@ -1,5 +1,21 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Evidence freshness and offline qualification tooling — source, 2026-10-05
+
+Age selected evidence without requery/focus loss, remove duplicate partial labels, bound timer
+lifecycle and announce visible aging accessibly. Final browser suite: 88 passed; preceding 87/88
+fixture-login availability failure retained. Combined source: 738 passed/two POSIX skips. Add a
+protected offline 122B plan/resource/trial reviewer using frozen cases and existing final-answer
+guards; no model call, capacity acceptance, profile selection or deployment. Serving app remains
+`f169875` pending separate qualification; model/public thinking and operational bounds are unchanged.
+
+شاهد انتخاب‌شده بدون گردآوری دوباره یا ربودن تمرکز قدیمی می‌شود؛ برچسب ناقصِ تکراری حذف، چرخهٔ
+تایمر محدود و تغییر قابل‌مشاهده با اعلان دسترس‌پذیر گزارش شد. مجموعهٔ نهایی مرورگر ۸۸ موفق
+و شکست پیشینِ ورودِ آزمایشی ۸۷ از ۸۸ محفوظ است. کد ترکیبی ۷۳۸ موفق/دو مورد POSIX اجرا‌نشده
+داشت. ابزار محافظت‌شدهٔ آفلاینِ برنامه/منابع/بازبینی آزمون 122B با پرسش ثابت و کنترل پاسخ نهایی
+اضافه شد؛ مدل را فراخوانی، ظرفیت را پذیرفته یا نمایه را انتخاب نمی‌کند. استقرار انجام نشده؛
+برنامهٔ زنده تا پذیرش جداگانه `f169875` و مدل، استدلال عمومی و حدود عملیاتی ثابت‌اند.
+
 ## Guarded UI repair deployment — 2026-10-05 / استقرار محافظت‌شدهٔ اصلاح رابط
 
 App `f169875` is serving after 70 browser regressions, 716 non-browser/non-integration tests/two

@@ -1,5 +1,19 @@
 # Next task / کار بعدی
 
+New source-only UI follow-up: qualify the 88-browser-test evidence-aging increment with exact-head
+CI and offline packaging, then guarded app-only deployment/real audit and exact `f169875` rollback.
+Preserve the preceding fixture-login failure record; never substitute fixture coverage for live
+acceptance. The offline 122B planner is prepared/not-run and does not enable thinking or a profile.
+Continue supervised pinned import in finite windows; retained failed retry files need distinct
+batch paths. Local range hashes/unique coverage are not complete upstream shard acceptance.
+
+پیگیری تازهٔ رابط فقط در کد است: گام تازگی شاهد با ۸۸ آزمون مرورگر، CI همان کد و بسته‌بندی آفلاین
+سنجیده شود؛ سپس استقرار محدودِ برنامه، ممیزی واقعی و بازگشت دقیق به `f169875` جدا پذیرفته شوند.
+شکست ورودِ آزمایشیِ پیشین حفظ و آزمون ساختگی جای پذیرش زنده ننشیند. برنامه‌ریز 122B آماده و
+اجرا‌نشده است؛ استدلال یا نمایه را فعال نمی‌کند. ورود ثابت تحت نظارت، در پنجره‌های محدود ادامه
+یابد؛ فایلِ شکست محفوظ به مسیر جداگانه برای هر نوبت نیاز دارد. هش محلیِ بخش و پوشش یکتای دریافت،
+پذیرش هش کاملِ فایل اصلی نیستند.
+
 Current owner-directed checkpoint, 2026-10-05: the motion/panel repair app `f169875` is now serving;
 70 local browser tests, exact-source CI, real browser/audit and `836b1ea` rollback/reapply passed
 in the [UI repair record](requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md). Do not redeploy

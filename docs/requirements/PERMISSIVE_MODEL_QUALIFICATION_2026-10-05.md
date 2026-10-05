@@ -119,6 +119,26 @@ deadline failure. Do not increase a limit to conceal failure.
 
 ### Next tasks, acceptance, rollback and evidence
 
+The offline preparation utility `scripts/prepare_122b_qualification.py` pins the same manifest and
+frozen corpus; it does not call a host/model, accept credentials or select a profile. It prepares
+standard-first, final-only thinking, actual-token 16K and conditional 32K stages. Supplied sanitized
+RSS/PSS, cgroup, global memory/swap and PSI excerpts remain observations, not a memory-fit pass.
+Finite trial review reuses the existing non-executing coding invariant and final-answer privacy guard.
+Reports are exclusive protected files outside Git. Use the provisioned environment and a new private
+absolute output path:
+
+```powershell
+.venv/Scripts/python.exe -m scripts.prepare_122b_qualification --output <private-absolute-new-file>
+```
+
+Exit 2 means prepared/not accepted; a supplied failed finite trial returns 1. Optional `--resources`
+and `--trial` accept only protected bounded inputs. The utility does not bypass the still-missing
+typed 122B identity, reviewed hard-template controls, candidate profile, release-identity validation
+or qualified thinking path. Its 16K/32K ladder is a test proposal, not accepted context capacity.
+Retain the pinned Apache license/attribution, applicable modification notices and any supplied NOTICE
+when distributing artifacts; no root NOTICE was found in the reviewed upstream revision. This does
+not verify the quantizer's undisclosed exact conversion revision or certify legal compliance.
+
 1. Reconcile exact existing ranges, complete the finite import and verify every full shard's size
    and SHA-256. Preserve incomplete attempts; never select them.
 2. Inspect verified actual GGUF metadata, tokenizer/template and CPU compatibility with pinned
@@ -256,6 +276,21 @@ schema سخت‌گیرانهٔ مستقل، اعتبارسنج فایل و آز�
 شکست بزرگ نشود.
 
 ### گام بعد، پذیرش، بازگشت و شواهد
+
+ابزار آفلاین `scripts/prepare_122b_qualification.py` همان manifest و مجموعهٔ پرسش ثابت را کنترل
+می‌کند؛ میزبان/مدل را فراخوانی، اعتبارنامه را دریافت یا نمایه را انتخاب نمی‌کند. ترتیب پیشنهادی،
+پاسخ استاندارد، استدلال با خروجی صرفاً نهایی، زمینهٔ واقعیِ 16K و سپس 32K مشروط است. دادهٔ
+پالایش‌شدهٔ RSS/PSS، cgroup، حافظه/swap مهمان و PSI فقط مشاهده‌اند، نه پذیرش مصرف کامل. بازبینی
+محدود، معیار کدنویسیِ بدون اجرای کد تولیدشده و کنترل حریم خصوصی پاسخ نهاییِ موجود را به‌کار می‌گیرد.
+گزارش، فایل تازهٔ محافظت‌شده و بیرون Git است. فرمان بخش انگلیسی با محیط آمادهٔ مخزن و مسیر
+مطلقِ خصوصیِ تازه اجرا شود؛ کد خروج ۲ یعنی آماده‌سازی، نه پذیرش. آزمون محدودِ ناموفقِ ورودی، کد
+خروج ۱ دارد. گزینه‌های `--resources` و `--trial` فقط فایل ورودیِ محدود و محافظت‌شده می‌پذیرند.
+
+هویت typedِ 122B، کنترل سختِ قالب، نمایهٔ نامزد، اعتبارسنج هویت انتشار و مسیر استدلالِ واجد
+پذیرش همچنان گام‌های کدیِ باقی‌اند؛ ابزار آن‌ها را دور نمی‌زند. پلکان 16K/32K پیشنهاد آزمون است،
+نه ظرفیت زمینهٔ پذیرفته‌شده. هنگام توزیع، متن مجوز ثابتِ Apache، انتساب، اعلام تغییرهای لازم و
+NOTICE احتمالیِ همراه حفظ شوند؛ در ریشهٔ نسخهٔ بررسی‌شدهٔ upstream، NOTICE یافت نشد. این
+بررسی، commit دقیقِ تبدیلِ اعلام‌نشدهٔ کوانتیزه‌کننده یا انطباق جامع حقوقی را تأیید نمی‌کند.
 
 ۱. بخش‌های موجود دقیق تطبیق، ورود محدود تکمیل و اندازه/SHA-256 کاملِ هر فایل تأیید شود؛ تلاش
 ناقص حفظ و هرگز انتخاب نشود.
