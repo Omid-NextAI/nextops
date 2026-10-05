@@ -1,5 +1,21 @@
 # Local CPU-only AI and capacity planning
 
+## Permissively licensed alternative — 2026-10-05
+
+The owner confirms Bank/customer access and now explicitly requests a permissive alternative.
+The [dated qualification packet](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md)
+records why the reviewed Apache-2.0 Qwen3.8 family stops at 27B, while Flash/Max weight licenses
+remain custom. A further native-only 27B Q8 coding sample at 48 threads/16K/256 reasoning-budget
+tokens/768 output exceeded 120 seconds at 120102 ms; it did not produce an accepted final answer.
+The trial was stopped and the baseline remained ready. Historical failures are not replaced.
+
+The pinned Apache-2.0 alternative **Qwen3.5-122B-A10B Q5_K_M** has three shards totalling about
+84.22 GiB; its upstream license copy is verified, exact conversion revision remains unverified.
+Range provisioning is partial, not a complete import/load or semantic pass. Observed guest
+251.86 GiB/80 vCPUs/three NUMA nodes is distinct from a proposed 128-GiB/32–48-CPU/16K isolated
+trial. Protect complete memory/cache accounting and the 120-second deadline. Serving 35B/runtime/
+limits and public thinking-off are unchanged; no Q5 selection or full production acceptance.
+
 ## Flash-Next preparation — 2026-10-05
 
 The [current record](../requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md) supersedes earlier

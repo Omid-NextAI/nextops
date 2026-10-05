@@ -85,6 +85,12 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: permissive_q5_model_trial
+    status: experimental
+    evidence:
+      - docs/requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md
+      - deploy/inference/qwen3-5-122b-a10b-q5-k-m.candidate.json
+      - tests/unit/test_122b_q5_candidate.py
   - id: qwen38_cpu_qualification
     status: experimental
     evidence:

@@ -99,6 +99,7 @@ def validate_repository(repository_root: Path) -> dict[str, Any]:
         (LARGER_MOE_CANDIDATE, "model-30b-a3b-candidate.schema.json"),
         (LARGER_QWEN35_CANDIDATE, "model-35b-a3b-candidate.schema.json"),
         ("qwen3-8-flash-next-q8.candidate.json", "model-flash-next-candidate.schema.json"),
+        ("qwen3-5-122b-a10b-q5-k-m.candidate.json", "model-122b-a10b-q5-candidate.schema.json"),
     ):
         try:
             larger_schema = json.loads((directory / schema_name).read_text("utf-8"))
@@ -275,6 +276,11 @@ def main() -> int:
             "utf-8"
         )
     )
+    q5 = json.loads(
+        (repository_root / "deploy/inference/qwen3-5-122b-a10b-q5-k-m.candidate.json").read_text(
+            "utf-8"
+        )
+    )
     print(
         "PASS: inference candidate metadata is schema-valid; "
         f"status={document['status']}; runtime_binary_built="
@@ -287,7 +293,10 @@ def main() -> int:
         f"benchmark_run={document['evidence']['benchmark_run']}; "
         f"flash_status={flash['status']}; "
         f"flash_complete_import={flash['qualification']['artifact_import']}; "
-        f"flash_selection_allowed={flash['deployment_selection_allowed']}."
+        f"flash_selection_allowed={flash['deployment_selection_allowed']}; "
+        f"q5_122b_status={q5['status']}; "
+        f"q5_122b_complete_import={q5['qualification']['artifact_import']}; "
+        f"q5_122b_selection_allowed={q5['deployment_selection_allowed']}."
     )
     return 0
 

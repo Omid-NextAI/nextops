@@ -25,7 +25,7 @@ remaining task-specific sources. The repository skill
 | Application or database code | `docs/en/DEVELOPMENT.md`, `DATA_API.md`, `TESTING.md`, current state/next task, source contracts, migrations, and neighboring tests |
 | Authentication or session lifecycle | `docs/requirements/SESSION_TERMINATION_SPEC.md`, `docs/en/SECURITY.md`, `DATA_API.md`, `TESTING.md`, current release manifest, source service/API, and identity integration tests |
 | Certificate lifecycle | `docs/requirements/CERTIFICATE_LIFECYCLE_SPEC.md`, `docs/en/OPERATIONS.md`, Persian operations pair, systemd checker/timer, Nginx profiles, current release manifest, and private rotation/alert evidence |
-| Local CPU inference | `docs/en/CPU_AI.md`, `OFFLINE_RUNTIME.md`, `TESTING.md`, `docs/requirements/QWEN38_QUALIFICATION_SPEC.md`, `QWEN38_QUALIFICATION_2026-10-05.md`, `QWEN38_FLASH_QUALIFICATION_2026-10-05.md`, pinned model artifact records, systemd model-selection profiles, current state/next task, and Persian pairs when human-facing text changes |
+| Local CPU inference | `docs/en/CPU_AI.md`, `OFFLINE_RUNTIME.md`, `TESTING.md`, `docs/requirements/QWEN38_QUALIFICATION_SPEC.md`, `QWEN38_QUALIFICATION_2026-10-05.md`, `QWEN38_FLASH_QUALIFICATION_2026-10-05.md`, `PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md`, pinned model artifact records, systemd model-selection profiles, current state/next task, and Persian pairs when human-facing text changes |
 | AI answer integrity | `docs/requirements/ANSWER_INTEGRITY_SPEC.md`, `docs/en/AI_INTEGRITY.md`, Persian pair, assistant contracts, answer-integrity policy, evaluation corpus, current release manifest, and private live evidence |
 | Conversational frontend and NOC/SOC guidance | `docs/requirements/NOC_SOC_WORKSPACE_SPEC.md`, `docs/en/UI.md`, Persian pair, `DATA_API.md`, assistant/context contracts, static assets, browser tests, integrity guide and current release manifest |
 | Reference-matched workspace and OCS login | `docs/requirements/REFERENCE_UI_SPEC.md`, `docs/en/REFERENCE_UI.md`, Persian pair, supplied design reference, static presentation/motion modules and isolated browser fixtures |
@@ -41,6 +41,8 @@ remaining task-specific sources. The repository skill
 | Release or GitHub workflow | `CONTRIBUTING.md`, `CHANGELOG.md`, `SECURITY.md`, `docs/en/DEVELOPMENT.md`, test guide, and GitHub templates |
 
 ## Complete inventory
+
+- `docs/requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md` — Bilingual failed 48-thread 27B retest, Apache Qwen3.5 122B Q5 identity/license, partial provisioning, bounded trial proposal and unrun acceptance.
 
 - `docs/requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md` — Bilingual actual resized-guest/new-volume preparation, pinned metadata-only Flash Q8 import, customer-license consideration, frozen regression tools and unrun model gates.
 

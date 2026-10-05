@@ -1,5 +1,20 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Motion/panel repair and permissive model preparation — 2026-10-05
+
+Repair responsive login motion, mobile input/control separation, focus, locale/evidence selection,
+truthful archived context and complete redacted JSON. Add hidden-DOM logout cleanup and native
+details state synchronization. Source regression/guarded deployment are separate checkpoints.
+Add pinned Apache Qwen3.5-122B-A10B Q5 metadata/schema/tests and supervised partial provisioning;
+record the failed 48-thread 27B thinking/coding deadline without promoting it. Preserve existing
+runtime, working 35B, public thinking-off, historical Flash and all unfinished acceptance.
+
+حرکت ورودِ واکنش‌گرا، جداسازی متن/کنترل موبایل، تمرکز، انتخاب شاهد/زبان، منشأ پاسخ پیشین و
+JSON کاملِ پالایش‌شده اصلاح شدند. پاک‌سازی DOM پنهان هنگام خروج و همگامی جزئیات نیز افزوده‌اند.
+آزمون کد و استقرار محافظت‌شده دو گام جدا هستند. هویت/قالب/آزمون ثابتِ Qwen3.5-122B-A10B Q5
+با مجوز Apache و آماده‌سازی ناقصِ تحت نظارت اضافه و مهلت‌گذریِ 27B با ۴۸ رشته ثبت شد؛ شکست
+ارتقا نیافت. runtime، مدل سالم 35B، خاموشی استدلال عمومی، سابقهٔ Flash و پذیرش‌های ناتمام حفظ‌اند.
+
 ## Controlled reference UI deployment — 2026-10-05 / استقرار محدود رابط مرجع
 
 Deploy app `836b1ea` after repairing sidebar deletion/profile navigation and passing five exact-code

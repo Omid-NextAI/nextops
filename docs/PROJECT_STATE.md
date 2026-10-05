@@ -1,5 +1,26 @@
 # Project state / وضعیت پروژه
 
+Owner-directed permissive alternative/UI repair, 2026-10-05: three real subagents repaired login
+motion visibility, mobile composer, keyboard/navigation/locale and evidence presentation, and reviewed
+model licenses. The assembled source browser checkpoint passed 69 tests; a subsequent hidden-DOM
+logout cleanup and request-details state repair are being revalidated. The serving app remains
+`836b1ea` until separately recorded guarded qualification. Qwen3.8 27B's new 48-thread/native-thinking
+coding sample failed the 120-second deadline at 120102 ms and was stopped/verified; baseline 35B
+remains ready. The owner requests a permissive alternative for Bank/customer access. Pinned Apache
+Qwen3.5-122B-A10B Q5_K_M is in supervised partial provisioning, not loaded or selected; do not label
+it 3.8 or resume full custom-license Flash import. See the [dated record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md)
+and paired UI guides. No public thinking, VM, serving-model or production-acceptance change.
+
+گام درخواستی مالک در ۵ اکتبر: سه عامل واقعی، نمایش حرکت ورود، کادر پرسش موبایل، پیمایش/
+تمرکز/زبان و ارائهٔ شاهد را اصلاح و مجوز مدل‌ها را بررسی کردند. گام کدِ ترکیبی، ۶۹ آزمون مرورگر
+موفق داشت؛ پاک‌سازی DOM پنهان هنگام خروج و همگامی وضعیت جزئیات درخواست سپس افزوده شده و
+دوباره آزموده می‌شوند. برنامهٔ زنده تا ثبت پذیرش محافظت‌شده همان `836b1ea` است. نمونهٔ تازهٔ
+کدنویسی 27B با ۴۸ رشته و استدلال native، در ۱۲۰۱۰۲ میلی‌ثانیه از مهلت ۱۲۰ ثانیه گذشت؛ توقف
+آن تأیید و مدل سالم 35B آماده ماند. مالک برای دسترسی بانک/مشتری، نامزدِ مجوز آزاد خواسته است.
+Qwen3.5-122B-A10B Q5_K_M با مجوز Apache، در دریافت ناقص و تحت نظارت است، نه بارگذاری یا
+انتخاب؛ 3.8 نامیده نشود و ورود کامل Flash با مجوز اختصاصی ادامه نیابد. گزارش تاریخ‌دار بالا
+و راهنمای دوزبانهٔ رابط مرجع‌اند. استدلال عمومی، ماشین، مدل زنده یا پذیرش تولید تغییر نکرده است.
+
 Flash-Next preparation, 2026-10-05: after the owner-managed resize, direct AI checks show 80 vCPUs,
 three guest NUMA nodes and 257905 MiB usable RAM. Only the identified blank added 400-GiB disk was
 prepared as a separate protected model volume. The pinned Q8 set totals 151.46 GiB; its complete

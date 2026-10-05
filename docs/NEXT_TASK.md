@@ -1,5 +1,25 @@
 # Next task / کار بعدی
 
+Current owner-directed checkpoint, 2026-10-05: qualify and guard-deploy the assembled motion/panel
+repairs without changing auth/policy/model. Continue the supervised pinned Apache Qwen3.5-122B-A10B
+Q5 range import on the already prepared large volume; verify all complete shards before actual
+metadata/load and frozen EN/FA thinking/context/coding acceptance. The [permissive packet](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md)
+supersedes Flash as the active import choice for customer-facing qualification; historical Flash
+files/license limitations remain. The extra 48-thread 27B coding timeout is failed, not a promotion.
+Maintain the serving 35B rollback and bounded OS/application headroom. No automatic live model or
+thinking selection before matched app/evidence/audit/offline/rollback gates pass.
+
+گام جاریِ درخواستی مالک در ۵ اکتبر: اصلاح حرکت/پنل پس از آزمون ترکیبی، با محافظ بازگشت مستقر
+شود؛ ورود، سیاست و مدل تغییر نکنند. دریافت محدودِ Qwen3.5-122B-A10B Q5 با مجوز Apache، تحت
+نظارت و روی حجم بزرگِ آماده ادامه یابد؛ پیش از metadata/بارگذاری و پذیرش ثابتِ فارسی/انگلیسی
+برای استدلال، زمینه و کدنویسی، همهٔ فایل‌های کامل تأیید شوند. گزارش مجوز آزادِ بالا، نامزد فعال
+برای پذیرش مشتری را جایگزین Flash می‌کند؛ فایل‌ها و محدودیت مجوز تاریخیِ Flash حفظ‌اند.
+مهلت‌گذریِ تازهٔ 27B در ۴۸ رشته، شکست است نه مجوز ارتقا. مدل 35B برای بازگشت و حاشیهٔ محدود
+سیستم‌عامل/برنامه حفظ شوند. مدل یا استدلال، پیش از پذیرش هماهنگِ برنامه/شاهد/ممیزی/آفلاین/
+بازگشت خودکار انتخاب نشوند.
+
+## Earlier checkpoints / گام‌های پیشین
+
 First unfinished Flash checkpoint: resolve customer-facing license applicability/organizational
 approval before publication or committing to the complete 151.46-GiB import; the owner confirms
 Bank/customer access, so do not assume the internal-use exception. Private bounded development
