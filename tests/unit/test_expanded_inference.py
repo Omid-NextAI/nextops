@@ -22,6 +22,7 @@ class TokenTransport:
         self.content = '{"answer":"The final answer."}'
         self.finish_reason = "stop"
         self.context_tokens = 16384
+        self.model = MODEL
 
     async def post_json(
         self,
@@ -39,7 +40,7 @@ class TokenTransport:
             assert payload["add_special"] is False
             return {"tokens": self.tokens}
         return {
-            "model": MODEL,
+            "model": self.model,
             "choices": [
                 {
                     "message": {
@@ -208,5 +209,37 @@ def test_standard_chat_stays_plain_text_without_thinking_controls() -> None:
         assert completion["chat_template_kwargs"] == {"enable_thinking": False}
         for key in ("reasoning_budget_tokens", "reasoning_budget_message", "response_format"):
             assert key not in completion
+
+    asyncio.run(scenario())
+
+
+def test_qwen38_candidate_standard_profile_disables_default_private_history() -> None:
+    async def scenario() -> None:
+        transport = TokenTransport()
+        transport.model = "nextops-qwen3-8-27b-q8-0"
+        transport.content = "A final answer, not private analysis."
+        configuration = LlamaCppSettings(
+            base_url="http://127.0.0.1:18080",
+            model_id="nextops-qwen3-8-27b-q8-0",
+            provider_api_key="provider-secret-only-for-test-0001",
+            service_auth_secret="service-secret-only-for-test-0002",
+            expanded_chat_enabled=True,
+            thinking_enabled=False,
+            context_tokens=16384,
+        )
+        result = await LlamaCppProvider(configuration, transport).generate(request(False))
+        completion = transport.calls[-1][1]
+        assert result.model_id == "nextops-qwen3-8-27b-q8-0"
+        assert completion["messages"][-1]["content"] == request(False).prompt
+        assert completion["chat_template_kwargs"] == {
+            "enable_thinking": False,
+            "preserve_thinking": False,
+        }
+        assert "Private trace" not in result.model_dump_json()
+        assert "response_format" not in completion
+        with pytest.raises(ApplicationError, match=r"inference\.thinking_disabled"):
+            await LlamaCppProvider(configuration, transport).generate(request())
+        with pytest.raises(ValueError, match=r"qualified expanded Qwen3\.5 profile"):
+            LlamaCppSettings(**{**configuration.model_dump(), "thinking_enabled": True})
 
     asyncio.run(scenario())

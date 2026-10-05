@@ -1,10 +1,59 @@
 # Local CPU-only AI and capacity planning
 
-## Qwen 3.8 upgrade checkpoint — 2026-10-05
+## Actual Qwen 3.8 trial outcome — 2026-10-05
+
+[Dated measurements](../requirements/QWEN38_QUALIFICATION_2026-10-05.md): the single pinned
+27B Q8 artifact is imported, size/hash verified and protected but **unselected**. Actual GGUF/template
+and CPU loading at 16K passed. Four strict digit/short-recall cases passed per profile; native-only
+thinking arithmetic passed in both languages. That is not complete coding, technical-thinking,
+saved-chat or live-evidence acceptance. Both baseline/candidate missed an explicit non-string coding
+invariant; candidate near-context recall (15360 input tokens) exceeded the 120-second deadline.
+
+Candidate network answers took 69–74 seconds at 16 threads, 48–66 seconds at 32 threads, versus
+12–20 seconds on the serving model in these single samples. Final trial RSS was about 30.15 GiB,
+with zero swap; small cgroup accounting excluded precharged model page cache and is not full memory
+fit. No comprehensive throughput, latency percentile or physical NUMA optimum is established.
+The trial is stopped/removed; verified candidate/logs remain and ~27.05 GiB of exact temporary
+duplicate parts was reclaimed. Serving 35B/runtime/limits, VM configuration and public thinking-off
+are unchanged. Do not promote this slower failed-context profile just because host resources exist.
+
+## Fresh capacity and Qwen 3.8 trial — 2026-10-05
+
+The owner now supplies fresh DS-C/host screenshots and states no space is reserved and resources
+are available for larger AI development. DS-C shows rounded **3.49 TB total / 1.79 TB provisioned /
+1.71 TB free**. Host RAM shows **1.31 TB total / 213.64 GB used / 1.1 TB free** and a Platinum 8280
+CPU label. These are point-in-time supplied observations, not measured future all-VM growth or
+an instruction to consume ESXi/other services' capacity. The 900-GiB free-space guard is a planning
+target, not a configured reservation; retain the existing 3-TB ceiling and other datastore exclusions.
+Do not request the already supplied aggregate totals or this Storage screenshot again as missing.
+
+Direct preflight at `2026-10-05T07:28:57Z`: 80 online vCPUs, 128769 MiB usable/107664 MiB available
+RAM, no swap use, AVX-512/VNNI visible, one guest NUMA node and **80 virtual sockets**. Model-volume
+space remains 169557 MiB available. Native serving MemoryMax is 96 GiB with 18 CPU equivalents.
+The screenshot's spare host RAM has **not** been assigned to this guest. Physical NUMA placement,
+saved virtual-hardware settings and storage latency are not proved by these observations.
+
+The bounded [qualification packet](../requirements/QWEN38_QUALIFICATION_SPEC.md) resolves the
+earlier capacity stop for **one** 27B Q8 trial and its range/assembly workspace. Provisioning uses
+the configured proxy chain and pinned SHA-256; partial transfers cannot be selected. The working
+35B model, runtime, app, secrets, public thinking-off flags and serving limits remain unchanged.
+The source adapter adds the exact Q8 identity and disables Qwen3.8's default thinking/preserved
+thinking; registration is not live selection. No runtime download or model-owned target credential.
+
+For a later higher-precision Flash-Next trial, **256 GiB guest RAM** is a starting proposal;
+consider 512 GiB only for measured larger-context/buffer needs. Its Q8 file metadata totals about
+175.3 GiB before runtime state, whereas Q4 is already 103.69 GiB before state. Neither fits the
+current 96-GiB service limit. Do not automatically allocate all host RAM or assume 80 inference
+threads are optimal; review actual topology and benchmark bounded thread counts. This proposal is
+not a resize, complete-memory-fit result, license approval or performance promise. Flash-Next is
+the larger experimental option; the 27B precision trial is not the maximum parameter count.
+
+## Earlier pre-import checkpoint — 2026-10-05
 
 The owner authorized an upgrade after the UI deployment, not unlimited resource allocation or
 automatic promotion. UI app `836b1ea` is live; the serving 35B model, runtime and disabled-thinking
-flag remain unchanged. No Qwen 3.8 weights were downloaded/imported or started.
+flag remained unchanged. At that earlier checkpoint, no Qwen 3.8 weights had been downloaded,
+imported or started; the fresh evidence/trial section above supersedes its capacity stop.
 
 Fresh read-only guest preflight: 80 online vCPUs, 128769 MiB usable RAM (about 125.75 GiB), 108015
 MiB available at observation, no swap use, one visible guest NUMA node, 169557 MiB available on the

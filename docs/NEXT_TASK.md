@@ -1,19 +1,26 @@
 # Next task / کار بعدی
 
 The owner-requested UI deployment is complete at `836b1ea`; see the
-[exact live record](requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md). Next, obtain current
-DS-C free space and outstanding snapshot/thin/planned growth commitments before importing a Qwen 3.8
-candidate. The old screenshot and a 500-GiB growth allowance are not fresh capacity observations.
-The paired CPU guide records feasible candidates, pinned metadata and the separate thinking/privacy,
-quality, latency, offline and rollback gates. Do not enable thinking or relabel Qwen discovery as an
-upgrade. Preserve the working app, 35B model and existing policy while the import gate is unresolved.
+[exact live record](requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md). The capacity
+stop and single 27B Q8 import/template/protected CPU-load tasks are complete; do not repeat them.
+The [actual trial](requirements/QWEN38_QUALIFICATION_2026-10-05.md) failed strict non-string coding
+and near-16K context/deadline qualification. Repair/expand the bounded evaluation corpus and review
+measured quantization/thread/topology options before another profile, preserving the frozen
+regressions and 120-second deadline. Public thinking stays off and the serving 35B/app/policy remains
+unchanged. Thinking/evidence/queue/WAN/rollback must pass matched application acceptance before
+selection. A larger Flash trial is separate: review its custom license, CPU compatibility, full memory
+fit and saved guest/topology settings before any resize/import. No automatic promotion, all-host
+allocation, repeated capacity request or discovery-as-upgrade claim.
 
-استقرار رابطِ درخواستی مالک با `836b1ea` تکمیل است؛ گزارش زندهٔ بالا مرجع است. گام بعد، دریافت
-فضای آزاد جاریِ DS-C و تعهد رشد snapshot، دیسک thin و نوشتن‌های برنامه‌ریزی‌شده، پیش از ورود
-نامزد Qwen 3.8 است. تصویر قدیمی و اجازهٔ رشد ۵۰۰ GiB مشاهدهٔ تازهٔ ظرفیت نیستند. راهنمای
-دوزبانهٔ CPU نامزدها، metadata ثابت و معیارهای جداگانهٔ استدلال/حریم خصوصی، کیفیت، تأخیر،
-آفلاین و بازگشت را ثبت می‌کند. استدلال فعال نشود و بررسی مدل، ارتقا نامیده نشود؛ برنامهٔ سالم،
-مدل 35B و سیاست موجود تا رفع این مانع حفظ شوند.
+استقرار رابط با `836b1ea` تکمیل است؛ گزارش زندهٔ بالا مرجع است. مانع ظرفیت، ورود یک فایل 27B Q8،
+قالب واقعی و بارگذاری محافظت‌شدهٔ CPU تکمیل‌اند و تکرار نشوند. گزارش آزمون واقعی بالا، شکست
+کدنویسیِ ورودی غیررشته‌ای و مهلت/زمینهٔ نزدیک 16K را ثبت می‌کند. مجموعهٔ ارزیابی محدود تکمیل
+و گزینهٔ سنجیدهٔ کمّی‌سازی/رشته/توپولوژی پیش از نمایهٔ بعدی بررسی شود؛ پرسش ثابت و مهلت
+۱۲۰ ثانیه حفظ شوند. استدلال عمومی خاموش و مدل 35B، برنامه و سیاست زنده ثابت بمانند. پذیرش
+هماهنگِ استدلال/شاهد/صف/WAN/بازگشت پیش از انتخاب لازم است. آزمون Flash بزرگ‌تر جداست:
+مجوز اختصاصی، سازگاری CPU، مصرف کامل و تنظیم ذخیره‌شدهٔ مهمان/توپولوژی پیش از افزایش/ورود
+بررسی شوند. ارتقای خودکار، تخصیص همهٔ میزبان، درخواست دوبارهٔ ظرفیت یا نامیدن بررسی به‌عنوان
+ارتقا مجاز نیست.
 
 Remaining answer-quality checkpoint after the controlled UI cutover: qualify source-answer usefulness
 for Internet-SLA/FortiGate without weakening integrity guards, and general instruction following

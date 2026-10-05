@@ -1,5 +1,41 @@
 # Testing, model evaluation and release evidence
 
+## Actual Qwen 3.8 native/adapter trial — 2026-10-05
+
+[Dated report](../requirements/QWEN38_QUALIFICATION_2026-10-05.md) separates verified import,
+actual template/CPU loading and native samples from unrun matched app/browser acceptance.
+Candidate manifest records failed standard coding and near-context latency gates, partial
+thinking/privacy/egress isolation and unrun model rollback. The serving 35B remains unchanged.
+Full-file rehash, stopped trial PID/listener, removed ephemeral unit and ready baseline were checked.
+
+At `e39e2c9`, `python -m pytest -m "not integration and not browser" -q` rerun: **622 passed,
+2 skipped, 85 deselected**, 29.42 seconds. Five exact-head CI jobs passed
+([run](https://github.com/Omid-NextAI/nextops/actions/runs/37281920437)), including PostgreSQL 16/17
+and fixture browser acceptance. `python -m mypy --platform linux packages tests scripts deploy/installers`
+passed 125 files. The initial Windows-target full mypy failed nine existing POSIX-only attribute
+checks in two Linux collector modules; no Linux security or locks were relaxed to suppress them.
+Later report-only commit checks do not retroactively qualify a live model.
+
+Final report/manifest working-tree rerun with the managed `.venv/Scripts/python.exe`: 622 passed,
+2 skipped, 85 deselected in 20.56 seconds; Ruff check/format passed 131 files, Linux-target mypy
+passed 125, docs passed 137 Markdown/39 pairs, and release/artifact/dossier checks passed. The first
+follow-up used system Python without yaml/pytest and a mistaken dossier-check filename; it failed
+before those checks ran. Correcting interpreter/path required no package installation. CI on a
+subsequent commit must still be checked independently.
+
+## Qwen 3.8 source gates and fresh preflight — 2026-10-05
+
+`python -m pytest -m "not integration and not browser" -q`: **622 passed, 2 POSIX-on-Windows
+skips, 85 deselected**, one existing Starlette/AnyIO deprecation warning, 22.12 seconds. The
+targeted provider/configuration/contracts/artifact/expanded-profile command passed **92 tests**.
+Ruff and strict mypy for nine affected files passed. `python -X utf8 scripts/check_docs.py` passed
+136 Markdown/39 paired guides; release-status and dossier checks passed. The initial docs invocation
+without UTF-8 failed while printing Persian to Windows cp1252; the UTF-8 rerun passed, not silently
+treated as an initial pass. These are source/structure gates, not model acceptance or a new deployment.
+The [qualification packet](../requirements/QWEN38_QUALIFICATION_SPEC.md) records fresh supplied
+capacity and direct guest evidence. Full artifact, template/load, held-out semantic/thinking,
+matched app/browser/audit, WAN and rollback gates remain separate; do not infer them from this suite.
+
 ## Current reference UI deployment — 2026-10-05
 
 [Exact UI record](../requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md): app `836b1ea`,

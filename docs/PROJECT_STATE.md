@@ -1,5 +1,42 @@
 # Project state / وضعیت پروژه
 
+Controlled Qwen 3.8 result, 2026-10-05: pinned 27B Q8 full-file verification, actual GGUF/template
+and isolated CPU loading passed. The [dated trial](requirements/QWEN38_QUALIFICATION_2026-10-05.md)
+records eight fixed-order standard samples per profile, four native-only thinking arithmetic samples,
+16/32-thread timings, a strict non-string coding invariant failure and a 15360-token context
+deadline failure at 120163 ms. This profile is **not selected**. Trial process/listener and ephemeral
+unit were stopped/removed; exact duplicate download parts were reclaimed after a complete rehash,
+with the immutable candidate and private logs retained. No serving-model/VM/resource or public
+thinking change. App `836b1ea`, AI `7ce9d29`, connector `2a7c8dc` and 35B remain unchanged. Five
+CI jobs passed at source `e39e2c9`; source success is not candidate application/model acceptance.
+
+نتیجهٔ آزمون کنترل‌شدهٔ Qwen 3.8 در ۵ اکتبر: هش کاملِ 27B Q8، قالب/metadata واقعی و بارگذاری
+مستقل CPU موفق بود. گزارش تاریخ‌دار بالا، هشت نمونهٔ استاندارد ثابت برای هر نمایه، چهار نمونهٔ
+محاسباتیِ استدلال صرفاً native، زمان‌های ۱۶/۳۲ رشته، شکست معیار کدنویسی برای ورودی غیررشته‌ای
+و شکست مهلت زمینهٔ ۱۵۳۶۰ توکنی در ۱۲۰۱۶۳ میلی‌ثانیه را ثبت می‌کند. نامزد **انتخاب نشده است**.
+فرایند/listener و خدمت موقت متوقف/حذف و فقط بخش‌های تکراریِ دریافت، پس از هش کامل پاک شدند؛
+نامزد تغییرناپذیر و log خصوصی حفظ‌اند. مدل زنده، ماشین، منابع و استدلال عمومی تغییر نکردند؛
+برنامهٔ `836b1ea`، AI با `7ce9d29`، اتصال‌دهندهٔ `2a7c8dc` و مدل 35B ثابت‌اند. پنج کنترل CI
+کد `e39e2c9` موفق‌اند؛ موفقیت کد، پذیرش مدل/برنامهٔ نامزد نیست.
+
+New resource/model increment, 2026-10-05: the owner supplied fresh DS-C/host screenshots and
+reports no reserved space. The earlier missing-capacity checkpoint is resolved for one bounded
+27B Q8 precision trial, not for unlimited host consumption. Direct AI preflight confirms 80 online
+vCPUs/128769 MiB usable RAM/one guest NUMA node/169557 MiB model-volume free; 96-GiB/18-equivalent
+serving limits remain. Pinned proxy-chain provisioning is separate from live selection; see the
+[qualification packet](requirements/QWEN38_QUALIFICATION_SPEC.md) and paired CPU guides.
+Source adds candidate identity, explicit no-thinking/no-preservation standard template controls
+and manifest regression tests. Serving app `836b1ea`, AI `7ce9d29`, 35B model and public flags are
+unchanged. No VM resize, production-readiness claim or model-quality acceptance is implied.
+
+گام تازهٔ منابع/مدل، ۵ اکتبر: مالک تصاویر جاریِ DS-C/میزبان و نبود فضای رزروشده را اعلام کرده است.
+مانع قبلیِ ظرفیت برای یک آزمون محدودِ 27B Q8 رفع شد، نه مصرف نامحدود میزبان. پیش‌بررسی مستقیم،
+۸۰ vCPU، حافظهٔ ۱۲۸۷۶۹ MiB، یک گرهٔ NUMA و فضای آزاد ۱۶۹۵۵۷ MiB حجم مدل را تأیید می‌کند؛
+سقف زندهٔ ۹۶ GiB/معادل ۱۸ CPU ثابت است. آماده‌سازی از پراکسی، انتخاب زنده نیست؛ بستهٔ پذیرش
+بالا و راهنمای دو زبان مبنا هستند. هویت نامزد، خاموشی صریح استدلال/حفظ آن و آزمون manifest در
+کد افزوده‌اند. برنامهٔ `836b1ea`، AI با `7ce9d29`، مدل 35B و گزینه‌های عمومی ثابت‌اند. افزایش
+ماشین، پذیرش کیفیت مدل یا آمادگی تولید از این گام استنباط نشود.
+
 Current controlled app, 2026-10-05 (Tehran): `836b1ea` serves the reference workspace/OCS login.
 Five exact-code CI jobs and 47 local browser tests passed. Fresh real login/logout, saved-chat
 reload/resume, both Zabbix sources, EN/FA generation, evidence selection and durable hash/audit
@@ -7,8 +44,8 @@ matching passed. Exact `2a7c8dc` rollback/reapply passed; final rollback guard i
 [dated UI record](requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md) retains failed trials
 and separates browser network restriction from unrun current-app server-WAN/VM cold-start tests.
 Connector remains `2a7c8dc`; AI API `7ce9d29`, runtime, Qwen3.5-35B-A3B, thinking-off and resources
-are unchanged. Qwen 3.8 official models/GGUF metadata were reviewed, not imported: fresh datastore
-free-space and snapshot/thin-growth commitments are required before the model trial. See the paired
+are unchanged. At the earlier pre-import checkpoint, Qwen 3.8 metadata was reviewed, not imported;
+the new resource/model increment above supersedes that checkpoint's missing capacity. See the paired
 [CPU guide](en/CPU_AI.md) / [راهنمای CPU](fa/CPU_AI.md). This is not full production acceptance.
 
 برنامهٔ کنترل‌شدهٔ جاری، ۵ اکتبر ۲۰۲۶ به وقت تهران: `836b1ea` محیط مرجع و ورود OCS را ارائه
@@ -17,8 +54,8 @@ free-space and snapshot/thin-growth commitments are required before the model tr
 بازگشت دقیق به `2a7c8dc` و استقرار دوباره موفق و تایمر نهایی متوقف است. گزارش تاریخ‌دارِ بالا
 شکست‌ها را حفظ و محدودیت شبکهٔ مرورگر را از آزمون اجرا‌نشدهٔ WAN سرور/شروع سرد این نسخه
 جدا می‌کند. اتصال‌دهنده `2a7c8dc`، API هوش مصنوعی `7ce9d29`، runtime، مدل Qwen3.5، استدلالِ
-غیرفعال و منابع ثابت‌اند. مدل‌های رسمی و metadataِ Qwen 3.8 بررسی شدند، نه دریافت یا انتخاب؛
-پیش از آزمون مدل، فضای آزاد جاری و تعهد رشد snapshot/thin لازم است. پذیرش کامل تولید ادعا نمی‌شود.
+غیرفعال و منابع ثابت‌اند. در گام قبلی، metadataِ Qwen 3.8 بررسی شده بود، نه دریافت یا انتخاب؛
+گام تازهٔ منابع/مدل در بالا جایگزین مانع ظرفیت آن شده است. پذیرش کامل تولید ادعا نمی‌شود.
 
 ## Historical checkpoints / گام‌های تاریخی
 

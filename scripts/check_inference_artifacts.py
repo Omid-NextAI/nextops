@@ -105,7 +105,85 @@ def validate_repository(repository_root: Path) -> dict[str, Any]:
             )
             raise ArtifactValidationError(f"larger candidate schema validation failed: {details}")
     validate_chat_candidates(directory)
+    validate_qwen38_candidate(directory)
     return document
+
+
+def validate_qwen38_candidate(directory: Path) -> None:
+    """Pin the provision-only trial; do not make discovery a serving selection."""
+
+    def unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        result: dict[str, Any] = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError("duplicate Qwen3.8 metadata field")
+            result[key] = value
+        return result
+
+    try:
+        candidate = json.loads(
+            (directory / "qwen3-8-27b-q8.candidate.json").read_text("utf-8"),
+            object_pairs_hook=unique,
+        )
+    except (OSError, ValueError) as error:
+        raise ArtifactValidationError("cannot parse Qwen3.8 candidate metadata") from error
+    expected = {
+        "schema_version": "1.0.0",
+        "model_id": "nextops-qwen3-8-27b-q8-0",
+        "source_repository": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF",
+        "source_revision": "4ca720788d1e01f1bff70c033e0d0028fd02e502",
+        "upstream_repository": "https://huggingface.co/Qwen/Qwen3.8-27B",
+        "upstream_reference_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+        "conversion_source_revision_verified": False,
+        "quantized_by": "unsloth",
+        "quantization": "Q8_0",
+        "filename": "Qwen3.8-27B-Q8_0.gguf",
+        "size_bytes": 29047086048,
+        "sha256": "a680f44a06920e5d689774823782006aa3acc8db95750323373b24139b67e348",
+        "license": "Apache-2.0",
+        "runtime_commit": "b29c606e28a01b1bc8c1351026a0fa6e616bf6c4",
+        "cpu_only_required": True,
+        "runtime_download_allowed": False,
+        "deployment_selection_allowed": False,
+        "public_thinking_enabled": False,
+        "private_reasoning_persisted": False,
+        "max_active_requests": 1,
+        "max_queued_requests": 2,
+    }
+    if not isinstance(candidate, dict) or set(candidate) != {*expected, "status", "qualification"}:
+        raise ArtifactValidationError("Qwen3.8 metadata fields changed")
+    if any(type(candidate[k]) is not type(v) or candidate[k] != v for k, v in expected.items()):
+        raise ArtifactValidationError("Qwen3.8 identity or qualification safety boundary changed")
+    qualification = candidate["qualification"]
+    gates = {
+        "artifact_import",
+        "template_tokenization",
+        "cpu_load",
+        "standard_semantics",
+        "thinking_semantics_privacy",
+        "latency_resource_comparison",
+        "wan_offline",
+        "runtime_model_rollback",
+    }
+    if (
+        not isinstance(qualification, dict)
+        or set(qualification) != gates
+        or any(
+            not isinstance(value, str) or value not in {"passed", "partial", "failed", "not_run"}
+            for value in qualification.values()
+        )
+        or not isinstance(candidate["status"], str)
+        or candidate["status"] not in {"provisioning_unselected", "verified_candidate_unselected"}
+        or (
+            candidate["status"] == "verified_candidate_unselected"
+            and qualification["artifact_import"] != "passed"
+        )
+        or (
+            candidate["status"] == "provisioning_unselected"
+            and qualification["artifact_import"] == "passed"
+        )
+    ):
+        raise ArtifactValidationError("Qwen3.8 qualification state is ambiguous")
 
 
 def validate_chat_candidates(directory: Path) -> None:
