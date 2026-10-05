@@ -90,6 +90,13 @@ capabilities:
     evidence:
       - docs/requirements/QWEN38_QUALIFICATION_SPEC.md
       - docs/requirements/QWEN38_QUALIFICATION_2026-10-05.md
+      - docs/requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md
+      - deploy/inference/qwen3-8-flash-next-q8.candidate.json
+      - deploy/inference/model-qualification-corpus.json
+      - tests/unit/test_flash_candidate.py
+      - tests/unit/test_gguf_metadata.py
+      - tests/unit/test_model_coding_invariant.py
+      - tests/unit/test_model_trial_review.py
       - deploy/inference/qwen3-8-27b-q8.candidate.json
       - tests/unit/test_expanded_inference.py
       - tests/unit/test_inference_artifacts.py

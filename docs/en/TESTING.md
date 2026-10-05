@@ -1,5 +1,17 @@
 # Testing, model evaluation and release evidence
 
+## Flash preparation and offline regression tools — 2026-10-05
+
+[Current packet](../requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md): actual small-shard
+size/hash/metadata, dedicated blank-volume preparation and bounded transfer checks passed in their
+stated scope; complete Flash import/load/generation/app/WAN/rollback gates are unrun or partial.
+New metadata bounds, immutable shard/license controls, frozen paired corpus and finite non-executing
+coding/trial review tests bring the non-browser suite to **660 passed, 2 skips, 85 deselected** in
+21.16 seconds, with one existing AnyIO warning. Ruff check/format passed 133 files, Linux-target mypy
+passed 132. Actual old baseline/27B EN/FA coding samples remain failed in the private offline review.
+HTTP success and digit-only examples cannot bypass human semantic review or missing acceptance.
+No new browser/PostgreSQL/live Flash qualification or model training is claimed.
+
 ## Actual Qwen 3.8 native/adapter trial — 2026-10-05
 
 [Dated report](../requirements/QWEN38_QUALIFICATION_2026-10-05.md) separates verified import,

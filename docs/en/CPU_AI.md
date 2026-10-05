@@ -1,5 +1,18 @@
 # Local CPU-only AI and capacity planning
 
+## Flash-Next preparation — 2026-10-05
+
+The [current record](../requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md) supersedes earlier
+guest-capacity observations, not their historical results: 80 vCPUs, three guest NUMA nodes and
+about 251.86 GiB usable RAM after the owner-managed resize. A blank added 400-GiB disk is now a
+separate protected model volume; original disks and serving limits/selection remain unchanged.
+The pinned ggml-org Q8 two-shard set is **151.46 GiB**, distinct from earlier larger quantizer-set
+estimates. Only its complete metadata shard and a bounded 512-MiB weight-range batch are staged.
+Full memory fit, CPU load, actual template and answer/thinking/context qualification are not run.
+Customer-facing custom-license applicability is pending; internal-only use cannot be assumed.
+New offline metadata/coding/trial-review tools preserve failed samples and frozen questions; they
+cannot approve or select a model. No model/AI release, public thinking or GPU path was enabled.
+
 ## Actual Qwen 3.8 trial outcome — 2026-10-05
 
 [Dated measurements](../requirements/QWEN38_QUALIFICATION_2026-10-05.md): the single pinned

@@ -1,5 +1,25 @@
 # Project state / وضعیت پروژه
 
+Flash-Next preparation, 2026-10-05: after the owner-managed resize, direct AI checks show 80 vCPUs,
+three guest NUMA nodes and 257905 MiB usable RAM. Only the identified blank added 400-GiB disk was
+prepared as a separate protected model volume. The pinned Q8 set totals 151.46 GiB; its complete
+small metadata shard passed size/hash/actual metadata checks, and 512 MiB of bounded weight ranges
+was staged. Full import, CPU load, complete memory fit and Flash generations are not run. The
+owner confirms Bank/customer access; custom-license applicability/organizational review is pending.
+Source adds pinned sharded metadata, offline readers/reviewers and frozen EN/FA coding/provenance
+regressions: 660 passed, two skips. Retained baseline/27B coding failures remain failed. See the
+[exact preparation record](requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md). No serving
+model/limits/public thinking/app/AI/connector cutover; baseline is ready, no download/trial remains.
+
+آماده‌سازی Flash-Next در ۵ اکتبر: پس از افزایش دستی منابع، ۸۰ vCPU، سه گرهٔ NUMA مهمان و
+۲۵۷۹۰۵ MiB حافظهٔ قابل‌استفاده مستقیم مشاهده شد. فقط دیسک تازه و خالیِ ۴۰۰ GiB به حجم مستقل
+مدل تبدیل شد. مجموعهٔ Q8 ثابت حدود ۱۵۱٫۴۶ GiB است؛ بخش کوچکِ کامل با اندازه/هش و metadata
+واقعی تأیید و ۵۱۲ MiB از وزن، محدود آماده شد. ورود کامل، بارگذاری CPU، مصرف کامل و پاسخ Flash
+اجرا نشده‌اند. مالک دسترسی کارکنان بانک/مشتری را تأیید کرده؛ بررسی شمول مجوز اختصاصی و تأیید
+سازمانی باقی است. هویت ثابت، ابزار آفلاین و آزمون‌های ثابت دوزبانه افزوده‌اند: ۶۶۰ موفق و دو
+اجرا‌نشده. شکست کدنویسی مدل زنده/27B حفظ است. گزارش دقیق بالا مرجع است؛ مدل/سقف/استدلال عمومی
+و استقرار برنامه/AI/اتصال‌دهنده تغییر نکرده‌اند. مدل سالم آماده و دریافت/آزمون فعالی باقی نیست.
+
 Controlled Qwen 3.8 result, 2026-10-05: pinned 27B Q8 full-file verification, actual GGUF/template
 and isolated CPU loading passed. The [dated trial](requirements/QWEN38_QUALIFICATION_2026-10-05.md)
 records eight fixed-order standard samples per profile, four native-only thinking arithmetic samples,

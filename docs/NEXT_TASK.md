@@ -1,5 +1,25 @@
 # Next task / کار بعدی
 
+First unfinished Flash checkpoint: resolve customer-facing license applicability/organizational
+approval before publication or committing to the complete 151.46-GiB import; the owner confirms
+Bank/customer access, so do not assume the internal-use exception. Private bounded development
+preparation is recorded in [the current packet](requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md).
+New volume, exact metadata shard and one 512-MiB range batch are complete; do not format again or
+repeat them. Preserve partial data and reconcile ranges before finite continuation/full-shard hashes.
+Then budget the complete isolated CPU trial, preserving baseline/OS headroom: current serving
+96-GiB limits are not a Flash fit. Use frozen cases/review tools, require real semantics, final-only
+thinking, context/latency/resource, matched application/evidence/audit, WAN and rollback. No automatic
+promotion, public thinking enablement or reinterpretation of the failed 27B context/coding record.
+
+نخستین گام ناتمام Flash: پیش از ارائه به مشتری یا تصمیم برای ورود کاملِ ۱۵۱٫۴۶ GiB، شمول
+مجوز و تأیید سازمانی روشن شود. مالک دسترسی بانک/مشتری را تأیید کرده و استثنای استفادهٔ داخلی
+فرض نشود. آماده‌سازی خصوصی در گزارش فعلی بالا ثبت است. حجم تازه، بخش metadata دقیق و یک
+انتقال ۵۱۲ MiB تکمیل‌اند؛ دوباره قالب‌بندی یا تکرار نشوند. بخش‌ها حفظ و پیش از ادامهٔ محدود و
+هش کامل تطبیق داده شوند. سپس بودجهٔ کاملِ آزمون مستقل CPU با حاشیهٔ مدل سالم/سیستم‌عامل تنظیم
+شود؛ سقف ۹۶ GiB خدمت فعلی مناسب Flash نیست. پرسش ثابت و ابزار بازبینی استفاده و معنا، پاسخ نهاییِ
+استدلال، زمینه/تأخیر/منابع، برنامه/شاهد/ممیزی، WAN و بازگشت واقعاً پذیرفته شوند. انتخاب خودکار،
+استدلال عمومی یا بازتفسیر شکست زمینه/کدنویسیِ 27B مجاز نیست.
+
 The owner-requested UI deployment is complete at `836b1ea`; see the
 [exact live record](requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md). The capacity
 stop and single 27B Q8 import/template/protected CPU-load tasks are complete; do not repeat them.
