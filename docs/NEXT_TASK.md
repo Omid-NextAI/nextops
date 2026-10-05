@@ -1,24 +1,44 @@
 # Next task / کار بعدی
 
-Current checkpoint: no-BLAS build002 compiled, but its temporary absolute/empty loader paths were
-rejected for relocatable packaging. Review and build a fresh bounded/network-denied build003 with
-literal `$ORIGIN`; preserve both earlier build records. Verify actual ELF/system dependencies and
-protected candidate inventory before any native execution. The explicit v1.1 verifier is source
+Current checkpoint: the no-BLAS standard trial ended failed at 20:55:02 UTC on 2026-10-05.
+Fourteen final answers returned; English hypothesis timed out at 120003 ms and Persian hypothesis
+was not run. Protected candidate packaging, static dependency closure, actual tree verification and
+seven-library/no-BLAS mapping checks passed within their stated scopes. Owned cleanup and unchanged
+live 35B readiness passed. Main/independent review agree on nine passes/six failures/one not run.
+The reviewed distinct `b94a84c` no-BLAS retest started at 21:04:55 UTC, loaded in 6621 ms and is
+running with the same corpus/profile/deadline. Finish and reconcile it before independent final-answer
+review; no failed result authorizes
+thinking, expanded context or selection. Matched app/evidence/audit/WAN/restart/rollback remain separate.
+
+گام جاری: آزمون استانداردِ بدون BLAS در ۵ اکتبر ۲۰۲۶، ساعت ۲۰:۵۵:۰۲ UTC ناموفق پایان یافت.
+چهارده پاسخ نهایی دریافت شد؛ پرسش انگلیسیِ فرضیه در ۱۲۰۰۰۳ میلی‌ثانیه از مهلت گذشت و پرسش
+فارسیِ آن اجرا نشد. بسته‌بندی محافظت‌شده، بررسی ایستای وابستگی، کنترل واقعیِ درخت و نگاشت
+هفت کتابخانه بدون BLAS در دامنهٔ خود موفق‌اند. پاک‌سازیِ متعلق به آزمون و حفظ آمادگیِ 35B
+زنده موفق‌اند. بازبینی اصلی/مستقل، نه موفق/شش ناموفق/یک اجرا‌نشده ثبت کردند.
+سنجش مستقل و بازبینی‌شدهٔ `b94a84c` با runtime بدون BLAS و همان پرسش/نمایه/مهلت، ساعت
+۲۱:۰۴:۵۵ UTC آغاز شد؛ بارگذاری ۶۶۲۱ میلی‌ثانیه طول کشید و اجرا ادامه دارد. پیش از بازبینی
+مستقلِ پاسخ نهایی، اجرای محدود و تطبیق توقف آن کامل شود؛ شکست، مجوز استدلال، زمینهٔ بزرگ‌تر یا انتخاب نیست. پذیرش
+هماهنگِ برنامه/شاهد/ممیزی/WAN/راه‌اندازی/بازگشت جدا باقی می‌ماند.
+
+## Prior checkpoints — historical / گام‌های پیشین — سوابق
+
+Historical checkpoint: no-BLAS build003 completed in 130332 ms with unchanged baseline and reconciled
+cleanup; all eight inspected ELF outputs have literal `$ORIGIN` RUNPATHs. Preserve failed build001
+and rejected build002. Finish actual ELF/system dependency review and protected candidate packaging/
+inventory before the distinct standard-first native trial. The explicit v1.1 verifier is source
 tested (176 focused/1053 source passes), not candidate acceptance. Keep the frozen `f6cff8f` runtime
 comparison separate from the already packaged `b94a84c` semantic retest; remove passive-wait
 overrides for comparison with the original non-passive ubatch512 profile. No failed gate authorizes
 thinking, larger context or selection. Matched app/evidence/audit/WAN/restart/rollback remain separate.
 
-گام جاری: ساخت بدون BLAS شمارهٔ ۰۰۲ موفق شد، اما مسیر موقتِ مطلق/خالیِ بارگذاری برای
-بسته‌بندیِ قابل‌انتقال پذیرفته نشد. ساخت تازهٔ ۰۰۳ با `$ORIGIN` لفظی، حدود ثابت و شبکهٔ
-مسدود بازبینی و ساخته شود؛ گزارش هر دو ساخت پیشین حفظ شود. پیش از اجرای بومی، وابستگی
-واقعیِ ELF/سیستم و فهرست محافظت‌شدهٔ نامزد بررسی شوند. بازبین صریحِ نسخهٔ ۱٫۱ در کد آزموده
+گام جاری: ساخت بدون BLAS شمارهٔ ۰۰۳ در ۱۳۰۳۳۲ میلی‌ثانیه کامل شد؛ خط مبنا ثابت و پاک‌سازی
+تطبیق داده شد. هر هشت خروجیِ بررسی‌شدهٔ ELF مسیر لفظیِ `$ORIGIN` دارند. ساخت ناموفقِ ۰۰۱
+و ساخت نپذیرفتهٔ ۰۰۲ حفظ شوند. پیش از آزمون مستقلِ ابتدا استاندارد، بررسی واقعیِ وابستگی
+ELF/سیستم و بسته‌بندی/فهرست محافظت‌شدهٔ نامزد تکمیل شوند. بازبین صریحِ نسخهٔ ۱٫۱ در کد آزموده
 شده است (۱۷۶ آزمون مرتبط/۱۰۵۳ آزمون کد موفق)، نه پذیرش نامزد. مقایسهٔ runtime با کد ثابتِ
 `f6cff8f` از سنجش معناییِ `b94a84c` که قبلاً بسته‌بندی شده جدا بماند؛ جایگزین انتظار غیرفعال
 برای مقایسه با نمایهٔ اولیهٔ غیرغیرفعالِ ubatch512 حذف شود. شکست، مجوز استدلال، زمینهٔ بزرگ‌تر
 یا انتخاب نیست. پذیرش هماهنگِ برنامه/شاهد/ممیزی/WAN/راه‌اندازی/بازگشت جدا باقی می‌ماند.
-
-## Prior checkpoints — historical / گام‌های پیشین — سوابق
 
 Historical checkpoint: the passive-wait Q5 trial is reconciled and failed (two passes/one timeout/
 thirteen not run). Do not repeat that profile or widen the deadline. Exact `b94a84c` CI and protected

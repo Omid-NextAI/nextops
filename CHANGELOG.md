@@ -1,5 +1,32 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Protected no-BLAS packaging and retained native trial failure — 2026-10-05
+
+Static ELF/system closure, protected candidate packaging and actual v1.1 integrity verification
+passed. The distinct standard trial returned fourteen finals, then timed out on English hypothesis
+at 120003 ms; Persian hypothesis was not run. Seven project libraries/no BLAS and bounded native
+timings were observed. Cleanup and unchanged live baseline passed; no semantic/thinking/context or
+live-selection approval follows. Earlier failures and unrun gates remain preserved.
+
+بررسی ایستای ELF/وابستگی سیستم، بسته‌بندی محافظت‌شدهٔ نامزد و کنترل واقعیِ هویت نسخهٔ ۱٫۱
+موفق شدند. آزمون مستقلِ استاندارد چهارده پاسخ نهایی داد؛ پرسش انگلیسیِ فرضیه در ۱۲۰۰۰۳
+میلی‌ثانیه از مهلت گذشت و پرسش فارسیِ آن اجرا نشد. هفت کتابخانه بدون BLAS و زمان بومیِ
+محدود مشاهده شدند. پاک‌سازی و حفظ خط مبنای زنده موفق‌اند؛ تأیید معنایی/استدلال/زمینه یا
+انتخاب زنده حاصل نشده است. شکست‌های پیشین و معیارهای اجرا‌نشده حفظ‌اند.
+
+## Isolated relocatable CPU runtime build — 2026-10-05
+
+Fresh no-BLAS build003 completed 214 steps in 130332 ms, exit 0; recorded sandbox, owned cleanup
+and unchanged ready/idle baseline passed. Read-only ELF review found literal `$ORIGIN` RUNPATHs
+in all eight outputs. Earlier failed/rejected builds remain preserved. Packaging, dependency closure
+and actual model execution are separate; no serving model, thinking or context setting changed.
+
+ساخت مستقلِ بدون BLAS شمارهٔ ۰۰۳، ۲۱۴ گام را در ۱۳۰۳۳۲ میلی‌ثانیه با کد صفر کامل کرد؛
+کنترل محیط اجرا، پاک‌سازیِ متعلق به آزمون و حفظ خط مبنای آماده/بی‌درخواست موفق‌اند. بررسی
+صرفاً خواندنیِ هر هشت خروجی ELF، مسیر لفظیِ `$ORIGIN` را نشان داد. ساخت‌های ناموفق/نپذیرفتهٔ
+پیشین حفظ‌اند. بسته‌بندی، وابستگی کامل و اجرای واقعی مدل جدا هستند؛ مدل زنده، استدلال یا
+تنظیم زمینه تغییر نکردند.
+
 ## Opt-in candidate runtime identity verification — 2026-10-05
 
 Add a distinct strict v1.1 candidate inventory and independently supplied binary-digest option to

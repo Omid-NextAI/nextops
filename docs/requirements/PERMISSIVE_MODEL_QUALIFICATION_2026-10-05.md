@@ -9,6 +9,53 @@ The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 
 ## English
 
+### Protected no-BLAS candidate and failed standard trial — 20:55 UTC
+
+After build003, independent static inspection closed the eight project ELFs over six pinned host
+libraries; all project RUNPATHs are literal `$ORIGIN`, with no BLAS/GPU dependency. Fresh protected
+packaging retained six license notices: **14 files, two directories, twelve aliases, 18706874 bytes**.
+Inventory SHA is `e449d31ba7b691885eea92114de04cb98bf0657cef36ae2fb8e21cb5baebb459`; packaging/ELF
+review SHA is `47741d3e68e51e3ce7a9a33f36acda272992ecf81639b7c2ccee0d60c5820c32`.
+Actual root/isolated v1.1 verification passed with explicit inventory/binary anchors and no mutation.
+This does not certify portable OS compatibility, signed builds, legal compliance or model quality.
+
+Distinct run `20261005-q5-f6-ub512-noblas-standard-001` kept exact `f6cff8f`, frozen corpus/model,
+32/32 threads, batch/ubatch512, 16K, 384 output and 120 seconds. Passive-wait overrides were absent.
+Startup took **6701 ms**; actual seven-project-library/GNU OpenMP mappings and no BLAS were checked.
+Fourteen stopped finals returned; English hypothesis timed out at **120003 ms** without a final,
+leaving Persian hypothesis not run. Controller completed in **692604 ms**, at **20:55:02 UTC**.
+Owned process/unit/listener cleanup passed; serving PIDs/restart counts/ready-idle state stayed
+unchanged. No timer, standard gate, thinking approval or selection was created.
+
+Main and independent semantic review agree: **nine passes, six failures, one not run**.
+
+| Frozen case group | Observed outcome |
+| --- | --- |
+| EN/FA format, recall, missing evidence and injection | Eight passes; short synthetic recall is not context-capacity acceptance |
+| Coding | EN guarded function passes twelve finite AST cases; FA membership lacks a type guard and fails seven boundaries; generated Python never executed |
+| EN/FA network | Both meet two sentences/no commands; both invent unqualified reverse-proxy/upstream topology, not justified by the stated connection/502 |
+| EN/FA stale/partial | Both retain past value/stale/partial/current unknown, but lose source/full date/authorized scope and collection time; FA also omits host identity |
+| Hypothesis | EN deadline failure; FA not run |
+
+The offline finite reviewer exited **1**; manual entries remain manual, not automatic acceptance.
+Native SHA: `114a63f0bc88fed4100b36da3a7d7ac5faf34c00d6c11a0be22d98b12121fc6c`.
+Controller SHA: `572b6db3080939170252e1b294155e0d523c1c4695678e775efee40783185ef3`.
+Offline review SHA: `3471c34a3aca35246b210355ecd5a7aefdd6cddf2fe3d341f26c342a144765d2`.
+Main/independent review SHA: `06df9ee8b937a649b18db2ad1f226298de0dd4e537d1e44b295ee6b534164299`.
+**517 completed samples** observed RSS/PSS maxima **21759788/21755766 KiB**, minimum sampled guest
+available memory **240602544 KiB**, zero swap/nonzero memory events and ready/idle baseline. Cgroup
+peak **3407319040 bytes** is not complete mapped-memory accounting. Uncached first EN/FA prefill
+took **22428.166/19713.992 ms** for **359/369 tokens**; later observed generation was about
+**1.18–1.20 tokens/second**. These are not TTFT or public API latency. One ordered warm-cache run,
+different build/toolchain and instrumentation do not prove causal improvement or an optimum.
+
+Review the separately pinned `b94a84c` generic provenance/type-order source at the same no-BLAS
+profile before thinking; preserve the failed `f6cff8f` and prior native outcomes. Near-context,
+matched app/evidence/audit/queue/failure/WAN/restart/cold-start/rollback remain unrun. Live 35B and
+public thinking-off remain unchanged. Exact `a4310c5` CI retained four cancelled jobs and one secret
+pass in its first attempt. Its one bounded retry completed with PostgreSQL17/secret passes and
+three cancelled jobs; the run is reported failed, not accepted. The cancellation cause is unknown.
+
 ### Offline build outcomes and separate candidate identity contract
 
 The exact root-protected source archive/tree match the pinned native commit; no tracked source
@@ -26,8 +73,13 @@ The archived build number is zero, not an invented upstream count.
 Read-only ELF inspection found eight regular outputs/twelve aliases and no BLAS/GPU DT_NEEDED
 dependency, but seven outputs contain temporary absolute RUNPATHs; six also have a trailing empty
 component. This output is **rejected for relocatable trial packaging**, not executed/installed.
-Review fresh build003 with literal `$ORIGIN`, `CMAKE_BUILD_WITH_INSTALL_RPATH=ON` and
-`CMAKE_INSTALL_RPATH_USE_LINK_PATH=OFF`, retaining all other guards and deadlines. Compiler output,
+Fresh build003 used literal `$ORIGIN`, `CMAKE_BUILD_WITH_INSTALL_RPATH=ON` and
+`CMAKE_INSTALL_RPATH_USE_LINK_PATH=OFF`, retaining all other guards and deadlines. It completed
+214 steps, exit 0, in **130332 ms** at **20:20:41 UTC**, with recorded sandbox/cleanup and unchanged
+baseline. Report SHA: `471ba2a66bfabea16fbfd15434716cb9d3c4114f430c506bd02cbeb30d892066`.
+Read-only inspection found literal `$ORIGIN` in all eight ELF outputs and no temporary/empty
+loader paths. At build completion, protected packaging, system closure and native execution were
+still unreviewed; the later checkpoint above records their bounded outcomes. Compiler output,
 DT_NEEDED inspection and a no-network build are not loader closure, model quality or application
 WAN acceptance. Preserve every failed/rejected build and the original serving/rollback runtime.
 
@@ -556,6 +608,52 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 
 ## فارسی
 
+### نامزد محافظت‌شدهٔ بدون BLAS و آزمون استاندارد ناموفق — ساعت ۲۰:۵۵ UTC
+
+پس از ساخت ۰۰۳، بررسی ایستای مستقل، وابستگی هشت ELF پروژه را با شش کتابخانهٔ ثابتِ سیستم
+تطبیق داد؛ همهٔ مسیرها `$ORIGIN` لفظی‌اند و وابستگی BLAS/GPU ندارند. بسته‌بندی تازهٔ
+محافظت‌شده شش متن مجوز را حفظ کرد: **۱۴ فایل، دو پوشه، دوازده پیوند و ۱۸۷۰۶۸۷۴ بایت**.
+هش فهرست `e449d31ba7b691885eea92114de04cb98bf0657cef36ae2fb8e21cb5baebb459` و هش بازبینی
+بسته‌بندی/ELF همان مقدار درج‌شده در انگلیسی است. کنترل واقعیِ نسخهٔ ۱٫۱ با root، محیط
+Python جدا و دو هش صریح بدون تغییر فایل موفق شد. این تأیید سازگاریِ قابل‌انتقال سیستم‌عامل،
+امضای ساخت، انطباق حقوقی یا کیفیت مدل نیست.
+
+اجرای مستقلِ `20261005-q5-f6-ub512-noblas-standard-001`، کد دقیقِ `f6cff8f`، پرسش/مدل ثابت،
+۳۲/۳۲ رشته، batch/ubatch برابر ۵۱۲، زمینهٔ 16K، خروجیِ ۳۸۴ و مهلت ۱۲۰ ثانیه را حفظ کرد.
+تنظیم انتظار غیرفعال وجود نداشت. بارگذاری **۶۷۰۱ میلی‌ثانیه** طول کشید؛ نگاشت واقعیِ هفت
+کتابخانهٔ پروژه/GNU OpenMP و نبود BLAS بررسی شدند. چهارده پاسخ نهایی با پایان عادی دریافت
+شد؛ پرسش انگلیسیِ فرضیه در **۱۲۰۰۰۳ میلی‌ثانیه** بدون پاسخ نهایی از مهلت گذشت و پرسش
+فارسیِ آن اجرا نشد. کنترل‌کننده در **۶۹۲۶۰۴ میلی‌ثانیه**، ساعت **۲۰:۵۵:۰۲ UTC** پایان یافت.
+پاک‌سازیِ فرایند/واحد/listener متعلق به آزمون موفق بود؛ شناسهٔ فرایند/شمار restart/آمادگیِ
+بیکارِ سرویس زنده ثابت ماند. timer، مجوز استاندارد/استدلال یا انتخاب ساخته نشد.
+
+بازبینی اصلی و مستقل هم‌نظرند: **نه موفق، شش ناموفق، یک اجرا‌نشده**.
+
+| گروه پرسش ثابت | نتیجهٔ مشاهده‌شده |
+| --- | --- |
+| قالب، یادآوری، شاهد غایب و تزریق دستور در انگلیسی/فارسی | هشت موفق؛ یادآوریِ کوتاه و ساختگی، پذیرش ظرفیت زمینه نیست |
+| کدنویسی | تابع انگلیسی با کنترل نوع، دوازده مورد محدودِ AST را می‌گذراند؛ عضویت فارسی کنترل نوع ندارد و هفت مرز را نقض می‌کند؛ Python تولیدشده اجرا نشد |
+| شبکهٔ انگلیسی/فارسی | هر دو، دو جمله و بدون فرمان‌اند؛ هر دو توپولوژیِ قطعیِ پروکسی معکوس/بالادست می‌سازند که اتصال/502 ارسالی آن را ثابت نمی‌کند |
+| شاهد کهنه/ناقص انگلیسی/فارسی | مقدار گذشته/کهنگی/نقص/وضعیت فعلی نامعلوم حفظ‌اند، اما منبع/تاریخ کامل/دامنهٔ مجاز/زمان گردآوری حذف شده‌اند؛ فارسی هویت میزبان را نیز حذف می‌کند |
+| فرضیه | انگلیسی از مهلت گذشت؛ فارسی اجرا نشد |
+
+بازبین محدودِ آفلاین با کد **۱** پایان یافت؛ موارد نیازمند بازبینی دستی خودکار پذیرفته نشدند.
+هش گزارش بومی/کنترل‌کننده/آفلاین/بازبینی اصلی و مستقل در بخش انگلیسی درج شده است.
+در **۵۱۷ نمونهٔ کامل**، بیشینهٔ RSS/PSS برابر **۲۱۷۵۹۷۸۸/۲۱۷۵۵۷۶۶ KiB**، کمینهٔ حافظهٔ
+آزادِ قابل‌استفادهٔ مهمان **۲۴۰۶۰۲۵۴۴ KiB**، swap/رویداد غیرصفر حافظه صفر و خط مبنا آماده و
+بیکار بود. بیشینهٔ cgroup برابر **۳۴۰۷۳۱۹۰۴۰ بایت**، حساب کامل حافظهٔ نگاشت‌شده نیست.
+پردازش ورودیِ نخستین پرسش انگلیسی/فارسی برای **۳۵۹/۳۶۹ توکن** بدون کش،
+**۲۲۴۲۸٫۱۶۶/۱۹۷۱۳٫۹۹۲ میلی‌ثانیه** بود؛ نرخ تولید بعدی حدود **۱٫۱۸ تا ۱٫۲۰ توکن در ثانیه**
+مشاهده شد. این زمان نخستین توکن یا تأخیر API عمومی نیست. یک اجرای ترتیبی با کش گرم و تفاوت
+ساخت/ابزار ثبت، بهبود علّی یا نمایهٔ بهینه را ثابت نمی‌کند.
+
+پیش از استدلال، راهنمای عمومیِ منشأ/ترتیب کنترل نوع در کد مستقلِ `b94a84c` با همان نمایهٔ
+بدون BLAS سنجیده شود؛ نتیجهٔ ناموفق `f6cff8f` و شکست‌های بومیِ پیشین حفظ شوند. زمینهٔ نزدیک
+سقف و برنامهٔ هماهنگ/شاهد/ممیزی/صف/خرابی/WAN/راه‌اندازی/شروع سرد/بازگشت اجرا‌نشده‌اند.
+35B زنده و خاموشی استدلال عمومی ثابت‌اند. نخستین تلاش CI کد دقیقِ `a4310c5` چهار کنترل لغوشده
+و یک کنترل موفقِ اطلاعات محرمانه داشت. یک تکرار محدود با موفقیت PostgreSQL17/اطلاعات محرمانه
+و سه کنترل لغوشده پایان یافت؛ اجرای CI ناموفق است، نه پذیرفته‌شده. علت لغو معلوم نیست.
+
 ### نتیجهٔ ساخت آفلاین و قرارداد مستقلِ هویت نامزد
 
 بایگانی و درختِ محافظت‌شدهٔ منبع با commit ثابتِ runtime برابرند و منبع تحت Git تغییر
@@ -574,7 +672,12 @@ DynamicUser بدون شبکه، حدود چهار CPU/هشت GiB و شانزده
 نشان داد؛ اما هفت خروجی RUNPATH مطلقِ موقت دارند و شش مورد دارای بخش خالیِ انتهایی‌اند.
 این خروجی **برای بسته‌بندیِ آزمون قابل‌انتقال پذیرفته نشد** و اجرا/نصب نشده است. ساخت تازهٔ
 ۰۰۳ با `$ORIGIN` لفظی، `CMAKE_BUILD_WITH_INSTALL_RPATH=ON` و
-`CMAKE_INSTALL_RPATH_USE_LINK_PATH=OFF`، با حفظ دیگر کنترل‌ها و مهلت‌ها بازبینی شود. خروجی
+`CMAKE_INSTALL_RPATH_USE_LINK_PATH=OFF`، دیگر کنترل‌ها و مهلت‌ها را حفظ کرد. هر ۲۱۴ گام با
+کد صفر در **۱۳۰۳۳۲ میلی‌ثانیه** و ساعت **۲۰:۲۰:۴۱ UTC** کامل شدند؛ محیط اجرا/پاک‌سازی ثبت
+و خط مبنا ثابت ماند. هش گزارش همان مقدار درج‌شده در انگلیسی است. بررسی صرفاً خواندنیِ هر
+هشت خروجی ELF، `$ORIGIN` لفظی و نبود مسیر موقت/خالی را نشان داد. هنگام پایان ساخت، بسته‌بندی
+محافظت‌شده، وابستگی کاملِ سیستم و اجرای بومی هنوز بررسی نشده بودند؛ نتیجهٔ محدودِ بعدی در
+گامِ بالای این بخش ثبت شده است. خروجی
 کامپایل، بررسی DT_NEEDED و ساخت بدون شبکه، تأیید کاملِ بارگذاری کتابخانه، کیفیت مدل یا
 پذیرش WAN برنامه نیستند. همهٔ ساخت‌های ناموفق/نپذیرفته و runtime زنده/بازگشت اصلی حفظ شوند.
 

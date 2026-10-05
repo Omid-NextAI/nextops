@@ -1,5 +1,20 @@
 # Local CPU-only AI and capacity planning
 
+The distinct no-BLAS standard trial ended failed at 20:55:02 UTC on 2026-10-05: fourteen finals,
+English hypothesis timeout at 120003 ms, Persian hypothesis not run. Protected packaging/static
+closure/tree checks and actual seven-library/no-BLAS maps passed within their stated scope; owned
+cleanup and unchanged live baseline passed. First EN/FA native prefill took 22428.166/19713.992 ms
+for 359/369 uncached tokens; later observed generation was about 1.18–1.20 tokens/second. Warm-cache,
+build and instrumentation differences limit attribution; these are not TTFT, optimum, thinking or
+near-context acceptance. Main/independent review agree on nine passes/six failures/one not run; no
+live model/profile changed. A separately pinned `b94a84c` standard retest started at 21:04:55 UTC,
+loaded in 6621 ms and is in progress; do not infer its outcome.
+
+Fresh build003 completed offline in 130332 ms at 20:20:41 UTC on 2026-10-05, with unchanged
+serving baseline and reconciled cleanup. All eight read-only-inspected ELF outputs have literal
+`$ORIGIN` RUNPATHs; build002's temporary absolute/empty paths remain rejected. Build output is not
+model acceptance: protected packaging, system-library closure and actual execution are separate.
+
 ## Candidate runtime identity — explicit, read-only and not acceptance
 
 The default `scripts/check_native_runtime_bundle.py` contract still requires the original pinned
@@ -23,7 +38,7 @@ unchanged live baseline passed. 227 completed samples observed RSS/PSS maxima 22
 KiB and no swap/OOM; cgroup peak is not full mapped-memory accounting. Numeric CPU deltas are
 non-atomic, not cause or downtime. Added instrumentation/warm-cache conditions limit comparisons.
 Exact `b94a84c` CI passed five jobs and offline package/staging code digests matched; generated
-answers remain unrun. The separate CPU no-BLAS build hypothesis keeps the same pinned source,
+answers were unrun at that prior checkpoint. The separate CPU no-BLAS build hypothesis keeps the same pinned source,
 protects serving/rollback artifacts and disables build downloads. It is not accepted or selected.
 See the [paired record](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
 
@@ -35,7 +50,7 @@ before value operations. It does not contain fixture answers or change the froze
 evidence prompts, template flags, context/output/deadlines or policy. Captured-payload tests now
 snapshot nested values and detect later mutation, rather than comparing shared mutable references.
 118 focused and 967 source tests passed (two POSIX skips); actual generated-answer improvement
-remains unrun. The passive-wait comparison keeps exact `f6cff8f`; this later source needs its own
+is not yet accepted. The historical passive-wait comparison keeps exact `f6cff8f`; this later source needs its own
 pinned semantic/privacy/context/app/offline/rollback qualification before deployment or selection.
 
 ## Distinct Q5 physical-batch512 result — 2026-10-05

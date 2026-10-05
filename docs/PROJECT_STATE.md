@@ -1,5 +1,46 @@
 # Project state / وضعیت پروژه
 
+Latest native checkpoint, 2026-10-05 at 20:55:02 UTC: the protected no-BLAS candidate trial returned
+fourteen final answers, then failed English hypothesis at 120003 ms; Persian hypothesis was not run.
+Its 6701-ms startup, seven actual project-library mappings with no BLAS, unchanged baseline and owned
+cleanup are recorded. Static dependency closure, protected fourteen-file/twelve-alias packaging and
+explicit v1.1 tree verification passed; these are not semantic or deployment acceptance. The offline
+finite checker exited 1; main/independent answer review agree on nine passes/six failures/one not run.
+Live 35B/public-thinking-off
+are unchanged. See the [paired record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+The separately reviewed exact-`b94a84c` semantic retest started at 21:04:55 UTC, loaded in 6621 ms
+and remains in progress; no result or acceptance is inferred.
+
+گام تازهٔ اجرای بومی، در ۵ اکتبر ۲۰۲۶ ساعت ۲۰:۵۵:۰۲ UTC: نامزد محافظت‌شدهٔ بدون BLAS،
+چهارده پاسخ نهایی داد و سپس پرسش انگلیسیِ فرضیه در ۱۲۰۰۰۳ میلی‌ثانیه از مهلت گذشت؛ پرسش
+فارسیِ آن اجرا نشد. بارگذاری ۶۷۰۱ میلی‌ثانیه‌ای، نگاشت واقعیِ هفت کتابخانه بدون BLAS، حفظ
+خط مبنا و پاک‌سازیِ متعلق به آزمون ثبت شدند. بررسی ایستای وابستگی، بسته‌بندی محافظت‌شدهٔ
+چهارده فایل/دوازده پیوند و کنترل واقعیِ نسخهٔ ۱٫۱ موفق‌اند؛ این‌ها پذیرش معنایی یا استقرار
+نیستند. ابزار محدودِ آفلاین با کد ۱ پایان یافت؛ بازبین اصلی/مستقل، نه موفق/شش ناموفق/یک
+اجرا‌نشده ثبت کردند. 35B زنده و خاموشی
+استدلال عمومی ثابت‌اند. گزارش دوزبانهٔ بالا مرجع است.
+سنجش معناییِ مستقل و بازبینی‌شده با کد دقیقِ `b94a84c` ساعت ۲۱:۰۴:۵۵ UTC آغاز شد؛ بارگذاری
+۶۶۲۱ میلی‌ثانیه طول کشید و اجرا ادامه دارد. نتیجه یا پذیرش فرض نمی‌شود.
+
+Previous build checkpoint — historical:
+
+Latest build checkpoint, 2026-10-05 at 20:20:41 UTC: fresh no-BLAS build003 completed all 214
+steps, exit 0, in 130332 ms. Its recorded sandbox, cleanup and unchanged ready/idle baseline
+passed. Read-only inspection of all eight ELF outputs found literal `$ORIGIN` RUNPATHs, with
+no temporary absolute or empty search component. Binary SHA:
+`eb53d6eef8bdae6f1227a93af1f6caf58542fb5943b03ccc80d136316e6f5721`.
+Protected packaging, complete dependency review and native execution remain separate; no model
+selection, thinking or context acceptance follows. Preserve rejected build002 and failed build001.
+
+گام تازهٔ ساخت در ۵ اکتبر ۲۰۲۶، ساعت ۲۰:۲۰:۴۱ UTC: ساخت مستقلِ بدون BLAS شمارهٔ ۰۰۳، هر
+۲۱۴ گام را با کد صفر در ۱۳۰۳۳۲ میلی‌ثانیه کامل کرد. کنترل محیط اجرا، پاک‌سازی و حفظ آمادگیِ
+خط مبنای بدون درخواست موفق‌اند. بررسی صرفاً خواندنیِ هر هشت فایل ELF، مسیر لفظیِ `$ORIGIN`
+را بدون مسیر مطلقِ موقت یا بخش خالی نشان داد؛ هش فایل اجرایی در بالا درج شده است.
+بسته‌بندیِ محافظت‌شده، بررسی کامل وابستگی و اجرای واقعی جدا باقی می‌مانند؛ انتخاب مدل،
+استدلال یا پذیرش زمینه حاصل نشده است. ساخت نپذیرفتهٔ ۰۰۲ و ساخت ناموفقِ ۰۰۱ حفظ شوند.
+
+Previous build checkpoint — historical:
+
 Latest runtime checkpoint, 2026-10-05: isolated no-BLAS build002 compiled successfully in 138380 ms
 with verified CPU/OpenMP/native flags, four-CPU/eight-GiB bounds and network-denied DynamicUser.
 Cleanup and unchanged live baseline passed. Read-only ELF review rejected its temporary absolute
