@@ -1,5 +1,33 @@
 # Project state / وضعیت پروژه
 
+Latest completed native checkpoint, **2026-10-05 at 21:36:41.463473 UTC**: the distinct
+`20261006-q5-b94-ub512-noblas-numa-standard-001` trial failed. Fourteen stopped finals returned;
+English hypothesis timed out at **120001 ms**, Persian hypothesis was not run. Main/independent
+review agree on **nine passes/six failures/one not run**: unsupported network topology, FA coding
+type guards and incomplete stale-evidence provenance/scope remain failures. Load/controller took
+6002/776965 ms. Owned cleanup and unchanged ready/idle 35B baseline passed; numeric guest NUMA
+masks/pages are not physical placement, affinity-success or performance acceptance. Exact
+`7f14ba194668ec2e76696b0d328065b9171dcb22` CI passed all five jobs in
+[run 37376324673](https://github.com/Omid-NextAI/nextops/actions/runs/37376324673), not model acceptance.
+The next bounded Apache-licensed **Qwen3.5-122B-A10B** import-resumption helpers are local and under
+review, not uploaded or run at this checkpoint; retained ranges and storage budgets need fresh
+verification. No standard/thinking gate or model selection was created; live 35B/public thinking-off
+remain unchanged. See the [paired record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+آخرین گام بومیِ پایان‌یافته در **۵ اکتبر ۲۰۲۶، ساعت ۲۱:۳۶:۴۱٫۴۶۳۴۷۳ UTC**: آزمون مستقلِ
+`20261006-q5-b94-ub512-noblas-numa-standard-001` ناموفق شد. چهارده پاسخ نهایی کامل دریافت شد؛
+فرضیهٔ انگلیسی در **۱۲۰۰۰۱ میلی‌ثانیه** از مهلت گذشت و پرسش فارسیِ آن اجرا نشد. بازبینی
+اصلی/مستقل، **نه موفق/شش ناموفق/یک اجرا‌نشده** ثبت کردند: توپولوژی بدون شاهد، کنترل نوعِ
+کدنویسی فارسی و منشأ/دامنهٔ ناکاملِ شاهد کهنه همچنان ناموفق‌اند. بارگذاری/کنترل‌کننده
+۶۰۰۲/۷۷۶۹۶۵ میلی‌ثانیه طول کشید. پاک‌سازی و حفظ خط مبنای آماده/بی‌درخواستِ 35B موفق‌اند؛
+ماسک/صفحهٔ عددی NUMA مهمان، جای‌گیری فیزیکی، موفقیت affinity یا پذیرش کارایی نیست. پنج کنترل
+CI کد دقیقِ بالا در اجرای پیوندشده موفق‌اند، نه پذیرش مدل. ابزار ادامهٔ دریافت محدودِ
+**Qwen3.5-122B-A10B** با مجوز Apache، در این گام فقط محلی و در حال بازبینی است؛ بارگذاری روی
+میزبان یا اجرا نشده و بخش‌های قبلی/بودجهٔ ذخیره‌سازی به بررسی تازه نیاز دارند. مجوز استاندارد/
+استدلال یا انتخاب مدل ساخته نشد؛ 35B زنده و خاموشی استدلال عمومی ثابت‌اند. گزارش دوزبانهٔ بالا مرجع است.
+
+Previous native checkpoint — historical / گام بومیِ پیشین — سابقه:
+
 Latest native checkpoint, 2026-10-05 at 21:14:22 UTC: the distinct exact-`b94a84c` no-BLAS retest
 failed after eleven stopped finals. Persian stale/partial exceeded the unchanged 120-second gate
 at 120234 ms; four later injection/hypothesis cases were not run. Main/independent review agree on

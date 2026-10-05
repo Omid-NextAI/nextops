@@ -1,5 +1,32 @@
 # Next task / کار بعدی
 
+Current checkpoint: the distinct NUMA trial ended failed at **21:36:41.463473 UTC on 2026-10-05**;
+fourteen stopped finals, English hypothesis timeout **120001 ms**, Persian hypothesis not run.
+Main/independent review agree on **nine passes/six failures/one not run**. Cleanup and unchanged
+35B ready/idle baseline passed; no standard/thinking gate or selection follows. Exact `7f14ba1`
+CI passed all five jobs in [run 37376324673](https://github.com/Omid-NextAI/nextops/actions/runs/37376324673).
+Next, independently review the **local-only, unuploaded, unrun** bounded Apache Qwen3.5-122B-A10B
+import-resumption helpers. Before any separately authorized window, freshly reconcile/rehash the
+retained transport ranges and verify free space/growth budget; historical counts are not current
+complete-shard verification. Preserve all failed trials and artifacts. No simultaneous download/
+native benchmark, blind retry, widened deadline or relabeling 3.5 as 3.8. Actual full hashes,
+GGUF/template/load, standard semantics, final-only thinking/privacy, measured context and matched
+app/evidence/audit/queue/failure/WAN/restart/cold-start/rollback remain distinct gates.
+
+گام جاری: آزمون مستقل NUMA در **۵ اکتبر ۲۰۲۶، ساعت ۲۱:۳۶:۴۱٫۴۶۳۴۷۳ UTC** ناموفق پایان یافت؛
+چهارده پاسخ نهایی کامل، مهلت‌گذری فرضیهٔ انگلیسی در **۱۲۰۰۰۱ میلی‌ثانیه** و پرسش فارسیِ آن
+اجرا‌نشده است. بازبینی اصلی/مستقل، **نه موفق/شش ناموفق/یک اجرا‌نشده** ثبت کردند. پاک‌سازی و
+حفظ خط مبنای آماده/بی‌درخواستِ 35B موفق‌اند؛ مجوز استاندارد/استدلال یا انتخاب حاصل نشده است.
+پنج کنترل CI کد دقیقِ `7f14ba1` در اجرای بالا موفق‌اند. گام بعد، بازبینی مستقلِ ابزار محدودِ
+ادامهٔ دریافت **Qwen3.5-122B-A10B** با مجوز Apache است که **فقط محلی، بارگذاری‌نشده روی میزبان
+و اجرا‌نشده** است. پیش از پنجرهٔ دارای مجوز جدا، بخش‌های قبلی تازه تطبیق/هش‌سنجی و فضای آزاد/
+بودجهٔ رشد بررسی شوند؛ شمار تاریخی، تأیید کاملِ فایل امروز نیست. همهٔ شکست‌ها و فایل‌ها حفظ
+شوند. دریافت هم‌زمان با سنجش بومی، تکرار کورکورانه، مهلت طولانی‌تر یا تغییر نام 3.5 به 3.8
+مجاز نیست. هش کامل، GGUF/قالب/بارگذاری، معنای استاندارد، استدلال با خروجی نهایی/حریم خصوصی،
+زمینهٔ سنجیده و برنامه/شاهد/ممیزی/صف/خرابی/WAN/راه‌اندازی/شروع سرد/بازگشت معیارهای جدا هستند.
+
+## Prior checkpoints — historical / گام‌های پیشین — سوابق
+
 Current checkpoint: the distinct `b94a84c` no-BLAS standard retest ended failed at 21:14:22 UTC
 on 2026-10-05. Eleven stopped finals returned; Persian stale/partial exceeded the unchanged
 120-second gate at 120234 ms, then four injection/hypothesis cases were not run. Main/independent
@@ -27,8 +54,6 @@ independently, without simultaneous download and native benchmarking.
 شده‌اند. کش کل سیستم پاک، گرهٔ فیزیکی حدس، مهلت طولانی یا نامزد ناموفق انتخاب نشود.
 استدلال، زمینهٔ نزدیک سقف و برنامه/شاهد/ممیزی/WAN/راه‌اندازی/بازگشت جدا باقی می‌مانند؛
 گزینهٔ 122B با مجوز آزاد، مستقل و بدون دریافت هم‌زمان با سنجش بومی صلاحیت‌سنجی شود.
-
-## Prior checkpoints — historical / گام‌های پیشین — سوابق
 
 Historical checkpoint: no-BLAS build003 completed in 130332 ms with unchanged baseline and reconciled
 cleanup; all eight inspected ELF outputs have literal `$ORIGIN` RUNPATHs. Preserve failed build001

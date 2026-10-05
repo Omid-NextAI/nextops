@@ -1,5 +1,25 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Completed NUMA comparison remains failed — 2026-10-05
+
+The distinct exact-`b94a84c` Q5 no-BLAS NUMA trial ended at 21:36:41.463473 UTC: fourteen
+stopped finals, English hypothesis timeout at 120001 ms, Persian hypothesis not run.
+Main/independent review agree on nine passes/six failures/one not run; topology, FA coding and
+stale-evidence provenance/scope remain failed. Cleanup and unchanged 35B readiness passed.
+Guest masks/pages and roughly 1.18–1.20 generated tokens/second do not prove improvement,
+physical placement or an optimum. Exact `7f14ba1` CI passed five jobs. Separate bounded Apache
+122B resumption helpers remain local/in review, not uploaded/run at this checkpoint; fresh range
+hashes/capacity are required. No model, public thinking, context, policy or live acceptance changed.
+
+آزمون مستقل NUMA برای Q5 بدون BLAS با کد دقیقِ `b94a84c` ساعت ۲۱:۳۶:۴۱٫۴۶۳۴۷۳ UTC پایان
+یافت: چهارده پاسخ نهایی کامل، مهلت‌گذری فرضیهٔ انگلیسی در ۱۲۰۰۰۱ میلی‌ثانیه و پرسش فارسیِ
+آن اجرا‌نشده. بازبینی اصلی/مستقل، نه موفق/شش ناموفق/یک اجرا‌نشده ثبت کردند؛ توپولوژی،
+کدنویسی فارسی و منشأ/دامنهٔ شاهد کهنه همچنان ناموفق‌اند. پاک‌سازی و حفظ آمادگیِ 35B موفق‌اند.
+ماسک/صفحهٔ مهمان و نرخ تولیدِ حدود ۱٫۱۸ تا ۱٫۲۰ توکن در ثانیه، بهبود، جای‌گیری فیزیکی یا
+نمایهٔ بهینه را ثابت نمی‌کنند. پنج کنترل CI کد دقیقِ `7f14ba1` موفق‌اند. ابزار محدود و مستقلِ
+ادامهٔ دریافت مدل 122B با مجوز Apache در این گام محلی/در حال بازبینی، نه بارگذاری روی میزبان یا اجرا
+است؛ هش تازهٔ بخش‌ها/ظرفیت لازم‌اند. مدل، استدلال عمومی، زمینه، سیاست یا پذیرش زنده تغییر نکرد.
+
 ## Retained exact-source no-BLAS result and distinct NUMA preparation — 2026-10-05
 
 The `b94a84c` retest ended failed at 21:14:22 UTC: eleven stopped finals, Persian stale/partial

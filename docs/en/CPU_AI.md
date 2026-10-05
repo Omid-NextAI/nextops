@@ -1,5 +1,26 @@
 # Local CPU-only AI and capacity planning
 
+Latest completed comparison: the exact-`b94a84c` Q5 no-BLAS NUMA trial ended failed at
+**21:36:41.463473 UTC on 2026-10-05**. Fourteen stopped finals returned; English hypothesis
+timed out at **120001 ms**, Persian hypothesis was not run. Main/independent review agree on
+**nine passes/six failures/one not run**. Unsupported network topology, FA coding type guards
+and missing stale-evidence date/collection/scope remain failures. Load/controller: 6002/776965 ms.
+598 samples observed maximum RSS/PSS **21116248/21112229 KiB**, minimum sampled available memory
+**240639852 KiB** (controller minimum **240231444 KiB**), no swap or nonzero memory events,
+zero recorded memory-PSI averages and ready/idle baseline. Seven project-library/no-BLAS checks passed in their recorded
+scope; fourteen available NUMA postchecks recorded 37 tasks and three guest-node/broad masks,
+not physical placement, cache relocation, warning absence, cause or optimum. Observed generation
+around 1.18–1.20 tokens/second is not an accepted improvement or TTFT; a changed FA stale-answer
+length is not a quality gain. Owned cleanup passed; live 35B/public thinking-off remain unchanged.
+Exact `7f14ba1` CI passed all five jobs in
+[run 37376324673](https://github.com/Omid-NextAI/nextops/actions/runs/37376324673).
+The separate Apache Qwen3.5-122B-A10B resumption helpers are local/in review, not uploaded/run at
+this checkpoint; freshly rehash retained ranges and verify storage budgets before any authorized
+import window. Thinking/context and matched app/WAN/rollback remain separate. See the
+[paired record](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+## Prior no-BLAS checkpoints — historical
+
 The distinct `b94a84c` no-BLAS standard retest ended failed at 21:14:22 UTC on 2026-10-05:
 eleven stopped finals, Persian stale/partial deadline failure at 120234 ms, four cases not run.
 Main/independent review agree on seven passes/five failures/four not run. Source/date/collection
