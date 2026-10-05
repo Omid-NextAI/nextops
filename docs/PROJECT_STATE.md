@@ -1,5 +1,26 @@
 # Project state / وضعیت پروژه
 
+Latest isolated Q5 result, 2026-10-05 at 18:08 UTC: the distinct physical-batch512 trial used the
+same exact `f6cff8f` source, frozen corpus, 32 threads/16K/384 output/120-second deadline and no
+thinking. Eleven finals returned; Persian stale/partial evidence timed out at 120002 ms and four
+subsequent cases were not run. Main and independent review agree: six passes, six failures, four
+not run. Failures include both coding type guards, network scope/format and missing evidence
+provenance. Cleanup passed; baseline PID/readiness stayed unchanged, no unit/listener/timer remains.
+No standard/thinking gate or model selection was created. Exact `ead5e30` CI subsequently passed
+all five jobs ([run](https://github.com/Omid-NextAI/nextops/actions/runs/37351635415)); that source
+result does not qualify the model. A distinct passive OpenMP waiting-policy diagnostic is being
+prepared, not executed or accepted. See the [paired private-evidence summary](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+نتیجهٔ تازهٔ آزمون مستقل Q5، در ۵ اکتبر ۲۰۲۶ ساعت ۱۸:۰۸ UTC: آزمون batch فیزیکیِ ۵۱۲ با
+همان کد دقیقِ `f6cff8f`، پرسش ثابت، ۳۲ رشته/زمینهٔ 16K/خروجیِ ۳۸۴/مهلتِ ۱۲۰ ثانیه و
+استدلالِ خاموش اجرا شد. یازده پاسخ نهایی دریافت شد؛ پرسش فارسیِ شاهد کهنه/ناقص در ۱۲۰۰۰۲
+میلی‌ثانیه از مهلت گذشت و چهار مورد بعدی اجرا نشد. بازبینی اصلی و مستقل هم‌نظرند: شش مورد
+موفق، شش مورد ناموفق و چهار مورد اجرا‌نشده. کنترل نوع در هر دو پاسخ کدنویسی، دامنه/قالب
+پاسخ شبکه و حفظ منشأ شاهد ناموفق‌اند. پاک‌سازی موفق و شناسهٔ فرایند/آمادگیِ خط مبنا ثابت است؛
+واحد، listener یا timer باقی نمانده است. مجوز استاندارد/استدلال یا انتخاب مدل ساخته نشد.
+هر پنج کنترل CI کد دقیقِ `ead5e30` در اجرای بالا موفق‌اند؛ موفقیت کد، پذیرش مدل نیست. آزمون
+مستقلِ انتظار غیرفعال OpenMP در حال آماده‌سازی است، نه اجرا یا پذیرش. گزارش دوزبانهٔ بالا مرجع است.
+
 Source-test repair, 2026-10-05 at 17:48 UTC: exact `76b92ec` CI recorded two stale partial-import
 expectation failures and 969 passes; browser, PostgreSQL16/17 and secret jobs passed. The tests now
 construct partial states explicitly and preserve ambiguous-status/selection rejection. Main local

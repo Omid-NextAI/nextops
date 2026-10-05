@@ -1,5 +1,20 @@
 # Local CPU-only AI and capacity planning
 
+## Distinct Q5 physical-batch512 result — 2026-10-05
+
+The separate exact-`f6cff8f` standard trial loaded in 7856 ms at 32 threads/16K/384 output/
+120 seconds with thinking off. Eleven final answers returned; Persian stale/partial evidence
+timed out at 120002 ms, leaving four cases unrun. Main and independent review recorded six passes,
+six failures and four not run. Both coding answers lacked a string guard before membership;
+network scope/format and stale-evidence source/scope also failed. Cleanup passed without changing
+the live 35B or enabling thinking. Its 619 completed samples observed maximum RSS/PSS
+22134148/22123893 KiB and no process swap/OOM kill; cgroup peak is not complete model accounting.
+Native timings are not TTFT or proven cause. The reviewed build record and live baseline maps show
+GNU OpenMP and pthread OpenBLAS; environment thread counts alone do not prove effective BLAS
+parallelism. A separate passive waiting-policy test is preparation, not an accepted optimization.
+All five exact-`ead5e30` CI jobs passed; source checks are not model qualification. See the
+[paired evidence record](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
 ## Complete Q5 candidate import — 2026-10-05
 
 All 74 canonical ranges of the separate **Qwen3.8-27B UD-Q5_K_M** candidate were assembled.

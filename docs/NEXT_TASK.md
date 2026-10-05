@@ -1,5 +1,25 @@
 # Next task / کار بعدی
 
+Immediate checkpoint after the failed physical-batch512 Q5 run: preserve six passes/six failures/
+four not-run cases and the reconciled cleanup. Exact `ead5e30` source CI passed five jobs; do not
+repeat the repaired import tests as an unfinished gate. Review the distinct private
+`OMP_WAIT_POLICY=PASSIVE` helpers and actual libgomp/pthread-OpenBLAS/environment prerequisites
+before any isolated run. Keep threads, quota, corpus, source, artifact, 16K, output and 120-second
+deadline unchanged; this tests scheduling overhead, not answer correctness. Separately review a
+generic prompt improvement for input contracts, observation scope and source/time/scope preservation,
+without inserting fixture answers or weakening acceptance. No failed standard gate may enable
+thinking or selection. Near-context and matched app/evidence/audit/WAN/rollback remain unfinished.
+
+گام فوری پس از شکست آزمون Q5 با batch فیزیکیِ ۵۱۲: شش مورد موفق/شش مورد ناموفق/چهار مورد
+اجرا‌نشده و پاک‌سازیِ تطبیق‌یافته حفظ شوند. پنج کنترل CI کد دقیقِ `ead5e30` موفق‌اند؛ اصلاح
+آزمون دریافت، گام ناتمام نیست. پیش از اجرای مستقل، ابزار خصوصیِ `OMP_WAIT_POLICY=PASSIVE`
+و پیش‌نیاز واقعیِ libgomp/OpenBLAS مبتنی بر pthread/محیط فرایند بررسی شوند. رشته، سهم CPU،
+پرسش، کد، فایل مدل، زمینهٔ 16K، خروجی و مهلتِ ۱۲۰ ثانیه ثابت بمانند؛ این سنجش سربار
+زمان‌بندی است، نه درستی پاسخ. بهبود عمومیِ راهنمای مدل برای قرارداد ورودی، دامنهٔ مشاهده و
+حفظ منبع/زمان/دامنه جدا بررسی شود، بدون افزودن پاسخِ دادهٔ آزمایشی یا ضعیف‌کردن پذیرش.
+آزمون استاندارد ناموفق، مجوز استدلال یا انتخاب مدل نمی‌دهد. زمینهٔ نزدیک سقف و پذیرش
+هماهنگِ برنامه/شاهد/ممیزی/WAN/بازگشت همچنان ناتمام‌اند.
+
 Immediate source checkpoint: verify the stale Q5 import-state test repair in CI; no acceptance
 validator was weakened. Review the distinct private physical-batch512 helper and numeric-only
 instrumentation before any isolated standard trial. Keep the frozen corpus, 384 standard output,

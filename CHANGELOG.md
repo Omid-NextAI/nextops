@@ -1,5 +1,19 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Q5 physical-batch512 failed qualification record — 2026-10-05
+
+Record the distinct frozen native trial: eleven finals, a 120002-ms Persian stale-evidence timeout,
+six reviewed passes/six failures/four unrun cases, numeric-only timings/resources and reconciled
+cleanup. No failed case is erased or promoted. Exact `ead5e30` CI passed all five jobs. A passive
+OpenMP diagnostic and generic prompt review remain separate preparation; no serving model,
+public thinking, acceptance validator or production status changed.
+
+آزمون بومیِ مستقل با پرسش ثابت ثبت شد: یازده پاسخ نهایی، مهلت‌گذریِ ۱۲۰۰۰۲ میلی‌ثانیه‌ایِ
+شاهد کهنهٔ فارسی، شش موفق/شش ناموفق/چهار اجرا‌نشده در بازبینی، زمان/مصرف صرفاً عددی و
+پاک‌سازیِ تطبیق‌یافته. شکست حذف یا به موفقیت تبدیل نشد. پنج کنترل CI کد دقیقِ `ead5e30`
+موفق‌اند. آزمون انتظار غیرفعال OpenMP و بازبینی عمومی راهنمای مدل، آماده‌سازیِ جداگانه‌اند؛
+مدل زنده، استدلال عمومی، بازبین پذیرش و وضعیت تولید تغییر نکردند.
+
 ## Q5 import-state regression repair — 2026-10-05
 
 Correct stale test assumptions after the recorded complete import; explicitly cover inconsistent

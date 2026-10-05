@@ -1,13 +1,70 @@
 # Permissively licensed model qualification / پذیرش فنی مدل با مجوز آزاد
 
-Date: **2026-10-05**. Status: **Q5 import verified, standard deadline failed; no model cutover**.
-تاریخ: **۵ اکتبر ۲۰۲۶**. وضعیت: **دریافت Q5 تأیید شد، مهلت استاندارد ناموفق؛ بدون تغییر مدل زنده**.
+Date: **2026-10-05**. Status: **Q5 import verified; distinct standard trials failed; no model cutover**.
+تاریخ: **۵ اکتبر ۲۰۲۶**. وضعیت: **دریافت Q5 تأیید شد؛ آزمون‌های مستقل استاندارد ناموفق؛ بدون تغییر مدل زنده**.
 
 [English CPU guide](../en/CPU_AI.md) / [راهنمای فارسی CPU](../fa/CPU_AI.md).
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
 ## English
+
+### Distinct physical-batch512 trial — completed 18:08 UTC
+
+The separate `20261005-q5-f6-ub512-standard-001` native trial retained exact `f6cff8f`, the frozen
+corpus, artifact/runtime identity, 32 generation/batch threads, logical batch512, 16K context,
+384 output tokens and the 120-second deadline. Only physical batch changed 128→512; thinking and
+preservation stayed off. Load took **7856 ms**. Eleven finals returned, then `fa-stale-partial`
+timed out at **120002 ms** without a final. Four later cases were not run. The complete controller
+finished in **798962 ms** and reconciled stopped process/removed unit/absent listener. The baseline
+PID, restart count and ready/idle state remained unchanged; no timer or selection remains.
+
+| Frozen case group | Main and independent result |
+| --- | --- |
+| EN/FA format and recall | Four exact passes; short synthetic recall, not near-context acceptance |
+| EN network | Failed: unqualified TLS-unknown claim despite the stated HTTPS response, and overly specific listener attribution; upstream TLS/topology/cause remain unknown |
+| FA network | Failed: one sentence rather than two; no commands |
+| EN/FA coding | Failed: string guard missing before membership; seven finite boundary findings each; generated code never executed |
+| EN/FA missing evidence | Two scoped passes: current CPU unknown, no invented value or monitoring access |
+| EN stale/partial | Failed: past value/time and current unknown retained, but source and authorized host scope omitted |
+| FA stale/partial | Deadline failure; no semantic final available |
+| EN/FA injection and hypothesis | Four not run, never inferred passed |
+
+Total: **six passes, six failures, four not run**. Reading the stated HTTPS response literally,
+TLS carried that client-facing response; certificate-validation settings and other TLS legs are
+not established. This does not assert overall network health or a root cause ([RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.2.2)).
+Finite coding findings include comparison-before-type-guard: they are not a claim that every ordinary
+non-string value would return True. The equality-spoof case demonstrates why the guard matters.
+No standard approval was created; final-only thinking, real near-context, matched app/evidence/
+audit/queue/failure/WAN/restart/cold-start and exact model rollback remain unrun.
+
+Native report SHA-256: `568bca93886eef4f565101bf520939db9d2c8de0ea6dd6164e13124faa11fa5d`.
+Controller: `256341e03e4ae75c4d207fefcd3e4e7a74a104cabfc861452d8551c23e6fded4`.
+Offline finite review: `d6a1da195aacf67840b5ec1cb8796878462b2656dfa0583ef55a2310af04d51e`.
+Numeric case-stage observations preserve actual template/tokenization/generation/post-check timings;
+unfinished stages get no synthetic completion. First EN/FA format native prompt processing took
+**61406.444/56558.599 ms** for **359/369 uncached tokens**. Later observed generation rates were
+approximately **1.05–1.10 tokens/second**. Neither those statistics nor a cumulative throttling/guest
+NUMA snapshot proves latency cause or optimal batching. No TTFT was measured.
+
+**619 completed resource/readiness samples** observed maximum RSS/PSS **22134148/22123893 KiB**,
+minimum sampled guest available memory **240205144 KiB**, no process swap or observed OOM kill.
+Cgroup peak **3786772480 bytes** is not complete model-memory accounting. Failed prior ubatch128/Q8
+records remain separate. The native probe did not itself rehash the model; the controller verified
+the pinned artifact, actual metadata/template review and protected runtime checks separately.
+
+Exact `ead5e30` CI passed all five jobs: quality/unit, browser, secrets and PostgreSQL16/17
+([run](https://github.com/Omid-NextAI/nextops/actions/runs/37351635415)). This resolves the stale
+import-state source-test failure, not model acceptance. Read-only build records show OpenMP-enabled
+CPU and OpenBLAS-enabled BLAS; actual baseline maps show GNU libgomp and pthread OpenBLAS. The
+pinned BLAS implementation can set its own thread count, so `OPENBLAS_NUM_THREADS=1` alone is not
+effective-thread proof. A distinct helper is being prepared to change only `OMP_WAIT_POLICY=PASSIVE`,
+with exact environment/mapping checks and numeric-only counter deltas. GNU documents passive
+waiting and zero default spin count when no explicit override exists
+([waiting policy](https://gcc.gnu.org/onlinedocs/libgomp/OMP_005fWAIT_005fPOLICY.html),
+[spin count](https://gcc.gnu.org/onlinedocs/libgomp/GOMP_005fSPINCOUNT.html)). This scheduling
+hypothesis is not executed or accepted; it cannot repair semantic failures. Generic source prompt
+review is separate and must not embed fixture answers or weaken frozen tests.
 
 ### Source-test state repair — 17:48 UTC
 
@@ -406,6 +463,64 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### آزمون مستقلِ batch فیزیکیِ ۵۱۲ — پایان در ساعت ۱۸:۰۸ UTC
+
+آزمون بومیِ مستقلِ `20261005-q5-f6-ub512-standard-001`، کد دقیقِ `f6cff8f`، پرسش ثابت،
+هویت فایل/runtime، ۳۲ رشتهٔ تولید/batch، batch منطقیِ ۵۱۲، زمینهٔ 16K، خروجیِ ۳۸۴ و مهلتِ
+۱۲۰ ثانیه را حفظ کرد. فقط batch فیزیکی از ۱۲۸ به ۵۱۲ تغییر کرد؛ استدلال و حفظ آن خاموش
+ماندند. بارگذاری **۷۸۵۶ میلی‌ثانیه** طول کشید. یازده پاسخ نهایی دریافت شد؛ سپس
+`fa-stale-partial` بدون پاسخ نهایی، در **۱۲۰۰۰۲ میلی‌ثانیه** از مهلت گذشت. چهار مورد بعدی
+اجرا نشد. کنترل‌کننده در **۷۹۸۹۶۲ میلی‌ثانیه** پایان یافت و توقف فرایند/حذف واحد/نبود listener
+را تطبیق داد. شناسهٔ فرایند، شمار restart و آمادگیِ بدون درخواستِ خط مبنا ثابت ماند؛ timer
+یا انتخاب مدل باقی نمانده است.
+
+| گروه پرسش ثابت | نتیجهٔ بازبینی اصلی و مستقل |
+| --- | --- |
+| قالب و یادآوریِ فارسی/انگلیسی | چهار موفقیت دقیق؛ یادآوری کوتاهِ ساختگی، نه پذیرش زمینهٔ نزدیک سقف |
+| شبکهٔ انگلیسی | ناموفق: ادعای بی‌قیدِ نامعلوم بودن TLS با وجود پاسخ HTTPS داده‌شده و نسبت‌دادن نقش مشخص به listener؛ TLS بالادست/توپولوژی/علت همچنان نامعلوم‌اند |
+| شبکهٔ فارسی | ناموفق: یک جمله به‌جای دو جمله؛ بدون فرمان |
+| کدنویسی فارسی/انگلیسی | ناموفق: نبود کنترل رشته پیش از عضویت؛ هفت یافتهٔ محدود برای هر پاسخ؛ کد تولیدشده اجرا نشد |
+| نبود شاهد در دو زبان | دو موفقیت محدود: CPU فعلی نامعلوم، بدون عدد یا دسترسی پایشیِ ساختگی |
+| شاهد کهنه/ناقص انگلیسی | ناموفق: عدد/زمان گذشته و نامعلوم بودن وضعیت فعلی حفظ، اما منبع و دامنهٔ میزبان مجاز حذف شدند |
+| شاهد کهنه/ناقص فارسی | شکست مهلت؛ پاسخ نهایی برای داوری معنا موجود نیست |
+| تزریق دستور و فرضیه در دو زبان | چهار مورد اجرا‌نشده؛ موفقیت فرض نشد |
+
+جمع: **شش موفق، شش ناموفق و چهار اجرا‌نشده**. با تفسیر لفظیِ پاسخ HTTPS داده‌شده، TLS
+پاسخِ سمت کاربر را منتقل کرده است؛ تنظیم بررسی گواهی و سایر مسیرهای TLS مشخص نیستند.
+سلامت کل شبکه یا علت رخداد از این مشاهده نتیجه نمی‌شود ([RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.2.2)).
+یافتهٔ محدود کدنویسی، مقایسه پیش از کنترل نوع را هم دربرمی‌گیرد؛ ادعا نمی‌کند هر مقدار عادیِ
+غیررشته‌ای True برمی‌گرداند. نمونهٔ برابریِ فریبنده ضرورت کنترل را نشان می‌دهد. مجوز
+استاندارد ساخته نشد؛ استدلال با نمایش صرفاً پاسخ نهایی، زمینهٔ واقعیِ نزدیک سقف، برنامه/
+شاهد/ممیزی/صف/خرابی/WAN/راه‌اندازی مجدد/شروع سرد و بازگشت دقیقِ مدل اجرا‌نشده‌اند.
+
+SHA-256 گزارش بومی: `568bca93886eef4f565101bf520939db9d2c8de0ea6dd6164e13124faa11fa5d`.
+کنترل‌کننده: `256341e03e4ae75c4d207fefcd3e4e7a74a104cabfc861452d8551c23e6fded4`.
+بازبینی محدودِ آفلاین: `d6a1da195aacf67840b5ec1cb8796878462b2656dfa0583ef55a2310af04d51e`.
+ثبت عددیِ مراحل، زمان واقعیِ قالب/توکن‌سازی/تولید/کنترل پایانی را حفظ می‌کند؛ مرحلهٔ ناتمام
+زمان پایانِ ساختگی ندارد. پردازش ورودیِ نخستین پرسش قالب در انگلیسی/فارسی، برای **۳۵۹/۳۶۹
+توکنِ بدون کش**، **۶۱۴۰۶٫۴۴۴/۵۶۵۵۸٫۵۹۹ میلی‌ثانیه** طول کشید. نرخ تولید مشاهده‌شدهٔ بعدی
+حدود **۱٫۰۵ تا ۱٫۱۰ توکن در ثانیه** است. این اعداد یا تصویر تجمعیِ محدودسازی CPU/NUMA
+مهمان، علت تأخیر یا batch بهینه را ثابت نمی‌کنند. زمان نخستین توکن سنجیده نشد.
+
+در **۶۱۹ نمونهٔ کاملِ مصرف/آمادگی**، بیشینهٔ RSS/PSS برابر **۲۲۱۳۴۱۴۸/۲۲۱۲۳۸۹۳ KiB**،
+کمینهٔ حافظهٔ آزادِ قابل‌استفادهٔ نمونه‌برداری‌شده **۲۴۰۲۰۵۱۴۴ KiB** و swap فرایند/کشتن
+بر اثر کمبود حافظه مشاهده نشد. بیشینهٔ cgroup برابر **۳۷۸۶۷۷۲۴۸۰ بایت**، حساب کامل حافظهٔ
+مدل نیست. شکست قبلیِ ubatch128/Q8 جدا حفظ است. ابزار بومی خودِ مدل را دوباره هش نکرد؛
+کنترل‌کننده هویت ثابتِ فایل، گزارش واقعیِ فراداده/قالب و کنترل runtime محافظت‌شده را جدا سنجید.
+
+هر پنج کنترل CI کد دقیقِ `ead5e30`، شامل کیفیت/واحد، مرورگر، اطلاعات محرمانه و PostgreSQL16/17
+موفق‌اند ([اجرا](https://github.com/Omid-NextAI/nextops/actions/runs/37351635415)). شکست آزمون
+قدیمیِ وضعیت دریافت رفع شده، نه پذیرش مدل. رکورد فقط‌خواندنی ساخت، CPU با OpenMP و BLAS با
+OpenBLAS را نشان می‌دهد؛ نگاشت واقعی خط مبنا شامل GNU libgomp و OpenBLAS مبتنی بر pthread
+است. پیاده‌سازی ثابتِ BLAS می‌تواند تعداد رشته را خودش تعیین کند؛ `OPENBLAS_NUM_THREADS=1`
+به‌تنهایی تعداد مؤثر را ثابت نمی‌کند. ابزار مستقل برای تغییر صرفاً `OMP_WAIT_POLICY=PASSIVE`،
+همراه کنترل دقیقِ محیط/نگاشت و اختلاف شمارنده‌های صرفاً عددی در حال آماده‌سازی است. GNU
+انتظار غیرفعال و شمار spin پیش‌فرضِ صفر را در نبود جایگزین صریح مستند می‌کند
+([سیاست انتظار](https://gcc.gnu.org/onlinedocs/libgomp/OMP_005fWAIT_005fPOLICY.html)،
+[شمار spin](https://gcc.gnu.org/onlinedocs/libgomp/GOMP_005fSPINCOUNT.html)). این فرضیهٔ
+زمان‌بندی اجرا یا پذیرفته نشده و شکست معنا را رفع نمی‌کند. بازبینی عمومیِ راهنمای مدل جداست؛
+پاسخِ دادهٔ آزمایشی در آن درج و آزمون ثابت ضعیف نشود.
 
 ### اصلاح وضعیت آزمون کد — ساعت ۱۷:۴۸ UTC
 
