@@ -1,5 +1,21 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Distinct 3.8 Q5 and defensive-coding preparation — source, 2026-10-05
+
+Pin a separate unselected Apache 27B UD-Q5_K_M candidate with strict artifact/regression checks.
+Add generic input-contract guidance to detailed general answers and ungraded independent bilingual
+coding proposals, preserving frozen questions and normal/evidence prompt hashes. Main checks:
+835 passed/two POSIX skips, lint/types passed; fresh browser fixtures: 88 passed. Exact typed Q5
+registration and bounded source profiles do not permit release selection. Model generations/import/load, new exact-head CI and
+deployment are not accepted by source tests. Live app/35B/public thinking/production status unchanged.
+
+نامزد مستقل و انتخاب‌نشدهٔ Apache از 27B UD-Q5_K_M با کنترل سخت‌گیر artifact/آزمون ثبت شد.
+پاسخ عمومیِ تفصیلی، راهنمای عمومیِ قرارداد ورودی و پیشنهادهای مستقلِ دوزبانهٔ ارزیابی‌نشده
+دارد؛ پرسش ثابت و هش پرامپت معمول/شاهد محفوظ‌اند. کنترل اصلی: ۸۳۵ موفق/دو مورد POSIX اجرا‌نشده،
+lint/نوع موفق و ۸۸ آزمون مرورگر با دادهٔ ساختگی موفق. ثبت هویت دقیقِ دارای نوع و نمایهٔ محدودِ
+Q5 در کد، مجوز انتخاب انتشار نیست. آزمون کد، پذیرش تولید پاسخ، دریافت/بارگذاری، CI تازه یا استقرار نیست. برنامهٔ
+زنده، مدل 35B، استدلال عمومی و وضعیت تولید تغییر نکرده‌اند.
+
 ## Evidence-aging follow-up — controlled live, 2026-10-05
 
 App `3d92b71` passed five exact-source CI jobs, offline install, first/final real browser/audit,

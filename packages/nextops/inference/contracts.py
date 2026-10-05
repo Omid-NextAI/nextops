@@ -19,6 +19,7 @@ ModelId = Literal[
     "nextops-qwen3-30b-a3b-q4-k-m",
     "nextops-qwen3-5-35b-a3b-q4-k-m",
     "nextops-qwen3-8-27b-q8-0",
+    "nextops-qwen3-8-27b-ud-q5-k-m",
 ]
 GenerationPurpose = Literal["general", "evidence_synthesis"]
 

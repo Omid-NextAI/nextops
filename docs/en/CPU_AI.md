@@ -1,5 +1,16 @@
 # Local CPU-only AI and capacity planning
 
+## Distinct 3.8 Q5 source preparation — 2026-10-05
+
+After the current finite 122B import window, prioritize the pinned **Qwen3.8-27B UD-Q5_K_M**
+experiment in the [permissive packet](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+Its 18.41-GiB weights retain 27B parameters; lower precision is a bandwidth hypothesis, not an
+accepted speed/coding improvement. Strict metadata/regression validation and generic detailed-answer
+coding guidance are source work. Frozen regressions, deadline and normal/evidence prompt controls
+are unchanged; independent bilingual coding proposals are ungraded. Full hash/template/CPU load,
+standard semantics, final-only thinking, real context, matched app/WAN/rollback remain required.
+Preserve Q8 failures, 122B partial ranges and the live 35B rollback. No serving/public thinking change.
+
 ## Permissively licensed alternative — 2026-10-05
 
 The owner confirms Bank/customer access and now explicitly requests a permissive alternative.

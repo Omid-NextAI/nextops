@@ -1,5 +1,23 @@
 # Project state / وضعیت پروژه
 
+Source-only follow-up, 2026-10-05: a distinct pinned Apache Qwen3.8-27B UD-Q5_K_M candidate
+and generic defensive-coding guidance are prepared. Main local checks passed 835 non-browser/
+non-integration tests, two POSIX-only skips, Ruff and Linux-target Mypy; independent bilingual
+coding proposals remain ungraded. Complete Q5 import/load/quality is not accepted. The finite 122B
+window ended with 133 canonical transport ranges; first 512-MiB 3.8 Q5 ranges are protected, not a
+full hash. Prioritize this separate trial; retain partial 122B and failed Q8 results.
+See the [permissive packet](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md). Live app
+`3d92b71`, inference API `7ce9d29`, serving 35B, public thinking-off and production status are unchanged.
+
+پیگیری صرفاً کد در ۵ اکتبر: نامزد مستقل و ثابتِ Apache از Qwen3.8-27B UD-Q5_K_M و راهنمای
+عمومیِ کدنویسی دفاعی آماده‌اند. کنترل محلیِ عامل اصلی، ۸۳۵ آزمون غیرمرورگر/غیرintegration
+موفق، دو مورد POSIX اجرا‌نشده، Ruff و Mypy برای Linux داشت؛ پیشنهادهای مستقلِ دوزبانه هنوز
+ارزیابی نشده‌اند. دریافت/بارگذاری/کیفیت کامل Q5 پذیرفته نیست. پنجرهٔ محدود 122B با ۱۳۳ بخشِ
+انتقال پایان یافت؛ ۵۱۲ MiB نخستِ 3.8 Q5 محافظت‌شده است، نه هش کامل. آزمون مستقل آن اولویت
+دارد؛ بخش‌های ناقص 122B و شکست Q8 محفوظ‌اند. گزارش مجوز آزاد
+بالا مرجع است. برنامهٔ زندهٔ `3d92b71`، API استنتاجِ `7ce9d29`، مدل 35B، خاموشی استدلال
+عمومی و وضعیت تولید ثابت‌اند.
+
 Latest controlled app, 2026-10-05: `3d92b71` is serving after the selected-evidence aging/partial labels and contextual accessibility
 announcements passed 88 browser tests; the earlier 87/88 fixture-login failure remains recorded
 with unconfirmed transport cause. Current combined source passed 738 non-browser/non-integration

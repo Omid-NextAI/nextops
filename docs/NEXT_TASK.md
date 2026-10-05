@@ -1,5 +1,22 @@
 # Next task / کار بعدی
 
+Active source follow-up: the finite 122B window is reconciled (133 ranges); prioritize
+the **distinct pinned Qwen3.8-27B UD-Q5_K_M** trial described in the
+[permissive packet](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md). First 512 MiB is partial,
+not a complete artifact hash. No concurrent desktop
+controllers or discarded failed samples. Verify the complete hash and actual template/load before
+standard-first frozen/independent EN/FA coding, final-only thinking and real near-16K/conditional32K
+acceptance. Generic coding guidance and 835 source tests are not generated-answer qualification.
+Keep 35B live and public thinking off until matched app/evidence/audit/WAN/failure/rollback passes.
+
+پیگیری فعالِ کد: پنجرهٔ محدودِ دریافت 122B با ۱۳۳ بخش پایان و تطبیق داده شد؛ اکنون آزمون
+**مستقل و ثابتِ Qwen3.8-27B UD-Q5_K_M** طبق گزارش مجوز آزادِ بالا اولویت دارد. کنترل‌کنندهٔ
+هم‌زمانِ دسکتاپ یا حذف نمونهٔ ناموفق مجاز نیست. ۵۱۲ MiB نخست، دریافت ناقص است نه هش کامل.
+پیش از پاسخ استانداردِ دوزبانه/کدنویسی ثابت و
+مستقل، استدلال با نمایش صرفاً پاسخ نهایی و زمینهٔ واقعیِ نزدیک 16K/32K مشروط، هش کامل و قالب/
+بارگذاری واقعی تأیید شوند. راهنمای کدنویسی و ۸۳۵ آزمون کد، پذیرش پاسخ تولیدشده نیستند. 35B
+زنده و استدلال عمومی خاموش بمانند تا پذیرش هماهنگِ برنامه/شاهد/ممیزی/WAN/خرابی/بازگشت موفق شود.
+
 Latest UI follow-up is complete at `3d92b71`: 88 browser tests, exact-head CI, offline packaging,
 guarded real browser/audit, actual five-minute aging and exact `f169875` rollback/reapply passed.
 Both guards are stopped. Preserve the preceding fixture-login failure and do not repeat this

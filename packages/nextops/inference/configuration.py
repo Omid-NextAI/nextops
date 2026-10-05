@@ -48,6 +48,12 @@ class LlamaCppSettings(BaseModel):
             raise ValueError("base_url must be an undecorated http://127.0.0.1:<port> origin")
         if self.provider_api_key.get_secret_value() == self.service_auth_secret.get_secret_value():
             raise ValueError("provider_api_key and service_auth_secret must differ")
+        if self.model_id == "nextops-qwen3-8-27b-ud-q5-k-m" and (
+            self.context_tokens > 16_384 or self.request_timeout_seconds > 120.0
+        ):
+            raise ValueError(
+                "the unselected Qwen3.8 Q5 candidate is bounded to 16K and 120 seconds"
+            )
         if self.thinking_enabled and (
             not self.expanded_chat_enabled or self.model_id != "nextops-qwen3-5-35b-a3b-q4-k-m"
         ):

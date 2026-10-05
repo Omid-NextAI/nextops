@@ -9,6 +9,53 @@ The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 
 ## English
 
+### Distinct Qwen3.8 Q5 follow-up and coding controls
+
+The next priority after the current finite 122B transfer window is a **separate Qwen3.8-27B
+UD-Q5_K_M** experiment. This is the same 27B parameter family at lower precision, not a larger
+model or an accepted speed/quality improvement. The [distinct candidate manifest](../../deploy/inference/qwen3-8-27b-ud-q5-k-m.candidate.json)
+pins the existing Unsloth revision `4ca720788d1e01f1bff70c033e0d0028fd02e502`, official reference
+`1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0`, **19771509664 bytes (18.41 GiB)** and SHA-256
+`2de73110cb254cbf09b54b717578dadff12ef1194e7271527e68202f39ba4bfd`.
+Apache license metadata matches the reviewed copy below; exact conversion-source verification
+remains false. Protected staging/license/controller preparation and the first **536870912 bytes**
+of transport ranges are complete. These two ranges took **125.324 / 124.593 seconds**, with exact
+HTTP 206/range/size and local-to-root hashes; the full upstream file hash remains unverified.
+Complete import, actual metadata, CPU load and answer acceptance are not run at this checkpoint. Existing
+122B ranges and failed Q8 results remain intact; a transfer window is not a model-selection gate.
+
+The actual verified Q8 artifact's embedded template has 9993 bytes and SHA-256
+`12827f24b742ea4e80cdc12dbcf9622227056b9f797252a3149263d4f9aaadce`. Read-only inspection confirms
+that `enable_thinking=false` bypasses the effort block; it does not silently retain xhigh thinking.
+Low adds concise guidance, medium adds no effort instruction, and the template's high alias maps
+to xhigh. The new Q5 artifact's own template must still be extracted and checked. Use matching
+explicit template kwargs for generation and token counting, not an inferred effort label.
+
+Source adds generic defensive-coding guidance only to detailed general answers: honor input/output
+contracts and check unexpected/adversarial values before membership, comparison, hashing or
+coercion; avoid Boolean-as-integer widening. Standard short/evidence prompt hashes, frozen cases,
+deadlines, privacy and authorization controls remain unchanged. Thirteen source regressions and
+three **ungraded independent bilingual proposals** cover integer ports, exact Boolean flags and
+finite bounded timeouts. They do not coach the frozen answer or execute arbitrary generated code.
+Actual output quality must be measured separately; source tests are not model training or acceptance.
+
+The exact Q5 typed identity, bounded configuration and source-only runtime/API/environment profiles
+are registered without changing defaults. Standard adapter requests explicitly disable thinking
+and preservation; Q5 settings reject thinking, context above 16K and deadlines above 120 seconds.
+The release validator rejects even forged selection flags. Source runtime profiles inherit base
+hardening/resources at 16 threads, not a measured optimum or the private32-thread experiment.
+Combined local checks passed **835** non-browser/non-integration tests with two POSIX-only skips,
+Ruff and Linux-target Mypy. A fresh **88-test** browser-fixture run passed during this source
+increment; exact new-head CI, packaging/native and live model acceptance remain separate.
+
+Sequence: complete full pinned Q5 hash, actual GGUF/template and bounded CPU loading; run unchanged
+standard EN/FA semantics first; review coding against the frozen and independent cases; then test
+final-only thinking starting at 128 tokens and conditional low/medium/xhigh effort. Real near-16K
+recall precedes any 32K test. Keep the 120-second deadline, one active/two queued requests and
+baseline/OS headroom. Only matched app/evidence/audit, failure, WAN/restart and exact rollback gates
+can permit a later live cutover. No public thinking, advertised maximum context or production claim
+is added by this source-only follow-up.
+
 ### Problem, owner scope and non-goals
 
 The owner confirms planned Bank/customer staff access and explicitly requests a permissively
@@ -117,6 +164,11 @@ explicit CDN allowlist. Pinned commit/whole-file metadata, exact ranges, local-t
 reconciliation and all three complete upstream SHA-256 gates remain required. Transfer-window
 completion is not model acceptance or an unattended continuation promise.
 
+The supervised eight-window continuation ended successfully; a fresh **14:22 UTC** reconciliation
+recorded **133 canonical transport ranges / 35701915648 bytes**, baseline ready/idle and zero failed
+units. No complete 122B shard or model selection is inferred. Provisioning priority then moved to
+the distinct 3.8 Q5 experiment above, retaining the 122B ranges rather than relabeling or deleting them.
+
 Observed guest: **80 vCPUs, 257905 MiB usable RAM (about 251.86 GiB), three guest NUMA nodes**.
 The added protected 400-GiB volume is already prepared; do not format it again. Guest NUMA does
 not prove physical placement. Retain the datastore free-space guard, project ceiling and other
@@ -190,6 +242,52 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### پیگیری مستقلِ Qwen3.8 Q5 و کنترل کدنویسی
+
+پس از پایان پنجرهٔ محدودِ جاری برای دریافت 122B، اولویت بعدی آزمون **مستقلِ Qwen3.8-27B
+UD-Q5_K_M** است. تعداد پارامتر همان ۲۷ میلیارد است؛ دقت پایین‌تر، مدل بزرگ‌تر یا بهبود
+پذیرفته‌شدهٔ سرعت/کیفیت محسوب نمی‌شود. [manifest مستقل نامزد](../../deploy/inference/qwen3-8-27b-ud-q5-k-m.candidate.json)
+نسخهٔ Unsloth با شناسهٔ `4ca720788d1e01f1bff70c033e0d0028fd02e502`، مرجع رسمی با شناسهٔ
+`1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0`، اندازهٔ **۱۹۷۷۱۵۰۹۶۶۴ بایت (۱۸٫۴۱ GiB)** و
+SHA-256 برابر `2de73110cb254cbf09b54b717578dadff12ef1194e7271527e68202f39ba4bfd` را ثابت می‌کند.
+فرادادهٔ مجوز Apache با نسخهٔ بررسی‌شدهٔ زیر منطبق است؛ تأیید نسخهٔ دقیقِ منبع تبدیل همچنان
+انجام نشده است. آماده‌سازی محافظت‌شدهٔ مسیر/مجوز/کنترل‌کننده و **۵۳۶۸۷۰۹۱۲ بایت** نخستِ
+بخش‌های انتقال تکمیل‌اند. دو بخش در **۱۲۵٫۳۲۴ و ۱۲۴٫۵۹۳ ثانیه**، با HTTP 206، محدوده/اندازهٔ
+دقیق و تطبیق هش محلی با نسخهٔ root دریافت شدند؛ هش کاملِ فایل اصلی هنوز تأیید نشده است.
+دریافت کامل، فرادادهٔ واقعی، بارگذاری CPU و پذیرش پاسخ در این گام اجرا نشده‌اند. بخش‌های 122B و
+شکست‌های Q8 محفوظ‌اند؛ تکمیل یک پنجرهٔ انتقال، مجوز انتخاب مدل نیست.
+
+قالب جاسازی‌شدهٔ فایل Q8 تأییدشده، ۹۹۹۳ بایت و SHA-256 زیر را دارد:
+`12827f24b742ea4e80cdc12dbcf9622227056b9f797252a3149263d4f9aaadce`.
+بازبینی فقط‌خواندنی نشان می‌دهد `enable_thinking=false` از بخش سطح استدلال عبور می‌کند و
+استدلال xhigh را پنهانی نگه نمی‌دارد. low راهنمای اختصار می‌افزاید؛ medium دستور اضافی ندارد
+و نام مستعار high در همین قالب به xhigh تبدیل می‌شود. قالب خودِ Q5 تازه باید پس از دریافت
+استخراج و بررسی شود. گزینه‌های صریح قالب در تولید و شمارش توکن یکسان باشند؛ برچسب حدسی کافی نیست.
+
+کد فقط برای پاسخ عمومیِ تفصیلی، راهنمای عمومیِ کدنویسی دفاعی می‌افزاید: قرارداد ورودی/خروجی
+رعایت و مقدار نامنتظره یا خصمانه پیش از بررسی عضویت، مقایسه، هش یا تبدیل نوع کنترل شود؛
+بولی با عدد صحیح یکسان تلقی نشود. هش پرامپت کوتاه/شاهد، پرسش ثابت، مهلت، حریم خصوصی و مجوز
+تغییر نکرده‌اند. سیزده آزمون کد و سه **پیشنهاد مستقلِ دوزبانهٔ ارزیابی‌نشده**، پورت صحیح،
+پرچم دقیقِ بولی و مهلت عددیِ محدود و متناهی را پوشش می‌دهند. پاسخ آزمون ثابت آموزش داده
+نمی‌شود و کد دلخواهِ تولیدشده اجرا نمی‌شود. کیفیت واقعی جدا سنجیده شود؛ آزمون کد، آموزش یا
+پذیرش مدل نیست.
+
+هویت دقیقِ Q5 دارای نوع، تنظیم محدود و فایلِ کدِ نمایهٔ runtime/API/محیط، بدون تغییر پیش‌فرض
+ثبت شده‌اند. درخواست استانداردِ رابط، استدلال و حفظ آن را صریحاً خاموش می‌کند؛ تنظیم Q5،
+استدلال، زمینهٔ بالاتر از 16K و مهلت بیشتر از ۱۲۰ ثانیه را نمی‌پذیرد. کنترل انتشار حتی پرچم
+ساختگیِ انتخاب را رد می‌کند. نمایهٔ runtime در کد، سخت‌سازی/منابع پایه و ۱۶ رشته را حفظ
+می‌کند؛ این مقدار بهینهٔ سنجیده یا آزمون خصوصیِ ۳۲ رشته نیست. کنترل ترکیبیِ محلی **۸۳۵**
+آزمون غیرمرورگر/غیرintegration موفق با دو مورد POSIX اجرا‌نشده، Ruff و Mypy برای Linux داشت.
+اجرای تازهٔ **۸۸ آزمون** مرورگر با دادهٔ ساختگی در این گام موفق بود؛ CI کد تازه، بسته‌بندی/
+native و پذیرش زندهٔ مدل جدا هستند.
+
+ترتیب کار: هش کاملِ ثابت Q5، قالب/GGUF واقعی و بارگذاری محدودِ CPU؛ سپس معنای پاسخ استاندارد
+فارسی/انگلیسی و کدنویسی با پرسش‌های ثابت و مستقل؛ بعد استدلال با نمایش صرفاً پاسخ نهایی، از
+بودجهٔ ۱۲۸ توکن و سطح مشروط low/medium/xhigh. یادآوری واقعیِ نزدیک 16K پیش از آزمون 32K است.
+مهلت ۱۲۰ ثانیه، یک درخواست فعال/دو منتظر و حاشیهٔ مدل سالم/سیستم‌عامل حفظ شوند. انتخاب زندهٔ
+بعدی فقط پس از پذیرش هماهنگِ برنامه/شاهد/ممیزی، خرابی، WAN/راه‌اندازی دوباره و بازگشت دقیق
+مجاز است. این پیگیریِ صرفاً کد، استدلال عمومی، بیشینهٔ زمینه یا ادعای پذیرش تولید نمی‌افزاید.
 
 ### مسئله، دامنهٔ مجاز و موارد خارج از این گام
 
@@ -291,6 +389,11 @@ schema سخت‌گیرانهٔ مستقل، اعتبارسنج فایل و آز�
 [راهنمای رسمی دریافت Hub](https://huggingface.co/docs/hub/models-downloading) مبنای فهرست صریح
 CDN بود. کنترل commit/فرادادهٔ فایل کامل، بازهٔ دقیق، تطبیق هش محلی با نسخهٔ root و SHA-256 کاملِ
 هر سه فایل همچنان الزامی‌اند. پایان پنجرهٔ انتقال، پذیرش مدل یا وعدهٔ ادامهٔ بدون نظارت نیست.
+
+ادامهٔ تحت نظارت در هشت پنجره موفق پایان یافت. تطبیق تازه در **۱۴:۲۲ UTC**، **۱۳۳ بخش اصلیِ
+انتقال با مجموع ۳۵۷۰۱۹۱۵۶۴۸ بایت**، خط مبنای آماده/بی‌درخواست و صفر واحد ناموفق را ثبت کرد.
+از این نتیجه، کامل‌بودن فایل 122B یا انتخاب مدل استنباط نمی‌شود. سپس اولویت آماده‌سازی به
+آزمون مستقلِ 3.8 Q5 در بالا منتقل شد؛ بخش‌های 122B حفظ شدند، نه تغییر نام یا حذف.
 
 مشاهدهٔ مهمان: **۸۰ vCPU، حافظهٔ قابل‌استفادهٔ ۲۵۷۹۰۵ MiB، حدود ۲۵۱٫۸۶ GiB و سه گرهٔ NUMA
 مهمان**. حجم محافظت‌شدهٔ ۴۰۰ GiB قبلاً آماده شده و دوباره قالب‌بندی نشود. NUMA مهمان، جای‌گیری

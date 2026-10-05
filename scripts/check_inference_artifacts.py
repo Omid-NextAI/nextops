@@ -120,7 +120,91 @@ def validate_repository(repository_root: Path) -> dict[str, Any]:
             raise ArtifactValidationError(f"larger candidate schema validation failed: {details}")
     validate_chat_candidates(directory)
     validate_qwen38_candidate(directory)
+    validate_qwen38_q5_candidate(directory)
     return document
+
+
+def validate_qwen38_q5_candidate(directory: Path) -> None:
+    """A distinct smaller-precision experiment cannot inherit Q8 or live acceptance."""
+    try:
+        candidate = json.loads(
+            (directory / "qwen3-8-27b-ud-q5-k-m.candidate.json").read_text("utf-8"),
+            object_pairs_hook=_unique_json_object,
+        )
+    except (OSError, ValueError) as error:
+        raise ArtifactValidationError("cannot parse Qwen3.8 Q5 candidate metadata") from error
+    expected = {
+        "schema_version": "1.0.0",
+        "model_id": "nextops-qwen3-8-27b-ud-q5-k-m",
+        "source_repository": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF",
+        "source_revision": "4ca720788d1e01f1bff70c033e0d0028fd02e502",
+        "upstream_repository": "https://huggingface.co/Qwen/Qwen3.8-27B",
+        "upstream_reference_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+        "conversion_source_revision_verified": False,
+        "quantized_by": "unsloth",
+        "quantization": "UD-Q5_K_M",
+        "filename": "Qwen3.8-27B-UD-Q5_K_M.gguf",
+        "size_bytes": 19771509664,
+        "sha256": "2de73110cb254cbf09b54b717578dadff12ef1194e7271527e68202f39ba4bfd",
+        "license": "Apache-2.0",
+        "license_size_bytes": 11544,
+        "license_sha256": "bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a",
+        "runtime_commit": "b29c606e28a01b1bc8c1351026a0fa6e616bf6c4",
+        "cpu_only_required": True,
+        "gpu_layers": 0,
+        "runtime_download_allowed": False,
+        "deployment_selection_allowed": False,
+        "public_thinking_enabled": False,
+        "private_reasoning_persisted": False,
+        "configured_context_tokens": 16384,
+        "max_output_tokens": 2048,
+        "request_reasoning_budget_tokens": 128,
+        "deadline_seconds": 120,
+        "max_active_requests": 1,
+        "max_queued_requests": 2,
+    }
+    if not isinstance(candidate, dict) or set(candidate) != {*expected, "status", "qualification"}:
+        raise ArtifactValidationError("Qwen3.8 Q5 metadata fields changed")
+    if any(
+        type(candidate[key]) is not type(value) or candidate[key] != value
+        for key, value in expected.items()
+    ):
+        raise ArtifactValidationError("Qwen3.8 Q5 identity or safety boundary changed")
+    gates = {
+        "artifact_import",
+        "actual_gguf_metadata",
+        "template_tokenization",
+        "cpu_load",
+        "standard_semantics",
+        "thinking_semantics_privacy",
+        "expanded_context_latency",
+        "latency_resource_comparison",
+        "matched_application",
+        "wan_offline",
+        "runtime_model_rollback",
+        "permissive_license_metadata_review",
+    }
+    qualification = candidate["qualification"]
+    if (
+        not isinstance(qualification, dict)
+        or set(qualification) != gates
+        or any(
+            type(value) is not str or value not in {"passed", "partial", "failed", "not_run"}
+            for value in qualification.values()
+        )
+        or qualification["permissive_license_metadata_review"] != "passed"
+        or type(candidate["status"]) is not str
+        or candidate["status"] not in {"provisioning_unselected", "verified_candidate_unselected"}
+        or (
+            candidate["status"] == "verified_candidate_unselected"
+            and qualification["artifact_import"] != "passed"
+        )
+        or (
+            candidate["status"] == "provisioning_unselected"
+            and qualification["artifact_import"] == "passed"
+        )
+    ):
+        raise ArtifactValidationError("Qwen3.8 Q5 qualification state is ambiguous")
 
 
 def validate_qwen38_candidate(directory: Path) -> None:
@@ -281,6 +365,11 @@ def main() -> int:
             "utf-8"
         )
     )
+    qwen38_q5 = json.loads(
+        (repository_root / "deploy/inference/qwen3-8-27b-ud-q5-k-m.candidate.json").read_text(
+            "utf-8"
+        )
+    )
     print(
         "PASS: inference candidate metadata is schema-valid; "
         f"status={document['status']}; runtime_binary_built="
@@ -296,7 +385,10 @@ def main() -> int:
         f"flash_selection_allowed={flash['deployment_selection_allowed']}; "
         f"q5_122b_status={q5['status']}; "
         f"q5_122b_complete_import={q5['qualification']['artifact_import']}; "
-        f"q5_122b_selection_allowed={q5['deployment_selection_allowed']}."
+        f"q5_122b_selection_allowed={q5['deployment_selection_allowed']}; "
+        f"qwen38_q5_status={qwen38_q5['status']}; "
+        f"qwen38_q5_complete_import={qwen38_q5['qualification']['artifact_import']}; "
+        f"qwen38_q5_selection_allowed={qwen38_q5['deployment_selection_allowed']}."
     )
     return 0
 

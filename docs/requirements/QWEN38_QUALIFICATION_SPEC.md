@@ -6,6 +6,17 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Bounded follow-up after the failed Q8 trial
+
+The [dated permissive packet](PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md) adds a distinct pinned
+27B UD-Q5_K_M trial after the failed Q8 coding/context results. It reduces weight size, not parameter
+count, and must independently pass full hash, actual template, CPU load, frozen/independent coding,
+standard-first EN/FA, final-only thinking and actual context/latency acceptance. Historical Q8 gates
+and the 122B alternative remain recorded. Generic defensive-coding prompt guidance is source-only,
+not training, a keyword router or proof of improvement. All security, offline, deadline, resource,
+rollback and documentation requirements below also apply to this follow-up. Serving identity and
+public thinking remain unchanged until matched application qualification.
+
 ### Problem and requirements
 
 Improve actual EN/FA instruction following, technical/coding answers, follow-ups and useful
@@ -72,6 +83,16 @@ this index entry. Preserve the prior failed-thinking and UI deployment records. 
 release manifest only for an actually accepted identity change, not source registration.
 
 ## فارسی
+
+### پیگیری محدود پس از آزمون ناموفق Q8
+
+[گزارش تاریخ‌دارِ مجوز آزاد](PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md)، پس از شکست کدنویسی/
+زمینهٔ Q8، آزمون مستقل و ثابتِ 27B UD-Q5_K_M را می‌افزاید. اندازهٔ وزن کمتر می‌شود، نه شمار
+پارامتر. هش کامل، قالب واقعی، بارگذاری CPU، کدنویسی با پرسش ثابت/مستقل، پاسخ استانداردِ
+دوزبانه، استدلال با نمایش صرفاً پاسخ نهایی و زمینه/تأخیر واقعی باید جدا پذیرفته شوند. معیارهای
+تاریخی Q8 و نامزد جایگزینِ 122B حفظ‌اند. راهنمای عمومیِ کدنویسی دفاعی، تغییر کد است، نه آموزش،
+مسیریابی کلیدواژه یا اثبات بهبود. تمام الزام‌های امنیت، آفلاین، مهلت، منابع، بازگشت و مستندات
+زیر در این پیگیری نیز برقرارند. هویت زنده و استدلال عمومی تا پذیرش هماهنگِ برنامه ثابت می‌مانند.
 
 ### مسئله و الزامات
 

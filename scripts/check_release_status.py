@@ -20,6 +20,8 @@ LARGER_MODEL_MANIFEST = ROOT / "deploy/inference/qwen3-14b-q4-k-m.candidate.json
 LARGER_32B_MODEL_MANIFEST = ROOT / "deploy/inference/qwen3-32b-q4-k-m.candidate.json"
 LARGER_MOE_MODEL_MANIFEST = ROOT / "deploy/inference/qwen3-30b-a3b-q4-k-m.candidate.json"
 LARGER_QWEN35_MODEL_MANIFEST = ROOT / "deploy/inference/qwen3-5-35b-a3b-q4-k-m.candidate.json"
+QWEN38_Q5_MODEL_ID = "nextops-qwen3-8-27b-ud-q5-k-m"
+QWEN38_Q5_MODEL_MANIFEST = ROOT / "deploy/inference/qwen3-8-27b-ud-q5-k-m.candidate.json"
 RECOVERY_VALIDATOR = ROOT / "scripts/check_recovery_profile.py"
 REQUIRED_CURRENT_APP_GATES = frozenset(
     {
@@ -156,7 +158,21 @@ def model_identity_errors(
     """Verify the entire selected identity without rewriting historical 8B evidence."""
 
     identifier = model.get("identifier")
-    if identifier == baseline.get("model_id"):
+    if identifier == QWEN38_Q5_MODEL_ID:
+        # Registration permits isolated standard testing, never release selection. The strict
+        # artifact validator pins this distinct candidate and keeps conversion provenance open.
+        # Even a forged status/boolean cannot promote it through the older Q4 selection branch.
+        errors = ["Qwen3.8 Q5 candidate is unselected and has no release-selection acceptance"]
+        if larger.get("model_id") != identifier:
+            errors.append("Qwen3.8 Q5 identity differs from its distinct candidate manifest")
+        errors.extend(
+            f"selected model {field} differs from its inference artifact manifest"
+            for field in ("source_revision", "quantization", "size_bytes", "sha256")
+            if type(model.get(field)) is not type(larger.get(field))
+            or model.get(field) != larger.get(field)
+        )
+        return errors
+    elif identifier == baseline.get("model_id"):
         selected = baseline
     elif identifier == larger.get("model_id"):
         if larger.get("status") != "controlled_selected_not_production_accepted":
@@ -214,6 +230,7 @@ def main() -> int:
             "nextops-qwen3-32b-q4-k-m": LARGER_32B_MODEL_MANIFEST,
             "nextops-qwen3-30b-a3b-q4-k-m": LARGER_MOE_MODEL_MANIFEST,
             "nextops-qwen3-5-35b-a3b-q4-k-m": LARGER_QWEN35_MODEL_MANIFEST,
+            QWEN38_Q5_MODEL_ID: QWEN38_Q5_MODEL_MANIFEST,
         }.get(model.get("identifier"), LARGER_MODEL_MANIFEST)
         larger_model = json.loads(larger_path.read_text(encoding="utf-8"))
         errors.extend(model_identity_errors(model, inference.get("model", {}), larger_model))

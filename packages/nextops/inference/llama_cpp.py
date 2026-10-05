@@ -297,6 +297,11 @@ class LlamaCppProvider:
                 "For an identifier-only answer, return the exact identifier with no prefix, "
                 "suffix or explanation. For a digit-only answer, use digits, not number words. "
                 "Do not add a follow-up question or a procedure unless needed or requested. "
+                "When providing code, honor the specified input/output types and edge cases. "
+                "Check unexpected or adversarial values before membership, comparison, hashing "
+                "or coercion; objects may overload equality and Boolean values satisfy integer "
+                "type checks. Do not silently widen the accepted input contract. Suggest relevant "
+                "boundary tests when useful without claiming execution. "
                 "Write a finished answer within the total budget; never output internal reasoning."
             )
         if request.purpose == "general":
@@ -329,7 +334,10 @@ class LlamaCppProvider:
             # https://huggingface.co/Qwen/Qwen3.5-35B-A3B#instruct-or-non-thinking-mode
             payload["messages"][-1]["content"] = request.prompt
             payload["chat_template_kwargs"] = {"enable_thinking": request.thinking}
-        if self._settings.model_id == "nextops-qwen3-8-27b-q8-0":
+        if self._settings.model_id in {
+            "nextops-qwen3-8-27b-q8-0",
+            "nextops-qwen3-8-27b-ud-q5-k-m",
+        }:
             # Provision-only candidate: Qwen3.8 defaults must not preserve private
             # thoughts or activate thinking. Settings deny its unqualified thinking.
             # https://huggingface.co/Qwen/Qwen3.8-27B#disable-preserved-thinking

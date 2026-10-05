@@ -42,11 +42,11 @@ remaining task-specific sources. The repository skill
 
 ## Complete inventory
 
-- `docs/requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md` — Bilingual failed 48-thread 27B retest, Apache 122B Q5 pins, partial import/finite CDN observations, protected offline planner and unrun model gates.
+- `docs/requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md` — Bilingual failed 48-thread 27B retest, distinct 3.8 Q5 preparation/coding controls, Apache 122B Q5 pins, partial import/finite CDN observations, protected offline planner and unrun model gates.
 
 - `docs/requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md` — Bilingual actual resized-guest/new-volume preparation, pinned metadata-only Flash Q8 import, customer-license consideration, frozen regression tools and unrun model gates.
 
-- `docs/requirements/QWEN38_QUALIFICATION_SPEC.md` — Bilingual bounded Qwen 3.8 provisioning/qualification, supplied capacity versus guest limits, privacy, tests and rollback.
+- `docs/requirements/QWEN38_QUALIFICATION_SPEC.md` — Bilingual bounded Qwen 3.8 Q8/Q5 provisioning/qualification, supplied capacity versus guest limits, privacy, tests and rollback.
 - `docs/requirements/QWEN38_QUALIFICATION_2026-10-05.md` — Bilingual actual 27B Q8 import/load, frozen baseline comparisons, native thinking, failed context/coding gates and unchanged serving model.
 - `docs/requirements/REFERENCE_UI_SPEC.md` — Bilingual bounded reference-workspace and original OCS login specification, security invariants and source rollback.
 - `docs/en/REFERENCE_UI.md` — English UI preview, source verification, controlled live qualification and screenshot handoff.
