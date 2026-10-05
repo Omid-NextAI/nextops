@@ -1,5 +1,17 @@
 # Local CPU-only AI and capacity planning
 
+## Latest bounded diagnostic — 2026-10-05
+
+The exact-`f6cff8f` Q8 retest failed coding, source/scope preservation and an English hypothesis
+deadline at 120001 ms; the corresponding Persian case was not run. Cleanup passed without changing
+the serving model. The [paired qualification record](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md)
+records final-answer review, resource-accounting limitations and protected-path corrections.
+The finite AST checker now rejects unguarded non-string equality, membership, hashing and truthiness;
+872 source tests/two POSIX skips are not model-quality acceptance. Q5 has 48 protected ranges/12 GiB,
+not a full hash/load. Keep standard-first, actual context, final-only privacy, matched application,
+WAN and rollback gates. Effective service mappings use protected libraries; shell RUNPATH output
+alone is not proof of live mutable loading. Preserve runtime/35B rollback and public thinking-off.
+
 ## Distinct 3.8 Q5 source preparation — 2026-10-05
 
 After the current finite 122B import window, prioritize the pinned **Qwen3.8-27B UD-Q5_K_M**

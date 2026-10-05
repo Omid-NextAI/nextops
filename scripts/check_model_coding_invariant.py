@@ -11,6 +11,18 @@ class UnsupportedCodeError(ValueError):
     """The submitted snippet exceeds the deliberately small review language."""
 
 
+class UnsafeInputOperationError(ValueError):
+    """A supported expression touches non-string input before its type guard."""
+
+
+class EvaluatedValue:
+    """Track input provenance through the bounded interpreter, never generated code."""
+
+    def __init__(self, value: Any, nonstring_input: bool = False) -> None:
+        self.value = value
+        self.nonstring_input = nonstring_input
+
+
 class EqualToEverything:
     """Synthetic non-string counterexample to unsafe string membership alone."""
 
@@ -20,51 +32,81 @@ class EqualToEverything:
     __hash__ = None  # type: ignore[assignment]
 
 
-def expression(node: ast.expr, value: object) -> Any:
+def truth_value(evaluated: EvaluatedValue) -> bool:
+    if evaluated.nonstring_input:
+        raise UnsafeInputOperationError("non-string input coerced before type guard")
+    return bool(evaluated.value)
+
+
+def evaluated_expression(node: ast.expr, value: object) -> EvaluatedValue:
     if isinstance(node, ast.Name) and node.id in {"method", "str"}:
-        return value if node.id == "method" else str
+        return (
+            EvaluatedValue(value, nonstring_input=not isinstance(value, str))
+            if node.id == "method"
+            else EvaluatedValue(str)
+        )
     if isinstance(node, ast.Constant) and (
         node.value is None
         or type(node.value) is bool
         or (type(node.value) is str and len(node.value) <= 64)
     ):
-        return node.value
+        return EvaluatedValue(node.value)
     if isinstance(node, (ast.Tuple, ast.List, ast.Set)) and len(node.elts) <= 8:
-        elements = [expression(child, value) for child in node.elts]
-        return set(elements) if isinstance(node, ast.Set) else tuple(elements)
+        elements = [evaluated_expression(child, value) for child in node.elts]
+        nonstring_input = any(element.nonstring_input for element in elements)
+        if isinstance(node, ast.Set) and nonstring_input:
+            raise UnsafeInputOperationError("non-string input hashed before type guard")
+        contents = [element.value for element in elements]
+        return EvaluatedValue(
+            set(contents) if isinstance(node, ast.Set) else tuple(contents), nonstring_input
+        )
     if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and not node.keywords:
         if node.func.id == "isinstance" and len(node.args) == 2:
-            target = expression(node.args[1], value)
+            target = evaluated_expression(node.args[1], value).value
             if target is str:
-                return isinstance(expression(node.args[0], value), str)
+                return EvaluatedValue(
+                    isinstance(evaluated_expression(node.args[0], value).value, str)
+                )
         if node.func.id == "type" and len(node.args) == 1:
-            return type(expression(node.args[0], value))
+            return EvaluatedValue(type(evaluated_expression(node.args[0], value).value))
     if isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.Not):
-        return not expression(node.operand, value)
+        return EvaluatedValue(not truth_value(evaluated_expression(node.operand, value)))
     if isinstance(node, ast.BoolOp) and 2 <= len(node.values) <= 4:
-        current = expression(node.values[0], value)
+        current = evaluated_expression(node.values[0], value)
         for child in node.values[1:]:
-            if isinstance(node.op, ast.And) and not current:
+            truth = truth_value(current)
+            if isinstance(node.op, ast.And) and not truth:
                 return current
-            if isinstance(node.op, ast.Or) and current:
+            if isinstance(node.op, ast.Or) and truth:
                 return current
-            current = expression(child, value)
+            current = evaluated_expression(child, value)
         return current
     if isinstance(node, ast.Compare) and len(node.ops) == len(node.comparators) == 1:
-        left, right = expression(node.left, value), expression(node.comparators[0], value)
+        left = evaluated_expression(node.left, value)
+        right = evaluated_expression(node.comparators[0], value)
         operation = node.ops[0]
-        if isinstance(operation, (ast.In, ast.NotIn)) and isinstance(right, (tuple, set)):
-            member = left in right
-            return member if isinstance(operation, ast.In) else not member
+        if isinstance(operation, (ast.In, ast.NotIn)) and not isinstance(right.value, (tuple, set)):
+            raise UnsupportedCodeError("unsupported membership container; manual review required")
+        if isinstance(operation, (ast.In, ast.NotIn, ast.Eq, ast.NotEq)) and (
+            left.nonstring_input or right.nonstring_input
+        ):
+            raise UnsafeInputOperationError("non-string input compared before type guard")
+        if isinstance(operation, (ast.In, ast.NotIn)) and isinstance(right.value, (tuple, set)):
+            member = left.value in right.value
+            return EvaluatedValue(member if isinstance(operation, ast.In) else not member)
         if isinstance(operation, ast.Eq):
-            return left == right
+            return EvaluatedValue(left.value == right.value)
         if isinstance(operation, ast.NotEq):
-            return left != right
+            return EvaluatedValue(left.value != right.value)
         if isinstance(operation, ast.Is):
-            return left is right
+            return EvaluatedValue(left.value is right.value)
         if isinstance(operation, ast.IsNot):
-            return left is not right
+            return EvaluatedValue(left.value is not right.value)
     raise UnsupportedCodeError("unsupported expression; manual review required")
+
+
+def expression(node: ast.expr, value: object) -> Any:
+    return evaluated_expression(node, value).value
 
 
 def statements(body: list[ast.stmt], value: object) -> tuple[bool, Any]:
@@ -72,7 +114,9 @@ def statements(body: list[ast.stmt], value: object) -> tuple[bool, Any]:
         if isinstance(node, ast.Return) and node.value is not None:
             return True, expression(node.value, value)
         if isinstance(node, ast.If):
-            branch = node.body if expression(node.test, value) else node.orelse
+            branch = (
+                node.body if truth_value(evaluated_expression(node.test, value)) else node.orelse
+            )
             returned, result = statements(branch, value)
             if returned:
                 return True, result

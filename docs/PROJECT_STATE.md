@@ -1,5 +1,24 @@
 # Project state / وضعیت پروژه
 
+Latest diagnostic, 2026-10-05: the distinct exact-`f6cff8f` Q8 standard retest failed coding,
+source/scope preservation and the 120-second hypothesis deadline. Fourteen final answers were
+recorded; the final Persian hypothesis was not run. Trial cleanup and unchanged baseline readiness
+passed; no thinking/expanded-context/application acceptance or selection followed. The source
+reviewer now rejects non-string operations before their type guard: 872 tests/two POSIX skips.
+All five earlier exact-`f6cff8f` CI jobs passed; that is not CI or model acceptance for later work.
+Protected Q5 preparation reached 48 canonical ranges (12 GiB), still without a complete hash.
+See the [updated permissive record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+App `3d92b71`, inference `7ce9d29`, serving 35B, public thinking-off and production status remain unchanged.
+
+بررسی تازه در ۵ اکتبر: آزمون استانداردِ مستقل Q8 با کد دقیقِ `f6cff8f` در کدنویسی، حفظ منبع/
+دامنه و مهلت ۱۲۰ ثانیهٔ فرضیه ناموفق بود. چهارده پاسخ نهایی ثبت شد؛ فرضیهٔ پایانی فارسی اجرا
+نشد. توقف/پاک‌سازی آزمون و آمادگیِ ثابتِ مدل سالم موفق‌اند؛ پذیرش استدلال/زمینهٔ گسترده/برنامه
+یا انتخاب انجام نشد. بازبین کد اکنون عملیات ورودی غیررشته‌ای را پیش از کنترل نوع رد می‌کند:
+۸۷۲ آزمون موفق/دو مورد POSIX اجرا‌نشده. هر پنج کنترل CI پیشین برای `f6cff8f` موفق‌اند؛ این
+پذیرش CI یا مدلِ کار بعدی نیست. آماده‌سازی محافظت‌شدهٔ Q5 به ۴۸ بخش اصلی، برابر ۱۲ GiB رسید؛
+هش کامل هنوز تأیید نیست. گزارش مجوز آزادِ به‌روز در بالا مرجع است. برنامهٔ `3d92b71`، استنتاج
+`7ce9d29`، مدل زندهٔ 35B، خاموشی استدلال عمومی و وضعیت تولید ثابت‌اند.
+
 Source-only follow-up, 2026-10-05: a distinct pinned Apache Qwen3.8-27B UD-Q5_K_M candidate
 and generic defensive-coding guidance are prepared. Main local checks passed 835 non-browser/
 non-integration tests, two POSIX-only skips, Ruff and Linux-target Mypy; independent bilingual

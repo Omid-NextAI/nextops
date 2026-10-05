@@ -1,5 +1,22 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Guard-order review repair and failed Q8 follow-up — 2026-10-05
+
+Track non-string input provenance in the bounded AST reviewer and reject equality, membership,
+hashing and truthiness before type validation, without executing generated code or changing frozen
+cases. Main source checks: 872 passed/two POSIX skips; focused checks: 56 passed. Retain exact-`f6cff8f`
+CI success and its separately failed native Q8 coding/provenance/deadline trial; cleanup passed,
+final Persian hypothesis not run. Q5 remains partial provisioning (48 canonical ranges/12 GiB).
+Protected-path and effective-runtime observations do not approve thinking or model selection.
+Live app/35B/public thinking and production status are unchanged.
+
+منشأ ورودی غیررشته‌ای در بازبین محدود AST دنبال و برابری، عضویت، هش و تبدیل بولی پیش از
+کنترل نوع رد شد؛ کد تولیدشده اجرا و پرسش ثابت تغییر نکرد. کنترل کدِ اصلی: ۸۷۲ موفق/دو مورد
+POSIX اجرا‌نشده؛ کنترل متمرکز: ۵۶ موفق. موفقیت CI کد دقیقِ `f6cff8f` و آزمون جداگانهٔ ناموفق
+Q8 در کدنویسی/منشأ/مهلت محفوظ‌اند؛ پاک‌سازی موفق و فرضیهٔ پایانی فارسی اجرا‌نشده است. ورود Q5
+ناقص است (۴۸ بخش اصلی/۱۲ GiB). بررسی مسیر محافظت‌شده و runtime واقعی، مجوز استدلال یا انتخاب
+مدل نیست. برنامهٔ زنده، 35B، استدلال عمومی و وضعیت تولید تغییر نکرده‌اند.
+
 ## Distinct 3.8 Q5 and defensive-coding preparation — source, 2026-10-05
 
 Pin a separate unselected Apache 27B UD-Q5_K_M candidate with strict artifact/regression checks.

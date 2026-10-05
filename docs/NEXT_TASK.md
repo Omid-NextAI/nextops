@@ -1,5 +1,20 @@
 # Next task / کار بعدی
 
+Current diagnostic checkpoint: the separate exact-`f6cff8f` Q8 standard retest failed and its
+unit/process/listener are reconciled stopped. Do not repeat that profile or create a thinking gate.
+Complete the **separate pinned Q5** import (48 canonical ranges/12 GiB recorded; complete hash
+unverified), actual template and protected complete runtime-tree review before its standard-first
+trial. Use the corrected finite coding checker; independently review source/time/scope, unsupported
+topology and unapproved recommendations. Preserve 120-second failures and unrun cases. No serving
+model or public thinking change until the matched acceptance sequence actually passes.
+
+گام جاری: آزمون استانداردِ مستقل Q8 با کد دقیقِ `f6cff8f` ناموفق و توقف واحد/فرایند/listener
+تطبیق داده شد. همان نمایه تکرار و تأیید استدلال ساخته نشود. ورود **Q5 ثابت و مستقل** تکمیل شود
+(۴۸ بخش اصلی/۱۲ GiB ثبت‌شده؛ هش کامل تأیید نیست)؛ قالب واقعی و درخت کامل runtime محافظت‌شده
+پیش از آزمونِ ابتدا استاندارد بررسی شوند. بازبین محدودِ اصلاح‌شده به‌کار رود؛ منبع/زمان/دامنه،
+توپولوژی بدون شاهد و توصیهٔ بدون مجوز مستقل بررسی شوند. شکست مهلت ۱۲۰ ثانیه و پرسش اجرا‌نشده
+حفظ شوند. مدل زنده یا استدلال عمومی تا موفقیت واقعیِ ترتیب پذیرش هماهنگ تغییر نکند.
+
 Active source follow-up: the finite 122B window is reconciled (133 ranges); prioritize
 the **distinct pinned Qwen3.8-27B UD-Q5_K_M** trial described in the
 [permissive packet](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md). First 512 MiB is partial,

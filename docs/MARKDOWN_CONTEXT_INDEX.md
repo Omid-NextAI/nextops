@@ -42,7 +42,7 @@ remaining task-specific sources. The repository skill
 
 ## Complete inventory
 
-- `docs/requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md` — Bilingual failed 48-thread 27B retest, distinct 3.8 Q5 preparation/coding controls, Apache 122B Q5 pins, partial import/finite CDN observations, protected offline planner and unrun model gates.
+- `docs/requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md` — Bilingual failed 48-thread and exact-source Q8 retests, corrected finite coding review, protected/effective-runtime observations, distinct 3.8 Q5 preparation, Apache 122B pins, partial import/finite CDN records and unrun acceptance gates.
 
 - `docs/requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md` — Bilingual actual resized-guest/new-volume preparation, pinned metadata-only Flash Q8 import, customer-license consideration, frozen regression tools and unrun model gates.
 
