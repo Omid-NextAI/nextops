@@ -1,7 +1,7 @@
 /* Omid Signal Gate: decorative service routing, not telemetry or a real topology. */
 body[data-authenticated="false"]{background:radial-gradient(ellipse at 22% 50%,#0090A00D,transparent 65%),var(--bg)}
 .login-layout{max-width:1440px;margin-inline:auto;padding:54px 56px 28px;min-height:calc(100dvh - 112px);display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:64px;align-items:center}
-.login-editorial{position:relative;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+.login-editorial{position:relative;isolation:isolate;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
 .company-lockup{display:flex;align-items:center;gap:16px;margin-bottom:28px}
 .company-lockup strong{font-size:22px;letter-spacing:-.025em;display:block}
 .company-lockup strong span{color:var(--muted);font-weight:400;font-size:16px}
@@ -15,7 +15,7 @@ body[data-authenticated="false"]{background:radial-gradient(ellipse at 22% 50%,#
 .circuit{fill:none;stroke:var(--brand-teal);stroke-opacity:.25;stroke-width:1}
 .service-node{fill:var(--surface);stroke:var(--brand-teal);stroke-opacity:.5;stroke-width:1.3}
 .signal{fill:var(--brand-teal);opacity:.8}
-.gate-architecture{animation:gate-float 18s ease-in-out infinite}
+.gate-architecture{animation:gate-float 18s cubic-bezier(.77,0,.175,1) infinite}
 .gate-shadow{fill:#0090A0;opacity:.055}
 .gate-back{fill:var(--surface);fill-opacity:.82;stroke:url(#gateGold);stroke-width:1.6}
 .gate-front{fill:var(--surface);fill-opacity:.83;stroke:url(#gateTeal);stroke-width:1.7}
@@ -26,7 +26,7 @@ body[data-authenticated="false"]{background:radial-gradient(ellipse at 22% 50%,#
 .organized-nodes path{fill:none}
 .scene-caption{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--muted);margin-top:-8px}
 .scene-rule{width:24px;height:1px;background:var(--brand-gold)}
-.motion-control{margin-top:14px;align-self:flex-start;background:transparent;border-color:transparent;color:var(--muted);font-size:12px;padding:4px 0}
+.motion-control{margin-top:14px;align-self:flex-start;background:transparent;border-color:transparent;color:var(--muted);font-size:12px;padding:8px 4px;min-height:36px}
 .motion-control .ui-icon{width:14px;height:14px}
 .login-form-region{display:flex;flex-direction:column;align-items:center;min-width:0}
 .login-card{width:100%;max-width:420px;padding:36px;background:var(--surface);box-shadow:0 20px 65px #00000009;border-color:var(--line);border-radius:12px}
@@ -71,8 +71,39 @@ body[data-authenticated="false"]{background:radial-gradient(ellipse at 22% 50%,#
 @keyframes signal-8{0%,8%{transform:translate(610px,474px);opacity:0}12%{opacity:.8}47%{transform:translate(533px,474px);opacity:.8}69%{transform:translate(475px,402px);opacity:.8}75%{opacity:0}100%{transform:translate(543px,422px);opacity:0}}
 body[data-motion="paused"] :is(.gate-architecture,.signal,.gate-edge){animation-play-state:paused!important}
 body[data-motion="paused"] :is(.login-editorial>.company-lockup,.login-editorial>h1,.login-editorial>.lead,.gate-scene){animation:none}
+body[data-motion-intro="complete"] :is(.login-editorial>.company-lockup,.login-editorial>h1,.login-editorial>.lead,.gate-scene){animation:none}
 body[data-authenticated="true"] .login-layout *{animation:none!important}
 @media(prefers-reduced-motion:reduce){.login-layout *{animation:none!important;transition:none!important}.signal{opacity:0}.gate-edge{stroke-dasharray:none;opacity:.22}}
 @media(max-width:1100px){.login-layout{padding:40px 32px;gap:32px}.login-card{padding:28px}.login-editorial h1{font-size:36px}.signal-scene{max-height:320px}}
-@media(max-width:800px){.login-layout{grid-template-columns:minmax(0,1fr);padding:30px 24px;gap:28px}.login-editorial{display:block}.company-lockup{margin-bottom:20px}.login-editorial h1{font-size:32px;max-width:600px}.login-editorial .lead{font-size:14px;max-width:600px}.gate-scene{position:absolute;inset-inline-end:0;top:90px;width:220px;opacity:.3;z-index:-1}.signal-scene{max-height:180px}.scene-caption{display:none}.login-form-region{align-items:stretch}.login-card{max-width:none}.login-boundary{max-width:none}.motion-control{margin-top:12px}.login-card .privacy-note{font-size:12px}}
-@media(max-width:520px){.login-layout{padding:24px 16px max(24px,env(safe-area-inset-bottom));min-height:calc(100dvh - 64px);gap:20px}.company-lockup strong{font-size:20px}.company-lockup small{font-size:12px}.ocs-logo-hero{width:40px;height:48px}.login-editorial h1{font-size:28px;margin-bottom:12px}.login-card{padding:24px}.login-card h2{font-size:23px}.login-helper{margin-bottom:22px}.login-lock{display:none}.gate-scene{display:none}.login-editorial .lead{font-size:13px}.login-editorial .eyebrow{font-size:10px}.login-boundary{font-size:11px}body[data-authenticated="false"] footer{display:none}}
+@media(max-width:800px){
+  .login-layout{grid-template-columns:minmax(0,1fr);padding:30px 24px;gap:28px}
+  .login-editorial{max-width:600px;justify-self:center;width:100%}
+  .company-lockup{margin-bottom:20px}
+  .login-editorial h1{font-size:32px;max-width:600px}
+  .login-editorial .lead{font-size:14px;max-width:600px}
+  /* A short, real scene in normal flow. Negative stacking hid the old tablet scene. */
+  .gate-scene{width:100%;max-width:320px;margin:0 auto;flex:none}
+  .signal-scene{max-height:180px}
+  .scene-caption{display:none}
+  .login-card{padding:28px}
+  .motion-control{margin-top:0;align-self:center;min-height:44px;padding:10px 12px}
+  .login-card .privacy-note{font-size:12px}
+}
+@media(max-width:520px){
+  .login-layout{padding:24px 16px max(24px,env(safe-area-inset-bottom));min-height:calc(100dvh - 64px);gap:20px}
+  .company-lockup strong{font-size:20px}
+  .company-lockup small{font-size:12px}
+  .ocs-logo-hero{width:40px;height:48px}
+  .login-editorial h1{font-size:28px;margin-bottom:12px}
+  .login-card{padding:24px}
+  .login-card h2{font-size:23px}
+  .login-helper{margin-bottom:22px}
+  .login-lock{display:none}
+  .gate-scene{max-width:240px}
+  .signal-scene{max-height:120px}
+  .signal{r:5px}
+  .login-editorial .lead{font-size:14px}
+  .login-editorial .eyebrow{font-size:10px}
+  .login-boundary{font-size:11px}
+  body[data-authenticated="false"] footer{display:none}
+}

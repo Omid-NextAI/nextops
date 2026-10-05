@@ -12,7 +12,8 @@
       observedChange:"Observed change", hostsFinding:"Affected hosts", possibleExplanation:"Possible explanation", nextChecks:"Suggested next checks", noChange:"No structured change or baseline was returned. See the recorded observations below.", noHypothesis:"A structured hypothesis was not returned. The answer above is not proof of a cause.", noChecks:"No structured next-check list was returned. Ask a specific follow-up; no action executes here.", scopedHost:"Evidence collected for", noLive:"General model knowledge · no live infrastructure evidence", noSelected:"No evidence selected", selectEvidence:"Select a numbered observation to inspect its source, time and scope.", source:"Source", observed:"Observed", collected:"Collected", host:"Host", metric:"Metric", value:"Value", threshold:"Threshold", severity:"Severity", freshness:"Freshness", scope:"Authorized scope", notReported:"Not reported", fresh:"Not marked stale", stale:"Stale", partial:"Partial", missing:"Missing", older:"Collection is older than five minutes", rawNotice:"Allowlisted diagnostic fields only", copyRaw:"Copy raw data", copied:"Copied", copyFailed:"Copy unavailable; select and copy the text.", contextHelp:"This observation belongs to the current authorized response. It does not establish causality or permission to mutate.", noChart:"No compatible time series was returned for this observation.", noRelated:"No other observation for this host is available in this response.", noCapability:"This destination is not implemented in the current controlled release. No additional access or integration is implied.", catalogHelp:"Deployment-approved catalogue; approval is not a health check.", knowledgeHelp:"Retrieval from local documents is not connected. General answers use model knowledge, not an invented knowledge base.", settingsHelp:"Theme and interface language are local preferences. Operational configuration is not editable here.", supportHelp:"Contact your organization’s NextOps administrator. This panel has no external support connection.",
       evidenceCollected:"Evidence collected", answerGenerated:"Answer completed", auditRecorded:"Audit record returned", queue:"Reported queue", clientTime:"Browser round trip", cancelWait:"Stop waiting", cancelNotice:"Stopped waiting in this browser. The server may still complete the read-only request; this does not prove remote cancellation. Retry a saved message with the same request identifier.",
       signalGate:"Omid Signal Gate · a decorative network abstraction", pauseMotion:"Pause motion", resumeMotion:"Resume motion", staticMotion:"Static scene · reduced motion", loginBoundary:"Local identity. CPU-only inference. No cloud AI fallback.", showPassword:"Show password", hidePassword:"Hide password", localModel:"Local CPU model", newChat:"New conversation", freshResponse:"Response observations", reference:"Evidence reference", noTraceSaved:"Saved answer · no new execution", attachmentUnavailable:"Attachments are not supported by the current API.",
-      navOpen:"Open navigation", navClose:"Close navigation", evidencePrevious:"Previous evidence", evidenceNext:"Next evidence", evidenceClose:"Close evidence", requestDetails:"Request details", accountMenu:"Account menu", closeSearch:"Close search", loginService:"The authentication service is unavailable. Try again later.", loginRate:"Too many sign-in attempts. Wait before trying again."
+      navOpen:"Open navigation", navClose:"Close navigation", evidencePrevious:"Previous evidence", evidenceNext:"Next evidence", evidenceClose:"Close evidence", requestDetails:"Request details", accountMenu:"Account menu", closeSearch:"Close search", loginService:"The authentication service is unavailable. Try again later.", loginRate:"Too many sign-in attempts. Wait before trying again.",
+      selectedResponse:"Selected response observations", archivedResponse:"Archived response observations · no new collection", selectedContextHelp:"This observation belongs to the selected authorized response. It does not establish causality or permission to mutate."
     },
     fa: {
       investigationOptions:"گزینه‌های بررسی", mainNavigation:"پیمایش اصلی", conversation:"گفت‌وگو", serviceStatus:"وضعیت خدمات", evidenceDetails:"جزئیات شاهد",
@@ -23,11 +24,12 @@
       observedChange:"تغییر مشاهده‌شده", hostsFinding:"میزبان‌های متأثر", possibleExplanation:"توضیح احتمالی", nextChecks:"بررسی‌های پیشنهادی", noChange:"تغییر یا خط مبنای ساختاریافته ارائه نشده است. مشاهدات ثبت‌شده در پایین آمده‌اند.", noHypothesis:"فرضیهٔ ساختاریافته ارائه نشده است. پاسخ بالا علت قطعی را اثبات نمی‌کند.", noChecks:"فهرست ساختاریافتهٔ بررسی بعدی ارائه نشده است. پرسش مشخصی بپرسید؛ اینجا عملیاتی اجرا نمی‌شود.", scopedHost:"شاهد گردآوری‌شده برای", noLive:"دانش عمومی مدل؛ بدون شاهد زندهٔ زیرساخت", noSelected:"شاهدی انتخاب نشده", selectEvidence:"مشاهدهٔ شماره‌دار را انتخاب کنید تا منبع، زمان و دامنهٔ آن نمایش داده شود.", source:"منبع", observed:"زمان مشاهده", collected:"زمان گردآوری", host:"میزبان", metric:"سنجه", value:"مقدار", threshold:"آستانه", severity:"شدت", freshness:"تازگی", scope:"دامنهٔ مجاز", notReported:"گزارش نشده", fresh:"قدیمی علامت‌گذاری نشده", stale:"قدیمی", partial:"ناقص", missing:"غایب", older:"بیش از پنج دقیقه از گردآوری گذشته است", rawNotice:"فقط فیلدهای تشخیصی مجاز", copyRaw:"کپی دادهٔ خام", copied:"کپی شد", copyFailed:"کپی خودکار در دسترس نیست؛ متن را انتخاب و کپی کنید.", contextHelp:"این مشاهده از پاسخ مجاز جاری است؛ علت یا مجوز تغییر را اثبات نمی‌کند.", noChart:"سری زمانی سازگار برای این مشاهده ارائه نشده است.", noRelated:"مشاهدهٔ دیگری برای این میزبان در این پاسخ نیست.", noCapability:"این بخش در انتشار کنترل‌شدهٔ فعلی پیاده‌سازی نشده است؛ به‌معنی دسترسی یا اتصال تازه نیست.", catalogHelp:"فهرست تأییدشدهٔ استقرار؛ تأیید به‌معنی آزمون سلامت نیست.", knowledgeHelp:"بازیابی از اسناد محلی متصل نیست. پاسخ عمومی از دانش مدل است، نه پایگاه دانشِ فرضی.", settingsHelp:"تم و زبان رابط، ترجیح محلی‌اند؛ تنظیمات عملیاتی اینجا ویرایش نمی‌شوند.", supportHelp:"با مدیر NextOps سازمان تماس بگیرید. این پنل به پشتیبانی خارجی متصل نیست.",
       evidenceCollected:"گردآوری شاهد", answerGenerated:"تکمیل پاسخ", auditRecorded:"شناسهٔ ممیزی دریافت شد", queue:"زمان صف گزارش‌شده", clientTime:"رفت‌وبرگشت مرورگر", cancelWait:"توقف انتظار", cancelNotice:"انتظار در این مرورگر متوقف شد؛ درخواست فقط‌خواندنی ممکن است در سرور کامل شود. توقف راه دور اثبات نشده است. برای پیام ذخیره‌شده، پیگیری با همان شناسهٔ درخواست انجام می‌شود.",
       signalGate:"دروازهٔ سیگنال امید؛ طرح نمادین شبکه", pauseMotion:"توقف حرکت", resumeMotion:"ادامهٔ حرکت", staticMotion:"صحنهٔ ثابت؛ حرکت کاهش‌یافته", loginBoundary:"هویت محلی، پردازش فقط با CPU، بدون جایگزین ابری.", showPassword:"نمایش گذرواژه", hidePassword:"پنهان‌کردن گذرواژه", localModel:"مدل محلی CPU", newChat:"گفتگوی تازه", freshResponse:"مشاهدات پاسخ", reference:"مرجع شاهد", noTraceSaved:"پاسخ ذخیره‌شده؛ بدون اجرای تازه", attachmentUnavailable:"API فعلی از پیوست پشتیبانی نمی‌کند.",
-      navOpen:"بازکردن پیمایش", navClose:"بستن پیمایش", evidencePrevious:"شاهد قبلی", evidenceNext:"شاهد بعدی", evidenceClose:"بستن شاهد", requestDetails:"جزئیات درخواست", accountMenu:"منوی حساب", closeSearch:"بستن جست‌وجو", loginService:"سرویس احراز هویت در دسترس نیست. بعداً دوباره تلاش کنید.", loginRate:"تعداد تلاش ورود بیش از حد مجاز است. پیش از تلاش دوباره کمی صبر کنید."
+      navOpen:"بازکردن پیمایش", navClose:"بستن پیمایش", evidencePrevious:"شاهد قبلی", evidenceNext:"شاهد بعدی", evidenceClose:"بستن شاهد", requestDetails:"جزئیات درخواست", accountMenu:"منوی حساب", closeSearch:"بستن جست‌وجو", loginService:"سرویس احراز هویت در دسترس نیست. بعداً دوباره تلاش کنید.", loginRate:"تعداد تلاش ورود بیش از حد مجاز است. پیش از تلاش دوباره کمی صبر کنید.",
+      selectedResponse:"مشاهدات پاسخ انتخاب‌شده", archivedResponse:"مشاهدات پاسخ پیشین؛ بدون گردآوری تازه", selectedContextHelp:"این مشاهده از پاسخ مجاز انتخاب‌شده است؛ علت یا مجوز تغییر را اثبات نمی‌کند."
     }
   };
   let locale = "en", authenticated = false, entries = [], selected = -1, last = null, catalog = [], model = "", returnFocus = null, selectedCard = null, requestFailed = false, connectorAvailable = null;
-  let turnEvidence = new WeakMap();
+  let turnEvidence = new WeakMap(), restoreNavFocus = true, destination = "investigations";
   const t = key => copy[locale][key] || key;
   const safe = value => String(value ?? "").slice(0, 6000).replace(/\b(Bearer\s+)\S+/gi,"$1[redacted]").replace(/((?:password|passwd|secret|api[_-]?token|authorization)\s*[:=]\s*)[^\s,;]+/gi,"$1[redacted]");
   function node(tag, text, className) { const n = document.createElement(tag); if (text !== undefined) n.textContent = safe(text); if (className) n.className = className; return n; }
@@ -89,9 +91,12 @@
     const entry=entries[index], state=status(entry), root=el("inspectorContent"); root.replaceChildren();
     const card=node("section",undefined,"evidence-detail-card"); const badge=node("span",t(state),`freshness ${state}`); if(state==="stale"&&!entry.stale) badge.title=t("older"); card.append(badge,node("h3",entry.title));
     const dl=node("dl"); [["source",entry.source],["observed",time(entry.observed)],["collected",time(entry.collected)],["host",entry.host],["metric",entry.metric || t("notReported")],["value",entry.value],["threshold",t("notReported")],["severity",Number.isInteger(entry.severity)?String(entry.severity):t("notReported")],["freshness",`${t(state)}${entry.partial?` · ${t("partial")}`:""}`],["scope",entry.scope]].forEach(([key,value])=>{ const dt=node("dt",t(key)),dd=node("dd"); const b=node("bdi",value); b.dir=["host","metric","scope"].includes(key)?"ltr":"auto"; dd.append(b); dl.append(dt,dd); }); card.append(dl); root.append(card);
-    const raw=el("panel-raw"), actions=node("div",undefined,"raw-actions"), button=node("button",t("copyRaw"),"quiet-button"); button.type="button"; button.id="copyRaw"; button.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(JSON.stringify(entry.raw,null,2));text("rawCopyStatus",t("copied"));}catch(_){text("rawCopyStatus",t("copyFailed"));}}); actions.append(node("span",t("rawNotice")),button); const pre=node("pre");pre.dir="ltr";pre.setAttribute("aria-label",t("raw"));pre.append(node("code",JSON.stringify(entry.raw,null,2))); const msg=node("p",undefined,"rail-help");msg.id="rawCopyStatus";msg.setAttribute("role","status");raw.replaceChildren(actions,pre,msg);
+    const raw=el("panel-raw"), actions=node("div",undefined,"raw-actions"), button=node("button",t("copyRaw"),"quiet-button"); button.type="button"; button.id="copyRaw"; button.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(JSON.stringify(entry.raw,null,2));text("rawCopyStatus",t("copied"));}catch(_){text("rawCopyStatus",t("copyFailed"));}}); actions.append(node("span",t("rawNotice")),button); const pre=node("pre"), code=node("code");pre.dir="ltr";pre.tabIndex=0;pre.setAttribute("role","region");pre.setAttribute("aria-label",t("raw"));
+    // Values were already bounded/redacted by adapt(). Do not clip the serialized object a
+    // second time: that produces invalid JSON and makes the displayed data differ from Copy.
+    code.textContent=JSON.stringify(entry.raw,null,2);pre.append(code); const msg=node("p",undefined,"rail-help");msg.id="rawCopyStatus";msg.setAttribute("role","status");raw.replaceChildren(actions,pre,msg);
     const related=el("panel-related");related.replaceChildren();entries.forEach((item,i)=>{if(i!==index&&item.host===entry.host){const b=node("button",item.title,"evidence-row");b.type="button";b.dataset.evidenceIndex=String(i);related.append(b);}});if(!related.children.length)related.append(node("p",t("noRelated")));
-    el("panel-context").replaceChildren(node("p",t("contextHelp")),node("p",`${t("scope")}: ${safe(entry.scope)}`),node("p",`${t("collected")}: ${time(entry.collected)}`));
+    el("panel-context").replaceChildren(node("p",t("selectedContextHelp")),node("p",selectedCard===el("resultCard")?t("selectedResponse"):t("archivedResponse")),node("p",`${t("scope")}: ${safe(entry.scope)}`),node("p",`${t("collected")}: ${time(entry.collected)}`));
     const chartPanel=el("panel-visualize");chartPanel.replaceChildren();
     if(entry.series?.length>=2){
       const points=[...entry.series].sort((a,b)=>Date.parse(a.time)-Date.parse(b.time));
@@ -130,6 +135,7 @@
     text("alertsValue",summary?String(summary.active_problems.length):"—");text("alertsValueHelp",summary?`${t("scopeCount")}${summary.is_partial?` · ${t("partial")}`:""}`:t("notAvailable"));
     text("hostsValue","—");text("hostsValueHelp",t("noAffected"));
     el("shareInvestigation").disabled=!question;
+    el("requestDetailsButton").disabled=false;
     card.querySelector('[data-followup="evidence"]').disabled=!entries.length;
     if(selected>=0)select(selected);else showEmpty();renderTrace(assistant,result,elapsed,saved);
     el("modelStatusLabel").textContent=t("localModel");el("modelStatusLabel").title=assistant.model_id || t("localModel");
@@ -138,9 +144,9 @@
     entries=[];selected=-1;last=null;returnFocus=null;selectedCard=null;turnEvidence=new WeakMap();requestFailed=false;["evidenceDialog","searchDialog","navDialog"].forEach(id=>{if(el(id).open)el(id).close();});el("inspectorSlot").append(el("evidenceInspector"));document.body.append(el("appNav"));el("profileMenu").open=false;el("inspectorSlot").classList.remove("inspector-closed");
     ["searchInput"].forEach(id=>el(id).value="");el("searchResults").replaceChildren();
     el("resultCard").querySelector(".user-message").removeAttribute("data-user-initial");
-    ["alertsValue","hostsValue"].forEach(id=>text(id,"—"));text("alertsValueHelp",t("notAvailable"));text("hostsValueHelp",t("noAffected"));text("investigationValue",t("readyToAsk"));text("investigationValueHelp",t("notStarted"));text("investigationState",t("readyToAsk"));text("openedTime",t("notStarted"));text("sourceContext",t("noEvidence"));text("traceDuration","");el("traceStages").replaceChildren(node("li",t("noTrace")));el("shareInvestigation").disabled=true;showEmpty();
+    ["alertsValue","hostsValue"].forEach(id=>text(id,"—"));text("alertsValueHelp",t("notAvailable"));text("hostsValueHelp",t("noAffected"));text("investigationValue",t("readyToAsk"));text("investigationValueHelp",t("notStarted"));text("investigationState",t("readyToAsk"));text("openedTime",t("notStarted"));text("sourceContext",t("noEvidence"));text("traceDuration","");el("traceStages").replaceChildren(node("li",t("noTrace")));el("shareInvestigation").disabled=true;el("requestDetailsButton").disabled=true;el("requestDetailsButton").setAttribute("aria-expanded","false");showEmpty();
   }
-  function session(actor) { authenticated=!!actor;document.body.dataset.authenticated=String(authenticated);document.querySelectorAll(".auth-only").forEach(n=>n.classList.toggle("hidden",!authenticated));if(authenticated){const name=actor.username || t("privateWorkspace");text("profileName",name);text("profileInitial",actor.username?actor.username.slice(0,1).toUpperCase():"U");}else{catalog=[];model="";connectorAvailable=null;text("connectorValue",t("notAvailable"));text("connectorValueHelp",t("engineUnknown"));text("profileName","");text("profileInitial","");el("environmentSelect").replaceChildren(node("option",t("environment")));clear();}
+  function session(actor) { authenticated=!!actor;document.body.dataset.authenticated=String(authenticated);document.querySelectorAll(".auth-only").forEach(n=>n.classList.toggle("hidden",!authenticated));if(authenticated){const name=actor.username || t("privateWorkspace");text("profileName",name);text("profileInitial",actor.username?actor.username.slice(0,1).toUpperCase():"U");navigate("investigations",false);}else{catalog=[];model="";connectorAvailable=null;text("connectorValue",t("notAvailable"));text("connectorValueHelp",t("engineUnknown"));text("profileName","");text("profileInitial","");el("environmentSelect").replaceChildren(node("option",t("environment")));el("destinationContent").replaceChildren();text("destinationTitle","");text("destinationHelp","");text("modelStatusLabel",t("localModel"));el("modelStatusLabel").removeAttribute("title");clear();}
     window.NextOpsMotion?.update();
   }
   function setLocale(lang) {
@@ -167,22 +173,25 @@
     }
     el("globalSearch").setAttribute("aria-label",t("search"));
     attachment?.setAttribute("aria-label",t("attachmentUnavailable"));
-    if(previousCard && previousCard!==el("resultCard") && previousSelected>=0){
-      selectedCard=previousCard;entries=previousEntries;select(previousSelected);
+    if(previousCard && previousSelected>=0){
+      if(previousCard!==el("resultCard")){selectedCard=previousCard;entries=previousEntries;}
+      select(previousSelected);
     }
+    if(authenticated&&!el("destinationView").classList.contains("hidden"))navigate(destination,false);
     window.NextOpsMotion?.update();
   }
-  function navigate(key) {
+  function navigate(key, moveFocus=true) {
     if(!authenticated)return;
-    if(el("navDialog").open)el("navDialog").close();el("profileMenu").open=false;
+    destination=key;
+    if(el("navDialog").open){restoreNavFocus=false;el("navDialog").close();}el("profileMenu").open=false;
     el("usersView").classList.add("hidden");
     document.querySelectorAll("[data-nav]").forEach(n=>{n.classList.toggle("selected",n.dataset.nav===key);if(n.dataset.nav===key)n.setAttribute("aria-current","page");else n.removeAttribute("aria-current");});
     const existing=["investigations","ask","overview"].includes(key);el("workspaceView").classList.toggle("hidden",!existing);el("destinationView").classList.toggle("hidden",existing);
-    if(existing){if(key==="ask")el("question").focus();else el("workspaceHeading").focus();return;}
+    if(existing){if(moveFocus){if(key==="ask")el("question").focus();else el("workspaceHeading").focus();}return;}
     text("destinationTitle",t(key));let help=t("noCapability");if(key==="knowledge")help=t("knowledgeHelp");if(key==="settings")help=t("settingsHelp");if(key==="support")help=t("supportHelp");if(["infrastructure","connectors"].includes(key))help=t("catalogHelp");text("destinationHelp",help);el("destinationContent").replaceChildren();
     if(["infrastructure","connectors"].includes(key))catalog.forEach(source=>{const c=node("section",undefined,"destination-card");c.append(node("h2",source.label),node("p",`${source.source_id} · ${t("catalogHelp")}`));if(key==="infrastructure")source.targets.forEach(target=>c.append(node("p",`${target.label} · ${target.target_id}`)));el("destinationContent").append(c);});
     if(key==="settings"){const b=node("button",el("themeButton").querySelector("span").textContent,"quiet-button");b.type="button";b.addEventListener("click",()=>{el("themeButton").click();b.textContent=el("themeButton").querySelector("span").textContent;});el("destinationContent").append(b);}
-    el("destinationTitle").focus();
+    if(moveFocus)el("destinationTitle").focus();
   }
   function search() {if(!authenticated)return;const query=el("searchInput").value.toLocaleLowerCase();const root=el("searchResults");root.replaceChildren();document.querySelectorAll(".saved-chat-button").forEach(chat=>{if(chat.textContent.toLocaleLowerCase().includes(query)){const b=node("button",chat.textContent);b.type="button";b.addEventListener("click",()=>{el("searchDialog").close();navigate("ask");chat.click();});root.append(b);}});entries.forEach((entry,i)=>{if(`${entry.title} ${entry.value}`.toLocaleLowerCase().includes(query)){const b=node("button",entry.title);b.type="button";b.addEventListener("click",()=>{el("searchDialog").close();select(i,true,el("globalSearch"));});root.append(b);}});if(!root.children.length)root.append(node("p",t("noMatches")));}
   function activateTurn(control) {const card=control.closest(".conversation-turn");if(card&&turnEvidence.has(card)){selectedCard=card;entries=turnEvidence.get(card);selected=0;}}
@@ -190,7 +199,7 @@
   el("evidencePrevious").addEventListener("click",()=>select(selected-1));el("evidenceNext").addEventListener("click",()=>select(selected+1));
   el("evidenceClose").addEventListener("click",()=>{if(el("evidenceDialog").open)el("evidenceDialog").close();else{el("inspectorSlot").classList.add("inspector-closed");(returnFocus || el("resultCard").querySelector('[data-followup="evidence"]')).focus();}});
   el("evidenceDialog").addEventListener("close",()=>{el("inspectorSlot").append(el("evidenceInspector"));returnFocus?.focus();});
-  el("navOpen").addEventListener("click",()=>{el("navDialog").append(el("appNav"));el("navDialog").showModal();el("navClose").focus();});el("navClose").addEventListener("click",()=>el("navDialog").close());el("navDialog").addEventListener("close",()=>{document.body.append(el("appNav"));el("navOpen").focus();});
+  el("navOpen").addEventListener("click",()=>{restoreNavFocus=true;el("navDialog").append(el("appNav"));el("navDialog").showModal();el("navClose").focus();});el("navClose").addEventListener("click",()=>el("navDialog").close());el("navDialog").addEventListener("close",()=>{document.body.append(el("appNav"));if(authenticated&&restoreNavFocus)el("navOpen").focus();restoreNavFocus=true;});
   el("appNav").addEventListener("click",event=>{if(event.target.closest(".saved-chat-button, #deleteChatButton")&&el("navDialog").open)el("navDialog").close();});
   el("destinationBack").addEventListener("click",()=>navigate("investigations"));
   el("globalSearch").addEventListener("click",()=>{search();el("searchDialog").showModal();el("searchInput").focus();});el("searchInput").addEventListener("input",search);
@@ -202,6 +211,7 @@
   el("shareInvestigation").addEventListener("click",async()=>{if(!last)return;try{await navigator.clipboard.writeText(last.question);text("copyStatus",t("copied"));}catch(_){text("copyStatus",t("copyFailed"));}});
   el("requestDetailsButton").setAttribute("aria-controls","evidenceDetails");
   el("requestDetailsButton").setAttribute("aria-expanded","false");
+  el("evidenceDetails").addEventListener("toggle",()=>el("requestDetailsButton").setAttribute("aria-expanded",String(el("evidenceDetails").open)));
   el("requestDetailsButton").addEventListener("click",()=>{const details=el("evidenceDetails");if(!el("resultCard").classList.contains("hidden")){details.open=!details.open;el("requestDetailsButton").setAttribute("aria-expanded",String(details.open));if(details.open){details.tabIndex=-1;details.focus();}}});
   // The current contract has one authorized environment, not a cross-environment switch.
   el("environmentSelect").disabled=true;
@@ -220,5 +230,5 @@
     archive(original,clone){if(turnEvidence.has(original))turnEvidence.set(clone,turnEvidence.get(original));},
     resumed(assistant,question){render(assistant,null,question,false,null,true);}
   };
-  el("evidenceInspector").tabIndex=-1;setLocale(document.documentElement.lang==="fa"?"fa":"en");showEmpty();
+  el("evidenceInspector").tabIndex=-1;el("workspaceHeading").tabIndex=-1;el("evidencePosition").dir="ltr";setLocale(document.documentElement.lang==="fa"?"fa":"en");showEmpty();
 })();

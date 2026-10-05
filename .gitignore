@@ -40,5 +40,6 @@ dist/
 build/
 work/
 artifacts/ui-reference/
+artifacts/ui-panel-quality/
 .DS_Store
 Thumbs.db

@@ -27,6 +27,31 @@ retrieval and fresh infrastructure evidence remain distinct.
 
 ## Use and preview
 
+### Motion and panel repair checkpoint — 2026-10-05
+
+The desktop packets already moved in a fresh browser; the reported failure exposed two real
+responsive defects: the tablet scene was behind the page, and the phone scene was hidden while
+its pause control remained. The scene now occupies a compact normal-flow region on tablet/phone.
+Pause/resume no longer replays the entrance or temporarily hides readable content. Visibility,
+reduced-motion and authenticated states stop motion; a stored pause preference still takes priority.
+The official OCS mark, base colors, CSP, local assets and authentication contract are unchanged.
+
+The phone composer now reserves a full-width 72px typing row with 16px text and a separate 44px
+control row. Keyboard navigation restores focus to the actual destination; locale switching retains
+the selected observation and retranslates supported destinations without stealing focus. Empty
+request details are disabled. Archived observations are labelled as previous-response evidence,
+not a fresh collection. Displayed raw JSON remains complete after allowlisted field redaction and
+matches Copy. These are presentation repairs, not new monitoring or model capabilities.
+
+At this source checkpoint the assembled browser suite passed **69 tests in 222.22s**. Ruff,
+formatting and strict Linux-target types passed (135 source files). Both dark/light capture passes
+cover the five specified viewport sizes and EN/FA, with no page overflow, JavaScript errors, failed
+assets or third-party requests. Additional GPU-disabled motion checks measured all nine moving
+packets in desktop English/Persian and the light theme. Screenshots are local ignored artifacts in
+`artifacts/ui-panel-quality/pass-2-dark/`, `pass-2-light/` and
+`artifacts/ui-reference/login-motion-repair/`. Fixture coverage is not live deployment or full
+server-WAN acceptance; the serving release remains `836b1ea` until a separately recorded cutover.
+
 After login, open investigation options beside the composer for mode, approved source/target,
 answer language and the existing response-mode flag. Enter sends; Shift+Enter adds a line; IME
 composition does not submit. Stop waiting preserves the draft and explains that remote work may

@@ -80,6 +80,7 @@ body[data-authenticated="true"] #languageButton{border:none;background:transpare
 .summary-icon.link{color:var(--success);background:color-mix(in srgb,var(--success) 12%,var(--surface))}
 #investigationValue,#connectorValue{font-size:20px;line-height:1.3}
 .conversation-feed{min-width:0}
+.conversation-turn,.destination-view{scroll-margin-block-start:80px}
 .conversation-welcome{padding:32px 12px 20px;text-align:center}
 .welcome-mark{color:var(--product-accent-text);font-size:12px;letter-spacing:.25em}
 .conversation-welcome h2{font-size:24px;margin:12px 0}
@@ -219,4 +220,39 @@ body[data-request-busy="true"] .request-status{position:static;clip:auto;width:a
 @media(max-width:1449px){.investigation-workspace{grid-template-columns:minmax(0,1fr)}.inspector-slot{display:none}.evidence-dialog{width:420px;padding:0;margin-inline-end:12px}.evidence-dialog .evidence-inspector{position:static;max-height:calc(100dvh - 24px)}.status-pill span{max-width:120px;overflow:hidden;text-overflow:ellipsis}.global-search kbd{display:none}}
 @media(max-width:1100px){body[data-authenticated="true"] #mainContent,body[data-authenticated="true"] .topbar{margin-inline-start:0}.app-nav{display:none}.mobile-nav{display:flex}.navigation-dialog{padding:0;margin:0;border-radius:0;max-height:100dvh;height:100dvh;max-width:300px;width:290px;inset-inline-start:0;inset-inline-end:auto}.navigation-dialog .app-nav{display:flex;position:static;width:100%;height:100%;border:0}.drawer-close{display:flex;margin-inline-start:auto}.product-lockup{margin-inline:0}.product-lockup small{max-width:150px}.status-panel{gap:6px}.environment-select select{max-width:150px}}
 @media(max-width:800px){.topbar .status-panel{display:none}.environment-select{display:none}.investigation-center{padding:20px 16px}.summary-grid{gap:10px}.findings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.result-card{padding-inline-start:42px}.result-heading::before,.user-message::before{inset-inline-start:-42px}.summary-card{padding:12px}.summary-icon{display:none}.summary-card h2,.summary-card>strong{padding:0}.header-actions>button span{display:none}.global-search{max-width:none}.title-row h1{font-size:24px}}
-@media(max-width:520px){body[data-authenticated="true"] .topbar{padding-inline:10px;gap:6px}.top-actions{gap:3px}.global-search{border:none;flex:initial;width:36px;padding:7px;background:none}.global-search span,.global-search kbd{display:none}.workspace-tools{gap:4px}.investigation-center{padding:16px 12px}.summary-grid{grid-template-columns:repeat(2,minmax(0,1fr));margin-block:16px}.summary-card{min-height:94px}.summary-card p{font-size:12px}.result-card{padding-inline-start:0}.user-message::before,.result-heading::before{display:none}.findings-grid{grid-template-columns:minmax(0,1fr)}.finding-card{min-height:0}.result-heading{flex-wrap:wrap}.evidence-row{min-height:44px;flex-wrap:wrap}.evidence-row time{margin-inline-start:28px}.evidence-row .evidence-label{white-space:normal;min-width:calc(100% - 40px)}.prompt-card{padding:10px}.mode-field .segmented-control{padding-inline-end:0}.locale-row{position:static;margin-bottom:6px}.choice{min-height:38px;padding:6px}.keyboard-hint{display:none}.turn-context{font-size:11px}.header-actions .icon-button{width:34px;height:34px}.header-actions .quiet-button{width:34px;padding:7px}.evidence-dialog{margin:0;border-radius:0;width:100%;max-width:100%;height:100dvh;max-height:100dvh}.evidence-dialog .evidence-inspector{max-height:100dvh;padding:16px}.inspector-controls .icon-button{width:40px;height:40px}.inspector-tab-panel{min-height:260px}.starter-grid{grid-template-columns:minmax(0,1fr)}.title-row{align-items:flex-start}.breadcrumb{font-size:12px}.investigation-meta{font-size:12px}.investigation-meta .evaluation-badge{font-size:11px}.search-dialog{padding:16px}.execution-trace{padding:12px}.summary-card>strong{font-size:26px}}
+@media(max-width:520px){
+  body[data-authenticated="true"] .topbar{padding-inline:10px;gap:6px}
+  .top-actions{gap:3px}.global-search{border:none;flex:initial;width:36px;padding:7px;background:none}
+  .global-search span,.global-search kbd{display:none}.workspace-tools{gap:4px}
+  .investigation-center{padding:16px 12px}.summary-grid{grid-template-columns:repeat(2,minmax(0,1fr));margin-block:16px}
+  .summary-card{min-height:94px}.summary-card p{font-size:12px}.summary-card>strong{font-size:26px}
+  .result-card{padding-inline-start:0}.user-message::before,.result-heading::before{display:none}
+  .findings-grid{grid-template-columns:minmax(0,1fr)}.finding-card{min-height:0}.result-heading{flex-wrap:wrap}
+  .evidence-row{min-height:44px;flex-wrap:wrap}.evidence-row time{margin-inline-start:28px}
+  .evidence-row .evidence-label{white-space:normal;min-width:calc(100% - 40px)}
+  /* Text gets its own row. Desktop's overlaid tools otherwise leave ~100px to type in. */
+  .prompt-card{padding:10px 10px 8px;display:grid;grid-template-columns:44px 44px minmax(0,1fr);gap:4px}
+  .prompt-label{grid-column:1/-1;grid-row:1;min-width:0}
+  .prompt-label textarea,[dir="rtl"] .prompt-label textarea{height:72px;min-height:72px;padding:8px;font-size:16px}
+  .attachment-control{position:static;grid-column:1;grid-row:2;width:44px;height:44px}
+  .composer-options{grid-column:2;grid-row:2;position:static}
+  .composer-options>summary{position:static;width:44px;min-height:44px;justify-content:center;padding:8px}
+  .composer-options>summary .ui-icon{width:18px;height:18px}
+  .composer-option-panel{bottom:56px;inset-inline:8px;max-height:60dvh}
+  .prompt-footer{position:static;grid-column:3;grid-row:2;min-width:0;justify-content:flex-end;gap:8px}
+  .prompt-footer>span:not(.model-status-label){display:none}
+  .model-status-label{max-width:130px;min-width:0}
+  #askButton{position:static;margin:0;width:44px;min-height:44px;padding:12px;flex:none}
+  #askButton svg{width:18px;height:18px}
+  #cancelRequest{inset-inline-end:8px;bottom:56px;min-height:44px}
+  .request-status,.form-error{grid-column:1/-1;margin:4px 0}
+  .mode-field .segmented-control{padding-inline-end:0}.locale-row{position:static;margin-bottom:6px}
+  .choice{min-height:44px;padding:6px}.keyboard-hint{display:none}.turn-context{font-size:11px}
+  .header-actions .icon-button{width:34px;height:34px}.header-actions .quiet-button{width:34px;padding:7px}
+  .evidence-dialog{margin:0;border-radius:0;width:100%;max-width:100%;height:100dvh;max-height:100dvh}
+  .evidence-dialog .evidence-inspector{max-height:100dvh;padding:16px 16px max(16px,env(safe-area-inset-bottom))}
+  .inspector-controls .icon-button{width:40px;height:40px}.inspector-tab-panel{min-height:260px}
+  .starter-grid{grid-template-columns:minmax(0,1fr)}.title-row{align-items:flex-start}.breadcrumb{font-size:12px}
+  .investigation-meta{font-size:12px}.investigation-meta .evaluation-badge{font-size:11px}
+  .search-dialog{padding:16px}.execution-trace{padding:12px}
+}
