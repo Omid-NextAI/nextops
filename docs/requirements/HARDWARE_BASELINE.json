@@ -3,7 +3,46 @@
   "received_date": "2026-09-20",
   "source_kind": "owner_supplied_esxcli_output_with_separately_attributed_storage_statement",
   "direct_host_access_performed": false,
+  "later_owner_observations": [
+    {
+      "received_date": "2026-10-05",
+      "source_kind": "owner_supplied_host_client_screenshots_and_resource_statement",
+      "datastore_alias": "DS-C",
+      "displayed_datastore_capacity_tb_rounded": 3.49,
+      "displayed_datastore_provisioned_tb_rounded": 1.79,
+      "displayed_datastore_free_tb_rounded": 1.71,
+      "displayed_host_memory_total_tb_rounded": 1.31,
+      "displayed_host_memory_used_gb_rounded": 213.64,
+      "displayed_host_memory_free_tb_rounded": 1.1,
+      "host_client_cpu_label": "112 CPUs x Intel Xeon Platinum 8280 at 2.70 GHz",
+      "owner_resource_statement": "No space reserved; resources available for AI development and larger models",
+      "all_package_inventory_verified": false,
+      "future_all_vm_growth_measured": false,
+      "guest_resize_performed": false,
+      "note": "UI units are rounded; do not infer exact byte values or sustained availability. Supplied host free memory is not guest memory or verified NUMA locality. Preserve other services, the 3-TB project ceiling and the free-space safety target; it is not a configured reservation."
+    }
+  ],
   "later_guest_observations": [
+    {
+      "observed_at": "2026-10-05T07:28:57Z",
+      "source_kind": "authorized_read_only_ssh_guest_preflight",
+      "role": "nextops-ai",
+      "online_vcpu": 80,
+      "reported_usable_memory_mib": 128769,
+      "reported_available_memory_mib_point_in_time": 107664,
+      "reported_swap_mib": 8191,
+      "swap_used_mib": 0,
+      "guest_numa_nodes": 1,
+      "guest_virtual_sockets": 80,
+      "guest_cores_per_socket": 1,
+      "guest_avx512_vnni_visible": true,
+      "model_volume_available_mib": 169557,
+      "runtime_cpu_quota_equivalent_cores": 18,
+      "runtime_memory_max_gib": 96,
+      "esxi_saved_configuration_verified": false,
+      "host_placement_and_reservations_verified": false,
+      "changes_performed": "none; preflight observation only"
+    },
     {
       "observed_date": "2026-09-30",
       "source_kind": "authorized_read_only_ssh_guest_preflight",

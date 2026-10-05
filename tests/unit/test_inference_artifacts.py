@@ -17,6 +17,69 @@ MANIFEST = REPOSITORY_ROOT / "deploy" / "inference" / "qwen3-8b-q4-k-m.yaml"
 @pytest.mark.parametrize(
     "field,incorrect",
     [
+        ("sha256", "0" * 64),
+        ("size_bytes", 1),
+        ("source_revision", "main"),
+        ("conversion_source_revision_verified", True),
+        ("runtime_download_allowed", True),
+        ("deployment_selection_allowed", True),
+        ("public_thinking_enabled", True),
+        ("private_reasoning_persisted", True),
+        ("max_active_requests", 2),
+        ("max_queued_requests", 3),
+        ("cpu_only_required", 1),
+        ("status", "controlled_selected_not_production_accepted"),
+    ],
+)
+def test_qwen38_trial_cannot_silently_change_identity_or_promote(
+    tmp_path: Path,
+    field: str,
+    incorrect: object,
+) -> None:
+    spec = importlib.util.spec_from_file_location(
+        "qwen38_guard",
+        REPOSITORY_ROOT / "scripts" / "check_inference_artifacts.py",
+    )
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    candidate = json.loads((MANIFEST.parent / "qwen3-8-27b-q8.candidate.json").read_text("utf-8"))
+    candidate[field] = incorrect
+    (tmp_path / "qwen3-8-27b-q8.candidate.json").write_text(json.dumps(candidate), encoding="utf-8")
+    with pytest.raises(module.ArtifactValidationError):
+        module.validate_qwen38_candidate(tmp_path)
+
+
+def test_qwen38_duplicate_identity_and_unproved_import_are_rejected(tmp_path: Path) -> None:
+    spec = importlib.util.spec_from_file_location(
+        "qwen38_guard",
+        REPOSITORY_ROOT / "scripts" / "check_inference_artifacts.py",
+    )
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    path = tmp_path / "qwen3-8-27b-q8.candidate.json"
+    original = (MANIFEST.parent / path.name).read_text("utf-8")
+    path.write_text(
+        original.replace('"schema_version":', '"size_bytes": 1, "schema_version":'),
+        encoding="utf-8",
+    )
+    with pytest.raises(module.ArtifactValidationError, match="cannot parse"):
+        module.validate_qwen38_candidate(tmp_path)
+    candidate = json.loads(original)
+    candidate["status"] = "verified_candidate_unselected"
+    candidate["qualification"]["artifact_import"] = "not_run"
+    path.write_text(json.dumps(candidate), encoding="utf-8")
+    with pytest.raises(module.ArtifactValidationError, match="ambiguous"):
+        module.validate_qwen38_candidate(tmp_path)
+    candidate["qualification"]["artifact_import"] = "passed"
+    path.write_text(json.dumps(candidate), encoding="utf-8")
+    module.validate_qwen38_candidate(tmp_path)
+
+
+@pytest.mark.parametrize(
+    "field,incorrect",
+    [
         ("thinking_enabled", True),
         ("max_queued_requests", 3),
         ("request_reasoning_budget_tokens", 384),

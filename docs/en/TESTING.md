@@ -1,5 +1,18 @@
 # Testing, model evaluation and release evidence
 
+## Qwen 3.8 source gates and fresh preflight — 2026-10-05
+
+`python -m pytest -m "not integration and not browser" -q`: **622 passed, 2 POSIX-on-Windows
+skips, 85 deselected**, one existing Starlette/AnyIO deprecation warning, 22.12 seconds. The
+targeted provider/configuration/contracts/artifact/expanded-profile command passed **92 tests**.
+Ruff and strict mypy for nine affected files passed. `python -X utf8 scripts/check_docs.py` passed
+136 Markdown/39 paired guides; release-status and dossier checks passed. The initial docs invocation
+without UTF-8 failed while printing Persian to Windows cp1252; the UTF-8 rerun passed, not silently
+treated as an initial pass. These are source/structure gates, not model acceptance or a new deployment.
+The [qualification packet](../requirements/QWEN38_QUALIFICATION_SPEC.md) records fresh supplied
+capacity and direct guest evidence. Full artifact, template/load, held-out semantic/thinking,
+matched app/browser/audit, WAN and rollback gates remain separate; do not infer them from this suite.
+
 ## Current reference UI deployment — 2026-10-05
 
 [Exact UI record](../requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md): app `836b1ea`,

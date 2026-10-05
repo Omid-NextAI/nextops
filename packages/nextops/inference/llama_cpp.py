@@ -329,6 +329,15 @@ class LlamaCppProvider:
             # https://huggingface.co/Qwen/Qwen3.5-35B-A3B#instruct-or-non-thinking-mode
             payload["messages"][-1]["content"] = request.prompt
             payload["chat_template_kwargs"] = {"enable_thinking": request.thinking}
+        if self._settings.model_id == "nextops-qwen3-8-27b-q8-0":
+            # Provision-only candidate: Qwen3.8 defaults must not preserve private
+            # thoughts or activate thinking. Settings deny its unqualified thinking.
+            # https://huggingface.co/Qwen/Qwen3.8-27B#disable-preserved-thinking
+            payload["messages"][-1]["content"] = request.prompt
+            payload["chat_template_kwargs"] = {
+                "enable_thinking": False,
+                "preserve_thinking": False,
+            }
         if request.thinking:
             # Controls belong to the trusted adapter, not user text or browser parameters.
             # Pinned server-common.cpp accepts reasoning_budget_tokens and its message.

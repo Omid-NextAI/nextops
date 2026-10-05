@@ -85,6 +85,15 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: qwen38_cpu_qualification
+    status: experimental
+    evidence:
+      - docs/requirements/QWEN38_QUALIFICATION_SPEC.md
+      - deploy/inference/qwen3-8-27b-q8.candidate.json
+      - tests/unit/test_expanded_inference.py
+      - tests/unit/test_inference_artifacts.py
+      - docs/en/CPU_AI.md
+      - docs/fa/CPU_AI.md
   - id: reference_investigation_workspace_ocs_login
     status: accepted_controlled
     evidence:
