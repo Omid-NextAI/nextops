@@ -1,5 +1,28 @@
 # Project state / وضعیت پروژه
 
+Latest runtime checkpoint, 2026-10-05: isolated no-BLAS build002 compiled successfully in 138380 ms
+with verified CPU/OpenMP/native flags, four-CPU/eight-GiB bounds and network-denied DynamicUser.
+Cleanup and unchanged live baseline passed. Read-only ELF review rejected its temporary absolute
+RUNPATHs and empty path components for relocatable trial packaging. No built runtime was executed
+or installed. Preserve build001's earlier configure/cache-guard failure and build002's outputs;
+review fresh build003 with literal `$ORIGIN` loader paths before artifact/closure verification.
+The opt-in candidate identity verifier preserves original v1.0 behavior/schema and requires separate
+external binary/inventory anchors for v1.1. Main checks: 176 focused/1053 source tests passed, two
+POSIX skips, 126 deselected in 24.99 seconds; lint/format/Linux-target types passed. This is not
+runtime/model acceptance. Exact `23dabae` CI passed all five jobs
+([run](https://github.com/Omid-NextAI/nextops/actions/runs/37360223624)). See the paired record below.
+
+گام تازهٔ runtime در ۵ اکتبر ۲۰۲۶: ساخت مستقلِ بدون BLAS شمارهٔ ۰۰۲ در ۱۳۸۳۸۰ میلی‌ثانیه
+موفق شد؛ تنظیم CPU/OpenMP/native، حدود چهار CPU/هشت GiB و DynamicUser بدون شبکه بررسی شدند.
+پاک‌سازی و حفظ خط مبنای زنده موفق‌اند. بررسی خواندنیِ ELF، مسیر مطلقِ موقت و بخش خالیِ
+RUNPATH را برای بسته‌بندیِ قابل‌انتقال نپذیرفت. runtime ساخته‌شده اجرا یا نصب نشد. شکست
+پیشینِ کنترل cache در ساخت ۰۰۱ و خروجیِ ساخت ۰۰۲ حفظ شوند؛ ساخت تازهٔ ۰۰۳ با مسیر لفظیِ
+`$ORIGIN`، پیش از بررسی فایل/وابستگی بازبینی شود. بازبین صریحِ هویت نامزد، رفتار/schema اصلیِ
+نسخهٔ ۱٫۰ را حفظ و برای نسخهٔ ۱٫۱ دو هش مستقلِ فایل اجرایی/فهرست را الزام می‌کند. کنترل
+اصلی: ۱۷۶ آزمون مرتبط/۱۰۵۳ آزمون کد موفق، دو مورد POSIX اجرا‌نشده و ۱۲۶ مورد خارج از انتخاب
+در ۲۴٫۹۹ ثانیه؛ قالب/lint/نوع با هدف Linux موفق‌اند. این پذیرش runtime/مدل نیست. پنج کنترل
+CI کد دقیقِ `23dabae` در اجرای بالا موفق‌اند. گزارش دوزبانهٔ زیر مرجع است.
+
 Latest isolated Q5 outcome, 2026-10-05 at 18:48 UTC: the distinct passive-wait trial failed after
 two exact format passes. English networking timed out at 120002 ms; thirteen later cases were not
 run. Main/independent review and the offline checker agree. Its owned process/unit/listener are

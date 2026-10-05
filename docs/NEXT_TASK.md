@@ -1,6 +1,26 @@
 # Next task / کار بعدی
 
-Current checkpoint: the passive-wait Q5 trial is reconciled and failed (two passes/one timeout/
+Current checkpoint: no-BLAS build002 compiled, but its temporary absolute/empty loader paths were
+rejected for relocatable packaging. Review and build a fresh bounded/network-denied build003 with
+literal `$ORIGIN`; preserve both earlier build records. Verify actual ELF/system dependencies and
+protected candidate inventory before any native execution. The explicit v1.1 verifier is source
+tested (176 focused/1053 source passes), not candidate acceptance. Keep the frozen `f6cff8f` runtime
+comparison separate from the already packaged `b94a84c` semantic retest; remove passive-wait
+overrides for comparison with the original non-passive ubatch512 profile. No failed gate authorizes
+thinking, larger context or selection. Matched app/evidence/audit/WAN/restart/rollback remain separate.
+
+گام جاری: ساخت بدون BLAS شمارهٔ ۰۰۲ موفق شد، اما مسیر موقتِ مطلق/خالیِ بارگذاری برای
+بسته‌بندیِ قابل‌انتقال پذیرفته نشد. ساخت تازهٔ ۰۰۳ با `$ORIGIN` لفظی، حدود ثابت و شبکهٔ
+مسدود بازبینی و ساخته شود؛ گزارش هر دو ساخت پیشین حفظ شود. پیش از اجرای بومی، وابستگی
+واقعیِ ELF/سیستم و فهرست محافظت‌شدهٔ نامزد بررسی شوند. بازبین صریحِ نسخهٔ ۱٫۱ در کد آزموده
+شده است (۱۷۶ آزمون مرتبط/۱۰۵۳ آزمون کد موفق)، نه پذیرش نامزد. مقایسهٔ runtime با کد ثابتِ
+`f6cff8f` از سنجش معناییِ `b94a84c` که قبلاً بسته‌بندی شده جدا بماند؛ جایگزین انتظار غیرفعال
+برای مقایسه با نمایهٔ اولیهٔ غیرغیرفعالِ ubatch512 حذف شود. شکست، مجوز استدلال، زمینهٔ بزرگ‌تر
+یا انتخاب نیست. پذیرش هماهنگِ برنامه/شاهد/ممیزی/WAN/راه‌اندازی/بازگشت جدا باقی می‌ماند.
+
+## Prior checkpoints — historical / گام‌های پیشین — سوابق
+
+Historical checkpoint: the passive-wait Q5 trial is reconciled and failed (two passes/one timeout/
 thirteen not run). Do not repeat that profile or widen the deadline. Exact `b94a84c` CI and protected
 offline source packaging passed, but its prepared passive comparison is unrun and deferred while
 the runtime bottleneck is investigated. Review a distinct offline, unprivileged, WAN-denied
@@ -19,16 +39,16 @@ rollback separately; no failed gate may authorize selection.
 
 Source prompt follow-up is implemented/tested, not deployed: preserve generic provenance/type-order
 instructions, immutable payload-capture tests and unchanged short/evidence prompt hashes. The
-immediate native comparison must still use exact `f6cff8f` so passive waiting is the only runtime
-setting changed. After that trial is reconciled/reviewed, package and hash this new source for a
-separate frozen semantic retest; do not mix attribution, reuse a failed gate or enable thinking.
+historical passive comparison used exact `f6cff8f` and is now reconciled failed. The changed source
+has since been packaged and hash-verified for a separate frozen semantic retest; do not mix
+attribution, reuse a failed gate or enable thinking.
 Source tests (967 passed/two POSIX skips) do not complete model or live application acceptance.
 
 پیگیری راهنمای مدل در کد پیاده‌سازی و آزموده شده، نه مستقر: دستور عمومیِ منشأ/ترتیب کنترل
-نوع، آزمون ثبت مستقلِ ورودی و هش ثابتِ راهنمای کوتاه/شاهد حفظ شوند. مقایسهٔ بومیِ فوری همچنان
-کد دقیقِ `f6cff8f` را به‌کار برد تا انتظار غیرفعال تنها تنظیم تغییر‌یافتهٔ runtime باشد.
-پس از تطبیق/بازبینی آن آزمون، کد تازه جدا بسته‌بندی و هش شود و دوباره با پرسش ثابت سنجیده
-شود؛ اثر تغییرها مخلوط، مجوز ناموفق دوباره استفاده و استدلال فعال نشود. ۹۶۷ آزمون موفقِ
+نوع، آزمون ثبت مستقلِ ورودی و هش ثابتِ راهنمای کوتاه/شاهد حفظ شوند. مقایسهٔ تاریخیِ انتظار
+غیرفعال با کد دقیقِ `f6cff8f` اکنون پایان یافته و ناموفق است. کد تغییر‌یافته پس از آن جدا
+بسته‌بندی و هش‌سنجی شد و به سنجش معنایی با پرسش ثابت نیاز دارد؛ اثر تغییرها مخلوط، مجوز
+ناموفق دوباره استفاده و استدلال فعال نشود. ۹۶۷ آزمون موفقِ
 کد/دو مورد POSIX اجرا‌نشده، پذیرش مدل یا برنامهٔ زنده نیست.
 
 Immediate checkpoint after the failed physical-batch512 Q5 run: preserve six passes/six failures/

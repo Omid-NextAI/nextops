@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Omid-NextAI/nextops/blob/main/deploy/inference/native-runtime-candidate-bundle.schema.json",
+  "title": "Protected candidate native runtime tree inventory",
+  "description": "Private inventory requiring independently supplied binary and inventory SHA-256 anchors; not CPU, linkage, offline, model, deployment or production acceptance. No installer or selection toggle.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source_commit", "runtime_root", "root_mode", "root_gid", "binary_sha256", "directories", "files", "aliases"],
+  "properties": {
+    "schema_version": {"const": "1.1.0"},
+    "source_commit": {"const": "b29c606e28a01b1bc8c1351026a0fa6e616bf6c4"},
+    "runtime_root": {"type": "string", "maxLength": 240, "pattern": "^/srv/nextops/releases/llama\\.cpp-(?:b29c606e|b29c606e28a01b1bc8c1351026a0fa6e616bf6c4)(?:-[a-z0-9][a-z0-9._-]{0,63})?$"},
+    "root_mode": {"$ref": "#/$defs/mode"},
+    "root_gid": {"$ref": "#/$defs/gid"},
+    "binary_sha256": {"type": "string", "minLength": 64, "maxLength": 64, "pattern": "^[0-9a-f]{64}$"},
+    "directories": {
+      "type": "array", "maxItems": 64,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["path", "mode", "gid"],
+        "properties": {"path": {"$ref": "#/$defs/path"}, "mode": {"$ref": "#/$defs/mode"}, "gid": {"$ref": "#/$defs/gid"}}
+      }
+    },
+    "files": {
+      "type": "array", "minItems": 1, "maxItems": 256,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["path", "size_bytes", "sha256", "mode", "gid"],
+        "properties": {
+          "path": {"$ref": "#/$defs/path"},
+          "size_bytes": {"type": "integer", "minimum": 1, "maximum": 536870912},
+          "sha256": {"type": "string", "minLength": 64, "maxLength": 64, "pattern": "^[0-9a-f]{64}$"},
+          "mode": {"$ref": "#/$defs/mode"},
+          "gid": {"$ref": "#/$defs/gid"}
+        }
+      }
+    },
+    "aliases": {
+      "type": "array", "maxItems": 128,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["path", "target", "gid"],
+        "properties": {
+          "path": {"$ref": "#/$defs/path"},
+          "target": {"type": "string", "minLength": 1, "maxLength": 240, "pattern": "^(?:[A-Za-z0-9._+-]{1,96}/)*[A-Za-z0-9._+-]{1,96}$"},
+          "gid": {"$ref": "#/$defs/gid"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "path": {"type": "string", "minLength": 1, "maxLength": 240, "pattern": "^(?!.*(?:^|/)\\.{1,2}(?:/|$))[A-Za-z0-9._+-]{1,96}(?:/[A-Za-z0-9._+-]{1,96}){0,7}$"},
+    "mode": {"type": "string", "pattern": "^0[0-7][0145][0145]$"},
+    "gid": {"type": "integer", "minimum": 0, "maximum": 2147483647}
+  }
+}

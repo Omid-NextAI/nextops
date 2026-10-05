@@ -9,6 +9,38 @@ The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 
 ## English
 
+### Offline build outcomes and separate candidate identity contract
+
+The exact root-protected source archive/tree match the pinned native commit; no tracked source
+changed. Finite build001 configured offline but exited 1 before server compilation. Its compiler
+cache entries were independently observed as `STRING`, rather than requested `FILEPATH`; the
+exact helper failure label was not retained. Report SHA:
+`eae6ad1da8d76c7955f27a507e6e5b7afc6ea6b2764bc9e916c4226f2c6f0267`.
+Fresh build002 preserved source/compiler/CPU flags and corrected only those cache types. It
+completed 214 build steps and exited 0 in **138380 ms** at **20:06:27 UTC**. Actual critical
+DynamicUser/network-denied sandbox, four-CPU/eight-GiB bounds and sixteen effective CPU compile
+edges were checked. Its owned unit/cgroup/listener are absent and live baseline unchanged.
+Report SHA: `983c93bde3694f0278b9642051b04e2dcca2b82e68e9e41414d4f96a899246c0`.
+The archived build number is zero, not an invented upstream count.
+
+Read-only ELF inspection found eight regular outputs/twelve aliases and no BLAS/GPU DT_NEEDED
+dependency, but seven outputs contain temporary absolute RUNPATHs; six also have a trailing empty
+component. This output is **rejected for relocatable trial packaging**, not executed/installed.
+Review fresh build003 with literal `$ORIGIN`, `CMAKE_BUILD_WITH_INSTALL_RPATH=ON` and
+`CMAKE_INSTALL_RPATH_USE_LINK_PATH=OFF`, retaining all other guards and deadlines. Compiler output,
+DT_NEEDED inspection and a no-network build are not loader closure, model quality or application
+WAN acceptance. Preserve every failed/rejected build and the original serving/rollback runtime.
+
+The source verifier's separate v1.1 schema requires explicit externally trusted binary and
+inventory SHA-256 anchors; neither comes from untrusted inventory contents. Original v1.0 default
+and schema remain unchanged. Both binary declarations must match the external digest, with the
+same root-owned/no-follow/exact-tree/stability/resource controls and no execution/approval path.
+Main results: **176 focused/1053 source tests passed**, two POSIX skips, 126 deselected in **24.99 s**;
+lint/format/Linux-target types passed. Filesystem coverage includes simulations, not native acceptance.
+Exact preceding `23dabae` CI passed five jobs
+([run](https://github.com/Omid-NextAI/nextops/actions/runs/37360223624)); this later source needs its
+own CI. All native semantic/thinking/context/matched-app/offline/rollback gates remain separate.
+
 ### Passive-wait trial — failed and reconciled at 18:48 UTC
 
 Distinct run `20261005-q5-f6-ub512-passive-standard-001` retained the pinned Q5/model/runtime,
@@ -523,6 +555,38 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### نتیجهٔ ساخت آفلاین و قرارداد مستقلِ هویت نامزد
+
+بایگانی و درختِ محافظت‌شدهٔ منبع با commit ثابتِ runtime برابرند و منبع تحت Git تغییر
+نکرد. ساخت محدودِ ۰۰۱ به‌صورت آفلاین پیکربندی شد، اما پیش از کامپایل سرور با کد ۱ پایان
+یافت. بررسی مستقل، نوع cache کامپایلر را `STRING` به‌جای `FILEPATH` درخواستی نشان داد؛
+برچسب دقیق خطای helper ثبت نشده است. هش گزارش:
+`eae6ad1da8d76c7955f27a507e6e5b7afc6ea6b2764bc9e916c4226f2c6f0267`.
+ساخت تازهٔ ۰۰۲ منبع/کامپایلر/تنظیم CPU را حفظ و فقط نوع این دو ورودی را اصلاح کرد. ۲۱۴
+گام ساخت با کد ۰، در **۱۳۸۳۸۰ میلی‌ثانیه** و ساعت **۲۰:۰۶:۲۷ UTC** کامل شدند. محیط واقعیِ
+DynamicUser بدون شبکه، حدود چهار CPU/هشت GiB و شانزده قاعدهٔ واقعیِ کامپایل CPU بررسی
+شدند. واحد/cgroup/listener متعلق به ساخت باقی نمانده و خط مبنای زنده ثابت است. هش گزارش:
+`983c93bde3694f0278b9642051b04e2dcca2b82e68e9e41414d4f96a899246c0`.
+شمارهٔ ساخت بایگانی صفر است، نه شمار فرضیِ انتشار بالادستی.
+
+بررسی خواندنیِ ELF، هشت فایل عادی/دوازده پیوند و نبود وابستگی BLAS/GPU در DT_NEEDED را
+نشان داد؛ اما هفت خروجی RUNPATH مطلقِ موقت دارند و شش مورد دارای بخش خالیِ انتهایی‌اند.
+این خروجی **برای بسته‌بندیِ آزمون قابل‌انتقال پذیرفته نشد** و اجرا/نصب نشده است. ساخت تازهٔ
+۰۰۳ با `$ORIGIN` لفظی، `CMAKE_BUILD_WITH_INSTALL_RPATH=ON` و
+`CMAKE_INSTALL_RPATH_USE_LINK_PATH=OFF`، با حفظ دیگر کنترل‌ها و مهلت‌ها بازبینی شود. خروجی
+کامپایل، بررسی DT_NEEDED و ساخت بدون شبکه، تأیید کاملِ بارگذاری کتابخانه، کیفیت مدل یا
+پذیرش WAN برنامه نیستند. همهٔ ساخت‌های ناموفق/نپذیرفته و runtime زنده/بازگشت اصلی حفظ شوند.
+
+schema مستقلِ نسخهٔ ۱٫۱ در کد بازبین، دو هش صریح و مستقلِ فایل اجرایی/فهرست را الزام
+می‌کند؛ هیچ‌یک از محتوای نامعتبر فهرست مبنای اعتماد نمی‌شود. قرارداد پیش‌فرض و schema اصلیِ
+نسخهٔ ۱٫۰ تغییر نکرده‌اند. هر دو مقدار اعلام‌شدهٔ فایل اجرایی باید با هش مستقل برابر باشند؛
+مالکیت root، منع دنبال‌کردن پیوند، تطبیق درخت، ثبات داده و حدود منابع حفظ‌اند و مسیر اجرا/
+تأیید وجود ندارد. کنترل اصلی: **۱۷۶ آزمون مرتبط/۱۰۵۳ آزمون کد موفق**، دو مورد POSIX اجرا‌نشده
+و ۱۲۶ مورد خارج از انتخاب در **۲۴٫۹۹ ثانیه**؛ قالب/lint/نوع با هدف Linux موفق‌اند. پوشش
+فایل‌سیستم شامل شبیه‌سازی است، نه پذیرش بومی. پنج کنترل CI کد پیشینِ `23dabae` در
+[اجرای مربوط](https://github.com/Omid-NextAI/nextops/actions/runs/37360223624) موفق‌اند؛ کد بعدی
+CI مستقل خود را می‌خواهد. معیارهای معنایی/استدلال/زمینه/برنامه/آفلاین/بازگشت جدا باقی می‌مانند.
 
 ### آزمون انتظار غیرفعال — ناموفق؛ تطبیق نهایی در ساعت ۱۸:۴۸ UTC
 

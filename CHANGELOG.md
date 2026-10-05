@@ -1,5 +1,23 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Opt-in candidate runtime identity verification — 2026-10-05
+
+Add a distinct strict v1.1 candidate inventory and independently supplied binary-digest option to
+the read-only native verifier. Omission preserves the original v1.0 contract/schema byte-for-byte.
+Both executable and inventory declarations must match the external anchor; protected traversal,
+stable snapshots and resource bounds remain unchanged. Main checks: 176 focused tests and 1053
+source tests passed, two POSIX skips, 126 deselected in 24.99 seconds; lint/format/Linux-target
+types passed. These include filesystem simulations, not candidate runtime or model acceptance.
+Exact preceding `23dabae` CI passed all five jobs. No serving package, model or policy changed.
+
+برای بازبین صرفاً خواندنیِ runtime، فهرست مستقل و سخت‌گیرانهٔ نسخهٔ ۱٫۱ و گزینهٔ صریحِ هش
+فایل اجرایی افزوده شد. بدون این گزینه، قرارداد و schema اصلیِ نسخهٔ ۱٫۰ بدون تغییر باقی
+می‌مانند. هش فایل اجرایی و مقدار اعلام‌شده در فهرست باید با هش مستقلِ ورودی برابر باشند؛
+کنترل مسیر محافظت‌شده، ثبات داده و حدود منابع حفظ‌اند. کنترل اصلی: ۱۷۶ آزمون مرتبط و ۱۰۵۳
+آزمون کد موفق، دو مورد POSIX اجرا‌نشده و ۱۲۶ مورد خارج از انتخاب در ۲۴٫۹۹ ثانیه؛ قالب/lint/
+نوع با هدف Linux موفق‌اند. آزمون‌ها شامل شبیه‌سازی فایل‌سیستم‌اند، نه پذیرش runtime یا مدل
+نامزد. پنج کنترل CI کد پیشینِ `23dabae` موفق‌اند. بستهٔ زنده، مدل و سیاست تغییر نکردند.
+
 ## Retained Q5 passive-wait failure and exact source CI — 2026-10-05
 
 The distinct passive trial returned two exact format finals, then timed out at 120002 ms on English

@@ -1,5 +1,19 @@
 # Local CPU-only AI and capacity planning
 
+## Candidate runtime identity — explicit, read-only and not acceptance
+
+The default `scripts/check_native_runtime_bundle.py` contract still requires the original pinned
+binary and v1.0 inventory. A separately reviewed runtime uses a distinct v1.1 inventory under
+`deploy/inference/native-runtime-candidate-bundle.schema.json` and an independently supplied
+`--candidate-binary-sha256`, in addition to the independently trusted inventory digest. Neither
+anchor may be inferred from untrusted inventory contents. Both declarations bind to the external
+binary digest; the same protected commit-bearing root, no-follow traversal, exact tree, metadata
+stability and size/count bounds apply. No execution, installation, selection or approval option
+exists. The original schema is unchanged. 176 focused tests and 1053 source tests passed (two
+POSIX skips); synthetic filesystem coverage is not actual candidate linkage or runtime acceptance.
+Build provenance, ELF/system closure, effective loaded mappings, CPU performance, answer quality,
+thinking/privacy, context, application/offline/rollback gates remain separate. No serving model changed.
+
 ## Passive-wait result and next runtime experiment — 2026-10-05
 
 The distinct exact-`f6cff8f` Q5 trial used passive OpenMP waiting with verified process settings.

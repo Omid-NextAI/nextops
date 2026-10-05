@@ -279,7 +279,20 @@ def _alias_destination(path: str, target: object) -> str:
     return result
 
 
-def _parse_inventory(contents: bytes) -> Inventory:
+def _expected_binary_digest(candidate_binary_sha256: str | None) -> str:
+    if candidate_binary_sha256 is None:
+        return BINARY_SHA256
+    if (
+        type(candidate_binary_sha256) is not str
+        or _SHA256.fullmatch(candidate_binary_sha256) is None
+    ):
+        raise NativeBundleError("external candidate binary SHA-256 is invalid")
+    return candidate_binary_sha256
+
+
+def _parse_inventory(contents: bytes, *, candidate_binary_sha256: str | None = None) -> Inventory:
+    expected_binary = _expected_binary_digest(candidate_binary_sha256)
+    expected_version = "1.0.0" if candidate_binary_sha256 is None else "1.1.0"
     try:
         document = json.loads(contents, object_pairs_hook=_unique_object)
     except (ValueError, UnicodeError, RecursionError) as error:
@@ -299,10 +312,14 @@ def _parse_inventory(contents: bytes) -> Inventory:
         },
     )
     if (
-        document["schema_version"] != "1.0.0"
+        document["schema_version"] != expected_version
         or document["source_commit"] != SOURCE_COMMIT
-        or document["binary_sha256"] != BINARY_SHA256
+        or document["binary_sha256"] != expected_binary
     ):
+        if candidate_binary_sha256 is not None:
+            raise NativeBundleError(
+                "inventory does not describe the externally pinned candidate runtime"
+            )
         raise NativeBundleError("inventory does not describe the pinned original runtime")
     root = document["runtime_root"]
     if type(root) is not str or _ROOT.fullmatch(root) is None:
@@ -343,7 +360,7 @@ def _parse_inventory(contents: bytes) -> Inventory:
                 _alias_destination(path, record["target"])
                 aliases[path] = AliasRecord(path, record["target"], gid)
     executable = files.get("bin/llama-server")
-    if executable is None or executable.sha256 != BINARY_SHA256 or not executable.mode & 0o100:
+    if executable is None or executable.sha256 != expected_binary or not executable.mode & 0o100:
         raise NativeBundleError("inventory omits the pinned executable or its execute permission")
     if sum(record.size_bytes for record in files.values()) > MAX_TOTAL_BYTES:
         raise NativeBundleError("runtime inventory total size exceeds the bound")
@@ -483,14 +500,24 @@ def _scan_tree(inventory: Inventory, *, verify_hashes: bool) -> dict[str, Finger
         os.close(root_descriptor)
 
 
-def verify_bundle(inventory_path: str, expected_inventory_sha256: str) -> VerificationSummary:
-    """Verify one root-owned installed tree against an external SHA anchor; make no writes."""
+def verify_bundle(
+    inventory_path: str,
+    expected_inventory_sha256: str,
+    *,
+    candidate_binary_sha256: str | None = None,
+) -> VerificationSummary:
+    """Read-only identity check; candidate mode requires a separate external binary anchor.
+
+    Omission preserves the original v1.0 contract. An explicit candidate anchor requires
+    v1.1 and grants no permission to execute, select, install or accept the runtime.
+    """
+    _expected_binary_digest(candidate_binary_sha256)
     _require_posix_root()
     if _SHA256.fullmatch(expected_inventory_sha256) is None:
         raise NativeBundleError("external inventory SHA-256 is invalid")
     try:
         contents, inventory_before = _read_inventory(inventory_path, expected_inventory_sha256)
-        inventory = _parse_inventory(contents)
+        inventory = _parse_inventory(contents, candidate_binary_sha256=candidate_binary_sha256)
         before = _scan_tree(inventory, verify_hashes=True)
         after = _scan_tree(inventory, verify_hashes=False)
         _, inventory_after = _read_inventory(inventory_path, expected_inventory_sha256)
@@ -513,9 +540,20 @@ def main(arguments: list[str] | None = None) -> int:
     parser.add_argument(
         "--inventory-sha256", required=True, help="separately trusted inventory SHA-256"
     )
+    parser.add_argument(
+        "--candidate-binary-sha256",
+        help=(
+            "independently trusted candidate binary SHA-256; "
+            "requires a v1.1 inventory, not approval"
+        ),
+    )
     options = parser.parse_args(arguments)
     try:
-        result = verify_bundle(options.inventory, options.inventory_sha256)
+        result = verify_bundle(
+            options.inventory,
+            options.inventory_sha256,
+            candidate_binary_sha256=options.candidate_binary_sha256,
+        )
     except NativeBundleError as error:
         print(f"ERROR: {error}", file=sys.stderr)
         return 1
