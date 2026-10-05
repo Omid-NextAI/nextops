@@ -1,5 +1,16 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Q5 import-state regression repair — 2026-10-05
+
+Correct stale test assumptions after the recorded complete import; explicitly cover inconsistent
+partial/verified and complete/provisioning combinations without changing the acceptance validator.
+966 local source tests passed with two POSIX skips; exact preceding CI's two failures remain recorded.
+No model selection, public thinking or deployment change.
+
+فرض قدیمیِ آزمون پس از دریافت کاملِ ثبت‌شده اصلاح شد؛ ترکیب ناسازگارِ ناقص/تأییدشده و کامل/
+آماده‌سازی صریح بررسی می‌شود، بدون تغییر بازبین پذیرش. ۹۶۶ آزمون محلی موفق و دو مورد POSIX
+اجرا‌نشده‌اند؛ دو شکست CI پیشینِ دقیق ثبت می‌مانند. انتخاب مدل، استدلال عمومی و استقرار ثابت‌اند.
+
 ## Complete protected Qwen3.8 Q5 import — 2026-10-05
 
 Record verified complete upstream hash and actual GGUF/template for the distinct 27B UD-Q5_K_M

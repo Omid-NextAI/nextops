@@ -1,5 +1,17 @@
 # Next task / کار بعدی
 
+Immediate source checkpoint: verify the stale Q5 import-state test repair in CI; no acceptance
+validator was weakened. Review the distinct private physical-batch512 helper and numeric-only
+instrumentation before any isolated standard trial. Keep the frozen corpus, 384 standard output,
+32 threads/16K/120 seconds, protected runtime identity, baseline-idle guards and cleanup unchanged.
+This tests a batching hypothesis, not a proven cause or a serving-model change.
+
+گام فوریِ کد: اصلاح آزمون قدیمیِ وضعیت دریافت Q5 در CI بررسی شود؛ بازبین پذیرش ضعیف نشده
+است. پیش از آزمون مستقلِ استاندارد، ابزار خصوصیِ batch فیزیکیِ ۵۱۲ و ثبت صرفاً عددیِ مراحل
+بازبینی شوند. پرسش ثابت، خروجی استانداردِ ۳۸۴، ۳۲ رشته/16K/۱۲۰ ثانیه، هویت runtime
+محافظت‌شده، کنترل بیکار بودن خط مبنا و پاک‌سازی ثابت بمانند. این سنجش فرضیهٔ batch است، نه
+علت ثابت‌شده یا تغییر مدل زنده.
+
 Current Q5 checkpoint: complete upstream hash, actual GGUF/template and protected candidate storage
 are verified. Its frozen 32-thread/16K standard trial failed the first case at 120010 ms without
 an answer; cleanup passed and fifteen cases remain not run. Investigate bounded CPU/prefill behavior

@@ -1,5 +1,19 @@
 # Project state / وضعیت پروژه
 
+Source-test repair, 2026-10-05 at 17:48 UTC: exact `76b92ec` CI recorded two stale partial-import
+expectation failures and 969 passes; browser, PostgreSQL16/17 and secret jobs passed. The tests now
+construct partial states explicitly and preserve ambiguous-status/selection rejection. Main local
+suite: 966 passed, two POSIX skips, 126 deselected in 26.94 seconds; focused lint/format passed.
+Repair CI is not yet recorded. A distinct physical-batch512 helper is in private preparation, not
+an executed trial. Failed Q5 standard and unrun thinking/context/application/WAN gates remain.
+
+اصلاح آزمون کد در ۵ اکتبر، ساعت ۱۷:۴۸ UTC: CI کد دقیق `76b92ec` دو شکستِ انتظار قدیمیِ
+دریافت ناقص و ۹۶۹ موفق داشت؛ مرورگر، PostgreSQL16/17 و کنترل اطلاعات محرمانه موفق بودند.
+آزمون اکنون حالت ناقص را صریح می‌سازد و رد وضعیت مبهم/انتخاب را حفظ می‌کند. اجرای محلی:
+۹۶۶ موفق، دو مورد POSIX اجرا‌نشده و ۱۲۶ انتخاب‌نشده در ۲۶٫۹۴ ثانیه؛ lint/قالب متمرکز موفق‌اند.
+CI اصلاح هنوز ثبت نشده است. ابزار خصوصیِ batch فیزیکیِ ۵۱۲ در آماده‌سازی است، نه آزمون
+اجراشده. شکست استاندارد Q5 و معیار اجرا‌نشدهٔ استدلال/زمینه/برنامه/WAN باقی‌اند.
+
 Current Q5 checkpoint, 2026-10-05 at 17:29 UTC: all 74 protected transport ranges were assembled;
 the complete 19771509664-byte Qwen3.8-27B UD-Q5_K_M artifact matched its pinned upstream SHA-256.
 An independent root-private reader rehashed it and verified actual GGUF3/qwen35 metadata and the

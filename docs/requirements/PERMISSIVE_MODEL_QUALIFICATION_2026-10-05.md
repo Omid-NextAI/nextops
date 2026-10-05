@@ -9,6 +9,26 @@ The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 
 ## English
 
+### Source-test state repair — 17:48 UTC
+
+Exact-source `76b92ec` CI retained two failed Q5 metadata tests: they assumed the maintained import
+was still partial. The run recorded **969 passed, two failed**; browser, PostgreSQL16/17 and secret
+jobs passed ([run](https://github.com/Omid-NextAI/nextops/actions/runs/37350158868)). No model gate
+was changed to resolve this source failure. Tests now assert the observed complete import and failed
+standard trial, construct partial states explicitly, and separately reject every partial/failed/
+not-run import paired with verified status, or complete import paired with provisioning status.
+Selection/thinking remain denied. Main local non-browser/non-integration command
+`.venv/Scripts/python.exe -m pytest -m "not integration and not browser" -q` passed **966 tests,
+two POSIX-only skips, 126 deselected in 26.94 seconds**; focused formatting/lint passed. This is
+not CI for the repair or acceptance of a generated answer.
+
+The next private experiment is physical batch128→512 with logical batch512, 32 threads, 16K,
+384 standard output tokens and the 120-second deadline unchanged. Pinned source inspection shows
+eligible BLAS quantized matmul converts weights before SGEMM; larger physical batches could amortize
+that work. Actual graph cost and the previous timeout's cause remain unknown. Loaded OpenBLAS or
+`OPENBLAS_NUM_THREADS=1` alone does not prove the effective matmul thread count. Preparation of
+distinct helpers and numeric-only stage observations is not execution or performance acceptance.
+
 ### Complete Q5 import and failed standard trial — 17:29 UTC
 
 All **74 canonical ranges** were assembled in order under a finite 600-second guard. The complete
@@ -386,6 +406,26 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### اصلاح وضعیت آزمون کد — ساعت ۱۷:۴۸ UTC
+
+CI کد دقیقِ `76b92ec` دو شکستِ آزمون فرادادهٔ Q5 را حفظ کرد؛ آن‌ها همچنان دریافت جاری را
+ناقص فرض می‌کردند. نتیجه، **۹۶۹ موفق و دو ناموفق** بود؛ آزمون مرورگر، PostgreSQL16/17 و
+کنترل اطلاعات محرمانه موفق بودند (پیوند اجرا در انگلیسی). برای رفع این خطای کد، هیچ معیار
+پذیرش مدل تغییر نکرد. آزمون اکنون دریافت کاملِ مشاهده‌شده و شکست پاسخ استاندارد را می‌سنجد؛
+حالت ناقص صریح ساخته و ترکیب دریافت ناقص/ناموفق/اجرا‌نشده با وضعیت تأییدشده، یا دریافت کامل
+با وضعیت آماده‌سازی، جدا رد می‌شود. انتخاب مدل و استدلال عمومی همچنان ممنوع‌اند. فرمان محلیِ
+غیرمرورگر/غیرintegration درج‌شده در انگلیسی، **۹۶۶ آزمون موفق، دو مورد مخصوص POSIX
+اجرا‌نشده و ۱۲۶ مورد انتخاب‌نشده در ۲۶٫۹۴ ثانیه** داشت؛ قالب/lint متمرکز نیز موفق‌اند. این
+CI اصلاح یا پذیرش پاسخ تولیدشده نیست.
+
+آزمایش خصوصیِ بعدی، تغییر batch فیزیکی از ۱۲۸ به ۵۱۲ است؛ batch منطقیِ ۵۱۲، ۳۲ رشته،
+زمینهٔ 16K، خروجی استانداردِ ۳۸۴ توکنی و مهلت ۱۲۰ ثانیه ثابت‌اند. بررسی منبع ثابت نشان
+می‌دهد ضرب ماتریسیِ کم‌دقتِ قابل‌اجرای BLAS، پیش از SGEMM وزن را تبدیل می‌کند؛ batch بزرگ‌تر
+ممکن است هزینه را میان توکن‌های بیشتری تقسیم کند. هزینهٔ واقعی گراف و علت مهلت‌گذری قبلی
+هنوز معلوم نیست. بارگذاری OpenBLAS یا مقدار `OPENBLAS_NUM_THREADS=1` به‌تنهایی شمار رشتهٔ
+واقعیِ ضرب ماتریس را ثابت نمی‌کند. آماده‌سازی ابزار مستقل و ثبت مراحل صرفاً عددی، اجرای
+آزمون یا پذیرش کارایی نیست.
 
 ### دریافت کامل Q5 و آزمون استانداردِ ناموفق — ساعت ۱۷:۲۹ UTC
 

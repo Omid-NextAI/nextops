@@ -31,7 +31,13 @@ def test_q5_is_a_distinct_unselected_pinned_precision_experiment() -> None:
     validate_qwen38_q5_candidate(DIRECTORY)
     value = candidate()
     assert value["size_bytes"] == 19771509664
-    assert value["qualification"]["artifact_import"] == "partial"
+    assert value["status"] == "verified_candidate_unselected"
+    assert value["qualification"]["artifact_import"] == "passed"
+    assert value["qualification"]["actual_gguf_metadata"] == "passed"
+    assert value["qualification"]["cpu_load"] == "passed"
+    assert value["qualification"]["standard_semantics"] == "failed"
+    assert value["qualification"]["thinking_semantics_privacy"] == "not_run"
+    assert value["qualification"]["matched_application"] == "not_run"
     assert value["conversion_source_revision_verified"] is False
     assert value["deployment_selection_allowed"] is value["public_thinking_enabled"] is False
     previous = json.loads((DIRECTORY / "qwen3-8-27b-q8.candidate.json").read_text("utf-8"))
@@ -90,6 +96,8 @@ def test_complete_import_needs_exact_verified_status_but_never_enables_selection
 ) -> None:
     document = candidate()
     document["status"] = "verified_candidate_unselected"
+    # Construct the partial state explicitly: the maintained candidate can advance.
+    document["qualification"]["artifact_import"] = "partial"
     write(tmp_path, document)
     with pytest.raises(ArtifactValidationError, match="state is ambiguous"):
         validate_qwen38_q5_candidate(tmp_path)
@@ -99,6 +107,30 @@ def test_complete_import_needs_exact_verified_status_but_never_enables_selection
     document["deployment_selection_allowed"] = True
     write(tmp_path, document)
     with pytest.raises(ArtifactValidationError):
+        validate_qwen38_q5_candidate(tmp_path)
+
+
+@pytest.mark.parametrize("import_gate", ["partial", "failed", "not_run"])
+def test_partial_import_requires_provisioning_status_without_inheriting_acceptance(
+    tmp_path: Path, import_gate: str
+) -> None:
+    document = candidate()
+    document["status"] = "provisioning_unselected"
+    document["qualification"]["artifact_import"] = import_gate
+    write(tmp_path, document)
+    validate_qwen38_q5_candidate(tmp_path)
+    document["status"] = "verified_candidate_unselected"
+    write(tmp_path, document)
+    with pytest.raises(ArtifactValidationError, match="state is ambiguous"):
+        validate_qwen38_q5_candidate(tmp_path)
+
+
+def test_complete_import_cannot_retain_provisioning_status(tmp_path: Path) -> None:
+    document = candidate()
+    document["status"] = "provisioning_unselected"
+    document["qualification"]["artifact_import"] = "passed"
+    write(tmp_path, document)
+    with pytest.raises(ArtifactValidationError, match="state is ambiguous"):
         validate_qwen38_q5_candidate(tmp_path)
 
 
