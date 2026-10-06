@@ -1,5 +1,24 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Preparation failure-boundary repairs and continued transport — 2026-10-06
+
+Transport reached 194 ranges/52062905120 bytes; 38366549632 remain, with one complete shard.
+Main/independent review rejected original child-cleanup and native-lock identity boundaries.
+The distinct complete-inspector V2 passed 6278 each-side pure checks; its fixed installer passed
+1020 each-side checks and actual 238-ms hash/stop/receipt-qualified installation, not inspection.
+Publication V2 passed 3035 each-side pure checks, not publication; native repair remains open.
+Exact `9375d49` passed five CI jobs. Rejected tools/history, original artifact permissions,
+staged-not-installed ca1, live 35B/public thinking-off and unaccepted context are preserved.
+
+انتقال به ۱۹۴ بخش/۵۲۰۶۲۹۰۵۱۲۰ بایت رسید؛ ۳۸۳۶۶۵۴۹۶۳۲ بایت باقی است و یک فایل کامل
+تأیید شده. بازبینی اصلی/مستقل، مسیر پاک‌سازی فرزند و تطبیق هویت قفل‌های بومیِ ابزارهای
+اصلی را رد کرد. نسخهٔ مستقلِ دومِ بررسی مجموعه، ۶۲۷۸ کنترل محض در هر بازبینی و ابزار
+نصب ثابت آن، ۱۰۲۰ کنترل در هر بازبینی و نصب واقعیِ ۲۳۸ میلی‌ثانیه‌ای با تأیید هش/توقف/
+رسید را گذراند، نه بررسی مجموعه. نسخهٔ دومِ انتشار، ۳۰۳۵ کنترل محض در هر بازبینی را
+گذراند، نه انتشار؛ اصلاح بومی باز است. پنج کنترل CI کد دقیق `9375d49` موفق‌اند.
+ابزارهای ردشده/سوابق، مجوز فایل‌های اصلی، ca1 آماده‌شده/نصب‌نشده، 35B زنده/خاموشی
+استدلال عمومی و وضعیت پذیرفته‌نشدهٔ زمینه حفظ شده‌اند.
+
 ## Expanded first-file metadata and bounded parallel transport — 2026-10-06
 
 The distinct metadata tools passed 5564 main/independent pure checks; their two fixed installers

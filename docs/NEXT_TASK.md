@@ -1,5 +1,33 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after the 02:11 UTC checkpoint**: continue reviewed finite transport
+from **194 ranges/52062905120 bytes**, with **38366549632 bytes** remaining. Preserve bodies;
+finish transport before remaining assembly. Do not repeat first-shard assembly, ca1 staging,
+first-file metadata inspection or the successful complete-inspector V2 installation. After
+all-shard assembly/full hashes, use the separately reviewed installed V2 inspector, then review
+actual full-set/template controls and immutable service-readable publication. Publication V2
+helper/main/peer pure checks passed, not operational publication; its fixed installer/controller
+still require review. Finish the distinct native lock-identity/cleanup repair and independent
+review before any standard trial. Preserve original rejected tools/failures and 120-second case,
+384-final-token/16K/32-thread qualification limits. Standard semantics precede separate thinking/
+privacy/context and matched app/operational/rollback gates. Exact `9375d49` passed five CI jobs.
+No model cutover, public thinking enablement or accepted context follows from these steps.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از گام ساعت ۰۲:۱۱ UTC**: انتقال محدودِ بررسی‌شده از مجموع
+**۱۹۴ بخش/۵۲۰۶۲۹۰۵۱۲۰ بایت** ادامه یابد؛ **۳۸۳۶۶۵۴۹۶۳۲ بایت** باقی است. بدنه‌ها حفظ و
+انتقال پیش از تجمیع باقی‌مانده تکمیل شود. تجمیع فایل اول، آماده‌سازی ca1، بررسی فرادادهٔ
+فایل اول و نصب موفقِ نسخهٔ دومِ ابزار مجموعه تکرار نشوند. پس از تجمیع/هش کامل همهٔ فایل‌ها،
+ابزار مستقلِ نصب‌شدهٔ نسخهٔ دوم اجرا و سپس مجموعهٔ واقعی/کنترل قالب و انتشار نسخهٔ
+تغییرناپذیرِ خواندنی برای سرویس بررسی شوند. کنترل‌های محضِ اصلی/مستقلِ ابزار انتشار نسخهٔ
+دوم موفق‌اند، نه انتشار عملی؛ ابزار نصب/کنترل‌کنندهٔ ثابت آن هنوز به بازبینی نیاز دارند.
+اصلاح مستقلِ هویت قفل/پاک‌سازی آزمون بومی و بازبینی مستقل، پیش از آزمون استاندارد کامل
+شوند. ابزارهای ردشده/شکست‌ها و سقف ۱۲۰ ثانیه برای هر پرسش، ۳۸۴ توکن خروجی نهایی، زمینهٔ
+16K و ۳۲ رشته حفظ شوند. معنای استاندارد پیش از استدلال/حریم خصوصی/زمینه و معیارهای متناظر
+برنامه/عملیات/بازگشت پذیرفته شود. پنج کنترل CI کد دقیق `9375d49` موفق‌اند. این گام‌ها
+به‌معنی تغییر مدل زنده، فعال‌سازی استدلال عمومی یا پذیرش زمینه نیستند.
+
+## Earlier expanded metadata checkpoint — historical / گام پیشینِ فرادادهٔ گسترش‌یافته — سابقه
+
 Current task — **2026-10-06, after the 01:36 UTC checkpoint**: continue reviewed finite transport
 from 178 verified ranges/47767937824 bytes, with 42661516928 bytes remaining. Preserve all
 desktop bodies; finish transport before assembling the remaining two files. Do not repeat the

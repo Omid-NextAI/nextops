@@ -7,10 +7,63 @@ Date: **2026-10-05**. Historical 27B status: **Qwen3.8-27B Q5 import verified; d
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, 01:36 UTC — expanded first-file metadata; 178 transport ranges; no model cutover**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۱:۳۶ UTC — فرادادهٔ گسترش‌یافتهٔ فایل اول؛ ۱۷۸ بخش انتقالی؛ بدون تغییر مدل زنده**.
+Latest update: **2026-10-06, 02:11 UTC — 194 transport ranges; reviewed preparation repairs; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۲:۱۱ UTC — ۱۹۴ بخش انتقالی؛ اصلاح‌های بازبینی‌شدهٔ آماده‌سازی؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Continued transport and preparation-tool failure review — 02:11 UTC
+
+Four further V7 windows completed after the preserved 178-range checkpoint:
+
+| Operation suffix | Second-file indexes | Curl milliseconds | Desktop result SHA-256 |
+| --- | --- | --- | --- |
+| `639268474034540055` | 30–33 | 36766 | `21e87ca2ad6216dc98000996bb7122f7e1ad87fec6ecceac244533215260cbaf` |
+| `639268478207318831` | 34–37 | 462562 | `3ecae93b54bd7107a03922ecb29c32ce5842eb2ed7b409a462e6ef8083899dd9` |
+| `639268485013170644` | 38–41 | 38860 | `add03d08b36c2370f5643f61705c70618032e924bee377946cad2033b91f2df9` |
+| `639268487728354785` | 42–45 | 461282 | `c026a0349907ef7b4e2a6eb535f2218cae3dfcc6d49760c70895478835501551` |
+
+Main read actual desktop records and successful session completions, not separate root range
+receipts. Each window retained four 268435456-byte bodies, verified numeric HTTP206/exit0,
+headers/held identities/full hashes before any import, then reported owned stop/closed handles/
+unchanged ready-idle baseline. Latest record completed at **02:10:08 UTC**. Canonical totals
+are **194 ranges/52062905120 bytes**, leaving **38366549632 transport bytes**. Only the first
+whole upstream shard is verified. Variable fast/slow windows do not establish speed improvement
+or explain the transport cause; no inference performance follows from provisioning.
+
+Independent review found that the original complete-set inspector's child setup failure or
+unexpected worker return could unwind into parent audit/cleanup. Original pure checks had not
+covered that path; the original six tools are preserved and rejected operationally. A distinct
+V2 enforces child-local `finally: os._exit(1)`; normal successful workers exit internally. Main
+and independent full-file/diff review and **1275/4402/601 pure checks (6278 each-side)** passed,
+including six failure fixtures. Inspector: **34137 bytes**, SHA
+`5e82762b45b5f6073d8d3bf0bb1350ce2bbb535a4d74c100749c957f72b95062`.
+Its fixed absent-only installer passed **147 Python/873 PowerShell checks (1020 each-side)**,
+then operation `metadata-complete-v2-install-20261006-639268494401094149` installed only that
+helper in **238 ms**. Destination hash, owned client stop and root receipt checks passed;
+desktop result SHA is `0c4a2c065019da94999a1b3d30d0eba1ab82952791922d56b21d8fb309f44c60`,
+root stdout SHA `86fc147a5954b2620ec5b2e0dee488349e3d3bc67419a608e142c29a7c46af49`.
+No complete-set inspection, native execution or service action occurred. The reconciler is
+streamed only when needed, not installed; original tools/ACLs are unchanged. The author first
+failed a stale-byte-pin preparation check, corrected it and preserved the failure history.
+
+Publication's original helper released locks before its required receipt; it remains rejected.
+Distinct publication V2 holds both root locks through receipt/fsync and independently attempts
+all descriptor closes. Main/independent full review and **3035 each-side pure checks** passed.
+Helper: **57921 bytes**, SHA `6d5d2a7d4ed3d436789da64304b5f3e5f24b4de7d6993cc98a5378b1fefb6a12`.
+Publication/its installer-controller qualification has not run. Likewise, **1073 passing pure
+native checks** did not cover replacement of held lock paths or sequential close failure.
+Main/peer review rejected that original quartet; a distinct lock-identity/cleanup and corrected
+metadata-pin repair is unfinished. Case120s/384-final-token/16K/32-thread limits, corpus/prompts
+and original failed trials are unchanged. No failed primary client outcome is converted to
+success merely because later read-only reconciliation finds a completed receipt.
+
+Exact `9375d49` passed quality/unit, PostgreSQL16/17, browser and secret-scanning CI in
+[run 37400813523](https://github.com/Omid-NextAI/nextops/actions/runs/37400813523).
+This is source CI, not whole-model/template/native/thinking/privacy/context/operational
+acceptance. ca1 remains staged, not installed; live35B/public thinking-off remain unchanged.
+Finish transport before the other assemblies, then full-set/template and standard gates before
+separate final-only thinking/privacy/measured context and matched operational/rollback gates.
 
 ### Expanded actual metadata and four-request transport — 01:36 UTC
 
@@ -1118,6 +1171,52 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### ادامهٔ انتقال و بازبینی مسیرهای شکست ابزارهای آماده‌سازی — ساعت ۰۲:۱۱ UTC
+
+پس از ثبتِ ۱۷۸بخشی، چهار پنجرهٔ دیگرِ نسخهٔ هفتم موفق شدند. شناسه‌های پایانی، اندیس‌های
+فایل دوم، زمان curl و هش نتیجهٔ رایانهٔ کاربر در جدول متناظرِ انگلیسی ثبت‌اند: اندیس‌های
+۳۰ تا ۳۳ در ۳۶۷۶۶، ۳۴ تا ۳۷ در ۴۶۲۵۶۲، ۳۸ تا ۴۱ در ۳۸۸۶۰ و ۴۲ تا ۴۵ در ۴۶۱۲۸۲
+میلی‌ثانیه. بازبین اصلی، رکوردهای واقعیِ رایانهٔ کاربر و پایان موفق فرایند را خواند، نه
+رسیدهای جداگانهٔ root. در هر پنجره، چهار بدنهٔ ۲۶۸۴۳۵۴۵۶ بایتی حفظ و HTTP206/کد خروج صفر،
+headerها، هویت فایلِ دارای handle باز و هش کامل پیش از هر دریافت محافظت‌شده تأیید شدند؛
+توقف فرایندها/بسته‌شدن handleها و ثبات خط مبنای آماده/بی‌درخواست موفق‌اند. آخرین رکورد
+ساعت **۰۲:۱۰:۰۸ UTC** کامل شد. مجموع اصلی **۱۹۴ بخش/۵۲۰۶۲۹۰۵۱۲۰ بایت** است و
+**۳۸۳۶۶۵۴۹۶۳۲ بایت انتقالی** باقی است. هنوز فقط فایل کامل اول با هش منبع اصلی تأیید
+شده. نوسان زمان، بهبود سرعت یا علت انتقال را اثبات نمی‌کند؛ کارایی استنتاج سنجیده نشده.
+
+بازبینی مستقل مشخص کرد که شکست آماده‌سازی فرزند یا بازگشت غیرمنتظرهٔ worker در ابزار
+اصلیِ بررسی مجموعه می‌توانست وارد مسیر ممیزی/پاک‌سازی والد شود. کنترل‌های محض قبلی این
+مسیر را پوشش نداده بودند؛ شش ابزار اصلی حفظ و برای اجرای عملی رد شدند. نسخهٔ مستقلِ
+دوم، خروج قطعیِ محلیِ فرزند در `finally: os._exit(1)` را اعمال می‌کند؛ worker موفق، خود
+خروج عادی را انجام می‌دهد. بازبینی کاملِ فایل/تفاوت اصلی و مستقل و **۱۲۷۵/۴۴۰۲/۶۰۱ کنترل
+محض، مجموع ۶۲۷۸ در هر بازبینی**، شامل شش حالت شکست موفق‌اند. ابزار بررسی، **۳۴۱۳۷
+بایت** و دارای هش `5e82762b45b5f6073d8d3bf0bb1350ce2bbb535a4d74c100749c957f72b95062` است.
+ابزار ثابتِ نصب فقط در مقصد غایب، **۱۴۷ کنترل Python/۸۷۳ کنترل PowerShell، مجموع ۱۰۲۰
+در هر بازبینی** را گذراند؛ سپس عملیات `metadata-complete-v2-install-20261006-639268494401094149`
+فقط همان ابزار را در **۲۳۸ میلی‌ثانیه** نصب کرد. هش مقصد، توقف فرایند کاربر و تطبیق رسید
+root موفق‌اند؛ هش‌های نتیجه/خروجی root در بخش متناظرِ انگلیسی ثبت‌اند. بررسی مجموعه،
+اجرای بومی یا تغییر سرویس انجام نشد. ابزار تطبیق فقط هنگام نیاز از ورودی استاندارد اجرا
+می‌شود، نه نصب؛ ابزارها/ACLهای اصلی ثابت‌اند. شکست اولیهٔ کنترل اندازهٔ قدیمی در آماده‌سازی
+توسط نویسنده، اصلاح و در سابقه حفظ شد.
+
+ابزار اصلیِ انتشار، قفل‌ها را پیش از رسید الزامی رها می‌کرد و همچنان ردشده است. نسخهٔ
+مستقلِ دوم، هر دو قفل root را تا ثبت رسید/fsync نگه می‌دارد و بستن همهٔ descriptorها را
+مستقل انجام می‌دهد. بازبینی کاملِ اصلی/مستقل و **۳۰۳۵ کنترل محض در هر بازبینی** موفق‌اند.
+ابزار، **۵۷۹۲۱ بایت** و دارای هش `6d5d2a7d4ed3d436789da64304b5f3e5f24b4de7d6993cc98a5378b1fefb6a12`
+است؛ انتشار/پذیرش ابزار نصب و کنترل‌کننده اجرا نشده‌اند. همچنین **۱۰۷۳ کنترل محض موفقِ
+ابزار بومی**، جایگزینی مسیر قفلِ دارای handle یا شکست بستن ترتیبی را پوشش نمی‌دادند.
+بازبینی اصلی/مستقل، چهار ابزار اصلی را رد کرد؛ اصلاح مستقلِ هویت قفل/پاک‌سازی و هش ابزار
+فراداده ناتمام است. سقف ۱۲۰ ثانیه برای هر پرسش، ۳۸۴ توکن نهایی، زمینهٔ 16K، ۳۲ رشته،
+مجموعهٔ آزمون/پرامپت‌ها و شکست‌های قبلی ثابت‌اند. یافتن رسید کامل در تطبیق فقط‌خواندنیِ
+بعدی، نتیجهٔ ناموفقِ اولیهٔ فرایند کاربر را به موفق تبدیل نمی‌کند.
+
+پنج کنترل CI کد دقیق `9375d49`، شامل کیفیت/واحد، PostgreSQL16/17، مرورگر و اطلاعات
+محرمانه، در [اجرای بالا](https://github.com/Omid-NextAI/nextops/actions/runs/37400813523) موفق‌اند.
+این CI کد است، نه پذیرش مدل کامل/قالب/اجرای بومی/استدلال/حریم خصوصی/زمینه/عملیات. ca1
+آماده شده، نه نصب؛ 35B زنده/خاموشی استدلال عمومی ثابت‌اند. انتقال پیش از تجمیع باقی‌مانده
+تمام شود؛ سپس مجموعهٔ کامل/قالب/معنای استاندارد، پیش از استدلال با خروجی نهایی/حریم خصوصی/
+زمینهٔ سنجیده و معیارهای متناظر عملیات/بازگشت تکمیل شوند.
 
 ### فرادادهٔ واقعیِ گسترش‌یافته و انتقال چهاردرخواستی — ساعت ۰۱:۳۶ UTC
 

@@ -1,5 +1,38 @@
 # Project state / وضعیت پروژه
 
+Latest verified checkpoint — **2026-10-06, 02:11 UTC; provisioning and preparation only**:
+transport reached **194 ranges/52062905120 canonical bytes**; **38366549632 bytes** remain.
+Only the first complete upstream shard is verified. Three further reviewed four-request windows
+passed with curl times 36766/462562/38860 ms, followed by 461282 ms; variability is not a
+demonstrated speedup. All four bodies were verified before each import; retained data, owned
+stop and live ready-idle baseline checks passed. Exact `9375d49` passed all five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37400813523).
+Local review rejected the original complete-set inspector's child-failure cleanup and the
+original native wrapper's missing retained-lock identity checks/sequential close cleanup.
+The distinct inspector V2 passed 6278 main/independent pure checks; its fixed installer passed
+1020 each-side checks and actual installation in 238 ms with destination-hash/client-stop/root
+receipt checks. It has not inspected the complete set. The separately reviewed publication V2
+passed 3035 each-side pure checks; publication has not run. Native lock repair/review remains
+unfinished. Original failures/artifacts are preserved; ca1 remains staged, not installed.
+Live 35B/public thinking-off, unaccepted advertised context and all remaining model gates stay.
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۲:۱۱ UTC؛ فقط آماده‌سازی و بازبینی**:
+انتقال به **۱۹۴ بخش/۵۲۰۶۲۹۰۵۱۲۰ بایت اصلی** رسید؛ **۳۸۳۶۶۵۴۹۶۳۲ بایت** باقی است.
+هنوز فقط فایل کامل اول با هش منبع اصلی تأیید شده. زمان دریافت چهار پنجرهٔ بعدی برابر
+۳۶۷۶۶/۴۶۲۵۶۲/۳۸۸۶۰/۴۶۱۲۸۲ میلی‌ثانیه بود؛ نوسان زمان، اثبات بهبود عمومی سرعت نیست.
+در هر پنجره، هر چهار بدنه پیش از دریافت محافظت‌شده تأیید شدند؛ حفظ داده، توقف فرایندهای
+متعلق به اجرا و ثبات خط مبنای آماده/بی‌درخواست موفق‌اند. پنج کنترل CI کد دقیق `9375d49`
+در اجرای بالا موفق‌اند. بررسی محلی، مسیر پاک‌سازی پس از شکست فرایند فرزند در ابزار اصلیِ
+مجموعهٔ کامل و نبود تطبیق هویت قفل/پاک‌سازی مستقلِ handleها در ابزار اصلیِ آزمون بومی را
+رد کرد. نسخهٔ مستقلِ دومِ بررسی مجموعه، ۶۲۷۸ کنترل محض اصلی/مستقل و ابزار نصب ثابت آن،
+۱۰۲۰ کنترل در هر بازبینی را گذراند؛ نصب واقعی در ۲۳۸ میلی‌ثانیه، با تأیید هش مقصد/توقف
+فرایند کاربر/تطبیق رسید root کامل شد. بررسی مجموعهٔ کامل هنوز اجرا نشده. نسخهٔ دومِ
+انتشار نیز ۳۰۳۵ کنترل محض در هر بازبینی را گذراند، اما اجرا نشده است. اصلاح و بازبینی
+قفل‌های آزمون بومی ناتمام است. شکست‌ها/فایل‌های اصلی محفوظ‌اند؛ ca1 آماده شده، نه نصب.
+35B زنده/خاموشی استدلال عمومی، زمینهٔ پذیرفته‌نشده و معیارهای باقی‌ماندهٔ مدل ثابت‌اند.
+
+## Earlier expanded metadata checkpoint — historical / گام پیشینِ فرادادهٔ گسترش‌یافته — سابقه
+
 Latest verified checkpoint — **2026-10-06, 01:36 UTC; provisioning only**: transport reached
 178 ranges/47767937824 canonical bytes; 42661516928 bytes remain. One complete upstream shard
 is verified, not the model. A distinct four-request parallel window completed in 463594 ms

@@ -1,5 +1,20 @@
 # Local CPU-only AI and capacity planning
 
+Latest checkpoint — **2026-10-06, 02:11 UTC; provisioning only**: transport reached
+194 ranges/52062905120 bytes; 38366549632 remain and only the first whole shard is verified.
+The latest four-request window passed in 461282 ms; the earlier fast/slow windows are not a
+proven general speedup. Review rejected two preparation-tool failure boundaries; the distinct
+complete-inspector V2 passed 6278 main/independent pure checks and its fixed installer passed
+1020 each-side checks plus actual 238-ms installation/owned-stop/hash/receipt checks. Full-set
+inspection has not run. Publication V2 passed 3035 each-side pure checks, not publication;
+native lock-identity/cleanup repair is unfinished. Exact `9375d49` passed five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37400813523).
+Preserve rejected tools, original root-only files, staged-not-installed ca1 and live 35B/public
+thinking-off. Complete transport/full-set/template/standard semantics before separate thinking,
+privacy, measured context and matched operational gates. Advertised 262144 is not accepted.
+
+## Earlier expanded metadata checkpoint — historical
+
 Latest checkpoint — **2026-10-06, 01:36 UTC; provisioning only**: 178 verified transport ranges/
 47767937824 bytes, with 42661516928 remaining; only one whole upstream shard is verified.
 The distinct four-request parallel window passed in 463594 ms of curl time, not a proven
