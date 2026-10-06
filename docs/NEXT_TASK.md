@@ -1,5 +1,27 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after the 08:25 UTC checkpoint**: obtain the owner's actual
+independent source/check review report for the prepared V3 tools. Reviewer selection and a
+prepared guide are not a passed review. Preserve all three new failed transfer attempts and
+unchanged **282 ranges/75685225248 bytes**; **14744229504 bytes** remain. Before a new transfer,
+require materially stronger evidence of a viable route/profile or an independently reviewed
+alternative; do not loop identical retries, reuse failed bodies or widen deadlines. Small-slice
+diagnostics did not establish full-range reliability. Exact `e95618e` passed five CI jobs.
+Complete transport/full-set inspection before native/model gates. No V3 host use before review,
+no unattended transfer/trial, and no change to the live 35B/public thinking-off baseline.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از گام ساعت ۰۸:۲۵ UTC**: گزارش واقعیِ بازبینی مستقل کد و
+آزمون‌های ابزار نسخهٔ سوم از مالک دریافت شود. انتخاب بازبین و آماده‌بودن راهنما، پذیرش
+بازبینی نیست. سه تلاش ناموفقِ تازه و مجموع ثابتِ **۲۸۲ بخش/۷۵۶۸۵۲۲۵۲۴۸ بایت** حفظ شوند؛
+**۱۴۷۴۴۲۲۹۵۰۴ بایت** باقی است. انتقال تازه به شاهد قوی‌ترِ مسیر/روش قابل‌استفاده یا روش
+جایگزینِ دارای بازبینی مستقل نیاز دارد؛ تکرار همان تلاش، استفاده از بدنهٔ ناموفق و افزایش
+مهلت انجام نشود. بررسی بخش کوچک، قابلیت اتکای انتقال کامل را ثابت نکرد. پنج کنترل CI
+کد دقیق `e95618e` موفق‌اند. انتقال و بررسی مجموعهٔ کامل پیش از معیارهای بومی/مدل تکمیل
+شوند. ابزار نسخهٔ سوم پیش از بازبینی روی میزبان استفاده نشود؛ انتقال/آزمون رهاشده و
+تغییر مدل زندهٔ 35B یا خاموشی استدلال عمومی وجود ندارد.
+
+## Earlier task checkpoint — historical / گام پیشینِ کار — سابقه
+
 Current task — **2026-10-06, after the 07:45 UTC checkpoint**: continue from **282 verified
 ranges/75685225248 bytes**, with **14744229504 bytes** remaining, before remaining assembly/
 full-set inspection. The latest window 134–137 failed all-four verification: two complete and

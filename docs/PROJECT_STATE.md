@@ -1,5 +1,29 @@
 # Project state / وضعیت پروژه
 
+Verified checkpoint — **2026-10-06, 08:25 UTC**: three further finite transfer attempts
+failed with actual terminal exit1 and zero imports. Failed bodies remain; owned curl stop,
+closed read handles and unchanged ready-idle reconciliation passed. Totals stay **282 ranges/
+75685225248 bytes**, **14744229504 bytes** remaining, one whole shard verified. Small
+data-discarding HTTPS diagnostics passed but did not predict full-range success; the subsequent
+single-range attempt failed. No further identical retry is justified by another small probe.
+Exact `e95618e` passed all five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37432024392).
+The owner volunteered for independent V3 review; a protected bilingual guide, eight isolated
+check commands and a blank report template are prepared, not executed or accepted by the owner.
+No external bundle handoff, V3 host use, model selection or public-thinking change occurred.
+
+گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۸:۲۵ UTC**: سه تلاش محدودِ دیگر با خروج نهاییِ
+یک و صفر بخش منتقل‌شده ناموفق شدند. بدنه‌های ناموفق حفظ‌اند؛ توقف curl متعلق به اجرا،
+بسته‌شدن handleهای خواندن و ثبات خط مبنای آماده و بی‌درخواست تأیید شد. مجموع **۲۸۲ بخش/
+۷۵۶۸۵۲۲۵۲۴۸ بایت**، باقی‌مانده **۱۴۷۴۴۲۲۹۵۰۴ بایت** و تأیید یک فایل کامل تغییر نکرد.
+بررسی‌های کوچک HTTPS با دورریختن داده موفق بودند، اما موفقیت انتقال کامل را پیش‌بینی
+نکردند؛ تلاش تک‌بخشیِ بعدی شکست خورد. بررسی کوچکِ دوباره، توجیه تکرار همان انتقال نیست.
+پنج کنترل CI کد دقیق `e95618e` در اجرای بالا موفق‌اند. مالک، بازبینی مستقلِ نسخهٔ سوم را
+بر عهده گرفت؛ راهنمای خصوصیِ دوزبانه، هشت فرمان بررسی محلی و الگوی خالیِ گزارش آماده‌اند؛
+اجرای بازبین یا پذیرش آن‌ها ثبت نشده است. بسته بیرون ارسال، ابزار روی میزبان استفاده،
+مدل تازه انتخاب یا استدلال عمومی فعال نشد.
+
+## Earlier transfer checkpoint — historical / گام پیشینِ انتقال — سابقه
+
 Verified checkpoint — **2026-10-06, 07:45 UTC**: two further reviewed V7 windows passed
 actual desktop receipts and terminal exit0, reaching **282 ranges/75685225248 bytes**;
 **14744229504 bytes** remain and only one whole upstream shard is verified. Two distinct

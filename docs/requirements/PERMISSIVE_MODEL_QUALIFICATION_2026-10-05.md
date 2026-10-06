@@ -7,10 +7,44 @@ Date: **2026-10-05**. Historical 27B status: **Qwen3.8-27B Q5 import verified; d
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, 07:45 UTC — 282 verified ranges; two failed windows retained with zero imports; independent review/model gates remain open; no model cutover**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۷:۴۵ UTC — ۲۸۲ بخش تأییدشده؛ دو پنجرهٔ ناموفق با صفر بخش منتقل‌شده حفظ شدند؛ معیارهای بازبینی مستقل/مدل باز؛ بدون تغییر مدل زنده**.
+Latest update: **2026-10-06, 08:25 UTC — 282 ranges unchanged; three further failed transfers retained; owner-review guide prepared, independent review not_run; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۸:۲۵ UTC — ۲۸۲ بخش ثابت؛ سه انتقال ناموفقِ دیگر حفظ شدند؛ راهنمای بازبینی مالک آماده و بازبینی مستقل اجرا‌نشده؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Further terminal failures and owner-review handoff — 08:25 UTC
+
+All three distinct attempts had actual terminal exit1, curl exit28, zero imports, retained
+local bodies, closed read handles and passed owned-stop/unchanged ready-idle reconciliation:
+
+| Operation suffix | Request scope | Curl milliseconds | Actual desktop result SHA-256 |
+| --- | --- | --- | --- |
+| `639268700251233887` | second-file 134–137, V7 | 600172 | `3b190fe7713752c424d89e2d4c02af95a4b7561fa442d45e2a6645b6ee39c2cb` |
+| `639268708751465646` | second-file 134, V6 | 180156 | `54f35e3bc47915b24dda6f3e9a438a89f7b0c6249119e4e6412449f30b879382` |
+| `639268715511946230` | second-file 134, V6 | 180156 | `d2aa9c34dbe10707db322303759d83dadb7d2735efc5bb6513b87c8403237ab2` |
+
+Main read the actual desktop results and terminal exits, not separate root receipts. The V7
+window had four partial HTTP206 responses; the serial attempts received 143944111 and 24982363
+of 268435456 bytes. Between the serial attempts, bounded data-discarding verified-HTTPS probes
+received 1MiB in 2.460615s and 16MiB at the missing offset in 3.182223s. Those observations
+supported one new judged attempt, not full-range reliability, artifact integrity or acceptance;
+that attempt failed. No further identical retry based on another small probe, deadline widening
+or failed-body reuse is justified. Transport stays **282 ranges/75685225248 bytes**, with
+**14744229504 bytes** remaining and only one whole upstream shard verified. Require materially
+stronger evidence of a viable route/profile or an independently reviewed alternative.
+
+Exact `e95618e4d6c3a2b40f4a6b0341badf19e63c984c` passed all five actual
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37432024392): secret scan,
+quality/unit, browser and PostgreSQL16/17 integration. Source CI is not model acceptance.
+The owner selected themselves for independent V3 review after the three subagent quota errors.
+Main prepared a protected English/Persian guide with eight isolated checker/syntax commands
+and a blank report template; all16 listed file/payload identities still matched the frozen
+request. These are main preparation observations, not an independently executed review.
+No external bundle transmission, operational checker invocation, V3 install/publication/native
+trial, model selection or public thinking enablement occurred. The owner must read the complete
+sources and selected dependencies, run the isolated checks and provide dated hashes, terminal
+results and criterion-specific findings. Full-set/native semantics/thinking/privacy/measured
+context/app/operational/rollback gates remain not accepted. The alternative remains 3.5, not3.8.
 
 ### Verified progress and retained transport failures — 07:45 UTC
 
@@ -1464,6 +1498,39 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### شکست‌های نهاییِ تازه و آماده‌سازی بازبینی مالک — ساعت ۰۸:۲۵ UTC
+
+هر سه تلاش مستقل، خروج نهاییِ یک، خروج۲۸ِ curl و صفر بخش منتقل‌شده داشتند. بدنه‌های محلی
+حفظ، handleهای خواندن بسته و توقف متعلق به اجرا/ثبات خط مبنای آماده و بی‌درخواست تأیید شد:
+
+| پسوند عملیات | دامنهٔ درخواست | میلی‌ثانیهٔ curl | SHA-256 نتیجهٔ واقعی رایانه |
+| --- | --- | --- | --- |
+| `639268700251233887` | فایل دوم، ۱۳۴–۱۳۷، نسخهٔ هفتم | 600172 | `3b190fe7713752c424d89e2d4c02af95a4b7561fa442d45e2a6645b6ee39c2cb` |
+| `639268708751465646` | فایل دوم، ۱۳۴، نسخهٔ ششم | 180156 | `54f35e3bc47915b24dda6f3e9a438a89f7b0c6249119e4e6412449f30b879382` |
+| `639268715511946230` | فایل دوم، ۱۳۴، نسخهٔ ششم | 180156 | `d2aa9c34dbe10707db322303759d83dadb7d2735efc5bb6513b87c8403237ab2` |
+
+عامل اصلی، نتیجهٔ واقعی رایانه و خروج نهایی را خواند، نه رسید جداگانهٔ root. پنجرهٔ نسخهٔ
+هفتم چهار پاسخ ناقص HTTP206 داشت؛ دو تلاش ترتیبی، ۱۴۳۹۴۴۱۱۱ و ۲۴۹۸۲۳۶۳ بایت از
+۲۶۸۴۳۵۴۵۶ بایت دریافت کردند. میان آن‌ها، بررسی‌های محدودِ HTTPS با اعتبارسنجی گواهی و
+دورریختن داده، ۱MiB را در ۲٫۴۶۰۶۱۵ ثانیه و ۱۶MiB در محل بخش غایب را در ۳٫۱۸۲۲۲۳
+ثانیه دریافت کردند. این مشاهده، مبنای یک تلاش تازهٔ ارزیابی‌شده بود، نه اثبات قابلیت اتکا،
+صحت فایل یا پذیرش؛ آن تلاش شکست خورد. بررسی کوچکِ دیگر، توجیه تکرار همان انتقال، افزایش
+مهلت یا استفاده از بدنهٔ ناموفق نیست. مجموع **۲۸۲ بخش/۷۵۶۸۵۲۲۵۲۴۸ بایت**، باقی‌مانده
+**۱۴۷۴۴۲۲۹۵۰۴ بایت** و تأیید یک فایل کامل ثابت‌اند. شاهد قوی‌ترِ مسیر/روش قابل‌استفاده یا
+روش جایگزینِ دارای بازبینی مستقل لازم است.
+
+پنج [کنترل CI](https://github.com/Omid-NextAI/nextops/actions/runs/37432024392) کد دقیق
+`e95618e4d6c3a2b40f4a6b0341badf19e63c984c` واقعاً موفق‌اند: بررسی راز، کیفیت/واحد، مرورگر و
+یکپارچه‌سازی PostgreSQL16/17. CI کد، پذیرش مدل نیست. پس از خطای سقف استفادهٔ سه عامل،
+مالک خود را بازبین مستقلِ نسخهٔ سوم معرفی کرد. عامل اصلی راهنمای خصوصیِ فارسی/انگلیسی،
+هشت فرمان بررسی محلی/نحوی و الگوی خالی گزارش را آماده کرد؛ هویت هر۱۶ فایل/وابستگیِ فهرست
+ثابت هنوز منطبق است. این‌ها مشاهدهٔ آماده‌سازی عامل اصلی‌اند، نه بازبینی مستقلِ اجراشده.
+بسته بیرون ارسال، فرمان عملیاتی اجرا، ابزار نسخهٔ سوم نصب/منتشر/آزمون بومی، مدل انتخاب یا
+استدلال عمومی فعال نشد. مالک باید کد کامل و وابستگی‌های انتخاب‌شده را بخواند، بررسی محلی
+را اجرا و هش تاریخ‌دار، خروج نهایی و یافتهٔ مربوط به هر معیار را ارائه کند. معیارهای مجموعهٔ
+کامل/معنای بومی/استدلال/حریم خصوصی/زمینهٔ سنجیده/برنامه/عملیات/بازگشت پذیرفته نیستند.
+جایگزین همچنان نسخهٔ 3.5 است، نه3.8.
 
 ### پیشرفت تأییدشده و حفظ شکست‌های انتقال — ساعت ۰۷:۴۵ UTC
 

@@ -1,5 +1,21 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Retained transfer failures and owner-review handoff — 2026-10-06
+
+Three further bounded transfer attempts imported zero ranges; actual failures, retained bodies
+and passed cleanup/baseline observations remain. Totals stay 282 ranges/75685225248 bytes.
+Small discarded HTTPS probes passed, but the subsequent full-range attempt failed; no new
+identical retry is justified. Exact `e95618e` passed five CI jobs. The owner selected themselves
+as reviewer; protected bilingual instructions and a blank report are prepared, not a passed
+independent review. No V3 host use, external bundle transmission or live-model change.
+
+سه تلاش محدودِ دیگر هیچ بخشی را منتقل نکردند؛ شکست واقعی، بدنه‌های حفظ‌شده و شاهد موفقِ
+پاک‌سازی/ثبات خط مبنا باقی‌اند. مجموع ۲۸۲ بخش/۷۵۶۸۵۲۲۵۲۴۸ بایت ثابت است. بررسی کوچک
+HTTPS با دورریختن داده موفق بود، اما انتقال کاملِ بعدی شکست خورد؛ تکرار همان تلاش توجیه
+ندارد. پنج کنترل CI کد دقیق `e95618e` موفق‌اند. مالک خود را بازبین معرفی کرد؛ راهنمای
+خصوصیِ دوزبانه و گزارش خالی آماده‌اند، نه بازبینی مستقلِ پذیرفته‌شده. ابزار نسخهٔ سوم روی
+میزبان استفاده، بسته بیرون ارسال یا مدل زنده تغییر نکرد.
+
 ## Verified transport, retained failures and licence-source refresh — 2026-10-06
 
 Two further verified windows reached 282 ranges/75685225248 bytes; 14744229504 remain,

@@ -1,5 +1,18 @@
 # Local CPU-only AI and capacity planning
 
+Checkpoint — **2026-10-06, 08:25 UTC**: three additional finite transfers failed with
+zero imports and actual stopped/closed/unchanged-baseline reconciliation passed. Totals remain
+282 ranges/75685225248 bytes, 14744229504 bytes outstanding, one whole shard verified.
+Small discarded HTTPS probes passed but the next full-range transfer failed; require stronger
+route/profile evidence or a reviewed alternative, not identical retries or deadline widening.
+Exact `e95618e` passed five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37432024392).
+The owner selected themselves for independent V3 review. A private bilingual guide, eight
+isolated checks and a blank report template are ready; actual owner review remains not_run.
+No V3 host use, new selection or thinking enablement; live35B stays. Full-set/native/model/
+privacy/context/app/operational/rollback gates remain separate. See the [paired record](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+## Earlier transfer checkpoint — historical
+
 Checkpoint — **2026-10-06, 07:45 UTC**: 282 ranges/75685225248 bytes verified as transported;
 14744229504 remain and only one whole upstream shard is verified. Two more reviewed windows
 passed actual receipts/exit0/pre-import verification. Two distinct failed windows imported
