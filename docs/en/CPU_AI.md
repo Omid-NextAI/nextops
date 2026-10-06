@@ -1,5 +1,17 @@
 # Local CPU-only AI and capacity planning
 
+## Raw priority-rule diagnosis failed; targeted follow-up — 2026-10-06
+
+At13:43 UTC the `d401583` retained-Q8 test ended with fifteen finals and a Persian hypothesis
+timeout: **12 main-reviewed passes/four failures**. Both raw coding answers now pass twelve
+finite AST boundaries each; Persian networking passes. English upstream assertions, missing
+EN/FA authorized scope and the timeout still fail. Preserve native SHA
+`8a6682fd3d5235fdd7fdf8edfa05ef5ad99b8cba2826424ac19c2e5046ddd6ad` and exact-source five-job CI.
+Cleanup/separate serving35B ready-idle reconciliation passed. A distinct generic labelled-scope/
+protocol policy is being prepared for the full unchanged corpus under the already authorized
+explicit300-second profile. Questions, semantic/code criteria, artifact/resources and serving
+configuration remain unchanged. This is not training, independent approval or a live upgrade.
+
 ## Candidate raw-quality repair, qualification pending — 2026-10-06
 
 The bounded [qualification experiment](../requirements/QWEN38_QUALIFICATION_SPEC.md) changes

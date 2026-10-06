@@ -224,7 +224,7 @@ def test_detailed_general_coding_guidance_is_trusted_and_not_frozen_answer_coach
     elif locale == "en":
         assert "validate input type before equality, membership, hashing or coercion" in system
         assert "first return False for an invalid type, then test allowed values" in system
-        assert "Comments, type hints and an allowlist do not replace a type guard" in system
+        assert "Type hints, comments and allowlists are not type guards" in system
         assert "overload equality; Boolean values satisfy integer type checks" in system
         assert "Do not widen input contracts" in system
         assert "Check branch order, short-circuiting and return types on every path" in system
@@ -236,7 +236,14 @@ def test_detailed_general_coding_guidance_is_trusted_and_not_frozen_answer_coach
         assert "completed steps are not independent verification" in system
         assert "Neither alone proves certificate validation, intermediary topology" in system
         assert "overall health or a root cause" in system
-        assert "does not prove a component exists in this network" in system
+        assert (
+            "Do not assert an upstream failure or intermediary exists from a status code" in system
+        )
+        assert (
+            "In the observation sentence label source, scope, observed, collected and limits"
+            in system
+        )
+        assert "a host name alone is not scope" in system
         assert "timestamps character-for-character, including original digits" in system
         assert "current states remain unknown" in system
         assert "Do not output private reasoning or drafts" in system
@@ -252,7 +259,8 @@ def test_detailed_general_coding_guidance_is_trusted_and_not_frozen_answer_coach
         assert "کهنگی یا ناقص‌بودن" in system
         assert "گزارش تکمیل یک کار، تأیید مستقل آن نیست" in system
         assert "هیچ‌کدام به‌تنهایی تأیید گواهی، توپولوژی واسط، سلامت کلی یا علت قطعی نیست" in system
-        assert "معنای عمومی کد خطا را با وجودِ یک جزء در شبکه اشتباه نگیرید" in system
+        assert "از کد خطا، وجود یا خرابیِ واسط و بالادست را قطعی ندانید" in system
+        assert "نام میزبان به‌تنهایی دامنه نیست" in system
         assert "ارقام و نویسه‌های اصلی حفظ کنید؛ ترجمه یا محلی‌سازی نکنید" in system
         assert "اندازه‌گیری‌نشده نامعلوم است" in system
         assert "استدلال خصوصی و پیش‌نویس ننویسید" in system

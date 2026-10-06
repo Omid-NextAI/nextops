@@ -1,5 +1,22 @@
 # Project state / وضعیت پروژه
 
+Current raw checkpoint — **2026-10-06,13:43 UTC**: `d401583` Q8 priority rules repair both finite
+raw coding samples and Persian networking, but the full run still fails: **12 main-reviewed
+passes/four failures** (English upstream assertion, both missing authorized scopes, final Persian
+timeout). Native SHA `8a6682fd3d5235fdd7fdf8edfa05ef5ad99b8cba2826424ac19c2e5046ddd6ad`;
+owned cleanup/separate unchanged ready-idle baseline passed. Five exact-source CI jobs passed.
+Prepare a distinct generic labelled-scope/protocol policy and full opt-in300-second corpus;
+do not alter questions/scoring, serving35B or public thinking. See the bounded specification.
+
+گام جاریِ پاسخ خام — **۶ اکتبر ۲۰۲۶،۱۳:۴۳ UTC**: دستور اولویت‌دار Q8 با کد `d401583` دو کد
+خامِ محدود و شبکهٔ فارسی را اصلاح کرد، اما اجرای کامل هنوز ناموفق است: **۱۲ موفقیت/چهار
+شکست در بازبینی عامل اصلی**؛ ادعای بالادست انگلیسی، دامنهٔ حذف‌شده در دو زبان و مهلت فارسی.
+هش بالا، توقف اختصاصی/بازخوانی جداگانهٔ خط مبنای آماده و بی‌درخواست و پنج CI همان کد ثبت‌اند.
+دستور عمومیِ متفاوتِ دامنهٔ عنوان‌دار/پروتکل و مجموعهٔ کاملِ۳۰۰ثانیه آماده شود؛ سؤال/معیار،
+مدل زندهٔ35B و استدلال عمومی تغییر نکنند. الزام محدود، مرجع این کار است.
+
+## Earlier priority-rule source plan — historical / برنامهٔ پیشینِ دستور اولویت‌دار — سابقه
+
 Current candidate source checkpoint — **2026-10-06**: generic locale-native Qwen3.8 instructions
 prioritize type guards, protocol-scoped conclusions and complete source/time/scope qualifiers.
 Frozen questions, finite coding/semantic criteria and serving35B/public thinking-off are unchanged.

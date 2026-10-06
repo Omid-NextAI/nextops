@@ -1,5 +1,20 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after13:43 UTC**: retain the failed twelve-pass/four-failure priority
+trial. Type-first coding and Persian networking improved, not whole-model quality. Prepare the
+distinct labelled-scope/protocol policy; capture exact committed300-second candidate requests;
+run/review all sixteen unchanged questions under the same CPU/artifact/output limits. Preserve
+prior120 outcomes, explicit deadline provenance, independent not_run, no application fallback
+credit, owned cleanup and unchanged serving35B. Do not select a failed candidate.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از۱۳:۴۳ UTC**: آزمون ناموفقِ دستور اولویت‌دار با دوازده موفقیت/
+چهار شکست حفظ شود. کدِ شرط‌نوع و شبکهٔ فارسی بهتر شده‌اند، نه کیفیت کل مدل. دستور متفاوتِ
+دامنهٔ عنوان‌دار/پروتکل آماده، درخواست نامزد۳۰۰ثانیه از کد دقیق ثبت و همهٔ شانزده سؤال ثابت
+با همان سقف CPU/فایل/خروجی اجرا و بازبینی شوند. سابقهٔ۱۲۰، منشأ صریح مهلت، مستقلِ اجرا‌نشده،
+نبود امتیاز پاسخ جایگزین، توقف اختصاصی و ثبات مدل زندهٔ35B حفظ شوند؛ نامزد ناموفق انتخاب نشود.
+
+## Earlier priority-rule task — historical / کار پیشینِ دستور اولویت‌دار — سابقه
+
 Current task — **2026-10-06, raw-quality repair**: capture the new committed generic candidate
 instructions, perform the unchanged full retained-Q8 corpus in the isolated bounded CPU profile,
 and directly review coding/reasoning/provenance finals. No application fallback credit, changed

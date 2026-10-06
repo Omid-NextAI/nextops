@@ -79,7 +79,8 @@ def test_policy_does_not_branch_on_question_or_copy_fixture_answers(locale: str)
         assert "استدلال خصوصی" in first
         assert first.index("کد:") < first.index("نتیجه‌گیری:") < first.index("شاهد:")
         assert "نخست برای نوع نامعتبر False" in first
-        assert "وجودِ یک جزء در شبکه" in first
+        assert "توپولوژی مشاهده‌شده نیست" in first
+        assert "نام میزبان به‌تنهایی دامنه نیست" in first
         assert "ارقام و نویسه‌های اصلی" in first
     else:
         assert "validate input type before equality, membership, hashing or coercion" in first
@@ -89,7 +90,10 @@ def test_policy_does_not_branch_on_question_or_copy_fixture_answers(locale: str)
         assert "private reasoning" in first
         assert first.index("Code:") < first.index("Conclusions:") < first.index("Evidence:")
         assert "first return False for an invalid type" in first
-        assert "does not prove a component exists" in first
+        assert (
+            "Do not assert an upstream failure or intermediary exists from a status code" in first
+        )
+        assert "a host name alone is not scope" in first
         assert "character-for-character, including original digits" in first
 
 

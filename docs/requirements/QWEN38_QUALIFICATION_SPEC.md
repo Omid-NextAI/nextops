@@ -6,6 +6,27 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Priority-rule result and distinct labelled-provenance follow-up — 13:43 UTC
+
+The `d401583` Q8 run returned fifteen finals; the last Persian hypothesis timed out. Main review
+records **12 passes/four failures**: English networking still asserts upstream failure, both
+stale answers omit explicit authorized scope, and Persian hypothesis has no completed final.
+Both raw code answers now pass all twelve finite AST boundaries and Persian networking passes.
+These narrow repairs are not whole-model acceptance. Native SHA:
+`8a6682fd3d5235fdd7fdf8edfa05ef5ad99b8cba2826424ac19c2e5046ddd6ad`.
+Owned cleanup and separate inactive/PID0/listener-absent/unchanged ready-idle serving checks passed.
+All five exact-source CI jobs passed; neither CI nor application fallback changes the raw score.
+
+Next distinct experiment: retain type-first rules; forbid asserting intermediary/upstream failure
+from an error code and require labelled source/scope/observed/collected/limits in observation
+sentences. A host name alone is not authorization scope; absent fields stay unknown. No frozen
+values/answers or question matching are added. Capture the committed opt-in300-second adapter
+profile and test the full unchanged sixteen-case corpus, same Q8/runtime/32 workers/16K/384
+tokens/sampling/one slot/48 GiB. Keep the finite2100-second native watchdog and2200-second
+controller bound; aggregate timeout is a failure, not a waiver. Record the explicit300 deadline
+separately from historical120 outcomes. Do not promote while any semantic gate remains failed;
+independent/app/thinking/privacy/context/evidence/WAN/rollback gates remain separate.
+
 ### Raw-quality repair experiment — 2026-10-06
 
 The owner requests repair of raw coding/reasoning failures, not application fallback credit.
@@ -210,6 +231,25 @@ this index entry. Preserve the prior failed-thinking and UI deployment records. 
 release manifest only for an actually accepted identity change, not source registration.
 
 ## فارسی
+
+### نتیجهٔ دستور اولویت‌دار و بررسی متفاوتِ منشأِ عنوان‌دار — ساعت۱۳:۴۳ UTC
+
+اجرای Q8 با کد `d401583` پانزده پاسخ نهایی ثبت کرد؛ آخرین فرضیهٔ فارسی از مهلت گذشت.
+بازبینی عامل اصلی **۱۲ موفقیت/چهار شکست** دارد: شبکهٔ انگلیسی هنوز خرابی بالادست را قطعی
+می‌داند، هر دو پاسخِ شاهد کهنه دامنهٔ صریحِ مجاز را حذف می‌کنند و فرضیهٔ فارسی پاسخ کامل
+ندارد. اکنون هر دو کد خام، هر دوازده حالتِ محدود AST را می‌گذرانند و شبکهٔ فارسی موفق است.
+این اصلاح‌های محدود، پذیرش کل مدل نیستند. هش بومی در بخش انگلیسی همین رکورد آمده است.
+توقف اختصاصی و بازخوانی جداگانهٔ واحد غیرفعال/PID0/نبود listener/خط مبنای آماده و بی‌درخواست
+موفق‌اند. هر پنج کنترل CI کد دقیق موفق است؛ CI یا پاسخ جایگزین، امتیاز خام را تغییر نمی‌دهد.
+
+آزمایش متفاوتِ بعدی: قواعد شرط نوع حفظ، استنتاج قطعیِ واسط/خرابی بالادست از کد خطا ممنوع و
+منبع/دامنه/مشاهده/گردآوری/محدودیت در جملهٔ مشاهده عنوان‌دار شوند. نام میزبان به‌تنهایی دامنهٔ
+مجاز نیست؛ مقدار غایب نامعلوم می‌ماند. مقدار یا پاسخ ثابت و تطبیق سؤال اضافه نمی‌شود.
+درخواستِ نمایهٔ اختیاری۳۰۰ثانیه از کد دقیق ثبت و هر شانزده پرسش ثابت با همان Q8/runtime/۳۲
+رشته/16K/۳۸۴توکن/نمونه‌گیری/یک جایگاه/۴۸ GiB آزموده شود. watchdog محدود۲۱۰۰ثانیه و سقف
+کنترل۲۲۰۰ثانیه حفظ شوند؛ عبور از مهلت کلی شکست است، نه حذف معیار. مهلت صریح۳۰۰ از سابقهٔ
+۱۲۰ جدا ثبت شود. تا رفع شکست معنایی، انتخاب زنده مجاز نیست؛ معیار مستقل/برنامه/استدلال/
+حریم خصوصی/زمینه/شاهد/WAN/بازگشت جدا باقی است.
 
 ### آزمایش اصلاح کیفیت پاسخ خام — ۶ اکتبر ۲۰۲۶
 
