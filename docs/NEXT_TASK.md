@@ -1,5 +1,27 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after the 06:56 UTC checkpoint**: continue reviewed finite transport
+from **274 ranges/73537741600 bytes**, with **16891713152 bytes** remaining. Four further V7
+windows passed actual terminal/receipt checks, including a slow window within the unchanged
+600-second request limit. Exact `940b84d` passed all five CI jobs. Finish transport before the
+remaining assemblies/full-set inspection; the V3 native/publication tools still need independent
+review before host use. Preserve the failed 3.8 trials and the correctly labeled Apache 3.5
+alternative, without narrowing the full 3.8/thinking/context goal. Standard semantics, final-only
+thinking/privacy, measured context and matched app/operational/rollback gates remain open.
+No unattended transfer/trial remains; the live 35B model and public thinking-off state stay.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از گام ساعت ۰۶:۵۶ UTC**: انتقال محدودِ بررسی‌شده از
+**۲۷۴ بخش/۷۳۵۳۷۷۴۱۶۰۰ بایت** ادامه یابد؛ **۱۶۸۹۱۷۱۳۱۵۲ بایت** باقی است. چهار پنجرهٔ
+دیگرِ نسخهٔ هفتم، رسید واقعی و خروج نهایی را گذراندند؛ پنجرهٔ کند نیز در مهلت ثابت
+۶۰۰ثانیه‌ای موفق شد. پنج کنترل CI کد دقیق `940b84d` موفق‌اند. انتقال پیش از تجمیع
+باقی‌مانده و بررسی مجموعهٔ کامل تکمیل شود؛ ابزارهای بومی/انتشار نسخهٔ سوم هنوز پیش از
+استفاده روی میزبان به بازبینی مستقل نیاز دارند. آزمون‌های ناموفق 3.8 و نام درستِ جایگزین
+Apacheِ نسخهٔ 3.5 حفظ شوند؛ هدف کاملِ 3.8/استدلال/زمینه محدود نشود. معیارهای معنای
+استاندارد، استدلالِ صرفاً نهایی/حریم خصوصی، زمینهٔ سنجیده و برنامه/عملیات/بازگشت همچنان
+بازند. انتقال/آزمون رهاشده‌ای وجود ندارد؛ مدل زندهٔ 35B و خاموشی استدلال عمومی ثابت بمانند.
+
+## Earlier transport/CI checkpoint — historical / گام پیشینِ انتقال/CI — سابقه
+
 Current task — **2026-10-06, after the 06:18 UTC follow-up**: continue reviewed finite transport
 from **258 ranges/69242774304 bytes**, with **21186680448 bytes** remaining. Exact `906a081`
 passed five CI jobs. The completed main-only V3 review handoff below remains pending independent

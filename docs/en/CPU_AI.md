@@ -1,5 +1,16 @@
 # Local CPU-only AI and capacity planning
 
+Transport checkpoint — **2026-10-06, 06:56 UTC**: 274 ranges/73537741600 bytes verified as
+transported; 16891713152 remain and only one whole upstream shard is verified. Four more
+reviewed V7 windows passed actual receipt/exit0/pre-import numeric/identity/hash/retention/
+cleanup/baseline checks; the slow last window stayed within fixed limits. Exact `940b84d`
+passed five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37423271410).
+Independent review/full-set/native/model/thinking/privacy/context/app/operational/rollback
+gates remain open. No new model selection or unattended trial; the Apache 122B alternative
+is correctly 3.5, while the live 35B model and public thinking-off remain unchanged.
+
+## Earlier transport/CI checkpoint — historical
+
 Follow-up — **2026-10-06, 06:18 UTC**: 258 ranges/69242774304 bytes verified as transported;
 21186680448 remain and only one whole upstream shard is verified. Another actual bounded V7
 window passed receipt/exit0/numeric/identity/hash/retention/cleanup/baseline checks. Exact

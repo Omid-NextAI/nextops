@@ -1,5 +1,33 @@
 # Project state / وضعیت پروژه
 
+Verified transport checkpoint — **2026-10-06, 06:56 UTC**: four further reviewed V7 windows
+passed actual desktop receipts and terminal exit0. Totals: **274 ranges/73537741600 bytes**,
+with **16891713152 bytes** remaining; only one complete upstream shard is verified. All-four
+numeric HTTP206/exit0/size/header/held-identity/hash checks preceded import; bodies remain,
+handles closed and owned-stop/unchanged ready-idle reconciliation passed. The slow fourth
+window took 581062ms of curl time within the unchanged limits, not a model benchmark.
+Exact `940b84d` passed all five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37423271410).
+Independent V3 review remains not run after the three subagent usage-limit errors; no new
+host installation/publication/native trial or model selection follows. Full-set, semantics,
+thinking/privacy, measured context and matched operational/rollback gates remain open.
+The Apache candidate is Qwen3.5-122B-A10B, not an accepted 3.8 model or a maximum-context
+claim. No unattended transfer/trial remains; the live 35B model and public thinking-off stay.
+
+گام انتقالِ تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۶:۵۶ UTC**: چهار پنجرهٔ دیگرِ نسخهٔ هفتم
+با رسید واقعی رایانه و خروج نهاییِ صفر موفق شدند. مجموع **۲۷۴ بخش/۷۳۵۳۷۷۴۱۶۰۰ بایت**
+و باقی‌مانده **۱۶۸۹۱۷۱۳۱۵۲ بایت** است؛ فقط یک فایل کامل با هش منبع تأیید شده. HTTP206
+عددی/خروج صفر/اندازه/سرآیند/هویت نگه‌داشته‌شده/هش هر چهار درخواست، پیش از انتقال به
+محل محافظت‌شده مطابق‌اند؛ بدنه‌ها حفظ و بسته‌شدن handleها/توقف فرایندهای متعلق به اجرا/
+ثبات خط مبنای آماده و بی‌درخواست تأیید است. پنجرهٔ چهارم با دریافتِ ۵۸۱۰۶۲ میلی‌ثانیه
+در مهلت ثابت موفق شد؛ این زمان، سنجهٔ کارایی مدل نیست. پنج کنترل CI کد دقیق `940b84d`
+در اجرای بالا موفق‌اند. پس از خطای سقف استفادهٔ سه عامل، بازبینی مستقلِ نسخهٔ سوم
+هنوز اجرا نشده؛ نصب/انتشار/آزمون بومی یا انتخاب مدل تازه‌ای رخ نداده. معیارهای مجموعهٔ
+کامل، معنا، استدلال/حریم خصوصی، زمینهٔ سنجیده و عملیات/بازگشت بازند. نامزد Apache،
+Qwen3.5-122B-A10B است، نه مدل پذیرفته‌شدهٔ 3.8 یا ادعای بیشترین زمینه. انتقال/آزمون
+رهاشده‌ای وجود ندارد؛ مدل زندهٔ 35B و خاموشی استدلال عمومی ثابت‌اند.
+
+## Earlier transport/CI checkpoint — historical / گام پیشینِ انتقال/CI — سابقه
+
 Transport/CI follow-up — **2026-10-06, 06:18 UTC**: a further reviewed V7 window passed actual
 desktop receipt/terminal exit0 and numeric pre-import/hash/identity/retention/closed-handle/
 unchanged ready-idle checks. Totals: **258 ranges/69242774304 bytes**, **21186680448 bytes**

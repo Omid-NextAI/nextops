@@ -7,10 +7,36 @@ Date: **2026-10-05**. Historical 27B status: **Qwen3.8-27B Q5 import verified; d
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, 06:18 UTC — 258 verified ranges; exact-head CI passed, independent review/model gates still open; no model cutover**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۶:۱۸ UTC — ۲۵۸ بخش تأییدشده؛ CI کد دقیق موفق، بازبینی مستقل/پذیرش مدل همچنان باز؛ بدون تغییر مدل زنده**.
+Latest update: **2026-10-06, 06:56 UTC — 274 verified ranges; exact-head CI passed, independent review/model gates still open; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۶:۵۶ UTC — ۲۷۴ بخش تأییدشده؛ CI کد دقیق موفق، بازبینی مستقل/پذیرش مدل همچنان باز؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Four further verified windows and exact-head CI — 06:56 UTC
+
+Four more reviewed V7 windows passed; main read each full actual desktop receipt and terminal
+exit0, not separate root range receipts:
+
+| Operation suffix | Second-file indexes | Curl milliseconds | Desktop result SHA-256 |
+| --- | --- | --- | --- |
+| `639268647031493367` | 110–113 | 44172 | `b2b630cefc776ef68d45f3d6b419d3bf009c821dcf74e63a001e6de3af98374b` |
+| `639268651190522106` | 114–117 | 44109 | `c9574dababe16104ec1cfaccefe41541a2fb48dcfba54425320225b1332cd85a` |
+| `639268654435422198` | 118–121 | 39234 | `d5765c9611ac8f019337d25062cd4da0ccf1f16569bd8a3beff275a896678dbb` |
+| `639268657463180170` | 122–125 | 581062 | `f72dbab8bb691583228339a2f1a6d3a77cbc4687dd4e42c64f20b27a5bde3b05` |
+
+All-four numeric HTTP206/exit0/size/header/held-identity/hash checks preceded import. Bodies
+remain, handles closed and owned-stop/unchanged ready-idle reconciliation passed. The last
+window's in-progress empty/partial bodies were not acceptance; it completed within the fixed
+600-second request limit without retry or widening. Totals: **274 ranges/73537741600 bytes**,
+with **16891713152 bytes** remaining; only one whole upstream shard is verified. No unattended
+transfer/trial remains. Exact `940b84d` passed all five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37423271410); source CI is not model
+acceptance. Independent V3/native/publication review remains not run after all three subagents
+hit usage limits. No new tool installation/publication/native test or model selection follows.
+Full-set/manual/standard semantics/thinking/privacy/measured-context/matched app/operational/
+rollback gates remain open. Failed 3.8 trials are retained; the Apache alternative remains
+correctly Qwen3.5-122B-A10B, not an accepted 3.8 or maximum-context claim. The live 35B model
+and public thinking-off are unchanged; the full requested goal remains unfinished.
 
 ### Additional finite transport and exact-head CI — 06:18 UTC
 
@@ -1395,6 +1421,32 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### چهار پنجرهٔ تأییدشدهٔ دیگر و CI کد دقیق — ساعت ۰۶:۵۶ UTC
+
+چهار پنجرهٔ دیگرِ نسخهٔ هفتم موفق شدند؛ بازبین اصلی، رسید واقعی و کامل رایانه و خروج
+نهاییِ صفرِ هر اجرا را خواند، نه رسید جداگانهٔ بخش‌های root:
+
+| پسوند عملیات | شاخص‌های فایل دوم | دریافت، میلی‌ثانیه | SHA-256 رسید رایانه |
+| --- | --- | --- | --- |
+| `639268647031493367` | ۱۱۰–۱۱۳ | ۴۴۱۷۲ | `b2b630cefc776ef68d45f3d6b419d3bf009c821dcf74e63a001e6de3af98374b` |
+| `639268651190522106` | ۱۱۴–۱۱۷ | ۴۴۱۰۹ | `c9574dababe16104ec1cfaccefe41541a2fb48dcfba54425320225b1332cd85a` |
+| `639268654435422198` | ۱۱۸–۱۲۱ | ۳۹۲۳۴ | `d5765c9611ac8f019337d25062cd4da0ccf1f16569bd8a3beff275a896678dbb` |
+| `639268657463180170` | ۱۲۲–۱۲۵ | ۵۸۱۰۶۲ | `f72dbab8bb691583228339a2f1a6d3a77cbc4687dd4e42c64f20b27a5bde3b05` |
+
+HTTP206 عددی/خروج صفر/اندازه/سرآیند/هویت نگه‌داشته‌شده/هش هر چهار درخواست، پیش از
+انتقال محافظت‌شده مطابق‌اند. بدنه‌ها حفظ و بسته‌شدن handleها/توقف فرایندهای متعلق به
+اجرا/ثبات خط مبنای آماده و بی‌درخواست تأیید است. بدنهٔ خالی/ناقص در حین دریافتِ پنجرهٔ
+آخر، پذیرش محسوب نشد؛ اجرا بدون تکرار یا افزایش مهلت، در سقف ثابتِ ۶۰۰ ثانیه موفق شد.
+مجموع **۲۷۴ بخش/۷۳۵۳۷۷۴۱۶۰۰ بایت** و باقی‌مانده **۱۶۸۹۱۷۱۳۱۵۲ بایت** است؛ فقط یک
+فایل کامل با هش منبع تأیید شده. انتقال/آزمون رهاشده‌ای وجود ندارد. پنج
+[کنترل CI](https://github.com/Omid-NextAI/nextops/actions/runs/37423271410) کد دقیق `940b84d`
+موفق‌اند؛ CI کد، پذیرش مدل نیست. پس از رسیدن هر سه عامل به سقف استفاده، بازبینی مستقلِ
+ابزارهای بومی/انتشار نسخهٔ سوم هنوز اجرا نشده. نصب/انتشار/آزمون بومی یا انتخاب مدل تازه‌ای
+رخ نداده. معیارهای مجموعهٔ کامل/بازبینی انسانی/معنای استاندارد/استدلال/حریم خصوصی/زمینهٔ
+سنجیده/برنامه/عملیات/بازگشت بازند. آزمون‌های ناموفق 3.8 حفظ شده‌اند؛ نام درستِ جایگزین
+Apache، Qwen3.5-122B-A10B است، نه 3.8 پذیرفته‌شده یا ادعای بیشترین زمینه. مدل زندهٔ 35B
+و خاموشی استدلال عمومی تغییر نکرده‌اند؛ هدف کاملِ درخواست‌شده هنوز محقق نشده است.
 
 ### انتقال محدود دیگر و CI کد دقیق — ساعت ۰۶:۱۸ UTC
 

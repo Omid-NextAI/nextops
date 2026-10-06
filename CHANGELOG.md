@@ -1,5 +1,19 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Four verified transport windows and exact-head CI — 2026-10-06
+
+Four further bounded windows reached 274 ranges/73537741600 bytes; 16891713152 remain and
+one whole upstream shard is verified. All four actual receipts and terminal exits passed;
+the slow last window stayed within the fixed limit. Exact `940b84d` passed five CI jobs.
+Independent review/model/thinking/context gates remain open. The 122B alternative is 3.5,
+not accepted 3.8; the live 35B model is unchanged and no unattended transfer/trial remains.
+
+چهار پنجرهٔ محدود دیگر، انتقال را به ۲۷۴ بخش/۷۳۵۳۷۷۴۱۶۰۰ بایت رساندند؛ ۱۶۸۹۱۷۱۳۱۵۲
+بایت باقی و یک فایل کامل با هش منبع تأیید است. رسید واقعی و خروج نهاییِ هر چهار اجرا
+موفق بود؛ پنجرهٔ کندِ آخر نیز در مهلت ثابت پایان یافت. پنج کنترل CI کد دقیق `940b84d`
+موفق‌اند. معیارهای بازبینی مستقل/مدل/استدلال/زمینه بازند. جایگزین 122B، نسخهٔ 3.5 است،
+نه 3.8 پذیرفته‌شده؛ مدل زندهٔ 35B ثابت و انتقال/آزمون رهاشده‌ای وجود ندارد.
+
 ## Additional verified transport and exact-head CI — 2026-10-06
 
 Another finite window reached 258 ranges/69242774304 bytes; 21186680448 remain and one whole
