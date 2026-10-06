@@ -1,5 +1,21 @@
 # Project state / وضعیت پروژه
 
+Current work — **2026-10-06, 11:40 UTC**: the owner explicitly permits longer Qwen3.8 response
+time. Implement an opt-in candidate-only 300-second provider /330-second app /360-second
+generation-proxy profile. Defaults/live35B are unchanged. A watched retained-Q5 two-case
+hypothesis diagnostic is planned with fixed questions/policy/16K/output/resources/security;
+fourteen other cases are not run in that profile. Historical failures remain failed; semantic
+gates and thinking denial are unchanged. This source work is not live selection or acceptance.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، ساعت ۱۱:۴۰ UTC**: مالک افزایش زمان پاسخ Qwen3.8 را صریحاً مجاز
+کرد. نمایهٔ اختیاریِ مخصوص نامزد با مهلت مدل/برنامه/پراکسیِ تولید ۳۰۰/۳۳۰/۳۶۰ ثانیه پیاده
+می‌شود. پیش‌فرض‌ها و مدل زندهٔ 35B ثابت‌اند. آزمون تحت نظارتِ دو فرضیه روی Q5 موجود با پرسش/
+دستور/زمینهٔ16K/خروجی/منابع/امنیت ثابت برنامه‌ریزی شده؛ چهارده مورد دیگر در آن اجرا نشده‌اند.
+شکست تاریخی ناموفق می‌ماند و معیار معنایی و منع استدلال تغییر نمی‌کند. کد، پذیرش یا انتخاب
+زنده نیست.
+
+## Previous Q8 comparison — historical / مقایسهٔ پیشین Q8 — سابقه
+
 Current checkpoint — **2026-10-06, 11:19:59 UTC**: the distinct retained-Q8/restored-policy/
 no-BLAS comparison returned sixteen finals within unchanged deadlines, but main-only semantic
 review is **12 passed/four failed**. Both networking answers assert unverified topology; Persian

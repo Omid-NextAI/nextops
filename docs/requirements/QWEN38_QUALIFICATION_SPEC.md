@@ -6,6 +6,44 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Owner-authorized long-response profile — 2026-10-06
+
+The later [timing amendment](PROMPT_CHANGELOG.md) replaces the old timing ceiling prospectively,
+not historical outcomes or semantic criteria. Default provider/app/proxy budgets remain
+120/150/180 seconds. An explicit `NEXTOPS_QWEN38_EXTENDED_TIMEOUT_ENABLED=1` permits only the
+expanded exact Q8/Q5 candidates up to 300 seconds; 16K and thinking denial remain enforced.
+Candidate-only overlays supply 300/330/360 seconds at provider/app/generation proxy boundaries.
+No arbitrary unlimited wait, wider queue, different prompts, new model or resources are included.
+
+Acceptance: test default denial, explicit opt-in, upper bounds, incompatible models, context and
+thinking denial, short readiness checks and unchanged ordinary routes. Capture the committed
+adapter's unchanged synthetic payloads; run only the two frozen hypothesis questions under the
+new deadline on the existing protected Q5/native CPU profile. Record actual final latency,
+semantic review, failure, owned-unit stop and a separate unchanged ready-idle baseline reread.
+Fourteen other cases are not run under this profile, not implicitly passed. Main self-review is
+not independent approval. Existing topology/coding/provenance failures still block selection.
+
+Rollback: remove the optional overlays and restore the base proxy's two 180-second directives
+in a separately authorized change, validate configuration before reload and reconcile inflight
+requests. No live files/restarts are required by this source change. WAN, full context, thinking,
+app/browser integration and model rollback gates are still open.
+
+### نمایهٔ پاسخ طولانی با مجوز مالک — ۶ اکتبر ۲۰۲۶
+
+[اصلاح زمان](PROMPT_CHANGELOG.md) سقف مهلت را برای آزمون جدید تغییر می‌دهد، نه نتیجهٔ گذشته
+یا معیار معنایی را. مهلت پیش‌فرضِ مدل/برنامه/پراکسی ۱۲۰/۱۵۰/۱۸۰ ثانیه می‌ماند. فقط نامزدهای
+دقیق Q8 و Q5 با گفت‌وگوی گسترش‌یافته و پرچم صریح بالا می‌توانند تا ۳۰۰ ثانیه پاسخ دهند؛
+زمینهٔ 16K و منع استدلال ثابت است. نمایه‌های اختیاری، مهلت‌های ۳۰۰/۳۳۰/۳۶۰ ثانیه را در سه
+مرز هماهنگ می‌کنند. انتظار نامحدود، صف بزرگ‌تر، دستور تازه، مدل تازه یا منابع بیشتر در scope نیست.
+کنترل پیش‌فرض، فعال‌سازی صریح، سقف، مدل ناسازگار، زمینه، منع استدلال، کوتاهی بررسی آمادگی
+و ثبات مسیر عادی آزموده شوند. دستورهای ثابتِ کد ثبت‌شده برای دو پرسش فرضیهٔ EN/FA روی Q5
+و runtime محافظت‌شدهٔ موجود اجرا شوند؛ زمان واقعی، کیفیت، شکست، توقف فرایند اختصاصی و
+بازخوانی جداگانهٔ خط مبنای آماده و بی‌درخواست ثبت شوند. چهارده پرسش دیگر در این نمایه اجرا
+نشده‌اند. خودبازبینی تأیید مستقل نیست و شکست توپولوژی/کد/منشأ همچنان مانع انتخاب مدل است.
+بازگشت با حذف نمایه‌ها و بازگرداندن دو دستور ۱۸۰ ثانیه‌ای پراکسی، کنترل پیکربندی پیش از
+بارگذاری و تعیین وضعیت درخواست جاری در تغییر مجازِ جدا انجام می‌شود. این تغییر کد به دست‌کاری
+فایل یا راه‌اندازی مجدد زنده نیاز ندارد؛ معیارهای WAN، زمینه، استدلال، برنامه و بازگشت بازند.
+
 ### Distinct Q8 comparison failed quality — 11:19:59 UTC
 
 The planned Q8/restored-policy/no-BLAS full comparison actually completed sixteen final deadlines,

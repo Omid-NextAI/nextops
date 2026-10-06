@@ -1,5 +1,22 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after 11:40 UTC**: implement/regression-test the owner-authorized
+opt-in Qwen3.8 long-response profile; capture exact committed unchanged synthetic requests and
+perform the finite two-case retained-Q5 EN/FA hypothesis diagnostic. Record final latency,
+semantic outcomes, owned cleanup and separate live baseline reconciliation. Fourteen remaining
+cases are not run under the new timing profile. Preserve all historical failures and unchanged
+live35B/defaults. Do not cut over or enable thinking while standard semantic gates fail.
+Independent, matched-app, privacy, long-context, fresh evidence/WAN and model rollback remain open.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از ساعت ۱۱:۴۰ UTC**: نمایهٔ اختیاریِ پاسخ طولانی Qwen3.8 مطابق
+مجوز مالک پیاده و کنترل رگرسیون شود؛ درخواست ثابتِ کد دقیق ثبت و آزمون محدودِ دو فرضیهٔ
+EN/FA روی Q5 موجود انجام شود. زمان نهایی، نتیجهٔ معنایی، توقف اختصاصی و بازخوانی جداگانهٔ
+خط مبنای زنده ثبت شوند. چهارده پرسش دیگر با این مهلت اجرا نشده‌اند. شکست‌های گذشته،
+پیش‌فرض‌ها و مدل زندهٔ 35B حفظ شوند. با شکست معیار استاندارد، مدل زنده و استدلال تغییر
+نکنند. معیار مستقل/برنامهٔ هماهنگ/حریم خصوصی/زمینه/شاهد تازه/WAN/بازگشت مدل همچنان باز است.
+
+## Earlier frozen-timing instruction — historical / دستور پیشینِ زمان ثابت — سابقه
+
 Current task — **2026-10-06, after 11:19:59 UTC**: no serving cutover. Preserve the completed
 Q8 comparison's 12 main-reviewed passes/four failures, actual cleanup and unchanged baseline.
 Actual3.8 remains the owner priority, but both current precisions fail quality under the frozen

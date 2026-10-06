@@ -16,6 +16,11 @@ def _base_environment(monkeypatch: pytest.MonkeyPatch) -> None:
         "NEXTOPS_INFERENCE_SERVICE_SECRET_FILE",
         "CREDENTIALS_DIRECTORY",
         "NEXTOPS_MODEL_ID",
+        "NEXTOPS_QWEN38_EXTENDED_TIMEOUT_ENABLED",
+        "NEXTOPS_INFERENCE_TIMEOUT_SECONDS",
+        "NEXTOPS_EXPANDED_CHAT_ENABLED",
+        "NEXTOPS_CONTEXT_TOKENS",
+        "NEXTOPS_THINKING_ENABLED",
     ):
         monkeypatch.delenv(name, raising=False)
 

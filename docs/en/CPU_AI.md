@@ -1,5 +1,25 @@
 # Local CPU-only AI and capacity planning
 
+## Optional five-minute Qwen3.8 response budget — 2026-10-06
+
+The owner's new timing instruction permits a distinct bounded candidate profile, not a quality
+waiver. Existing defaults and the serving 35B remain unchanged. Load
+`deploy/systemd/model-profiles/qwen38-long-response.env` **after** an exact Qwen3.8 Q8/Q5 profile
+only for reviewed candidate qualification: provider 300 seconds, queue wait five seconds, 16K,
+thinking off. The explicit flag rejects unrelated models and nonexpanded profiles.
+`qwen38-long-response-app.env` is an app-only 330-second overlay. The proxy snippet
+`deploy/nginx/profiles/qwen38-long-response.conf` replaces, not duplicates, the two 180-second
+directives inside the existing generation location with 360 seconds. Other routes, login, TLS,
+rate limits and authentication stay unchanged. Do not install/reload these source-only profiles
+as a way around failed model acceptance. The browser has no artificial 120-second answer timer.
+
+The planned two-case EN/FA Q5 hypothesis probe isolates timing; questions, prompt policy,
+sampling, output, runtime and resource limits are unchanged. Fourteen other cases are not run
+in that probe. Historical 120-second failures remain failed; longer waits do not repair false
+topology, missing type guards or lost scope. Rollback removes the overlays/restores proxy
+directives in a separately guarded change, with inflight-request reconciliation. Full standard,
+independent, app, privacy, thinking, context, WAN and rollback qualification remain required.
+
 ## Distinct Q8 comparison remains unqualified — 2026-10-06
 
 The retained Q8/restored-policy/no-BLAS full run ended at 11:19:59 UTC with all sixteen finals

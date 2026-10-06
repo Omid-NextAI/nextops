@@ -16,11 +16,24 @@ class CapturingTransport:
     def __init__(self, model_id: ModelId = "nextops-qwen3-14b-q4-k-m") -> None:
         self.payload: dict[str, Any] = {}
         self.model_id = model_id
+        self.deadlines: dict[str, float] = {}
 
     async def get_json(
         self, path: str, headers: dict[str, str], timeout_seconds: float
     ) -> dict[str, Any]:
-        raise AssertionError("Readiness is not part of this serialization test")
+        assert path == "/readyz"
+        assert "Authorization" not in headers
+        self.deadlines[path] = timeout_seconds
+        return {
+            "state": "ready",
+            "model_id": self.model_id,
+            "runtime_version": "v0.4.1",
+            "cpu_only_required": True,
+            "max_active_requests": 1,
+            "max_queued_requests": 2,
+            "active_requests": 0,
+            "queued_requests": 0,
+        }
 
     async def post_json(
         self,
@@ -30,6 +43,7 @@ class CapturingTransport:
         timeout_seconds: float,
     ) -> dict[str, Any]:
         assert path == "/api/v1/generate"
+        self.deadlines[path] = timeout_seconds
         self.payload = payload
         now = datetime.now(UTC).isoformat()
         return {
@@ -73,5 +87,18 @@ def test_gateway_serializes_trusted_purpose_and_preserves_exact_model(
         assert "purpose" not in response.model_dump()
         assert response.evidence_mode == "model_only"
         assert response.live_monitoring_data is False
+
+    asyncio.run(scenario())
+
+
+def test_long_response_gateway_keeps_health_short_and_identity_checked() -> None:
+    async def scenario() -> None:
+        transport = CapturingTransport("nextops-qwen3-8-27b-ud-q5-k-m")
+        gateway = LoopbackInferenceGateway("http://127.0.0.1:8090", "s" * 32, 330, transport)
+        assert (await gateway.readiness()).max_active_requests == 1
+        response = await gateway.generate(SynthesisRequest(locale="fa", question="سلام"), uuid4())
+        assert response.model_id == transport.model_id
+        assert transport.deadlines == {"/readyz": 5.0, "/api/v1/generate": 330}
+        assert "Authorization" not in transport.payload
 
     asyncio.run(scenario())
