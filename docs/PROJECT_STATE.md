@@ -1,5 +1,35 @@
 # Project state / وضعیت پروژه
 
+Latest verified checkpoint — **2026-10-06, 01:36 UTC; provisioning only**: transport reached
+178 ranges/47767937824 canonical bytes; 42661516928 bytes remain. One complete upstream shard
+is verified, not the model. A distinct four-request parallel window completed in 463594 ms
+of curl time with all four bodies verified before import; this does not establish a general
+speed improvement. Exact `495b704` passed all five source-CI jobs in
+[run 37397504800](https://github.com/Omid-NextAI/nextops/actions/runs/37397504800).
+The separately installed metadata reader/helper passed preparation and actual first-file
+inspection in 87843 ms. Observed `qwen35moe` fields include 256 experts/8 used, 32 attention
+heads/2 KV heads and EOS/padding IDs 248046/248044. Missing fields remain absent; tokenizer
+arrays/template-control semantics are unreviewed. Advertised 262144 context is not accepted.
+Main independently reread the protected result; owned cleanup and unchanged live readiness
+passed. Original tools, ca1 staged-not-installed status, live 35B and public thinking-off remain.
+Full-set, native semantics, thinking/privacy, measured context and operational gates are open.
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۱:۳۶ UTC؛ فقط آماده‌سازی**: انتقال به
+۱۷۸ بخش/۴۷۷۶۷۹۳۷۸۲۴ بایت اصلی رسید؛ ۴۲۶۶۱۵۱۶۹۲۸ بایت باقی است. فقط یک فایل کامل با
+هش منبع اصلی تأیید شده، نه مدل. پنجرهٔ مستقلِ چهار درخواست هم‌زمان، با زمان دریافت
+۴۶۳۵۹۴ میلی‌ثانیه، هر چهار بدنه را پیش از دریافت محافظت‌شده تأیید کرد؛ بهبود عمومی سرعت
+اثبات نشده است. پنج کنترل CI کد دقیق `495b704` در اجرای بالا موفق‌اند. ابزارهای مستقلِ
+فراداده، کنترل‌های آماده‌سازی و بررسی واقعی فایل اول را در ۸۷۸۴۳ میلی‌ثانیه گذراندند.
+در معماری `qwen35moe`، تعداد expert برابر ۲۵۶ با ۸ expert مورد استفاده، ۳۲ سر توجه/۲ سر KV
+و شناسه‌های EOS/padding برابر ۲۴۸۰۴۶/۲۴۸۰۴۴ مشاهده شد. مقدارهای غایب جایگزین نشده‌اند؛
+آرایه‌های tokenizer و معنای کنترل قالب بررسی نشده‌اند. زمینهٔ اعلام‌شدهٔ ۲۶۲۱۴۴ پذیرفته
+نیست. بازبین اصلی، نتیجهٔ محافظت‌شده را مستقل خواند؛ توقف فرایندهای متعلق به اجرا و ثبات
+آمادگی زنده تأیید شدند. ابزارهای اصلی، وضعیت آماده‌شده/نصب‌نشدهٔ ca1، مدل زندهٔ 35B و
+خاموشی استدلال عمومی حفظ‌اند. مجموعهٔ کامل، معنای بومی، استدلال/حریم خصوصی، زمینهٔ سنجیده
+و معیارهای عملیاتی هنوز پذیرفته نشده‌اند.
+
+## Earlier staging checkpoint — historical / گام پیشینِ آماده‌سازی — سابقه
+
 Latest verified checkpoint — **2026-10-06, after the 00:57 UTC transport window**: 166 ranges/
 44546712352 canonical bytes are verified; 45882742400 transport bytes remain. Only the first
 whole upstream shard is accepted. The distinct wheel-only staging repair passed 1303 main/

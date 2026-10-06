@@ -1,5 +1,31 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after the 01:36 UTC checkpoint**: continue reviewed finite transport
+from 178 verified ranges/47767937824 bytes, with 42661516928 bytes remaining. Preserve all
+desktop bodies; finish transport before assembling the remaining two files. Do not repeat the
+completed first-file assembly, exact-ca1 staging or successful first-file metadata inspections.
+Expanded first-file metadata is now observed, not full-set/template-control/native acceptance.
+The separately prepared complete-set inspector, immutable service-readable publication and
+standard-only CPU trial still require main/independent review and actual evidence. Keep original
+root-only two-link artifacts untouched; never grant service access by changing their permissions.
+Qualify standard semantics before separate final-only thinking/privacy and near-context tests;
+then perform matched application/operational/rollback gates before selection. Exact `495b704`
+passed five source-CI jobs; live 35B/public thinking-off remain unchanged.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از گام ساعت ۰۱:۳۶ UTC**: انتقال محدودِ بررسی‌شده از مجموع
+۱۷۸ بخشِ تأییدشده/۴۷۷۶۷۹۳۷۸۲۴ بایت ادامه یابد؛ ۴۲۶۶۱۵۱۶۹۲۸ بایت باقی است. همهٔ بدنه‌های
+رایانهٔ کاربر حفظ و انتقال پیش از تجمیع دو فایل باقی‌مانده تکمیل شود. تجمیع فایل اول،
+آماده‌سازی دقیق ca1 و بررسی‌های موفق فرادادهٔ فایل اول تکرار نشوند. فرادادهٔ گسترش‌یافتهٔ
+فایل اول مشاهده شده است، نه پذیرش مجموعهٔ کامل/کنترل قالب/اجرای بومی. ابزار مستقلِ مجموعه،
+انتشار نسخهٔ تغییرناپذیرِ خواندنی برای سرویس و آزمون CPU فقط در حالت استاندارد، همچنان به
+بازبینی اصلی/مستقل و شاهد واقعی نیاز دارند. فایل‌های اصلیِ دوپیوندی و مختص root دست‌نخورده
+بمانند؛ دسترسی سرویس با تغییر مجوز آن‌ها ایجاد نشود. معنای استاندارد پیش از آزمون مستقلِ
+استدلال با خروجی نهایی/حریم خصوصی و زمینهٔ نزدیک سقف پذیرفته شود؛ سپس معیارهای متناظر
+برنامه/عملیات/بازگشت پیش از انتخاب اجرا شوند. پنج کنترل CI کد دقیق `495b704` موفق‌اند؛
+35B زنده/خاموشی استدلال عمومی ثابت‌اند.
+
+## Earlier staging checkpoint — historical / گام پیشینِ آماده‌سازی — سابقه
+
 Current task — **2026-10-06, after the 00:57 UTC transport window**: continue the next reviewed
 finite transport window from 166 verified ranges/44546712352 bytes, with 45882742400 missing.
 The exact ca1 source/wheel is now protected and staged, not installed; do not repeat staging.

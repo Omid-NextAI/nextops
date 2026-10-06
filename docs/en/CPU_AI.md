@@ -1,5 +1,20 @@
 # Local CPU-only AI and capacity planning
 
+Latest checkpoint — **2026-10-06, 01:36 UTC; provisioning only**: 178 verified transport ranges/
+47767937824 bytes, with 42661516928 remaining; only one whole upstream shard is verified.
+The distinct four-request parallel window passed in 463594 ms of curl time, not a proven
+general speedup. Separately installed expanded metadata tools passed actual first-file inspection
+in 87843 ms and independent protected-result reread/owned cleanup/live-baseline checks.
+Actual `qwen35moe` fields include 256 experts/8 used, 32 attention heads/2 KV heads and
+EOS/padding IDs 248046/248044. Missing scalars remain absent; token arrays and template-control
+semantics are unreviewed. Advertised 262144 context is not accepted. Exact `495b704` passed five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37397504800); ca1 remains staged,
+not installed. Finish transport, all-shard verification and immutable service-readable copies
+before native standard tests, then separate thinking/privacy/context and operational acceptance.
+Original two-link root-only files, live 35B/public thinking-off and failed trials are preserved.
+
+## Earlier staging checkpoint — historical
+
 Latest checkpoint — **2026-10-06, following the 00:57 UTC window**: 166 verified ranges/
 44546712352 canonical bytes; 45882742400 still require transport. The distinct wheel-only repair
 passed 1303 main/independent checks and protected ca1 source/wheel staging, with unchanged ACLs,

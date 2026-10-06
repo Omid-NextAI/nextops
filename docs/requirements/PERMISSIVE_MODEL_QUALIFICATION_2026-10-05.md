@@ -1,16 +1,68 @@
 # Permissively licensed model qualification / پذیرش فنی مدل با مجوز آزاد
 
-Date: **2026-10-05**. Status: **Q5 import verified; distinct standard trials failed; no model cutover**.
-تاریخ: **۵ اکتبر ۲۰۲۶**. وضعیت: **دریافت Q5 تأیید شد؛ آزمون‌های مستقل استاندارد ناموفق؛ بدون تغییر مدل زنده**.
+Date: **2026-10-05**. Historical 27B status: **Qwen3.8-27B Q5 import verified; distinct standard trials failed; no model cutover**.
+تاریخ: **۵ اکتبر ۲۰۲۶**. وضعیت تاریخیِ 27B: **دریافت Qwen3.8-27B Q5 تأیید شد؛ آزمون‌های مستقل استاندارد ناموفق؛ بدون تغییر مدل زنده**.
 
 [English CPU guide](../en/CPU_AI.md) / [راهنمای فارسی CPU](../fa/CPU_AI.md).
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, following 00:57 UTC — ca1 source staged; 166 transport ranges; no model cutover**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، پس از ساعت ۰۰:۵۷ UTC — آماده‌سازی کد ca1؛ ۱۶۶ بخش انتقالی؛ بدون تغییر مدل زنده**.
+Latest update: **2026-10-06, 01:36 UTC — expanded first-file metadata; 178 transport ranges; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۱:۳۶ UTC — فرادادهٔ گسترش‌یافتهٔ فایل اول؛ ۱۷۸ بخش انتقالی؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Expanded actual metadata and four-request transport — 01:36 UTC
+
+Preserve the preceding serial windows. Window `resume-20261006-639268455415290393` added
+shard-two indexes 22–25: 174 canonical ranges/46694196000 bytes, 43735258752 missing;
+curl 525500 ms. The distinct reviewed v7 window `resume-20261006-639268464492464192` then
+completed indexes 26–29, four times 268435456 bytes/all HTTP 206/exit 0. Curl time was
+**463594 ms**; per-request times **203.479489/463.448385/363.428074/440.723006 seconds**.
+All four numeric results, headers, held identities and local hashes were verified before any
+import. Protected imports, duplicate cleanup, owned handle/process stop and unchanged live
+ready-idle baseline passed. Canonical totals: **178 ranges/47767937824 bytes**; **42661516928
+transport bytes** remain. Only the first whole upstream shard is verified. Main read the
+desktop result SHA `3b6c555286221fd0e11cc5bb7edfa61b97111ad2931ba6e25d27d1de059b34a7`,
+not separate root receipts. One parallel observation does not establish a general speedup,
+network diagnosis or inference-performance improvement. Original bodies and failures remain.
+
+The seven expanded-metadata files passed **5564 main/independent pure checks**; the two
+fixed installer quartets passed **2014 checks on each side**. Original tools are unchanged.
+Distinct reader/inspector root installations completed in **231/220 ms**, exact destination
+hashes verified, clients stopped/outcomes reconciled, without metadata or model execution.
+First-file inspection `metadata-v2-122b-20261006-639268471855185668` subsequently completed
+exit 0 in **87843 ms**, including **87485 ms** inspection. The whole first upstream hash
+was verified before parsing. Read-only reconciliation and main's independent bounded
+stat/SHA/read/stat reread confirmed the protected result: **2850 bytes**, root/root `0400`,
+single link, SHA `06dadb4368dc0b38758c5ae3aa60849db0951b09abeb652980b20e59a0c122b2`.
+Main's reread used second-precision stable stat fields, not a retained-FD proof. Owned worker/
+guard cleanup and unchanged live readiness passed.
+
+| Actually observed first-file metadata | Value |
+| --- | --- |
+| Architecture/blocks/embedding | `qwen35moe` / 49 / 3072 |
+| Expert count/used count | 256 / 8 |
+| Expert/shared feed-forward lengths | 1024 / 1024 |
+| Attention heads/KV heads/key/value lengths | 32 / 2 / 256 / 256 |
+| Full-attention interval/next-token-prediction layers/RoPE dimension | 4 / 1 / 64 |
+| SSM convolution/groups/inner/state/time-step rank | 4 / 16 / 8192 / 128 / 64 |
+| Tokenizer/pre/add-BOS/EOS/padding | `gpt2` / `qwen35` / false / 248046 / 248044 |
+
+The template hash remains `a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715`.
+Vocabulary/shared-expert-count/other token IDs/flags remain absent, not defaulted. Token/merge
+arrays and standard template-control semantics are unreviewed. The first file has 392 tensors;
+899 aggregate tensors and 262144 context tokens remain advertised, with accepted context null.
+Complete-set helpers, immutable service-readable publication and standard-only native trials
+are separately prepared, not executed or accepted. Finish transport before the remaining
+assemblies; never change the root-only two-link original artifacts to grant service access.
+
+Exact `495b704` passed all five source-CI jobs in
+[run 37397504800](https://github.com/Omid-NextAI/nextops/actions/runs/37397504800): quality/unit,
+PostgreSQL 16/17, browser and secrets. This does not inherit prior-head results or qualify a
+model. ca1 remains staged, not installed; live 35B/public thinking-off and previous failed
+standard trials remain unchanged. Full-set/template/native/semantic/thinking/privacy/measured
+context and matched application/operational/rollback gates remain unfinished.
 
 ### Protected ca1 source staging and 166-range transport checkpoint
 
@@ -1066,6 +1118,58 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### فرادادهٔ واقعیِ گسترش‌یافته و انتقال چهاردرخواستی — ساعت ۰۱:۳۶ UTC
+
+پنجره‌های ترتیبیِ قبلی حفظ‌اند. پنجرهٔ `resume-20261006-639268455415290393` اندیس‌های
+۲۲ تا ۲۵ فایل دوم را افزود: ۱۷۴ بخش اصلی/۴۶۶۹۴۱۹۶۰۰۰ بایت، با ۴۳۷۳۵۲۵۸۷۵۲ بایت
+باقی‌مانده و زمان دریافت ۵۲۵۵۰۰ میلی‌ثانیه. سپس پنجرهٔ مستقل و بررسی‌شدهٔ نسخهٔ هفتم با
+شناسهٔ `resume-20261006-639268464492464192` اندیس‌های ۲۶ تا ۲۹، چهار بخشِ ۲۶۸۴۳۵۴۵۶ بایتی،
+را با HTTP 206/کد خروج صفر کامل کرد. زمان دریافت **۴۶۳۵۹۴ میلی‌ثانیه** و زمان هر درخواست
+**۲۰۳٫۴۷۹۴۸۹/۴۶۳٫۴۴۸۳۸۵/۳۶۳٫۴۲۸۰۷۴/۴۴۰٫۷۲۳۰۰۶ ثانیه** بود. نتیجه‌های عددی، headerها، هویت
+فایل‌های دارای handle باز و هش محلی هر چهار بدنه پیش از هر دریافت محافظت‌شده تأیید شدند.
+دریافت، پاک‌سازی نسخهٔ تکراریِ تأییدشده، توقف handle/فرایندهای متعلق به اجرا و ثبات خط مبنای
+آماده/بی‌درخواست موفق‌اند. مجموع اصلی: **۱۷۸ بخش/۴۷۷۶۷۹۳۷۸۲۴ بایت**؛ **۴۲۶۶۱۵۱۶۹۲۸ بایت
+انتقالی** باقی است. فقط فایل کامل اول با هش منبع اصلی تأیید است. بازبین اصلی، نتیجهٔ
+رایانهٔ کاربر با هش `3b6c555286221fd0e11cc5bb7edfa61b97111ad2931ba6e25d27d1de059b34a7` را
+خواند، نه رسیدهای جداگانهٔ root. یک مشاهدهٔ هم‌زمان، بهبود عمومی سرعت، علت شبکه یا بهبود
+کارایی استنتاج را اثبات نمی‌کند. بدنه‌های اصلی و شکست‌ها محفوظ‌اند.
+
+هفت فایل فرادادهٔ گسترش‌یافته، **۵۵۶۴ کنترل محض اصلی/مستقل** و دو مجموعهٔ ثابتِ نصب،
+**۲۰۱۴ کنترل در هر بازبینی** را گذراندند؛ ابزارهای اصلی ثابت‌اند. نصب مستقلِ ابزار خواندن/
+بررسی فراداده با دسترسی root در **۲۳۱/۲۲۰ میلی‌ثانیه**، با تأیید هش مقصد، توقف فرایند
+کاربر/تطبیق نتیجه و بدون اجرای فراداده یا مدل پایان یافت. سپس بررسی فایل اول با شناسهٔ
+`metadata-v2-122b-20261006-639268471855185668` در **۸۷۸۴۳ میلی‌ثانیه**، شامل **۸۷۴۸۵ میلی‌ثانیه**
+بررسی، با کد خروج صفر کامل شد. هش کامل فایل اول پیش از خواندن فراداده تأیید شد.
+تطبیق فقط‌خواندنی و خواندن مستقل و محدودِ stat/هش/محتوا/stat توسط بازبین اصلی، نتیجهٔ
+محافظت‌شدهٔ **۲۸۵۰ بایتی** با مالکیت root/root، حالت `0400` و یک پیوند را تأیید کردند؛
+هش آن `06dadb4368dc0b38758c5ae3aa60849db0951b09abeb652980b20e59a0c122b2` است. خواندن مستقلِ
+بازبین اصلی به ثبات ویژگی‌های stat با دقت ثانیه متکی بود، نه اثبات از طریق handle باز.
+توقف فرایند بررسی/کنترل‌های متعلق به اجرا و ثبات آمادگی زنده تأیید شدند.
+
+| فرادادهٔ واقعاً مشاهده‌شدهٔ فایل اول | مقدار |
+| --- | --- |
+| معماری/بلوک/ابعاد تعبیه | `qwen35moe` / ۴۹ / ۳۰۷۲ |
+| تعداد expert/تعداد مورد استفاده | ۲۵۶ / ۸ |
+| ابعاد feed-forward اختصاصی/اشتراکی | ۱۰۲۴ / ۱۰۲۴ |
+| سر توجه/سر KV/طول key/value | ۳۲ / ۲ / ۲۵۶ / ۲۵۶ |
+| فاصلهٔ توجه کامل/لایهٔ پیش‌بینی توکن بعد/RoPE | ۴ / ۱ / ۶۴ |
+| کانولوشن/گروه/ابعاد درونی/حالت/رتبهٔ گام SSM | ۴ / ۱۶ / ۸۱۹۲ / ۱۲۸ / ۶۴ |
+| tokenizer/pre/add-BOS/EOS/padding | `gpt2` / `qwen35` / false / ۲۴۸۰۴۶ / ۲۴۸۰۴۴ |
+
+هش قالب همان `a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715` است. اندازهٔ
+واژگان، تعداد expert اشتراکی و دیگر شناسه‌ها/پرچم‌های توکن غایب‌اند، نه مقدار پیش‌فرض.
+آرایه‌های token/merge و معنای کنترل استانداردِ قالب بررسی نشده‌اند. فایل اول ۳۹۲ تنسور دارد؛
+مجموع ۸۹۹ تنسور و زمینهٔ ۲۶۲۱۴۴ فقط اعلام‌شده و زمینهٔ پذیرفته‌شده نامشخص است. ابزار مستقلِ
+مجموعهٔ کامل، انتشار نسخهٔ تغییرناپذیرِ خواندنی برای سرویس و آزمون بومی فقط در حالت استاندارد،
+صرفاً آماده شده‌اند، نه اجرا یا پذیرفته. انتقال پیش از تجمیع باقی‌مانده تکمیل شود؛ مجوز فایل‌های
+اصلیِ دوپیوندی و مختص root برای ایجاد دسترسی سرویس تغییر نکند.
+
+پنج کنترل CI کد دقیق `495b704` در [اجرای بالا](https://github.com/Omid-NextAI/nextops/actions/runs/37397504800)،
+شامل کیفیت/واحد، PostgreSQL 16/17، مرورگر و اطلاعات محرمانه موفق‌اند. نتیجهٔ کد قبلی به این
+کد تعمیم داده نشده؛ این پذیرش مدل نیست. ca1 آماده شده، نه نصب؛ 35B زنده/خاموشی استدلال
+عمومی و آزمون‌های ناموفق استاندارد حفظ‌اند. مجموعهٔ کامل/قالب/اجرای بومی/معنا/استدلال/
+حریم خصوصی/زمینهٔ سنجیده و معیارهای متناظر برنامه/عملیات/بازگشت هنوز تکمیل نیستند.
 
 ### آماده‌سازی محافظت‌شدهٔ کد ca1 و گام انتقال ۱۶۶بخشی
 

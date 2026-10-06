@@ -1,5 +1,26 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Expanded first-file metadata and bounded parallel transport — 2026-10-06
+
+The distinct metadata tools passed 5564 main/independent pure checks; their two fixed installers
+passed 2014 each-side checks. Actual root installations took 231/220 ms; first-file inspection
+completed in 87843 ms, with independent protected-result reread and owned-stop/readiness checks.
+Observed MoE/tokenizer scalars replace unknown first-file values, not missing fields or model
+acceptance. Parallel transport added four verified ranges, reaching 178/47767937824 bytes;
+42661516928 remain. The 463594-ms download is one observation, not a proven general speedup.
+Exact `495b704` passed five source-CI jobs. Original tools/history, staged-not-installed ca1,
+live 35B/public thinking-off and unaccepted advertised context remain unchanged.
+
+ابزارهای مستقلِ فراداده، ۵۵۶۴ کنترل محضِ اصلی/مستقل و دو ابزار نصب ثابت، ۲۰۱۴ کنترل در
+هر بازبینی را گذراندند. نصب واقعی با دسترسی root در ۲۳۱/۲۲۰ میلی‌ثانیه و بررسی فایل اول
+در ۸۷۸۴۳ میلی‌ثانیه، همراه خواندن مستقلِ نتیجهٔ محافظت‌شده و کنترل توقف/آمادگی کامل شد.
+ویژگی‌های عددیِ مشاهده‌شدهٔ MoE/tokenizer، فقط مقدارهای نامعلوم فایل اول را روشن می‌کنند؛
+مقدار غایب یا پذیرش مدل ساخته نشده است. انتقال هم‌زمان چهار بخش تأییدشده افزود: مجموع
+۱۷۸ بخش/۴۷۷۶۷۹۳۷۸۲۴ بایت؛ ۴۲۶۶۱۵۱۶۹۲۸ بایت باقی است. زمان دریافت ۴۶۳۵۹۴ میلی‌ثانیه
+یک مشاهده است، نه اثبات بهبود عمومی سرعت. پنج کنترل CI کد دقیق `495b704` موفق‌اند.
+ابزارها/سوابق اصلی، ca1 آماده‌شده/نصب‌نشده، 35B زنده/خاموشی استدلال عمومی و وضعیت
+پذیرفته‌نشدهٔ زمینهٔ اعلام‌شده ثابت‌اند.
+
 ## Protected ca1 source staging and continued 122B provisioning — 2026-10-06
 
 The distinct exact-wheel-only ACL boundary passed 1303 main/independent checks and actual
