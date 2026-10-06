@@ -1,5 +1,21 @@
 # Local CPU-only AI and capacity planning
 
+## Raw repair remains incomplete; regressed policy rolled back — 2026-10-06
+
+At 14:31 UTC the third distinct Q8 policy completed all finals but scored **11/16** in main-only
+review: both topology assertions, Persian coding guard/scope and an unsupported English causal
+denial fail. It was rejected; the prompt/two tests were restored to exact `6c3a380` bytes, whose measured
+**13/16 is still failed**. No unchanged native rerun or model selection. Native SHA:
+`0984bfea6235c3b24b2cf464ff7e557fc642e506020f58b436c9c6568b2285ce`.
+All three reports, failures and rejected artifact remain protected. Actual owned stop and separate
+unchanged ready-idle serving checks passed; five source CI jobs do not prove raw correctness.
+The two earlier guarded coding samples do not establish universal coding reliability after this
+regression. Prompt edits are not training. A materially justified next candidate strategy/full
+frozen review is needed; no cherry-picking or application fallback credit. Serving35B/defaults/
+public thinking remain unchanged; independent/app/privacy/context/evidence/WAN/rollback are open.
+After source rollback, the local unit/API suite passed 1,383 tests, with two POSIX-only skips and
+130 integration/browser cases deselected. This is source verification, not raw-model acceptance.
+
 ## All finals on time, three raw failures remain — 2026-10-06
 
 The full `6c3a380` Q8/300-second run ended at14:07 UTC: **13 main-reviewed passes/three failures**.

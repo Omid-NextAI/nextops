@@ -6,6 +6,25 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Third policy rejected; exact source rollback — 14:31 UTC
+
+The `4654b43` full Q8/300 run met all sixteen deadlines but regressed to **11 main-reviewed
+passes/five failures**: both networking topology claims, missing Persian string guard and scope,
+and an unsupported categorical English denial of causation. Persian explanatory hypothesis now
+passes, but that cannot offset the regressions. Native SHA:
+`0984bfea6235c3b24b2cf464ff7e557fc642e506020f58b436c9c6568b2285ce`.
+The unchanged AST checker again rejects seven Persian guard boundaries; no generated code runs.
+Owned cleanup/separate baseline reconciliation and five exact-source CI jobs passed, not quality.
+
+This policy was rejected and `qwen38_prompt.py` plus its two policy tests restored to exact `6c3a380`
+contents. All reports and the rejected wheel are retained. The restored policy's measured 13/16 remains
+failed, not a selected model or a new unchanged trial. Prompt-only changes have not reliably
+repaired raw instruction following; do not cherry-pick samples, train on frozen questions or
+credit deterministic application text as raw success. Further model work needs a materially
+justified artifact/profile/method strategy with applicable license/integrity/resource/tool review,
+then unchanged full semantic/code acceptance. Serving35B/defaults/public thinking remain unchanged;
+independent/app/privacy/thinking/context/evidence/WAN/model rollback are still open.
+
 ### Labelled-policy result and closed-observation experiment — 14:07 UTC
 
 The `6c3a380` full Q8 run completed all sixteen finals within explicit300 seconds, but main
@@ -252,6 +271,25 @@ this index entry. Preserve the prior failed-thinking and UI deployment records. 
 release manifest only for an actually accepted identity change, not source registration.
 
 ## فارسی
+
+### رد دستور سوم و بازگشت دقیق کد — ساعت۱۴:۳۱ UTC
+
+اجرای کامل Q8/۳۰۰ با کد `4654b43` همهٔ شانزده مهلت را گذراند، اما به **۱۱ موفقیت/پنج شکست
+در بازبینی عامل اصلی** برگشت: ادعای توپولوژی در هر دو زبان، نبود شرط رشته و دامنه در فارسی
+و رد قطعی و بی‌شاهدِ علت در انگلیسی. فرضیهٔ توضیحیِ فارسی اکنون موفق است، اما شکست‌های دیگر
+را جبران نمی‌کند. هش بومی در بخش انگلیسی همین رکورد آمده است. کنترل ثابت AST دوباره هفت
+مرز شرط نوعِ فارسی را رد می‌کند؛ کد تولیدشده اجرا نمی‌شود. توقف/بازخوانی جداگانهٔ خط مبنا
+و پنج CI همان کد موفق‌اند، نه کیفیت مدل.
+
+این دستور رد شد و فایل دستور و دو آزمون آن به محتوای دقیق `6c3a380` بازگشتند. گزارش‌ها و
+wheel ردشده حفظ شده‌اند. نتیجهٔ ۱۳ از ۱۶ دستور بازگردانده‌شده هنوز ناموفق است؛ این بازگشت
+نه انتخاب مدل است و نه آزمون تازهٔ اجرای بدون تغییر. تغییر دستور به‌تنهایی پیروی از دستور
+را در پاسخ خام به‌طور پایدار اصلاح نکرده است. نمونهٔ موفق به‌تنهایی ملاک نباشد، پرسش‌های
+ثابت وارد آموزش نشوند و متن قطعی برنامه به مدل امتیاز ندهد. کار بعدی به راهبرد متفاوت و
+مستدلی برای فایل مدل، نمایه یا روش آزمون نیاز دارد؛ بررسی مجوز، صحت فایل‌ها، منابع و ابزارها
+و سپس پذیرش با مجموعهٔ کامل و ثابت معیارهای معنا و کد لازم است. مدل زندهٔ 35B، تنظیمات
+پیش‌فرض و وضعیت استدلال عمومی ثابت‌اند. بازبینی مستقل و پذیرش برنامه، حریم خصوصی، استدلال،
+پنجرهٔ زمینه، شواهد، قطع WAN و بازگشت مدل همچنان تکمیل نشده‌اند.
 
 ### نتیجهٔ دستور عنوان‌دار و آزمایشِ مشاهدهٔ محدود — ساعت۱۴:۰۷ UTC
 

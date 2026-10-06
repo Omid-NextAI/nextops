@@ -1,5 +1,28 @@
 # Project state / وضعیت پروژه
 
+Current raw checkpoint — **2026-10-06, 14:31 UTC**: three bounded candidate-policy trials do not
+complete the owner's raw coding/reasoning repair. Scores are 12/16 (final 120-second timeout), 13/16
+under explicit 300 seconds, then 11/16 with regressions. The last policy was rejected and its
+prompt/two tests restored to exact `6c3a380`; its 13/16 remains unqualified. Last native SHA
+`0984bfea6235c3b24b2cf464ff7e557fc642e506020f58b436c9c6568b2285ce` and all history are retained.
+Owned cleanup/separate serving35B PID/readiness/idle reconciliation passed; no live change or
+public thinking. Five exact-source CI jobs per experiment do not prove raw quality. Next model
+work requires a justified different strategy, unchanged full criteria and applicable review;
+independent/app/privacy/context/evidence/WAN/model rollback remain open. No training or fake pass.
+
+گام جاری پاسخ خام — **۶ اکتبر ۲۰۲۶، ۱۴:۳۱ UTC**: سه آزمون محدود دستورهای نامزد، اصلاح
+خواسته‌شدهٔ کدنویسی و نتیجه‌گیری خام را تکمیل نکردند. نتایج به‌ترتیب ۱۲ از ۱۶ با پایان‌یافتن
+مهلت ۱۲۰ثانیه‌ای پاسخ آخر، ۱۳ از ۱۶ با مهلت صریح ۳۰۰ ثانیه و سپس ۱۱ از ۱۶ همراه با پسرفت
+بودند. دستور آخر رد شد و فایل دستور و دو آزمون آن به محتوای دقیق `6c3a380` بازگشتند؛ نتیجهٔ
+۱۳ از ۱۶ آن همچنان پذیرفته نیست. هش آخرین گزارش و همهٔ سوابق حفظ شده‌اند. توقف فرایند آزمون
+و بررسی جداگانهٔ شناسهٔ فرایند، آمادگی و نبود درخواست فعال در مدل زندهٔ 35B موفق بود؛ تنظیم
+مدل زنده و وضعیت استدلال عمومی تغییر نکردند. موفقیت پنج کار CI برای هر نسخهٔ کد، صحت پاسخ
+خام را ثابت نمی‌کند. راهبرد بعدی باید متفاوت و مستدل باشد و مجموعهٔ کامل معیارها و بازبینی
+لازم را حفظ کند. بازبینی مستقل و پذیرش برنامه، حریم خصوصی، پنجرهٔ زمینه، شواهد، قطع WAN و
+بازگشت مدل هنوز تکمیل نشده‌اند. آموزش مدل یا موفقیت ساختگی گزارش نمی‌شود.
+
+## Earlier closed-observation preparation — historical / آماده‌سازی پیشینِ مشاهدهٔ محدود — سابقه
+
 Current raw checkpoint — **2026-10-06,14:07 UTC**: full `6c3a380` Q8/300 completed16 finals,
 but **13 main-reviewed passes/three failures** remain: English upstream assumption, Persian
 authorized scope and a missing specific Persian hypothesis. Both finite code samples/English

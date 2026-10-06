@@ -79,9 +79,7 @@ def test_policy_does_not_branch_on_question_or_copy_fixture_answers(locale: str)
         assert "استدلال خصوصی" in first
         assert first.index("کد:") < first.index("نتیجه‌گیری:") < first.index("شاهد:")
         assert "نخست برای نوع نامعتبر False" in first
-        assert "نه تعریف کتابیِ کد خطا" in first
-        assert "ندانستن علت به‌تنهایی فرضیه نیست" in first
-        assert "با محدودیت مجوز و دامنهٔ داده‌شده آغاز کنید" in first
+        assert "توپولوژی مشاهده‌شده نیست" in first
         assert "نام میزبان به‌تنهایی دامنه نیست" in first
         assert "ارقام و نویسه‌های اصلی" in first
     else:
@@ -92,10 +90,9 @@ def test_policy_does_not_branch_on_question_or_copy_fixture_answers(locale: str)
         assert "private reasoning" in first
         assert first.index("Code:") < first.index("Conclusions:") < first.index("Evidence:")
         assert "first return False for an invalid type" in first
-        assert "infrastructure facts are supplied observations" in first
-        assert "not textbook error definitions" in first
-        assert "state a possible causal explanation, not just uncertainty" in first
-        assert "Begin observations with the supplied authorization/scope constraint" in first
+        assert (
+            "Do not assert an upstream failure or intermediary exists from a status code" in first
+        )
         assert "a host name alone is not scope" in first
         assert "character-for-character, including original digits" in first
 

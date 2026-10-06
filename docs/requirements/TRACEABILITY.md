@@ -1,5 +1,17 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Raw repair result for sections 11/16–17/20–21: three distinct frozen native trials scored 12/16,
+13/16 and 11/16 (main-only). The regressed third policy was rejected; exact source rollback preserves the
+unqualified `6c3a380` candidate and all failures. Finite guard checks, topology/scope/causal review
+and explicit deadlines remain strict. No model training, serving/thinking selection or acceptance
+is inferred from source CI or application-owned qualifiers. See the qualification specification.
+
+نتیجهٔ اصلاح خام در بخش‌های ۱۱/۱۶–۱۷/۲۰–۲۱: سه آزمون بومی با پرسش‌های ثابت و دستورهای متفاوت
+در بازبینی عامل اصلی به‌ترتیب ۱۲، ۱۳ و ۱۱ از ۱۶ امتیاز گرفتند. دستور سوم رد شد و با بازگشت
+دقیق کد، نامزد تأییدنشدهٔ `6c3a380` و همهٔ شکست‌ها حفظ شدند. کنترل محدود شرط نوع، بازبینی
+توپولوژی، دامنه و رابطهٔ علّی و ثبت صریح مهلت همچنان سخت‌گیرانه باقی‌اند. CI و اطلاعات
+درج‌شده توسط برنامه، به معنای آموزش، انتخاب مدل زنده، فعال‌شدن استدلال یا پذیرش مدل نیستند.
+
 Original sections11/16–17/20–21: the [raw-quality experiment](QWEN38_QUALIFICATION_SPEC.md) maps
 candidate instruction invariants to `inference/qwen38_prompt.py`, `test_qwen38_prompt.py` and
 `test_coding_guidance.py`. Source checks do not replace the unchanged sixteen-case native corpus,

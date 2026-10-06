@@ -234,12 +234,15 @@ def test_detailed_general_coding_guidance_is_trusted_and_not_frozen_answer_coach
             in system
         )
         assert "completed steps are not independent verification" in system
-        assert "infrastructure facts are supplied observations" in system
-        assert "not textbook error definitions" in system
-        assert "No certificate validation, intermediary topology, overall health or cause" in system
-        assert "Additional components/failures are unverified hypotheses" in system
-        assert "state a possible causal explanation, not just uncertainty" in system
-        assert "Begin observations with the supplied authorization/scope constraint" in system
+        assert "Neither alone proves certificate validation, intermediary topology" in system
+        assert "overall health or a root cause" in system
+        assert (
+            "Do not assert an upstream failure or intermediary exists from a status code" in system
+        )
+        assert (
+            "In the observation sentence label source, scope, observed, collected and limits"
+            in system
+        )
         assert "a host name alone is not scope" in system
         assert "timestamps character-for-character, including original digits" in system
         assert "current states remain unknown" in system
@@ -255,12 +258,8 @@ def test_detailed_general_coding_guidance_is_trusted_and_not_frozen_answer_coach
         assert "زمان کامل مشاهده و گردآوری، دامنهٔ مجاز" in system
         assert "کهنگی یا ناقص‌بودن" in system
         assert "گزارش تکمیل یک کار، تأیید مستقل آن نیست" in system
-        assert "واقعیتِ وضعیت زیرساخت فقط مشاهدهٔ صریحِ دادهٔ ورودی است" in system
-        assert "نه تعریف کتابیِ کد خطا" in system
-        assert "تأیید گواهی، توپولوژی، سلامت کلی یا علت را ثابت نمی‌کند" in system
-        assert "جزء یا خرابیِ اضافی فقط فرضیهٔ تأییدنشده است" in system
-        assert "ندانستن علت به‌تنهایی فرضیه نیست" in system
-        assert "با محدودیت مجوز و دامنهٔ داده‌شده آغاز کنید" in system
+        assert "هیچ‌کدام به‌تنهایی تأیید گواهی، توپولوژی واسط، سلامت کلی یا علت قطعی نیست" in system
+        assert "از کد خطا، وجود یا خرابیِ واسط و بالادست را قطعی ندانید" in system
         assert "نام میزبان به‌تنهایی دامنه نیست" in system
         assert "ارقام و نویسه‌های اصلی حفظ کنید؛ ترجمه یا محلی‌سازی نکنید" in system
         assert "اندازه‌گیری‌نشده نامعلوم است" in system

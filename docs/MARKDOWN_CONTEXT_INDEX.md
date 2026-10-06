@@ -46,7 +46,7 @@ remaining task-specific sources. The repository skill
 
 - `docs/requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md` — Bilingual actual resized-guest/new-volume preparation, pinned metadata-only Flash Q8 import, customer-license consideration, frozen regression tools and unrun model gates.
 
-- `docs/requirements/QWEN38_QUALIFICATION_SPEC.md` — Bilingual bounded Qwen 3.8 Q8/Q5 qualification, candidate-only type/protocol/provenance rule experiment, frozen raw acceptance, supplied capacity versus guest limits, privacy and rollback.
+- `docs/requirements/QWEN38_QUALIFICATION_SPEC.md` — Bilingual bounded Qwen 3.8 Q8/Q5 qualification, three failed raw-policy experiments and exact rejected-source rollback, frozen acceptance, capacity, privacy and remaining gates.
 - `docs/requirements/QWEN38_QUALIFICATION_2026-10-05.md` — Bilingual actual 27B Q8 import/load, frozen baseline comparisons, native thinking, failed context/coding gates and unchanged serving model.
 - `docs/requirements/REFERENCE_UI_SPEC.md` — Bilingual bounded reference-workspace and original OCS login specification, security invariants and source rollback.
 - `docs/en/REFERENCE_UI.md` — English UI preview, source verification, controlled live qualification and screenshot handoff.

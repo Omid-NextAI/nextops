@@ -1,5 +1,28 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after 14:31 UTC**: raw-model repair is incomplete. Preserve three
+actual trials and the completed rejected-policy rollback to exact `6c3a380`; retained 13/16 is not accepted.
+Do not repeat an unchanged run, cherry-pick a lucky sample, train on frozen tests or call
+application safeguards raw improvement. Determine a materially justified candidate artifact/
+profile/method against persistent networking/scope/instruction-following failures; establish
+license/integrity/resource/tool review before another finite test. Keep all16 frozen questions/
+semantic/code criteria and explicit deadline provenance. Standard failures still prohibit serving
+selection/public thinking; independent, app/proxy, privacy/context/evidence/WAN/model rollback
+remain open. Source tests/CI and source rollback are not native/live/model-rollback acceptance.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از ۱۴:۳۱ UTC**: اصلاح پاسخ خام مدل هنوز کامل نیست. گزارش سه
+آزمون واقعی و بازگشت انجام‌شدهٔ دستور ردشده به محتوای دقیق `6c3a380` حفظ شوند؛ نتیجهٔ ۱۳ از
+۱۶ برای پذیرش کافی نیست. اجرای بدون تغییر تکرار نشود، نمونهٔ موفق به‌تنهایی ملاک نباشد،
+پرسش‌های ثابت وارد آموزش نشوند و کنترل‌های برنامه به‌عنوان بهبود خام مدل گزارش نشوند.
+برای خطاهای پایدار شبکه، دامنهٔ مجاز و پیروی از دستور، راهبرد متفاوت و مستدلی برای فایل مدل،
+نمایه یا روش آزمون تعیین شود. پیش از آزمون محدود بعدی، مجوز، صحت فایل‌ها، منابع و ابزارها
+بررسی شوند. هر شانزده پرسش، معیارهای معنا و کد و ثبت صریح مهلت پاسخ ثابت بمانند. شکست آزمون
+استاندارد همچنان مانع انتخاب مدل زنده و فعال‌کردن استدلال عمومی است. بازبینی مستقل و پذیرش
+مسیر برنامه و پراکسی، حریم خصوصی، پنجرهٔ زمینه، شواهد، قطع WAN و بازگشت مدل هنوز تکمیل
+نشده‌اند. آزمون‌های کد، CI و بازگشت کد، جایگزین پذیرش مدل بومی یا محیط عملیاتی نیستند.
+
+## Earlier closed-observation task — historical / کار پیشینِ مشاهدهٔ محدود — سابقه
+
 Current task — **2026-10-06, after14:07 UTC**: preserve the full Q8/300 thirteen-pass/three-failure
 raw review and owned cleanup. Test the materially distinct generic closed-observation/scope-first/
 explicit causal-explanation instructions with the exact committed full unchanged sixteen-case
