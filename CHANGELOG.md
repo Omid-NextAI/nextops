@@ -1,5 +1,25 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Reviewed execution tools and further installer cleanup repair — 2026-10-06
+
+Transport reached 202 ranges/54210388768 bytes; 36219065984 remain, one whole shard verified.
+Native V2 passed 1478 main/independent preparation checks; publication execution V2 passed 1646
+each-side checks. Actual pinned template/license hashes match; no native privacy/context gate
+is inferred. Publication installer V2 was subsequently rejected; distinct V3 passed 256/989
+main-only local checks. The repaired native installer draft passed 227 main-only checks;
+controllers/independent reviews remain open as applicable after subagent usage-limit failures.
+Exact `2847651` passed five CI jobs. No host install/publication/trial/model selection from these
+repairs; earlier metadata installation, original failures, staged ca1 and live35B remain intact.
+
+انتقال به ۲۰۲ بخش/۵۴۲۱۰۳۸۸۷۶۸ بایت رسید؛ ۳۶۲۱۹۰۶۵۹۸۴ بایت باقی و یک فایل کامل تأیید
+است. ابزار بومیِ نسخهٔ دوم، ۱۴۷۸ کنترل اصلی/مستقل و اجرای انتشار، ۱۶۴۶ کنترل در هر
+بازبینی را گذراندند. هش‌های واقعی قالب/مجوز مطابق‌اند، نه پذیرش بومیِ حریم خصوصی/زمینه.
+سپس ابزار نصب انتشارِ نسخهٔ دوم رد شد؛ نسخهٔ مستقلِ سوم، ۲۵۶/۹۸۹ کنترل صرفاً اصلی و
+پیش‌نویس اصلاح‌شدهٔ نصب بومی، ۲۲۷ کنترل اصلی را گذراندند. کنترل‌کننده/بازبینی مستقلِ
+لازم پس از توقف عامل‌ها به دلیل سقف استفاده، باز است. پنج کنترل CI کد دقیق `2847651`
+موفق‌اند. این اصلاح‌ها نصب/انتشار/آزمون روی میزبان یا انتخاب مدل نیستند؛ نصب قبلیِ
+فراداده، شکست‌های اصلی، ca1 آماده‌شده و 35B زنده حفظ‌اند.
+
 ## Preparation failure-boundary repairs and continued transport — 2026-10-06
 
 Transport reached 194 ranges/52062905120 bytes; 38366549632 remain, with one complete shard.

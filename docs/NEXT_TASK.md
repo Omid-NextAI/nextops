@@ -1,5 +1,32 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after the 04:12 UTC checkpoint**: continue reviewed finite transport
+from **202 ranges/54210388768 bytes**, with **36219065984 bytes** remaining. Finish transport
+before remaining assembly; retain bodies and earlier failures. Native V2 and publication V2
+execution tools passed main/independent local review, not host execution. Do not use the rejected
+publication installer V2. Finish independent review of its distinct installer V3 and complete the
+native-trio installer/controller; main-only checks are not peer acceptance. Subagent usage-limit
+failures do not erase completed reviews or authorize credit for unfinished ones. Root can continue
+already reviewed provisioning and isolated repairs. After all whole-file hashes, inspect the full
+set, bind actual metadata/template/license review, publish independent service-readable copies,
+then run standard semantics before separate thinking/privacy/measured-context/app/rollback gates.
+Preserve case120s/384-final/16K/32-thread qualification controls. Live35B/public thinking-off stay.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از گام ساعت ۰۴:۱۲ UTC**: انتقال محدودِ بررسی‌شده از
+**۲۰۲ بخش/۵۴۲۱۰۳۸۸۷۶۸ بایت** ادامه یابد؛ **۳۶۲۱۹۰۶۵۹۸۴ بایت** باقی است. انتقال پیش از
+تجمیع باقی‌مانده تکمیل و بدنه‌ها/شکست‌های قبلی حفظ شوند. ابزارهای بومی و اجرای انتشارِ
+نسخهٔ دوم، بازبینی محلیِ اصلی/مستقل را گذرانده‌اند، نه اجرای روی میزبان. ابزار ردشدهٔ
+نصب انتشارِ نسخهٔ دوم استفاده نشود؛ بازبینی مستقلِ نسخهٔ سوم و ابزار نصب/کنترل‌کنندهٔ
+سه فایل بومی کامل شوند. کنترلِ صرفاً اصلی، بازبینی مستقل محسوب نمی‌شود. توقف عامل‌ها
+به دلیل سقف استفاده، بازبینی کامل‌شده را حذف یا کار ناتمام را تأیید نمی‌کند. بازبین اصلی
+می‌تواند آماده‌سازیِ قبلاً بررسی‌شده و اصلاح جداگانهٔ محلی را ادامه دهد. پس از هش کامل
+همهٔ فایل‌ها، مجموعه/فراداده/قالب/مجوز واقعی تطبیق و نسخه‌های مستقلِ خواندنی برای سرویس
+منتشر شوند؛ سپس معنای استاندارد پیش از استدلال/حریم خصوصی/زمینهٔ سنجیده/برنامه/بازگشت
+پذیرفته شود. سقف پرسش۱۲۰ ثانیه/۳۸۴ توکن نهایی/16K/۳۲ رشته و 35B زنده/خاموشی استدلال
+عمومی ثابت بمانند.
+
+## Earlier preparation checkpoint — historical / گام پیشینِ آماده‌سازی — سابقه
+
 Current task — **2026-10-06, after the 02:11 UTC checkpoint**: continue reviewed finite transport
 from **194 ranges/52062905120 bytes**, with **38366549632 bytes** remaining. Preserve bodies;
 finish transport before remaining assembly. Do not repeat first-shard assembly, ca1 staging,

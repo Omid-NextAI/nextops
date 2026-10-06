@@ -7,10 +7,72 @@ Date: **2026-10-05**. Historical 27B status: **Qwen3.8-27B Q5 import verified; d
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, 02:11 UTC — 194 transport ranges; reviewed preparation repairs; no model cutover**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۲:۱۱ UTC — ۱۹۴ بخش انتقالی؛ اصلاح‌های بازبینی‌شدهٔ آماده‌سازی؛ بدون تغییر مدل زنده**.
+Latest update: **2026-10-06, 04:12 UTC — 202 verified ranges; execution-tool review and installer repair; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۴:۱۲ UTC — ۲۰۲ بخش تأییدشده؛ بازبینی ابزار اجرا و اصلاح نصب؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Further transport, actual template binding and installer cleanup — 04:12 UTC
+
+Two more V7 windows completed after the preserved 194-range record:
+
+| Operation suffix | Second-file indexes | Curl milliseconds | Desktop result SHA-256 |
+| --- | --- | --- | --- |
+| `639268494625754785` | 46–49 | 465344 | `af5af058176e47b1959ed2dcf4c679eac51a7173a035c70d32fd23166b82fba5` |
+| `639268501838394192` | 50–53 | 37625 | `ec63aa840b65844bb20ce8a30019a4ba1748e74d1f60942ad3fb21e217dd8993` |
+
+Main read actual desktop results and terminal exit0, not separate root range receipts. All
+four numeric HTTP206/exit0/size/header/held-identity/hash checks passed before each import;
+bodies remain, handles closed and owned-stop/live ready-idle reconciliation passed. Totals:
+**202 ranges/54210388768 bytes**, **36219065984 transport bytes** remaining. One whole shard
+is verified, not the model. Variable curl duration is not an inference benchmark or speedup.
+
+Main and independent source review matched actual lossless upstream bytes at official revision
+`dc4d348443bc740c68e2d77492492c11606384d5`: template **7756 bytes**, SHA
+`a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715`, and license **11544 bytes**,
+SHA `bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a`. These match the observed
+first-file template and protected Apache-2.0 license. No whitespace/newline normalization was
+used. With generation prompt enabled, literal `enable_thinking=false` statically closes the
+empty think prefix; true/unset leaves it open. Latest assistant reasoning history/tool-cycle
+handling is independent of that flag. This is not native rendering, tokenizer-array equality,
+privacy, all-shard integrity, conversion-provenance, context or whole-product legal acceptance.
+No passing complete-set manual input has been created. Preserve license/attribution/NOTICE
+where applicable and modification notices; this remains correctly named Qwen3.5, not 3.8.
+
+Distinct native V2 full-file/diff review passed **1478 main/independent pure checks** and Bash
+syntax. Probe/wrapper/unit SHAs are `dd85034de1cfbba9cc97622a1a8847bbdda887931eb38b003c13e7c03c41b4d6`,
+`f63eb791cc8a22a13b09d9b96c6beda351f51a0b3c4600885ed850add78cae9c` and
+`79befd1115da2b98fe1e34fdc9f0530abd538136b02a6a2ac16f1bd655ca1046`. Both retained FD/path locks
+and stable ancestor identities bracket guards/writes/fsync; required-audit failure cannot skip
+owned-probe termination and descriptor cleanup. Its installer/external controller and host
+standard trial remain open. Frozen source/runtime/corpus/case120s/384-final/16K/32-thread limits
+are unchanged. Publication V2's execution pair passed **1646 each-side pure checks**; controller
+SHA `b79d6539361075d778fe144c06617d89feeae855adfaec412ededa55e58392a5`. It invokes an already
+installed fixed publisher only; it has not installed or executed anything. A later read-only
+receipt cannot change an unsuccessful primary transport/cleanup outcome into success.
+
+Subsequent review rejected publication installer V2 despite its earlier passing pure checks:
+constructor fstat/close errors could lose or skip owned handles, and required receipt fsyncs
+did not recheck both held-lock identities. Successful earlier metadata-helper installations
+remain historical successes, not proof of these failure paths. Distinct installer V3 now
+registers directory ownership before validation, attempts all closes, latches uncertainty and
+rechecks both locks around receipt fsyncs. Its controller validates explicit cleanup/receipt
+flags and preserves actual primary exit/stdout hash before parsing. Main-only **256 Python/989
+PowerShell checks** passed; source/controller SHAs are
+`66e75a494da7ea696e3a85aec7209f4ef0cd01c7bfc3a6b41263c120ac0ffff1` and
+`673739b11fa9f432575c42bb601abb3dc56758343cc9a2d35eaec59744b6dc18`. They have not run on the host.
+The unfinished native-trio installer draft also had raw closes bypassing ownership tracking;
+main repaired them and **227 isolated definition/memory checks** passed, including actual
+selected-finally failure paths. Its controller and independent review are still unfinished.
+Local checker-development assertion failures/corrections and original rejected tools remain.
+
+All three authorized subagents subsequently stopped with usage-limit errors. Completed reviews
+above retain their scope; neither ongoing agents nor unfinished independent passes are claimed.
+Root continues already reviewed finite provisioning and isolated repairs. Exact `2847651` passed
+all five source-CI jobs in [run 37403305543](https://github.com/Omid-NextAI/nextops/actions/runs/37403305543).
+ca1 remains staged-not-installed; live35B/public thinking-off and unaccepted advertised context
+remain. Finish transport before other assemblies/full-set inspection/publication, then standard
+semantics before separate thinking/privacy/measured-context/matched-app/operational/rollback gates.
 
 ### Continued transport and preparation-tool failure review — 02:11 UTC
 
@@ -1171,6 +1233,57 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### ادامهٔ انتقال، تطبیق قالب واقعی و اصلاح پاک‌سازی نصب — ساعت ۰۴:۱۲ UTC
+
+پس از رکوردِ ۱۹۴بخشی، دو پنجرهٔ دیگرِ نسخهٔ هفتم موفق شدند. شناسه‌ها و هش‌های کاملِ
+نتیجه در جدول انگلیسی ثبت‌اند: اندیس‌های فایل دوم ۴۶ تا ۴۹ در ۴۶۵۳۴۴ میلی‌ثانیه و ۵۰
+تا ۵۳ در ۳۷۶۲۵ میلی‌ثانیه. بازبین اصلی نتیجه‌های واقعیِ رایانهٔ کاربر و پایان با کد صفر
+را خواند، نه رسیدهای جداگانهٔ root. در هر پنجره، هر چهار پاسخ HTTP206/کد خروج صفر،
+اندازه/header/هویت handle باز/هش کامل پیش از دریافت محافظت‌شده تأیید شدند. بدنه‌ها محفوظ،
+handleها بسته و توقف فرایندهای متعلق به اجرا/ثبات خط مبنای آماده و بی‌درخواست تأیید است.
+مجموع **۲۰۲ بخش/۵۴۲۱۰۳۸۸۷۶۸ بایت** است؛ **۳۶۲۱۹۰۶۵۹۸۴ بایت** باقی و فقط یک فایل کامل
+با هش منبع اصلی تأیید است. نوسان زمان curl، سنجش استنتاج یا اثبات بهبود سرعت نیست.
+
+بازبینی اصلی/مستقل، بایت‌های واقعی و بدون نرمال‌سازیِ قالب/مجوزِ نسخهٔ رسمیِ ثابت را با
+هش‌های درج‌شده در انگلیسی تطبیق داد: قالب ۷۷۵۶ بایتی با قالب مشاهده‌شدهٔ فایل اول و
+مجوز ۱۱۵۴۴ بایتی Apache-2.0 با نسخهٔ محافظت‌شده مطابق‌اند. در متن قالب، با فعال بودن
+generation prompt، مقدار دقیق `enable_thinking=false` پیشوند خالی استدلال را می‌بندد؛
+مقدار true/غایب آن را باز می‌گذارد. پردازش سابقهٔ استدلالِ آخرین پاسخ/چرخهٔ ابزار از این
+پرچم مستقل است. این بررسی، پذیرش رندر بومی، برابری آرایهٔ توکن، حریم خصوصی، همهٔ فایل‌ها،
+منشأ تبدیل، زمینه یا حقوق کل محصول نیست. ورودیِ تأییدشدهٔ دستی برای مجموعهٔ کامل هنوز
+ایجاد نشده. مجوز/انتساب/NOTICE لازم و توضیح تغییر حفظ شوند؛ نام این مدل Qwen3.5 است،
+نه 3.8.
+
+بازبینی کامل فایل/تفاوتِ چهار ابزار بومیِ نسخهٔ دوم، **۱۴۷۸ کنترل اصلی/مستقل** و نحو Bash
+را گذراند؛ هش‌های ثابتِ probe/اسکریپت/unit در متناظرِ انگلیسی ثبت‌اند. هویت دو قفل با
+FD/path و هویت ثابتِ پوشه‌های والد، اطراف کنترل/نوشتن/fsync تطبیق می‌شود؛ شکست ممیزی
+الزامی، توقف probe و پاک‌سازی مستقل را حذف نمی‌کند. ابزار نصب/کنترل‌کنندهٔ خارجی و
+آزمون استاندارد روی میزبان هنوز بازند. کد/محیط اجرا/مجموعهٔ پرسش/سقف پرسش۱۲۰ ثانیه/
+۳۸۴ توکن نهایی/16K/۳۲ رشته ثابت‌اند. جفت ابزار اجرای انتشارِ نسخهٔ دوم، **۱۶۴۶ کنترل
+در هر بازبینی** را گذراند؛ فقط ابزار ثابتِ ازپیش‌نصب‌شده را فراخوانی می‌کند و هنوز نصب
+یا اجرا نکرده است. رسیدِ بعدیِ فقط‌خواندنی، شکست اولیهٔ انتقال/پاک‌سازی را موفق نمی‌کند.
+
+بازبینی بعدی، با وجود کنترل‌های محضِ موفق قبلی، ابزار نصب انتشارِ نسخهٔ دوم را رد کرد:
+شکست fstat/بستن می‌توانست مالکیت handle را از دست بدهد یا بستن همتایان را حذف کند؛
+fsync رسید نیز هویت هر دو قفل را بازبینی نمی‌کرد. نصب‌های موفق قبلیِ ابزار فراداده،
+موفقیت تاریخی‌اند، نه پذیرش این مسیرهای شکست. نسخهٔ مستقلِ سوم، مالکیت پوشه را پیش از
+اعتبارسنجی ثبت، همهٔ بستن‌ها را امتحان و عدم قطعیت را حفظ می‌کند؛ هویت دو قفل پیش/پس
+از fsync رسید تطبیق می‌شود. کنترل‌کننده، شاهد صریحِ پاک‌سازی/رسید را می‌سنجد و کد خروج/
+هش خروجی اولیه را پیش از parse حفظ می‌کند. **۲۵۶ کنترل Python/۹۸۹ کنترل PowerShellِ
+صرفاً اصلی** موفق‌اند؛ هش‌ها در انگلیسی ثبت‌اند و اجرا روی میزبان انجام نشده. پیش‌نویس
+ناتمامِ نصب سه فایل بومی نیز بستن مستقیمِ خارج از ثبت مالکیت داشت؛ بازبین اصلی اصلاح
+کرد و **۲۲۷ کنترلِ جداگانهٔ تعاریف/حافظه**، شامل مسیرهای شکستِ finally واقعی، موفق شدند.
+کنترل‌کننده و بازبینی مستقل هنوز ناتمام‌اند. شکست/اصلاحِ کنترل‌های محلی و ابزارهای ردشده
+حفظ شده‌اند.
+
+سپس سه عاملِ مجاز به دلیل سقف استفاده متوقف شدند. دامنهٔ بازبینی‌های کامل‌شدهٔ بالا
+حفظ است؛ عاملِ درحال‌کار یا پذیرش مستقلِ ناتمام ادعا نمی‌شود. بازبین اصلی آماده‌سازی
+محدودِ قبلاً بررسی‌شده و اصلاح محلی را ادامه می‌دهد. پنج کنترل CI کد دقیق `2847651` در
+[اجرای 37403305543](https://github.com/Omid-NextAI/nextops/actions/runs/37403305543) موفق‌اند.
+ca1 آماده شده، نه نصب؛ 35B زنده/خاموشی استدلال عمومی و زمینهٔ اعلام‌شدهٔ پذیرفته‌نشده
+ثابت‌اند. انتقال پیش از تجمیع باقی‌مانده/بررسی مجموعه/انتشار تکمیل شود؛ معنای استاندارد
+پیش از استدلال/حریم خصوصی/زمینهٔ سنجیده/برنامه/عملیات/بازگشت متناظر پذیرفته شود.
 
 ### ادامهٔ انتقال و بازبینی مسیرهای شکست ابزارهای آماده‌سازی — ساعت ۰۲:۱۱ UTC
 

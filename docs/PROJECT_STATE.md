@@ -1,5 +1,38 @@
 # Project state / وضعیت پروژه
 
+Latest verified checkpoint — **2026-10-06, 04:12 UTC; provisioning and local repair only**:
+transport reached **202 ranges/54210388768 bytes**; **36219065984 transport bytes** remain.
+Two further four-request windows completed; all bodies were verified before import, retained,
+and followed by closed-handle/owned-stop/ready-idle reconciliation. Only one whole shard is
+verified. The native V2 quartet now passed 1478 main/independent preparation checks; publication
+V2's execution pair passed 1646 each-side checks. Neither has run on the host. Actual pinned
+upstream template/license bytes match the first-shard template/protected Apache license;
+static template review is not native privacy/tokenizer/context acceptance. Review subsequently
+rejected publication installer V2's close/receipt failure boundaries. Its distinct V3 passed
+256 Python/989 PowerShell main-only local checks; the unfinished native installer draft was
+repaired and passed 227 main-only checks. Their controllers/independent reviews remain open
+as applicable; all three authorized subagents stopped with usage-limit errors. No unfinished
+review is credited. Exact `2847651` passed all five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37403305543).
+Preserve successful earlier metadata-helper installation, original rejected tools/failures,
+staged-not-installed ca1, live 35B/public thinking-off and all open acceptance gates.
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۴:۱۲ UTC؛ فقط آماده‌سازی و اصلاح محلی**:
+انتقال به **۲۰۲ بخش/۵۴۲۱۰۳۸۸۷۶۸ بایت** رسیده و **۳۶۲۱۹۰۶۵۹۸۴ بایت** باقی است. دو
+پنجرهٔ چهاردرخواستیِ دیگر موفق شدند؛ بدنه‌ها پیش از دریافت محافظت‌شده تأیید و سپس حفظ
+شدند؛ بسته‌شدن handleها، توقف فرایندهای متعلق به اجرا و ثبات خط مبنا تأیید است. فقط یک
+فایل کامل با هش منبع اصلی تأیید شده. چهار ابزار بومیِ نسخهٔ دوم، ۱۴۷۸ کنترل اصلی/مستقل
+و جفت ابزار اجرای انتشار، ۱۶۴۶ کنترل در هر بازبینی را گذراندند؛ هیچ‌کدام روی میزبان اجرا
+نشده‌اند. بایت‌های واقعی قالب/مجوزِ نسخهٔ ثابت با هش قالب فایل اول/مجوز Apache محافظت‌شده
+مطابق‌اند؛ بررسی متن قالب، پذیرش حریم خصوصی/توکن‌ها/زمینه نیست. سپس مسیرهای شکستِ بستن
+handle/ثبت رسید، در ابزار نصب انتشارِ نسخهٔ دوم رد شدند. نسخهٔ مستقلِ سوم، ۲۵۶ کنترل
+Python/۹۸۹ کنترل PowerShell و پیش‌نویس اصلاح‌شدهٔ نصب بومی، ۲۲۷ کنترل محلیِ بازبین اصلی
+را گذراندند. کنترل‌کننده یا بازبینی مستقلِ باقی‌مانده هنوز کامل نیست؛ سه عاملِ مجاز به
+دلیل سقف استفاده متوقف شدند و کار ناتمام آن‌ها پذیرفته نشده است. پنج کنترل CI کد دقیق
+`2847651` در اجرای بالا موفق‌اند. نصب موفق قبلیِ ابزار فراداده، ابزارها/شکست‌های ردشده،
+ca1 آماده‌شده/نصب‌نشده، 35B زنده/خاموشی استدلال عمومی و معیارهای باز حفظ‌اند.
+
+## Earlier preparation checkpoint — historical / گام پیشینِ آماده‌سازی — سابقه
+
 Latest verified checkpoint — **2026-10-06, 02:11 UTC; provisioning and preparation only**:
 transport reached **194 ranges/52062905120 canonical bytes**; **38366549632 bytes** remain.
 Only the first complete upstream shard is verified. Three further reviewed four-request windows

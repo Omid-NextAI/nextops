@@ -1,5 +1,20 @@
 # Local CPU-only AI and capacity planning
 
+Latest checkpoint — **2026-10-06, 04:12 UTC; provisioning/local repair only**: 202 verified
+transport ranges/54210388768 bytes; 36219065984 remain and one whole upstream shard is verified.
+Native V2's 1478 main/independent checks and publication execution V2's 1646 each-side checks
+passed, not host execution. Pinned actual template/license bytes match reviewed hashes; native
+privacy/token-array/context acceptance is open. Publication installer V2 was subsequently rejected
+for close/receipt failure gaps. Distinct V3 passed 256/989 main-only Python/PowerShell checks;
+the repaired native installer draft passed 227 main-only checks. Required unfinished controller/
+independent reviews are not credited; authorized subagents stopped on usage limits. Exact
+`2847651` passed five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37403305543).
+Finish reviewed transport and all-file verification before standard/thinking/privacy/context/
+matched operational gates. Successful metadata installation/history, staged ca1, live35B/public
+thinking-off and unaccepted advertised context remain unchanged. See the [paired record](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+## Earlier preparation checkpoint — historical
+
 Latest checkpoint — **2026-10-06, 02:11 UTC; provisioning only**: transport reached
 194 ranges/52062905120 bytes; 38366549632 remain and only the first whole shard is verified.
 The latest four-request window passed in 461282 ms; the earlier fast/slow windows are not a
