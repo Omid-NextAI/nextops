@@ -1,5 +1,23 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after the 06:18 UTC follow-up**: continue reviewed finite transport
+from **258 ranges/69242774304 bytes**, with **21186680448 bytes** remaining. Exact `906a081`
+passed five CI jobs. The completed main-only V3 review handoff below remains pending independent
+review after subagent quota failures; do not install/publish/run those tools without that review.
+Preserve all completed work/failures. Finish transport before remaining assembly/full-set work,
+then standard semantics, final-only thinking/privacy/measured context and matched operational/
+rollback gates. No unattended transport/trial remains; live35B/public thinking-off stay.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از پیگیری ساعت ۰۶:۱۸ UTC**: انتقال محدودِ بررسی‌شده از
+**۲۵۸ بخش/۶۹۲۴۲۷۷۴۳۰۴ بایت** ادامه یابد؛ **۲۱۱۸۶۶۸۰۴۴۸ بایت** باقی است. پنج کنترل CI
+کد دقیق `906a081` موفق‌اند. بستهٔ تحویل بازبینیِ صرفاً اصلیِ نسخهٔ سوم در ادامه، پس از
+خطای سقف استفادهٔ عامل‌ها هنوز بازبینی مستقل نشده؛ ابزار بدون آن بازبینی نصب/منتشر/
+اجرا نشود. کار تکمیل‌شده/شکست‌ها حفظ شوند. انتقال پیش از تجمیع باقی‌مانده/مجموعهٔ کامل
+تکمیل و سپس معنا، استدلال نهایی/حریم خصوصی/زمینهٔ سنجیده و معیار عملیات/بازگشت دنبال
+شوند. انتقال/آزمون رهاشده‌ای وجود ندارد؛ 35B زنده/خاموشی استدلال عمومی ثابت‌اند.
+
+## Earlier provisioning/handoff checkpoint — historical / گام پیشینِ آماده‌سازی/تحویل — سابقه
+
 Current task — **2026-10-06, after the 06:10 UTC checkpoint**: continue reviewed finite transport
 from **254 ranges/68169032480 bytes**, with **22260422272 bytes** remaining. The private V3 review
 handoff binds fourteen exact files and isolated commands; matching hashes/JSON and existing

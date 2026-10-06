@@ -7,10 +7,24 @@ Date: **2026-10-05**. Historical 27B status: **Qwen3.8-27B Q5 import verified; d
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, 06:10 UTC — 254 verified ranges; exact-file independent-review handoff prepared, not approved; no model cutover**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۶:۱۰ UTC — ۲۵۴ بخش تأییدشده؛ بستهٔ تحویل بازبینی مستقلِ فایل‌های دقیق آماده، نه تأییدشده؛ بدون تغییر مدل زنده**.
+Latest update: **2026-10-06, 06:18 UTC — 258 verified ranges; exact-head CI passed, independent review/model gates still open; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۶:۱۸ UTC — ۲۵۸ بخش تأییدشده؛ CI کد دقیق موفق، بازبینی مستقل/پذیرش مدل همچنان باز؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Additional finite transport and exact-head CI — 06:18 UTC
+
+Operation `639268639835556618` passed second-file indexes106–109; curl43547ms, actual desktop
+result3084 bytes/SHA `a90c39b6491ad9910edc424400220455630082a9d4b5b51c56db28f5e2ccf9ce`;
+main read the full actual receipt and terminal exit0, not separate root range receipts. Numeric
+HTTP206/exit0/size/header/held-identity/hash checks for all four preceded import. Bodies remain,
+handles closed and unchanged ready-idle/owned-stop reconciliation passed. Totals: **258 ranges/
+69242774304 bytes**, **21186680448 bytes** remaining; only one whole upstream shard verified.
+No unattended transport/trial remains at this checkpoint. Exact `906a081` passed five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37422445456). Existing private V3
+review handoff/main assertions are not independent review or host/model acceptance. All earlier
+failures/completed stages and unrun full-set/standard/thinking/privacy/measured-context/matched
+app/operational/rollback gates remain. Apache alternative stays correctly 3.5, live35B/thinking-off.
 
 ### Further provisioning and independent-review handoff — 06:10 UTC
 
@@ -1381,6 +1395,22 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### انتقال محدود دیگر و CI کد دقیق — ساعت ۰۶:۱۸ UTC
+
+عملیات `639268639835556618` شاخص‌های ۱۰۶–۱۰۹ فایل دوم را گذراند؛ دریافت ۴۳۵۴۷ میلی‌ثانیه،
+رسید واقعی رایانه ۳۰۸۴ بایت/SHA
+`a90c39b6491ad9910edc424400220455630082a9d4b5b51c56db28f5e2ccf9ce` است. بازبین اصلی
+رسید کامل واقعی/خروج صفر را خواند، نه رسید جداگانهٔ بخش‌های root. HTTP206 عددی/خروج صفر/
+اندازه/سرآیند/هویت نگه‌داشته‌شده/هش چهار درخواست، پیش از دریافت محافظت‌شده مطابق‌اند.
+بدنه‌ها حفظ و بسته‌شدن handleها/توقف متعلق به اجرا/ثبات خط مبنای آماده و بی‌درخواست
+تأیید است. مجموع **۲۵۸ بخش/۶۹۲۴۲۷۷۴۳۰۴ بایت** و باقی‌مانده **۲۱۱۸۶۶۸۰۴۴۸ بایت** است؛
+فقط یک فایل کامل با هش منبع تأیید شده. انتقال/آزمون رهاشده‌ای در این گام وجود ندارد.
+پنج [کنترل CI](https://github.com/Omid-NextAI/nextops/actions/runs/37422445456) کد دقیق
+`906a081` موفق‌اند. بستهٔ خصوصی تحویل بازبینی/کنترل صرفاً اصلیِ نسخهٔ سوم، بازبینی مستقل
+یا پذیرش میزبان/مدل نیست. شکست‌ها/مراحل تکمیل‌شده و معیارهای اجرا‌نشدهٔ مجموعهٔ کامل/
+معنا/استدلال/حریم خصوصی/زمینهٔ سنجیده/برنامه/عملیات/بازگشت ثابت‌اند. نام درست جایگزین
+Apache، نسخهٔ 3.5 است؛ 35B زنده/خاموشی استدلال عمومی حفظ شوند.
 
 ### ادامهٔ آماده‌سازی و تحویل بازبینی مستقل — ساعت ۰۶:۱۰ UTC
 

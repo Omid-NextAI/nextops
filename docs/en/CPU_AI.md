@@ -1,5 +1,14 @@
 # Local CPU-only AI and capacity planning
 
+Follow-up — **2026-10-06, 06:18 UTC**: 258 ranges/69242774304 bytes verified as transported;
+21186680448 remain and only one whole upstream shard is verified. Another actual bounded V7
+window passed receipt/exit0/numeric/identity/hash/retention/cleanup/baseline checks. Exact
+`906a081` passed five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37422445456).
+Independent review/full-set/model/thinking/privacy/context/operational gates below remain open;
+no V3 host use, model selection or unattended trial. Live35B/public thinking-off are unchanged.
+
+## Earlier provisioning/handoff checkpoint — historical
+
 Provisioning/review handoff — **2026-10-06, 06:10 UTC**: 254 ranges/68169032480 bytes transferred
 with numeric HTTP206/exit0 and pre-import identity/hash/retention/stop/baseline checks;
 22260422272 bytes remain and one whole shard is verified. A private handoff binds fourteen

@@ -1,5 +1,23 @@
 # Project state / وضعیت پروژه
 
+Transport/CI follow-up — **2026-10-06, 06:18 UTC**: a further reviewed V7 window passed actual
+desktop receipt/terminal exit0 and numeric pre-import/hash/identity/retention/closed-handle/
+unchanged ready-idle checks. Totals: **258 ranges/69242774304 bytes**, **21186680448 bytes**
+remaining; one whole shard verified. Exact `906a081` passed all five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37422445456). The private review
+handoff and main-only V3 checks below do not close independent review or model/operational
+gates. No unattended transport/trial remains at this checkpoint; live35B/thinking-off stay.
+
+پیگیری انتقال/CI — **۶ اکتبر ۲۰۲۶، ساعت ۰۶:۱۸ UTC**: یک پنجرهٔ دیگرِ نسخهٔ هفتم با
+رسید واقعی/خروج صفر و کنترل عددی پیش از دریافت/هش/هویت/حفظ بدنه/بسته‌شدن handleها/
+ثبات خط مبنای آماده و بی‌درخواست موفق شد. مجموع **۲۵۸ بخش/۶۹۲۴۲۷۷۴۳۰۴ بایت** و
+باقی‌مانده **۲۱۱۸۶۶۸۰۴۴۸ بایت** است؛ یک فایل کامل تأیید شده. پنج کنترل CI کد دقیق
+`906a081` در اجرای بالا موفق‌اند. بستهٔ خصوصیِ تحویل بازبینی و کنترل صرفاً اصلیِ نسخهٔ
+سوم در ادامه، بازبینی مستقل یا معیار مدل/عملیات را نمی‌بندند. انتقال/آزمون رهاشده‌ای
+در این گام وجود ندارد؛ 35B زنده/خاموشی استدلال عمومی ثابت‌اند.
+
+## Earlier provisioning/handoff checkpoint — historical / گام پیشینِ آماده‌سازی/تحویل — سابقه
+
 Latest provisioning/review-handoff checkpoint — **2026-10-06, 06:10 UTC**: three further V7
 windows passed actual desktop receipts/terminal exit0, reaching **254 ranges/68169032480 bytes**;
 **22260422272 bytes** remain, one whole upstream shard verified. Numeric HTTP206/exit0,

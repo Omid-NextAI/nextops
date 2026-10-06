@@ -1,5 +1,15 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Additional verified transport and exact-head CI — 2026-10-06
+
+Another finite window reached 258 ranges/69242774304 bytes; 21186680448 remain and one whole
+shard is verified. Exact `906a081` passed all five CI jobs. Independent review/model/thinking/
+context gates remain open; live35B is unchanged and no unattended transport/trial remains.
+
+یک پنجرهٔ محدود دیگر، انتقال را به ۲۵۸ بخش/۶۹۲۴۲۷۷۴۳۰۴ بایت رساند؛ ۲۱۱۸۶۶۸۰۴۴۸ بایت
+باقی و یک فایل کامل تأیید است. پنج کنترل CI کد دقیق `906a081` موفق‌اند. معیارهای بازبینی
+مستقل/مدل/استدلال/زمینه باز است؛ 35B زنده ثابت و انتقال/آزمون رهاشده‌ای وجود ندارد.
+
 ## Continued provisioning and exact-file review handoff — 2026-10-06
 
 Three further bounded windows reached 254 ranges/68169032480 bytes; 22260422272 remain and one
