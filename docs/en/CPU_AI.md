@@ -1,5 +1,21 @@
 # Local CPU-only AI and capacity planning
 
+Latest checkpoint — **2026-10-06, 05:10 UTC; provisioning/local repair only**: 230 verified
+transport ranges/61726581536 bytes; 28702873216 remain and one whole shard is verified. Three
+further windows passed actual desktop receipt/exit/retention/closed-handle/ready-idle checks.
+Frozen native V2 lacks directory-entry fsync; distinct V3 adds it under retained identity-checked
+locks and passed 1869 main assertions/Bash syntax. Matching trio installer/controller passed
+227/1022; external read-only reconciliation/controller passed 18403/842 main assertions. Expanded
+mocks caught/repaired a bytearray process-token bug before host use; the large count includes
+per-block scan checks, not independent tests. Independent review remains not run after subagent
+usage-limit errors; no V3 host installation/execution. Exact `4bb295d` passed five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37414641936).
+Apache Qwen3.5-122B-A10B Q5 is still unselected, not 3.8 or accepted maximum context/thinking.
+Preserve completed earlier work/failures and live35B/public thinking-off. See the
+[paired record](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+## Earlier installer-controller checkpoint — historical
+
 Latest checkpoint — **2026-10-06, 04:36 UTC; provisioning/local checks only**: 218 transport
 ranges/58505356064 bytes verified, 31924098688 bytes remain; one whole shard verified. Four
 additional windows passed actual desktop receipt/exit and retained-body/closed-handle/unchanged

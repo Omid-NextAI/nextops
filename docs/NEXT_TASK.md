@@ -1,5 +1,33 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after the 05:10 UTC checkpoint**: continue reviewed finite transport
+from **230 ranges/61726581536 bytes**, **28702873216 bytes** remaining. Finish transport before
+remaining assemblies. Do not use native V2 as directory-durable: the distinct V3 wrapper,
+trio installer/controller and external reconciliation/controller passed main local checks only;
+finish independent review of these and publication installer V3 before host use. Preserve the
+unhashable-bytearray mock failure and repair, primary failures and completed earlier work.
+Current exact-argv absence is explicitly not recorded PID/start proof or prior-client-success
+proof; no later receipt may erase a primary failure. Exact `4bb295d` passed five CI jobs.
+After whole-file checks, inspect/bind the actual metadata/template/license, publish protected
+independent copies and qualify standard semantics before thinking/privacy/measured context/
+matched app/operational/rollback. Live35B/public thinking-off stay; this is a 3.5 alternative,
+not accepted 3.8. No missing review/gate is credited because subagents hit usage limits.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از گام ساعت ۰۵:۱۰ UTC**: انتقال محدودِ بررسی‌شده از
+**۲۳۰ بخش/۶۱۷۲۶۵۸۱۵۳۶ بایت** ادامه یابد؛ **۲۸۷۰۲۸۷۳۲۱۶ بایت** باقی است. انتقال پیش
+از تجمیع باقی‌مانده کامل شود. نسخهٔ بومیِ دوم، ثبت مدخل پوشه را پایدار نمی‌کند؛ نسخهٔ
+مستقلِ سوم و ابزار نصب/کنترل‌کننده/تطبیق بیرونیِ آن فقط کنترل اصلیِ محلی را گذرانده‌اند.
+بازبینی مستقلِ این ابزارها و نصب انتشار نسخهٔ سوم پیش از اجرای میزبان کامل شود. شکست
+آزمون bytearray غیرقابل‌هش/اصلاح آن، شکست اولیه و کار تکمیل‌شده حفظ شوند. نبود فعلیِ
+آرگومان مشخص، اثبات هویت PID/زمان آغازِ ثبت‌شده یا موفقیت فرایند قبلی نیست؛ رسید بعدی
+شکست اولیه را پاک نکند. پنج کنترل CI کد دقیق `4bb295d` موفق‌اند. پس از هش فایل‌های
+کامل، فراداده/قالب/مجوز واقعی تطبیق و نسخه‌های محافظت‌شدهٔ مستقل منتشر شوند؛ معنای
+استاندارد پیش از استدلال/حریم خصوصی/زمینهٔ سنجیده/برنامه/عملیات/بازگشت پذیرفته شود.
+35B زنده/خاموشی استدلال عمومی ثابت بمانند؛ جایگزین 3.5 است، نه 3.8 پذیرفته‌شده. سقف
+استفادهٔ عامل‌ها مجوز پذیرش بازبینی یا معیار اجرا‌نشده نیست.
+
+## Earlier installer-controller checkpoint — historical / گام پیشینِ کنترل‌کنندهٔ نصب — سابقه
+
 Current task — **2026-10-06, after the 04:36 UTC checkpoint**: continue reviewed finite transport
 from **218 ranges/58505356064 bytes**, with **31924098688 bytes** remaining. Finish transport
 before remaining assemblies. Native-trio installer/controller main checks now pass **227/1022**;

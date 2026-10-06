@@ -7,10 +7,66 @@ Date: **2026-10-05**. Historical 27B status: **Qwen3.8-27B Q5 import verified; d
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, 04:36 UTC — 218 verified ranges; native installer-controller main preparation; no model cutover**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۴:۳۶ UTC — ۲۱۸ بخش تأییدشده؛ آماده‌سازی اصلیِ کنترل‌کنندهٔ نصب بومی؛ بدون تغییر مدل زنده**.
+Latest update: **2026-10-06, 05:10 UTC — 230 verified ranges; directory-durable native V3 and external main review; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۵:۱۰ UTC — ۲۳۰ بخش تأییدشده؛ نسخهٔ بومیِ سوم با ثبت پایدار پوشه/بازبینی اصلیِ مرز بیرونی؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Directory-durable native preparation and external failure-boundary repair — 05:10 UTC
+
+Three additional V7 windows completed; main read actual desktop receipts and terminal exit0:
+
+| Operation suffix | Second-file indexes | Curl milliseconds | Desktop result SHA-256 |
+| --- | --- | --- | --- |
+| `639268580870887985` | 70–73 | 465344 | `b1a05e2bf6359e6b0ec7175c2487ffd4ef75b67bce7f7b17930ba2594df8f0ce` |
+| `639268588480494906` | 74–77 | 48375 | `2ca7d88a33a3082488972dde49d6b236ee59801e8e6c25327f188306921c24db` |
+| `639268592479363732` | 78–81 | 41157 | `25a21077b23e4d0817a23700454787fdb144d9f8ac76b4fffc869b2e68ec5991` |
+
+All-four numeric HTTP206/exit0/size/header/held-identity/hash checks preceded import; bodies
+remain, handles closed and unchanged ready-idle/owned-stop reconciliation passed. Main did not
+separately read root range receipts. Totals: **230 ranges/61726581536 bytes**, **28702873216
+bytes** remaining. Only the first whole upstream shard is verified; timings are not model
+benchmarks or proof of general transport speedup.
+
+Review found that frozen native V2 fsyncs report contents but not the containing new directory
+entry. Its earlier 1478 main/independent checks remain dated history, not proof of this omitted
+durability case. Distinct native V3 (**93609 bytes**, SHA
+`3414db13444f76c34c83a71d05e52a4ce476baaeeb7847ef5b39ed580606a842`) adds content fsync,
+lock checks, already-retained ROOT directory fsync and lock rechecks; failures stay unknown/
+nonzero with independent descriptor cleanup. Main **1869 pure assertions** and Bash syntax passed.
+Matching trio installer **33044 bytes**, SHA
+`3bf2fe34245c5fa13d39e946fe6b87bee86fdb8d4249369e524c23338a18f36e`, and controller
+**23868 bytes**, SHA `43ee65fd859ac428cb8ad7ce21a243f5fa02d1a909458c1e83c7090fc9e03381`,
+passed **227 Python/1022 PowerShell main assertions**, not installation. Probe/unit/source/runtime/
+corpus/prompts/case120s/384-final/16K/32+32 threads and existing run IDs are unchanged; no trial
+ran with either version. The fixed three-file payload is 185433 bytes, bootstrap plus payload
+218477 bytes. Old frozen tooling/pins and failures are retained, not silently relabeled.
+
+The distinct external read-only reconciler (**17037 bytes**, SHA
+`c984bd8e68c9c3204e67bf485484ae97649177c3290ae789f37e9c875f5743bd`) passed **18403 main
+assertions** across protected FD-relative reads, exact pre/post identity, input/process bounds,
+independent cleanup and fully mocked main failures. The count includes per-block checks while
+testing aggregate scan limits; it is not 18403 independent tests. Expanded mocks first failed
+with `TypeError: unhashable type: bytearray`: set intersection received bytearray tokens. The
+draft was repaired by converting bounded bytes before exact argv matching; the failure remains
+recorded. No host ran that draft. Current argv absence is explicitly **not** recorded PID/start
+identity proof, prior-client success, fresh full-shard hashing or semantic acceptance.
+
+External controller (**22979 bytes**, SHA
+`a658912ec27e752e701e53b132161c8c2ebd739ec705d75ee189ea0d1c2ecfac`) passed **842 main
+PowerShell assertions**, exit0: exact commands/bootstrap pins, bounded reads, strict typed
+receipts, async bounded input/output, owned client cleanup, primary exit/stdout digest before
+parse and one later read-only reconciliation that cannot green a primary failure. Root deadlines
+are 1010s artifact/2740s standard/65s read-only with 5s kill grace; clients 1030/2770/85s;
+outer bounds 1300/3060s. Standard exit2 means manual semantic review required, never acceptance.
+
+All V3 independent reviews and publication installer V3 independent review are **not_run**:
+three authorized subagents remain terminal usage-limit errors. None of these new tools is
+installed, published or operationally executed. Exact `4bb295d` passed five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37414641936). Completed metadata
+installation/first-shard assembly/source checks, original failures, staged-not-installed ca1,
+Apache **3.5** labeling and live35B/public thinking-off are preserved. Complete-file/manual/native
+standard/thinking/privacy/measured-context/matched app/operational/rollback gates remain open.
 
 ### Native installer-controller preparation and continued transport — 04:36 UTC
 
@@ -1273,6 +1329,63 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### آماده‌سازی بومی با ثبت پایدار پوشه و اصلاح مرز شکست بیرونی — ساعت ۰۵:۱۰ UTC
+
+سه پنجرهٔ دیگرِ نسخهٔ هفتم کامل شدند؛ بازبین اصلی رسید واقعی رایانه و خروج صفر را خواند:
+
+| پسوند عملیات | شاخص‌های فایل دوم | دریافت، میلی‌ثانیه | SHA-256 رسید رایانه |
+| --- | --- | --- | --- |
+| `639268580870887985` | ۷۰–۷۳ | ۴۶۵۳۴۴ | `b1a05e2bf6359e6b0ec7175c2487ffd4ef75b67bce7f7b17930ba2594df8f0ce` |
+| `639268588480494906` | ۷۴–۷۷ | ۴۸۳۷۵ | `2ca7d88a33a3082488972dde49d6b236ee59801e8e6c25327f188306921c24db` |
+| `639268592479363732` | ۷۸–۸۱ | ۴۱۱۵۷ | `25a21077b23e4d0817a23700454787fdb144d9f8ac76b4fffc869b2e68ec5991` |
+
+HTTP206 عددی/خروج صفر/اندازه/سرآیند/هویت نگه‌داشته‌شده/هش هر چهار درخواست پیش از
+دریافت محافظت‌شده مطابق‌اند؛ بدنه‌ها حفظ و بسته‌شدن handleها/توقف متعلق به اجرا/ثبات
+خط مبنای آماده و بی‌درخواست تأیید است. رسید بخش‌های root جداگانه خوانده نشده. مجموع
+**۲۳۰ بخش/۶۱۷۲۶۵۸۱۵۳۶ بایت** و باقی‌مانده **۲۸۷۰۲۸۷۳۲۱۶ بایت** است. فقط فایل کامل
+اول با هش منبع تأیید شده؛ زمان‌ها معیار مدل یا اثبات بهبود عمومی سرعت نیستند.
+
+بازبینی نشان داد نسخهٔ ثابت بومیِ دوم، محتوای گزارش را fsync می‌کند، نه مدخل تازهٔ آن
+در پوشه. ۱۴۷۸ کنترل اصلی/مستقل قبلی، سابقهٔ تاریخ‌دار است، نه اثبات این حالت بررسی‌نشده.
+نسخهٔ مستقلِ سوم (**۹۳۶۰۹ بایت**؛ هش
+`3414db13444f76c34c83a71d05e52a4ce476baaeeb7847ef5b39ed580606a842`) ترتیب fsync محتوا،
+کنترل قفل، fsync پوشهٔ ROOT از پیش نگه‌داشته‌شده و کنترل دوبارهٔ قفل را افزود. شکست،
+نامعلوم/غیرصفر می‌ماند و descriptorها مستقل بسته می‌شوند. **۱۸۶۹ کنترل محض اصلی** و
+نحو Bash موفق‌اند. ابزار نصب متناظر **۳۳۰۴۴ بایت** با هش
+`3bf2fe34245c5fa13d39e946fe6b87bee86fdb8d4249369e524c23338a18f36e` و کنترل‌کنندهٔ
+**۲۳۸۶۸ بایتی** با هش `43ee65fd859ac428cb8ad7ce21a243f5fa02d1a909458c1e83c7090fc9e03381`،
+**۲۲۷ کنترل اصلی Python/۱۰۲۲ کنترل اصلی PowerShell** را گذراندند، نه نصب. probe/واحد/
+منبع/runtime/مجموعهٔ آزمون/پرسش‌ها/سقف پرسش۱۲۰ ثانیه/۳۸۴ توکن نهایی/16K/۳۲+۳۲ رشته و
+شناسه‌های اجرا ثابت‌اند؛ با هیچ نسخه آزمون اجرا نشده. بار ثابت سه فایل، ۱۸۵۴۳۳ بایت
+و با bootstrap، ۲۱۸۴۷۷ بایت است. ابزار/هش ثابت قدیمی و شکست‌ها حفظ‌اند، نه تغییر نام پنهانی.
+
+ابزار مستقلِ تطبیق فقط‌خواندنیِ بیرونی (**۱۷۰۳۷ بایت**؛ هش
+`c984bd8e68c9c3204e67bf485484ae97649177c3290ae789f37e9c875f5743bd`) **۱۸۴۰۳ کنترل اصلی**
+را در خواندن محافظت‌شدهٔ وابسته به FD، هویت دقیق پیش/پس، سقف ورودی/فرایند، بستن مستقل
+و شکست‌های main کاملاً شبیه‌سازی‌شده گذراند. این تعداد شامل کنترل هر بلوک برای سقف
+کل اسکن است، نه ۱۸۴۰۳ آزمون مستقل. آزمون گسترش‌یافته ابتدا با خطای
+`TypeError: unhashable type: bytearray` شکست خورد؛ اشتراک مجموعه، توکن bytearray دریافت
+می‌کرد. تبدیل بایت‌های محدود پیش از تطبیق دقیق آرگومان اصلاح شد و شکست ثبت است؛
+پیش‌نویس روی میزبان اجرا نشد. نبود فعلیِ آرگومان، **اثبات هویت PID/زمان آغازِ ثبت‌شده،
+موفقیت فرایند قبلی، هش کامل تازهٔ فایل‌ها یا پذیرش معنایی نیست**.
+
+کنترل‌کنندهٔ بیرونی (**۲۲۹۷۹ بایت**؛ هش
+`a658912ec27e752e701e53b132161c8c2ebd739ec705d75ee189ea0d1c2ecfac`) **۸۴۲ کنترل اصلی
+PowerShell** را با خروج صفر گذراند: فرمان/هش bootstrap ثابت، خواندن محدود، رسید دارای
+نوع دقیق، ورودی‌وخروجی ناهم‌زمانِ محدود، بستن فرایند متعلق به اجرا، ثبت خروج/هش stdout
+اولیه پیش از تفسیر و فقط یک تطبیق فقط‌خواندنیِ بعدی که شکست اولیه را موفق نمی‌کند.
+سقف root برای artifact برابر ۱۰۱۰ ثانیه، استاندارد ۲۷۴۰، فقط‌خواندنی ۶۵ و مهلت kill
+۵ ثانیه است؛ رایانه ۱۰۳۰/۲۷۷۰/۸۵ و مرز بیرونی ۱۳۰۰/۳۰۶۰ ثانیه. خروج۲ استاندارد یعنی
+نیاز به بازبینی معنایی، نه پذیرش.
+
+همهٔ بازبینی‌های مستقل نسخهٔ سوم و نصب انتشارِ نسخهٔ سوم **اجرا نشده‌اند**؛ سه عامل
+مجاز همچنان با خطای سقف استفاده متوقف‌اند. ابزارهای تازه نصب/منتشر/عملیاتی اجرا نشده‌اند.
+پنج [کنترل CI](https://github.com/Omid-NextAI/nextops/actions/runs/37414641936) کد دقیق
+`4bb295d` موفق‌اند. نصب فراداده/تجمیع فایل اول/بررسی منبعِ تکمیل‌شده، شکست‌های اصلی،
+ca1 آماده‌شده/نصب‌نشده، نام درست **3.5** با مجوز Apache و 35B زنده/خاموشی استدلال عمومی
+حفظ‌اند. معیارهای فایل کامل/بازبینی واقعی/معنای بومیِ استاندارد/استدلال/حریم خصوصی/
+زمینهٔ سنجیده/برنامهٔ متناظر/عملیات/بازگشت همچنان باز هستند.
 
 ### آماده‌سازی کنترل‌کنندهٔ نصب بومی و ادامهٔ انتقال — ساعت ۰۴:۳۶ UTC
 

@@ -1,5 +1,39 @@
 # Project state / وضعیت پروژه
 
+Latest verified checkpoint — **2026-10-06, 05:10 UTC; provisioning/local repair only**:
+three further V7 windows reached **230 ranges/61726581536 bytes**, leaving **28702873216 bytes**.
+Main read actual desktop receipts/exit0; numeric HTTP206/exit0, pre-import identity/hash,
+retained bodies, closed handles and unchanged ready-idle checks passed. Only one whole shard
+is verified. Review found that frozen native V2 flushes report contents but not the new report
+directory entry. Distinct V3 adds retained-directory fsync under both identity-checked locks;
+**1869 main assertions/Bash syntax** passed. Its matching trio installer/controller passed
+**227/1022 main assertions**. External V3 reconciliation/controller passed **18403/842 main
+assertions**, including anchored reads/process bounds/mocked cleanup and primary-failure
+preservation. Expanded mocks caught and repaired an unhashable-bytearray process-token bug
+before host use. Counts are assertions, not independent tests; most of 18403 are bounded-scan
+block checks. Independent reviews remain **not_run** after three subagent usage-limit errors.
+None of these V3 tools is installed or operationally executed. Exact `4bb295d` passed five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37414641936).
+Preserve completed metadata installation, first-shard assembly, earlier source checks/failures,
+Apache 3.5 alternative labeling and live35B/public thinking-off. All model acceptance gates remain.
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۵:۱۰ UTC؛ فقط آماده‌سازی/اصلاح محلی**:
+سه پنجرهٔ دیگر، انتقال را به **۲۳۰ بخش/۶۱۷۲۶۵۸۱۵۳۶ بایت** رساندند؛ **۲۸۷۰۲۸۷۳۲۱۶
+بایت** باقی است. بازبین اصلی، رسید واقعی/خروج صفر را خواند؛ HTTP206 عددی/خروج صفر،
+هویت/هش پیش از دریافت محافظت‌شده، حفظ بدنه‌ها، بسته‌شدن handleها و ثبات خط مبنا
+مطابق‌اند. فقط یک فایل کامل تأیید است. نسخهٔ ثابت بومیِ دوم، محتوای گزارش را پایدار
+می‌کند، نه مدخل تازهٔ آن در پوشه. نسخهٔ مستقلِ سوم، fsync پوشهٔ نگه‌داشته‌شده را زیر
+دو قفل با کنترل هویت افزود؛ **۱۸۶۹ کنترل اصلی/نحو Bash** موفق‌اند. ابزار نصب/کنترل‌کنندهٔ
+متناظر، **۲۲۷/۱۰۲۲ کنترل اصلی** و تطبیق بیرونی/کنترل‌کننده، **۱۸۴۰۳/۸۴۲ کنترل اصلی**
+را گذراندند. آزمون‌های گسترش‌یافته، خطای bytearray غیرقابل‌هش در بررسی آرگومان فرایند
+را پیش از اجرای میزبان آشکار و اصلاح کردند. تعدادها کنترل‌اند، نه آزمون مستقل؛ بیشترِ
+۱۸۴۰۳ مربوط به بلوک‌های اسکن محدود است. بازبینی مستقل پس از خطای سقف استفادهٔ سه
+عامل، **اجرا نشده**. هیچ ابزار نسخهٔ سوم نصب یا عملیاتی اجرا نشده. پنج کنترل CI کد
+دقیق `4bb295d` در اجرای بالا موفق‌اند. نصب فراداده/تجمیع فایل اول/سوابق بررسی و شکست،
+نام درستِ جایگزین Apache 3.5 و 35B زنده/خاموشی استدلال عمومی حفظ شوند؛ پذیرش مدل باز است.
+
+## Earlier installer-controller checkpoint — historical / گام پیشینِ کنترل‌کنندهٔ نصب — سابقه
+
 Latest verified checkpoint — **2026-10-06, 04:36 UTC; provisioning/local checks only**:
 four further V7 windows reached **218 ranges/58505356064 bytes**, leaving **31924098688 bytes**.
 Main read actual desktop receipts and terminal exits; all-four numeric HTTP206/exit0 and

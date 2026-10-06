@@ -1,5 +1,24 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Directory-durable native preparation and external failure-boundary repair — 2026-10-06
+
+Transport reached 230 ranges/61726581536 bytes, 28702873216 remain; one whole shard verified.
+Native V2's directory-entry durability gap led to distinct V3: 1869 main assertions/Bash syntax,
+227/1022 matching installer/controller and 18403/842 external reconciliation/controller assertions
+passed locally. Expanded mocks caught/repaired unhashable-bytearray process matching before host
+use. Independent reviews remain not run after subagent usage-limit failures; nothing newly
+installed/executed/selected. Exact `4bb295d` passed five CI jobs. Earlier completed work/failures,
+Apache 3.5 alternative labeling, live35B/public thinking-off and open model gates remain.
+
+انتقال به ۲۳۰ بخش/۶۱۷۲۶۵۸۱۵۳۶ بایت رسید؛ ۲۸۷۰۲۸۷۳۲۱۶ بایت باقی و یک فایل کامل تأیید
+است. کاستیِ ثبت پایدار مدخل پوشه در نسخهٔ بومیِ دوم، به نسخهٔ مستقلِ سوم انجامید:
+۱۸۶۹ کنترل اصلی/نحو Bash، ۲۲۷/۱۰۲۲ کنترل ابزار نصب/کنترل‌کنندهٔ متناظر و ۱۸۴۰۳/۸۴۲
+کنترل تطبیق بیرونی/کنترل‌کننده در محیط محلی موفق‌اند. آزمون گسترش‌یافته، خطای bytearray
+غیرقابل‌هش را پیش از اجرای میزبان آشکار و اصلاح کرد. پس از سقف استفادهٔ عامل‌ها،
+بازبینی مستقل اجرا نشده؛ نصب/اجرای میزبان/انتخاب مدل تازه‌ای انجام نشده. پنج کنترل CI
+کد دقیق `4bb295d` موفق‌اند. کار تکمیل‌شده/شکست‌های قبلی، نام درست جایگزین Apache 3.5،
+35B زنده/خاموشی استدلال عمومی و معیارهای باز مدل حفظ‌اند.
+
 ## Native installer-controller preparation and continued verified transport — 2026-10-06
 
 Four further windows reached 218 ranges/58505356064 bytes; 31924098688 remain, one complete
