@@ -75,17 +75,12 @@ def test_policy_does_not_branch_on_question_or_copy_fixture_answers(locale: str)
         assert "پیش از مقایسه، عضویت، هش یا تبدیل، نوع ورودی" in first
         assert "زمان کامل مشاهده و گردآوری، دامنهٔ مجاز" in first
         assert "هیچ‌کدام حذف نشود" in first
-        assert "رقم‌های داخل زمان و شناسهٔ لاتین را فارسی نکنید" in first
-        assert "تعریف کد خطا، اثبات اجزای زیرساخت نیست" in first
-        assert "تعداد جمله و همهٔ اجزای منشأ" in first
         assert "اختصار نباید" in first
         assert "استدلال خصوصی" in first
     else:
         assert "validate input type before equality, membership, hashing or coercion" in first
         assert "full observation and collection times" in first
         assert "authorized scope, and stale/partial qualifiers; omit none" in first
-        assert "An error-code definition does not verify infrastructure components" in first
-        assert "Recheck sentence count and every supplied provenance field" in first
         assert "Brevity must not drop" in first
         assert "private reasoning" in first
 
@@ -97,12 +92,6 @@ def test_concise_policy_tracks_trusted_budget_not_question_keywords(locale: str)
     assert short.startswith(longer) and len(short) > len(longer)
     assert general_prompt(request(locale=locale, max_output_tokens=1)) == short
     assert general_prompt(request(locale=locale, detailed=False)) == short
-    if locale == "fa":
-        assert "حداکثر پنجاه واژه" in short and "هدف اختصار است، نه مجوز حذف" in short
-        assert "پنجاه واژه" not in longer
-    else:
-        assert "at most 50 words" in short and "never permission to omit required" in short
-        assert "50 words" not in longer
 
 
 @pytest.mark.parametrize(

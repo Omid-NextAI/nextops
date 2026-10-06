@@ -6,6 +6,26 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Rejected third diagnostic — 10:47 UTC
+
+The third full run met all sixteen final deadlines, but semantic review is **11 passed/five
+failed**, main-only. Reject the generic 50-word experiment: Persian coding regressed across
+seven finite AST boundaries; unverified networking topology, missing Persian provenance and
+missing causal hypothesis remain. Restore prompt/tests to exact `7157c3b` bytes and retain
+the report SHA `c8591c1ffa8cda6bbd4df6c165ff56b847e881c9ab419f3e72a7e488a18049dc`.
+Successful cleanup and unchanged baseline are not semantic acceptance. A smaller Q4 metadata
+lookup is not an imported/qualified candidate and reduces precision, not parameter count.
+Any distinct follow-up requires source/license/hash/capacity/tool review and a measured reason
+to expect benefit; preserve corpus, deadlines and security. Do not select a failed model,
+relabel 3.5, repeat unchanged diagnostics or claim main self-review as independent approval.
+Standard/app/thinking/privacy/context/evidence/WAN/rollback gates stay open; live35B unchanged.
+
+Next bounded comparison: use the retained Q8 artifact with the restored locale-native policy
+and already reviewed no-BLAS runtime, the same full corpus/32-worker profile/16K/384 output/
+120-second deadlines and independent-review labels. The initial Q8 experiment used different
+instructions/runtime and only eight standard questions; this is a distinct full diagnostic, not
+an unchanged retry or promised improvement. No download, promotion or precision downgrade.
+
 ### Failed compact trial and bounded follow-up — 10:30 UTC
 
 The second full diagnostic and separate two-case 16/64-worker probes also failed the Persian
@@ -127,6 +147,24 @@ this index entry. Preserve the prior failed-thinking and UI deployment records. 
 release manifest only for an actually accepted identity change, not source registration.
 
 ## فارسی
+
+### رد تشخیص سوم — ساعت ۱۰:۴۷ UTC
+
+اجرای کامل سوم هر شانزده مهلت پاسخ نهایی را گذراند، اما بازبینی معنایی **یازده موفق/پنج
+ناموفق** و صرفاً متعلق به عامل اصلی است. آزمایش عمومیِ هدف پنجاه‌واژه‌ای رد شود: کد فارسی
+در هفت مرز آزمون محدود AST پسرفت کرد؛ توپولوژی شبکهٔ تأییدنشده، منشأ ناقص فارسی و نبود
+فرضیهٔ علّی باقی‌اند. دستور/آزمون‌ها دقیقاً به کد `7157c3b` بازگردند و هش گزارش
+`c8591c1ffa8cda6bbd4df6c165ff56b847e881c9ab419f3e72a7e488a18049dc` حفظ شود.
+توقف موفق و ثبات خط مبنا پذیرش معنایی نیست. فرادادهٔ Q4 کوچک‌تر به معنی نامزد دریافت‌شده/
+پذیرفته‌شده نیست و دقت را کم می‌کند، نه تعداد پارامتر. پیگیری متفاوت به بازبینی منبع/مجوز/
+هش/ظرفیت/ابزار و دلیل سنجیده برای انتظار بهبود نیاز دارد؛ پرسش، مهلت و امنیت ثابت بمانند.
+مدل ناموفق انتخاب، 3.5 تغییر نام، تشخیص یکسان تکرار یا خودبازبینی عامل، تأیید مستقل معرفی
+نشود. معیارهای استاندارد/برنامه/استدلال/حریم خصوصی/زمینه/شاهد/WAN/بازگشت بازند؛ 35B زنده ثابت.
+
+مقایسهٔ محدود بعدی: فایل موجود Q8 با دستور بومیِ بازگردانده‌شده و runtime بدون BLAS دارای
+بازبینی پیشین، همان پرسش کامل/روش۳۲رشته‌ای/زمینه16K/خروجی۳۸۴/مهلت۱۲۰ثانیه و برچسب بازبینی
+مستقل آزموده شود. آزمایش اولیهٔ Q8، دستور/runtime متفاوت و فقط هشت پرسش استاندارد داشت؛ این
+تشخیص کامل متفاوت است، نه تکرار یکسان یا وعدهٔ بهبود. دریافت، انتخاب یا کاهش دقتی رخ نمی‌دهد.
 
 ### آزمون فشردهٔ ناموفق و پیگیری محدود — ساعت ۱۰:۳۰ UTC
 

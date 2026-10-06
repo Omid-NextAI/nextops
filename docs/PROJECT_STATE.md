@@ -1,6 +1,36 @@
 # Project state / وضعیت پروژه
 
-Current checkpoint — **2026-10-06, 10:30 UTC**: the second full standard diagnostic also failed
+Current checkpoint — **2026-10-06, 10:47 UTC**: the third full standard diagnostic completed
+sixteen final answers within unchanged deadlines; main semantic review records **11 passed/five
+failed**, not acceptance. Persian coding omitted the type guard and failed seven finite AST
+boundaries. Both networking answers infer unverified topology; Persian stale evidence omits
+authorized scope/collection time; Persian causality proposes no actual causal hypothesis.
+Native SHA: `c8591c1ffa8cda6bbd4df6c165ff56b847e881c9ab419f3e72a7e488a18049dc`.
+Reject the 50-word policy experiment and restore its prompt/tests to exact `7157c3b` bytes.
+All owned units/listeners stopped and a separate reread confirmed unchanged ready-idle baseline.
+Exact `d638667` passed five CI jobs; source rollback passed **1315 tests/two POSIX skips/
+126 deselected, 27.37 s**. These are not native semantic or live application acceptance.
+A read-only upstream lookup identified a 16464440224-byte UD-Q4_K_M artifact at the same pinned
+third-party revision; it has not been downloaded, imported, tested or selected. Lower precision
+reduces weight size, not parameter count, and does not prove better quality. No unchanged rerun,
+criterion/deadline relaxation, live model change or public-thinking enablement.
+
+گام جاری — **۶ اکتبر ۲۰۲۶، ساعت ۱۰:۴۷ UTC**: سومین تشخیص استاندارد کامل، شانزده پاسخ نهایی
+در مهلت‌های ثابت ثبت کرد؛ بازبینی معنایی عامل اصلی **یازده موفق/پنج ناموفق** است، نه پذیرش.
+کد فارسی شرط بررسی نوع را حذف کرد و هفت مرز آزمون محدود AST را نگذراند. هر دو پاسخ شبکه،
+توپولوژی تأییدنشده را استنتاج کردند؛ شاهد کهنهٔ فارسی دامنهٔ مجاز/زمان گردآوری را حذف کرد؛
+پاسخ علّی فارسی فرضیهٔ مشخصی پیشنهاد نداد. هش گزارش در بالا ثبت است. آزمایش هدف پنجاه‌واژه‌ای
+رد و دستور/آزمون‌ها دقیقاً به کد `7157c3b` بازگردانده شدند. خدمات/شنونده‌های متعلق به آزمون
+متوقف و بازخوانی جدا، ثبات خط مبنای آماده و بی‌درخواست را تأیید کرد. پنج کنترل CI کد دقیق
+`d638667` موفق‌اند؛ کد بازگردانده‌شده **۱۳۱۵ آزمون موفق/دو مورد مخصوص POSIX ردشده/
+۱۲۶ انتخاب‌نشده، ۲۷٫۳۷ ثانیه** ثبت کرد، نه پذیرش معنایی مدل یا برنامهٔ زنده. بررسی فقط‌خواندنی
+منبع، فایل UD-Q4_K_M با اندازهٔ ۱۶۴۶۴۴۴۰۲۲۴ بایت در همان نسخهٔ ثابتِ تبدیل‌کنندهٔ ثالث یافت؛
+دریافت، وارد، آزموده یا انتخاب نشده است. کاهش دقت، حجم وزن را کم می‌کند، نه تعداد پارامتر یا
+اثبات بهبود کیفیت. آزمون یکسان تکرار، معیار/مهلت آسان، مدل زنده عوض یا استدلال عمومی فعال نشد.
+
+## Previous policy trial checkpoint — historical / گام پیشینِ آزمایش دستور — سابقه
+
+Checkpoint — **2026-10-06, 10:30 UTC**: the second full standard diagnostic also failed
 at the Persian hypothesis deadline; main review records **12 passed/four failed**. English stale
 scope is now retained; English networking inferred an unverified upstream, Persian networking
 used one sentence rather than two, Persian stale scope was omitted, and the last final timed out.

@@ -1,6 +1,35 @@
 # Next task / کار بعدی
 
-Current task — **2026-10-06, after 10:30 UTC**: reconcile the watched full 32-worker diagnostic
+Current task — **2026-10-06, after 10:47 UTC**: preserve the completed third trial's actual
+11 main-reviewed passes/five failures and the rejected policy's exact source rollback. All sixteen
+finals arriving on time is not semantic acceptance. Prioritize actual **Qwen3.8**, not a relabelled
+3.5 alternative. The next bounded comparison uses the already retained higher-precision Q8 with
+the restored locale-native policy and reviewed no-BLAS runtime, not another download. This distinct
+combination has not covered the full frozen corpus; investigate quality without claiming it will
+pass or changing limits. Before another native run, justify a materially distinct artifact/profile against
+the retained quality failures, establish its source/license/integrity/capacity and applicable tool
+review, and retain the same frozen questions, deadlines and safety criteria. The smaller Q4
+metadata lookup is not an import or an improvement result; do not lower precision merely to claim
+an upgrade. No identical retry or failed/incomplete/self-reviewed serving selection. Standard,
+independent, matched-app, final-only thinking/privacy, measured context and authorized evidence/
+audit/WAN/rollback gates remain; serving35B and public thinking-off stay unchanged.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از ساعت ۱۰:۴۷ UTC**: یازده موفقیت و پنج شکست واقعیِ بازبینی
+عامل اصلی در آزمون سوم و بازگشت دقیق کدِ آزمایش ردشده حفظ شوند. رسیدن شانزده پاسخ در مهلت،
+پذیرش معنایی نیست. **Qwen3.8** واقعی در اولویت است، نه مدل 3.5 با نام تغییر‌یافته. مقایسهٔ
+محدود بعدی، Q8 دقیق‌ترِ موجود را با دستور بومیِ بازگردانده‌شده و runtime بازبینی‌شدهٔ بدون
+BLAS می‌آزماید، نه با دریافت تازه. این ترکیب متفاوت هنوز کل پرسش‌های ثابت را پوشش نداده است؛
+کیفیت بررسی شود، بدون وعدهٔ موفقیت یا تغییر سقف. پیش از
+اجرای بومی تازه، روش/فایل واقعاً متفاوت با توجه به شکست‌های کیفیت توجیه و منبع، مجوز، صحت،
+ظرفیت و بازبینی لازم ابزار تأیید شود؛ پرسش، مهلت و معیار ایمنی ثابت بمانند. یافتن فرادادهٔ
+Q4 کوچک‌تر، دریافت یا شاهد بهبود نیست؛ دقت صرفاً برای اعلام ارتقا کاهش نیابد. آزمون یکسان
+تکرار یا مدل ناموفق/ناقص/دارای خودبازبینی انتخاب نشود. معیارهای استاندارد، مستقل، برنامهٔ
+هماهنگ، استدلال نهایی/حریم خصوصی، زمینهٔ سنجیده و شاهد/ممیزی/WAN/بازگشت مجاز بازند؛ مدل
+زندهٔ 35B و خاموشی استدلال عمومی ثابت بمانند.
+
+## Previous policy trial task — historical / کار پیشینِ آزمایش دستور — سابقه
+
+Task — **2026-10-06, after 10:30 UTC**: reconcile the watched full 32-worker diagnostic
 with the distinct small-budget concision/technical-time/error-code policy; review actual finals
 and deadline outcomes against unchanged questions/criteria. Preserve both earlier 12/four
 main-only reviews and failed 16/64-worker two-case probes; never infer fourteen unrun cases.

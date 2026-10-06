@@ -1,5 +1,23 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Rejected Qwen 3.8 policy experiment and source rollback — 2026-10-06
+
+The third full diagnostic returned all sixteen finals within the unchanged deadline, but main
+semantic review failed five cases: **11 passed/five failed**. Persian coding lost its type guard
+and failed seven finite AST boundaries; networking topology, Persian provenance and causal
+hypothesis failures remain. Reject the experiment and restore the candidate prompt/tests to exact
+`7157c3b` bytes; this is not a live rollback. Preserve every result. Exact `d638667` passed five CI
+jobs, not model acceptance; reverted source passed **1315 tests/two POSIX skips/126 deselected,
+27.37 s**. Serving35B/public thinking-off remain unchanged.
+
+سومین تشخیص کامل، هر شانزده پاسخ نهایی را در مهلت ثابت ثبت کرد، اما پنج پرسش در بازبینی معنایی
+عامل اصلی ناموفق بود: **یازده موفق/پنج ناموفق**. کد فارسی شرط بررسی نوع را حذف کرد و هفت
+مرز آزمون محدود AST را نگذراند؛ خطاهای توپولوژی شبکه، منشأ فارسی و فرضیهٔ علّی نیز باقی‌اند.
+آزمایش رد و دستور نامزد/آزمون‌های کد دقیقاً به `7157c3b` بازگردانده شدند؛ این بازگشت کد است،
+نه تغییر مدل زنده. همهٔ نتایج حفظ شدند. پنج کنترل CI کد دقیق `d638667` موفق‌اند، نه پذیرش مدل؛
+کد بازگردانده‌شده **۱۳۱۵ آزمون موفق/دو مورد مخصوص POSIX ردشده/۱۲۶ انتخاب‌نشده، ۲۷٫۳۷ ثانیه**
+ثبت کرد. مدل زندهٔ 35B و خاموشی استدلال عمومی ثابت‌اند.
+
 ## Bounded Qwen 3.8 concision and exact technical-time policy — 2026-10-06
 
 Retain second standard failure (12 main-only passes/four failures), failed 16/64-worker two-case

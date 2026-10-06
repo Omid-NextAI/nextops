@@ -7,10 +7,41 @@ Date: **2026-10-05**. Historical 27B status: **Qwen3.8-27B Q5 import verified; d
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, 10:30 UTC — second full Q5 diagnostic and 16/64-worker probes failed; exact 7157c3b CI passed; distinct short-budget/time/format policy trial pending; no model cutover**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۱۰:۳۰ UTC — تشخیص کاملِ دوم Q5 و بررسی ۱۶/۶۴رشته‌ای ناموفق؛ CI کد دقیق 7157c3b موفق؛ آزمون جدا با دستور بودجهٔ کوچک/زمان/قالب هنوز باز؛ بدون تغییر مدل زنده**.
+Latest update: **2026-10-06, 10:47 UTC — sixteen finals within deadline, but third Q5 semantic review failed 11/five; policy rejected and source reverted; exact d638667 CI passed; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۱۰:۴۷ UTC — شانزده پاسخ در مهلت، اما بازبینی معنایی سوم Q5 با یازده موفق/پنج ناموفق پذیرفته نشد؛ آزمایش دستور رد و کد بازگردانده شد؛ CI کد دقیق d638667 موفق؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Rejected third diagnostic and retained source rollback — 10:47 UTC
+
+The third full run ended at 10:47:37 UTC with exit0, sixteen final answers within the unchanged
+120-second per-case deadline, and `completed_requires_semantic_review`, not acceptance.
+Native SHA-256: `c8591c1ffa8cda6bbd4df6c165ff56b847e881c9ab419f3e72a7e488a18049dc`.
+Main-only semantic review records **11 passed/five failed/zero not-run**. Both networking answers
+infer unverified topology; Persian coding omits the type guard and fails seven existing finite
+AST boundaries; Persian stale evidence omits authorized scope/collection time and changes technical
+timestamp digits; Persian causality names no actual hypothesis despite uncertainty/two checks.
+English coding passes twelve AST boundaries; no generated code is executed. The Persian hypothesis
+deadline is now met at 90129ms, but timing alone cannot erase its semantic failure.
+
+Reject the generic 50-word policy experiment and restore candidate prompt/tests to exact
+`7157c3b` bytes (prompt SHA `6852b62f6fc1f06fb6cc997dcf0895ebea9c85536c664922c8e6850ffcba23ea`).
+Preserve all native/finite/main-semantic reports. All owned units/listeners stopped; separate
+reread confirmed unchanged serving PIDs/restarts and ready-idle baseline. Exact `d638667` passed
+five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37451505603), not native acceptance.
+Rollback source suite: **1315 passed/two POSIX skips/126 deselected, 27.37s**, with the existing
+AnyIO deprecation warning. This is source rollback only; no serving cutover occurred.
+
+Read-only pinned upstream metadata identifies `Qwen3.8-27B-UD-Q4_K_M.gguf`, 16464440224 bytes,
+SHA `322e194ff79741c7baa497c240f677f54b201b0efab44ca8e50f122b39123482`, at third-party revision
+`4ca720788d1e01f1bff70c033e0d0028fd02e502`, declaring Apache-2.0. It is not an official Qwen GGUF;
+exact conversion-source provenance remains unverified. No download/import/native trial/quality
+or selection is inferred. Lower precision is not fewer parameters or evidence of better answers.
+Require a justified distinct strategy, current capacity/integrity/license/tool review and unchanged
+criteria before another trial. Prioritize actual3.8; neither relabelling3.5 nor loosening gates
+satisfies the request. Independent/app/thinking/privacy/context/evidence/WAN/rollback gates remain.
+Serving35B/public thinking-off are unchanged; no operational credential or private reasoning is
+persisted in these synthetic final-only diagnostics.
 
 ### Second standard failure and finite profile comparisons — 10:30 UTC
 
@@ -1557,6 +1588,38 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### رد تشخیص سوم و حفظ بازگشت کد — ساعت ۱۰:۴۷ UTC
+
+سومین اجرای کامل ساعت ۱۰:۴۷:۳۷ UTC با خروج صفر، شانزده پاسخ در مهلت ثابتِ ۱۲۰ثانیه‌ای
+هر پرسش و وضعیت `completed_requires_semantic_review` پایان یافت؛ این پذیرش نیست. هش گزارش:
+`c8591c1ffa8cda6bbd4df6c165ff56b847e881c9ab419f3e72a7e488a18049dc`.
+بازبینی معناییِ صرفاً عامل اصلی **یازده موفق/پنج ناموفق/صفر اجرا‌نشده** ثبت کرد. هر دو پاسخ
+شبکه توپولوژی تأییدنشده را استنتاج کردند؛ کد فارسی شرط بررسی نوع را حذف کرد و هفت مرز
+آزمون محدود AST را نگذراند؛ شاهد کهنهٔ فارسی دامنهٔ مجاز/زمان گردآوری را حذف و رقم‌های زمان
+فنی را تغییر داد؛ پاسخ علّی فارسی با وجود عدم قطعیت/دو بررسی، فرضیهٔ مشخصی نداد. کد انگلیسی
+دوازده مرز AST را گذراند؛ هیچ کد تولیدشده‌ای اجرا نشد. فرضیهٔ فارسی اکنون با ۹۰۱۲۹ میلی‌ثانیه
+در مهلت رسید، اما زمان مناسب شکست معنایی را رفع نمی‌کند.
+
+آزمایش عمومیِ هدف پنجاه‌واژه‌ای رد و دستور نامزد/آزمون‌ها دقیقاً به کد `7157c3b` بازگردانده
+شدند؛ هش دستور `6852b62f6fc1f06fb6cc997dcf0895ebea9c85536c664922c8e6850ffcba23ea` است.
+همهٔ گزارش‌های بومی/محدود/معنایی حفظ شوند. خدمات/شنونده‌های متعلق به آزمون متوقف و بازخوانی
+جدا ثبات PID/راه‌اندازی مجدد و خط مبنای آماده و بی‌درخواست را تأیید کرد. پنج
+[کنترل CI](https://github.com/Omid-NextAI/nextops/actions/runs/37451505603) کد دقیق `d638667`
+موفق‌اند، نه پذیرش بومی. آزمون کد بازگردانده‌شده: **۱۳۱۵ موفق/دو مورد مخصوص POSIX ردشده/
+۱۲۶ انتخاب‌نشده، ۲۷٫۳۷ ثانیه**؛ هشدار قبلیِ منسوخ‌شدن AnyIO نیز موجود است. این بازگشت کد
+است؛ مدل زنده تغییر نکرده بود.
+
+فرادادهٔ فقط‌خواندنیِ نسخهٔ ثابت منبع، فایل `Qwen3.8-27B-UD-Q4_K_M.gguf` با اندازهٔ
+۱۶۴۶۴۴۴۰۲۲۴ بایت و هش `322e194ff79741c7baa497c240f677f54b201b0efab44ca8e50f122b39123482`
+را در نسخهٔ ثالث `4ca720788d1e01f1bff70c033e0d0028fd02e502` با اظهار مجوز Apache-2.0 نشان
+می‌دهد. این GGUF رسمی Qwen نیست؛ منشأ دقیق نسخهٔ تبدیل همچنان تأیید نشده است. دریافت، ورود،
+آزمون بومی، کیفیت یا انتخاب از آن نتیجه نمی‌شود. کاهش دقت، کاهش پارامتر یا شاهد بهترشدن پاسخ
+نیست. پیش از آزمون تازه، راهبرد متفاوت توجیه و ظرفیت تازه/صحت/مجوز/ابزار بازبینی شوند؛ معیارها
+ثابت بمانند. 3.8 واقعی در اولویت است؛ تغییر نام 3.5 یا آسان‌کردن معیار خواسته را برآورده
+نمی‌کند. معیارهای مستقل/برنامه/استدلال/حریم خصوصی/زمینه/شاهد/WAN/بازگشت بازند. مدل زندهٔ35B
+و خاموشی استدلال عمومی ثابت‌اند؛ در این تشخیص ساختگیِ صرفاً پاسخ نهایی، اطلاعات ورود عملیاتی
+یا استدلال خصوصی نگه‌داری نمی‌شود.
 
 ### شکست استانداردِ دوم و مقایسهٔ محدود روش اجرا — ساعت ۱۰:۳۰ UTC
 

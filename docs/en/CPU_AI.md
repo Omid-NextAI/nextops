@@ -1,5 +1,19 @@
 # Local CPU-only AI and capacity planning
 
+## Rejected third standard diagnostic and source rollback — 2026-10-06
+
+At 10:47 UTC, all sixteen finals arrived within unchanged deadlines, but main semantic review
+records **11 passed/five failed**: both networking answers assume unverified topology, Persian
+coding lacks its type guard, Persian stale evidence loses scope/collection time, and Persian
+causality omits an actual hypothesis. Seven finite AST boundaries fail; generated code was not
+executed. Native SHA: `c8591c1ffa8cda6bbd4df6c165ff56b847e881c9ab419f3e72a7e488a18049dc`.
+Reject the 50-word experiment and restore prompt/tests to exact `7157c3b` bytes. Cleanup and
+separate ready-idle baseline rereads passed; serving35B/public thinking-off remain. Exact
+`d638667` passed five CI jobs, not model acceptance; reverted source passed 1315 tests/two POSIX
+skips/126 deselected in 27.37s. Metadata alone identifies a smaller 16464440224-byte Q4 at the
+same third-party pin; no download, test, selection or quality claim follows. Lower precision is
+not fewer parameters. A new trial needs a justified distinct strategy and unchanged gates.
+
 ## Second standard failure and finite CPU profiles — 2026-10-06
 
 The second full run retained 15 finals and timed out in the final Persian case. Main review:
