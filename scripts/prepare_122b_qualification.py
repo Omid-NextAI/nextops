@@ -131,11 +131,13 @@ def build_plan() -> dict[str, Any]:
             "memory_and_cpu_PSI_some_full_avg10_and_total_deltas",
             "baseline_readiness_active_and_queued_requests_before_during_after",
         ],
-        "source_gaps_not_bypassed": [
+        "source_capabilities_implemented_not_runtime_accepted": [
             "register_exact_122b_ModelId_in_typed_inference_contracts_and_tests",
             "add_reviewed_122b_hard_template_controls_standard_first_not_soft_no_think",
-            "add_bounded_candidate_runtime_profile_and_exact_identity_installer_checks",
             "propagate_actual_model_label_through_existing_API_UI_contracts",
+        ],
+        "source_gaps_not_bypassed": [
+            "add_bounded_candidate_runtime_profile_and_exact_identity_installer_checks",
             "retain_122b_thinking_default_denial_until_qualified_candidate_path_review",
         ],
         "remaining_after_native_trials": [

@@ -1,6 +1,29 @@
 # Local CPU-only AI and capacity planning
 
-Latest checkpoint — **2026-10-06; not model acceptance**: the first of three Apache
+Latest checkpoint — **2026-10-06, 00:27 UTC; first-file metadata, not model acceptance**:
+protected full-hash/metadata inspection passed in 89798 ms, with independent read-only stopped/
+baseline reconciliation. Actual `qwen35moe`, 49 blocks, 3072 embedding dimensions, split count 3,
+first-file tensor count 392 and template hash were recorded. Aggregate 899 tensors and 262144
+context tokens are advertised only. Expert/special-token fields and template branches are not
+verified by this reader. Protected serial S-drive transfer reached 158 ranges/42399228704 bytes,
+leaving 48030226048 transport bytes. Only one full shard is upstream-hash verified. Finish
+transport before remaining assembly to preserve the importer free-space guard. `861bf7d` CI
+passed all five jobs. The source planner separates implemented registration/hard-standard/
+model-label capabilities from uncompleted runtime/qualified-thinking work; 63 focused tests
+passed. None of this enables thinking, selects a model or accepts advertised context. Full-set,
+native semantics, privacy and matched operational gates remain unfinished; live 35B is unchanged.
+See the [paired record](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+Subsequently, 00:44 UTC transport reached 162 ranges/43472970528 bytes, with 46956484224
+missing. Source-only bounded MoE/special-token inspection passed 1098 unit tests/two POSIX
+skips; independent focused reader tests passed 211. The installed reader stays unchanged.
+The ca1 stager failed local preflight on the fixed packaged wheel's OWNER RIGHTS ACL, before
+host access. Preserve that failure/original ACL and review a distinct exact-wheel boundary;
+never relax the generic path validator or mistake source checks for model acceptance.
+
+## Earlier first-shard checkpoint — historical
+
+Historical checkpoint — **2026-10-06; not model acceptance**: the first of three Apache
 Qwen3.5-122B-A10B Q5 shards is complete, **39714874144 bytes**, and matches upstream SHA
 `d7d5aa3ef843ba3fe5ee27cdaebe17abd8a6a8a03a5c236db9bfe2fc6b88be2e`.
 The protected assembler verified all 148 ranges, completed in 480111 ms and reconciled owned

@@ -1,6 +1,47 @@
 # Project state / وضعیت پروژه
 
-Latest verified checkpoint — **2026-10-06; no model cutover**: 148 retained transport ranges
+Latest verified checkpoint — **2026-10-06, 00:27 UTC; no model cutover**: the first complete
+122B shard passed a fresh full hash and bounded metadata inspection in 89798 ms. Actual
+`qwen35moe`/49 blocks/3072 embedding dimensions/three splits/392 first-file tensors are observed;
+899 aggregate tensors and 262144 context tokens remain advertised, not accepted. Template hash
+and protected receipts are in the [paired report](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+Owned worker/guard stop and independent read-only reconciliation of live readiness passed.
+Serial protected S-drive continuation completed **158 ranges/42399228704 canonical bytes**,
+with **48030226048 transport bytes** missing and only one complete upstream-shard verification.
+Exact `861bf7d` passed all five CI jobs; no package/model deployment follows. Three implemented
+source capabilities were removed from stale missing-work labels; 63 focused source tests passed.
+All-shard identity, template branches, native load/semantics, thinking/privacy, measured context
+and operational gates remain unfinished. Live 35B/public thinking-off and previous failures stay
+unchanged; ca1 is packaged locally, not installed.
+
+At 00:44 UTC, four more ranges advanced transport to 162 ranges/43472970528 bytes;
+46956484224 remain. The ca1 stager then failed only local preflight on the fixed wheel's
+OWNER RIGHTS ACL, before host access; failure/original ACL are preserved. Source-only bounded
+MoE/tokenizer scalar inspection passed 1098 unit tests/two POSIX skips; independent focused
+review passed 211. The installed private reader/ca1 package/live services remain unchanged.
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۰:۲۷ UTC؛ بدون تغییر مدل زنده**: نخستین فایل
+کاملِ 122B، هش کاملِ تازه و بررسی محدود فراداده را در ۸۹۷۹۸ میلی‌ثانیه گذراند. معماری
+`qwen35moe`، ۴۹ بلوک، ابعاد تعبیهٔ ۳۰۷۲، سه فایل و ۳۹۲ تنسورِ فایل اول مشاهده شدند؛
+مجموع ۸۹۹ تنسور و زمینهٔ ۲۶۲۱۴۴ توکنی فقط اعلام‌شده‌اند، نه پذیرفته. هش قالب و رسیدهای
+محافظت‌شده در گزارش بالا ثبت است. توقف فرایندهای متعلق به اجرا و تطبیق مستقلِ
+فقط‌خواندنیِ آمادگی زنده موفق‌اند. انتقال ترتیبیِ محافظت‌شده روی S، **۱۵۸ بخش/
+۴۲۳۹۹۲۲۸۷۰۴ بایت اصلی** را تکمیل کرد؛ **۴۸۰۳۰۲۲۶۰۴۸ بایت انتقالی** باقی است و هنوز فقط
+یک فایل کامل، تأیید منبع اصلی دارد. پنج کنترل CI کد دقیق `861bf7d` موفق‌اند، نه استقرار
+بسته یا مدل. سه قابلیت پیاده‌شده از برچسب‌های قدیمیِ کار ناتمام جدا شدند؛ ۶۳ آزمون کد
+موفق‌اند. هویت همهٔ فایل‌ها، شاخه‌های قالب، بارگذاری/معنای بومی، استدلال/حریم خصوصی،
+زمینهٔ سنجیده و معیارهای عملیاتی هنوز تکمیل نیستند. 35B زنده/خاموشی استدلال عمومی و
+شکست‌های پیشین حفظ‌اند؛ ca1 فقط محلی بسته‌بندی شده، نه نصب.
+
+ساعت ۰۰:۴۴ UTC، چهار بخش تازه، انتقال را به ۱۶۲ بخش/۴۳۴۷۲۹۷۰۵۲۸ بایت رساندند؛
+۴۶۹۵۶۴۸۴۲۲۴ بایت باقی است. سپس آماده‌سازی ca1 فقط در کنترل محلیِ ACL از نوع OWNER RIGHTS
+فایل wheel، پیش از دسترسی به میزبان ناموفق شد؛ شکست/ACL اصلی حفظ‌اند. بررسی محدودِ
+فرادادهٔ MoE/tokenizer در کد، ۱۰۹۸ آزمون واحد/دو مورد POSIX اجرا‌نشده را ثبت کرد؛ بازبینی
+مستقلِ محدود ۲۱۱ آزمون را گذراند. ابزار خصوصیِ نصب‌شده/بستهٔ ca1/خدمات زنده تغییر نکرده‌اند.
+
+## Earlier first-shard checkpoint — historical / گام پیشینِ فایل اول — سابقه
+
+Historical checkpoint — **2026-10-06; no model cutover**: 148 retained transport ranges
 produced the first complete Apache Qwen3.5-122B-A10B Q5 shard: **39714874144 bytes**, upstream
 SHA `d7d5aa3ef843ba3fe5ee27cdaebe17abd8a6a8a03a5c236db9bfe2fc6b88be2e`.
 Protected assembly completed in 480111 ms; owned stop and unchanged live ready/idle baseline

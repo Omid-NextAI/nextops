@@ -1,6 +1,55 @@
 # Next task / کار بعدی
 
-Current checkpoint — **2026-10-06, following the 23:30 UTC first-shard result**:
+Current checkpoint — **2026-10-06, 00:27 UTC; first-file metadata only**: the protected
+first 122B shard was rehashed and inspected in 89798 ms. Actual architecture is `qwen35moe`,
+49 blocks/3072 embedding dimensions, with three splits and 392 first-file tensors; 899 tensors
+and 262144 context tokens are advertised, not whole-model or context acceptance. Its template
+hash is recorded in the [paired report](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md);
+template-branch and MoE/special-token verification remain unfinished. Separate read-only
+reconciliation confirmed owned worker/guard cleanup and unchanged live ready/idle baseline.
+Protected serial S-drive continuation reached **158 ranges/42399228704 bytes**, leaving
+**48030226048 transport bytes**. Preserve all bodies; finish transport before assembling
+remaining files so the importer's free-space guard is retained. Do not repeat first-file
+inspection or assembly. Exact documentation checkpoint `861bf7d` passed all five CI jobs.
+The planner now distinguishes three implemented source capabilities from the two remaining
+runtime/profile/qualified-thinking gaps; its 63 focused tests passed, not runtime acceptance.
+Continue the next reviewed finite transport window, then separately reviewed exact-ca1
+source/wheel staging and all-shard/template/native/semantic/context/operational qualification.
+No ca1 installation, complete 122B model acceptance, cutover or public thinking enablement.
+
+Subsequent update — **00:44 UTC**: transport reached 162 ranges/43472970528 bytes, with
+46956484224 missing. A ca1 stager failed local preflight before any host call because its
+fixed packaged wheel uses an OWNER RIGHTS ACL. Preserve the failure and exact original ACL;
+review the distinct narrowly scoped wheel boundary before any staging attempt. Source-only
+MoE/tokenizer inspection and 1098 unit tests/two POSIX skips passed; the frozen installed
+reader and ca1 package remain unchanged. Continue reviewed transport while that repair is local.
+
+گام جاری — **۶ اکتبر ۲۰۲۶، ساعت ۰۰:۲۷ UTC؛ فقط فرادادهٔ فایل اول**: فایل محافظت‌شدهٔ اول
+دوباره هش‌گیری و در ۸۹۷۹۸ میلی‌ثانیه بررسی شد. معماری واقعی `qwen35moe`، با ۴۹ بلوک و
+ابعاد تعبیهٔ ۳۰۷۲ است؛ سه فایل و ۳۹۲ تنسور در فایل اول مشاهده شد. مجموع ۸۹۹ تنسور و
+زمینهٔ ۲۶۲۱۴۴ توکنی فقط ویژگی اعلام‌شده است، نه پذیرش مدل کامل یا زمینهٔ قابل‌استفاده.
+هش قالب در گزارش دوزبانهٔ بالا ثبت است؛ بررسی شاخه‌های قالب، MoE و توکن‌های ویژه هنوز
+باقی است. تطبیق مستقلِ فقط‌خواندنی، توقف فرایندهای متعلق به اجرا و ثبات خط مبنای
+آماده/بی‌درخواست را تأیید کرد. ادامهٔ ترتیبیِ محافظت‌شده روی دیسک S به **۱۵۸ بخش/
+۴۲۳۹۹۲۲۸۷۰۴ بایت** رسید؛ **۴۸۰۳۰۲۲۶۰۴۸ بایت انتقالی** باقی است. همهٔ بدنه‌ها حفظ شوند؛
+انتقال پیش از تجمیع فایل‌های باقی‌مانده تکمیل شود تا حداقل فضای آزادِ ابزار دریافت رعایت
+شود. بررسی و تجمیع فایل اول تکرار نشود. هر پنج کنترل CI گام مستندات `861bf7d` موفق‌اند.
+برنامه‌ریز، سه قابلیت پیاده‌شدهٔ کد را از دو کار باقی‌ماندهٔ نمایهٔ اجرا/مسیر استدلالِ
+واجد صلاحیت جدا می‌کند؛ ۶۳ آزمون محدود موفق‌اند، نه پذیرش اجرا. پس از پنجرهٔ محدودِ
+بعدی، آماده‌سازی مستقلِ بستهٔ دقیق ca1 و پذیرش همهٔ فایل‌ها/قالب/اجرای بومی/معنا/زمینه/
+معیارهای عملیاتی ادامه یابد. نصب ca1، پذیرش کامل 122B، تغییر مدل زنده یا فعال‌سازی
+استدلال عمومی انجام نشده است.
+
+به‌روزرسانی بعدی — **ساعت ۰۰:۴۴ UTC**: انتقال به ۱۶۲ بخش/۴۳۴۷۲۹۷۰۵۲۸ بایت رسید؛
+۴۶۹۵۶۴۸۴۲۲۴ بایت باقی است. آماده‌سازی ca1 پیش از هر فراخوانی میزبان در کنترل محلی ناموفق
+شد، زیرا wheel ثابت، ACL از نوع OWNER RIGHTS دارد. شکست و ACL اصلی حفظ و مرز مستقلِ
+محدود به همین wheel پیش از آماده‌سازی بازبینی شود. بررسی MoE/tokenizer در کد و ۱۰۹۸
+آزمون واحد/دو مورد POSIX اجرا‌نشده موفق‌اند؛ ابزار ثابتِ نصب‌شده و بستهٔ ca1 تغییر
+نکرده‌اند. انتقال بررسی‌شده ادامه یابد؛ این اصلاح فقط محلی است.
+
+## Earlier first-shard checkpoint — historical / گام پیشینِ فایل اول — سابقه
+
+Historical checkpoint — **2026-10-06, following the 23:30 UTC first-shard result**:
 the Apache Qwen3.5-122B-A10B Q5 alternative has **one of three complete shards verified**.
 All 148 first-shard ranges were retained and assembled; the final 39714874144-byte file matches
 upstream SHA `d7d5aa3ef843ba3fe5ee27cdaebe17abd8a6a8a03a5c236db9bfe2fc6b88be2e`.

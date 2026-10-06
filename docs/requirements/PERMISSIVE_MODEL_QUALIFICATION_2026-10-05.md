@@ -7,10 +7,86 @@ Date: **2026-10-05**. Status: **Q5 import verified; distinct standard trials fai
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06 — first complete 122B shard verified; offline ca1 package built; no model acceptance**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶ — فایل کامل اولِ 122B تأیید و بستهٔ آفلاین ca1 ساخته شد؛ بدون پذیرش مدل**.
+Latest update: **2026-10-06, 00:27 UTC — actual first-file metadata verified; whole-model acceptance not run**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۰:۲۷ UTC — فرادادهٔ واقعی فایل اول تأیید شد؛ پذیرش مدل کامل اجرا نشده است**.
 
 ## English
+
+### Actual first-file metadata and protected S-drive continuation — 00:27 UTC
+
+The separately reviewed metadata installer passed **136 Python/864 PowerShell** main and
+independent preparation checks. Its root-only installation completed in 225 ms without
+running a model. The distinct external execution quartet passed **1469 Python/587 PowerShell**
+main and independent checks. Operation `metadata-122b-20261006-639268431340517846` then
+completed exit 0 at **00:27:06 UTC**: **89798 ms** total/**89410 ms** inspection. It freshly
+verified the complete first-file upstream SHA before bounded metadata parsing. An independent
+read-only reconciliation and main's separate protected-record reread confirmed owned worker/
+guard stop, exact result identity and unchanged live ready/idle baseline. Protected result SHA:
+`5f8b6345c3437acfdc4fc65da4ac0bd69d469d8eef30bbe2ea78216593805ce1`.
+
+| Actual observed field | Value and boundary |
+| --- | --- |
+| Architecture/name/license | `qwen35moe` / Qwen3.5 122B A10B / `apache-2.0` |
+| GGUF/quantization version/file type | 3 / 2 / 17 |
+| Metadata fields/block count/embedding length | 51 / 49 / 3072 |
+| Split count/index/first-file tensors | 3 / 0 / 392 |
+| Aggregate tensors/context length | 899 / 262144 — advertised, not whole-set or usable-context proof |
+| Tokenizer model/pre | `gpt2` / `qwen35` |
+| Template SHA-256, not raw text | `a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715` |
+
+Expert/special-token fields and rendered template branches are not verified by this reader.
+Accepted context stays null; full-model/native-load/semantic/thinking/privacy gates are not run.
+The installer/inspector/reconciler execute no inference and change no serving configuration.
+
+The exact precreated private S-drive child passed ACL/identity checks, without changing the
+drive root ACL. Separately reviewed v6 serial continuation passed **328 main/independent**
+preparation checks. Three successful windows completed shard-two indexes 1, 2–5 and 6–9,
+with full per-range HTTP 206/exit-0/size/local hash and protected import/cleanup/finish checks.
+The resulting canonical ledger contains **158 ranges/42399228704 bytes**; **48030226048
+transport bytes** remain. Only the first complete upstream shard is verified. All local
+bodies are retained. Main separately reread the first window's root receipts; the latter two
+were verified by the controller, not separately reread by this report. Final baseline/owned
+stop checks passed. Finish missing transport before additional full-file assembly to retain
+the importer's 200-billion-byte free-space floor; never weaken the system-drive floor.
+
+Exact `861bf7d` passed all five CI jobs in
+[run 37392947997](https://github.com/Omid-NextAI/nextops/actions/runs/37392947997).
+The source planner now lists implemented typed identity, hard standard-mode control and actual
+model-label propagation separately from uncompleted runtime/qualified-thinking work. The
+focused plan/registration suite passed **63 tests in 2.58 seconds**; lint/format and independent
+diagnostic review passed. This is source/status repair, not 122B runtime acceptance, and does
+not alter the frozen ca1 archive/wheel or installed private reader. The exact ca1 source/wheel
+staging quartet passed **286 Python/923 PowerShell** main/independent preparation checks;
+actual host staging and installed-venv parity are still not run at this checkpoint.
+
+The next serial window completed exit 0 at **00:44:09 UTC**: shard-two indexes 10–13,
+four times 268435456 bytes, all HTTP 206/exit 0, **505890 ms** aggregate curl time. Its
+controller verified all protected receipts/owned-stop/baseline checks. Canonical transport
+advanced to **162 ranges/43472970528 bytes**, leaving **46956484224 transport bytes**; no
+second whole-file verification. Private desktop result SHA:
+`ab1fe22ed0ec7fe54e5b11bab895b408ff3c5ea31dcd7833264470034ffa5907`.
+Main did not independently reread this window's root receipts.
+
+The subsequent ca1 staging controller failed **desktop preflight in 3.63 seconds**, before
+any host call/upload/root stage. Its exact wheel has a current-user owner and a narrow inherited
+OWNER RIGHTS/SYSTEM/administrator ACL; the reused validator accepts explicit current-user,
+SYSTEM and administrator principals and therefore rejected that OWNER RIGHTS entry. Read-only
+diagnosis confirmed exact source/wheel hashes and the other protected paths. Original files,
+ACLs and failure are retained. Review a distinct fixed-wheel-only boundary with negative tests;
+do not retry unchanged, alter original ACLs or broaden the generic private-path validator.
+
+Source-only metadata inspection now captures **22** bounded architecture integer suffixes,
+**14** special-token ID keys and **five** strict Boolean flags using the pinned upstream
+[constants](https://raw.githubusercontent.com/ggml-org/llama.cpp/b29c606e28a01b1bc8c1351026a0fa6e616bf6c4/gguf-py/gguf/constants.py).
+Selected arrays fail closed; missing fields remain absent. Full hash/byte/string/array bounds,
+template hashing and no tensor parsing remain. This is not vocabulary/template-branch or
+active-expert/KV/context validation; the installed private reader is unchanged. Main's exact
+`python -m pytest tests/unit -q -m 'not browser'` passed **1098 tests/two POSIX skips/one existing
+warning in 20.54 seconds**. Independent focused reader tests passed **211 in 1.64 seconds**;
+main focused Ruff/format/mypy passed. The first offline documentation invocation failed only
+when printing Persian under Windows cp1252; the distinct `uv run --offline --no-sync python
+-X utf8 scripts/check_docs.py` completed exit 0: **140 Markdown files/39 pairs**. Release status
+validation and diff checks passed. No new live-model or WAN acceptance follows.
 
 ### First full shard and exact-source offline package — 2026-10-06 checkpoint
 
@@ -956,6 +1032,83 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### فرادادهٔ واقعی فایل اول و ادامهٔ محافظت‌شده روی S — ساعت ۰۰:۲۷ UTC
+
+ابزار مستقلِ نصب فراداده، **۱۳۶ کنترل Python/۸۶۴ کنترل PowerShell** اصلی و مستقل را
+گذراند. نصب با دسترسی root در ۲۲۵ میلی‌ثانیه، بدون اجرای مدل پایان یافت. چهار ابزار
+مستقلِ نظارت بیرونی، **۱۴۶۹ کنترل Python/۵۸۷ کنترل PowerShell** اصلی و مستقل را گذراندند.
+عملیات `metadata-122b-20261006-639268431340517846` ساعت **۰۰:۲۷:۰۶ UTC** با کد خروج صفر
+کامل شد: **۸۹۷۹۸ میلی‌ثانیه** کل/**۸۹۴۱۰ میلی‌ثانیه** بررسی. پیش از خواندن محدودِ
+فراداده، هش کاملِ تازهٔ فایل اول با منبع اصلی تطبیق داده شد. تطبیق مستقلِ فقط‌خواندنی
+و بازخوانی جداگانهٔ رسیدهای محافظت‌شده توسط بازبین اصلی، توقف فرایندهای متعلق به اجرا،
+هویت دقیق نتیجه و ثبات خط مبنای آماده/بی‌درخواست را تأیید کردند. هش نتیجهٔ محافظت‌شده:
+`5f8b6345c3437acfdc4fc65da4ac0bd69d469d8eef30bbe2ea78216593805ce1`.
+
+| ویژگی واقعاً مشاهده‌شده | مقدار و محدودیت نتیجه |
+| --- | --- |
+| معماری/نام/مجوز | `qwen35moe` / Qwen3.5 122B A10B / `apache-2.0` |
+| نسخهٔ GGUF/کوانتیزه‌سازی/نوع فایل | ۳ / ۲ / ۱۷ |
+| تعداد فیلد/بلوک/ابعاد تعبیه | ۵۱ / ۴۹ / ۳۰۷۲ |
+| تعداد فایل/اندیس/تنسورهای فایل اول | ۳ / ۰ / ۳۹۲ |
+| مجموع تنسور/طول زمینه | ۸۹۹ / ۲۶۲۱۴۴ — اعلام‌شده، نه تأیید مجموعهٔ کامل یا زمینهٔ قابل‌استفاده |
+| مدل/پیش‌پردازش tokenizer | `gpt2` / `qwen35` |
+| هش SHA-256 قالب؛ نه متن خام | `a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715` |
+
+این ابزار، ویژگی expert/توکن‌های ویژه یا شاخه‌های اجراشدهٔ قالب را تأیید نکرده است.
+زمینهٔ پذیرفته‌شده همچنان null است؛ معیارهای مدل کامل/بارگذاری بومی/معنا/استدلال/حریم
+خصوصی اجرا نشده‌اند. ابزار نصب/بررسی/تطبیق، استنتاج یا تغییر تنظیم زنده انجام نمی‌دهد.
+
+پوشهٔ خصوصیِ ازپیش‌ساخته‌شده روی S، کنترل ACL/هویت را بدون تغییر ACL ریشهٔ دیسک گذراند.
+ابزار مستقلِ ادامهٔ ترتیبیِ نسخهٔ ششم، **۳۲۸ کنترل اصلی/مستقل** آماده‌سازی را گذراند.
+سه پنجرهٔ موفق، اندیس‌های ۱، ۲ تا ۵ و ۶ تا ۹ فایل دوم را با HTTP 206/کد خروج صفر/
+اندازه/هش کامل محلی و رسیدهای محافظت‌شدهٔ دریافت/پاک‌سازی/پایان کامل کردند. فهرست اصلی
+اکنون **۱۵۸ بخش/۴۲۳۹۹۲۲۸۷۰۴ بایت** دارد؛ **۴۸۰۳۰۲۲۶۰۴۸ بایت انتقالی** باقی است. فقط
+فایل کامل اول، تأیید منبع اصلی دارد؛ همهٔ بدنه‌های محلی حفظ‌اند. بازبین اصلی، رسیدهای
+root پنجرهٔ نخست را جدا خواند؛ دو پنجرهٔ بعدی با کنترل‌کننده تأیید شدند، نه بازخوانی
+مستقل در این گزارش. ثبات خط مبنا/توقف فرایند موفق است. برای حفظ حداقل فضای آزادِ
+۲۰۰ میلیارد بایتیِ ابزار دریافت، انتقال باقی‌مانده پیش از تجمیع فایل‌های بعدی کامل شود؛
+حداقل فضای آزاد دیسک سیستم تضعیف نشود.
+
+هر پنج کنترل CI کد دقیق `861bf7d` در
+[اجرای 37392947997](https://github.com/Omid-NextAI/nextops/actions/runs/37392947997) موفق‌اند.
+برنامه‌ریز، ثبت هویت نوع‌دار، کنترل سختِ حالت استاندارد و نمایش نام واقعی مدل را به‌عنوان
+کد پیاده‌شده، جدا از کار ناتمام نمایهٔ اجرا/استدلالِ واجد صلاحیت ثبت می‌کند. مجموعهٔ
+محدودِ برنامه/ثبت مدل **۶۳ آزمون را در ۲٫۵۸ ثانیه** گذراند؛ lint/قالب‌بندی و بازبینی مستقل
+اصلاح وضعیت موفق‌اند. این اصلاح کد/وضعیت است، نه پذیرش اجرای 122B؛ آرشیو/wheel ثابت ca1
+و ابزار خصوصیِ نصب‌شده تغییر نکرده‌اند. چهار ابزار آماده‌سازیِ بستهٔ دقیق ca1، **۲۸۶ کنترل
+Python/۹۲۳ کنترل PowerShell** اصلی/مستقل را گذراندند؛ آماده‌سازی واقعی روی میزبان و برابری
+وابستگی‌های محیط نصب‌شده هنوز در این گام اجرا نشده‌اند.
+
+پنجرهٔ ترتیبیِ بعدی ساعت **۰۰:۴۴:۰۹ UTC** با کد خروج صفر کامل شد: اندیس‌های ۱۰ تا ۱۳
+فایل دوم، چهار بخشِ ۲۶۸۴۳۵۴۵۶ بایتی، همگی HTTP 206/کد خروج صفر، با **۵۰۵۸۹۰ میلی‌ثانیه**
+زمان کل curl. کنترل‌کننده، رسیدهای محافظت‌شده/توقف فرایند/ثبات خط مبنا را تأیید کرد.
+مجموع انتقال به **۱۶۲ بخش/۴۳۴۷۲۹۷۰۵۲۸ بایت** رسید؛ **۴۶۹۵۶۴۸۴۲۲۴ بایت انتقالی** باقی است،
+نه تأیید فایل کامل دوم. هش نتیجهٔ خصوصیِ رایانهٔ کاربر:
+`ab1fe22ed0ec7fe54e5b11bab895b408ff3c5ea31dcd7833264470034ffa5907`.
+بازبین اصلی، رسیدهای root این پنجره را مستقل بازخوانی نکرده است.
+
+سپس کنترل‌کنندهٔ آماده‌سازی ca1 در **۳٫۶۳ ثانیه، در کنترل اولیهٔ رایانهٔ کاربر** و پیش
+از هر فراخوانی میزبان/بارگذاری/آماده‌سازی root ناموفق شد. فایل دقیق wheel، مالکیت کاربر
+جاری و ACL محدودِ موروثیِ OWNER RIGHTS/SYSTEM/مدیر دارد؛ اعتبارسنج قبلی فقط شناسهٔ صریح
+کاربر جاری، SYSTEM و مدیر را می‌پذیرد و ورودی OWNER RIGHTS را رد کرد. بررسی فقط‌خواندنی،
+هش دقیق کد/wheel و مسیرهای محافظت‌شدهٔ دیگر را تأیید کرد. فایل‌ها، ACLها و شکست اولیه
+حفظ‌اند. مرز مستقلِ مختص همین wheel، با آزمون‌های منفی بازبینی شود؛ اجرای بدون تغییر
+تکرار، ACL اصلی دست‌کاری یا اعتبارسنج عمومیِ مسیر خصوصی گسترده نشود.
+
+ابزار فراداده در کد اکنون **۲۲** پسوندِ عدد صحیحِ محدودِ معماری، **۱۴** شناسهٔ توکن ویژه
+و **پنج** پرچم بولیِ سخت‌گیرانه را بر اساس
+[ثابت‌های نسخهٔ پین‌شده](https://raw.githubusercontent.com/ggml-org/llama.cpp/b29c606e28a01b1bc8c1351026a0fa6e616bf6c4/gguf-py/gguf/constants.py)
+می‌خواند. آرایهٔ فیلد انتخاب‌شده رد و ویژگی غایب همچنان غایب می‌ماند. کنترل هش کامل/
+حد بایت/رشته/آرایه، هش قالب و عدم خواندن تنسورها حفظ است. این نتیجه تأیید واژگان/شاخهٔ
+قالب/تعداد expert فعال/KV/زمینه نیست؛ ابزار خصوصیِ نصب‌شده تغییر نکرده است. فرمان دقیق
+اصلی `python -m pytest tests/unit -q -m 'not browser'`، **۱۰۹۸ آزمون موفق/دو مورد POSIX
+اجرانشده/یک هشدار قبلی را در ۲۰٫۵۴ ثانیه** ثبت کرد. آزمون مستقلِ محدودِ ابزار فراداده،
+**۲۱۱ مورد را در ۱٫۶۴ ثانیه** گذراند؛ Ruff/قالب‌بندی/mypy اصلی موفق‌اند. فرمان نخستِ
+مستندات آفلاین فقط هنگام چاپ فارسی با cp1252 ویندوز ناموفق شد؛ فرمان مستقلِ
+`uv run --offline --no-sync python -X utf8 scripts/check_docs.py` با کد خروج صفر، **۱۴۰
+Markdown/۳۹ جفت زبان** را بررسی کرد. اعتبارسنج وضعیت انتشار و کنترل diff موفق‌اند؛
+پذیرش تازهٔ مدل زنده یا قطع WAN از این نتایج حاصل نمی‌شود.
 
 ### نخستین فایل کامل و بستهٔ آفلاین کد دقیق — گام ۶ اکتبر ۲۰۲۶
 

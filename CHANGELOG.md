@@ -1,5 +1,33 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## First-file metadata and qualification-plan status repair — 2026-10-06
+
+Protected first-shard full-hash/metadata inspection completed in 89798 ms with owned stopped/
+ready-idle reconciliation. `qwen35moe`/49 blocks/3072 embedding dimensions/three splits/392
+first-file tensors are observed; aggregate 899 tensors/262144 context remain advertised only.
+Serial protected transfer reached 158 ranges/42399228704 bytes, leaving 48030226048 transport
+bytes. Exact `861bf7d` passed five CI jobs. Corrected three stale missing-source diagnostics;
+63 focused plan/registration tests passed. No full model, native/thinking/context acceptance,
+installation or cutover. Historical records and live 35B/public thinking-off are preserved.
+
+Extended bounded scalar MoE/tokenizer metadata inspection: 1098 local unit tests/two POSIX
+skips and 211 independent focused tests passed. The next transport window reached 162 ranges/
+43472970528 bytes at 00:44 UTC; 46956484224 remain. A ca1 stager failed local wheel-ACL preflight
+before host access; preserve the original and review a distinct fixed-wheel-only repair.
+
+بررسی محافظت‌شدهٔ هش کامل/فرادادهٔ فایل اول در ۸۹۷۹۸ میلی‌ثانیه، همراه تطبیق توقف فرایند
+متعلق به اجرا/آمادگی بی‌درخواست کامل شد. `qwen35moe`، ۴۹ بلوک، ابعاد تعبیهٔ ۳۰۷۲، سه فایل
+و ۳۹۲ تنسورِ فایل اول مشاهده شدند؛ مجموع ۸۹۹ تنسور/زمینهٔ ۲۶۲۱۴۴ فقط اعلام‌شده است.
+انتقال ترتیبیِ محافظت‌شده به ۱۵۸ بخش/۴۲۳۹۹۲۲۸۷۰۴ بایت رسید؛ ۴۸۰۳۰۲۲۶۰۴۸ بایت انتقالی
+باقی است. پنج کنترل CI کد دقیق `861bf7d` موفق‌اند. سه برچسب قدیمیِ قابلیت غایب اصلاح و
+۶۳ آزمون محدودِ برنامه/ثبت مدل موفق شدند. مدل کامل، اجرای بومی/استدلال/زمینه، نصب یا
+تغییر مدل زنده پذیرفته نشده است. سوابق و 35B زنده/خاموشی استدلال عمومی محفوظ‌اند.
+
+بررسی محدودِ ویژگی‌های عددیِ MoE/tokenizer گسترش یافت: ۱۰۹۸ آزمون واحد محلی/دو مورد
+POSIX اجرا‌نشده و ۲۱۱ آزمون محدود مستقل موفق‌اند. پنجرهٔ بعدی ساعت ۰۰:۴۴ UTC به ۱۶۲ بخش/
+۴۳۴۷۲۹۷۰۵۲۸ بایت رسید؛ ۴۶۹۵۶۴۸۴۲۲۴ بایت باقی است. آماده‌سازی ca1 در کنترل محلی ACL فایل
+wheel پیش از دسترسی میزبان ناموفق شد؛ اصل آن حفظ و اصلاح مستقلِ محدود به همان فایل بازبینی شود.
+
 ## First complete 122B shard and ca1 offline package — 2026-10-06
 
 Protected assembly of all 148 first-shard ranges completed in 480111 ms; its 39714874144-byte

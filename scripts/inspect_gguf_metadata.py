@@ -9,22 +9,77 @@ import struct
 from pathlib import Path
 from typing import Any, BinaryIO
 
-FIELDS = {
-    "general.architecture",
-    "general.name",
-    "general.file_type",
-    "general.quantization_version",
-    "general.license",
-    "general.size_label",
-    "general.base_model.0.name",
-    "general.base_model.0.repo_url",
-    "tokenizer.ggml.model",
-    "tokenizer.ggml.pre",
-    "tokenizer.chat_template",
-    "split.no",
-    "split.count",
-    "split.tensors.count",
+# Exact scalar keys from llama.cpp b29c606e's gguf/constants.py and GGUF writer.
+# These are inspection bounds, not model compatibility, active-parameter, KV
+# allocation or usable-context validation. Missing fields stay absent.
+TOKEN_ID_FIELDS = {
+    "tokenizer.ggml.bos_token_id",
+    "tokenizer.ggml.eos_token_id",
+    "tokenizer.ggml.eot_token_id",
+    "tokenizer.ggml.eom_token_id",
+    "tokenizer.ggml.unknown_token_id",
+    "tokenizer.ggml.seperator_token_id",  # Upstream spelling, not a corrected alias.
+    "tokenizer.ggml.padding_token_id",
+    "tokenizer.ggml.mask_token_id",
+    "tokenizer.ggml.fim_pre_token_id",
+    "tokenizer.ggml.fim_suf_token_id",
+    "tokenizer.ggml.fim_mid_token_id",
+    "tokenizer.ggml.fim_pad_token_id",
+    "tokenizer.ggml.fim_rep_token_id",
+    "tokenizer.ggml.fim_sep_token_id",
 }
+TOKEN_FLAG_FIELDS = {
+    "tokenizer.ggml.add_bos_token",
+    "tokenizer.ggml.add_eos_token",
+    "tokenizer.ggml.add_sep_token",
+    "tokenizer.ggml.add_space_prefix",
+    "tokenizer.ggml.remove_extra_whitespaces",
+}
+ARCHITECTURE_INTEGER_SUFFIXES = (
+    ".context_length",
+    ".block_count",
+    ".embedding_length",
+    ".vocab_size",
+    ".feed_forward_length",
+    ".expert_count",
+    ".expert_used_count",
+    ".expert_shared_count",
+    ".expert_feed_forward_length",
+    ".expert_shared_feed_forward_length",
+    ".attention.head_count",
+    ".attention.head_count_kv",
+    ".attention.key_length",
+    ".attention.value_length",
+    ".full_attention_interval",
+    ".nextn_predict_layers",
+    ".ssm.conv_kernel",
+    ".ssm.inner_size",
+    ".ssm.state_size",
+    ".ssm.time_step_rank",
+    ".ssm.group_count",
+    ".rope.dimension_count",
+)
+MAX_SCALAR_UINT = (1 << 32) - 1
+FIELDS = (
+    {
+        "general.architecture",
+        "general.name",
+        "general.file_type",
+        "general.quantization_version",
+        "general.license",
+        "general.size_label",
+        "general.base_model.0.name",
+        "general.base_model.0.repo_url",
+        "tokenizer.ggml.model",
+        "tokenizer.ggml.pre",
+        "tokenizer.chat_template",
+        "split.no",
+        "split.count",
+        "split.tensors.count",
+    }
+    | TOKEN_ID_FIELDS
+    | TOKEN_FLAG_FIELDS
+)
 FORMATS = {
     0: "B",
     1: "b",
@@ -80,6 +135,11 @@ class Reader:
         return None
 
     def value(self, kind: int, capture: bool) -> Any:
+        if kind == 7:
+            value = self.number("B")
+            if value not in (0, 1):
+                raise MetadataError("invalid metadata boolean encoding")
+            return bool(value)
         if kind in FORMATS:
             return self.number(FORMATS[kind])
         if kind == 8:
@@ -119,11 +179,15 @@ def inspect(path: Path, expected_size: int, expected_sha256: str) -> dict[str, A
             if key is None or key in seen:
                 raise MetadataError("duplicate metadata key")
             seen.add(key)
-            capture = key in FIELDS or key.endswith(
-                (".context_length", ".block_count", ".embedding_length")
-            )
+            architecture_integer = key.endswith(ARCHITECTURE_INTEGER_SUFFIXES)
+            capture = key in FIELDS or architecture_integer
             value = reader.value(reader.number("I"), capture)
             if capture:
+                if architecture_integer or key in TOKEN_ID_FIELDS:
+                    if type(value) is not int or not 0 <= value <= MAX_SCALAR_UINT:
+                        raise MetadataError("metadata integer scalar type or bound invalid")
+                elif key in TOKEN_FLAG_FIELDS and type(value) is not bool:
+                    raise MetadataError("tokenizer flag is not a boolean scalar")
                 if key == "tokenizer.chat_template":
                     if not isinstance(value, str):
                         raise MetadataError("chat template is not a string")
