@@ -1,5 +1,31 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after the 06:10 UTC checkpoint**: continue reviewed finite transport
+from **254 ranges/68169032480 bytes**, with **22260422272 bytes** remaining. The private V3 review
+handoff binds fourteen exact files and isolated commands; matching hashes/JSON and existing
+main-only checks are not independent acceptance. Finish independent native/publication review
+before those host operations; all three subagents still have terminal usage-limit errors. Do not
+restart completed source staging, first-file assembly/inspection or complete-inspector installation.
+Exact `8b94d88` passed five CI jobs. Complete transport before remaining assemblies/full-set
+inspection; then reviewed protected publication, standard semantics, final-only thinking/privacy,
+measured context and matched app/operational/rollback gates. Live35B/public thinking-off remain;
+the Apache alternative is Qwen3.5, never an accepted 3.8 label or maximum-context claim. No
+unattended transport/trial remains at this checkpoint.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از گام ساعت ۰۶:۱۰ UTC**: انتقال محدودِ بررسی‌شده از
+**۲۵۴ بخش/۶۸۱۶۹۰۳۲۴۸۰ بایت** ادامه یابد؛ **۲۲۲۶۰۴۲۲۲۷۲ بایت** باقی است. بستهٔ خصوصی
+تحویل بازبینی، چهارده فایل دقیق و فرمان‌های جداگانهٔ محلی را مشخص می‌کند؛ تطبیق هش/
+JSON و کنترل صرفاً اصلی، پذیرش مستقل نیست. بازبینی مستقلِ ابزارهای بومی/انتشار پیش از
+اجرای میزبان کامل شود؛ سه عامل همچنان خطای پایانیِ سقف استفاده دارند. آماده‌سازی کد/
+تجمیع و بررسی فایل اول/نصب ابزار مجموعهٔ کامل تکرار نشوند. پنج کنترل CI کد دقیق
+`8b94d88` موفق‌اند. انتقال پیش از تجمیع باقی‌مانده/بررسی مجموعه کامل شود؛ سپس انتشار
+محافظت‌شدهٔ بررسی‌شده، معنای استاندارد، استدلال نهایی/حریم خصوصی، زمینهٔ سنجیده و معیارهای
+برنامه/عملیات/بازگشت دنبال شوند. 35B زنده/خاموشی استدلال عمومی ثابت‌اند؛ جایگزین Apache
+Qwen3.5 است، نه نامِ پذیرفته‌شدهٔ 3.8 یا ادعای بیشترین زمینه. انتقال/آزمون رهاشده‌ای
+در این گام وجود ندارد.
+
+## Earlier transport/regression checkpoint — historical / گام پیشینِ انتقال/رگرسیون — سابقه
+
 Current task — **2026-10-06, after the 05:33 UTC follow-up**: continue reviewed finite transport
 from **242 ranges/64947807008 bytes**, **25481647744 bytes** remaining. Preserve the V3 durability/
 process-token repairs and main-only review status below; independent review is still not run.

@@ -1,5 +1,30 @@
 # Project state / وضعیت پروژه
 
+Latest provisioning/review-handoff checkpoint — **2026-10-06, 06:10 UTC**: three further V7
+windows passed actual desktop receipts/terminal exit0, reaching **254 ranges/68169032480 bytes**;
+**22260422272 bytes** remain, one whole upstream shard verified. Numeric HTTP206/exit0,
+all-body pre-import hashes/identities, retained bodies, closed handles and unchanged ready-idle
+reconciliation passed. A private independent-review handoff now binds fourteen freshly rehashed
+V3 source/checker files, pure commands and required failure-boundary findings; its JSON/pins
+check passed, not independent review. Three authorized subagents remain usage-limit errors.
+Exact `8b94d88` passed all five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37419756842).
+No V3 installation/publication/native execution, model selection, thinking enablement or accepted
+maximum context follows. No unattended transport/trial remains at this checkpoint. Preserve all
+earlier completed work/failures and the live35B baseline.
+
+آخرین گام آماده‌سازی/تحویل بازبینی — **۶ اکتبر ۲۰۲۶، ساعت ۰۶:۱۰ UTC**: سه پنجرهٔ دیگرِ
+نسخهٔ هفتم با رسید واقعی/خروج صفر موفق شدند؛ مجموع **۲۵۴ بخش/۶۸۱۶۹۰۳۲۴۸۰ بایت** و
+باقی‌مانده **۲۲۲۶۰۴۲۲۲۷۲ بایت** است؛ یک فایل کامل با هش منبع تأیید شده. HTTP206 عددی/
+خروج صفر، هش/هویت همهٔ بدنه‌ها پیش از دریافت محافظت‌شده، حفظ بدنه/بسته‌شدن handleها/
+ثبات خط مبنای آماده و بی‌درخواست تأیید است. بستهٔ خصوصیِ تحویل بازبینی، چهارده فایل
+کد/آزمون نسخهٔ سوم را با هش تازه، فرمان‌های صرفاً محلی و مرزهای شکست لازم مشخص می‌کند؛
+کنترل JSON/هش آن موفق است، نه بازبینی مستقل. سه عامل مجاز همچنان با خطای سقف استفاده
+متوقف‌اند. پنج کنترل CI کد دقیق `8b94d88` در اجرای بالا موفق‌اند. نصب/انتشار/اجرای بومیِ
+نسخهٔ سوم، انتخاب مدل، فعال‌سازی استدلال یا پذیرش بیشترین زمینه رخ نداده؛ سوابق و 35B
+زنده ثابت‌اند. انتقال/آزمون رهاشده‌ای در این گام وجود ندارد.
+
+## Earlier transport/regression checkpoint — historical / گام پیشینِ انتقال/رگرسیون — سابقه
+
 Latest transport follow-up — **2026-10-06, 05:33 UTC**: three further reviewed windows reached
 **242 ranges/64947807008 bytes**, with **25481647744 bytes** remaining. Actual desktop receipts/
 terminal exit0, all-four numeric checks before import, retained bodies, closed handles and

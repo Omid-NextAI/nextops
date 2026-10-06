@@ -7,10 +7,40 @@ Date: **2026-10-05**. Historical 27B status: **Qwen3.8-27B Q5 import verified; d
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, 05:33 UTC — 242 verified ranges; exact-head CI/local regression success; no model cutover**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۵:۳۳ UTC — ۲۴۲ بخش تأییدشده؛ موفقیت CI/آزمون محلیِ کد دقیق؛ بدون تغییر مدل زنده**.
+Latest update: **2026-10-06, 06:10 UTC — 254 verified ranges; exact-file independent-review handoff prepared, not approved; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۶:۱۰ UTC — ۲۵۴ بخش تأییدشده؛ بستهٔ تحویل بازبینی مستقلِ فایل‌های دقیق آماده، نه تأییدشده؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Further provisioning and independent-review handoff — 06:10 UTC
+
+Three further reviewed V7 windows passed; main read actual desktop receipts and terminal exit0:
+
+| Operation suffix | Second-file indexes | Curl milliseconds | Desktop result SHA-256 |
+| --- | --- | --- | --- |
+| `639268621098769452` | 94–97 | 38235 | `a994ef5700d1eb30601ed615fd5e935025aa9330945814d6c25eda55ff52caee` |
+| `639268623859327096` | 98–101 | 374734 | `b5b5b80d1f69678a884a1a3f7651fa6a0ccb560eab0161efc2922efb6ee8f6ae` |
+| `639268630606440778` | 102–105 | 514047 | `0848c9e229304f7719be2e84f443a75a02e1f5497226fe559bdb24758dfd4dda` |
+
+All-four numeric HTTP206/exit0/size/header/held-identity/hash checks passed before import;
+bodies remain, handles closed and unchanged ready-idle/owned-stop reconciliation passed.
+Separate root range receipts were not read by main. Totals: **254 ranges/68169032480 bytes**,
+**22260422272 bytes** remaining, only one complete upstream shard verified. Individual transport
+timings and in-progress zero-length bodies are not performance or model acceptance; no deadline
+was widened. No unattended operation remains at this checkpoint. Exact `8b94d88` passed all five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37419756842).
+
+Main prepared a private independent-review request for the directory-durable native wrapper,
+matching trio installer, external execution/read-only reconciler and publication installer V3.
+All fourteen listed current source/checker files were freshly rehashed against existing pins;
+the handoff JSON/current-pin check passed with no host/model call. It supplies exact isolated
+checker arguments, syntax-check command, frozen controls and required ownership/identity,
+file/directory fsync, bounded process/cleanup, strict receipt and primary-failure-preservation
+review criteria. This is preparation, not independent review or execution authority. None of
+the V3 tools was installed or operationally invoked. All three authorized subagents remain
+terminal usage-limit errors. Earlier source and failure evidence is unchanged; full-set,
+standard semantics, thinking/privacy/measured context and matched operational gates remain.
+The candidate is the Apache Qwen3.5 alternative, not an accepted 3.8 replacement; live35B stays.
 
 ### Further transport and targeted regression — 05:33 UTC
 
@@ -1351,6 +1381,35 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### ادامهٔ آماده‌سازی و تحویل بازبینی مستقل — ساعت ۰۶:۱۰ UTC
+
+سه پنجرهٔ دیگرِ نسخهٔ هفتم موفق شدند؛ بازبین اصلی، رسید واقعی رایانه و خروج صفر را خواند:
+
+| پسوند عملیات | شاخص‌های فایل دوم | دریافت، میلی‌ثانیه | SHA-256 رسید رایانه |
+| --- | --- | --- | --- |
+| `639268621098769452` | ۹۴–۹۷ | ۳۸۲۳۵ | `a994ef5700d1eb30601ed615fd5e935025aa9330945814d6c25eda55ff52caee` |
+| `639268623859327096` | ۹۸–۱۰۱ | ۳۷۴۷۳۴ | `b5b5b80d1f69678a884a1a3f7651fa6a0ccb560eab0161efc2922efb6ee8f6ae` |
+| `639268630606440778` | ۱۰۲–۱۰۵ | ۵۱۴۰۴۷ | `0848c9e229304f7719be2e84f443a75a02e1f5497226fe559bdb24758dfd4dda` |
+
+HTTP206 عددی/خروج صفر/اندازه/سرآیند/هویت نگه‌داشته‌شده/هش چهار درخواست، پیش از دریافت
+محافظت‌شده مطابق‌اند؛ بدنه‌ها حفظ و بسته‌شدن handleها/توقف متعلق به اجرا/ثبات خط مبنای
+آماده و بی‌درخواست تأیید است. رسید بخش‌های root جداگانه خوانده نشده. مجموع **۲۵۴ بخش/
+۶۸۱۶۹۰۳۲۴۸۰ بایت** و باقی‌مانده **۲۲۲۶۰۴۲۲۲۷۲ بایت** است؛ فقط یک فایل کامل با هش
+منبع تأیید شده. زمان هر انتقال و بدنهٔ صفرِ در حال دریافت، معیار کارایی یا پذیرش مدل
+نیست؛ مهلت افزایش نیافت. عملیات رهاشده‌ای در این گام وجود ندارد. پنج
+[کنترل CI](https://github.com/Omid-NextAI/nextops/actions/runs/37419756842)
+کد دقیق `8b94d88` موفق‌اند.
+
+بازبین اصلی، درخواست خصوصیِ بازبینی مستقل برای ابزار بومی با ثبت پایدار پوشه، ابزار نصب
+سه فایل، کنترل‌کننده/تطبیق فقط‌خواندنی بیرونی و نصب انتشارِ نسخهٔ سوم آماده کرد. هش تازهٔ
+چهارده فایل کد/آزمونِ فهرست‌شده با هویت ثابت مطابق است؛ کنترل JSON/هش بسته بدون تماس
+میزبان/مدل موفق شد. فرمان دقیق آزمون‌های جداگانه/نحو، کنترل‌های ثابت و معیارهای مالکیت/
+هویت، fsync فایل/پوشه، فرایند محدود/پاک‌سازی، رسید دقیق و حفظ شکست اولیه مشخص شده‌اند.
+این آماده‌سازی است، نه بازبینی مستقل یا مجوز اجرا. هیچ ابزار نسخهٔ سوم نصب یا عملیاتی
+اجرا نشده؛ سه عامل مجاز همچنان خطای پایانیِ سقف استفاده دارند. سوابق کد/شکست ثابت و
+معیارهای مجموعهٔ کامل، معنای استاندارد، استدلال/حریم خصوصی/زمینهٔ سنجیده و عملیات متناظر
+باز است. نامزد، جایگزین Apacheِ Qwen3.5 است، نه 3.8 پذیرفته‌شده؛ 35B زنده ثابت بماند.
 
 ### ادامهٔ انتقال و آزمون رگرسیون هدفمند — ساعت ۰۵:۳۳ UTC
 

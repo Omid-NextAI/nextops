@@ -1,5 +1,16 @@
 # Local CPU-only AI and capacity planning
 
+Provisioning/review handoff — **2026-10-06, 06:10 UTC**: 254 ranges/68169032480 bytes transferred
+with numeric HTTP206/exit0 and pre-import identity/hash/retention/stop/baseline checks;
+22260422272 bytes remain and one whole shard is verified. A private handoff binds fourteen
+freshly rehashed V3 source/checker files, isolated review commands and failure criteria; JSON/pin
+validation passed, not independent review. Exact `8b94d88` passed five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37419756842). Quota-blocked independent
+review, full-set/native/standard/thinking/privacy/context/app/operational/rollback gates remain.
+No V3 host execution or model selection; live35B stays and the 122B alternative is correctly 3.5.
+
+## Earlier transport/regression checkpoint — historical
+
 Transport follow-up — **2026-10-06, 05:33 UTC**: 242 ranges/64947807008 bytes verified,
 25481647744 remain, one whole shard verified. Three more bounded windows passed actual desktop
 receipt/exit0/pre-import numeric/hash/retention/stop/baseline checks. Exact `4e78144` passed five

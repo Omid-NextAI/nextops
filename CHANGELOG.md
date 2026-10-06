@@ -1,5 +1,18 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Continued provisioning and exact-file review handoff — 2026-10-06
+
+Three further bounded windows reached 254 ranges/68169032480 bytes; 22260422272 remain and one
+whole shard is verified. A private V3 handoff binds fourteen freshly rehashed files and isolated
+review commands; JSON/pins pass, not independent review. Exact `8b94d88` passed five CI jobs.
+Subagent quotas and model/thinking/context gates remain open; no new live selection or V3 host use.
+
+سه پنجرهٔ محدود دیگر، انتقال را به ۲۵۴ بخش/۶۸۱۶۹۰۳۲۴۸۰ بایت رساندند؛ ۲۲۲۶۰۴۲۲۲۷۲ بایت
+باقی و یک فایل کامل تأیید است. بستهٔ خصوصی بازبینیِ نسخهٔ سوم، چهارده فایل با هش تازه
+و فرمان‌های محلی را مشخص کرد؛ کنترل JSON/هش موفق است، نه بازبینی مستقل. پنج کنترل CI
+کد دقیق `8b94d88` موفق‌اند. محدودیت عامل‌ها و معیارهای مدل/استدلال/زمینه باز است؛ مدل
+زنده تغییر نکرده و ابزار نسخهٔ سوم روی میزبان به کار نرفته.
+
 ## Continued transport and exact-head regression evidence — 2026-10-06
 
 Three more windows reached 242 ranges/64947807008 bytes; 25481647744 remain, one whole shard.
