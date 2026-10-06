@@ -1,5 +1,14 @@
 # Local CPU-only AI and capacity planning
 
+Transport follow-up — **2026-10-06, 05:33 UTC**: 242 ranges/64947807008 bytes verified,
+25481647744 remain, one whole shard verified. Three more bounded windows passed actual desktop
+receipt/exit0/pre-import numeric/hash/retention/stop/baseline checks. Exact `4e78144` passed five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37417547944) and 61 targeted local
+regression tests (5.12s); neither is native model acceptance. Independent reviews and model/
+thinking/privacy/context/app/operational/rollback gates below remain open; live35B stays.
+
+## Earlier directory-durability checkpoint — historical
+
 Latest checkpoint — **2026-10-06, 05:10 UTC; provisioning/local repair only**: 230 verified
 transport ranges/61726581536 bytes; 28702873216 remain and one whole shard is verified. Three
 further windows passed actual desktop receipt/exit/retention/closed-handle/ready-idle checks.

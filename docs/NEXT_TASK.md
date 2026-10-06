@@ -1,5 +1,23 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after the 05:33 UTC follow-up**: continue reviewed finite transport
+from **242 ranges/64947807008 bytes**, **25481647744 bytes** remaining. Preserve the V3 durability/
+process-token repairs and main-only review status below; independent review is still not run.
+Exact `4e78144` passed five CI jobs and 61 targeted local regression tests, not host/model gates.
+Finish transport before remaining assembly/full-set inspection/publication/native standard tests;
+thinking/privacy/measured context/matched app/operational/rollback follow accepted semantics.
+No unattended download/trial remains at this checkpoint; live35B/public thinking-off stay.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از پیگیری ساعت ۰۵:۳۳ UTC**: انتقال محدودِ بررسی‌شده از
+**۲۴۲ بخش/۶۴۹۴۷۸۰۷۰۰۸ بایت** ادامه یابد؛ **۲۵۴۸۱۶۴۷۷۴۴ بایت** باقی است. اصلاح پایداری
+پوشه/توکن فرایند و وضعیتِ صرفاً بازبینی اصلیِ نسخهٔ سوم در ادامه حفظ شود؛ بازبینی مستقل
+اجرا نشده. پنج کنترل CI و ۶۱ آزمون محلیِ هدفمندِ کد دقیق `4e78144` موفق‌اند، نه معیار
+میزبان/مدل. انتقال پیش از تجمیع باقی‌مانده/مجموعهٔ کامل/انتشار/معنای بومی تکمیل شود؛
+استدلال/حریم خصوصی/زمینهٔ سنجیده/برنامه/عملیات/بازگشت پس از پذیرش معنا دنبال شوند.
+در این گام دانلود/آزمون رهاشده‌ای وجود ندارد؛ 35B زنده/خاموشی استدلال عمومی ثابت بمانند.
+
+## Earlier directory-durability checkpoint — historical / گام پیشینِ پایداری پوشه — سابقه
+
 Current task — **2026-10-06, after the 05:10 UTC checkpoint**: continue reviewed finite transport
 from **230 ranges/61726581536 bytes**, **28702873216 bytes** remaining. Finish transport before
 remaining assemblies. Do not use native V2 as directory-durable: the distinct V3 wrapper,

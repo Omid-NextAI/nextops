@@ -7,10 +7,32 @@ Date: **2026-10-05**. Historical 27B status: **Qwen3.8-27B Q5 import verified; d
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, 05:10 UTC — 230 verified ranges; directory-durable native V3 and external main review; no model cutover**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۵:۱۰ UTC — ۲۳۰ بخش تأییدشده؛ نسخهٔ بومیِ سوم با ثبت پایدار پوشه/بازبینی اصلیِ مرز بیرونی؛ بدون تغییر مدل زنده**.
+Latest update: **2026-10-06, 05:33 UTC — 242 verified ranges; exact-head CI/local regression success; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۵:۳۳ UTC — ۲۴۲ بخش تأییدشده؛ موفقیت CI/آزمون محلیِ کد دقیق؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Further transport and targeted regression — 05:33 UTC
+
+Three more V7 windows passed, with actual terminal exit0 and desktop receipts read by main:
+
+| Operation suffix | Second-file indexes | Curl milliseconds | Desktop result SHA-256 |
+| --- | --- | --- | --- |
+| `639268596918597658` | 82–85 | 486344 | `ec1891cadf86ae8d53298d5ed1aa6da2b904aad6ba4ce6738fda6e84370225d6` |
+| `639268604309844912` | 86–89 | 479219 | `d6ebeed02f5929f5d9fab80a9cecfe75c41115c9e12ec5030f47ebaf937e2410` |
+| `639268612161360707` | 90–93 | 39250 | `d5439a8fa0026f6dbdd7bb8a6fbff365b24dcb61e74586fc86fe62cc34f5d69f` |
+
+All-four numeric HTTP206/exit0/size/header/held-identity/hash checks preceded import; bodies
+remain, handles closed and unchanged ready-idle/owned-stop checks passed. No separate root
+range receipt was read by main. Totals: **242 ranges/64947807008 bytes**, **25481647744 bytes**
+remaining, one whole upstream shard verified. In-progress body-length observations were not
+acceptance; no deadline was widened. No unattended operation remains at this checkpoint.
+Exact `4e78144` passed five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37417547944).
+Local command `.venv/Scripts/python.exe -I -B -X utf8 -m pytest -q -p no:cacheprovider tests/unit/test_122b_q5_candidate.py tests/unit/test_thinking_qualification.py`
+passed **61 tests in 5.12s**, exit0; the actual import was the active checkout. This is manifest/
+premature-selection and mocked thinking-qualifier coverage, not native quality/privacy/context or
+live acceptance. The V3 main-only reviews, subagent quota failure, correctly labeled Apache 3.5
+alternative, live35B/public thinking-off and all model acceptance gates below remain unchanged.
 
 ### Directory-durable native preparation and external failure-boundary repair — 05:10 UTC
 
@@ -1329,6 +1351,30 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### ادامهٔ انتقال و آزمون رگرسیون هدفمند — ساعت ۰۵:۳۳ UTC
+
+سه پنجرهٔ دیگرِ نسخهٔ هفتم موفق شدند؛ بازبین اصلی خروج صفر واقعی و رسید رایانه را خواند:
+
+| پسوند عملیات | شاخص‌های فایل دوم | دریافت، میلی‌ثانیه | SHA-256 رسید رایانه |
+| --- | --- | --- | --- |
+| `639268596918597658` | ۸۲–۸۵ | ۴۸۶۳۴۴ | `ec1891cadf86ae8d53298d5ed1aa6da2b904aad6ba4ce6738fda6e84370225d6` |
+| `639268604309844912` | ۸۶–۸۹ | ۴۷۹۲۱۹ | `d6ebeed02f5929f5d9fab80a9cecfe75c41115c9e12ec5030f47ebaf937e2410` |
+| `639268612161360707` | ۹۰–۹۳ | ۳۹۲۵۰ | `d5439a8fa0026f6dbdd7bb8a6fbff365b24dcb61e74586fc86fe62cc34f5d69f` |
+
+HTTP206 عددی/خروج صفر/اندازه/سرآیند/هویت نگه‌داشته‌شده/هش چهار درخواست، پیش از دریافت
+محافظت‌شده مطابق‌اند؛ بدنه‌ها حفظ و بسته‌شدن handleها/توقف متعلق به اجرا/ثبات خط مبنا
+تأیید است. رسید بخش‌های root جداگانه خوانده نشده. مجموع **۲۴۲ بخش/۶۴۹۴۷۸۰۷۰۰۸ بایت**
+و باقی‌مانده **۲۵۴۸۱۶۴۷۷۴۴ بایت** است؛ یک فایل کامل با هش منبع تأیید شده. اندازهٔ بدنهٔ
+در حال دریافت، پذیرش نبود؛ مهلت اجرا افزایش نیافت. عملیات رهاشده‌ای در این گام وجود ندارد.
+پنج [کنترل CI](https://github.com/Omid-NextAI/nextops/actions/runs/37417547944) کد دقیق `4e78144`
+موفق‌اند. فرمان محلی
+`.venv/Scripts/python.exe -I -B -X utf8 -m pytest -q -p no:cacheprovider tests/unit/test_122b_q5_candidate.py tests/unit/test_thinking_qualification.py`
+با **۶۱ آزمون موفق در ۵٫۱۲ ثانیه** و خروج صفر اجرا شد؛ مسیر واقعی import همان checkout
+فعال بود. این پوشش manifest/جلوگیری از انتخاب زودهنگام/ابزار شبیه‌سازی‌شدهٔ استدلال است،
+نه کیفیت بومی/حریم خصوصی/زمینه/پذیرش زنده. بازبینی صرفاً اصلیِ نسخهٔ سوم، خطای سقف
+استفادهٔ عامل‌ها، نام درست جایگزین Apache 3.5، 35B زنده/خاموشی استدلال عمومی و همهٔ
+معیارهای پذیرش مدل در ادامه ثابت‌اند.
 
 ### آماده‌سازی بومی با ثبت پایدار پوشه و اصلاح مرز شکست بیرونی — ساعت ۰۵:۱۰ UTC
 

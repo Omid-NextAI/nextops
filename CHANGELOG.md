@@ -1,5 +1,16 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Continued transport and exact-head regression evidence — 2026-10-06
+
+Three more windows reached 242 ranges/64947807008 bytes; 25481647744 remain, one whole shard.
+Exact `4e78144` passed five CI jobs and 61 targeted local regression tests (5.12s). Independent
+review/model/thinking/context acceptance remain open; no live model selection or unattended trial.
+
+سه پنجرهٔ دیگر، انتقال را به ۲۴۲ بخش/۶۴۹۴۷۸۰۷۰۰۸ بایت رساندند؛ ۲۵۴۸۱۶۴۷۷۴۴ بایت باقی
+و یک فایل کامل تأیید است. پنج کنترل CI و ۶۱ آزمون محلیِ هدفمندِ کد دقیق `4e78144` در
+۵٫۱۲ ثانیه موفق‌اند. بازبینی مستقل/پذیرش مدل/استدلال/زمینه باز است؛ مدل زنده تغییر
+نکرده و آزمون رهاشده‌ای وجود ندارد.
+
 ## Directory-durable native preparation and external failure-boundary repair — 2026-10-06
 
 Transport reached 230 ranges/61726581536 bytes, 28702873216 remain; one whole shard verified.

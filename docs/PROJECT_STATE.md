@@ -1,5 +1,25 @@
 # Project state / وضعیت پروژه
 
+Latest transport follow-up — **2026-10-06, 05:33 UTC**: three further reviewed windows reached
+**242 ranges/64947807008 bytes**, with **25481647744 bytes** remaining. Actual desktop receipts/
+terminal exit0, all-four numeric checks before import, retained bodies, closed handles and
+unchanged ready-idle reconciliation passed; one whole shard verified. Exact `4e78144` passed five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37417547944); **61 targeted local
+regression tests passed in 5.12s**, not model acceptance. Native/publication independent reviews,
+complete-set/native/thinking/privacy/context/app/operational/rollback gates remain open.
+Live35B/public thinking-off and the correctly labeled unselected Apache 3.5 alternative are unchanged.
+
+آخرین پیگیری انتقال — **۶ اکتبر ۲۰۲۶، ساعت ۰۵:۳۳ UTC**: سه پنجرهٔ بررسی‌شدهٔ دیگر،
+انتقال را به **۲۴۲ بخش/۶۴۹۴۷۸۰۷۰۰۸ بایت** رساندند؛ **۲۵۴۸۱۶۴۷۷۴۴ بایت** باقی است.
+رسید واقعی/خروج صفر، کنترل عددی چهار درخواست پیش از دریافت محافظت‌شده، حفظ بدنه‌ها/
+بسته‌شدن handleها/ثبات خط مبنای آماده و بی‌درخواست تأیید است؛ یک فایل کامل تأیید شده.
+پنج کنترل CI کد دقیق `4e78144` در اجرای بالا و **۶۱ آزمون محلیِ هدفمند در ۵٫۱۲ ثانیه**
+موفق‌اند، نه پذیرش مدل. بازبینی مستقل ابزارهای بومی/انتشار و معیارهای مجموعهٔ کامل/
+معنا/استدلال/حریم خصوصی/زمینه/برنامه/عملیات/بازگشت باز است. 35B زنده/خاموشی استدلال
+عمومی و نام درستِ جایگزین Apache 3.5ِ انتخاب‌نشده ثابت‌اند.
+
+## Earlier directory-durability checkpoint — historical / گام پیشینِ پایداری پوشه — سابقه
+
 Latest verified checkpoint — **2026-10-06, 05:10 UTC; provisioning/local repair only**:
 three further V7 windows reached **230 ranges/61726581536 bytes**, leaving **28702873216 bytes**.
 Main read actual desktop receipts/exit0; numeric HTTP206/exit0, pre-import identity/hash,
