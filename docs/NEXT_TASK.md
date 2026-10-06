@@ -1,5 +1,27 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after source repair**: isolated browser/packaging review of the new
+application protocol/provenance safeguard is complete; require exact-source hosted CI before any
+promotion. Keep its guard successes
+separate from failed raw Qwen3.8 network/coding/provenance scores. Do not repeat an unchanged native
+trial or treat application-owned text as a model pass. A materially justified candidate change
+must then undergo the unchanged full bilingual semantic/coding corpus, followed by independent,
+matched app/proxy, thinking/privacy/context, evidence/WAN and exact model rollback qualification.
+Preserve owner-scoped memory, permissions, raw completion metadata, frozen questions and explicit
+deadline provenance. No serving model/prompt/budget, dependency, schema or credential change is
+part of this source repair; current 35B/thinking-off and all historical failures remain.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از اصلاح کد**: بازبینی جداگانهٔ مرورگر/بسته‌بندیِ کنترل تازهٔ
+پروتکل/مشخصات شاهد تکمیل است؛ پیش از هر استقرار، CI همان کد باید تأیید شود. موفقیت کنترل
+برنامه از شکست امتیاز خامِ شبکه/پایتون/
+منشأ Qwen3.8 جدا بماند؛ آزمون بومی یکسان تکرار و متن برنامه به موفقیت مدل تبدیل نشود. سپس
+تغییر توجیه‌شدهٔ نامزد باید مجموعهٔ کامل و ثابتِ معنایی/کد دوزبانه و بعد، پذیرش مستقل/برنامه
+و پراکسی هماهنگ/استدلال و حریم خصوصی/زمینه/شاهد و WAN/بازگشت دقیق مدل را بگذراند. حافظهٔ
+مالک، مجوز، metadata خام، پرسش ثابت و ثبت صریح مهلت حفظ شوند. تغییر مدل زنده، پرامپت، بودجه،
+وابستگی، پایگاه یا اطلاعات ورود در این اصلاح نیست؛ مدل 35B/استدلال خاموش و سابقه ثابت‌اند.
+
+## Earlier quality task — historical / کار پیشینِ کیفیت — سابقه
+
 Current task — **2026-10-06, after 11:53:44 UTC**: the new time budget is implemented and its
 two-case Q5 diagnosis completed; EN/FA finals passed timing and narrow main semantic review.
 Fourteen other cases are not run under300. Keep the failed full Q5/Q8 findings; longer waits do

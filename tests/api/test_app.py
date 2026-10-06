@@ -1620,6 +1620,72 @@ def test_monitoring_answer_passes_when_source_and_boundaries_are_explicit() -> N
 
 
 @pytest.mark.parametrize("locale", ["en", "fa"])
+@pytest.mark.parametrize("mode", ["monitoring", "incident"])
+def test_application_qualifiers_reach_the_completed_durable_response(
+    locale: str, mode: str
+) -> None:
+    service = FakeService()
+    client = TestClient(
+        create_app(
+            service,
+            FakeInferenceGateway("Zabbix Linux observations for app."),
+            FakeMonitoringGateway(),
+            incident_target_ids=("app",),
+        )
+    )
+    payload = {"locale": locale, "question": "Summarize the evidence."}
+    if mode == "incident":
+        payload["target_id"] = "app"
+    route = "/api/v1/investigate" if mode == "monitoring" else "/api/v1/incidents/investigate"
+    response = client.post(
+        route,
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json=payload,
+    )
+    assert response.status_code == 200
+    body = response.json()
+    answer = body["assistant"]["answer"]
+    assert '"Zabbix server"' in answer
+    assert "2026-09-21T09:00:00Z" in answer and "2026-09-21T08:59:45Z" in answer
+    assert body["assistant"]["evidence_mode"] == body["evidence_mode"]
+    assert body["evidence_reference"] == f"run-evidence:{RUN_ID}"
+    assert body["audit_event_id"]
+    if mode == "incident":
+        assert service.incident_completed
+        assert '"app"' in answer and "Linux:" in answer
+    else:
+        assert service.live_completed
+
+
+@pytest.mark.parametrize(
+    ("locale", "question"),
+    [
+        ("en", "TCP succeeds but HTTPS fails. What can be concluded about the topology?"),
+        ("fa", "TCP برقرار است ولی HTTP خطا می‌دهد؛ چه چیزی ثابت و چه چیزی نامعلوم است؟"),
+    ],
+)
+def test_protocol_conclusion_fallback_is_authenticated_and_has_no_live_evidence(
+    locale: str, question: str
+) -> None:
+    inference = FakeInferenceGateway("The load balancer is definitely faulty.")
+    client = TestClient(create_app(FakeService(), inference))
+    payload = {"locale": locale, "question": question}
+    assert client.post("/api/v1/assistant/generate", json=payload).status_code == 401
+    assert inference.last_request is None
+    result = client.post(
+        "/api/v1/assistant/generate",
+        headers={"Authorization": "Bearer valid-bearer-token-that-is-long-enough"},
+        json=payload,
+    )
+    assert result.status_code == 200
+    body = result.json()
+    assert body["integrity_status"] == "deterministic_fallback"
+    assert body["evidence_mode"] == "model_only" and not body["live_monitoring_data"]
+    assert body["finish_reason"] == "stop"
+    assert "definitely faulty" not in body["answer"]
+
+
+@pytest.mark.parametrize("locale", ["en", "fa"])
 @pytest.mark.parametrize("stale", [False, True])
 def test_cpu_only_answer_owns_idle_semantics_and_preserves_exact_provenance(
     locale: str, stale: bool

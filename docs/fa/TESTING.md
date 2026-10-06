@@ -2,6 +2,44 @@
 
 # آزمون، ارزیابی مدل و شواهد انتشار
 
+## اصلاح کدِ پروتکل و مشخصات شاهد — ۶ اکتبر ۲۰۲۶
+
+این رکورد، آزمون جداگانهٔ کد/شاهد ساختگی است، نه نتیجهٔ مدل یا استقرار. پرامپت، وزن و نمایهٔ
+مدل، اطلاعات ورود عملیاتی، پایگاه و تنظیم سرویس زنده تغییر نکرده‌اند.
+
+فرمان‌های دقیق در محیط قفل‌شده و ازپیش‌آمادهٔ Python 3.12/dev+MCP:
+
+```text
+python -I -B -X utf8 -m pytest -q -p no:cacheprovider -m "not integration and not browser"
+python -I -B -X utf8 -m pytest -q -p no:cacheprovider -m browser tests/browser
+python -I -B -X utf8 -m pytest -q -p no:cacheprovider tests/browser/test_evidence_qualifiers.py
+python -I -B -X utf8 -m mypy --platform linux packages tests scripts deploy/installers
+python -I -B -X utf8 -m ruff check packages migrations tests scripts deploy/installers
+python -I -B -X utf8 -m ruff format --check packages migrations tests scripts deploy/installers
+python -I -B -X utf8 scripts/check_docs.py
+python -I -B -X utf8 scripts/check_release_status.py
+python -I -B -X utf8 scripts/check_inference_artifacts.py
+uv build --offline --no-sources --no-build-isolation --wheel --out-dir <private-output>
+python -I -B -X utf8 scripts/compute_app_code_digest.py <private-output>/nextops-0.1.0-py3-none-any.whl
+git diff --check
+```
+
+نتیجهٔ کد نهایی: **۱۳۸۳ موفق، دو مورد مخصوص POSIX اجرا نشده، ۱۳۰ انتخاب‌نشده** در ۳۴٫۶۵ ثانیه؛
+کل مجموعهٔ مرورگر **۹۲ آزمون موفق** در ۲۹۰٫۷۰ ثانیه داشت. چهار آزمون تازهٔ EN/FA با عرض
+390/1440، از کنترل برنامه تا مرورگر، جداگانه در
+۱۵٫۳۲ ثانیه موفق‌اند: مشخصات/کپی دقیق، نمایش امن متن، RTL/LTR و
+پاک‌سازی پس از خروج. مقصد بیرونی مرورگر منع و loopback مجاز بود؛ در این چهار مورد هیچ تلاش
+بیرونی ثبت نشد. این پذیرش مدل بومی یا LAN/WAN نیست. هشدار قدیمی AnyIO باقی است. type با هدف
+Linux روی ۱۴۹ فایل، lint و قالب ۱۵۵ فایل موفق‌اند. کنترل مستندات ۱۴۰ Markdown/۳۹ جفت و کنترل
+انتشار/مدل/diff موفق‌اند. wheel آفلاین، ماژول تازهٔ `api/evidence_qualifiers.py` را دارد؛
+SHA256 درخت کد بسته:
+`e3610b7800f27c1f78adc46ae6b8b4eb4a12d6c6d4dcef387b5a1c3b46dddece`.
+
+شکست خام پایتون/شبکه/منشأ Qwen3.8 همچنان ناموفق است. تولید بومی تازه، بازبینی معنایی مستقل،
+integration واقعی پایگاه برای این گام، CI میزبان روی همین کد، استقرار/بازگشت، استدلال/حریم
+خصوصی/زمینه و WAN/شروع سرد واقعی، با این نتیجه‌های محلی اثبات نمی‌شوند.
+[الزام](../requirements/ANSWER_INTEGRITY_SPEC.md) مرجع است.
+
 ## آماده‌سازی Flash و ابزار آفلاینِ آزمون بازگشت — ۵ اکتبر ۲۰۲۶
 
 [گزارش فعلی](../requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md): اندازه/هش/metadata

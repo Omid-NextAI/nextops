@@ -1,5 +1,43 @@
 # Testing, model evaluation and release evidence
 
+## Protocol/provenance source repair — 2026-10-06
+
+This is isolated source/fixture verification, not a model or deployment result. No inference
+prompt/weights/profile, operational credentials, schema or serving configuration changed.
+
+Exact commands from the locked, already provisioned Python 3.12/dev+MCP environment:
+
+```text
+python -I -B -X utf8 -m pytest -q -p no:cacheprovider -m "not integration and not browser"
+python -I -B -X utf8 -m pytest -q -p no:cacheprovider -m browser tests/browser
+python -I -B -X utf8 -m pytest -q -p no:cacheprovider tests/browser/test_evidence_qualifiers.py
+python -I -B -X utf8 -m mypy --platform linux packages tests scripts deploy/installers
+python -I -B -X utf8 -m ruff check packages migrations tests scripts deploy/installers
+python -I -B -X utf8 -m ruff format --check packages migrations tests scripts deploy/installers
+python -I -B -X utf8 scripts/check_docs.py
+python -I -B -X utf8 scripts/check_release_status.py
+python -I -B -X utf8 scripts/check_inference_artifacts.py
+uv build --offline --no-sources --no-build-isolation --wheel --out-dir <private-output>
+python -I -B -X utf8 scripts/compute_app_code_digest.py <private-output>/nextops-0.1.0-py3-none-any.whl
+git diff --check
+```
+
+Final-source results: **1383 passed, two POSIX skips, 130 deselected** in 34.65s; the full browser
+suite passed **92 tests** in 290.70s. The four new guard-to-browser EN/FA 390/1440-width tests also
+passed separately in 15.32s:
+exact qualifiers/copy, safe text rendering, RTL/LTR and logout clearing. External browser
+destinations were denied while loopback stayed available; no external attempt occurred in these
+four cases. This is not native-model or LAN/WAN acceptance. Existing AnyIO deprecation warning
+remains. Linux-target types passed 149 files, lint passed and 155 files were formatted. Docs passed
+140 Markdown/39 pairs; release/inference/diff checks passed. Offline wheel includes the new
+`api/evidence_qualifiers.py`; package-code SHA256:
+`e3610b7800f27c1f78adc46ae6b8b4eb4a12d6c6d4dcef387b5a1c3b46dddece`.
+
+Raw Qwen3.8 coding/network/provenance failures remain failed. Fresh native generation, independent
+semantic review, real database integration for this increment, exact-head hosted CI, serving
+deployment/rollback, thinking/privacy/context and real WAN/cold-start gates are not proved by
+these local results. See [requirements](../requirements/ANSWER_INTEGRITY_SPEC.md).
+
 ## Flash preparation and offline regression tools — 2026-10-05
 
 [Current packet](../requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md): actual small-shard

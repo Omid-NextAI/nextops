@@ -10,6 +10,11 @@ import re
 from datetime import datetime
 from decimal import Decimal
 
+from nextops.api.evidence_qualifiers import (
+    incident_qualifiers,
+    monitoring_qualifiers,
+    with_evidence_qualifiers,
+)
 from nextops.api.incident_focus import (
     incident_focus,
     monitoring_cpu_focus,
@@ -198,6 +203,34 @@ _SUPPLIED_TLS_OR_NAME_VALIDATION = re.compile(
     r"گواهی.{0,40}نام\s*میزبان",
     re.IGNORECASE,
 )
+_TCP_OBSERVATION = re.compile(r"\bTCP\b", re.IGNORECASE)
+_HTTP_OBSERVATION = re.compile(r"\bHTTPS?\b", re.IGNORECASE)
+_PROTOCOL_CONCLUSION_QUESTION = re.compile(
+    r"\b(?:prov(?:e|es|en)|establish(?:es)?|conclud\w*|unknown|inference)\b|"
+    r"(?:ثابت|نتیجه|استنباط|نامعلوم|چه\s*چیزی.{0,30}معلوم)",
+    re.IGNORECASE,
+)
+_PROTOCOL_ASSERTION = re.compile(
+    r"\b(?:proves?|confirms?|establish(?:es)?|demonstrates?)\b.{0,160}"
+    r"\b(?:TLS|SSL|certificate|upstream|origin|gateway|proxy|load[ -]balancer)\b|"
+    r"\b(?:the|our|your|this|that)\s+(?:upstream(?:\s+origin)?(?:\s+server)?|"
+    r"origin(?:\s+server)?|backend|gateway|(?:reverse\s+)?proxy|load[ -]balancer)\s+"
+    r"(?:(?:is|was|has|had)\s+(?:definitely\s+)?(?:faulty|broken|offline|failed|invalid)|"
+    r"failed\b)|"
+    r"(?:ثابت|تأیید|تایید).{0,160}(?:TLS|گواهی|دروازه|بالادستی|پراکسی)|"
+    r"(?:بالادستی|دروازه|پراکسی|فایروال|سرور|سرویس).{0,70}"
+    r"(?:معیوب|خراب|خاموش|رد\s*کرده|نامعتبر)",
+    re.IGNORECASE,
+)
+_PROTOCOL_QUALIFIER = re.compile(
+    r"\b(?:not|never|cannot|can't|doesn't|isn't|unknown|unproven|may|might|could|"
+    r"if|assuming|possible|potential)\b|"
+    r"(?:نیست|نمی[‌ ]|نامعلوم|اثبات\s*نشده|تأیید\s*نشده|اگر|ممکن|احتمال|شاید)",
+    re.IGNORECASE,
+)
+_PROTOCOL_CLAUSE_BOUNDARY = re.compile(
+    r"[;.!?؛؟\n]+|\b(?:but|however)\b|\s(?:اما|ولی)\s", re.IGNORECASE
+)
 
 
 def assure_general_answer(
@@ -229,6 +262,17 @@ def assure_general_answer(
         supplied_scenario
         and _SUPPLIED_TLS_OR_NAME_VALIDATION.search(request.question)
         and _TLS_SCOPE_QUESTION.search(request.question)
+    )
+    protocol_scope = bool(
+        _TCP_OBSERVATION.search(request.question)
+        and _HTTP_OBSERVATION.search(request.question)
+        and _PROTOCOL_CONCLUSION_QUESTION.search(request.question)
+        and not explicit_current_fact
+        and not _REAL_TARGET_REQUEST.search(request.question)
+    )
+    protocol_overclaim = protocol_scope and any(
+        _PROTOCOL_ASSERTION.search(clause) and not _PROTOCOL_QUALIFIER.search(clause)
+        for clause in _PROTOCOL_CLAUSE_BOUNDARY.split(assistant.answer)
     )
     requires_live_evidence = bool(
         (
@@ -281,6 +325,7 @@ def assure_general_answer(
         and not greeting_mismatch
         and not missing_fresh_scenario
         and not supplied_tls_scope
+        and not protocol_overclaim
     ):
         return assistant.model_copy(
             update={
@@ -317,6 +362,23 @@ def assure_general_answer(
             "success covers only the checks explicitly stated. It does not establish "
             "the DNS resolution method, overall network health, all application components' "
             "readiness or the API error's cause; no live check or change was performed."
+        )
+        integrity_status = "deterministic_fallback"
+        limitations = ("no_live_evidence", "model_output_may_be_incorrect")
+    elif protocol_overclaim and not requires_live_evidence and not unsafe_claim:
+        # Interpret the limits of supplied protocol results, never turn a port
+        # number, status code or model sentence into proof of infrastructure.
+        answer = (
+            "نتیجه‌های بیان‌شدهٔ TCP و HTTP فقط همان بررسی‌ها را پوشش می‌دهند؛ برقراری اتصال "
+            "به‌تنهایی اعتبارسنجی TLS یا پاسخ موفق برنامه را ثابت نمی‌کند. از این نتایج "
+            "به‌تنهایی نمی‌توان توپولوژی واسط، علت خطا یا سلامت کل شبکه را نتیجه گرفت؛ این "
+            "تفسیرِ اطلاعات داده‌شده است، نه بررسی زنده یا اجرای تغییر."
+            if request.locale == "fa"
+            else "The stated TCP and HTTP results apply only to their respective checks; "
+            "a connection result alone does not establish TLS validation or successful "
+            "application service. Intermediary topology, root cause and whole-network health "
+            "are not established by those results alone; this interprets supplied information, "
+            "not a live check or performed change."
         )
         integrity_status = "deterministic_fallback"
         limitations = ("no_live_evidence", "model_output_may_be_incorrect")
@@ -423,6 +485,16 @@ def assure_general_answer(
 
 
 def assure_monitoring_answer(
+    request: AssistantRequest,
+    assistant: AssistantResponse,
+    evidence: MonitoringSummary,
+) -> AssistantResponse:
+    """Apply existing safeguards and always preserve application-owned qualifiers."""
+    guarded = _assure_monitoring_answer(request, assistant, evidence)
+    return with_evidence_qualifiers(guarded, monitoring_qualifiers(request.locale, evidence))
+
+
+def _assure_monitoring_answer(
     request: AssistantRequest,
     assistant: AssistantResponse,
     evidence: MonitoringSummary,
@@ -564,6 +636,16 @@ def assure_monitoring_answer(
 
 
 def assure_incident_answer(
+    request: IncidentInvestigationRequest,
+    assistant: AssistantResponse,
+    evidence: IncidentEvidence,
+) -> AssistantResponse:
+    """Keep every guarded result attributable without trusting model wording."""
+    guarded = _assure_incident_answer(request, assistant, evidence)
+    return with_evidence_qualifiers(guarded, incident_qualifiers(request.locale, evidence))
+
+
+def _assure_incident_answer(
     request: IncidentInvestigationRequest,
     assistant: AssistantResponse,
     evidence: IncidentEvidence,

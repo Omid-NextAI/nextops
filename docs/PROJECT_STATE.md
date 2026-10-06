@@ -1,5 +1,35 @@
 # Project state / وضعیت پروژه
 
+Current source checkpoint — **2026-10-06**: the owner-requested repair adds a scoped TCP/HTTP
+conclusion safeguard and application-owned source/time/one-host qualifiers to guarded evidence
+answers. Exact technical timestamps, distinct Linux/Zabbix scopes, empty times, hostile labels,
+raw completion metadata, evidence identity and answer bounds are covered by local tests.
+Non-browser suite: **1383 passed, two POSIX skips, 130 deselected** in 34.65s; final-source EN/FA
+desktop/mobile guard-to-browser cases: **4 passed** in 15.32s. The final-source full browser suite
+passed **92 tests** in 290.70s. Linux-target strict
+types passed 149 files; lint/155-file formatting and docs/status/inference checks passed; offline
+wheel includes the new module. Qualified protocol explanations remain unverified model guidance;
+only reviewed affirmative overclaims receive the scoped fallback. The existing raw coding
+regression remains strict and failed model examples remain failed. This is not training, a new
+native-model result or deployment; serving 35B/defaults/thinking-off and release manifest remain
+unchanged. Independent/full 3.8/app/WAN/context/thinking/rollback gates are not passed by application
+fixtures. See [requirements](requirements/ANSWER_INTEGRITY_SPEC.md).
+
+گام جاریِ کد — **۶ اکتبر ۲۰۲۶**: اصلاح خواسته‌شدهٔ مالک، کنترل محدودِ نتیجه‌گیری TCP/HTTP و
+مشخصات منبع/زمان/تنها میزبانِ مجازِ درج‌شده توسط برنامه را به پاسخ دارای شاهد می‌افزاید. زمان
+فنی دقیق، جدایی دامنهٔ Linux/Zabbix، زمان غایب، نام نامعتبر، هویت/پایان خام، شاهد و سقف پاسخ
+آزمون دارند. مجموعهٔ غیرمرورگر: **۱۳۸۳ موفق، دو مورد مخصوص POSIX اجرا نشده، ۱۳۰ انتخاب‌نشده**
+در ۳۴٫۶۵ ثانیه؛ چهار آزمون تازهٔ EN/FA رومیزی/موبایلِ کنترل تا مرورگر روی کد نهایی در ۱۵٫۳۲
+ثانیه موفق‌اند. کل مجموعهٔ مرورگر روی کد نهایی **۹۲ آزمون موفق** در ۲۹۰٫۷۰ ثانیه داشت.
+type با هدف Linux روی ۱۴۹ فایل، lint/قالب ۱۵۵ فایل و کنترل مستندات/وضعیت/
+مدل موفق‌اند؛ wheel آفلاین ماژول تازه را دارد. توضیح درست و محدودِ پروتکل، راهنمای تأییدنشدهٔ
+مدل باقی می‌ماند؛ فقط ادعاهای قطعیِ بررسی‌شده پاسخ جایگزین می‌گیرند. کنترل کد سخت‌گیرانه
+باقی است و مثال ناموفق مدل همچنان ناموفق است. این کار آموزش، نتیجهٔ تازهٔ مدل بومی یا استقرار
+نیست؛ مدل زندهٔ 35B، پیش‌فرض، خاموشی استدلال و manifest ثابت‌اند. شاهد ساختگی، پذیرش مستقل/
+کامل ۳.۸/برنامه/WAN/زمینه/استدلال/بازگشت نیست. الزام پیوندشده، دامنه و محدودیت را ثبت می‌کند.
+
+## Earlier timeout checkpoint — historical / گام پیشینِ مهلت — سابقه
+
 Current checkpoint — **2026-10-06, 11:53:44 UTC**: the owner-authorized retained-Q5
 300-second two-case probe returned EN/FA finals in **88441/145010 ms**, 86/144 completion tokens.
 Both pass the narrow frozen hypothesis criteria in main-only manual review; fourteen other cases

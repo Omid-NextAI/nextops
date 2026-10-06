@@ -1,5 +1,83 @@
 # Answer integrity specification
 
+## Source-only protocol/provenance repair — 2026-10-06
+
+Problem: the retained Qwen3.8 Q8 trial completed all sixteen deadlines but failed four semantic
+checks: two unsupported network conclusions, one missing Python type guard, and one omitted
+authorized evidence scope. A longer deadline does not repair these. This increment strengthens
+the existing application boundary; it does not change weights, inference prompts or acceptance.
+
+Requirements and tasks:
+
+1. Reject reviewed affirmative overclaims in TCP/HTTP conclusion questions, scoped to the reported
+   checks. A result cannot establish TLS validation, intermediary topology, whole-network health or
+   cause by implication. Use an explicit `deterministic_fallback`, not an allegedly corrected
+   raw-model pass. Actual-state and
+   execution denial retain priority; qualified answers/hypotheses and ordinary protocol tutorials
+   remain model-only guidance. This lexical rule has limited wording coverage, not complete semantics.
+2. Append a clearly labelled application-owned provenance section to guarded monitoring and
+   incident answers before durable completion: source, one-host scope, exact collection and metric
+   observation times, stale markers and partial coverage. Keep Linux target/time separate from
+   Zabbix host/time; do not imply they are the same host. Empty metric times remain unavailable.
+3. Keep identifiers/timestamps byte-faithful where possible, without localizing technical digits.
+   Quote host labels as data, escaping newlines and bidirectional override controls. Do not copy
+   arbitrary metric names/values or new operational details into the qualifiers.
+4. Preserve response identity, raw completion reason/token counts, canonical evidence and audit.
+   Revalidate the 16000-character response bound; replace overlong prose visibly rather than
+   clipping provenance. Model-only answers cannot acquire a live-evidence footer.
+5. Keep the finite non-executing coding regression checker strict. Generated code is not executed
+   or automatically repaired; arbitrary code remains unverified. The Q8 coding failure stays
+   failed and requires a materially changed candidate plus fresh raw-model evaluation.
+
+Threats/non-goals: collected labels and generated text remain untrusted. No new credential,
+authorization grant, shell/code execution, schema, dependency, runtime download, model selection,
+thinking flag, resource budget or serving restart is introduced. A lexical protocol guard is not a
+general semantic verifier. An application-owned footer does not prove that preceding model prose
+is factually correct, nor repair the synthetic general-answer model's raw provenance failure.
+
+Acceptance: unit/API tests for EN/FA omissions, distinct scopes, empty metrics, hostile labels,
+offset timestamps, completion bounds and denial priority; browser tests for display, exact copy,
+RTL/LTR and logout clearing; existing regression suite, locked types/lint and documentation checks.
+Browser fixtures may block external destinations while allowing loopback; that is not live-model
+WAN/cold-start acceptance. Native generation, independent semantics, real database persistence,
+matched serving release, thinking/privacy/context and model rollback remain separate gates.
+
+Rollback: revert this bounded source increment to `0bf5a99`; no migration or data deletion is
+needed. Existing serving artifacts/configuration are untouched. Update paired AI-integrity and
+test guides, traceability, current state and next task; preserve every historical failure.
+
+### فارسی
+
+مقایسهٔ ثبت‌شدهٔ Qwen3.8 Q8 هر شانزده مهلت را گذراند، اما چهار معیار معنایی را نپذیرفت:
+دو نتیجه‌گیریِ بی‌شاهد دربارهٔ شبکه، حذف بررسی نوع در یک پاسخ پایتون و حذف دامنهٔ مجاز در
+یک پاسخ فارسی. این گام فقط کنترل برنامه را تقویت می‌کند؛ مدل، پرامپت و معیار پذیرش ثابت‌اند.
+
+ادعای قطعیِ بی‌شاهدِ بررسی‌شده در پاسخِ نتیجه‌گیری از TCP/HTTP، توضیح محدود و آشکارا برنامه‌ای
+با برچسب `deterministic_fallback` می‌گیرد؛ نتیجهٔ یک بررسی، TLS، توپولوژی واسط، سلامت کل شبکه
+یا علت خطا را اثبات نمی‌کند. ردِ وضعیت واقعی و ادعای اجرا اولویت دارد؛ پاسخِ درست و محدود، فرضیهٔ
+مشروط و آموزش عمومی پروتکل حفظ می‌شوند. این قاعدهٔ واژگانی پوشش محدود دارد، نه معنای کامل.
+پیش از ثبت پاسخ پایش یا رخداد، برنامه بخش مشخصات شاهد را از قرارداد معتبر می‌سازد: منبع،
+تنها میزبان مجاز، زمان دقیق گردآوری و مشاهدهٔ سنجه‌ها، علامت قدیمی‌بودن و پوشش ناقص. هدف و
+زمان Linux از میزبان و زمان Zabbix جداست؛ برای سنجهٔ غایب، زمان ساخته نمی‌شود. شناسه و زمان
+فنی با ارقام اصلی باقی می‌مانند. نام میزبان نقل‌قول و نویسهٔ کنترل جهت/سطر جدید escape می‌شود؛
+نام و مقدار دلخواه سنجه به این بخش افزوده نمی‌شود.
+
+هویت پاسخ، علت پایان خام، شمار توکن، شاهد کامل و ممیزی حفظ می‌شوند. سقف 16000 نویسه دوباره
+اعتبارسنجی می‌شود؛ پاسخ بیش‌ازحد طولانی با اعلان روشن جایگزین می‌شود، نه حذف پنهانی مشخصات
+شاهد. پاسخ صرفاً مبتنی بر مدل نمی‌تواند مشخصات شاهد زنده بگیرد. کنترل محدودِ کد بدون اجرای
+کد تولیدشده ثابت است؛ خطای پایتون Q8 همچنان ناموفق است و اصلاح خودکار یا درستی عمومی ادعا
+نمی‌شود. هیچ مجوز، اطلاعات ورود، ابزار اجرا، پایگاه، وابستگی، دریافت فایل، انتخاب مدل، استدلال،
+بودجهٔ منابع یا راه‌اندازی سرویس تغییر نمی‌کند. این کنترل واژگانی و بخش مشخصات، راستی‌آزمای
+عمومیِ متن مدل نیستند و خطای منشأ در پاسخ خامِ مثال ساختگی را موفق نمی‌کنند.
+
+پذیرش محلی شامل آزمون واحد/APIِ حذف مشخصات، دو منبع مستقل، سنجهٔ غایب، نام نامعتبر، زمان با
+offset، سقف پاسخ و اولویت ردِ دسترسی، و آزمون مرورگرِ نمایش/کپی دقیق/RTL/LTR/پاک‌سازی پس از
+خروج است. منع مقصد بیرونی در مرورگر ساختگی با دسترسی loopback، پذیرش WAN یا شروع سرد مدل
+زنده نیست. تولید بومی، معنای مستقل، ثبت واقعی پایگاه، انتشار هماهنگ، استدلال/حریم خصوصی/
+زمینه و بازگشت مدل جدا می‌مانند. بازگشت کد به `0bf5a99` بدون مهاجرت یا حذف داده است؛ فایل
+و تنظیم زنده دست‌نخورده‌اند. راهنمای دوزبانه، آزمون، ردیابی، وضعیت و کار بعدی به‌روز شوند و
+همهٔ شکست‌های گذشته حفظ بمانند.
+
 ## Application-only safeguard increment — 2026-10-04
 
 Accepted bounded result: matched app/AI `7ce9d29` are live for controlled use after 524 local

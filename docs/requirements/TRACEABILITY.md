@@ -1,5 +1,17 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Original sections 11/16–17/20–21: the [answer-integrity source repair](ANSWER_INTEGRITY_SPEC.md)
+maps scoped protocol conclusions and application-owned evidence qualifiers to
+`api/evidence_qualifiers.py`, integrity guards, unit/API tests and
+`tests/browser/test_evidence_qualifiers.py`. Local source/browser fixtures preserve raw metadata,
+canonical evidence, denials, exact technical times and logout clearing. Raw-model quality,
+independent/native/serving/WAN/model-rollback gates remain separate, not inferred passes.
+
+بخش‌های اصلی ۱۱/۱۶–۱۷/۲۰–۲۱: الزامِ پیوندشده، نتیجه‌گیریِ محدود پروتکل و مشخصات شاهدِ درج‌شده
+توسط برنامه را به ماژول فوق، کنترل صحت و آزمون واحد/API/مرورگر متصل می‌کند. شاهد محلیِ کد و
+مرورگر، metadata خام، شاهد کامل، ردِ دسترسی، زمان فنی و پاک‌سازی پس از خروج را کنترل می‌کند؛
+کیفیت خام مدل و پذیرش مستقل/بومی/استقرار/WAN/بازگشت مدل، جدا و نه موفقیت استنتاجی‌اند.
+
 UI-R01–06 controlled app delivery: [dated live record](REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md)
 binds `836b1ea` to exact-source CI, 47 fixture browser tests, real auth/saved-chat/source/evidence
 checks, durable audit/hash matching and tested prior-release rollback. Current-app server-WAN,

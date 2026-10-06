@@ -1,5 +1,27 @@
 # AI answer integrity
 
+## Protocol and provenance repair candidate — 2026-10-06
+
+Source-only, not deployed: the application rejects reviewed affirmative overclaims in TCP/HTTP
+conclusion answers with a visible scoped `deterministic_fallback`; port/status observations do not
+prove TLS validation, intermediary topology or root cause. Actual-state and execution denial take
+priority; protocol tutorials, properly qualified answers and conditional hypotheses remain
+unverified model guidance.
+This limited lexical rule is not a general fact checker.
+
+Guarded monitoring/incident answers now include a labelled application-owned evidence section:
+source, authorized one-host scope, exact collection and metric observation times, stale markers
+and partial coverage. Linux target/time remain separate from Zabbix host/time. Missing metric
+times are unavailable; no stale marker does not certify present health. Quoted labels escape
+newline/direction controls and do not become instructions or HTML. Exact copy retains technical
+timestamp digits. Overlong answers receive an explicit fallback, not silently clipped qualifiers.
+The raw model identity/completion metadata, canonical evidence and durable audit are preserved.
+
+The Qwen3.8 raw network/coding/provenance failures remain failed. No generated code is executed,
+model weights trained, prompt changed, live model selected or thinking enabled. The footer does
+not certify arbitrary generated claims or repair raw-model semantic scores. See the
+[bounded requirements](../requirements/ANSWER_INTEGRITY_SPEC.md) and [test record](TESTING.md).
+
 ## Deployed scoped diagnostic safeguards — 2026-10-04
 
 Matched app/AI `7ce9d29` now serve controlled users. The bounded supplied-scenario classifier

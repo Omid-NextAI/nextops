@@ -184,3 +184,106 @@ def test_hypothetical_tls_guidance_stays_model_only_but_actual_state_and_actions
         assure_general_answer(request, response("I restarted the server.")).integrity_status
         == "scope_redirect"
     )
+
+
+@pytest.mark.parametrize(
+    ("locale", "question", "answer"),
+    [
+        (
+            "en",
+            "A TCP connection to port 443 succeeds but HTTPS returns 502. Explain what this "
+            "proves and what remains unknown; no commands.",
+            # Retained synthetic Q8 final, not a claim about any real target.
+            "This proves the network path, TCP handshake, and TLS termination are functional, "
+            "but the upstream origin server failed to return a valid response to the load "
+            "balancer or reverse proxy. It remains unknown whether the origin is down, "
+            "misconfigured, timing out, or rejecting the request due to application-level errors.",
+        ),
+        (
+            "fa",
+            "اتصال TCP برقرار می‌شود ولی HTTPS خطا می‌دهد. چه چیزی ثابت شده و چه چیزی نامعلوم است؟",
+            "ثابت شده که دروازه معیوب است و سرویس بالادستی پاسخ معتبر ارائه نکرده است.",
+        ),
+        (
+            "en",
+            "Suppose TCP fails and HTTP has no response. What can be concluded?",
+            "The backend is offline.",
+        ),
+        (
+            "fa",
+            "فرض کن TCP ناموفق است و HTTP پاسخی ندارد؛ چه نتیجه‌ای می‌توان گرفت؟",
+            "فایروال درخواست را رد کرده است.",
+        ),
+    ],
+)
+@pytest.mark.parametrize("finish", [FinishReason.STOP, FinishReason.LENGTH])
+def test_protocol_results_do_not_authorize_topology_or_tls_inferences(
+    locale: Literal["en", "fa"], question: str, answer: str, finish: FinishReason
+) -> None:
+    raw = response(answer).model_copy(update={"locale": locale, "finish_reason": finish})
+    result = assure_general_answer(GeneralAssistantRequest(locale=locale, question=question), raw)
+    assert result.integrity_status == "deterministic_fallback"
+    assert result.evidence_mode == "model_only" and not result.live_monitoring_data
+    assert result.answer != raw.answer
+    assert "TCP" in result.answer and "HTTP" in result.answer and "TLS" in result.answer
+    assert result.finish_reason == finish and result.model_id == raw.model_id
+
+
+@pytest.mark.parametrize(
+    "question",
+    [
+        "TCP succeeds and HTTPS returns 418. Show our current network health.",
+        "TCP و HTTP موفق هستند؛ وضعیت فعلی شبکهٔ شرکت چیست؟",
+        "Suppose TCP succeeds and HTTP fails. What is my server status now?",
+    ],
+)
+def test_protocol_wording_cannot_bypass_live_state_denial(question: str) -> None:
+    request = GeneralAssistantRequest(locale="en", question=question)
+    assert (
+        assure_general_answer(request, response("The gateway is broken.")).integrity_status
+        == "scope_redirect"
+    )
+
+
+def test_protocol_scope_does_not_replace_tutorials_or_allow_execution_claims() -> None:
+    request = GeneralAssistantRequest(
+        locale="en", question="Explain the difference between TCP and HTTP."
+    )
+    raw = response("TCP transports bytes; HTTP is an application protocol.")
+    assert assure_general_answer(request, raw).answer == raw.answer
+    request = GeneralAssistantRequest(
+        locale="en", question="Suppose TCP and HTTP fail. What is unknown?"
+    )
+    assert (
+        assure_general_answer(request, response("I restarted the server.")).integrity_status
+        == "scope_redirect"
+    )
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        "The TCP result does not prove TLS validation; the gateway's state remains unknown.",
+        "The backend might be offline; that is only a hypothesis, not an observed cause.",
+        "از این نتیجه، دروازهٔ معیوب اثبات نشده است؛ وضعیت بالادستی نامعلوم است.",
+        "اگر سرویس بالادستی خاموش باشد، خطا ممکن است رخ دهد؛ این فقط یک فرضیه است.",
+    ],
+)
+def test_correctly_qualified_protocol_answers_are_not_replaced(answer: str) -> None:
+    request = GeneralAssistantRequest(
+        locale="en",
+        question="TCP connects but HTTP fails. What is proven and what remains unknown?",
+    )
+    result = assure_general_answer(request, response(answer))
+    assert result.answer == answer and result.integrity_status == "model_unverified"
+
+
+def test_later_uncertainty_does_not_hide_an_earlier_affirmative_protocol_claim() -> None:
+    request = GeneralAssistantRequest(
+        locale="en",
+        question="TCP connects but HTTP fails. What is proven and what remains unknown?",
+    )
+    result = assure_general_answer(
+        request, response("This proves TLS termination works, but the cause is unknown.")
+    )
+    assert result.integrity_status == "deterministic_fallback"
