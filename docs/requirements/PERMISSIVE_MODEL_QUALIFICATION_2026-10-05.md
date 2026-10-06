@@ -7,10 +7,44 @@ Date: **2026-10-05**. Status: **Q5 import verified; distinct standard trials fai
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, 00:27 UTC — actual first-file metadata verified; whole-model acceptance not run**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۰:۲۷ UTC — فرادادهٔ واقعی فایل اول تأیید شد؛ پذیرش مدل کامل اجرا نشده است**.
+Latest update: **2026-10-06, following 00:57 UTC — ca1 source staged; 166 transport ranges; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، پس از ساعت ۰۰:۵۷ UTC — آماده‌سازی کد ca1؛ ۱۶۶ بخش انتقالی؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Protected ca1 source staging and 166-range transport checkpoint
+
+Window `resume-20261006-639268444064771324` completed exit 0: shard-two indexes 14–17,
+four times 268435456 bytes, all HTTP 206/exit 0. Aggregate curl time was **509172 ms**;
+per-range times were **127.098919/126.124402/126.298074/129.518253 seconds**. The controller
+verified protected receipts, owned stop and unchanged ready-idle baseline. Canonical totals
+are **166 ranges/44546712352 bytes**, with **45882742400 transport bytes** missing. Main read
+the desktop result, SHA `9c70819749a75c63d4d14e4474f545a8ce2fa069d32c03f69662ebb86333b988`;
+it did not independently reread these root receipts. One complete upstream shard is verified,
+not the complete model. The preceding faster windows and failed parallel attempts remain history;
+no route-throttling diagnosis or new parallel speed improvement is established.
+
+The distinct v2 stager restricts its OWNER RIGHTS exception to the fixed wheel and direct
+build parent. It requires the actual current owner, exactly three SYSTEM/administrator/OWNER
+RIGHTS allow-full-control ACEs with exact flags, non-reparse ancestry, held read-only handle,
+single link, unchanged handle/path identity and full wheel digest. The generic private-path
+validator, original ACLs, frozen Python stager, package pins and failed preflight stay unchanged.
+Main/independent review passed **1303 PowerShell definition/mock checks**; the separately
+authorized actual local read-only wheel fixture passed in **1500 ms**, without a host call.
+Operation `source-stage-ca1da27-20261006-639268451997194459` then completed exit 0:
+**staged, not installed**, root stage **1879 ms**. The controller verified all protected
+archive/source/wheel/static parity, owned client stop, root outcome and ready-idle baseline.
+Desktop result SHA: `42ce75d5672c65ad9c0dfd78f6f2c9c744b2d5c2f70109532d0bdd4573855255`.
+Installed-venv dependency parity, package installation and inference were not run. The original
+3.63-second preflight failure remains retained; success of this distinct repair does not erase it.
+
+Exact `f7d0b35` passed all five source-CI jobs in
+[run 37396025687](https://github.com/Omid-NextAI/nextops/actions/runs/37396025687): quality/unit,
+PostgreSQL 16, PostgreSQL 17, browser and secrets. Its earlier queued state is superseded by
+this observed run result, not inferred from the preceding commit. Next, continue reviewed
+transport and separately review expanded actual metadata/full-set/native qualification.
+Public thinking remains off; live 35B and previous failures are unchanged. This is provisioning
+and source verification, not full-model/usable-context/operational acceptance.
 
 ### Actual first-file metadata and protected S-drive continuation — 00:27 UTC
 
@@ -1032,6 +1066,42 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### آماده‌سازی محافظت‌شدهٔ کد ca1 و گام انتقال ۱۶۶بخشی
+
+پنجرهٔ `resume-20261006-639268444064771324` با کد خروج صفر کامل شد: اندیس‌های ۱۴ تا ۱۷
+از فایل دوم، هرکدام ۲۶۸۴۳۵۴۵۶ بایت، همگی با HTTP 206/کد خروج صفر. زمان کل curl برابر
+**۵۰۹۱۷۲ میلی‌ثانیه** و زمان هر بخش **۱۲۷٫۰۹۸۹۱۹/۱۲۶٫۱۲۴۴۰۲/۱۲۶٫۲۹۸۰۷۴/۱۲۹٫۵۱۸۲۵۳ ثانیه**
+بود. کنترل‌کننده، رسیدهای محافظت‌شده، توقف فرایند متعلق به اجرا و ثبات خط مبنای آماده/
+بی‌درخواست را تأیید کرد. مجموع اصلی **۱۶۶ بخش/۴۴۵۴۶۷۱۲۳۵۲ بایت** است و **۴۵۸۸۲۷۴۲۴۰۰ بایت
+انتقالی** باقی است. بازبین اصلی، نتیجهٔ رایانهٔ کاربر را با هش
+`9c70819749a75c63d4d14e4474f545a8ce2fa069d32c03f69662ebb86333b988` خواند؛ رسیدهای root
+این پنجره را جداگانه دوباره نخواند. یک فایل کامل با هش منبع اصلی تأیید است، نه مدل کامل.
+پنجره‌های سریع‌تر پیشین و تلاش‌های موازیِ ناموفق سابقه‌اند؛ علت‌یابیِ محدودسازی مسیر یا
+بهبود سرعت در نمایهٔ موازیِ تازه اثبات نشده است.
+
+نسخهٔ مستقل دومِ ابزار آماده‌سازی، استثنای OWNER RIGHTS را فقط برای wheel ثابت و پوشهٔ
+ساختِ مستقیم آن می‌پذیرد. مالک واقعیِ کاربر جاری، دقیقاً سه ورودی مجاز SYSTEM/مدیر/OWNER
+RIGHTS با دسترسی کامل و پرچم‌های دقیق، مسیر والد بدون reparse، handle فقط‌خواندنیِ باز،
+یک پیوند، ثبات هویت handle/مسیر و هش کاملِ wheel الزامی‌اند. اعتبارسنج عمومی مسیر خصوصی،
+ACL اصلی، ابزار ثابت Python، هش‌های بسته و شکست نخست تغییر نکرده‌اند. بازبینی اصلی/مستقل،
+**۱۳۰۳ کنترل تعریفی/ساختگی PowerShell** را گذراند؛ آزمون واقعیِ مجزای فقط‌خواندنیِ wheel
+محلی، با مجوز قبلی و بدون فراخوانی میزبان، در **۱۵۰۰ میلی‌ثانیه** موفق شد.
+سپس عملیات `source-stage-ca1da27-20261006-639268451997194459` با کد خروج صفر کامل شد:
+**آماده‌سازی، نه نصب**؛ زمان آماده‌سازی root برابر **۱۸۷۹ میلی‌ثانیه** بود. کنترل‌کننده،
+برابری محافظت‌شدهٔ آرشیو/کد/wheel/دارایی‌های ثابت، توقف فرایند کاربر، نتیجهٔ root و ثبات
+خط مبنای آماده/بی‌درخواست را تأیید کرد. هش نتیجهٔ رایانهٔ کاربر:
+`42ce75d5672c65ad9c0dfd78f6f2c9c744b2d5c2f70109532d0bdd4573855255`.
+برابری وابستگی‌های venv نصب‌شده، نصب بسته و استنتاج اجرا نشدند. شکست اولیهٔ ۳٫۶۳ثانیه‌ای
+حفظ است؛ موفقیت این اصلاح مستقل، سابقهٔ آن را حذف نمی‌کند.
+
+پنج کنترل CI کد دقیق `f7d0b35` در
+[اجرای 37396025687](https://github.com/Omid-NextAI/nextops/actions/runs/37396025687) موفق‌اند:
+کیفیت/واحد، PostgreSQL 16، PostgreSQL 17، مرورگر و اطلاعات محرمانه. نتیجهٔ مشاهده‌شدهٔ
+همین اجرا، وضعیت پیشینِ در صف را به‌روز می‌کند؛ از کد قبلی استنتاج نشده است. گام بعد،
+ادامهٔ انتقال بررسی‌شده و بازبینی مستقلِ فرادادهٔ گسترش‌یافته/مجموعهٔ کامل/اجرای بومی است.
+استدلال عمومی خاموش است؛ 35B زنده و شکست‌های پیشین ثابت‌اند. این آماده‌سازی و تأیید کد
+است، نه پذیرش مدل کامل/زمینهٔ قابل‌استفاده/عملیات.
 
 ### فرادادهٔ واقعی فایل اول و ادامهٔ محافظت‌شده روی S — ساعت ۰۰:۲۷ UTC
 

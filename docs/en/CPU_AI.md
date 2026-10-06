@@ -1,6 +1,16 @@
 # Local CPU-only AI and capacity planning
 
-Latest checkpoint — **2026-10-06, 00:27 UTC; first-file metadata, not model acceptance**:
+Latest checkpoint — **2026-10-06, following the 00:57 UTC window**: 166 verified ranges/
+44546712352 canonical bytes; 45882742400 still require transport. The distinct wheel-only repair
+passed 1303 main/independent checks and protected ca1 source/wheel staging, with unchanged ACLs,
+owned stop and ready-idle baseline. Staging is not installation or model acceptance. Exact
+`f7d0b35` passed all five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37396025687).
+Only one complete upstream shard is verified; live 35B/public thinking-off remain unchanged.
+Expanded actual metadata and complete-set/native/semantic/thinking/context gates remain open.
+
+## Earlier metadata checkpoint — historical
+
+Checkpoint — **2026-10-06, 00:27 UTC; first-file metadata, not model acceptance**:
 protected full-hash/metadata inspection passed in 89798 ms, with independent read-only stopped/
 baseline reconciliation. Actual `qwen35moe`, 49 blocks, 3072 embedding dimensions, split count 3,
 first-file tensor count 392 and template hash were recorded. Aggregate 899 tensors and 262144

@@ -1,6 +1,29 @@
 # Next task / کار بعدی
 
-Current checkpoint — **2026-10-06, 00:27 UTC; first-file metadata only**: the protected
+Current task — **2026-10-06, after the 00:57 UTC transport window**: continue the next reviewed
+finite transport window from 166 verified ranges/44546712352 bytes, with 45882742400 missing.
+The exact ca1 source/wheel is now protected and staged, not installed; do not repeat staging.
+Its distinct wheel-only repair passed 1303 main/independent checks and actual host parity/stop/
+baseline gates; preserve the original preflight failure and unchanged ACLs. `f7d0b35` passed
+all five CI jobs in [run 37396025687](https://github.com/Omid-NextAI/nextops/actions/runs/37396025687).
+Review a distinct expanded-metadata reader/helper without overwriting the installed frozen
+reader. Finish transport before remaining assembly, then full-set/template/native standard
+semantics before separate thinking/context and matched operational gates. No model cutover,
+thinking enablement, live restart or accepted context follows from provisioning/source CI.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از پنجرهٔ انتقال ساعت ۰۰:۵۷ UTC**: از مجموع ۱۶۶ بخشِ تأییدشده/
+۴۴۵۴۶۷۱۲۳۵۲ بایت، پنجرهٔ محدود بعدیِ بررسی‌شده ادامه یابد؛ ۴۵۸۸۲۷۴۲۴۰۰ بایت باقی است.
+کد/wheel دقیق ca1 اکنون محافظت و آماده‌سازی شده، نه نصب؛ آماده‌سازی تکرار نشود. اصلاح
+مستقلِ محدود به wheel، ۱۳۰۳ کنترل اصلی/مستقل و کنترل‌های واقعی برابری/توقف/خط مبنا را
+گذراند؛ شکست نخست و ACL ثابت حفظ شوند. پنج کنترل CI کد دقیق `f7d0b35` در اجرای بالا
+موفق‌اند. ابزار مستقلِ بررسی فرادادهٔ گسترش‌یافته بدون بازنویسی ابزار ثابتِ نصب‌شده بازبینی
+شود. انتقال پیش از تجمیع باقی‌مانده تکمیل و سپس هویت مجموعه/قالب/معنای بومیِ استاندارد،
+پیش از استدلال/زمینه و معیارهای عملیاتی متناظر بررسی شود. آماده‌سازی/CI کد، تغییر مدل،
+فعال‌سازی استدلال، راه‌اندازی مجددِ زنده یا پذیرش زمینه نیست.
+
+## Earlier metadata checkpoint — historical / گام پیشینِ فراداده — سابقه
+
+Checkpoint — **2026-10-06, 00:27 UTC; first-file metadata only**: the protected
 first 122B shard was rehashed and inspected in 89798 ms. Actual architecture is `qwen35moe`,
 49 blocks/3072 embedding dimensions, with three splits and 392 first-file tensors; 899 tensors
 and 262144 context tokens are advertised, not whole-model or context acceptance. Its template

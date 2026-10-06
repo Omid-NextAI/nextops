@@ -1,5 +1,19 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Protected ca1 source staging and continued 122B provisioning — 2026-10-06
+
+The distinct exact-wheel-only ACL boundary passed 1303 main/independent checks and actual
+protected archive/source/wheel staging, not installation. Original ACLs/preflight failure remain;
+owned client stop, root reconciliation and live ready-idle baseline passed. Transport advanced
+to 166 ranges/44546712352 canonical bytes, with 45882742400 missing and one complete shard.
+Exact `f7d0b35` passed all five CI jobs. No live model, thinking or context acceptance changed.
+
+مرز مستقلِ ACL محدود به wheel دقیق، ۱۳۰۳ کنترل اصلی/مستقل و آماده‌سازی واقعیِ محافظت‌شدهٔ
+آرشیو/کد/wheel را گذراند، نه نصب. ACL اصلی/شکست اولیه حفظ‌اند؛ توقف فرایند کاربر، تطبیق
+root و ثبات خط مبنای آماده/بی‌درخواست موفق‌اند. انتقال به ۱۶۶ بخش/۴۴۵۴۶۷۱۲۳۵۲ بایت اصلی
+رسید؛ ۴۵۸۸۲۷۴۲۴۰۰ بایت باقی است و فقط یک فایل کامل تأیید شده. پنج کنترل CI کد دقیق
+`f7d0b35` موفق‌اند. مدل زنده و وضعیت پذیرش استدلال/زمینه تغییر نکرده است.
+
 ## First-file metadata and qualification-plan status repair — 2026-10-06
 
 Protected first-shard full-hash/metadata inspection completed in 89798 ms with owned stopped/

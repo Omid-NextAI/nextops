@@ -1,6 +1,25 @@
 # Project state / وضعیت پروژه
 
-Latest verified checkpoint — **2026-10-06, 00:27 UTC; no model cutover**: the first complete
+Latest verified checkpoint — **2026-10-06, after the 00:57 UTC transport window**: 166 ranges/
+44546712352 canonical bytes are verified; 45882742400 transport bytes remain. Only the first
+whole upstream shard is accepted. The distinct wheel-only staging repair passed 1303 main/
+independent preparation checks and actual protected ca1 source/wheel staging, not installation.
+Owned client stop/root reconciliation and unchanged ready-idle baseline passed. Original ACLs,
+failed preflight and live 35B/public thinking-off remain unchanged. Exact `f7d0b35` passed all five
+CI jobs in [run 37396025687](https://github.com/Omid-NextAI/nextops/actions/runs/37396025687).
+Full-model/native/semantic/thinking/context/operational acceptance remains unfinished.
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶، پس از پنجرهٔ انتقال ساعت ۰۰:۵۷ UTC**: مجموع ۱۶۶ بخش/
+۴۴۵۴۶۷۱۲۳۵۲ بایت اصلی تأیید شده و ۴۵۸۸۲۷۴۲۴۰۰ بایت انتقالی باقی است. هنوز فقط فایل کامل
+اول با هش منبع اصلی تأیید است. اصلاح مستقلِ محدود به wheel، ۱۳۰۳ کنترل آماده‌سازی اصلی/
+مستقل و سپس آماده‌سازی واقعیِ محافظت‌شدهٔ کد/wheel مربوط به ca1 را گذراند؛ نصب انجام نشد.
+توقف فرایند کاربر، تطبیق نتیجهٔ root و ثبات خط مبنای آماده/بی‌درخواست موفق‌اند. ACL اصلی،
+شکست نخست و 35B زنده/خاموشی استدلال عمومی ثابت‌اند. پنج کنترل CI کد دقیق `f7d0b35` در
+اجرای بالا موفق‌اند. پذیرش مدل کامل/اجرای بومی/معنا/استدلال/زمینه/عملیات هنوز تکمیل نیست.
+
+## Earlier metadata checkpoint — historical / گام پیشینِ فراداده — سابقه
+
+Verified checkpoint — **2026-10-06, 00:27 UTC; no model cutover**: the first complete
 122B shard passed a fresh full hash and bounded metadata inspection in 89798 ms. Actual
 `qwen35moe`/49 blocks/3072 embedding dimensions/three splits/392 first-file tensors are observed;
 899 aggregate tensors and 262144 context tokens remain advertised, not accepted. Template hash
