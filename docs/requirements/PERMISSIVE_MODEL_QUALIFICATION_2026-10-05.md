@@ -7,10 +7,50 @@ Date: **2026-10-05**. Historical 27B status: **Qwen3.8-27B Q5 import verified; d
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, 04:12 UTC — 202 verified ranges; execution-tool review and installer repair; no model cutover**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۴:۱۲ UTC — ۲۰۲ بخش تأییدشده؛ بازبینی ابزار اجرا و اصلاح نصب؛ بدون تغییر مدل زنده**.
+Latest update: **2026-10-06, 04:36 UTC — 218 verified ranges; native installer-controller main preparation; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۴:۳۶ UTC — ۲۱۸ بخش تأییدشده؛ آماده‌سازی اصلیِ کنترل‌کنندهٔ نصب بومی؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Native installer-controller preparation and continued transport — 04:36 UTC
+
+Four further V7 windows completed after the preserved 202-range checkpoint:
+
+| Operation suffix | Second-file indexes | Curl milliseconds | Desktop result SHA-256 |
+| --- | --- | --- | --- |
+| `639268563148794529` | 54–57 | 576407 | `2987a60b014acdeb8298bb7299fa1bf8ae44722201656bf19fdcba40e7817e75` |
+| `639268571098453763` | 58–61 | 46844 | `40b27f420528c4bd8f54bd0b6cde964adde1d8efc9cd2ae1bb6dd9536cba09d4` |
+| `639268574470045182` | 62–65 | 41875 | `d8ee7cc9e54b767a99b4b7d27f84ecd40f407ca89db5b05a682b4c131ed24507` |
+| `639268577711261283` | 66–69 | 43031 | `c5d09fe6d07995232a529dedf648c949c87f40c5acc1ef81984c9ded61ecfadf` |
+
+Main read actual desktop receipts and successful terminal exits, not separate root range
+receipts. All-four numeric HTTP206/exit0/size/header/held-identity/hash checks preceded import;
+bodies remain, handles closed and owned-stop/unchanged ready-idle checks passed. Canonical
+totals are **218 ranges/58505356064 bytes**, with **31924098688 transport bytes** remaining.
+Only the first whole upstream shard is verified. Variable durations are not an inference
+benchmark or proven general transport improvement.
+
+The distinct native-trio installer/controller is now fully prepared and main-reviewed locally:
+installer **33044 bytes**, SHA `f65751dd360e3d1f1493963978a150c2f11d8391e3f43e66f587063025e2bc95`;
+controller **23868 bytes**, SHA `89cc15367c7d6af6ccb6552ef8ca5b98f84117151c975c62e35ab57e134ce23d`.
+The fixed payload is exactly three artifacts/184787 bytes; including the bootstrap it is
+217831 bytes. Main **227 Python/1022 PowerShell pure checks** passed and were rerun, exit0,
+without operational entrypoints, host/model calls or real filesystem/process mutations.
+The controller checks exact names/sizes/hashes/modes, explicit durable-receipt/closed-handle
+flags, and retains primary exit/stdout digest before parsing; later read-only reconciliation
+cannot erase primary failure. The historical Python-only draft remains unchanged. Local
+mechanical preparation failures and a checker rerun missing its mandatory hash (exit1 before
+tests) are retained; the corrected exact pinned command passed, not a host retry.
+
+Independent review is **not_run** because the authorized subagents errored on usage limits.
+This installer controller is not the still-unprepared external native execution/reconciler.
+Durable report publication and independently observed stop/baseline outcomes must be covered
+there before a trial. Publication installer V3 also awaits independent review. Nothing was
+installed, published, started or selected by these new tools. Exact `2838b2a` passed all five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37413048626).
+The alternative remains Apache Qwen3.5-122B-A10B Q5, not 3.8; complete-set/manual/native standard,
+thinking/privacy/context/matched app/operational/rollback gates stay open. Live35B/public
+thinking-off and completed earlier work/failures are preserved.
 
 ### Further transport, actual template binding and installer cleanup — 04:12 UTC
 
@@ -1233,6 +1273,39 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### آماده‌سازی کنترل‌کنندهٔ نصب بومی و ادامهٔ انتقال — ساعت ۰۴:۳۶ UTC
+
+پس از گام تاریخیِ ۲۰۲ بخش، چهار پنجرهٔ دیگرِ V7 موفق شدند. پسوند عملیات، شاخص‌های فایل
+دوم، زمان دریافت و هش واقعی رسید، همان جدولِ بخش انگلیسی است: شاخص‌های ۵۴–۵۷ با
+۵۷۶۴۰۷ میلی‌ثانیه؛ ۵۸–۶۱ با ۴۶۸۴۴؛ ۶۲–۶۵ با ۴۱۸۷۵؛ و ۶۶–۶۹ با ۴۳۰۳۱.
+بازبین اصلی، رسیدهای واقعی رایانه و پایان موفق فرایندها را خواند، نه رسیدهای جداگانهٔ
+بخش‌ها روی root. کد عددی HTTP206/خروج صفر/اندازه/سرآیند/هویتِ باز/هشِ هر چهار بدنه،
+پیش از دریافت محافظت‌شده تأیید شد؛ بدنه‌ها حفظ و بسته‌شدن handleها/توقف فرایندهای متعلق
+به اجرا/ثبات خط مبنای آماده و بی‌درخواست ثبت است. مجموع **۲۱۸ بخش/۵۸۵۰۵۳۵۶۰۶۴ بایت**
+است؛ **۳۱۹۲۴۰۹۸۶۸۸ بایت انتقالی** باقی و فقط فایل کامل اول تأیید شده. تفاوت زمان‌ها،
+آزمون کارایی مدل یا بهبود عمومیِ اثبات‌شدهٔ انتقال نیست.
+
+ابزار مستقلِ نصب/کنترل‌کنندهٔ سه فایل بومی اکنون در بررسی محلیِ اصلی آماده است:
+اندازه/هش نصب‌کننده **۳۳۰۴۴ بایت**/
+`f65751dd360e3d1f1493963978a150c2f11d8391e3f43e66f587063025e2bc95` و کنترل‌کننده
+**۲۳۸۶۸ بایت**/`89cc15367c7d6af6ccb6552ef8ca5b98f84117151c975c62e35ab57e134ce23d` است.
+بدنهٔ ثابت دقیقاً سه فایل/۱۸۴۷۸۷ بایت و همراه bootstrap، ۲۱۷۸۳۱ بایت است. **۲۲۷ کنترل
+Python/۱۰۲۲ کنترل PowerShellِ محض** با خروج صفر موفق و دوباره اجرا شدند؛ entrypoint
+عملیاتی، میزبان/مدل یا تغییر واقعیِ فایل/فرایند فراخوانی نشد. نام/اندازه/هش/مجوز دقیق،
+پرچم صریحِ ثبت پایدار رسید/بسته‌شدن handle و حفظ خروج/هش stdout اصلی پیش از تحلیل لازم
+است؛ تطبیق فقط‌خواندنیِ بعدی، شکست اصلی را حذف نمی‌کند. پیش‌نویس تاریخیِ صرفاً Python
+دست‌نخورده است. شکست‌های محلیِ آماده‌سازی مکانیکی و اجرای کنترل بدون هش اجباری (خروج۱
+پیش از آزمون) حفظ شدند؛ دستور اصلاح‌شدهٔ دقیق موفق بود، نه تکرار روی میزبان.
+
+بازبینی مستقل **اجرا نشده**، زیرا عامل‌های مجاز به سقف استفاده رسیدند. کنترل‌کنندهٔ نصب
+با مرز اجرای بومی/تطبیق بیرونیِ هنوز آماده‌نشده متفاوت است؛ ثبت پایدار گزارش و مشاهدهٔ
+مستقلِ توقف/ثبات خط مبنا باید پیش از آزمون پوشش داده شوند. ابزار نصب انتشارِ نسخهٔ سوم
+نیز بازبینی مستقل می‌خواهد. ابزارهای جدید هیچ نصب، انتشار، شروع یا انتخابی انجام نداده‌اند.
+پنج کنترل CI کد دقیق `2838b2a` در پیوند بخش انگلیسی موفق‌اند. جایگزین Apache همچنان
+Qwen3.5-122B-A10B Q5 است، نه 3.8؛ معیارهای مجموعهٔ کامل/بازبینی دستی/معنای بومی/
+استدلال/حریم خصوصی/زمینه/برنامه/عملیات/بازگشت باز و 35B زنده/خاموشی استدلال عمومی و
+کار/شکست‌های قبلی حفظ‌اند.
 
 ### ادامهٔ انتقال، تطبیق قالب واقعی و اصلاح پاک‌سازی نصب — ساعت ۰۴:۱۲ UTC
 

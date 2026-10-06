@@ -1,5 +1,34 @@
 # Project state / وضعیت پروژه
 
+Latest verified checkpoint — **2026-10-06, 04:36 UTC; provisioning/local checks only**:
+four further V7 windows reached **218 ranges/58505356064 bytes**, leaving **31924098688 bytes**.
+Main read actual desktop receipts and terminal exits; all-four numeric HTTP206/exit0 and
+pre-import hash/identity checks passed. Retained bodies, closed handles and the unchanged live
+ready-idle baseline are recorded; only the first whole upstream shard is verified. The distinct
+native-trio installer/controller now passed **227 Python/1022 PowerShell main-only checks**,
+not independent review, installation or execution. Original draft/failures remain historical.
+Publication installer V3's independent review and the external native execution/reconciliation
+boundary remain unfinished. Exact `2838b2a` passed all five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37413048626).
+Do not retry completed staging/first-file inspection/metadata installation. The alternative is
+Apache Qwen3.5-122B-A10B Q5, not Qwen3.8. Failed 3.8 trials, live35B/public thinking-off,
+pending full-file/standard/thinking/privacy/context/app/operational/rollback gates remain.
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۴:۳۶ UTC؛ فقط آماده‌سازی/کنترل محلی**:
+چهار پنجرهٔ دیگر، انتقال را به **۲۱۸ بخش/۵۸۵۰۵۳۵۶۰۶۴ بایت** رساندند؛ **۳۱۹۲۴۰۹۸۶۸۸
+بایت** باقی است. بازبین اصلی، رسیدهای واقعی رایانه و پایان موفق فرایندها را خواند؛
+کد عددی HTTP206/خروج صفرِ چهار درخواست و هش/هویت پیش از دریافت محافظت‌شده مطابق‌اند.
+بدنه‌ها حفظ و بسته‌شدن handleها/ثبات خط مبنای آماده و بی‌درخواست ثبت است؛ فقط فایل کامل
+اول تأیید شده. ابزار نصب/کنترل‌کنندهٔ سه فایل بومی اکنون **۲۲۷ کنترل Python/۱۰۲۲ کنترل
+PowerShellِ صرفاً اصلی** را گذرانده، نه بازبینی مستقل، نصب یا اجرا. پیش‌نویس/شکست‌های
+قبلی حفظ‌اند. بازبینی مستقلِ ابزار نصب انتشار نسخهٔ سوم و مرز اجرای بومی/تطبیق بیرونی
+ناتمام‌اند. پنج کنترل CI کد دقیق `2838b2a` در اجرای بالا موفق‌اند. آماده‌سازی/بررسی فایل
+اول/نصب فرادادهٔ تکمیل‌شده تکرار نشوند. مدل جایگزین Apache، Qwen3.5-122B-A10B Q5 است،
+نه Qwen3.8. شکست‌های 3.8، مدل 35B زنده/خاموشی استدلال عمومی و معیارهای بازِ همهٔ فایل‌ها/
+معنا/استدلال/حریم خصوصی/زمینه/برنامه/عملیات/بازگشت ثابت‌اند.
+
+## Earlier execution-tool checkpoint — historical / گام پیشینِ ابزار اجرا — سابقه
+
 Latest verified checkpoint — **2026-10-06, 04:12 UTC; provisioning and local repair only**:
 transport reached **202 ranges/54210388768 bytes**; **36219065984 transport bytes** remain.
 Two further four-request windows completed; all bodies were verified before import, retained,

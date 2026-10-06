@@ -1,5 +1,19 @@
 # Local CPU-only AI and capacity planning
 
+Latest checkpoint — **2026-10-06, 04:36 UTC; provisioning/local checks only**: 218 transport
+ranges/58505356064 bytes verified, 31924098688 bytes remain; one whole shard verified. Four
+additional windows passed actual desktop receipt/exit and retained-body/closed-handle/unchanged
+ready-idle checks. Native-trio installer/controller passed 227/1022 main-only Python/PowerShell
+checks; independent review and external execution/reconciliation remain open. Publication
+installer V3 also awaits independent review. Exact `2838b2a` passed five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37413048626).
+This is the Apache Qwen3.5-122B-A10B Q5 alternative, not accepted 3.8 or an accepted maximum
+context/thinking profile. Full-shard/standard/privacy/context/app/operational/rollback gates
+remain; live35B/public thinking-off and earlier completed work/failures are preserved.
+See the [paired record](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+## Earlier execution-tool checkpoint — historical
+
 Latest checkpoint — **2026-10-06, 04:12 UTC; provisioning/local repair only**: 202 verified
 transport ranges/54210388768 bytes; 36219065984 remain and one whole upstream shard is verified.
 Native V2's 1478 main/independent checks and publication execution V2's 1646 each-side checks

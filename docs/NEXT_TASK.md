@@ -1,5 +1,32 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after the 04:36 UTC checkpoint**: continue reviewed finite transport
+from **218 ranges/58505356064 bytes**, with **31924098688 bytes** remaining. Finish transport
+before remaining assemblies. Native-trio installer/controller main checks now pass **227/1022**;
+independent review is still not run. Finish that review and publication installer V3 review;
+prepare the distinct native external execution/reconciliation boundary, including durable
+report-publication and owned-process-stop verification. Never turn a later root receipt into
+a successful earlier failed client outcome. Retain bodies, original tools/failures and completed
+reviews. Exact `2838b2a` passed five CI jobs. After all whole-file checks, inspect the actual set,
+bind metadata/template/license, publish independent protected copies, then standard semantics
+before thinking/privacy/measured context/matched app/operational/rollback gates. No 3.8 acceptance
+or thinking enablement; the provisioned alternative is correctly labeled 3.5. Live35B stays.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از گام ساعت ۰۴:۳۶ UTC**: انتقال محدودِ بررسی‌شده از
+**۲۱۸ بخش/۵۸۵۰۵۳۵۶۰۶۴ بایت** ادامه یابد؛ **۳۱۹۲۴۰۹۸۶۸۸ بایت** باقی است. انتقال پیش
+از تجمیع فایل‌های باقی‌مانده کامل شود. ابزار نصب/کنترل‌کنندهٔ سه فایل بومی، **۲۲۷/۱۰۲۲
+کنترل اصلی** را گذرانده؛ بازبینی مستقل هنوز اجرا نشده. آن بازبینی و بازبینی مستقلِ ابزار
+نصب انتشارِ نسخهٔ سوم کامل و مرز مستقلِ اجرای بومی/تطبیق بیرونی آماده شود؛ ثبت پایدار
+گزارش و تأیید توقف فرایند متعلق به اجرا نیز لازم‌اند. رسید بعدیِ root، شکست قبلیِ فرایند
+رایانه را به موفقیت تبدیل نکند. بدنه‌ها، ابزارها/شکست‌های اصلی و بازبینی‌های کامل حفظ
+شوند. پنج کنترل CI کد دقیق `2838b2a` موفق‌اند. پس از هش کامل همهٔ فایل‌ها، مجموعهٔ
+واقعی/فراداده/قالب/مجوز تطبیق و نسخه‌های محافظت‌شدهٔ مستقل منتشر شوند؛ سپس معنای
+استاندارد پیش از استدلال/حریم خصوصی/زمینهٔ سنجیده/برنامه/عملیات/بازگشت پذیرفته شود.
+پذیرش 3.8 یا فعال‌سازی استدلال انجام نشده؛ نام درست جایگزینِ در حال آماده‌سازی 3.5 است.
+مدل 35B زنده ثابت بماند.
+
+## Earlier execution-tool checkpoint — historical / گام پیشینِ ابزار اجرا — سابقه
+
 Current task — **2026-10-06, after the 04:12 UTC checkpoint**: continue reviewed finite transport
 from **202 ranges/54210388768 bytes**, with **36219065984 bytes** remaining. Finish transport
 before remaining assembly; retain bodies and earlier failures. Native V2 and publication V2

@@ -1,5 +1,20 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Native installer-controller preparation and continued verified transport — 2026-10-06
+
+Four further windows reached 218 ranges/58505356064 bytes; 31924098688 remain, one complete
+shard verified. Native-trio installer/controller passed 227/1022 main-only checks, not peer
+review/host execution. Publication installer V3 review and external native execution/reconciliation
+remain open. Exact `2838b2a` passed all five CI jobs. Correctly labeled Apache 3.5 alternative,
+failed 3.8 trials, live35B/public thinking-off and earlier work/failures are preserved.
+
+چهار پنجرهٔ دیگر، انتقال را به ۲۱۸ بخش/۵۸۵۰۵۳۵۶۰۶۴ بایت رساندند؛ ۳۱۹۲۴۰۹۸۶۸۸ بایت
+باقی و یک فایل کامل تأیید است. ابزار نصب/کنترل‌کنندهٔ سه فایل بومی، ۲۲۷/۱۰۲۲ کنترل
+صرفاً اصلی را گذراند، نه بازبینی مستقل/اجرای میزبان. بازبینی ابزار نصب انتشارِ نسخهٔ
+سوم و مرز اجرای بومی/تطبیق بیرونی باز است. پنج کنترل CI کد دقیق `2838b2a` موفق‌اند.
+نام درستِ جایگزین Apache برابر 3.5 است؛ آزمون‌های ناموفق 3.8، مدل 35B زنده/خاموشی
+استدلال عمومی و کار/شکست‌های قبلی حفظ‌اند.
+
 ## Reviewed execution tools and further installer cleanup repair — 2026-10-06
 
 Transport reached 202 ranges/54210388768 bytes; 36219065984 remain, one whole shard verified.
