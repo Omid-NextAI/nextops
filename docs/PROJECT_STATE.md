@@ -1,5 +1,34 @@
 # Project state / وضعیت پروژه
 
+Verified checkpoint — **2026-10-06, 07:45 UTC**: two further reviewed V7 windows passed
+actual desktop receipts and terminal exit0, reaching **282 ranges/75685225248 bytes**;
+**14744229504 bytes** remain and only one whole upstream shard is verified. Two distinct
+failed windows imported zero ranges: the first had four partial HTTP206/exit28 responses;
+the later window had two complete and two partial responses, failing all-four verification.
+Failures and bodies remain; curl was reaped, read handles closed and unchanged ready-idle
+reconciliation passed. No partial body was promoted and no timeout was widened. Exact
+`5bf461c` passed all five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37426920560).
+Current official licence pages were reread separately, not as legal approval or updated
+artifact pins. The Apache alternative remains Qwen3.5-122B-A10B, not accepted 3.8. Independent
+V3 review remains not run after subagent quota failures; full-set, native semantics, thinking/
+privacy, measured context and matched operational/rollback gates remain open. No unattended
+transfer/trial remains; the live 35B model and public thinking-off state are unchanged.
+
+گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۷:۴۵ UTC**: دو پنجرهٔ دیگرِ نسخهٔ هفتم با رسید
+واقعی رایانه و خروج نهاییِ صفر موفق شدند؛ مجموع **۲۸۲ بخش/۷۵۶۸۵۲۲۵۲۴۸ بایت** و
+باقی‌مانده **۱۴۷۴۴۲۲۹۵۰۴ بایت** است. فقط یک فایل کامل با هش منبع تأیید شده. دو پنجرهٔ
+ناموفق هیچ بخشی را وارد محل محافظت‌شده نکردند: نخست، چهار پاسخ ناقص HTTP206/خروج۲۸؛
+دومی، دو پاسخ کامل و دو پاسخ ناقص داشت و شرط تأیید هر چهار درخواست را نگذراند.
+شکست‌ها و بدنه‌ها حفظ، فرایند curl جمع‌آوری، handleهای خواندن بسته و ثبات خط مبنای
+آماده و بی‌درخواست تأیید شد. بدنهٔ ناقصی منتشر و مهلتی افزایش داده نشد. پنج کنترل CI
+کد دقیق `5bf461c` در اجرای بالا موفق‌اند. منابع رسمی مجوز جداگانه بازخوانی شدند؛ این
+تأیید حقوقی یا تغییر نسخهٔ ثابت نیست. جایگزین Apache با نام درستِ Qwen3.5-122B-A10B
+ثبت است، نه 3.8 پذیرفته‌شده. پس از خطای سقف استفادهٔ عامل‌ها، بازبینی مستقلِ نسخهٔ سوم
+اجرا نشده؛ معیارهای مجموعهٔ کامل، معنای بومی، استدلال/حریم خصوصی، زمینهٔ سنجیده و
+عملیات/بازگشت بازند. انتقال/آزمون رهاشده‌ای وجود ندارد؛ 35B زنده و خاموشی استدلال عمومی ثابت‌اند.
+
+## Earlier transport checkpoint — historical / گام پیشینِ انتقال — سابقه
+
 Verified transport checkpoint — **2026-10-06, 06:56 UTC**: four further reviewed V7 windows
 passed actual desktop receipts and terminal exit0. Totals: **274 ranges/73537741600 bytes**,
 with **16891713152 bytes** remaining; only one complete upstream shard is verified. All-four

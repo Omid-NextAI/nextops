@@ -1,5 +1,22 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Verified transport, retained failures and licence-source refresh — 2026-10-06
+
+Two further verified windows reached 282 ranges/75685225248 bytes; 14744229504 remain,
+one whole shard verified. Two separate timeout windows imported zero ranges; all failed bodies,
+actual terminal failures and successful cleanup/baseline records remain. No partial promotion,
+limit widening or live-model change. Exact `5bf461c` passed five CI jobs. Current official licence
+pages were reread, not approved or used to change artifact pins. Independent V3/model/thinking/
+context gates remain open; the Apache alternative is 3.5, not accepted 3.8. No unattended trial.
+
+دو پنجرهٔ تأییدشدهٔ دیگر، مجموع را به ۲۸۲ بخش/۷۵۶۸۵۲۲۵۲۴۸ بایت رساندند؛ ۱۴۷۴۴۲۲۹۵۰۴
+بایت باقی و یک فایل کامل تأیید است. دو پنجرهٔ مستقل با پایان مهلت، هیچ بخشی را منتقل
+نکردند؛ بدنه‌های ناموفق، خروج‌های واقعی و رسید موفقِ پاک‌سازی/ثبات خط مبنا حفظ‌اند.
+انتشار ناقص، افزایش مهلت یا تغییر مدل زنده‌ای رخ نداد. پنج کنترل CI کد دقیق `5bf461c`
+موفق‌اند. منابع رسمی مجوز بازخوانی شدند، نه تأیید یا مبنای تغییر نسخهٔ ثابت. معیارهای
+بازبینی مستقلِ نسخهٔ سوم/مدل/استدلال/زمینه بازند؛ جایگزین Apache، نسخهٔ 3.5 است، نه 3.8
+پذیرفته‌شده. آزمون رهاشده‌ای وجود ندارد.
+
 ## Four verified transport windows and exact-head CI — 2026-10-06
 
 Four further bounded windows reached 274 ranges/73537741600 bytes; 16891713152 remain and

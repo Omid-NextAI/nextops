@@ -7,10 +7,53 @@ Date: **2026-10-05**. Historical 27B status: **Qwen3.8-27B Q5 import verified; d
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, 06:56 UTC — 274 verified ranges; exact-head CI passed, independent review/model gates still open; no model cutover**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۶:۵۶ UTC — ۲۷۴ بخش تأییدشده؛ CI کد دقیق موفق، بازبینی مستقل/پذیرش مدل همچنان باز؛ بدون تغییر مدل زنده**.
+Latest update: **2026-10-06, 07:45 UTC — 282 verified ranges; two failed windows retained with zero imports; independent review/model gates remain open; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۷:۴۵ UTC — ۲۸۲ بخش تأییدشده؛ دو پنجرهٔ ناموفق با صفر بخش منتقل‌شده حفظ شدند؛ معیارهای بازبینی مستقل/مدل باز؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Verified progress and retained transport failures — 07:45 UTC
+
+Main read full actual desktop receipts and terminal exits, not separate root range receipts:
+
+| Operation suffix | Second-file indexes | Curl milliseconds | Terminal/import result | Desktop result SHA-256 |
+| --- | --- | --- | --- | --- |
+| `639268670195557890` | 126–129 | 42484 | exit0 / 4 verified imports | `054bbbb7c1f9702750515893df5350e43e374b1d1e51249027fa76141eb1292b` |
+| `639268673443213457` | 130–133 | 600187 | exit1 / 0 imports | `5aa54de2ed01f65a08c09f63fd78fd6ea5d71499060e6e08267d71779125512f` |
+| `639268682537805778` | 130–133 | 46016 | exit0 / 4 verified imports | `f3d1f6a0a2c843532f822ba7ca17bd7a67f7e91229e96dbfb624c1f3a81e8a0b` |
+| `639268687208020705` | 134–137 | 600156 | exit1 / 0 imports | `7f3173317d3a0e828319c15a5cedd0462ef7e3b9afe70a0fd59c9d98d6de6355` |
+
+Both successful operations passed all-four numeric HTTP206/exit0/exact-size/header/held-identity/
+hash checks before import. The first failed operation had four partial HTTP206/exit28 responses.
+Only after its terminal failure, zero imports and actual stopped/closed/baseline reconciliation,
+main judged one distinct fresh attempt safe: new operation and files, unchanged reviewed limits,
+no failed-body reuse/resume. That fresh attempt passed. The later 134–137 window had complete
+268435456-byte responses for 134 and 137 (371.366755/598.457943s), but partial 165155796/127423444-byte
+responses for 135/136 at the 600-second timeout. It failed all-four verification; neither complete
+body was imported alone. Curl was reaped, all local read handles closed, bodies retained and
+actual unchanged ready-idle reconciliation passed for every operation. Earlier empty-file
+metadata observations were not proof of no response or acceptance. No timeout was widened,
+partial input promoted or model failure inferred. No unattended operation remains.
+
+Totals are **282 ranges/75685225248 bytes**, **14744229504 bytes** remaining; one whole upstream
+shard is verified. Exact `5bf461c` passed all five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37426920560),
+with actual job/step summaries read. The three authorized subagents still report usage-limit
+errors; the prepared V3 handoff is not independent review. No V3 installation/publication/native
+trial or live selection occurred. Full-set/manual/standard semantics/thinking/privacy/measured
+context/matched app/operational/rollback gates remain open. The Apache 122B alternative is
+Qwen3.5, not an accepted 3.8 or maximum-context claim. Live 35B/public thinking-off are unchanged.
+
+### Official licence-source refresh — 07:06 UTC
+
+Main reread current official licence pages: [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B/blob/main/LICENSE)
+remains Apache-2.0; [Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/main/LICENSE)
+uses Qwen Community License 1.0; [2.4T-A95B](https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B/blob/main/LICENSE)
+uses the separate Qwen3.8-Max License. The latter two have conditional commercial-use terms;
+Bank/customer access cannot simply be classified as internal-only use. This refresh is not
+independent legal approval, a fresh verification of pinned artifact bytes or a blanket finding
+that use is prohibited. Company classification, applicable terms and any separate grant remain
+unverified. No source pin, manifest, runtime or selection changed; the Apache 27B's failed
+standard trials remain failures, and the Apache 122B alternative remains correctly labeled 3.5.
 
 ### Four further verified windows and exact-head CI — 06:56 UTC
 
@@ -1421,6 +1464,51 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### پیشرفت تأییدشده و حفظ شکست‌های انتقال — ساعت ۰۷:۴۵ UTC
+
+بازبین اصلی، رسید واقعی و کامل رایانه و خروج نهایی را خواند، نه رسید جداگانهٔ بخش‌های root:
+
+| پسوند عملیات | شاخص‌های فایل دوم | دریافت، میلی‌ثانیه | خروج نهایی/نتیجهٔ انتقال محافظت‌شده | SHA-256 رسید رایانه |
+| --- | --- | --- | --- | --- |
+| `639268670195557890` | ۱۲۶–۱۲۹ | ۴۲۴۸۴ | خروج۰ / ۴ بخش تأییدشده | `054bbbb7c1f9702750515893df5350e43e374b1d1e51249027fa76141eb1292b` |
+| `639268673443213457` | ۱۳۰–۱۳۳ | ۶۰۰۱۸۷ | خروج۱ / ۰ بخش | `5aa54de2ed01f65a08c09f63fd78fd6ea5d71499060e6e08267d71779125512f` |
+| `639268682537805778` | ۱۳۰–۱۳۳ | ۴۶۰۱۶ | خروج۰ / ۴ بخش تأییدشده | `f3d1f6a0a2c843532f822ba7ca17bd7a67f7e91229e96dbfb624c1f3a81e8a0b` |
+| `639268687208020705` | ۱۳۴–۱۳۷ | ۶۰۰۱۵۶ | خروج۱ / ۰ بخش | `7f3173317d3a0e828319c15a5cedd0462ef7e3b9afe70a0fd59c9d98d6de6355` |
+
+هر دو عملیات موفق، کنترل عددی HTTP206/خروج۰/اندازهٔ دقیق/سرآیند/هویت نگه‌داشته‌شده/
+هش هر چهار درخواست را پیش از انتقال محافظت‌شده گذراندند. عملیات ناموفق اول، چهار پاسخ
+ناقص HTTP206/خروج۲۸ داشت. فقط پس از خروج ناموفق، صفر بخش منتقل‌شده و تأیید واقعیِ توقف/
+بسته‌شدن handleها/ثبات خط مبنا، بازبین اصلی یک تلاش تازه و مستقل را مجاز و ایمن دانست:
+عملیات و فایل تازه، حدود بررسی‌شدهٔ ثابت و بدون استفادهٔ دوباره/ادامهٔ بدنهٔ ناموفق.
+آن تلاش موفق شد. پنجرهٔ بعدیِ ۱۳۴–۱۳۷، برای ۱۳۴ و ۱۳۷ پاسخ کاملِ ۲۶۸۴۳۵۴۵۶بایتی در
+۳۷۱٫۳۶۶۷۵۵/۵۹۸٫۴۵۷۹۴۳ ثانیه، اما برای ۱۳۵/۱۳۶ پاسخ ناقصِ ۱۶۵۱۵۵۷۹۶/۱۲۷۴۲۳۴۴۴بایتی
+تا پایان مهلت ۶۰۰ثانیه‌ای داشت. شرط تأیید هر چهار درخواست ناموفق بود؛ هیچ بدنهٔ کاملی
+به‌تنهایی منتقل نشد. برای هر عملیات، جمع‌آوری curl، بسته‌شدن همهٔ handleهای خواندن،
+حفظ بدنه‌ها و ثبات واقعیِ خط مبنای آماده و بی‌درخواست تأیید است. مشاهدهٔ زودترِ فرادادهٔ
+فایل خالی، اثبات نبود پاسخ یا پذیرش نبود. مهلتی افزایش داده نشد، ورودی ناقصی منتشر نشد
+و شکست مدل نتیجه‌گیری نشد. عملیات رهاشده‌ای وجود ندارد.
+
+مجموع **۲۸۲ بخش/۷۵۶۸۵۲۲۵۲۴۸ بایت** و باقی‌مانده **۱۴۷۴۴۲۲۹۵۰۴ بایت** است؛ یک فایل
+کامل با هش منبع تأیید شده. پنج [کنترل CI](https://github.com/Omid-NextAI/nextops/actions/runs/37426920560)
+کد دقیق `5bf461c` با خواندن نتایج واقعی کارها/گام‌ها موفق‌اند. سه عامل مجاز همچنان خطای
+سقف استفاده دارند؛ بستهٔ تحویل نسخهٔ سوم، بازبینی مستقل نیست. نصب/انتشار/آزمون بومیِ
+نسخهٔ سوم یا انتخاب مدل زنده‌ای رخ نداده. معیارهای مجموعهٔ کامل/بازبینی انسانی/معنای
+استاندارد/استدلال/حریم خصوصی/زمینهٔ سنجیده/برنامه/عملیات/بازگشت بازند. جایگزین Apacheِ
+122B، Qwen3.5 است، نه 3.8 پذیرفته‌شده یا ادعای بیشترین زمینه. 35B زنده/خاموشی استدلال
+عمومی تغییر نکرده‌اند.
+
+### بازخوانی منابع رسمی مجوز — ساعت ۰۷:۰۶ UTC
+
+بازبین اصلی، صفحات جاری و رسمی مجوز را دوباره خواند: [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B/blob/main/LICENSE)
+همچنان Apache-2.0، [Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/main/LICENSE)
+دارای Qwen Community License 1.0 و [2.4T-A95B](https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B/blob/main/LICENSE)
+دارای مجوز جداگانهٔ Qwen3.8-Max است. دو مجوز اخیر، استفادهٔ تجاری را به شروطی وابسته
+کرده‌اند؛ دسترسی کارکنان بانک/مشتری را نمی‌توان بدون بررسی، استفادهٔ صرفاً داخلی دانست.
+این بازخوانی، تأیید حقوقی مستقل، تأیید دوبارهٔ بایت‌های نسخهٔ ثابت یا حکم کلیِ ممنوعیت
+استفاده نیست. دسته‌بندی شرکت، شروط قابل‌اعمال و هر مجوز جداگانه هنوز تأیید نشده‌اند.
+نسخهٔ ثابت، مانیفست، محیط اجرا یا انتخاب مدل تغییر نکرد؛ شکست آزمون‌های استانداردِ
+27B با مجوز Apache پابرجاست و جایگزین 122B با مجوز Apache، همچنان با نام درستِ 3.5 ثبت است.
 
 ### چهار پنجرهٔ تأییدشدهٔ دیگر و CI کد دقیق — ساعت ۰۶:۵۶ UTC
 

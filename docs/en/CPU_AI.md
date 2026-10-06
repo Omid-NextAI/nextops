@@ -1,5 +1,19 @@
 # Local CPU-only AI and capacity planning
 
+Checkpoint — **2026-10-06, 07:45 UTC**: 282 ranges/75685225248 bytes verified as transported;
+14744229504 remain and only one whole upstream shard is verified. Two more reviewed windows
+passed actual receipts/exit0/pre-import verification. Two distinct failed windows imported
+zero ranges, retaining all bodies; the later one had two complete and two partial HTTP206
+responses. Actual terminal failures, closed handles, reaped curl and unchanged ready-idle
+reconciliation were recorded, without partial promotion or timeout widening. Exact `5bf461c`
+passed five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37426920560).
+Official licence-page rereading is not legal approval or a new artifact pin. Independent
+V3/full-set/native/model/thinking/privacy/context/app/operational/rollback gates stay open;
+no unattended trial or new selection. The alternative is correctly Apache Qwen3.5-122B-A10B;
+live35B/public thinking-off remain unchanged. See the [paired record](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+## Earlier transport checkpoint — historical
+
 Transport checkpoint — **2026-10-06, 06:56 UTC**: 274 ranges/73537741600 bytes verified as
 transported; 16891713152 remain and only one whole upstream shard is verified. Four more
 reviewed V7 windows passed actual receipt/exit0/pre-import numeric/identity/hash/retention/

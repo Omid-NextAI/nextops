@@ -1,5 +1,34 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after the 07:45 UTC checkpoint**: continue from **282 verified
+ranges/75685225248 bytes**, with **14744229504 bytes** remaining, before remaining assembly/
+full-set inspection. The latest window 134–137 failed all-four verification: two complete and
+two partial HTTP206 responses, zero imported ranges, actual terminal exit1 and owned-stop/
+closed-handle/unchanged ready-idle reconciliation passed. Preserve those bodies and the earlier
+failed 130–133 window; the distinct fresh 130–133 operation subsequently passed. Do not reuse
+failed inputs, import the two complete bodies alone, widen limits or silently retry. Review the
+reconciled state and frozen tool identity before a separate bounded operation. Exact `5bf461c`
+passed five CI jobs. Independent V3 review is still not run after subagent quota failures;
+do not install/publish/run those tools without review. Preserve failed 3.8 trials and the
+correctly labeled Apache 3.5 alternative. Full-set/native semantics/thinking/privacy/measured
+context/app/operational/rollback gates remain; no unattended operation or live-model change.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از گام ساعت ۰۷:۴۵ UTC**: از **۲۸۲ بخشِ تأییدشده/
+۷۵۶۸۵۲۲۵۲۴۸ بایت** و باقی‌ماندهٔ **۱۴۷۴۴۲۲۹۵۰۴ بایت**، انتقال پیش از تجمیع باقی‌مانده/
+بررسی مجموعهٔ کامل ادامه یابد. پنجرهٔ اخیرِ ۱۳۴–۱۳۷، با دو پاسخ کامل و دو پاسخ ناقص
+HTTP206 شرط تأیید هر چهار درخواست را نگذراند؛ هیچ بخشی دریافت محافظت‌شده نشد. خروج
+نهاییِ یک و توقف متعلق به اجرا/بسته‌شدن handleها/ثبات خط مبنای آماده و بی‌درخواست تأیید
+است. بدنه‌های آن و پنجرهٔ ناموفقِ پیشینِ ۱۳۰–۱۳۳ حفظ شوند؛ اجرای تازه و مستقلِ ۱۳۰–۱۳۳
+بعداً موفق شد. ورودی ناموفق دوباره به کار نرود، فقط دو بدنهٔ کامل منتقل نشود، مهلت افزایش
+نیابد و تکرار ضمنی انجام نشود. پیش از عملیات محدودِ جداگانه، وضعیت تطبیق‌یافته و هویت
+ابزار ثابت بررسی شود. پنج کنترل CI کد دقیق `5bf461c` موفق‌اند. بازبینی مستقلِ نسخهٔ سوم
+پس از خطای سقف استفادهٔ عامل‌ها هنوز اجرا نشده؛ ابزار بدون بازبینی نصب/منتشر/اجرا نشود.
+آزمون ناموفقِ 3.8 و نام درستِ جایگزین Apacheِ 3.5 حفظ شود. معیارهای مجموعهٔ کامل/معنای
+بومی/استدلال/حریم خصوصی/زمینهٔ سنجیده/برنامه/عملیات/بازگشت بازند؛ عملیات رهاشده یا تغییر
+مدل زنده‌ای وجود ندارد.
+
+## Earlier transport checkpoint — historical / گام پیشینِ انتقال — سابقه
+
 Current task — **2026-10-06, after the 06:56 UTC checkpoint**: continue reviewed finite transport
 from **274 ranges/73537741600 bytes**, with **16891713152 bytes** remaining. Four further V7
 windows passed actual terminal/receipt checks, including a slow window within the unchanged
