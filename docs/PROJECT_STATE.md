@@ -1,5 +1,30 @@
 # Project state / وضعیت پروژه
 
+Current priority — **2026-10-06**: owner requests autonomous Qwen **3.8** work even with
+fewer parameters. The complete pinned 27B Q5 is the next candidate; 3.5-122B is not a substitute.
+Candidate-only locale-native general instructions and adapter regressions are implemented, not
+deployed or trained. Local suite: **1315 passed, two POSIX skips, 126 deselected, 27.27 s**;
+lint/format passed 146 files, Linux-target types passed 145. An initial suite failed four English
+literal assertions after localization; equivalent EN/FA invariant checks corrected them, without
+changing frozen model questions or semantic criteria. The current native diagnostic is main-only,
+not an independent review, matched application gate or live model acceptance.
+Fresh bounded preflight confirmed unchanged serving PIDs/restarts, ready-idle 35B, unused swap
+and absent trial listener. Serving selection and public thinking remain unchanged. See the
+[bounded specification](requirements/QWEN38_QUALIFICATION_SPEC.md); preserve all earlier failures.
+
+اولویت جاری — **۶ اکتبر ۲۰۲۶**: مالک، انجام مستقلِ کار برای Qwen **3.8** را حتی با پارامتر
+کمتر خواسته است. فایل کامل و ثابتِ 27B Q5 نامزد بعدی است؛ 3.5-122B جایگزین هدف نیست.
+دستور عمومیِ بومی هر زبان، صرفاً برای نامزد، و آزمون رابط پیاده‌سازی شده‌اند؛ نه استقرار یا
+آموزش مدل. آزمون محلی: **۱۳۱۵ موفق، دو مورد مخصوص POSIX ردشده، ۱۲۶ انتخاب‌نشده، ۲۷٫۲۷
+ثانیه**؛ lint/قالبِ ۱۴۶ فایل و نوع‌دهی با هدف Linux برای ۱۴۵ فایل موفق‌اند. اجرای اولیه چهار
+بررسیِ عبارت ثابت انگلیسی را پس از بومی‌سازی ناموفق ثبت کرد؛ کنترل هم‌معنای فارسی/انگلیسی
+اصلاح شد، بدون تغییر پرسش ثابت یا معیار معنایی مدل. تشخیص بومیِ جاری متعلق به عامل اصلی
+است، نه بازبینی مستقل، پذیرش برنامهٔ هماهنگ یا مدل زنده. پیش‌بررسی تازه، ثبات PID/راه‌اندازی
+مجدد، خط مبنای 35B آماده و بیکار، swap بدون مصرف و نبود شنوندهٔ آزمون را تأیید کرد.
+انتخاب زنده و خاموشی استدلال عمومی ثابت‌اند؛ مشخصات بالا و تمام شکست‌های قبلی حفظ شوند.
+
+## Previous transfer checkpoint — historical / گام پیشینِ انتقال — سابقه
+
 Verified checkpoint — **2026-10-06, 08:25 UTC**: three further finite transfer attempts
 failed with actual terminal exit1 and zero imports. Failed bodies remain; owned curl stop,
 closed read handles and unchanged ready-idle reconciliation passed. Totals stay **282 ranges/

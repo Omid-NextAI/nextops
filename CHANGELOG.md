@@ -1,5 +1,20 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Qwen 3.8 priority and candidate-only bilingual policy — 2026-10-06
+
+Prioritize the complete 3.8-27B candidate after the owner accepts fewer parameters. Add compact,
+locale-native general instructions behind exact candidate identities, preserving serving/evidence
+prompts, type-first coding, provenance, uncertainty and all runtime/authorization controls. Local
+source suite: 1315 passed/two POSIX skips/126 deselected; lint/format/Linux types passed. Four initial
+literal-English assertion failures were corrected with equivalent bilingual invariant checks.
+No training, model selection, thinking enablement or model-quality acceptance is claimed.
+
+با پذیرش پارامتر کمتر توسط مالک، نامزد کاملِ 3.8-27B در اولویت قرار گرفت. دستور عمومیِ فشرده و
+بومیِ هر زبان صرفاً پشت هویت دقیق نامزد افزوده شد؛ دستور زنده/شاهد، بررسی نوع، منشأ، عدم قطعیت
+و کنترل runtime/مجوز ثابت‌اند. ۱۳۱۵ آزمون موفق، دو مورد مخصوص POSIX ردشده و ۱۲۶ انتخاب‌نشده؛
+lint/قالب/نوع‌دهی Linux موفق. چهار شکست اولیهٔ عبارت ثابت انگلیسی با کنترل هم‌معنای دوزبانه
+اصلاح شدند. آموزش، انتخاب مدل، فعال‌سازی استدلال یا پذیرش کیفیت مدل ادعا نمی‌شود.
+
 ## Retained transfer failures and owner-review handoff — 2026-10-06
 
 Three further bounded transfer attempts imported zero ranges; actual failures, retained bodies

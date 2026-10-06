@@ -200,28 +200,58 @@ def test_detailed_general_coding_guidance_is_trusted_and_not_frozen_answer_coach
     transport = asyncio.run(capture_prompt(locale, detailed=True, model=model))
     payload = transport.calls[-1][1]
     system = payload["messages"][0]["content"]
-    assert "When providing code" in system
-    assert "specified input/output types and edge cases" in system
-    assert "unexpected or adversarial values before" in system
-    assert "validate the required type first, then apply value rules" in system
-    assert "Check branch order, short-circuiting and return types" in system
-    assert "overload equality" in system and "Boolean values satisfy integer type checks" in system
-    assert "Do not silently widen the accepted input contract" in system
-    assert "without claiming execution" in system
+    if model == BASELINE_MODEL:
+        assert "When providing code" in system
+        assert "specified input/output types and edge cases" in system
+        assert "unexpected or adversarial values before" in system
+        assert "validate the required type first, then apply value rules" in system
+        assert "Check branch order, short-circuiting and return types" in system
+        assert (
+            "overload equality" in system and "Boolean values satisfy integer type checks" in system
+        )
+        assert "Do not silently widen the accepted input contract" in system
+        assert "without claiming execution" in system
+        assert f"natural professional {locale}" in system
+        assert "Separate observations, hypotheses and safe next checks" in system
+        assert "source, observation/collection times, scope and stale/partial limits" in system
+        assert "Reported completed steps stay observations" in system
+        assert "not proof of independent verification" in system
+        assert "unmeasured steps and current states remain unknown" in system
+        assert "Do not invent intermediary topology" in system
+        assert "have not executed anything and cannot change systems" in system
+        assert "never output internal reasoning" in system
+        assert "optional diagnostic questions" in system
+    elif locale == "en":
+        assert "honor every type and edge-case constraint" in system
+        assert "validate input type before equality, membership, hashing or coercion" in system
+        assert "overload equality and Boolean values satisfy integer type checks" in system
+        assert "Do not widen input contracts" in system
+        assert "check branch order, short-circuiting and return types" in system
+        assert "checks are read-only and not executed" in system
+        assert (
+            "full observation and collection times, scope, and stale/partial qualifiers" in system
+        )
+        assert "completed steps are not independent verification" in system
+        assert "not topology, overall health or cause" in system
+        assert "current states remain unknown" in system
+        assert "Do not output private reasoning or drafts" in system
+    else:
+        assert "کد باید قرارداد نوع و تمام حالت‌های مرزی" in system
+        assert "پیش از مقایسه، عضویت، هش یا تبدیل، نوع ورودی" in system
+        assert "برابری را بازتعریف کنند و Boolean زیرنوع integer است" in system
+        assert "قرارداد ورودی را گسترش ندهید" in system
+        assert "ترتیب شرط، ارزیابی اتصال کوتاه و نوع خروجی" in system
+        assert "بررسی پیشنهادی فقط‌خواندنی و اجرا‌نشده" in system
+        assert "زمان کامل مشاهده و گردآوری، دامنه" in system
+        assert "کهنگی یا ناقص‌بودن" in system
+        assert "گزارش تکمیل یک کار، تأیید مستقل آن نیست" in system
+        assert "توپولوژی، سلامت کلی یا علت" in system
+        assert "اندازه‌گیری‌نشده نامعلوم است" in system
+        assert "استدلال خصوصی و پیش‌نویس ننویسید" in system
     assert all(
         term not in system
         for term in ("is_allowed", "host.get", "item.get", "LAB-", "91%", "2026-10-01")
     )
-    assert f"natural professional {locale}" in system
-    assert "Separate observations, hypotheses and safe next checks" in system
-    assert "source, observation/collection times, scope and stale/partial limits" in system
-    assert "Reported completed steps stay observations" in system
-    assert "not proof of independent verification" in system
-    assert "unmeasured steps and current states remain unknown" in system
-    assert "Do not invent intermediary topology" in system
-    assert "have not executed anything and cannot change systems" in system
-    assert "never output internal reasoning" in system
-    assert "optional diagnostic questions" in system
     assert payload["messages"][-1]["content"].startswith("Synthetic request:")
     assert payload["max_tokens"] == 384 and payload["temperature"] == 0.3
     assert payload["stream"] is False and "tools" not in payload

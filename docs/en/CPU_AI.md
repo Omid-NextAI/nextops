@@ -1,5 +1,20 @@
 # Local CPU-only AI and capacity planning
 
+## Current priority: Qwen 3.8, even at lower parameter count — 2026-10-06
+
+The owner's clarified goal prioritizes actual **3.8**, not a larger relabelled 3.5. Resume the
+complete pinned 27B Q5. Candidate-only general instructions now use native EN/FA wording and
+budget-aware concision while preserving type-first coding, full provenance and uncertainty.
+They do not inspect question keywords or insert expected fixture answers. Serving 3.5 and
+evidence synthesis remain unchanged. This is source work, not training or a model-quality pass.
+Local checks passed **1315 tests**, two POSIX skips/126 deselected; lint/format and Linux types
+passed. Frozen questions, sampling, context, output/deadline and thinking denial are unchanged.
+The separate main-only native diagnostic requires actual final/semantic/deadline/cleanup review;
+independent, matched application, thinking/context, WAN and rollback gates are not inferred.
+See the [updated plan](../requirements/QWEN38_QUALIFICATION_SPEC.md).
+
+## Previous transfer checkpoint — historical
+
 Checkpoint — **2026-10-06, 08:25 UTC**: three additional finite transfers failed with
 zero imports and actual stopped/closed/unchanged-baseline reconciliation passed. Totals remain
 282 ranges/75685225248 bytes, 14744229504 bytes outstanding, one whole shard verified.

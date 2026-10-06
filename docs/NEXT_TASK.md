@@ -1,5 +1,26 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06**: prioritize the complete Qwen3.8-27B Q5 and the candidate-only
+locale-native policy. Reconcile the finite main-only standard diagnostic, its actual stopped
+unit/listener and unchanged ready-idle baseline; review every EN/FA final against the unchanged
+corpus, including type boundaries, topology uncertainty, full provenance and causal hypotheses.
+Do not promote a failed, incomplete or self-reviewed diagnostic as independent acceptance.
+Only after standard gates pass, continue matched application/final-only thinking/context and
+authorized evidence/audit/WAN/rollback qualification. Keep the live 35B and all historic failures.
+The stalled 122B transport and owner-review handoff remain historical unfinished alternative work,
+not the first task or a replacement for the clarified 3.8 goal.
+
+کار جاری — **۶ اکتبر ۲۰۲۶**: فایل کامل Qwen3.8-27B Q5 و دستور بومیِ صرفاً نامزد در اولویت
+باشند. آزمون استانداردِ محدود و متعلق به عامل اصلی، توقف واقعیِ خدمت/شنونده و ثبات خط مبنای
+آماده و بیکار تطبیق داده شوند؛ هر پاسخ فارسی/انگلیسی با پرسش ثابت بررسی شود، از جمله مرز نوع،
+نامعلوم‌بودن توپولوژی، منشأ کامل و فرضیهٔ علّی. آزمون ناموفق، ناقص یا بازبینی‌شده توسط عامل
+اصلی، پذیرش مستقل نیست. تنها پس از پذیرش استاندارد، برنامهٔ هماهنگ، استدلال با نمایش صرفاً
+پاسخ نهایی، زمینه و شاهد/ممیزی/WAN/بازگشت مجاز ادامه یابند. مدل زندهٔ 35B و همهٔ شکست‌های
+قبلی حفظ شوند. انتقال متوقفِ 122B و تحویل بازبینی به مالک، کار جایگزینِ ناتمام در سابقه‌اند،
+نه نخستین گام یا جایگزین هدف روشن‌شدهٔ 3.8.
+
+## Previous task checkpoint — historical / گام پیشینِ کار — سابقه
+
 Current task — **2026-10-06, after the 08:25 UTC checkpoint**: obtain the owner's actual
 independent source/check review report for the prepared V3 tools. Reviewer selection and a
 prepared guide are not a passed review. Preserve all three new failed transfer attempts and

@@ -22,6 +22,7 @@ from nextops.inference.contracts import (
     ProviderReadiness,
     ReadinessState,
 )
+from nextops.inference.qwen38_prompt import general_prompt as qwen38_general_prompt
 from nextops.security.http import NoRedirectHandler
 
 MAX_PROVIDER_RESPONSE_BYTES = 1_048_576
@@ -319,6 +320,13 @@ class LlamaCppProvider:
                 "An explicit fixed-length or identifier-only request takes priority over "
                 "optional diagnostic questions."
             )
+        if request.purpose == "general" and self._settings.model_id in {
+            "nextops-qwen3-8-27b-q8-0",
+            "nextops-qwen3-8-27b-ud-q5-k-m",
+        }:
+            # Experimental candidate-only repair. Frozen questions/review criteria,
+            # runtime limits and serving 3.5 instructions remain unchanged.
+            system_prompt = qwen38_general_prompt(request)
         # Qwen3 documents /no_think as its soft switch for non-thinking output:
         # https://github.com/QwenLM/Qwen3/blob/main/docs/source/run_locally/llama.cpp.md
         payload: dict[str, Any] = {

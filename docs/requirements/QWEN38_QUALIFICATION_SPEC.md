@@ -6,6 +6,28 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Owner priority and candidate-only repair — 2026-10-06
+
+The owner now prioritizes Qwen **3.8**, accepting a lower parameter count, and asks the main
+agent to perform the work. A 3.5 alternative cannot satisfy that goal. Resume from the complete
+pinned 27B Q5 artifact rather than repeating the stalled 122B transfer. Preserve those transport
+records and the unaccepted V3 review bundle; this instruction does not turn self-review into
+independent review or license a failed model for public use.
+
+The bounded source repair is a locale-native, compact general-answer policy shared by the two
+exact 3.8 candidates. It preserves reported source/full observation and collection times/scope,
+stale/partial qualifiers, unknown current states, conditional hypotheses and type-first coding.
+It uses trusted locale/output metadata only, never question keywords or fixture-specific answers.
+Keep serving 3.5 and evidence-synthesis instructions unchanged. Do not change frozen questions,
+review criteria, sampling, 120-second deadline, 16K context or thinking denial.
+
+Acceptance sequence: local policy/adapter/security regressions; an isolated standard-first native
+diagnostic; semantic review of every final and deadline failure; then matched application,
+final-only thinking, measured context, authorized evidence/audit/offline and exact rollback gates.
+Main-only native results are not independent approval. Preserve failed attempts. Revert the
+candidate-only module/wiring to roll back source; the diagnostic has no serving cutover to undo.
+No training, GPU, cloud, download, infrastructure permission or architectural migration is added.
+
 ### Bounded follow-up after the failed Q8 trial
 
 The [dated permissive packet](PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md) adds a distinct pinned
@@ -83,6 +105,25 @@ this index entry. Preserve the prior failed-thinking and UI deployment records. 
 release manifest only for an actually accepted identity change, not source registration.
 
 ## فارسی
+
+### اولویت تازهٔ مالک و اصلاح محدودِ نامزد — ۶ اکتبر ۲۰۲۶
+
+مالک، Qwen **3.8** را حتی با پارامتر کمتر در اولویت گذاشته و انجام کار را به عامل اصلی سپرده
+است. جایگزین 3.5 هدف را برآورده نمی‌کند. ادامه از فایل کامل و ثابتِ 27B Q5 باشد، نه تکرار انتقال
+متوقف‌شدهٔ 122B. سوابق انتقال و بستهٔ بازبینیِ پذیرفته‌نشدهٔ نسخهٔ سوم حفظ شوند؛ این دستور،
+بازبینی عامل اصلی را مستقل نمی‌کند و مجوز انتشار مدل ناموفق نیست.
+
+اصلاح کد، دستور پاسخ عمومیِ فشرده و بومیِ هر زبان برای دو نامزد دقیقِ 3.8 است: منبع، زمان کامل
+مشاهده و گردآوری، دامنه، قید کهنگی/نقص، وضعیت فعلیِ نامعلوم، فرضیهٔ مشروط و بررسی نوع پیش از
+مقایسه در کد حفظ می‌شوند. فقط زبان و بودجهٔ خروجیِ معتبر مبنا هستند، نه کلیدواژهٔ سؤال یا پاسخ
+ساختگیِ آزمون. دستور مدل زندهٔ 3.5 و خلاصه‌سازی شاهد ثابت بماند. پرسش و معیار ثابت، نمونه‌گیری،
+مهلت ۱۲۰ ثانیه، زمینهٔ 16K و ممنوعیت استدلال نامزد تغییر نکنند.
+
+ترتیب پذیرش: آزمون محلیِ دستور/رابط/امنیت؛ تشخیص بومیِ استاندارد در محیط جدا؛ بازبینی معنای
+تمام پاسخ‌ها و شکست زمانی؛ سپس برنامهٔ هماهنگ، استدلال با نمایش صرفاً پاسخ نهایی، زمینهٔ سنجیده،
+شاهد/ممیزی/آفلاین و بازگشت دقیق. نتیجهٔ عامل اصلی پذیرش مستقل نیست. تلاش ناموفق حفظ شود.
+بازگشت کد با برگرداندن ماژول و اتصال صرفاً نامزد انجام می‌شود؛ آزمون تشخیصی، مدل زنده را تغییر
+نمی‌دهد. آموزش مدل، GPU، ابر، دانلود، مجوز زیرساخت یا تغییر معماری افزوده نمی‌شود.
 
 ### پیگیری محدود پس از آزمون ناموفق Q8
 
