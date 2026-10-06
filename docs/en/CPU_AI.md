@@ -1,5 +1,18 @@
 # Local CPU-only AI and capacity planning
 
+## Retained Qwen 3.8 diagnostic and bounded repair — 2026-10-06
+
+The first locale-native standard trial ended at 09:53 UTC with **12 main-reviewed passes/four
+failures**: an unverified Persian networking topology, missing authorized scope in both stale
+answers, and the final Persian hypothesis timeout. Fifteen finals were retained; both coding
+answers passed twelve finite AST checks, never executed. The protected report's SHA-256 is
+`3b9574281efb81fe07ac0937ef1dde9f7a3682275adb73d0bd80c037f30de1ab`.
+Cleanup and a separate ready-idle baseline reread passed. Exact `5500a24` passed five CI jobs,
+not model acceptance. A distinct compact-policy diagnostic is watched; it explicitly preserves
+authorized scope/full timestamps and asks for short complete parts. Frozen questions, sampling,
+32-thread CPU profile, 16K/output/deadline/security controls remain. Its result is pending;
+independent/application/thinking/context/WAN/rollback gates and serving 35B remain unchanged.
+
 ## Current priority: Qwen 3.8, even at lower parameter count — 2026-10-06
 
 The owner's clarified goal prioritizes actual **3.8**, not a larger relabelled 3.5. Resume the

@@ -1,5 +1,26 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after the 09:53 UTC trial**: reconcile the distinct compact-policy
+diagnostic, its actual terminal status, stopped owned unit/listener and unchanged ready-idle
+baseline; review every retained EN/FA final against the frozen corpus. Preserve the first trial's
+12 main-only passes/four failures, including its actual Persian timeout. Keep standard-first
+qualification: do not select a failed/incomplete/self-reviewed model or widen the deadline to
+hide failure. The compact policy changes no question/sampling/resource/context/security control.
+Only after standard gates pass, continue held-out review, matched application/final-only thinking,
+measured context and authorized evidence/audit/WAN/rollback. Serving 35B remains unchanged; the
+122B alternative and its outstanding V3 independent review do not replace the 3.8 goal.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از آزمون ساعت ۰۹:۵۳ UTC**: نتیجهٔ نهاییِ واقعیِ تشخیص جدا با
+دستور فشرده، توقف خدمت/شنوندهٔ متعلق به آزمون و ثبات خط مبنای آماده و بی‌درخواست تطبیق داده
+شود؛ هر پاسخ فارسی/انگلیسی با پرسش ثابت بازبینی شود. دوازده موفقیتِ صرفاً عامل اصلی و چهار
+شکست آزمون نخست، از جمله پایان مهلت فارسی، حفظ شوند. پذیرش استاندارد مقدم است؛ مدل ناموفق،
+ناقص یا دارای خودبازبینی انتخاب نشود و مهلت برای پنهان‌کردن شکست افزایش نیابد. دستور فشرده،
+پرسش/نمونه‌گیری/منابع/زمینه/امنیت را عوض نمی‌کند. پس از پذیرش استاندارد، پرسش مستقل، برنامهٔ
+هماهنگ، استدلالِ صرفاً نهایی، زمینهٔ سنجیده و شاهد/ممیزی/WAN/بازگشت مجاز ادامه یابد. مدل زندهٔ
+35B ثابت است؛ جایگزین 122B و بازبینی مستقلِ ناتمامِ نسخهٔ سوم جای هدف 3.8 را نمی‌گیرند.
+
+## Previous priority checkpoint — historical / گام پیشینِ اولویت — سابقه
+
 Current task — **2026-10-06**: prioritize the complete Qwen3.8-27B Q5 and the candidate-only
 locale-native policy. Reconcile the finite main-only standard diagnostic, its actual stopped
 unit/listener and unchanged ready-idle baseline; review every EN/FA final against the unchanged

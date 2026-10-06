@@ -73,12 +73,14 @@ def test_policy_does_not_branch_on_question_or_copy_fixture_answers(locale: str)
     assert len(first) < 2000
     if locale == "fa":
         assert "پیش از مقایسه، عضویت، هش یا تبدیل، نوع ورودی" in first
-        assert "زمان کامل مشاهده و گردآوری، دامنه" in first
+        assert "زمان کامل مشاهده و گردآوری، دامنهٔ مجاز" in first
+        assert "هیچ‌کدام حذف نشود" in first
         assert "اختصار نباید" in first
         assert "استدلال خصوصی" in first
     else:
         assert "validate input type before equality, membership, hashing or coercion" in first
         assert "full observation and collection times" in first
+        assert "authorized scope, and stale/partial qualifiers; omit none" in first
         assert "Brevity must not drop" in first
         assert "private reasoning" in first
 

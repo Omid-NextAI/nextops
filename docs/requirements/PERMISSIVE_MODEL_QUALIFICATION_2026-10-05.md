@@ -7,10 +7,38 @@ Date: **2026-10-05**. Historical 27B status: **Qwen3.8-27B Q5 import verified; d
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, 08:25 UTC — 282 ranges unchanged; three further failed transfers retained; owner-review guide prepared, independent review not_run; no model cutover**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۸:۲۵ UTC — ۲۸۲ بخش ثابت؛ سه انتقال ناموفقِ دیگر حفظ شدند؛ راهنمای بازبینی مالک آماده و بازبینی مستقل اجرا‌نشده؛ بدون تغییر مدل زنده**.
+Latest update: **2026-10-06, 09:53 UTC — Qwen3.8 priority; first locale-native Q5 diagnostic failed, 12 main-reviewed passes/four failures; distinct compact-policy trial pending; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۹:۵۳ UTC — اولویت Qwen3.8؛ نخستین تشخیص Q5 با دستور بومی ناموفق، دوازده موفقیتِ عامل اصلی/چهار شکست؛ نتیجهٔ آزمون جدا با دستور فشرده هنوز باز؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Clarified 3.8 priority and retained standard failures — 09:53 UTC
+
+The owner prioritizes actual Qwen **3.8** even at fewer parameters and asks main to continue
+autonomously. The complete pinned 27B Q5 remains the candidate; the 3.5-122B transport/review
+history below is not erased or presented as a 3.8 substitute. Candidate-only locale-native
+instructions preserve serving/evidence prompts and hard controls. Exact `5500a24` passed five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37445010646), not model acceptance.
+
+The first native standard diagnostic retained 15 final-only answers; actual terminal exit1
+records `TimeoutError` at `fa-hypothesis`. Its unchanged profile was 32/32 threads, one slot,
+16K context, 384 output tokens, temperature0.3 and 120 seconds including native admission and
+post-check. Main reviewed all retained finals against the frozen corpus, obtaining **12 passes /
+4 failures**. Both coding answers passed twelve AST cases without generated-code execution.
+Persian networking invented an upstream/proxy relationship; both stale/partial answers omitted
+the explicit one-authorized-host scope (and shortened technical times); the last Persian final
+was absent after timeout. Deadline failure is failed, not skipped or accepted. Protected native
+report SHA-256: `3b9574281efb81fe07ac0937ef1dde9f7a3682275adb73d0bd80c037f30de1ab`.
+Cleanup passed; a separate reread verified inactive owned unit/MainPID0, absent listener and
+unchanged serving PIDs/restarts/ready-idle 35B. No private reasoning was retained or generated
+code executed. This is main-only synthetic review, not independent or real application evidence.
+
+A distinct watched experiment now uses shorter generic wording, explicitly forbids dropping
+authorized scope/full times and requests the shortest complete parts. The question corpus,
+sampling, native profile, deadline, context, output and all safety controls stay fixed. Its
+outcome is pending, not a pass. Follow the [3.8 specification](QWEN38_QUALIFICATION_SPEC.md),
+standard-first; independent/held-out, thinking/privacy/measured-context, matched application,
+authorized evidence/audit/WAN and rollback gates remain open. No selection or thinking enablement.
 
 ### Further terminal failures and owner-review handoff — 08:25 UTC
 
@@ -1498,6 +1526,32 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### روشن‌شدن اولویت 3.8 و حفظ شکست‌های استاندارد — ساعت ۰۹:۵۳ UTC
+
+مالک، Qwen **3.8** واقعی را حتی با پارامتر کمتر در اولویت گذاشته و ادامهٔ مستقل را از عامل
+اصلی خواسته است. نامزد، فایل کامل و ثابتِ 27B Q5 است؛ سابقهٔ انتقال/بازبینی 3.5-122B در ادامه
+حذف نمی‌شود و جایگزین 3.8 معرفی نیست. دستور بومی، صرفاً برای نامزد است؛ دستور زنده/شاهد و
+کنترل قطعی ثابت‌اند. پنج [کنترل CI](https://github.com/Omid-NextAI/nextops/actions/runs/37445010646)
+کد دقیق `5500a24` موفق‌اند، نه پذیرش مدل.
+
+نخستین تشخیص استاندارد بومی، پانزده پاسخِ صرفاً نهایی حفظ کرد؛ خروج واقعی یک، `TimeoutError`
+در `fa-hypothesis` ثبت شد. روش ثابت: ۳۲/۳۲ رشته، یک جایگاه، زمینهٔ 16K، خروجی ۳۸۴ توکن،
+دمای۰٫۳ و مهلت ۱۲۰ثانیه شامل پذیرش بومی و کنترل پس از پاسخ. عامل اصلی همهٔ پاسخ‌ها را با
+معیار ثابت بررسی و **دوازده موفقیت / چهار شکست** ثبت کرد. هر دو پاسخ کد، دوازده حالت AST را
+بدون اجرای کد تولیدشده گذراندند. پاسخ شبکهٔ فارسی، رابطهٔ بالادست/پروکسیِ تأییدنشده را ساخت؛
+دو پاسخ کهنه/ناقص، دامنهٔ صریحِ تنها میزبان مجاز را حذف و زمان فنی را کوتاه کردند؛ آخرین
+پاسخ فارسی پس از پایان مهلت موجود نبود. شکست مهلت، ناموفق است، نه ردشده یا پذیرفته‌شده.
+هش گزارش بومیِ محافظت‌شده: `3b9574281efb81fe07ac0937ef1dde9f7a3682275adb73d0bd80c037f30de1ab`.
+توقف موفق بود؛ بازخوانی جدا، خدمت آزمونِ غیرفعال/MainPID0، نبود شنونده و ثبات PID/راه‌اندازی
+مجدد/35B آماده و بی‌درخواست را تأیید کرد. استدلال خصوصی حفظ و کد تولیدشده اجرا نشد. این
+بازبینی دادهٔ ساختگی توسط عامل اصلی است، نه پذیرش مستقل یا شاهد واقعیِ برنامه.
+
+آزمایش جدا و تحت نظارت، عبارت عمومیِ کوتاه‌تر دارد، حذف دامنهٔ مجاز/زمان کامل را صریحاً منع
+می‌کند و کوتاه‌ترین پاسخ کامل را می‌خواهد. پرسش، نمونه‌گیری، روش بومی، مهلت، زمینه، خروجی و
+همهٔ کنترل‌های ایمنی ثابت‌اند. نتیجه هنوز باز است، نه پذیرفته. [مشخصات 3.8](QWEN38_QUALIFICATION_SPEC.md)
+با تقدم استاندارد دنبال شود؛ پرسش/بازبینی مستقل، استدلال/حریم خصوصی/زمینهٔ سنجیده، برنامهٔ
+هماهنگ، شاهد/ممیزی/WAN مجاز و بازگشت بازند. انتخاب مدل یا فعال‌سازی استدلال رخ نداده است.
 
 ### شکست‌های نهاییِ تازه و آماده‌سازی بازبینی مالک — ساعت ۰۸:۲۵ UTC
 

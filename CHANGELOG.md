@@ -1,5 +1,19 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Retained Qwen 3.8 results and compact candidate policy — 2026-10-06
+
+Preserve the first locale-native native diagnostic: 12 main-reviewed passes/four failures, with
+actual Persian timeout and successful cleanup/baseline reread. Exact `5500a24` passed five CI jobs,
+not model acceptance. Make generic candidate instructions shorter and explicitly retain authorized
+scope/full times; request the shortest complete parts without changing the frozen corpus, sampling,
+native limits, security or serving model. The distinct watched follow-up remains pending.
+
+نتیجهٔ نخستین تشخیص بومی با دستور هر زبان حفظ شد: دوازده موفقیتِ بازبینی‌شده توسط عامل اصلی/
+چهار شکست، پایان مهلت واقعی فارسی و توقف/بازخوانی موفق خط مبنا. پنج کنترل CI کد دقیق `5500a24`
+موفق‌اند، نه پذیرش مدل. دستور عمومیِ نامزد فشرده‌تر شد و حفظ صریح دامنهٔ مجاز/زمان کامل و
+کوتاه‌ترین پاسخ کامل را می‌خواهد؛ پرسش ثابت، نمونه‌گیری، سقف بومی، امنیت و مدل زنده تغییر
+نکرده‌اند. نتیجهٔ پیگیری جدا و تحت نظارت هنوز پذیرفته نیست.
+
 ## Qwen 3.8 priority and candidate-only bilingual policy — 2026-10-06
 
 Prioritize the complete 3.8-27B candidate after the owner accepts fewer parameters. Add compact,

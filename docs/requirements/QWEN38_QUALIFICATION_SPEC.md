@@ -6,6 +6,17 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Observed failure and distinct compact-policy experiment — 2026-10-06
+
+The first locale-native diagnostic actually failed at the last Persian deadline. Main-only
+review records 12 passes/four failures against the unchanged criteria: unverified Persian
+networking topology, omitted authorized scope in both stale answers, and the timeout. Preserve
+the protected report and separate stopped/listener-absent/unchanged-ready-idle checks. The next
+bounded source experiment makes scope/full-time omission explicitly forbidden, reduces generic
+wording and requests the shortest complete parts. This is not training, a new answer router,
+an identical retry or independent approval. Keep the same native profile and all fixed limits.
+Do not begin thinking/cutover gates while applicable standard failures remain.
+
 ### Owner priority and candidate-only repair — 2026-10-06
 
 The owner now prioritizes Qwen **3.8**, accepting a lower parameter count, and asks the main
@@ -105,6 +116,16 @@ this index entry. Preserve the prior failed-thinking and UI deployment records. 
 release manifest only for an actually accepted identity change, not source registration.
 
 ## فارسی
+
+### شکست مشاهده‌شده و آزمون جدا با دستور فشرده — ۶ اکتبر ۲۰۲۶
+
+نخستین تشخیص با دستور بومی واقعاً در آخرین پرسش فارسی به پایان مهلت رسید. بازبینی عامل اصلی،
+با همان معیار، دوازده موفقیت/چهار شکست ثبت کرد: توپولوژی تأییدنشدهٔ شبکه در فارسی، حذف دامنهٔ
+مجاز در دو پاسخ کهنه و پایان مهلت. گزارش محافظت‌شده و کنترل جداگانهٔ توقف/نبود شنونده/ثبات
+خط مبنای آماده و بی‌درخواست حفظ شود. آزمایش بعدی، حذف دامنه/زمان کامل را صریحاً منع می‌کند،
+عبارت‌های عمومی را فشرده و کوتاه‌ترین پاسخ کامل را می‌خواهد. این آموزش، مسیریابی تازهٔ پاسخ،
+تکرار همان تلاش یا پذیرش مستقل نیست. روش بومی و همهٔ سقف‌های ثابت حفظ شوند؛ تا باقی‌بودن
+شکست استاندارد، معیار استدلال یا تغییر مدل زنده آغاز نشود.
 
 ### اولویت تازهٔ مالک و اصلاح محدودِ نامزد — ۶ اکتبر ۲۰۲۶
 

@@ -229,7 +229,8 @@ def test_detailed_general_coding_guidance_is_trusted_and_not_frozen_answer_coach
         assert "check branch order, short-circuiting and return types" in system
         assert "checks are read-only and not executed" in system
         assert (
-            "full observation and collection times, scope, and stale/partial qualifiers" in system
+            "full observation and collection times, authorized scope, and stale/partial qualifiers"
+            in system
         )
         assert "completed steps are not independent verification" in system
         assert "not topology, overall health or cause" in system
@@ -242,7 +243,7 @@ def test_detailed_general_coding_guidance_is_trusted_and_not_frozen_answer_coach
         assert "قرارداد ورودی را گسترش ندهید" in system
         assert "ترتیب شرط، ارزیابی اتصال کوتاه و نوع خروجی" in system
         assert "بررسی پیشنهادی فقط‌خواندنی و اجرا‌نشده" in system
-        assert "زمان کامل مشاهده و گردآوری، دامنه" in system
+        assert "زمان کامل مشاهده و گردآوری، دامنهٔ مجاز" in system
         assert "کهنگی یا ناقص‌بودن" in system
         assert "گزارش تکمیل یک کار، تأیید مستقل آن نیست" in system
         assert "توپولوژی، سلامت کلی یا علت" in system

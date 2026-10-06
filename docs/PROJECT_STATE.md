@@ -1,5 +1,38 @@
 # Project state / وضعیت پروژه
 
+Verified 3.8 diagnostic checkpoint — **2026-10-06, 09:53 UTC**: the first locale-native Q5
+standard trial retained 15 finals and failed at the Persian causal-hypothesis deadline. Main-only
+review against the unchanged corpus records **12 passed / 4 failed**: Persian networking inferred
+an unverified upstream topology, both stale/partial answers omitted explicit authorized scope,
+and the last Persian case timed out. Both coding answers passed the existing twelve-case AST
+review without executing generated code. Report SHA-256:
+`3b9574281efb81fe07ac0937ef1dde9f7a3682275adb73d0bd80c037f30de1ab`.
+The owned unit stopped, its listener disappeared, and a separate reread confirmed unchanged
+ready-idle serving PIDs/restarts. Exact `5500a24` passed all five CI jobs; source CI is not model
+acceptance. A compact generic policy now explicitly forbids omitting authorized scope/full times
+and asks for the shortest complete parts. Its distinct watched diagnostic keeps the same frozen
+questions, sampling, 32-thread profile, 16K context, output budget and 120-second deadline. Its
+result is pending, not passed. Revised local suite: **1315 passed / two POSIX skips /
+126 deselected, 35.37 s**; lint/format passed 151 files, Linux-target types passed 145,
+documentation/artifact/status/whitespace checks passed. No training, selection or public-thinking
+change.
+
+گام تأییدشدهٔ تشخیص 3.8 — **۶ اکتبر ۲۰۲۶، ساعت ۰۹:۵۳ UTC**: نخستین آزمون استاندارد Q5 با
+دستور بومی، ۱۵ پاسخ نهایی ثبت کرد و در پرسش فارسیِ فرضیهٔ علّی به پایان مهلت رسید. بازبینی
+عامل اصلی با معیار ثابت، **۱۲ موفق / ۴ ناموفق** ثبت کرد: پاسخ شبکهٔ فارسی، توپولوژی بالادستِ
+تأییدنشده را استنتاج کرد؛ هر دو پاسخ شاهد کهنه/ناقص، دامنهٔ مجاز را صریحاً حفظ نکردند؛ و
+آخرین پرسش فارسی بی‌پاسخ ماند. هر دو پاسخ کد، بررسی دوازده‌حالتی AST را بدون اجرای کد تولیدشده
+گذراندند. هش گزارش در بالا ثبت است. خدمت متعلق به آزمون متوقف و شنونده حذف شد؛ بازخوانی جدا
+ثبات PID/راه‌اندازی مجدد و مدل زندهٔ آماده و بیکار را تأیید کرد. پنج کنترل CI کد دقیق `5500a24`
+موفق‌اند، نه پذیرش مدل. دستور عمومیِ فشرده‌تر اکنون حذف دامنهٔ مجاز/زمان کامل را صریحاً منع
+می‌کند و کوتاه‌ترین پاسخ کامل را می‌خواهد. آزمون جدا و تحت نظارت با همان پرسش، نمونه‌گیری،
+۳۲ رشته، زمینهٔ 16K، بودجه و مهلت ۱۲۰ثانیه ادامه دارد؛ نتیجه هنوز پذیرفته نیست. آزمون محلیِ
+اصلاح‌شده: **۱۳۱۵ موفق / دو مورد مخصوص POSIX ردشده / ۱۲۶ انتخاب‌نشده، ۳۵٫۳۷ ثانیه**؛
+lint/قالبِ ۱۵۱ فایل، نوع‌دهی Linux برای ۱۴۵ فایل و کنترل سند/فایل/وضعیت/فاصله موفق‌اند.
+آموزش، انتخاب مدل یا فعال‌سازی استدلال عمومی رخ نداده است.
+
+## Previous priority checkpoint — historical / گام پیشینِ اولویت — سابقه
+
 Current priority — **2026-10-06**: owner requests autonomous Qwen **3.8** work even with
 fewer parameters. The complete pinned 27B Q5 is the next candidate; 3.5-122B is not a substitute.
 Candidate-only locale-native general instructions and adapter regressions are implemented, not
