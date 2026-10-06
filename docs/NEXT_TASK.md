@@ -1,6 +1,29 @@
 # Next task / کار بعدی
 
-Current task — **2026-10-06, after 10:47 UTC**: preserve the completed third trial's actual
+Current task — **2026-10-06, after 11:19:59 UTC**: no serving cutover. Preserve the completed
+Q8 comparison's 12 main-reviewed passes/four failures, actual cleanup and unchanged baseline.
+Actual3.8 remains the owner priority, but both current precisions fail quality under the frozen
+criteria. Reassess a materially justified source/profile strategy and independent review capacity
+before another trial; more RAM, lower precision or repeated sampling is not evidence of repair.
+Keep provenance and deterministic authorization outside model trust. Do not start thinking/cutover
+gates while standard failures remain, relabel3.5, widen deadlines, invent peer review or repeat an
+unchanged run. Q4 metadata alone is not qualified. Retain all history and the rejected-policy
+rollback; live35B/public thinking-off remain. Independent/app/privacy/context/evidence/WAN/rollback
+gates remain open, not inferred from source CI or synthetic native results.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از ساعت ۱۱:۱۹:۵۹ UTC**: مدل زنده تغییر نکند. دوازده موفقیت/
+چهار شکست بازبینی عامل اصلی در مقایسهٔ کامل Q8، توقف واقعی و ثبات خط مبنا حفظ شوند. 3.8
+واقعی همچنان اولویت مالک است، اما هر دو دقت موجود با معیار ثابت کیفیت ناموفق‌اند. پیش از
+آزمون تازه، راهبرد منبع/روش واقعاً متفاوت و توجیه‌شده و ظرفیت بازبینی مستقل بررسی شوند؛
+حافظهٔ بیشتر، دقت کمتر یا نمونه‌گیری تکراری، شاهد رفع خطا نیست. منشأ و مجوز قطعی خارج از
+اعتماد به مدل باقی بمانند. پیش از رفع شکست استاندارد، معیارهای استدلال/انتخاب زنده آغاز،
+3.5 تغییر نام، مهلت افزایش، بازبین ابداع یا آزمون یکسان تکرار نشود. فرادادهٔ Q4 پذیرش نیست.
+سابقه و بازگشت دستور ردشده حفظ شوند؛ مدل زندهٔ35B/استدلال خاموش ثابت‌اند. معیارهای مستقل/
+برنامه/حریم خصوصی/زمینه/شاهد/WAN/بازگشت بازند و از CI یا تشخیص بومیِ ساختگی نتیجه نمی‌شوند.
+
+## Previous Q8 comparison task — historical / کار پیشینِ مقایسهٔ Q8 — سابقه
+
+Task — **2026-10-06, after 10:47 UTC**: preserve the completed third trial's actual
 11 main-reviewed passes/five failures and the rejected policy's exact source rollback. All sixteen
 finals arriving on time is not semantic acceptance. Prioritize actual **Qwen3.8**, not a relabelled
 3.5 alternative. The next bounded comparison uses the already retained higher-precision Q8 with

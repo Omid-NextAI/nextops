@@ -1,5 +1,23 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Retained Qwen 3.8 Q8 comparison: quality still failed — 2026-10-06
+
+Reused the retained Q8 artifact, restored locale-native policy and reviewed no-BLAS runtime in
+a distinct full diagnostic; no download or live change. All sixteen finals arrived within the
+unchanged deadline, but main semantic review is **12 passed/four failed**: EN/FA unverified
+networking topology, Persian coding/type guard and Persian authorized scope. English coding
+passes twelve finite AST checks; Persian fails seven guard boundaries. All owned cleanup and
+separate unchanged ready-idle rereads passed. Exact `4ac2cf4` passed five CI jobs, not model
+acceptance. Actual3.8 remains the goal; this failed candidate is not selected or relabelled.
+
+فایل موجود Q8، دستور بومیِ بازگردانده‌شده و runtime بازبینی‌شدهٔ بدون BLAS در تشخیص کاملِ
+متفاوت استفاده شدند؛ دریافت یا تغییر زنده‌ای رخ نداد. هر شانزده پاسخ در مهلت ثابت رسید، اما
+بازبینی معنایی عامل اصلی **دوازده موفق/چهار ناموفق** است: توپولوژی شبکهٔ فارسی/انگلیسی،
+شرط نوع کد فارسی و دامنهٔ مجاز فارسی. کد انگلیسی دوازده بررسی محدود AST را گذراند؛ کد فارسی
+هفت مرز شرط نوع را نگذراند. توقف و بازخوانی جداگانهٔ خط مبنای آماده و بی‌درخواست موفق‌اند.
+پنج کنترل CI کد دقیق `4ac2cf4` موفق‌اند، نه پذیرش مدل. هدف همچنان 3.8 واقعی است؛ نامزد
+ناموفق انتخاب یا با نام دیگر معرفی نشده است.
+
 ## Rejected Qwen 3.8 policy experiment and source rollback — 2026-10-06
 
 The third full diagnostic returned all sixteen finals within the unchanged deadline, but main

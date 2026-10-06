@@ -6,6 +6,18 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Distinct Q8 comparison failed quality — 11:19:59 UTC
+
+The planned Q8/restored-policy/no-BLAS full comparison actually completed sixteen final deadlines,
+but main-only semantic review is **12 passed/four failed**: both networking topology claims,
+Persian coding guard and Persian authorized scope. Both hypothesis samples now pass the narrow
+frozen criteria, not independent/model-wide acceptance. Retain native SHA
+`b13ddbcb8e71555c81ff951126a4900eed0b7bf46f200ba7444a847c434a34f8`, finite failures and separate
+stopped/listener-absent/unchanged-ready-idle rereads. Exact `4ac2cf4` source CI passed five jobs.
+No unchanged retry, precision downgrade, relaxed gate, relabelled model or serving cutover.
+Further trials need a justified materially distinct strategy and applicable review; thinking/
+app/context/evidence/WAN/rollback remain unaccepted. Actual3.8 is still the goal, not live yet.
+
 ### Rejected third diagnostic — 10:47 UTC
 
 The third full run met all sixteen final deadlines, but semantic review is **11 passed/five
@@ -147,6 +159,18 @@ this index entry. Preserve the prior failed-thinking and UI deployment records. 
 release manifest only for an actually accepted identity change, not source registration.
 
 ## فارسی
+
+### شکست کیفیت در مقایسهٔ متفاوت Q8 — ساعت ۱۱:۱۹:۵۹ UTC
+
+مقایسهٔ کاملِ برنامه‌ریزی‌شدهٔ Q8/دستور بازگردانده‌شده/runtime بدون BLAS واقعاً شانزده مهلت
+پاسخ را گذراند، اما بازبینی معنایی صرفاً عامل اصلی **دوازده موفق/چهار ناموفق** است: ادعای
+توپولوژی در هر دو زبان، شرط نوع کد فارسی و دامنهٔ مجاز فارسی. هر دو نمونهٔ فرضیه معیار
+ثابتِ محدود را گذراندند، نه پذیرش مستقل یا کلی مدل. هش گزارش بومی
+`b13ddbcb8e71555c81ff951126a4900eed0b7bf46f200ba7444a847c434a34f8`، شکست‌های محدود و
+بازخوانی جداگانهٔ توقف/نبود شنونده/ثبات خط مبنای آماده و بی‌درخواست حفظ شوند. پنج کنترل CI
+کد دقیق `4ac2cf4` موفق‌اند. آزمون یکسان تکرار، دقت کم، معیار آسان، مدل تغییر نام یا خدمت زنده
+عوض نشود. آزمون بعدی به راهبرد متفاوتِ واقعاً توجیه‌شده و بازبینی لازم نیاز دارد؛ معیارهای
+استدلال/برنامه/زمینه/شاهد/WAN/بازگشت پذیرفته نیستند. هدف همچنان 3.8 واقعی است؛ هنوز زنده نیست.
 
 ### رد تشخیص سوم — ساعت ۱۰:۴۷ UTC
 

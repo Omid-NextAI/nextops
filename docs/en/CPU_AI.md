@@ -1,5 +1,18 @@
 # Local CPU-only AI and capacity planning
 
+## Distinct Q8 comparison remains unqualified — 2026-10-06
+
+The retained Q8/restored-policy/no-BLAS full run ended at 11:19:59 UTC with all sixteen finals
+inside unchanged deadlines, but **12 main-reviewed passes/four failures**. Both networking
+answers claim unverified topology; Persian coding lacks its string guard; Persian stale evidence
+omits explicit authorized scope. English coding passes twelve finite AST checks; Persian fails
+seven guard boundaries; no code executes. Both hypotheses pass this narrow review, not a general
+accuracy or thinking gate. SHA: `b13ddbcb8e71555c81ff951126a4900eed0b7bf46f200ba7444a847c434a34f8`.
+Owned cleanup/separate ready-idle rereads passed; exact `4ac2cf4` passed five CI jobs. A single
+resource observation shows 30050156 KiB RSS/no swap, not peak RAM, throughput or a NUMA optimum.
+No new import, precision downgrade, live selection or thinking enablement. Frozen criteria and
+all failed attempts stay; independent/app/privacy/context/evidence/WAN/rollback remain open.
+
 ## Rejected third standard diagnostic and source rollback — 2026-10-06
 
 At 10:47 UTC, all sixteen finals arrived within unchanged deadlines, but main semantic review

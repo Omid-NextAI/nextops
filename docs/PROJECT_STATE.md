@@ -1,6 +1,35 @@
 # Project state / وضعیت پروژه
 
-Current checkpoint — **2026-10-06, 10:47 UTC**: the third full standard diagnostic completed
+Current checkpoint — **2026-10-06, 11:19:59 UTC**: the distinct retained-Q8/restored-policy/
+no-BLAS comparison returned sixteen finals within unchanged deadlines, but main-only semantic
+review is **12 passed/four failed**. Both networking answers assert unverified topology; Persian
+coding omits the type guard; Persian stale evidence omits explicit authorized scope. English
+coding passes twelve finite AST checks; Persian fails seven guard boundaries, without code
+execution. Both hypothesis cases now pass this narrow main review. No independent, matched-app,
+thinking/privacy, measured long-context, WAN or model rollback acceptance follows.
+Native SHA: `b13ddbcb8e71555c81ff951126a4900eed0b7bf46f200ba7444a847c434a34f8`.
+All owned cleanup and separate unchanged ready-idle rereads passed. Exact `4ac2cf4` passed five
+CI jobs. Preserve all failed models/policies and the rejected 50-word rollback; do not repeat an
+unchanged diagnostic, weaken criteria or select a failed model. Q4 remains metadata only, not an
+import or proven remedy. Actual3.8 is still unqualified/unselected; serving35B/public thinking-off
+remain unchanged. Native offset time was explicitly converted to UTC in the protected review.
+
+گام جاری — **۶ اکتبر ۲۰۲۶، ساعت ۱۱:۱۹:۵۹ UTC**: مقایسهٔ متفاوتِ Q8 موجود/دستور بازگردانده‌شده/
+runtime بدون BLAS شانزده پاسخ در مهلت ثابت ثبت کرد، اما بازبینی معناییِ صرفاً عامل اصلی
+**دوازده موفق/چهار ناموفق** است. هر دو پاسخ شبکه توپولوژی تأییدنشده را ادعا کردند؛ کد فارسی
+شرط بررسی نوع نداشت؛ شاهد کهنهٔ فارسی دامنهٔ مجاز را صریحاً حفظ نکرد. کد انگلیسی دوازده
+بررسی محدود AST را گذراند؛ کد فارسی هفت مرز شرط نوع را نگذراند، بدون اجرای کد. هر دو فرضیه
+اکنون این بازبینی محدودِ عامل اصلی را گذراندند؛ از آن پذیرش مستقل، برنامهٔ هماهنگ، استدلال/
+حریم خصوصی، زمینهٔ بلندِ سنجیده، WAN یا بازگشت مدل نتیجه نمی‌شود. هش گزارش در بالا ثبت است.
+توقف و بازخوانی جداگانهٔ خط مبنای آماده و بی‌درخواست موفق‌اند؛ پنج کنترل CI کد دقیق `4ac2cf4`
+موفق است. همهٔ شکست‌ها و بازگشت آزمایش پنجاه‌واژه‌ای حفظ شوند؛ تشخیص یکسان تکرار، معیار
+آسان یا مدل ناموفق انتخاب نشود. Q4 فقط فراداده است، نه فایل دریافت‌شده یا راه‌حل ثابت‌شده.
+3.8 واقعی هنوز پذیرفته/انتخاب نشده است؛ مدل زندهٔ35B/استدلال خاموش ثابت‌اند. زمان دارای
+اختلاف منطقهٔ زمانی گزارش بومی در بازبینی محافظت‌شده صریحاً به UTC تبدیل شد.
+
+## Previous Q5 result — historical / نتیجهٔ پیشین Q5 — سابقه
+
+Checkpoint — **2026-10-06, 10:47 UTC**: the third full standard diagnostic completed
 sixteen final answers within unchanged deadlines; main semantic review records **11 passed/five
 failed**, not acceptance. Persian coding omitted the type guard and failed seven finite AST
 boundaries. Both networking answers infer unverified topology; Persian stale evidence omits
