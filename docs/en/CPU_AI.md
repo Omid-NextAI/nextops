@@ -1,5 +1,17 @@
 # Local CPU-only AI and capacity planning
 
+## Candidate raw-quality repair, qualification pending — 2026-10-06
+
+The bounded [qualification experiment](../requirements/QWEN38_QUALIFICATION_SPEC.md) changes
+only the candidate Qwen3.8 general-answer instruction policy: type-first code, protocol-scoped
+conclusions and complete evidence qualifiers. It neither trains the model nor repairs raw scores
+by application fallback. Source regressions pass **1383 tests**, two POSIX skips/130 deselected
+in 27.55s; lint/155-file formatting/Linux-target strict types on149 files pass. Four obsolete
+wording assertions were updated without weakening their invariants. One Windows socket setup
+failure in an earlier broader run did not recur in the isolated41-test file or final suite.
+The unchanged sixteen-case retained-Q8 native experiment is pending. No serving profile, public
+thinking, model artifact, runtime, database, connector or permission changes are included.
+
 ## Longer-timeout probe completed, not model promotion — 2026-10-06
 
 At 11:53:44 UTC, the protected Q5/no-BLAS/32-worker two-case probe completed EN/FA finals in

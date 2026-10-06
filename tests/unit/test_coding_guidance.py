@@ -222,31 +222,38 @@ def test_detailed_general_coding_guidance_is_trusted_and_not_frozen_answer_coach
         assert "never output internal reasoning" in system
         assert "optional diagnostic questions" in system
     elif locale == "en":
-        assert "honor every type and edge-case constraint" in system
         assert "validate input type before equality, membership, hashing or coercion" in system
-        assert "overload equality and Boolean values satisfy integer type checks" in system
+        assert "first return False for an invalid type, then test allowed values" in system
+        assert "Comments, type hints and an allowlist do not replace a type guard" in system
+        assert "overload equality; Boolean values satisfy integer type checks" in system
         assert "Do not widen input contracts" in system
-        assert "check branch order, short-circuiting and return types" in system
+        assert "Check branch order, short-circuiting and return types on every path" in system
         assert "checks are read-only and not executed" in system
         assert (
             "full observation and collection times, authorized scope, and stale/partial qualifiers"
             in system
         )
         assert "completed steps are not independent verification" in system
-        assert "not topology, overall health or cause" in system
+        assert "Neither alone proves certificate validation, intermediary topology" in system
+        assert "overall health or a root cause" in system
+        assert "does not prove a component exists in this network" in system
+        assert "timestamps character-for-character, including original digits" in system
         assert "current states remain unknown" in system
         assert "Do not output private reasoning or drafts" in system
     else:
-        assert "کد باید قرارداد نوع و تمام حالت‌های مرزی" in system
         assert "پیش از مقایسه، عضویت، هش یا تبدیل، نوع ورودی" in system
-        assert "برابری را بازتعریف کنند و Boolean زیرنوع integer است" in system
+        assert "نخست برای نوع نامعتبر False برگردانید، سپس مقدار مجاز را بسنجید" in system
+        assert "type hint یا مجموعهٔ مجاز جای شرط نوع را نمی‌گیرد" in system
+        assert "برابری را بازتعریف کنند؛ Boolean زیرنوع integer است" in system
         assert "قرارداد ورودی را گسترش ندهید" in system
-        assert "ترتیب شرط، ارزیابی اتصال کوتاه و نوع خروجی" in system
+        assert "ترتیب شرط، اتصال کوتاه و نوع خروجیِ همهٔ مسیرها" in system
         assert "بررسی پیشنهادی فقط‌خواندنی و اجرا‌نشده" in system
         assert "زمان کامل مشاهده و گردآوری، دامنهٔ مجاز" in system
         assert "کهنگی یا ناقص‌بودن" in system
         assert "گزارش تکمیل یک کار، تأیید مستقل آن نیست" in system
-        assert "توپولوژی، سلامت کلی یا علت" in system
+        assert "هیچ‌کدام به‌تنهایی تأیید گواهی، توپولوژی واسط، سلامت کلی یا علت قطعی نیست" in system
+        assert "معنای عمومی کد خطا را با وجودِ یک جزء در شبکه اشتباه نگیرید" in system
+        assert "ارقام و نویسه‌های اصلی حفظ کنید؛ ترجمه یا محلی‌سازی نکنید" in system
         assert "اندازه‌گیری‌نشده نامعلوم است" in system
         assert "استدلال خصوصی و پیش‌نویس ننویسید" in system
     assert all(

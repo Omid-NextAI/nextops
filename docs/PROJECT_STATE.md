@@ -1,5 +1,20 @@
 # Project state / وضعیت پروژه
 
+Current candidate source checkpoint — **2026-10-06**: generic locale-native Qwen3.8 instructions
+prioritize type guards, protocol-scoped conclusions and complete source/time/scope qualifiers.
+Frozen questions, finite coding/semantic criteria and serving35B/public thinking-off are unchanged.
+Local source suite: **1383 passed, two POSIX skips,130 deselected**, 27.55s; lint/format/types pass.
+The retained-Q8 full native trial is planned, not a new model pass, training or deployment.
+See [bounded specification](requirements/QWEN38_QUALIFICATION_SPEC.md).
+
+گام جاریِ کد نامزد — **۶ اکتبر ۲۰۲۶**: دستور عمومیِ بومی Qwen3.8 بر شرط نوع، نتیجه‌گیری
+محدودِ پروتکل و مشخصات کامل منبع/زمان/دامنه تأکید می‌کند. سؤال ثابت، معیار کد/معنا، مدل زندهٔ
+35B و خاموشی استدلال عمومی تغییر نکرده‌اند. آزمون محلی: **۱۳۸۳ موفق، دو مورد مخصوص POSIX
+اجرا نشده،۱۳۰ انتخاب‌نشده** در۲۷٫۵۵ ثانیه؛ lint/قالب/type موفق‌اند. آزمون بومی کامل روی Q8
+موجود برنامه‌ریزی شده است؛ هنوز موفقیت مدل، آموزش یا استقرار نیست. الزام پیوندشده مرجع است.
+
+## Previous application-only repair — historical / اصلاح پیشینِ برنامه — سابقه
+
 Current source checkpoint — **2026-10-06**: the owner-requested repair adds a scoped TCP/HTTP
 conclusion safeguard and application-owned source/time/one-host qualifiers to guarded evidence
 answers. Exact technical timestamps, distinct Linux/Zabbix scopes, empty times, hostile labels,

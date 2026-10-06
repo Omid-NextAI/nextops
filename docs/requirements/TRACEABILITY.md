@@ -1,5 +1,14 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Original sections11/16–17/20–21: the [raw-quality experiment](QWEN38_QUALIFICATION_SPEC.md) maps
+candidate instruction invariants to `inference/qwen38_prompt.py`, `test_qwen38_prompt.py` and
+`test_coding_guidance.py`. Source checks do not replace the unchanged sixteen-case native corpus,
+finite raw-code checker, semantic review or independent/live acceptance. Serving35B is unaffected.
+
+بخش‌های اصلی۱۱/۱۶–۱۷/۲۰–۲۱: آزمایشِ پیوندشده، قواعد دستورِ نامزد را به فایل دستور و دو آزمون
+بالا متصل می‌کند. کنترل کد، جای مجموعهٔ بومیِ ثابتِ شانزده‌پرسشی، کنترل محدود کد خام، بازبینی
+معنایی یا پذیرش مستقل/زنده نیست؛ مدل زندهٔ35B بدون تغییر می‌ماند.
+
 Original sections 11/16–17/20–21: the [answer-integrity source repair](ANSWER_INTEGRITY_SPEC.md)
 maps scoped protocol conclusions and application-owned evidence qualifiers to
 `api/evidence_qualifiers.py`, integrity guards, unit/API tests and

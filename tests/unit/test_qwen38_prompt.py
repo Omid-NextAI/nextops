@@ -77,12 +77,20 @@ def test_policy_does_not_branch_on_question_or_copy_fixture_answers(locale: str)
         assert "هیچ‌کدام حذف نشود" in first
         assert "اختصار نباید" in first
         assert "استدلال خصوصی" in first
+        assert first.index("کد:") < first.index("نتیجه‌گیری:") < first.index("شاهد:")
+        assert "نخست برای نوع نامعتبر False" in first
+        assert "وجودِ یک جزء در شبکه" in first
+        assert "ارقام و نویسه‌های اصلی" in first
     else:
         assert "validate input type before equality, membership, hashing or coercion" in first
         assert "full observation and collection times" in first
         assert "authorized scope, and stale/partial qualifiers; omit none" in first
         assert "Brevity must not drop" in first
         assert "private reasoning" in first
+        assert first.index("Code:") < first.index("Conclusions:") < first.index("Evidence:")
+        assert "first return False for an invalid type" in first
+        assert "does not prove a component exists" in first
+        assert "character-for-character, including original digits" in first
 
 
 @pytest.mark.parametrize("locale", ["en", "fa"])

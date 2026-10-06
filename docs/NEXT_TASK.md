@@ -1,5 +1,19 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, raw-quality repair**: capture the new committed generic candidate
+instructions, perform the unchanged full retained-Q8 corpus in the isolated bounded CPU profile,
+and directly review coding/reasoning/provenance finals. No application fallback credit, changed
+questions, relaxed criteria or unchanged retries. Keep source tests, native results and independent
+approval separate. Reconcile owned cleanup and unchanged serving35B before further gates.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، اصلاح کیفیت خام**: درخواست‌های دستور عمومیِ تازه از کد دقیق ثبت،
+مجموعهٔ کامل و ثابت روی Q8 موجود در نمایهٔ جدا و محدودِ CPU اجرا و پاسخ خام کد/نتیجه‌گیری/منشأ
+بازبینی شود. پاسخ جایگزین برنامه امتیاز نگیرد؛ سؤال، معیار یا آزمون یکسان تغییر/تکرار نشود.
+آزمون کد، نتیجهٔ بومی و تأیید مستقل جدا بمانند. پیش از معیار بعدی، توقف اختصاصی و ثبات مدل
+زندهٔ35B بازخوانی شود.
+
+## Previous source-repair task — historical / کار پیشینِ اصلاح کد — سابقه
+
 Current task — **2026-10-06, after source repair**: isolated browser/packaging review of the new
 application protocol/provenance safeguard is complete; require exact-source hosted CI before any
 promotion. Keep its guard successes

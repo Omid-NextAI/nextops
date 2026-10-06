@@ -6,6 +6,25 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Raw-quality repair experiment — 2026-10-06
+
+The owner requests repair of raw coding/reasoning failures, not application fallback credit.
+The candidate-only locale-native policy now prioritizes runtime type guards before value tests,
+limits TCP/HTTP conclusions to observed protocol facts, and requires explicit source/full times/
+authorized scope/stale-partial qualifiers with unchanged technical identifiers. These generic
+rules depend only on trusted locale/output metadata; they contain no frozen answers or question
+matching. They are instructions, not training, authorization or measured model improvement.
+
+Acceptance plan: capture the exact committed adapter's full unchanged sixteen EN/FA requests,
+then run the retained Q8/no-BLAS/32-worker CPU profile with 16K context, 384 output tokens,
+unchanged sampling, 120-second case deadlines, one slot and 48 GiB hard memory. Review finals
+directly against the frozen semantic criteria and finite coding checker, without application
+fallbacks. Record main-only review separately from independent approval. No downloads, model/
+runtime replacement, serving prompt/configuration, public thinking, queue or resource changes.
+On failure retain the report and stop/reconcile only the owned transient unit; keep the serving
+35B ready-idle baseline unchanged. Historical Q8 12/16 and Q5 failures remain failed. Further
+app/proxy, thinking/privacy/context, evidence/WAN and rollback gates remain open.
+
 ### Timing result — 11:53:44 UTC
 
 The retained-Q5 two-case300-second probe returned EN/FA finals in88441/145010 ms; both pass
@@ -191,6 +210,24 @@ this index entry. Preserve the prior failed-thinking and UI deployment records. 
 release manifest only for an actually accepted identity change, not source registration.
 
 ## فارسی
+
+### آزمایش اصلاح کیفیت پاسخ خام — ۶ اکتبر ۲۰۲۶
+
+مالک، اصلاح خطای خامِ کدنویسی و نتیجه‌گیری را خواسته است، نه امتیاز دادن به پاسخ جایگزین
+برنامه. دستور بومیِ مخصوص نامزد اکنون شرط نوعِ زمان اجرا را پیش از سنجش مقدار قرار می‌دهد،
+نتیجهٔ TCP/HTTP را به واقعیت مشاهده‌شده محدود می‌کند و منبع، زمان کامل، دامنهٔ مجاز و قید
+کهنگی/نقص را با شناسهٔ فنیِ دست‌نخورده لازم می‌داند. این قواعد عمومی فقط از زبان و سقف خروجیِ
+معتبر استفاده می‌کنند؛ پاسخ ثابت یا تطبیق متن سؤال ندارند. این تغییر، دستور است؛ نه آموزش،
+مجوز یا شاهدِ بهبود اندازه‌گیری‌شدهٔ مدل.
+
+برنامهٔ پذیرش: درخواست هر شانزده پرسش ثابت EN/FA از نگاشتِ کد دقیق ثبت شود؛ سپس Q8 موجود با
+runtime بدون BLAS، ۳۲ رشته، زمینهٔ 16K، سقف خروجی ۳۸۴، نمونه‌گیری ثابت، مهلت۱۲۰ ثانیه، یک
+جایگاه و سقف حافظهٔ۴۸ GiB اجرا شود. پاسخ نهایی مستقیماً با معیار معنایی و کنترل محدودِ کد
+سنجیده شود؛ پاسخ جایگزین برنامه دخیل نیست. بازبینی عامل اصلی از تأیید مستقل جدا ثبت شود.
+دریافت تازه، تغییر مدل/runtime/پرامپت و تنظیم زنده/استدلال عمومی/صف/منابع در دامنه نیست.
+در شکست، گزارش حفظ و فقط واحد موقتِ اختصاصی متوقف و بازخوانی شود؛ مدل زندهٔ35B آماده و
+بی‌درخواست ثابت بماند. نتیجهٔ تاریخی Q8 با۱۲ موفقیت از۱۶ و شکست Q5 محفوظ‌اند. معیارهای
+برنامه‌ـ‌پراکسی، استدلال/حریم خصوصی/زمینه، شاهد/WAN و بازگشت همچنان بازند.
 
 ### نتیجهٔ زمان — ساعت ۱۱:۵۳:۴۴ UTC
 
