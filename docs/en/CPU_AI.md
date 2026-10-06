@@ -1,5 +1,17 @@
 # Local CPU-only AI and capacity planning
 
+## All finals on time, three raw failures remain — 2026-10-06
+
+The full `6c3a380` Q8/300-second run ended at14:07 UTC: **13 main-reviewed passes/three failures**.
+Both coding samples pass12 finite AST boundaries; English stale scope is fixed. English upstream
+assumption, Persian authorized scope and a missing specific Persian causal explanation still fail.
+Persian hypothesis124395ms now fits300; it would fail120, and timing does not repair its meaning.
+Native SHA `edfe704360afb2a17b9413c775f7b7730e9f75050340717571d869fac7f18d8c`;
+cleanup/separate ready-idle baseline and five exact-source CI jobs passed. A distinct generic
+closed-observation/scope-first/explicit-hypothesis policy is being prepared with the same full
+corpus, scoring and resources. Serving35B/public thinking remain unchanged; no model pass or
+deployment is claimed. See the bounded qualification specification.
+
 ## Raw priority-rule diagnosis failed; targeted follow-up — 2026-10-06
 
 At13:43 UTC the `d401583` retained-Q8 test ended with fifteen finals and a Persian hypothesis

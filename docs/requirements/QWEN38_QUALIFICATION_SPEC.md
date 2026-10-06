@@ -6,6 +6,27 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Labelled-policy result and closed-observation experiment — 14:07 UTC
+
+The `6c3a380` full Q8 run completed all sixteen finals within explicit300 seconds, but main
+semantic review is **13 passed/three failed**: English networking assumes an upstream dependency,
+Persian stale evidence omits explicit authorized scope, and Persian causality gives uncertainty/
+two checks without a specific explanatory hypothesis. Its124395ms final fits300, not historical120.
+Both coding samples pass all twelve finite AST boundaries; English stale scope is preserved.
+Native SHA `edfe704360afb2a17b9413c775f7b7730e9f75050340717571d869fac7f18d8c`;
+owned stop/separate baseline reread and all five exact-source CI jobs pass, not model acceptance.
+
+The next bounded policy changes the framing rather than repeating an identical run: supplied
+observations define actual infrastructure facts; diagnostic explanations must not turn textbook
+error definitions into observed components. Observation reports start with supplied authorization/
+scope before host/value. A requested hypothesis needs a possible causal explanation, explicitly
+unverified, not uncertainty alone. General model knowledge stays distinct from live evidence.
+No frozen answers/values/question matching, relaxed criteria or application fallback credit.
+Run the full unchanged sixteen-case Q8/300-second CPU corpus with the same artifact/runtime/
+sampling/384 output/16K/resources/security/global watchdog. Preserve all failures and main-only
+review; serving35B/public thinking and later independent/app/context/privacy/WAN/rollback gates
+are unchanged. Prompt edits are not training or a promise of improvement.
+
 ### Priority-rule result and distinct labelled-provenance follow-up — 13:43 UTC
 
 The `d401583` Q8 run returned fifteen finals; the last Persian hypothesis timed out. Main review
@@ -231,6 +252,25 @@ this index entry. Preserve the prior failed-thinking and UI deployment records. 
 release manifest only for an actually accepted identity change, not source registration.
 
 ## فارسی
+
+### نتیجهٔ دستور عنوان‌دار و آزمایشِ مشاهدهٔ محدود — ساعت۱۴:۰۷ UTC
+
+اجرای کامل Q8 با کد `6c3a380` هر شانزده پاسخ نهایی را در مهلت صریح۳۰۰ثانیه ثبت کرد، اما
+بازبینی معناییِ عامل اصلی **۱۳ موفقیت/سه شکست** دارد: شبکهٔ انگلیسی وجودِ بالادست را فرض
+می‌کند، شاهد کهنهٔ فارسی دامنهٔ صریحِ مجاز را حذف می‌کند و پاسخ علّی فارسی، با وجود عدم قطعیت/
+دو بررسی، توضیح احتمالیِ مشخصی نمی‌دهد. پاسخ۱۲۴۳۹۵میلی‌ثانیه‌ای در۳۰۰ جا دارد، نه سابقهٔ۱۲۰.
+هر دو کد، دوازده حالت محدود AST را می‌گذرانند؛ دامنهٔ شاهد کهنهٔ انگلیسی حفظ است. هش بومی
+در بخش انگلیسی آمده؛ توقف/بازخوانی جداگانهٔ خط مبنا و پنج CI همان کد موفق‌اند، نه پذیرش مدل.
+
+دستور محدودِ بعدی، چارچوب بیان را عوض می‌کند، نه اینکه آزمون یکسان تکرار شود: واقعیت وضعیت
+زیرساخت از مشاهدهٔ داده‌شده می‌آید؛ تعریف کتابیِ خطا نباید به جزء مشاهده‌شده تبدیل شود.
+گزارش مشاهده با مجوز/دامنهٔ داده‌شده، پیش از میزبان/مقدار آغاز شود. فرضیهٔ خواسته‌شده باید
+توضیح احتمالیِ مشخص و صریحاً تأییدنشده باشد، نه فقط بیان عدم قطعیت. دانش عمومی مدل از شاهد
+زنده جداست. پاسخ/مقدار ثابت، تطبیق سؤال، معیار آسان‌تر یا امتیاز پاسخ جایگزین اضافه نمی‌شود.
+مجموعهٔ کامل و ثابتِ Q8/۳۰۰ثانیه با همان فایل/runtime/نمونه‌گیری/۳۸۴توکن/16K/منابع/امنیت/
+watchdog اجرا شود. همهٔ شکست‌ها و برچسب بازبینی عامل اصلی حفظ‌اند؛ مدل زندهٔ35B/استدلال
+عمومی و معیار مستقل/برنامه/زمینه/حریم خصوصی/WAN/بازگشت ثابت‌اند. تغییر دستور، آموزش یا وعدهٔ
+بهبود نیست.
 
 ### نتیجهٔ دستور اولویت‌دار و بررسی متفاوتِ منشأِ عنوان‌دار — ساعت۱۳:۴۳ UTC
 

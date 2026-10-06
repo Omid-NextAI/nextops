@@ -1,5 +1,20 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after14:07 UTC**: preserve the full Q8/300 thirteen-pass/three-failure
+raw review and owned cleanup. Test the materially distinct generic closed-observation/scope-first/
+explicit causal-explanation instructions with the exact committed full unchanged sixteen-case
+corpus/profile. Keep all raw scores separate from application fallbacks and source CI. No serving
+selection or thinking while standard semantics fail; independent/app/privacy/context/evidence/
+WAN/rollback remain open. Record final content and deadline identity honestly, without blind retry.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از۱۴:۰۷ UTC**: بازبینی کامل خامِ Q8/۳۰۰ با سیزده موفقیت/سه
+شکست و توقف اختصاصی حفظ شود. دستور عمومیِ واقعاً متفاوتِ مشاهدهٔ محدود/دامنهٔ آغازین/توضیح
+علّیِ مشخص، با کد دقیق و مجموعه/نمایهٔ کامل و ثابتِ شانزده‌پرسشی آزموده شود. امتیاز خام از پاسخ
+جایگزین و CI جداست. با شکست معنا، مدل زنده و استدلال انتخاب نشوند؛ معیار مستقل/برنامه/حریم
+خصوصی/زمینه/شاهد/WAN/بازگشت بازند. متن نهایی و هویت مهلت صادقانه ثبت و تکرار کور انجام نشود.
+
+## Earlier labelled-policy task — historical / کار پیشینِ دستور عنوان‌دار — سابقه
+
 Current task — **2026-10-06, after13:43 UTC**: retain the failed twelve-pass/four-failure priority
 trial. Type-first coding and Persian networking improved, not whole-model quality. Prepare the
 distinct labelled-scope/protocol policy; capture exact committed300-second candidate requests;

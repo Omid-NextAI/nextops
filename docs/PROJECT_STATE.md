@@ -1,5 +1,24 @@
 # Project state / وضعیت پروژه
 
+Current raw checkpoint — **2026-10-06,14:07 UTC**: full `6c3a380` Q8/300 completed16 finals,
+but **13 main-reviewed passes/three failures** remain: English upstream assumption, Persian
+authorized scope and a missing specific Persian hypothesis. Both finite code samples/English
+stale scope pass; timing alone is not quality repair. Native SHA
+`edfe704360afb2a17b9413c775f7b7730e9f75050340717571d869fac7f18d8c`, owned cleanup/separate unchanged
+ready-idle baseline and five exact-source CI jobs are recorded. Prepare a distinct generic
+closed-observation/scope-first/causal-explanation policy, retaining all corpus/criteria/resources,
+failures and serving35B/public thinking. No raw-model or deployment acceptance yet.
+
+گام جاریِ پاسخ خام — **۶ اکتبر ۲۰۲۶،۱۴:۰۷ UTC**: اجرای کامل Q8/۳۰۰ با کد `6c3a380` شانزده
+پاسخ نهایی دارد، ولی **۱۳ موفقیت/سه شکست در بازبینی عامل اصلی** باقی است: فرضِ بالادست در
+انگلیسی، دامنهٔ مجاز فارسی و نبود فرضیهٔ مشخصِ فارسی. دو کد محدود/دامنهٔ شاهد انگلیسی موفق‌اند؛
+مهلت به‌تنهایی کیفیت را اصلاح نمی‌کند. هش بالا، توقف/بازخوانی جداگانهٔ خط مبنای آماده و
+بی‌درخواست و پنج CI همان کد ثبت‌اند. دستور عمومیِ متفاوتِ مشاهدهٔ محدود/دامنهٔ آغازین/توضیح
+علّی آماده شود؛ مجموعه/معیار/منابع، شکست‌ها و مدل زندهٔ35B/استدلال عمومی محفوظ‌اند. هنوز
+پذیرش کل مدل خام یا استقرار نیست.
+
+## Earlier labelled-policy preparation — historical / آماده‌سازی پیشینِ دستور عنوان‌دار — سابقه
+
 Current raw checkpoint — **2026-10-06,13:43 UTC**: `d401583` Q8 priority rules repair both finite
 raw coding samples and Persian networking, but the full run still fails: **12 main-reviewed
 passes/four failures** (English upstream assertion, both missing authorized scopes, final Persian
