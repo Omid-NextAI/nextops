@@ -6,6 +6,17 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Failed compact trial and bounded follow-up — 10:30 UTC
+
+The second full diagnostic and separate two-case 16/64-worker probes also failed the Persian
+deadline. Preserve all report identities, semantic findings, actual cleanup and unchanged baseline
+checks; the probes do not cover fourteen other questions. Do not infer a thread optimum from
+different answer lengths/cache histories. The next generic source experiment adds a 50-word target
+only under small trusted output budgets, never overriding required facts/code/format/provenance;
+explicitly preserves Latin technical timestamps in Persian; and checks final sentence count and
+provenance. Error-code definitions cannot establish unobserved topology. Keep corpus/sampling/
+deadlines/context/artifact/security fixed. This is another main-only diagnostic, not acceptance.
+
 ### Observed failure and distinct compact-policy experiment — 2026-10-06
 
 The first locale-native diagnostic actually failed at the last Persian deadline. Main-only
@@ -116,6 +127,16 @@ this index entry. Preserve the prior failed-thinking and UI deployment records. 
 release manifest only for an actually accepted identity change, not source registration.
 
 ## فارسی
+
+### آزمون فشردهٔ ناموفق و پیگیری محدود — ساعت ۱۰:۳۰ UTC
+
+تشخیص کاملِ دوم و دو بررسی جدا و دوپرسشیِ ۱۶/۶۴رشته‌ای نیز مهلت فارسی را نگذراندند. هویت
+گزارش، یافتهٔ معنایی، توقف واقعی و ثبات خط مبنا حفظ شوند؛ بررسی محدود، چهارده سؤال دیگر را
+پوشش نمی‌دهد. طول پاسخ/سابقهٔ cache متفاوت، تعداد رشتهٔ بهینه را ثابت نمی‌کند. آزمایش عمومیِ
+بعدی، فقط برای بودجهٔ خروجی کوچک هدف پنجاه‌واژه‌ای دارد، نه به قیمت حذف واقعیت/کد/قالب/منشأ
+ضروری؛ زمان فنیِ لاتین در فارسی را صریحاً حفظ و تعداد جمله/منشأ پاسخ را کنترل می‌کند. معنای
+کد خطا، اثبات توپولوژیِ مشاهده‌نشده نیست. پرسش/نمونه‌گیری/مهلت/زمینه/فایل/امنیت ثابت‌اند؛
+این نیز تشخیص عامل اصلی است، نه پذیرش.
 
 ### شکست مشاهده‌شده و آزمون جدا با دستور فشرده — ۶ اکتبر ۲۰۲۶
 

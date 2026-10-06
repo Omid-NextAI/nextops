@@ -1,5 +1,43 @@
 # Project state / وضعیت پروژه
 
+Current checkpoint — **2026-10-06, 10:30 UTC**: the second full standard diagnostic also failed
+at the Persian hypothesis deadline; main review records **12 passed/four failed**. English stale
+scope is now retained; English networking inferred an unverified upstream, Persian networking
+used one sentence rather than two, Persian stale scope was omitted, and the last final timed out.
+Native SHA: `6ac9eef4c0fca09ead8829efc39248fdf4a16eb7c8e76d207e2e84e88525fa2d`.
+Separate two-case 64-worker/56-CPU-equivalent and 16-worker/16-equivalent probes each retained
+one English final and failed the Persian deadline; fourteen other cases were not run in each
+probe. Their English observations were 104321 ms/74 output tokens and 105842 ms/93 tokens;
+different answer lengths and cache histories do not prove an optimum. All owned cleanup and
+separate unchanged ready-idle baseline rereads passed. Exact `7157c3b` passed five CI jobs.
+A distinct source experiment adds a 50-word concision target only for small trusted budgets,
+without permission to omit required facts/code/format/provenance; preserves Latin technical
+timestamps in Persian; and rechecks final sentence count/provenance. Error-code meanings are not
+verified topology. A watched full 32-worker diagnostic is pending. No criterion, deadline,
+sampling, model artifact, serving selection or public-thinking state changed.
+
+گام جاری — **۶ اکتبر ۲۰۲۶، ساعت ۱۰:۳۰ UTC**: تشخیص استانداردِ کاملِ دوم نیز در فرضیهٔ
+فارسی به پایان مهلت رسید؛ بازبینی عامل اصلی **دوازده موفق/چهار ناموفق** ثبت کرد. دامنه در
+پاسخ کهنهٔ انگلیسی حفظ شد؛ پاسخ شبکهٔ انگلیسی بالادستِ تأییدنشده را استنتاج کرد، شبکهٔ فارسی
+به‌جای دو جمله یک جمله داشت، دامنهٔ مجاز در شاهد کهنهٔ فارسی حذف شد و آخرین پاسخ به پایان
+مهلت رسید. هش گزارش در بالا ثبت است. دو بررسی جدا با ۶۴ رشته/سقف ۵۶ معادل CPU و ۱۶ رشته/
+سقف۱۶، هرکدام یک پاسخ انگلیسی ثبت و در فارسی ناموفق شدند؛ چهارده پرسش دیگر در هر بررسی
+اجرا نشده‌اند. پاسخ انگلیسی به‌ترتیب ۱۰۴۳۲۱ میلی‌ثانیه/۷۴ توکن و ۱۰۵۸۴۲ میلی‌ثانیه/۹۳ توکن
+بود؛ تفاوت طول پاسخ و سابقهٔ cache، مقدار بهینه را ثابت نمی‌کند. توقف متعلق به اجرا و
+بازخوانی جداگانهٔ خط مبنای آماده و بی‌درخواست همگی موفق‌اند. پنج کنترل CI کد دقیق `7157c3b`
+موفق است. آزمایش کدِ جدا، تنها برای بودجهٔ خروجی کوچک، هدف پنجاه‌واژه‌ای دارد، نه مجوز حذف
+واقعیت/کد/قالب/منشأ ضروری؛ زمان فنیِ لاتین در فارسی را حفظ و تعداد جمله/منشأ را پیش از پاسخ
+بازبینی می‌کند. معنای کد خطا، اثبات توپولوژی نیست. تشخیص کاملِ ۳۲رشته‌ای تحت نظارت است و
+هنوز پذیرفته نیست؛ معیار، مهلت، نمونه‌گیری، فایل مدل، انتخاب زنده و استدلال عمومی ثابت‌اند.
+
+Correction to first-review wording: its English collection timestamp already matched the
+partial timestamp supplied by the frozen input; no extra date should be invented. That first
+answer still failed for missing explicit authorized scope; its 12/four totals remain unchanged.
+اصلاح عبارت بازبینی نخست: زمان گردآوری انگلیسی با زمانِ داده‌شده در پرسش ثابت برابر بود؛
+تاریخ اضافی نباید ساخته شود. شکست آن پاسخ بابت حذف دامنهٔ مجاز و مجموع دوازده/چهار ثابت‌اند.
+
+## Previous standard diagnostic — historical / تشخیص استانداردِ پیشین — سابقه
+
 Verified 3.8 diagnostic checkpoint — **2026-10-06, 09:53 UTC**: the first locale-native Q5
 standard trial retained 15 finals and failed at the Persian causal-hypothesis deadline. Main-only
 review against the unchanged corpus records **12 passed / 4 failed**: Persian networking inferred

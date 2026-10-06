@@ -7,10 +7,41 @@ Date: **2026-10-05**. Historical 27B status: **Qwen3.8-27B Q5 import verified; d
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06, 09:53 UTC — Qwen3.8 priority; first locale-native Q5 diagnostic failed, 12 main-reviewed passes/four failures; distinct compact-policy trial pending; no model cutover**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۰۹:۵۳ UTC — اولویت Qwen3.8؛ نخستین تشخیص Q5 با دستور بومی ناموفق، دوازده موفقیتِ عامل اصلی/چهار شکست؛ نتیجهٔ آزمون جدا با دستور فشرده هنوز باز؛ بدون تغییر مدل زنده**.
+Latest update: **2026-10-06, 10:30 UTC — second full Q5 diagnostic and 16/64-worker probes failed; exact 7157c3b CI passed; distinct short-budget/time/format policy trial pending; no model cutover**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶، ساعت ۱۰:۳۰ UTC — تشخیص کاملِ دوم Q5 و بررسی ۱۶/۶۴رشته‌ای ناموفق؛ CI کد دقیق 7157c3b موفق؛ آزمون جدا با دستور بودجهٔ کوچک/زمان/قالب هنوز باز؛ بدون تغییر مدل زنده**.
 
 ## English
+
+### Second standard failure and finite profile comparisons — 10:30 UTC
+
+The second full diagnostic retained 15 finals and ended failed at 10:13:40 UTC with the final
+Persian `TimeoutError`. Main review: **12 passed/four failed**. English stale scope is preserved;
+English networking infers an unverified upstream/proxy, Persian networking has one sentence
+rather than two, Persian stale scope is omitted, and the last final is absent after deadline.
+Native SHA: `6ac9eef4c0fca09ead8829efc39248fdf4a16eb7c8e76d207e2e84e88525fa2d`.
+Correction to first-review wording below: the English collection timestamp already matched the
+timestamp supplied by the frozen input. Its missing-scope failure and first 12/four totals stay;
+do not require an invented collection date.
+
+Two distinct profile probes used only the unchanged English/Persian hypothesis questions, same
+payload/model/runtime/16K/384-output/120-second deadlines; fourteen other cases are not run.
+
+| Probe | Threads / CPU-equivalent cap | EN elapsed ms / output tokens | Actual final outcome | Native report SHA-256 |
+| --- | --- | --- | --- | --- |
+| `profile64-main` | 64 / 56 | 104321 / 74 | Failed: Persian timeout, one retained final | `fdbbea5a2e41fe9d15b650d286e694007f7c7db3847bdbe691f23b6f356849fb` |
+| `profile16-main` | 16 / 16 | 105842 / 93 | Failed: Persian timeout, one retained final | `99e560d7f23295e5d1074d18bbe5d17e3571f8f349b957a752647328de536d69` |
+
+All owned unit/listener cleanup and separate unchanged serving PID/restart/ready-idle rereads
+passed. Different answer lengths/cache histories do not establish a thread optimum or causal
+scaling result. Exact `7157c3b` passed all five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37447663075).
+The next source policy uses a 50-word target only for small trusted output allocations; required
+facts/code/format/provenance override it. It preserves Latin technical timestamps in Persian,
+checks sentence count/provenance and distinguishes error-code definitions from verified topology.
+Thirty focused tests and the local non-browser/non-integration suite passed **1315/two POSIX skips/
+126 deselected, 36.02s**; lint/format151, Linux types145 and docs/status/artifact/whitespace passed.
+The distinct watched full 32-worker run is pending, not selected, independently accepted or trained.
+All frozen semantic criteria, sampling and security/deadline controls remain. Serving35B and
+public thinking-off are unchanged; main-only synthetic data is not application/live acceptance.
 
 ### Clarified 3.8 priority and retained standard failures — 09:53 UTC
 
@@ -1526,6 +1557,36 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### شکست استانداردِ دوم و مقایسهٔ محدود روش اجرا — ساعت ۱۰:۳۰ UTC
+
+تشخیص کاملِ دوم، پانزده پاسخ حفظ کرد و ساعت ۱۰:۱۳:۴۰ UTC با `TimeoutError` در آخرین پرسش
+فارسی پایان یافت. بازبینی عامل اصلی: **دوازده موفق/چهار ناموفق**. دامنهٔ شاهد کهنهٔ انگلیسی
+حفظ شد؛ شبکهٔ انگلیسی بالادست/پروکسی تأییدنشده را استنتاج کرد، شبکهٔ فارسی به‌جای دو جمله
+یک جمله داشت، دامنهٔ شاهد کهنهٔ فارسی حذف شد و آخرین پاسخ پس از مهلت موجود نبود. هش گزارش:
+`6ac9eef4c0fca09ead8829efc39248fdf4a16eb7c8e76d207e2e84e88525fa2d`.
+اصلاح عبارت بازبینی نخست در ادامه: زمان گردآوری انگلیسی با زمان داده‌شده در سؤال ثابت برابر
+بود. شکست حذف دامنه و مجموع دوازده/چهارِ نخست ثابت است؛ تاریخ گردآوریِ اضافی ساخته نشود.
+
+دو بررسی جدا فقط پرسش ثابتِ فرضیهٔ فارسی/انگلیسی را با همان داده/مدل/runtime/زمینهٔ16K/
+خروجی۳۸۴/مهلت۱۲۰ثانیه اجرا کردند؛ چهارده پرسش دیگر در هرکدام اجرا نشده‌اند.
+
+| بررسی | رشته / سقف معادل CPU | زمان انگلیسی، میلی‌ثانیه / توکن خروجی | نتیجهٔ نهایی واقعی | SHA-256 گزارش بومی |
+| --- | --- | --- | --- | --- |
+| `profile64-main` | 64 / 56 | 104321 / 74 | ناموفق: پایان مهلت فارسی، یک پاسخ ثبت‌شده | `fdbbea5a2e41fe9d15b650d286e694007f7c7db3847bdbe691f23b6f356849fb` |
+| `profile16-main` | 16 / 16 | 105842 / 93 | ناموفق: پایان مهلت فارسی، یک پاسخ ثبت‌شده | `99e560d7f23295e5d1074d18bbe5d17e3571f8f349b957a752647328de536d69` |
+
+توقف همهٔ خدمت‌ها/شنونده‌های متعلق به بررسی و بازخوانی جداگانهٔ ثبات PID/راه‌اندازی مجدد/
+خط مبنای آماده و بی‌درخواست موفق‌اند. طول پاسخ/سابقهٔ cache متفاوت، مقدار بهینهٔ رشته یا اثر
+علّی افزایش منابع را ثابت نمی‌کند. پنج [کنترل CI](https://github.com/Omid-NextAI/nextops/actions/runs/37447663075)
+کد دقیق `7157c3b` موفق است. دستور بعدی، تنها برای بودجهٔ کوچک هدف پنجاه‌واژه‌ای دارد و
+واقعیت/کد/قالب/منشأ ضروری بر آن مقدم‌اند؛ زمان فنی لاتین در فارسی را حفظ، تعداد جمله/منشأ
+را بازبینی و تعریف کد خطا را از توپولوژی تأییدشده جدا می‌کند. سی آزمون هدفمند و آزمون محلیِ
+بدون مرورگر/یکپارچه‌سازی، **۱۳۱۵ موفق/دو مورد مخصوص POSIX ردشده/۱۲۶ انتخاب‌نشده، ۳۶٫۰۲ثانیه**
+ثبت کردند؛ lint/قالب۱۵۱، نوع‌دهیLinux۱۴۵ و کنترل سند/وضعیت/فایل/فاصله موفق‌اند. اجرای کاملِ
+جدا و تحت نظارت با ۳۲رشته هنوز باز است، نه انتخاب، پذیرش مستقل یا آموزش. پرسش و معیار،
+نمونه‌گیری و امنیت/مهلت ثابت‌اند. 35B زنده و استدلال عمومی خاموش‌اند؛ دادهٔ ساختگیِ عامل
+اصلی پذیرش برنامه یا شاهد زنده نیست.
 
 ### روشن‌شدن اولویت 3.8 و حفظ شکست‌های استاندارد — ساعت ۰۹:۵۳ UTC
 

@@ -1,5 +1,20 @@
 # Local CPU-only AI and capacity planning
 
+## Second standard failure and finite CPU profiles — 2026-10-06
+
+The second full run retained 15 finals and timed out in the final Persian case. Main review:
+12 passes/four failures, including English networking topology, Persian sentence count/stale
+scope and the timeout. English stale scope now passes; its supplied collection time need not
+gain an invented date. Native SHA:
+`6ac9eef4c0fca09ead8829efc39248fdf4a16eb7c8e76d207e2e84e88525fa2d`.
+Two-case 64-worker/56-equivalent and 16-worker/16-equivalent probes also failed the Persian
+deadline; their fourteen omitted cases are not run. English elapsed/token observations were
+104321/74 and 105842/93, not matched-length/cache benchmarks or an optimum. Cleanup and separate
+baseline rereads passed; exact `7157c3b` passed five CI jobs. A distinct watched full 32-worker
+experiment uses a 50-word target for small output budgets, exact Latin technical times in Persian,
+and final format/provenance checks. Required content overrides the concision target. Error-code
+definitions cannot verify topology. Outcome pending; no serving/acceptance/control change.
+
 ## Retained Qwen 3.8 diagnostic and bounded repair — 2026-10-06
 
 The first locale-native standard trial ended at 09:53 UTC with **12 main-reviewed passes/four

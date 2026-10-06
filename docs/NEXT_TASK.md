@@ -1,5 +1,24 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after 10:30 UTC**: reconcile the watched full 32-worker diagnostic
+with the distinct small-budget concision/technical-time/error-code policy; review actual finals
+and deadline outcomes against unchanged questions/criteria. Preserve both earlier 12/four
+main-only reviews and failed 16/64-worker two-case probes; never infer fourteen unrun cases.
+More resources are not automatically a better model profile. Do not repeat an unchanged failed
+run, widen deadlines or select a failed/incomplete/self-reviewed model. Only after applicable
+standard gates pass continue held-out/independent, matched app, final-only thinking/privacy,
+measured context and authorized evidence/audit/WAN/rollback. Live35B/public thinking-off remain.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از ساعت ۱۰:۳۰ UTC**: تشخیص کاملِ ۳۲رشته‌ایِ تحت نظارت با
+دستور جدا برای اختصار بودجهٔ کوچک/زمان فنی/معنای کد خطا تطبیق داده شود؛ پاسخ واقعی و شکست
+مهلت با پرسش و معیار ثابت بازبینی شوند. دو بازبینیِ دوازده/چهارِ عامل اصلی و دو بررسی ناموفق
+۱۶/۶۴رشته‌ای حفظ شوند؛ چهارده پرسش اجرا‌نشدهٔ هرکدام موفق فرض نشوند. منابع بیشتر خودبه‌خود
+روش بهتر نیست. همان آزمون ناموفق تکرار، مهلت افزایش و مدل ناموفق/ناقص/دارای خودبازبینی انتخاب
+نشود. پس از پذیرش استانداردِ لازم، پرسش/بازبینی مستقل، برنامهٔ هماهنگ، استدلال نهایی/حریم
+خصوصی، زمینهٔ سنجیده و شاهد/ممیزی/WAN/بازگشت مجاز ادامه یابد؛ 35B زنده/استدلال خاموش ثابت‌اند.
+
+## Previous full diagnostic checkpoint — historical / گام پیشینِ تشخیص کامل — سابقه
+
 Current task — **2026-10-06, after the 09:53 UTC trial**: reconcile the distinct compact-policy
 diagnostic, its actual terminal status, stopped owned unit/listener and unchanged ready-idle
 baseline; review every retained EN/FA final against the frozen corpus. Preserve the first trial's

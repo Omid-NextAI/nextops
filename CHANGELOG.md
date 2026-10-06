@@ -1,5 +1,19 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Bounded Qwen 3.8 concision and exact technical-time policy — 2026-10-06
+
+Retain second standard failure (12 main-only passes/four failures), failed 16/64-worker two-case
+probes and successful cleanup/baseline checks; exact `7157c3b` passed five CI jobs. Add a 50-word
+small-budget target subordinate to required content, preserve Latin technical timestamps in Persian
+and recheck format/provenance. An error-code definition is not verified topology. New full diagnostic
+is pending; frozen criteria, limits, artifact, authorization and serving/public thinking remain.
+
+شکست استانداردِ دوم (دوازده موفقیتِ عامل اصلی/چهار شکست)، دو بررسی ناموفقِ دوپرسشیِ ۱۶/۶۴رشته‌ای
+و کنترل موفقِ توقف/خط مبنا حفظ شدند؛ پنج کنترل CI کد دقیق `7157c3b` موفق است. هدف پنجاه‌واژه‌ایِ
+بودجهٔ کوچک، مشروط به حفظ محتوای ضروری، زمان فنیِ لاتین در فارسی و بازبینی قالب/منشأ افزوده شد.
+تعریف کد خطا، اثبات توپولوژی نیست. تشخیص کاملِ تازه هنوز باز است؛ معیار، سقف، فایل، مجوز، مدل
+زنده و استدلال عمومی ثابت‌اند.
+
 ## Retained Qwen 3.8 results and compact candidate policy — 2026-10-06
 
 Preserve the first locale-native native diagnostic: 12 main-reviewed passes/four failures, with
