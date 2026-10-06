@@ -1,5 +1,21 @@
 # Local CPU-only AI and capacity planning
 
+## Longer-timeout probe completed, not model promotion — 2026-10-06
+
+At 11:53:44 UTC, the protected Q5/no-BLAS/32-worker two-case probe completed EN/FA finals in
+88441/145010 ms (86/144 output tokens). Both pass the narrow frozen hypothesis criteria in
+main-only manual review. The Persian final exceeds the old120-second ceiling but fits the new
+owner-authorized300-second profile. Fourteen other cases are not run under this profile; prior
+topology/coding/provenance failures remain unresolved. Proposed log/metric/version checks are
+suggestions, not executed actions or proof of authorized log integration. Native report SHA:
+`96813c347b8035d592c941ffc6ead9d1a0250dfa4f9347b730a57ab49e0275c5`.
+Owned stop and separate listener-absent/unchanged-ready-idle checks passed. Live35B, defaults and
+public thinking-off remain. Exact source `5e15b5c` passed all five CI jobs, not model acceptance.
+The offline review CLI now requires `--deadline-seconds 300` plus the recorded exact3.8 profile;
+default120 still rejects this Persian latency and cannot silently inherit a report's deadline.
+Local regressions: 1340 passed, two POSIX skips,126 deselected; Linux types/lint/format passed.
+Whole standard, independent, app/proxy, privacy/thinking/context/evidence/WAN/rollback remain open.
+
 ## Optional five-minute Qwen3.8 response budget — 2026-10-06
 
 The owner's new timing instruction permits a distinct bounded candidate profile, not a quality
@@ -13,7 +29,7 @@ directives inside the existing generation location with 360 seconds. Other route
 rate limits and authentication stay unchanged. Do not install/reload these source-only profiles
 as a way around failed model acceptance. The browser has no artificial 120-second answer timer.
 
-The planned two-case EN/FA Q5 hypothesis probe isolates timing; questions, prompt policy,
+The two-case EN/FA Q5 hypothesis probe isolates timing; questions, prompt policy,
 sampling, output, runtime and resource limits are unchanged. Fourteen other cases are not run
 in that probe. Historical 120-second failures remain failed; longer waits do not repair false
 topology, missing type guards or lost scope. Rollback removes the overlays/restores proxy

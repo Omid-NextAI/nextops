@@ -26,7 +26,16 @@ def unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return result
 
 
-def review(document: dict[str, Any]) -> dict[str, Any]:
+def review(document: dict[str, Any], *, deadline_seconds: int = 120) -> dict[str, Any]:
+    if type(deadline_seconds) is not int or deadline_seconds not in (120, 300):
+        raise ValueError("review deadline must be the explicit 120- or 300-second profile")
+    if deadline_seconds == 300 and (
+        document.get("model_id")
+        not in ("nextops-qwen3-8-27b-q8-0", "nextops-qwen3-8-27b-ud-q5-k-m")
+        or not isinstance(document.get("profile"), dict)
+        or document["profile"].get("deadline_seconds") != 300
+    ):
+        raise ValueError("extended review requires a recorded Qwen3.8 300-second candidate profile")
     corpus_bytes = CORPUS.read_bytes()
     corpus = json.loads(corpus_bytes, object_pairs_hook=unique)
     cases = {case["id"]: case for case in corpus["cases"]}
@@ -48,7 +57,11 @@ def review(document: dict[str, Any]) -> dict[str, Any]:
         elapsed = entry.get("elapsed_ms")
         if type(elapsed) is not int or elapsed < 0:
             raise ValueError("trial requires measured nonnegative integer elapsed_ms")
-        if elapsed > 120_000 or entry.get("error") or entry.get("finish_reason") == "length":
+        if (
+            elapsed > deadline_seconds * 1000
+            or entry.get("error")
+            or entry.get("finish_reason") == "length"
+        ):
             finding.update(status="failed", reason="deadline_transport_or_truncation")
         elif entry.get("finish_reason") != "stop":
             finding.update(status="failed", reason="missing_completed_final_answer")
@@ -65,6 +78,8 @@ def review(document: dict[str, Any]) -> dict[str, Any]:
     return {
         "scope": "offline_finite_checks_not_model_or_application_acceptance",
         "corpus_sha256": hashlib.sha256(corpus_bytes).hexdigest(),
+        "corpus_deadline_seconds": corpus["deadline_seconds"],
+        "review_deadline_seconds": deadline_seconds,
         "canonical_input_sha256": hashlib.sha256(
             json.dumps(document, sort_keys=True, ensure_ascii=False).encode()
         ).hexdigest(),
@@ -112,8 +127,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--deadline-seconds", type=int, choices=(120, 300), default=120)
     args = parser.parse_args()
-    result = review(protected_input(args.input))
+    result = review(protected_input(args.input), deadline_seconds=args.deadline_seconds)
     write_report(args.output, result)
     print(f"review_status={result['status']}; no model called or selected")
     return 1 if result["status"] == "failed" else 2

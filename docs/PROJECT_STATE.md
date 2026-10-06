@@ -1,5 +1,31 @@
 # Project state / وضعیت پروژه
 
+Current checkpoint — **2026-10-06, 11:53:44 UTC**: the owner-authorized retained-Q5
+300-second two-case probe returned EN/FA finals in **88441/145010 ms**, 86/144 completion tokens.
+Both pass the narrow frozen hypothesis criteria in main-only manual review; fourteen other cases
+are not run in this timing profile. Historical quality/deadline failures are retained. Owned
+cleanup and a separate unit/listener/unchanged-ready-idle reread passed; live35B/public thinking-off
+and serving defaults remain unchanged. Native SHA:
+`96813c347b8035d592c941ffc6ead9d1a0250dfa4f9347b730a57ab49e0275c5`.
+Exact `5e15b5c` passed five CI jobs. The review CLI requires explicit `--deadline-seconds 300`
+and a matching recorded Qwen3.8 profile; default120 still rejects the 145-second sample. Source
+regressions: 1340 passed/two POSIX skips/126 deselected, strict Linux types/lint/format passed.
+This is a timing improvement, not repair of topology/coding/provenance or live model acceptance.
+Independent, full-standard, app/proxy, thinking/privacy/context/evidence/WAN/rollback remain open.
+
+گام جاری — **۶ اکتبر ۲۰۲۶، ساعت ۱۱:۵۳:۴۴ UTC**: آزمون دوپرسشیِ Q5 موجود با مهلت مجازِ
+۳۰۰ ثانیه، پاسخ انگلیسی/فارسی را در **۸۸۴۴۱/۱۴۵۰۱۰ میلی‌ثانیه** با ۸۶/۱۴۴ توکن خروجی ثبت
+کرد. هر دو معیار محدودِ فرضیه را در بازبینی دستیِ عامل اصلی گذراندند؛ چهارده مورد دیگر با
+این مهلت اجرا نشده‌اند. شکست‌های گذشته حفظ‌اند. توقف و بازخوانی جداگانهٔ فرایند/نبود listener/
+خط مبنای آماده و بی‌درخواست موفق‌اند؛ مدل زندهٔ35B، خاموشی استدلال و پیش‌فرض‌ها ثابت‌اند.
+هش گزارش بالا ثبت است. پنج کنترل CI کد دقیق `5e15b5c` موفق‌اند. ابزار بازبینی، پارامتر صریح
+بالا و نمایهٔ ثبت‌شدهٔ Qwen3.8 را می‌خواهد؛ پیش‌فرض۱۲۰ همچنان پاسخ۱۴۵ثانیه‌ای را رد می‌کند.
+کنترل کد: ۱۳۴۰ موفق/دو مورد مخصوص POSIX اجرا نشده/۱۲۶ انتخاب‌نشده؛ type/lint/format موفق‌اند.
+این بهبود زمان است، نه رفع توپولوژی/کد/منشأ یا پذیرش مدل زنده. معیار مستقل/استاندارد کامل/
+برنامه‌ـ‌پراکسی/استدلال/حریم خصوصی/زمینه/شاهد/WAN/بازگشت همچنان باز است.
+
+## Earlier timing implementation — historical / پیاده‌سازی پیشینِ زمان — سابقه
+
 Current work — **2026-10-06, 11:40 UTC**: the owner explicitly permits longer Qwen3.8 response
 time. Implement an opt-in candidate-only 300-second provider /330-second app /360-second
 generation-proxy profile. Defaults/live35B are unchanged. A watched retained-Q5 two-case

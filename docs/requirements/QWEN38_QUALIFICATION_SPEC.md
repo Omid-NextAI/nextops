@@ -6,6 +6,16 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Timing result — 11:53:44 UTC
+
+The retained-Q5 two-case300-second probe returned EN/FA finals in88441/145010 ms; both pass
+the narrow main-reviewed hypothesis criteria. Fourteen cases are not run under300. Native SHA:
+`96813c347b8035d592c941ffc6ead9d1a0250dfa4f9347b730a57ab49e0275c5`.
+Owned cleanup/separate baseline reconciliation passed; source `5e15b5c` passed five CI jobs.
+The explicit offline review deadline records300 separately from the frozen corpus120; default
+review still fails the late Persian sample. Full model semantics, independent, app/proxy,
+thinking/privacy/context/evidence/WAN/rollback remain open; live35B/defaults remain unchanged.
+
 ### Owner-authorized long-response profile — 2026-10-06
 
 The later [timing amendment](PROMPT_CHANGELOG.md) replaces the old timing ceiling prospectively,
@@ -27,22 +37,6 @@ Rollback: remove the optional overlays and restore the base proxy's two 180-seco
 in a separately authorized change, validate configuration before reload and reconcile inflight
 requests. No live files/restarts are required by this source change. WAN, full context, thinking,
 app/browser integration and model rollback gates are still open.
-
-### نمایهٔ پاسخ طولانی با مجوز مالک — ۶ اکتبر ۲۰۲۶
-
-[اصلاح زمان](PROMPT_CHANGELOG.md) سقف مهلت را برای آزمون جدید تغییر می‌دهد، نه نتیجهٔ گذشته
-یا معیار معنایی را. مهلت پیش‌فرضِ مدل/برنامه/پراکسی ۱۲۰/۱۵۰/۱۸۰ ثانیه می‌ماند. فقط نامزدهای
-دقیق Q8 و Q5 با گفت‌وگوی گسترش‌یافته و پرچم صریح بالا می‌توانند تا ۳۰۰ ثانیه پاسخ دهند؛
-زمینهٔ 16K و منع استدلال ثابت است. نمایه‌های اختیاری، مهلت‌های ۳۰۰/۳۳۰/۳۶۰ ثانیه را در سه
-مرز هماهنگ می‌کنند. انتظار نامحدود، صف بزرگ‌تر، دستور تازه، مدل تازه یا منابع بیشتر در scope نیست.
-کنترل پیش‌فرض، فعال‌سازی صریح، سقف، مدل ناسازگار، زمینه، منع استدلال، کوتاهی بررسی آمادگی
-و ثبات مسیر عادی آزموده شوند. دستورهای ثابتِ کد ثبت‌شده برای دو پرسش فرضیهٔ EN/FA روی Q5
-و runtime محافظت‌شدهٔ موجود اجرا شوند؛ زمان واقعی، کیفیت، شکست، توقف فرایند اختصاصی و
-بازخوانی جداگانهٔ خط مبنای آماده و بی‌درخواست ثبت شوند. چهارده پرسش دیگر در این نمایه اجرا
-نشده‌اند. خودبازبینی تأیید مستقل نیست و شکست توپولوژی/کد/منشأ همچنان مانع انتخاب مدل است.
-بازگشت با حذف نمایه‌ها و بازگرداندن دو دستور ۱۸۰ ثانیه‌ای پراکسی، کنترل پیکربندی پیش از
-بارگذاری و تعیین وضعیت درخواست جاری در تغییر مجازِ جدا انجام می‌شود. این تغییر کد به دست‌کاری
-فایل یا راه‌اندازی مجدد زنده نیاز ندارد؛ معیارهای WAN، زمینه، استدلال، برنامه و بازگشت بازند.
 
 ### Distinct Q8 comparison failed quality — 11:19:59 UTC
 
@@ -197,6 +191,33 @@ this index entry. Preserve the prior failed-thinking and UI deployment records. 
 release manifest only for an actually accepted identity change, not source registration.
 
 ## فارسی
+
+### نتیجهٔ زمان — ساعت ۱۱:۵۳:۴۴ UTC
+
+آزمون دوپرسشی Q5 موجود با مهلت۳۰۰ ثانیه، پاسخ EN/FA را در۸۸۴۴۱/۱۴۵۰۱۰ میلی‌ثانیه ثبت
+کرد؛ هر دو معیار محدودِ فرضیه را در بازبینی عامل اصلی گذراندند. چهارده مورد با این مهلت
+اجرا نشده‌اند. هش: `96813c347b8035d592c941ffc6ead9d1a0250dfa4f9347b730a57ab49e0275c5`.
+توقف/بازخوانی جداگانهٔ خط مبنا و پنج کنترل CI کد `5e15b5c` موفق‌اند. مهلت صریحِ ابزار آفلاین،
+۳۰۰ را جدا از۱۲۰ِ مجموعهٔ ثابت ثبت می‌کند؛ پیش‌فرض هنوز پاسخ دیرهنگام فارسی را ناموفق می‌داند.
+معناشناسی کامل مدل/مستقل/برنامه‌ـ‌پراکسی/استدلال/حریم خصوصی/زمینه/شاهد/WAN/بازگشت بازند؛
+مدل زندهٔ35B و پیش‌فرض‌ها ثابت‌اند.
+
+### نمایهٔ پاسخ طولانی با مجوز مالک — ۶ اکتبر ۲۰۲۶
+
+[اصلاح زمان](PROMPT_CHANGELOG.md) سقف مهلت را برای آزمون جدید تغییر می‌دهد، نه نتیجهٔ گذشته
+یا معیار معنایی را. مهلت پیش‌فرضِ مدل/برنامه/پراکسی ۱۲۰/۱۵۰/۱۸۰ ثانیه می‌ماند. فقط نامزدهای
+دقیق Q8 و Q5 با گفت‌وگوی گسترش‌یافته و پرچم صریح
+`NEXTOPS_QWEN38_EXTENDED_TIMEOUT_ENABLED=1` می‌توانند تا ۳۰۰ ثانیه پاسخ دهند؛
+زمینهٔ 16K و منع استدلال ثابت است. نمایه‌های اختیاری، مهلت‌های ۳۰۰/۳۳۰/۳۶۰ ثانیه را در سه
+مرز هماهنگ می‌کنند. انتظار نامحدود، صف بزرگ‌تر، دستور تازه، مدل تازه یا منابع بیشتر در دامنه نیست.
+کنترل پیش‌فرض، فعال‌سازی صریح، سقف، مدل ناسازگار، زمینه، منع استدلال، کوتاهی بررسی آمادگی
+و ثبات مسیر عادی آزموده شوند. دستورهای ثابتِ کد ثبت‌شده برای دو پرسش فرضیهٔ EN/FA روی Q5
+و runtime محافظت‌شدهٔ موجود اجرا شوند؛ زمان واقعی، کیفیت، شکست، توقف فرایند اختصاصی و
+بازخوانی جداگانهٔ خط مبنای آماده و بی‌درخواست ثبت شوند. چهارده پرسش دیگر در این نمایه اجرا
+نشده‌اند. خودبازبینی تأیید مستقل نیست و شکست توپولوژی/کد/منشأ همچنان مانع انتخاب مدل است.
+بازگشت با حذف نمایه‌ها و بازگرداندن دو دستور ۱۸۰ ثانیه‌ای پراکسی، کنترل پیکربندی پیش از
+بارگذاری و تعیین وضعیت درخواست جاری در تغییر مجازِ جدا انجام می‌شود. این تغییر کد به دست‌کاری
+فایل یا راه‌اندازی مجدد زنده نیاز ندارد؛ معیارهای WAN، زمینه، استدلال، برنامه و بازگشت بازند.
 
 ### شکست کیفیت در مقایسهٔ متفاوت Q8 — ساعت ۱۱:۱۹:۵۹ UTC
 

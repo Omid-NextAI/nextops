@@ -102,3 +102,45 @@ def test_report_input_is_bounded_and_cannot_be_inside_git(tmp_path: Path) -> Non
         protected_input(path)
     with pytest.raises(ValueError, match="private bounded"):
         protected_input(CORPUS)
+
+
+def test_extended_report_does_not_silently_rewrite_frozen_deadline() -> None:
+    late = {**entry("fa-hypothesis", "A hypothetical explanation."), "elapsed_ms": 150000}
+    document = {
+        "model_id": "nextops-qwen3-8-27b-ud-q5-k-m",
+        "profile": {"deadline_seconds": 300},
+        "cases": [late],
+    }
+    assert review(document)["cases"][0]["status"] == "failed"
+    extended = review(document, deadline_seconds=300)
+    assert extended["cases"][0]["status"] == "manual_review_required"
+    assert extended["corpus_deadline_seconds"] == 120
+    assert extended["review_deadline_seconds"] == 300
+    assert extended["status"] == "partial" and len(extended["missing_cases"]) == 15
+    assert extended["deployment_selection_allowed"] is False
+    late["elapsed_ms"] = 300001
+    assert review(document, deadline_seconds=300)["cases"][0]["status"] == "failed"
+
+
+@pytest.mark.parametrize("model_id", [None, "remote-model", "nextops-qwen3-5-35b-a3b-q4-k-m"])
+def test_extended_review_cannot_be_applied_to_unrelated_reports(model_id: str | None) -> None:
+    with pytest.raises(ValueError, match=r"recorded Qwen3\.8"):
+        review(
+            {"model_id": model_id, "profile": {"deadline_seconds": 300}, "cases": []},
+            deadline_seconds=300,
+        )
+
+
+@pytest.mark.parametrize("profile", [None, {}, {"deadline_seconds": 120}, "300"])
+def test_extended_review_requires_matching_recorded_profile(profile: object) -> None:
+    with pytest.raises(ValueError, match=r"recorded Qwen3\.8"):
+        review(
+            {"model_id": "nextops-qwen3-8-27b-q8-0", "profile": profile, "cases": []},
+            deadline_seconds=300,
+        )
+
+
+@pytest.mark.parametrize("deadline", [0, 121, 600])
+def test_arbitrary_deadline_cannot_hide_a_failed_result(deadline: int) -> None:
+    with pytest.raises(ValueError, match="explicit 120- or 300-second"):
+        review({"cases": []}, deadline_seconds=deadline)

@@ -1,5 +1,24 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-06, after 11:53:44 UTC**: the new time budget is implemented and its
+two-case Q5 diagnosis completed; EN/FA finals passed timing and narrow main semantic review.
+Fourteen other cases are not run under300. Keep the failed full Q5/Q8 findings; longer waits do
+not repair false topology, missing type guards or lost scope. Next model work must address those
+standard quality gaps with a bounded justified strategy before full300/app/thinking/context/WAN/
+rollback qualification. Preserve independent-review labels and the committed CLI's explicit
+deadline provenance. Do not repeat an unchanged probe, waive gates or select failed3.8.
+Live35B/default timeouts/public thinking-off remain unchanged; source CI is not deployment.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، پس از ساعت ۱۱:۵۳:۴۴ UTC**: مهلت تازه پیاده و تشخیص دوپرسشی Q5
+تکمیل شد؛ پاسخ‌های EN/FA زمان و بازبینی معناییِ محدودِ عامل اصلی را گذراندند. چهارده پرسش
+دیگر با مهلت۳۰۰ اجرا نشده‌اند. یافته‌های شکست کامل Q5/Q8 حفظ شوند؛ انتظار بیشتر، توپولوژی
+نادرست، شرط نوعِ حذف‌شده یا دامنهٔ مفقود را اصلاح نمی‌کند. پیش از پذیرش کامل۳۰۰/برنامه/
+استدلال/زمینه/WAN/بازگشت، این کاستی‌های استاندارد با راهبرد محدود و توجیه‌شده رفع شوند.
+برچسب بازبینی مستقل و ثبت صریح مهلت در ابزار حفظ شود. آزمون یکسان تکرار، معیار حذف یا
+مدل۳.۸ ناموفق انتخاب نشود. مدل زندهٔ35B/پیش‌فرض زمان/استدلال خاموش ثابت‌اند؛ CI استقرار نیست.
+
+## Earlier timing implementation task — historical / کار پیشینِ پیاده‌سازی زمان — سابقه
+
 Current task — **2026-10-06, after 11:40 UTC**: implement/regression-test the owner-authorized
 opt-in Qwen3.8 long-response profile; capture exact committed unchanged synthetic requests and
 perform the finite two-case retained-Q5 EN/FA hypothesis diagnostic. Record final latency,
