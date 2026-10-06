@@ -1,5 +1,34 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## First complete 122B shard and ca1 offline package — 2026-10-06
+
+Protected assembly of all 148 first-shard ranges completed in 480111 ms; its 39714874144-byte
+file matches upstream SHA `d7d5aa3ef843ba3fe5ee27cdaebe17abd8a6a8a03a5c236db9bfe2fc6b88be2e`.
+Owned cleanup and unchanged live readiness passed. Two shards/50714580608 bytes remain. After
+first-shard transport completed but before assembly, a three-range timeout accepted zero ranges
+and retained partial bodies. Exact ca1
+passed five CI jobs; the distinct browser rerun passed 88 tests, with the original cancellation
+preserved. Its offline archive/wheel build passed source/static/dependency parity in 23046 ms,
+not upload, installation, signature, WAN acceptance or model qualification. The original failed
+packaging preflight is retained; the separately reviewed Git-launcher alias correction does not
+weaken other file-identity checks. The subsequent pinned-prefix continuation completed at
+23:56:08 UTC with one verified 268435456-byte range/protected receipts/unchanged readiness:
+149 ranges/39983309600 canonical bytes, 50446145152 transport bytes remain. Failed originals
+and all new desktop bodies are retained. Live 35B/public thinking-off remain unchanged.
+
+تجمیع محافظت‌شدهٔ هر ۱۴۸ بخشِ فایل اول در ۴۸۰۱۱۱ میلی‌ثانیه کامل شد؛ فایل ۳۹۷۱۴۸۷۴۱۴۴
+بایتی با هش منبع اصلیِ بالا مطابقت دارد. توقف فرایند متعلق به اجرا و ثبات آمادگی زنده
+موفق‌اند. دو فایل/۵۰۷۱۴۵۸۰۶۰۸ بایت باقی است. پس از تکمیل انتقال فایل اول و پیش از تجمیع،
+مهلت‌گذریِ سه‌بخشی صفر بخش پذیرفت و بدنه‌های ناقص را حفظ کرد. پنج کنترل CI کد دقیقِ ca1
+موفق‌اند؛ اجرای مستقلِ بعدیِ مرورگر
+۸۸ آزمون را گذراند و لغو نخستین تلاش حفظ است. ساخت آفلاینِ آرشیو/wheel در ۲۳۰۴۶ میلی‌ثانیه
+برابری کد/دارایی ثابت/وابستگی را گذراند، نه بارگذاری، نصب، امضا، پذیرش قطع WAN یا پذیرش مدل.
+شکست اولیهٔ کنترل پیش از بسته‌بندی حفظ است؛ اصلاح مستقل و بررسی‌شدهٔ نام مستعارِ ابزار Git،
+سایر کنترل‌های هویت فایل را تضعیف نمی‌کند. ادامهٔ بعدیِ پیشوند ثابت ساعت ۲۳:۵۶:۰۸ UTC با یک
+بخش تأییدشدهٔ ۲۶۸۴۳۵۴۵۶ بایتی/رسید محافظت‌شده/ثبات آمادگی کامل شد: ۱۴۹ بخش/۳۹۹۸۳۳۰۹۶۰۰
+بایت اصلی و ۵۰۴۴۶۱۴۵۱۵۲ بایت انتقالی باقی است. ورودی‌های ناموفق و همهٔ بدنه‌های تازهٔ
+رایانهٔ کاربر حفظ‌اند. 35B زنده/خاموشی استدلال عمومی تغییر نکرده‌اند.
+
 ## Bounded 122B provisioning and runner correction — 2026-10-06 checkpoint
 
 Exact `293164e` passed all five CI jobs. The reviewed root-owned `0400` importer has exact

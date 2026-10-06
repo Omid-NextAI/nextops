@@ -1,5 +1,63 @@
 # Next task / کار بعدی
 
+Current checkpoint — **2026-10-06, following the 23:30 UTC first-shard result**:
+the Apache Qwen3.5-122B-A10B Q5 alternative has **one of three complete shards verified**.
+All 148 first-shard ranges were retained and assembled; the final 39714874144-byte file matches
+upstream SHA `d7d5aa3ef843ba3fe5ee27cdaebe17abd8a6a8a03a5c236db9bfe2fc6b88be2e`.
+Owned cleanup and the original live ready/idle baseline passed. **50714580608 bytes** remain
+across two shards; no complete model, metadata/load, standard, thinking or context gate passes.
+After first-shard transport completed, a three-range window failed before assembly, after
+180 seconds with curl code 28 and zero accepted ranges. Preserve those short bodies. A distinct
+single-prefix continuation passed 379 main/independent preparation checks. Its actual read-only
+native identity fixture subsequently passed in 2938 ms with unchanged prefix SHA and closed
+handles. Window `resume-20261006-639268412374949643` completed at **23:56:08 UTC**, exit 0:
+the missing 37541835 bytes downloaded in 17.98552 seconds, then the combined 268435456-byte
+range passed protected import/cleanup/finish receipts, independently read by main. Canonical
+transport totals **149 ranges/39983309600 bytes**; **50446145152 transport bytes** and two
+complete-shard checks remain. Original and new desktop bodies remain retained; owned handles
+closed and original ready/idle baseline passed. Next, fully review a separate protected
+desktop-staging child/controller before another finite window, and the metadata installer/
+external supervisor before actual first-shard metadata inspection. Never
+weaken the 4 GiB system-drive floor or accept partial bodies from headers alone.
+
+Exact `ca1da27` passed all five CI jobs in
+[run 37384508573](https://github.com/Omid-NextAI/nextops/actions/runs/37384508573).
+The cancelled first browser attempt remains history; the distinct rerun passed 88 tests.
+Its offline source archive/wheel were built and source/static/dependency parity verified in
+23046 ms, not uploaded, installed, signed or WAN-qualified. Continue bounded provisioning,
+actual metadata verification and exact-package isolated qualification before selection.
+Live 35B/public thinking-off remain unchanged. The [paired record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md)
+contains exact artifact and tool identities; do not repeat completed windows or rename 3.5 as 3.8.
+
+گام جاری — **۶ اکتبر ۲۰۲۶، پس از نتیجهٔ فایل اول در ساعت ۲۳:۳۰ UTC**: از سه فایلِ نامزد
+Qwen3.5-122B-A10B Q5 با مجوز Apache، **یک فایل کامل تأیید شده است**. هر ۱۴۸ بخشِ فایل اول
+حفظ و تجمیع شدند؛ فایل نهاییِ ۳۹۷۱۴۸۷۴۱۴۴ بایتی با هش منبع اصلیِ بالا مطابقت دارد.
+توقف فرایندهای متعلق به اجرا و ثبات خط مبنای آماده/بی‌درخواست موفق‌اند. **۵۰۷۱۴۵۸۰۶۰۸ بایت**
+در دو فایل باقی است؛ دریافت کامل مدل، فراداده/بارگذاری، پاسخ استاندارد، استدلال و زمینه
+پذیرفته نشده‌اند. پس از تکمیل انتقال فایل اول و پیش از تجمیع، پنجرهٔ سه‌بخشی پس از
+۱۸۰ ثانیه با کد ۲۸ curl و صفر بخش پذیرفته‌شده ناموفق شد؛ بدنه‌های کوتاه حفظ شوند. ابزار
+مستقلِ ادامهٔ یک بخش، ۳۷۹ کنترل آماده‌سازیِ اصلی/مستقل را گذراند. آزمون واقعیِ فقط‌خواندنیِ
+هویت فایل سپس در ۲۹۳۸ میلی‌ثانیه با ثبات هش پیشوند و بسته‌شدن handleها موفق شد. پنجرهٔ
+`resume-20261006-639268412374949643` در ساعت **۲۳:۵۶:۰۸ UTC** با کد خروج صفر کامل شد:
+۳۷۵۴۱۸۳۵ بایتِ باقی‌مانده در ۱۷٫۹۸۵۵۲ ثانیه دریافت و بخشِ ترکیبیِ ۲۶۸۴۳۵۴۵۶ بایتی، رسیدهای
+محافظت‌شدهٔ دریافت/پاک‌سازی/پایان را گذراند؛ بازبین اصلی آن‌ها را مستقل خواند. مجموع انتقال
+اصلی **۱۴۹ بخش/۳۹۹۸۳۳۰۹۶۰۰ بایت** است؛ **۵۰۴۴۶۱۴۵۱۵۲ بایت انتقالی** و تأیید دو فایل کامل
+باقی‌اند. بدنه‌های اصلی و تازهٔ رایانهٔ کاربر حفظ، handleها بسته و ثبات خط مبنای آماده/
+بی‌درخواست تأیید شدند. گام بعد، بازبینی کاملِ پوشهٔ موقت خصوصیِ مستقل/کنترل‌کننده پیش از
+پنجرهٔ تازه و ابزار نصب فراداده/ناظر بیرونی پیش از بررسی واقعی فرادادهٔ فایل اول است.
+حداقل فضای آزادِ ۴ GiB در دیسک سیستم تضعیف و
+بدنهٔ ناقص صرفاً بر پایهٔ header پذیرفته نشود.
+
+پنج کنترل CI کد دقیقِ `ca1da27` در اجرای بالا موفق‌اند. تلاش نخستِ مرورگرِ لغوشده سابقه است؛
+اجرای مستقلِ بعدی ۸۸ آزمون را گذراند. آرشیو کد/بستهٔ wheel همان کد، به‌صورت آفلاین در
+۲۳۰۴۶ میلی‌ثانیه ساخته و برابری کد، دارایی‌های ثابت و وابستگی‌ها تأیید شد؛ بارگذاری روی میزبان،
+نصب، امضا یا پذیرش قطع WAN انجام نشده است. آماده‌سازی محدود، بررسی واقعی فراداده و پذیرش
+جداشدهٔ بستهٔ دقیق پیش از انتخاب ادامه یابد. 35B زنده/خاموشی استدلال عمومی ثابت‌اند.
+گزارش دوزبانهٔ بالا، هویت دقیق فایل‌ها/ابزارها را ثبت می‌کند؛ پنجرهٔ کامل‌شده تکرار و 3.5
+به 3.8 تغییر نام داده نشود.
+
+## Earlier provisioning checkpoints — historical / گام‌های آماده‌سازیِ پیشین — سوابق
+
 Current provisioning task — **2026-10-06**: continue only with a separately authorized finite
 window after fresh guards. The four-range v2 window `resume-20261006-639268355159703524`
 completed indexes 134–137, each 268435456 bytes, with root finish/stopped/baseline checks passed.

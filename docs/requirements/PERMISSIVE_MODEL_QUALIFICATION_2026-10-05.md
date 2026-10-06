@@ -7,10 +7,84 @@ Date: **2026-10-05**. Status: **Q5 import verified; distinct standard trials fai
 The [27B result](QWEN38_QUALIFICATION_2026-10-05.md) and
 [Flash preparation](QWEN38_FLASH_QUALIFICATION_2026-10-05.md) remain dated evidence, not erased.
 
-Latest update: **2026-10-06 — 141 retained 122B transport ranges; no complete-shard or model acceptance**.
-آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶ — ۱۴۱ بخش انتقالیِ 122B حفظ‌شده؛ بدون پذیرش فایل کامل یا مدل**.
+Latest update: **2026-10-06 — first complete 122B shard verified; offline ca1 package built; no model acceptance**.
+آخرین به‌روزرسانی: **۶ اکتبر ۲۰۲۶ — فایل کامل اولِ 122B تأیید و بستهٔ آفلاین ca1 ساخته شد؛ بدون پذیرش مدل**.
 
 ## English
+
+### First full shard and exact-source offline package — 2026-10-06 checkpoint
+
+The subsequent bounded windows completed first-shard indexes 141–147. All **148 canonical
+ranges/39714874144 bytes** were then freshly verified and assembled by the protected
+**48745-byte** assembler, SHA
+`14ce5d8a1f6ee1345bdd4c1c15bdd79f38ed05bc988eb440a8b7b0a77ee111bc`.
+Its reviewed installer and distinct v2 controller preserved previous failures and enforced
+owned cleanup. Operation `assemble-20261006-639268393270653379-sh0` completed exit 0 at
+**23:30:39 UTC**, in **480111 ms**. The immutable first shard matches its complete upstream SHA
+`d7d5aa3ef843ba3fe5ee27cdaebe17abd8a6a8a03a5c236db9bfe2fc6b88be2e`.
+The protected retained alias, canonical ranges and failed inputs remain recoverable. This
+two-link publication is intentional, not a second copy. Original serving baseline/owned stop
+passed. The result SHA is
+`0d9a9b9e44e961e398bfc3bcad5557da59eea7941d9da5f85df5c33a2903ff52`.
+**50714580608 bytes/two shards remain**; actual metadata, complete model and CPU gates are not
+accepted from one shard or its advertised properties.
+
+Before that assembly, after first-shard transport completed, window
+`resume-20261006-639268385049931193` attempted the first three ranges of shard two and
+failed at `finite_download`: curl **28**, **180187 ms**, **zero accepted ranges**, with
+stopped/baseline reconciliation true. Retained body sizes are **230893621/131419903/63364396
+bytes**, all below 268435456. HTTP 206 headers do not accept these incomplete bodies.
+The result SHA is
+`95f842e89e7400f620cc305791df1c2a530cbb348161e75f59cdc3bd646f12d3`.
+The first prefix's independent local SHA is
+`a4796fb8a2b7f710e15307331649b11259b5197db5d9336cd5d221e7b2df94c1`, not an upstream shard hash.
+A distinct pinned-prefix/suffix helper passed **379 main/independent preparation checks**;
+actual native identity/continuation remained unrun at the packaging checkpoint. Subsequently,
+the fixed read-only native fixture passed in **2938 ms**, with unchanged held/path identity,
+complete prefix SHA and all handles closed. Its private result SHA is
+`d88b1f1f90a24486be0a055b752e03da5136e6016d0087b34a20188e38391d8f`.
+The distinct one-range continuation started at **23:53:59 UTC** under fresh guards and
+completed exit 0 at **23:56:08 UTC**. The missing **37541835 bytes** took **17.98552 seconds**,
+one connection/HTTP 206/exit 0. The combined **268435456-byte** range's SHA is
+`45e1d51def522f0d0424e26d53127aec7cbc03c49647d7601c53f4e9b4ae1fcf`.
+Main independently read the protected accept/cleanup/finish receipts; all match. The desktop
+result SHA is `94f5641ad7991f924e01afcbaaba5c1e97a0342cdc74bd282c3533e938a02ec7`.
+Canonical transport totals **149 ranges/39983309600 bytes**, with **50446145152 bytes** still
+missing and only one complete upstream shard. Original and new local bodies remain preserved;
+only the fully verified incoming transport duplicate was removed, protected copies retained.
+All held local handles closed and original live ready/idle baseline passed. No blind retry,
+system-drive floor waiver, unverified-body deletion or parallelism benefit is claimed.
+
+Exact source **ca1da27d6317fae247cee2b92576d6947d55421a** passed all five CI jobs in
+[run 37384508573](https://github.com/Omid-NextAI/nextops/actions/runs/37384508573): browser,
+PostgreSQL 16, PostgreSQL 17, quality and secret scanning. The original browser cancellation
+remains historical; its distinct rerun passed **88 tests/1141 deselected/one existing warning**
+in **182.51 seconds**. This does not establish why the first attempt was cancelled.
+
+The first local packaging attempt failed preflight before any child/build/archive because the
+preexisting Git launcher has an exact two-link `git.exe`/`git-lfs.exe` pair. That failure is
+retained. A separately reviewed **39571-byte v2** packager, SHA
+`e84427c8850af879b6308bb74dd5ef07082c12cd66b8ab7a0673cd249f57a5a9`, permits only that fixed
+pair with strict identity/hash checks; every other file keeps single-link checks. Main and
+independent **1619 declaration/mock checks** passed. Four actual local owned-child cases
+(normal, nonzero, descendant timeout, output limit) passed in **1313 ms**, with zero remaining
+job members. Actual packaging then completed in **23046 ms** using offline/no-index/no-cache/
+no-build-isolation flags, with source/wheel/checkout, nine UI assets and dependency parity:
+
+| Exact ca1 artifact | Bytes | SHA-256 |
+| --- | --- | --- |
+| Source archive | 8448000 | `a45a2e3290215416f6c3ee2a24a5c3a748ec5ba7ec2a16d7cd4eca44a17bd462` |
+| Wheel | 195885 | `d82179a220fbceb62446681bb2096959bb818b122aae22f116bb9acd44118f7c` |
+| Package code identity | — | `24353ee100cdf3def9f509703cd6b1f68da49394c69c0bf2a1190d8f13c0cd09` |
+| Protected packaging result | — | `972d463716c5ccbcc4628df8340dc8bbdfd82f35870ff9341db0411f8ce22c86` |
+
+No package upload/install, serving-venv change, signature verification, WAN-isolation or
+production acceptance occurred. The three-shard manifest stays unselected. Live 35B/public
+thinking-off, failed Qwen3.8 trials, prompt/corpus and fixed deadlines remain unchanged.
+Continue protected provisioning and actual metadata/load/semantic/thinking/context plus matched
+app/evidence/audit/queue/failure/WAN/restart/cold-start/rollback qualification, not a model rename.
+
+### Earlier provisioning checkpoint — historical
 
 ### Bounded 122B resumption and desktop-runner correction — 2026-10-06 checkpoint
 
@@ -882,6 +956,72 @@ without rewriting historical acceptance or claiming these unrun gates passed.
 <div dir="rtl">
 
 ## فارسی
+
+### نخستین فایل کامل و بستهٔ آفلاین کد دقیق — گام ۶ اکتبر ۲۰۲۶
+
+پنجره‌های محدودِ بعدی، اندیس‌های ۱۴۱ تا ۱۴۷ فایل اول را کامل کردند. سپس هر **۱۴۸ بخشِ
+اصلی/۳۹۷۱۴۸۷۴۱۴۴ بایت** دوباره بررسی و با ابزار محافظت‌شدهٔ **۴۸۷۴۵ بایتی**، با هش
+`14ce5d8a1f6ee1345bdd4c1c15bdd79f38ed05bc988eb440a8b7b0a77ee111bc` تجمیع شدند.
+ابزار نصبِ بررسی‌شده و کنترل‌کنندهٔ مستقلِ نسخهٔ دوم، شکست‌های قبلی را حفظ و توقف فرایند
+متعلق به اجرا را الزام کردند. عملیات `assemble-20261006-639268393270653379-sh0` در ساعت
+**۲۳:۳۰:۳۹ UTC**، با کد خروج صفر و مدت **۴۸۰۱۱۱ میلی‌ثانیه** کامل شد. فایل تغییرناپذیرِ اول
+با هش کامل منبع اصلیِ `d7d5aa3ef843ba3fe5ee27cdaebe17abd8a6a8a03a5c236db9bfe2fc6b88be2e`
+مطابقت دارد. نام مستعارِ محافظت‌شده، بخش‌های اصلی و ورودی‌های ناموفق قابل‌بازیابی‌اند.
+انتشار با دو پیوند به یک فایل عمدی است، نه یک نسخهٔ مستقل دیگر. ثبات خط مبنای زنده/توقف
+فرایند موفق‌اند. هش نتیجه:
+`0d9a9b9e44e961e398bfc3bcad5557da59eea7941d9da5f85df5c33a2903ff52`.
+**۵۰۷۱۴۵۸۰۶۰۸ بایت/دو فایل باقی است**؛ فرادادهٔ واقعی، مدل کامل و معیارهای CPU با یک فایل
+یا ویژگی‌های اعلام‌شدهٔ آن پذیرفته نمی‌شوند.
+
+پیش از آن تجمیع و پس از تکمیل انتقال فایل اول، پنجرهٔ
+`resume-20261006-639268385049931193` سه بخش نخستِ فایل دوم را دریافت می‌کرد و در
+`finite_download` ناموفق شد: کد **۲۸** curl، مدت **۱۸۰۱۸۷ میلی‌ثانیه**، **صفر بخش پذیرفته‌شده**
+و تطبیق موفقِ توقف/خط مبنا. اندازهٔ بدنه‌های حفظ‌شده **۲۳۰۸۹۳۶۲۱/۱۳۱۴۱۹۹۰۳/۶۳۳۶۴۳۹۶ بایت**
+است؛ هر سه کمتر از ۲۶۸۴۳۵۴۵۶ بایت‌اند. headerهای HTTP 206، پذیرش بدنهٔ ناقص نیستند.
+هش نتیجه `95f842e89e7400f620cc305791df1c2a530cbb348161e75f59cdc3bd646f12d3` است.
+هش مستقلِ پیشوند محلیِ اول،
+`a4796fb8a2b7f710e15307331649b11259b5197db5d9336cd5d221e7b2df94c1`، هش فایل کاملِ منبع نیست.
+ابزار مستقلِ ادامهٔ پیشوند/پسوند ثابت، **۳۷۹ کنترل آماده‌سازیِ اصلی/مستقل** را گذراند؛
+آزمون بومیِ هویت فایل/ادامهٔ واقعی در گام بسته‌بندی اجرا نشده بودند. پس از آن، آزمون بومیِ
+فقط‌خواندنیِ ثابت در **۲۹۳۸ میلی‌ثانیه** با ثبات هویت handle/مسیر، هش کامل پیشوند و
+بسته‌شدن همهٔ handleها موفق شد. هش نتیجهٔ خصوصی:
+`d88b1f1f90a24486be0a055b752e03da5136e6016d0087b34a20188e38391d8f`.
+ادامهٔ مستقلِ یک بخش ساعت **۲۳:۵۳:۵۹ UTC** با کنترل‌های تازه آغاز و ساعت **۲۳:۵۶:۰۸ UTC** با
+کد خروج صفر کامل شد. **۳۷۵۴۱۸۳۵ بایت** باقی‌مانده در **۱۷٫۹۸۵۵۲ ثانیه**، با یک اتصال/HTTP 206/
+کد خروج صفر دریافت شد. هش بخش ترکیبیِ **۲۶۸۴۳۵۴۵۶ بایتی**،
+`45e1d51def522f0d0424e26d53127aec7cbc03c49647d7601c53f4e9b4ae1fcf` است. بازبین اصلی رسیدهای
+محافظت‌شدهٔ دریافت/پاک‌سازی/پایان را مستقل خواند؛ همگی مطابق‌اند. هش نتیجهٔ رایانهٔ کاربر:
+`94f5641ad7991f924e01afcbaaba5c1e97a0342cdc74bd282c3533e938a02ec7`.
+مجموع انتقال اصلی **۱۴۹ بخش/۳۹۹۸۳۳۰۹۶۰۰ بایت** است؛ **۵۰۴۴۶۱۴۵۱۵۲ بایت** هنوز دریافت نشده
+و فقط یک فایل کاملِ منبع اصلی تأیید شده است. بدنه‌های اصلی/تازهٔ محلی حفظ‌اند؛ فقط نسخهٔ
+تکراریِ ورودیِ کاملاً تأییدشده حذف و نسخه‌های محافظت‌شده حفظ شدند. همهٔ handleهای محلیِ
+متعلق به اجرا بسته و ثبات خط مبنای آماده/بی‌درخواست تأیید شد. تکرار کور، کاهش حداقل فضای
+دیسک سیستم، حذف بدنهٔ تأییدنشده یا سود موازی‌سازی ادعا نمی‌شود.
+
+کد دقیقِ **ca1da27d6317fae247cee2b92576d6947d55421a** هر پنج کنترل CI در
+[اجرای 37384508573](https://github.com/Omid-NextAI/nextops/actions/runs/37384508573) را گذراند:
+مرورگر، PostgreSQL 16، PostgreSQL 17، کیفیت و بررسی اطلاعات محرمانه. لغو نخستین اجرای
+مرورگر سابقه است؛ اجرای مستقلِ بعدی **۸۸ موفق/۱۱۴۱ انتخاب‌نشده/یک هشدار قبلی** در
+**۱۸۲٫۵۱ ثانیه** ثبت کرد. علت لغو نخستین تلاش از این نتیجه ثابت نمی‌شود.
+
+نخستین تلاش بسته‌بندی، پیش از هر فرایند/ساخت/آرشیو شکست خورد؛ ابزار موجود Git دو پیوندِ
+دقیقِ `git.exe`/`git-lfs.exe` دارد. شکست حفظ شده است. ابزار مستقلِ نسخهٔ دوم با **۳۹۵۷۱
+بایت** و هش `e84427c8850af879b6308bb74dd5ef07082c12cd66b8ab7a0673cd249f57a5a9` فقط همین
+جفت ثابت را با کنترل دقیقِ هویت/هش می‌پذیرد؛ سایر فایل‌ها همچنان تک‌پیوندی‌اند. در بررسی
+اصلی و مستقل **۱۶۱۹ کنترل تعریفی/شبیه‌سازی** موفق شدند. چهار آزمون واقعیِ محلیِ فرایند متعلق
+به اجرا (عادی، خروج غیرصفر، مهلت‌گذری با فرایند فرزند، سقف خروجی) در **۱۳۱۳ میلی‌ثانیه**
+موفق شدند و عضو باقی‌ماندهٔ job صفر بود. بسته‌بندی واقعی در **۲۳۰۴۶ میلی‌ثانیه** با گزینه‌های
+آفلاین/بدون index/بدون cache/بدون محیط ساخت جدا کامل شد؛ برابری کد/wheel/checkout، نه دارایی
+رابط و وابستگی‌ها تأیید شدند. هویت آرشیوِ **۸۴۴۸۰۰۰ بایتی**، wheelِ **۱۹۵۸۸۵ بایتی**، کد
+بسته و نتیجه، دقیقاً مطابق جدول انگلیسی بالاست.
+
+بارگذاری یا نصب بسته، تغییر محیط خدمت‌دهنده، تأیید امضا، آزمون قطع WAN یا پذیرش عملیاتی
+انجام نشد. manifest سه‌فایلی انتخاب نشده است. 35B زنده/خاموشی استدلال عمومی، آزمون‌های
+ناموفق Qwen3.8، پرامپت/مجموعهٔ پرسش و مهلت‌های ثابت تغییر نکرده‌اند. دریافت محافظت‌شده و
+پذیرش واقعی فراداده/بارگذاری/معنا/استدلال/زمینه و برنامه/شاهد/ممیزی/صف/خرابی/WAN/راه‌اندازی/
+شروع سرد/بازگشت ادامه یابد؛ مدل تغییر نام داده نشود.
+
+### گام آماده‌سازیِ پیشین — سابقه
 
 ### ادامهٔ دریافت محدود 122B و اصلاح محیط اجرای رایانهٔ کاربر — گام ۶ اکتبر ۲۰۲۶
 

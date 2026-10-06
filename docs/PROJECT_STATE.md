@@ -1,5 +1,46 @@
 # Project state / وضعیت پروژه
 
+Latest verified checkpoint — **2026-10-06; no model cutover**: 148 retained transport ranges
+produced the first complete Apache Qwen3.5-122B-A10B Q5 shard: **39714874144 bytes**, upstream
+SHA `d7d5aa3ef843ba3fe5ee27cdaebe17abd8a6a8a03a5c236db9bfe2fc6b88be2e`.
+Protected assembly completed in 480111 ms; owned stop and unchanged live ready/idle baseline
+passed. Two shards/**50714580608 bytes** remain. A three-range window after completed first-shard
+transport but before assembly timed out with zero accepted ranges; its partial bodies are
+preserved, not credited. Metadata, full-model
+load, semantics, thinking/privacy, context and matched operational gates remain unrun for 122B.
+Subsequent one-prefix continuation completed at 23:56:08 UTC: one further 268435456-byte range
+passed independently read protected receipts; 149 ranges/39983309600 canonical bytes and
+50446145152 remaining transport bytes. Original/new bodies are retained; no second full shard
+or model is accepted. Its native identity fixture passed in 2938 ms before the finite window.
+Exact `ca1da27` passed all five CI jobs in
+[run 37384508573](https://github.com/Omid-NextAI/nextops/actions/runs/37384508573);
+its distinct browser rerun passed 88 tests, while the cancelled first attempt remains recorded.
+An offline ca1 archive/wheel build completed in 23046 ms with source/static/dependency parity;
+it is local-only, unsigned and not deployment or WAN acceptance. Source code identity is
+`24353ee100cdf3def9f509703cd6b1f68da49394c69c0bf2a1190d8f13c0cd09`.
+Live 35B/public thinking-off and the failed Qwen3.8 trials are unchanged.
+See the [paired record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶؛ بدون تغییر مدل زنده**: از ۱۴۸ بخشِ حفظ‌شده، نخستین
+فایل کاملِ Qwen3.5-122B-A10B Q5 با مجوز Apache تجمیع شد: **۳۹۷۱۴۸۷۴۱۴۴ بایت**، مطابق هش
+منبع اصلیِ بالا. تجمیع محافظت‌شده در ۴۸۰۱۱۱ میلی‌ثانیه پایان یافت؛ توقف فرایند متعلق به اجرا
+و ثبات خط مبنای آماده/بی‌درخواست موفق‌اند. دو فایل/**۵۰۷۱۴۵۸۰۶۰۸ بایت** باقی است. پس از
+تکمیل انتقال فایل اول و پیش از تجمیع، پنجرهٔ سه‌بخشی با مهلت‌گذری و صفر بخش پذیرفته‌شده
+ناموفق شد؛ بدنه‌های ناقص حفظ‌اند، نه
+پذیرفته. فراداده، بارگذاری کامل، معنا، استدلال/حریم خصوصی، زمینه و معیارهای عملیاتیِ متناظر
+برای 122B اجرا نشده‌اند.
+ادامهٔ بعدیِ یک پیشوند ساعت ۲۳:۵۶:۰۸ UTC کامل شد؛ یک بخش تازهٔ ۲۶۸۴۳۵۴۵۶ بایتی، رسیدهای
+محافظت‌شدهٔ مستقلاً خوانده‌شده را گذراند: ۱۴۹ بخش/۳۹۹۸۳۳۰۹۶۰۰ بایت اصلی و ۵۰۴۴۶۱۴۵۱۵۲ بایت
+انتقالیِ باقی‌مانده. بدنه‌های اصلی/تازه حفظ‌اند؛ فایل کامل دوم یا مدل پذیرفته نشده است.
+آزمون بومیِ هویت فایل پیش از پنجرهٔ محدود در ۲۹۳۸ میلی‌ثانیه موفق شد.
+پنج کنترل CI کد دقیقِ `ca1da27` در اجرای بالا موفق‌اند؛ اجرای مستقلِ
+بعدیِ مرورگر ۸۸ آزمون را گذراند و تلاش نخستِ لغوشده حفظ است. ساخت آفلاینِ آرشیو/wheel
+کد ca1 در ۲۳۰۴۶ میلی‌ثانیه با برابری کد/دارایی ثابت/وابستگی پایان یافت؛ فقط محلی، بدون
+امضا و نه پذیرش استقرار یا قطع WAN است. هویت کد همان هش بالاست. 35B زنده/خاموشی استدلال
+عمومی و آزمون‌های ناموفق Qwen3.8 تغییر نکرده‌اند؛ گزارش دوزبانهٔ بالا مرجع است.
+
+## Earlier provisioning checkpoints — historical / گام‌های آماده‌سازیِ پیشین — سوابق
+
 Current provisioning checkpoint — **2026-10-06; not model acceptance**: exact `293164e` passed
 all five CI jobs in [run 37378458739](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739).
 The reviewed 122B importer is installed root-owned/mode `0400`, with exact source parity;

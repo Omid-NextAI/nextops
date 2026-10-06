@@ -1,5 +1,26 @@
 # Local CPU-only AI and capacity planning
 
+Latest checkpoint — **2026-10-06; not model acceptance**: the first of three Apache
+Qwen3.5-122B-A10B Q5 shards is complete, **39714874144 bytes**, and matches upstream SHA
+`d7d5aa3ef843ba3fe5ee27cdaebe17abd8a6a8a03a5c236db9bfe2fc6b88be2e`.
+The protected assembler verified all 148 ranges, completed in 480111 ms and reconciled owned
+stop/unchanged live readiness. Two shards/**50714580608 bytes** remain. A three-range download
+after first-shard transport completed but before assembly timed out; zero ranges were accepted
+and short bodies remain preserved.
+The distinct prefix/suffix continuation then completed at 23:56:08 UTC, adding one verified
+268435456-byte transport range with protected receipts/cleanup and unchanged readiness:
+149 ranges/39983309600 bytes, with 50446145152 transport bytes still missing. All local bodies
+are retained; there is still only one complete upstream-shard result.
+The ca1 source archive/wheel passed offline packaging/parity in 23046 ms, with all five exact
+`ca1da27` CI jobs successful, including the distinct 88-test browser rerun. Packaging is not
+upload, deployment, signature or WAN acceptance. Actual GGUF/load, standard semantics,
+final-only thinking/privacy, measured context and matched app/operational gates are still
+unrun for 122B. Do not claim its advertised context or larger parameter count is accepted.
+Live 35B/public thinking-off and failed Qwen3.8 evidence remain unchanged. See the
+[paired record](../requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+## Earlier provisioning checkpoints — historical
+
 Current provisioning checkpoint — **2026-10-06**: exact `293164e` passed all five CI jobs in
 [run 37378458739](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739). The reviewed
 122B importer is installed root-owned/mode `0400` with exact source parity; 825 main/independent
