@@ -26,6 +26,7 @@ class LlamaCppSettings(BaseModel):
     queue_timeout_seconds: float = Field(default=5.0, ge=0.01, le=60.0)
     expanded_chat_enabled: bool = False
     qwen38_extended_timeout_enabled: bool = False
+    qwen38_instruct_sampling_enabled: bool = False
     thinking_enabled: bool = False
     context_tokens: Literal[8192, 16384, 32768] = 8192
 
@@ -53,6 +54,10 @@ class LlamaCppSettings(BaseModel):
             "nextops-qwen3-8-27b-q8-0",
             "nextops-qwen3-8-27b-ud-q5-k-m",
         )
+        if self.qwen38_instruct_sampling_enabled and (
+            not qwen38_candidate or not self.expanded_chat_enabled
+        ):
+            raise ValueError("instruct sampling requires an expanded Qwen3.8 candidate profile")
         if self.qwen38_extended_timeout_enabled and (
             not qwen38_candidate or not self.expanded_chat_enabled
         ):
@@ -101,6 +106,9 @@ class LlamaCppSettings(BaseModel):
             expanded_chat_enabled=os.environ.get("NEXTOPS_EXPANDED_CHAT_ENABLED", "0") == "1",
             qwen38_extended_timeout_enabled=(
                 os.environ.get("NEXTOPS_QWEN38_EXTENDED_TIMEOUT_ENABLED", "0") == "1"
+            ),
+            qwen38_instruct_sampling_enabled=(
+                os.environ.get("NEXTOPS_QWEN38_INSTRUCT_SAMPLING_ENABLED", "0") == "1"
             ),
             thinking_enabled=os.environ.get("NEXTOPS_THINKING_ENABLED", "0") == "1",
             context_tokens=int(os.environ.get("NEXTOPS_CONTEXT_TOKENS", "8192")),

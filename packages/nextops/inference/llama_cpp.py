@@ -366,6 +366,18 @@ class LlamaCppProvider:
                 "enable_thinking": False,
                 "preserve_thinking": False,
             }
+            if self._settings.qwen38_instruct_sampling_enabled:
+                # Explicit unselected profile, not a silent serving/default change.
+                # Qwen's non-thinking controls; seed fixed before qualification,
+                # not an upstream recommendation or universal determinism claim.
+                payload.update(
+                    temperature=0.7,
+                    top_k=20,
+                    min_p=0.0,
+                    presence_penalty=1.5,
+                    repeat_penalty=1.0,
+                    seed=0,
+                )
         if request.thinking:
             # Controls belong to the trusted adapter, not user text or browser parameters.
             # Pinned server-common.cpp accepts reasoning_budget_tokens and its message.

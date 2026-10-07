@@ -1,5 +1,20 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-07**: verify the opt-in upstream instruct-sampling source, capture exact
+committed requests with all sixteen unchanged cases, review the bounded controller, and run one
+fresh-preflight retained-Q8 CPU diagnostic. Keep deadlines/scoring/history, no fallback credit or
+blind retry, and separate unchanged serving/owned cleanup. Do not deploy unless full raw and the
+subsequent independent/app/privacy/context/evidence/WAN/rollback gates actually pass.
+
+کار جاری — **۷ اکتبر ۲۰۲۶**: کد نمایهٔ اختیاری نمونه‌گیری سازنده بررسی، درخواست همهٔ شانزده
+پرسش ثابت از کد دقیق ثبت و کنترل‌کنندهٔ محدود بازبینی شود. پس از بررسی تازه، یک آزمون
+تشخیصی CPU روی Q8 موجود اجرا شود. مهلت، معیار و سابقه حفظ شوند؛ پاسخ جایگزین امتیاز نگیرد،
+اجرای بدون تغییر کورکورانه تکرار نشود و ثبات مدل زنده و توقف اختصاصی جدا بررسی شوند.
+استقرار فقط پس از موفقیت واقعی پاسخ خام و معیارهای مستقل، برنامه، حریم خصوصی، زمینه، شواهد،
+قطع WAN و بازگشت مدل ممکن است.
+
+## Previous raw-policy task — historical / کار پیشین دستور خام — سابقه
+
 Current task — **2026-10-06, after 14:31 UTC**: raw-model repair is incomplete. Preserve three
 actual trials and the completed rejected-policy rollback to exact `6c3a380`; retained 13/16 is not accepted.
 Do not repeat an unchanged run, cherry-pick a lucky sample, train on frozen tests or call

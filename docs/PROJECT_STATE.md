@@ -1,5 +1,26 @@
 # Project state / وضعیت پروژه
 
+Current source experiment — **2026-10-07**: candidate-only opt-in upstream instruct sampling is
+implemented with preselected seed0, default isolation and unchanged restored prompt/frozen corpus.
+It addresses an observed sampler-configuration difference, not a proved raw-quality repair.
+Sixteen sampler boundary cases plus configuration/default/prompt/deadline regressions pass in a
+60-test focused run. Final source suite:1,406 passed/two POSIX skips/130 deselected/one existing
+warning,34.94s; lint/156-file format/Linux-target types150 and docs140/39 passed. Native,
+independent/matched app/privacy/context/evidence/WAN/rollback gates remain separate and not passed
+by that result. Live35B/public thinking stay unchanged.
+
+آزمایش جاری کد — **۷ اکتبر ۲۰۲۶**: نمونه‌گیری اختیاریِ بدون استدلال سازنده، فقط برای نامزد
+و با seed0 ازپیش‌انتخاب‌شده پیاده‌سازی شد. جدایی پیش‌فرض، دستور بازگردانده‌شده و پرسش‌های
+ثابت حفظ‌اند. این کار تفاوت مشاهده‌شدهٔ تنظیم نمونه‌گیری را بررسی می‌کند، نه اینکه رفع خطای
+خام را ثابت کرده باشد. شانزده حالت مرزی نمونه‌گیری و آزمون‌های تنظیم، پیش‌فرض، دستور و مهلت
+در اجرای محدود ۶۰آزمونی موفق‌اند. آزمون نهایی کد:۱٬۴۰۶ موفق، دو مورد ویژهٔ POSIX اجرا‌نشده،
+۱۳۰ انتخاب‌نشده و یک هشدار موجود در۳۴٫۹۴ ثانیه؛ lint، قالب۱۵۶ فایل، type با هدف Linux روی
+۱۵۰ فایل و مستندات۱۴۰/۳۹ موفق‌اند. آزمون بومی، مستقل، برنامه، حریم خصوصی، زمینه، شواهد،
+قطع WAN و بازگشت مدل جدا هستند و این نتیجه آن‌ها را موفق نمی‌کند. مدل زندهٔ 35B و خاموشی
+استدلال عمومی تغییر نکرده‌اند.
+
+## Previous raw-policy checkpoint — historical / گام پیشین دستور خام — سابقه
+
 Current raw checkpoint — **2026-10-06, 14:31 UTC**: three bounded candidate-policy trials do not
 complete the owner's raw coding/reasoning repair. Scores are 12/16 (final 120-second timeout), 13/16
 under explicit 300 seconds, then 11/16 with regressions. The last policy was rejected and its

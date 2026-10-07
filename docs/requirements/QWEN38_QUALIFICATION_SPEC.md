@@ -6,6 +6,32 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Candidate sampler comparison — 2026-10-07
+
+Problem: repeated instruction-following failures persist across three prompt policies. The
+retained candidate sends temperature0.3/presence0 and inherits native top-k/min-p defaults;
+this differs from [Qwen's non-thinking guidance](https://huggingface.co/Qwen/Qwen3.8-27B#best-practices).
+Test a materially distinct, opt-in sampling profile without changing the restored prompt or tests.
+`NEXTOPS_QWEN38_INSTRUCT_SAMPLING_ENABLED=1` requires an expanded exact Q8/Q5 candidate. It sets
+temperature0.7/top-p0.8/top-k20/min-p0/presence1.5/repeat-penalty1. Seed0 is fixed before the trial
+for input reproducibility, not an upstream recommendation or cross-hardware determinism claim.
+The flag defaults off; serving35B/other models cannot enable it. Thinking remains denied.
+
+Risks: higher presence penalty can worsen language consistency; vendor settings do not prove
+NextOps quality. Preserve all sixteen frozen questions/semantic/AST criteria, including format,
+authorized scope, full times, unsupported claims, code guards and deadline failures. Run one finite
+retained-Q8/no-BLAS/32-worker/48-GiB/16K/384-output comparison with explicit300-second deadlines
+and unchanged watchdog/security/owned cleanup. No new weights, downloads, VM/storage/route changes,
+target credentials, application fallback credit or private-reasoning retention. Record the full
+sampler/source/capture identity, all finals and failures; do not retry the same sample blindly.
+
+Tasks: configuration/adapter tests and default isolation; exact-source capture/tool review; fresh
+idle/artifact/resource preflight; full raw trial/review; then independent and matched application,
+privacy/context/evidence/WAN/rollback qualification only after standard correctness passes. Source
+and live acceptance remain separate. Roll back the source flag/wiring to this change's parent and
+stop only the owned trial unit; baseline stays untouched. Preserve earlier failed reports and update
+paired CPU guides, state/next task and traceability. Native and live gates are not run at this plan.
+
 ### Third policy rejected; exact source rollback — 14:31 UTC
 
 The `4654b43` full Q8/300 run met all sixteen deadlines but regressed to **11 main-reviewed
@@ -271,6 +297,34 @@ this index entry. Preserve the prior failed-thinking and UI deployment records. 
 release manifest only for an actually accepted identity change, not source registration.
 
 ## فارسی
+
+### مقایسهٔ نمونه‌گیری نامزد — ۷ اکتبر ۲۰۲۶
+
+مسئله: سه دستور متفاوت، خطاهای پیروی از دستور را به‌طور پایدار رفع نکردند. نامزد موجود
+temperature0.3 و presence0 می‌فرستد و top-k و min-p را به پیش‌فرض runtime واگذار می‌کند؛
+این تنظیم با راهنمای بدون استدلال Qwen تفاوت دارد. نمایهٔ اختیاری و متفاوتی با همان دستور
+بازگردانده‌شده و معیارهای ثابت آزموده شود. پرچم
+`NEXTOPS_QWEN38_INSTRUCT_SAMPLING_ENABLED=1` فقط برای نامزد دقیق Q8 یا Q5 با گفت‌وگوی
+گسترش‌یافته پذیرفته می‌شود. مقادیر temperature0.7، top-p0.8، top-k20، min-p0، presence1.5
+و repeat-penalty1 صریح‌اند. Seed0 پیش از آزمون برای ثبت ورودی تکرارپذیر انتخاب شده؛ پیشنهاد
+سازنده یا تضمین نتیجهٔ یکسان روی هر سخت‌افزار نیست. پرچم به‌صورت پیش‌فرض خاموش است، برای
+35B زنده و مدل‌های دیگر پذیرفته نمی‌شود و استدلال را فعال نمی‌کند.
+
+خطر: جریمهٔ حضور بالاتر ممکن است یکنواختی زبان را کاهش دهد؛ توصیهٔ سازنده پذیرش NextOps
+نیست. هر شانزده پرسش و معیار معنایی و AST، از جمله قالب، دامنهٔ مجاز، زمان کامل، ادعای
+بی‌شاهد، شرط نوع و مهلت، ثابت بمانند. یک مقایسهٔ محدود روی Q8 موجود با runtime بدون BLAS،
+۳۲ رشته، سقف ۴۸ GiB، زمینهٔ16K، خروجی۳۸۴ و مهلت صریح۳۰۰ ثانیه اجرا شود؛ سقف کلی، امنیت
+و توقف اختصاصی تغییر نکنند. فایل مدل، دریافت اینترنتی، منابع یا مسیر شبکهٔ VM، اطلاعات ورود
+مقصد، امتیاز پاسخ جایگزین و نگه‌داری استدلال خصوصی در دامنه نیستند. هویت کامل نمایه و کد،
+همهٔ پاسخ‌ها و شکست‌ها ثبت شوند؛ همان اجرای بدون تغییر کورکورانه تکرار نشود.
+
+گام‌ها: آزمون تنظیم و نگاشت و جدایی پیش‌فرض؛ ثبت درخواست از کد دقیق و بازبینی ابزار؛ بررسی
+تازهٔ آمادگی، فایل و منابع؛ آزمون و بازبینی کامل پاسخ خام؛ سپس فقط پس از موفقیت استاندارد،
+بازبینی مستقل و پذیرش مسیر برنامه، حریم خصوصی، زمینه، شواهد، قطع WAN و بازگشت مدل. پذیرش
+کد و محیط عملیاتی جدا هستند. بازگشت کد با حذف پرچم و نگاشت این تغییر به نسخهٔ والد و توقف
+فقط واحد آزمون انجام می‌شود؛ خط مبنا دست‌نخورده می‌ماند. سوابق شکست حفظ و راهنمای CPU،
+وضعیت، کار بعدی و ردیابی در هر دو زبان به‌روز شوند. آزمون بومی و زنده در زمان این طرح هنوز
+اجرا نشده‌اند.
 
 ### رد دستور سوم و بازگشت دقیق کد — ساعت۱۴:۳۱ UTC
 

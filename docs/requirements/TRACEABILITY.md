@@ -1,5 +1,14 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Sections11/16–17/20–21: the opt-in Qwen3.8 sampler comparison maps to settings, trusted adapter
+payload controls and `test_qwen38_sampling.py`. Default serving isolation, fixed corpus/criteria,
+no private thinking and exact source/profile identity are required; source wiring is not raw or
+live acceptance. See [qualification specification](QWEN38_QUALIFICATION_SPEC.md).
+
+بخش‌های۱۱/۱۶–۱۷/۲۰–۲۱: مقایسهٔ اختیاری نمونه‌گیری Qwen3.8 به تنظیم، نگاشت معتبر درخواست و
+`test_qwen38_sampling.py` ردیابی می‌شود. جدایی پیش‌فرض زنده، پرسش و معیار ثابت، منع استدلال
+خصوصی و هویت دقیق کد و نمایه الزامی‌اند؛ نگاشت کد به معنای پذیرش خام یا زنده نیست.
+
 Raw repair result for sections 11/16–17/20–21: three distinct frozen native trials scored 12/16,
 13/16 and 11/16 (main-only). The regressed third policy was rejected; exact source rollback preserves the
 unqualified `6c3a380` candidate and all failures. Finite guard checks, topology/scope/causal review

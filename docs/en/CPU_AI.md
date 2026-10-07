@@ -1,5 +1,16 @@
 # Local CPU-only AI and capacity planning
 
+## Opt-in Qwen3.8 sampler comparison — 2026-10-07
+
+The candidate profile `NEXTOPS_QWEN38_INSTRUCT_SAMPLING_ENABLED=1` applies explicit upstream
+non-thinking sampling controls plus preselected seed0; it requires an expanded exact Q8/Q5 model
+and defaults off. See the [bounded comparison](../requirements/QWEN38_QUALIFICATION_SPEC.md).
+The existing restored prompt, sixteen frozen cases and all semantic/code requirements remain.
+This source profile is not model training or a measured quality pass; higher presence penalty
+can degrade language consistency. Source tests, one finite full raw trial, independent review and
+matched app/privacy/context/evidence/WAN/rollback must remain separate. No serving model, thinking,
+credentials, VM resources or live configuration change is authorized by the flag itself.
+
 ## Raw repair remains incomplete; regressed policy rolled back — 2026-10-06
 
 At 14:31 UTC the third distinct Q8 policy completed all finals but scored **11/16** in main-only
