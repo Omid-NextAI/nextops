@@ -6,6 +6,26 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Full greedy result — 2026-10-07, 06:35:53 UTC
+
+Exact `60605d8`/greedy Q8 completes all sixteen finals under explicit300; main semantic review is
+13 passed/3 failed: English unverified upstream assertion, Persian omission of one-authorized-host
+scope, and Persian causal answer lacking an explanatory hypothesis. Both raw code samples pass
+twelve finite AST boundaries. English stale evidence65373ms resolves the earlier diagnostic
+timeout, not a blanket latency/quality acceptance; Persian hypothesis126362ms still exceeds
+historical120. Native SHA `b69e4cf3a9725a344b2eadc92a72bb9ec0090ce971934de5ca051d09ac17926e`.
+Owned stop/separate PID0/inactive/free-port/unchanged ready-idle baseline and five exact-source
+CI jobs pass, not raw quality. Offline finite review is partial/exit2: six finite passes, ten manual
+reviews, no missing cases; direct main review resolves the semantic findings, not independence.
+
+Decision: keep both profiles default-off/unselected and preserve all five prompt/sampler reports,
+failures and wheels. Prompt/sampler-only changes have not cured persistent factual/instruction
+failures. Do not repeat identical tests, cherry-pick seeds, soften scoring, train on frozen cases
+or award app-fallback credit. Further work needs a materially evidenced artifact/method strategy,
+applicable license/integrity/resource/tool review and unchanged full raw acceptance. Independent,
+matched app/thinking/privacy/context/evidence/WAN/model rollback remain open; live35B and public
+thinking are unchanged. This is not a live release or production acceptance.
+
 ### Instruct result and greedy-decoding plan — 2026-10-07, 06:10 UTC
 
 The exact `da8d61c` instruct-sampler trial completed ten finals, then TimeoutError on English
@@ -323,6 +343,26 @@ this index entry. Preserve the prior failed-thinking and UI deployment records. 
 release manifest only for an actually accepted identity change, not source registration.
 
 ## فارسی
+
+### نتیجهٔ کامل حریصانه — ۷ اکتبر ۲۰۲۶، ۰۶:۳۵:۵۳ UTC
+
+Q8 با کد دقیق `60605d8` و انتخاب حریصانهٔ توکن، همهٔ شانزده پاسخ را در مهلت صریح۳۰۰ثانیه
+تکمیل کرد؛ بازبینی عامل اصلی۱۳ مورد موفق و۳ ناموفق دارد: ادعای بی‌شاهد بالادست انگلیسی،
+حذف دامنهٔ «تنها میزبان مجاز» در فارسی و نبودِ فرضیهٔ توضیحی فارسی. هر نمونهٔ کد، دوازده
+مرز محدود AST را گذراند. شاهد انگلیسی با۶۵۳۷۳میلی‌ثانیه پایان مهلت پیشین را رفع کرد، نه
+اینکه پذیرش عمومی سرعت یا کیفیت باشد؛ فرضیهٔ فارسی۱۲۶۳۶۲میلی‌ثانیه طول کشید و هنوز از۱۲۰
+تاریخی بیشتر است. هش بومی بالا، توقف اختصاصی و بررسی جداگانهٔ نبود PID/شنونده و آمادگی
+بی‌درخواستِ خط مبنا حفظ‌اند. پنج CI همان کد، صحت خام نیست. بررسی محدود آفلاین partial با
+کد خروج۲ دارد: شش کنترل محدود موفق، ده مورد نیازمند بررسی دستی و هیچ مورد غایب؛ بازبینی
+مستقیم عامل اصلی معنا را بررسی می‌کند، نه استقلال بررسی را.
+
+تصمیم: هر دو نمایه پیش‌فرض خاموش و انتخاب‌نشده بمانند؛ پنج گزارش دستور/نمونه‌گیری، شکست‌ها
+و فایل‌های بسته حفظ شوند. این تغییرها خطای پایدار واقع‌گویی و پیروی از دستور را رفع نکردند.
+اجرای یکسان تکرار، seed موفق جدا انتخاب، معیار آسان‌تر یا پرسش ثابت وارد آموزش نشود؛ پاسخ
+جایگزین برنامه به مدل امتیاز ندهد. برای کار بعدی، راهبرد متفاوتِ فایل یا روش با شاهد و
+بررسی مجوز، صحت، منابع و ابزار و سپس پذیرش کامل خام با معیار ثابت لازم است. معیارهای مستقل،
+برنامه، استدلال، حریم خصوصی، زمینه، شاهد، WAN و بازگشت مدل بازند؛ مدل زندهٔ35B و استدلال
+عمومی ثابت‌اند. نسخهٔ زندهٔ تازه یا پذیرش عملیاتی اعلام نمی‌شود.
 
 ### نتیجهٔ نمونه‌گیری سازنده و برنامهٔ رمزگشایی حریصانه — ۷ اکتبر ۲۰۲۶، ۰۶:۱۰ UTC
 

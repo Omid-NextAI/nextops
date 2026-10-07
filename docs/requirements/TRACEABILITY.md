@@ -1,5 +1,16 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Sections11/16–17/20–21: full greedy Q8 comparison passes13/fails3 unchanged semantic cases
+(main-only); finite coding passes12 boundaries per completed sample. Raw quality stays failed.
+Current status adds the dated failed candidate gate and sampler source tests as evidence, not live
+acceptance. Preserve explicit300 provenance, all five trials and independent/matched later gates.
+
+بخش‌های۱۱/۱۶–۱۷/۲۰–۲۱: مقایسهٔ کامل Q8 حریصانه در بازبینی عامل اصلی۱۳ مورد موفق و۳ مورد
+ناموفق دارد؛ هر نمونهٔ کامل کد دوازده مرز محدود را می‌گذراند. صحت خام هنوز ناموفق است.
+وضعیت ماشین‌خوان، معیار ناموفقِ تاریخ‌دار و آزمون کد نمونه‌گیری را شاهد می‌گیرد، نه پذیرش
+زنده. مهلت صریح۳۰۰، هر پنج آزمون و معیارهای مستقل و برنامهٔ بعدی حفظ شوند.
+
+
 Sections11/16–17/20–21: upstream-sampler native result is nine passed/two failed/five not run
 (main-only). Both completed finite coding samples pass, but unsupported upstream topology and
 stale-evidence timeout block selection. Greedy opt-in/mutual denial/default isolation map to

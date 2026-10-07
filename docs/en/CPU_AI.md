@@ -1,5 +1,23 @@
 # Local CPU-only AI and capacity planning
 
+## Full greedy comparison completed; three semantic failures — 7 October 2026
+
+The `60605d8` Q8/greedy/explicit300 trial completed all sixteen finals at06:35:53 UTC.
+Main-only review: **13 passed/3 failed**. English networking still asserts an upstream condition;
+Persian stale evidence omits explicit one-authorized-host scope; Persian causal answer has two
+checks but no explanatory hypothesis. Both raw code samples pass twelve finite AST boundaries
+each. English stale response took65373ms; Persian hypothesis126362ms fits300, not historical120.
+Native SHA `b69e4cf3a9725a344b2eadc92a72bb9ec0090ce971934de5ca051d09ac17926e`.
+Owned stop, separate baseline reconciliation and all five exact-source CI jobs passed, not quality.
+
+The earlier instruct trial's nine-pass/two-failure/five-unrun report is preserved below. Neither
+sampler is selected; both flags remain off by default. Source80-focused/1426-unit/API success does
+not cure these raw failures. Do not repeat unchanged runs, pick lucky seeds, train on frozen tests
+or count app-owned qualifiers as model improvement. Further comparison requires a materially
+evidenced artifact/method strategy and applicable review. Independent/matched app/thinking/
+privacy/context/evidence/WAN/model rollback remain open; live35B/public thinking are unchanged.
+
+
 ## Instruct sampler failed; bounded greedy comparison — 7 October 2026
 
 The upstream-profile diagnostic returned ten finals, then TimeoutError on English stale/partial

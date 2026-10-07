@@ -1,5 +1,47 @@
 # Project state / وضعیت پروژه
 
+Current checkpoint — **2026-10-07, 06:35:53 UTC**: the distinct greedy Q8 trial completed
+all sixteen finals under explicit300 seconds, but main semantic review is **13 passed/3 failed**.
+English networking still asserts an unverified upstream condition; Persian stale evidence omits
+one-authorized-host scope; Persian causality gives uncertainty/two checks without an explanatory
+hypothesis. Both raw code samples pass twelve finite AST boundaries each, not general code approval.
+English stale evidence now completes in65373ms; Persian hypothesis126362ms fits300, not historical120.
+Native SHA `b69e4cf3a9725a344b2eadc92a72bb9ec0090ce971934de5ca051d09ac17926e`.
+Owned stop and separate PID0/inactive/free-port/unchanged ready-idle serving reconciliation passed.
+Exact `60605d8` source:80 focused/1426 unit-API tests plus five CI jobs passed, not raw quality.
+Final source/status-document rerun:1426 passed,2 POSIX skips,130 deselected,one existing warning,
+27.98s; lint/format/Linux-target types/docs/status/artifact/diff checks pass.
+
+Both new sampler profiles remain default-off/unselected. The five retained prompt/sampler trials
+have not completed raw repair; do not repeat identical runs, soften scoring, search lucky seeds,
+train on frozen tests or credit app safeguards as raw improvement. Further work needs a materially
+evidenced artifact/method strategy and applicable review before a new finite full comparison.
+Independent/matched app/thinking/privacy/context/evidence/WAN/model rollback remain open.
+Serving35B and public thinking are unchanged; no new live release or production acceptance.
+
+گام جاری — **۷ اکتبر ۲۰۲۶، ۰۶:۳۵:۵۳ UTC**: آزمون متفاوت Q8 با انتخاب حریصانهٔ توکن، همهٔ
+شانزده پاسخ را در مهلت صریح۳۰۰ثانیه تکمیل کرد؛ بازبینی عامل اصلی **۱۳ مورد موفق و ۳ مورد
+ناموفق** ثبت می‌کند. پاسخ شبکهٔ انگلیسی وضعیت بالادست را بدون شاهد قطعی می‌داند؛ شاهد کهنهٔ
+فارسی دامنهٔ «تنها میزبان مجاز» را حذف می‌کند؛ پاسخ علّی فارسی عدم قطعیت و دو بررسی دارد،
+اما فرضیهٔ توضیحی نمی‌دهد. هر نمونهٔ کد، دوازده حالت محدود AST را گذراند؛ این تأیید عمومی
+کدنویسی نیست. شاهد انگلیسی در۶۵۳۷۳میلی‌ثانیه تکمیل شد؛ فرضیهٔ فارسی با۱۲۶۳۶۲میلی‌ثانیه در
+مهلت۳۰۰ جا دارد، نه۱۲۰ تاریخی. هش بومی بالا، توقف اختصاصی و بررسی جداگانهٔ نبود PID/شنونده
+و آمادگی بی‌درخواستِ مدل زنده حفظ‌اند. کد دقیق `60605d8` با۸۰ آزمون محدود،۱٬۴۲۶ آزمون
+واحد/API و پنج کار CI موفق است؛ این نتیجه صحت پاسخ خام نیست.
+بازاجرای نهایی کد و سند وضعیت:۱٬۴۲۶ موفق، دو مورد ویژهٔ POSIX اجرا‌نشده،۱۳۰ انتخاب‌نشده و
+یک هشدار موجود در۲۷٫۹۸ ثانیه؛ کنترل lint، قالب، type با هدف Linux، سند، وضعیت، فایل و diff
+موفق است.
+
+دو نمایهٔ جدید پیش‌فرض خاموش و انتخاب‌نشده‌اند. پنج آزمون دستور/نمونه‌گیریِ حفظ‌شده، اصلاح
+خام را تکمیل نکرده‌اند. اجرای یکسان تکرار، معیار آسان‌تر، seed موفق جدا انتخاب یا پرسش ثابت
+وارد آموزش نشود؛ کنترل برنامه به مدل امتیاز ندهد. برای آزمون کامل بعدی، راهبرد متفاوتِ فایل
+یا روش، با پشتوانهٔ شاهد و بازبینی لازم تعیین شود. معیارهای مستقل، برنامه، استدلال، حریم
+خصوصی، زمینه، شواهد، WAN و بازگشت مدل بازند. مدل زندهٔ35B و استدلال عمومی ثابت‌اند؛ نسخهٔ
+زندهٔ تازه یا پذیرش عملیاتی اعلام نمی‌شود.
+
+## Earlier greedy-plan checkpoint — historical / گام پیشین برنامهٔ حریصانه — سابقه
+
+
 Current checkpoint — **2026-10-07, 06:10 UTC**: the upstream instruct sampler failed. Ten
 finals completed; main review records nine passed/two failed/five not run. English networking still
 asserts an unverified upstream response; the attempted English stale/partial case raised

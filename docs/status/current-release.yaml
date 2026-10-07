@@ -103,6 +103,8 @@ capabilities:
       - tests/unit/test_gguf_metadata.py
       - tests/unit/test_model_coding_invariant.py
       - tests/unit/test_model_trial_review.py
+      - tests/unit/test_qwen38_sampling.py
+      - tests/unit/test_qwen38_deadlines.py
       - deploy/inference/qwen3-8-27b-q8.candidate.json
       - tests/unit/test_expanded_inference.py
       - tests/unit/test_inference_artifacts.py
@@ -300,6 +302,14 @@ capabilities:
       - deploy/systemd/nextops-certificate-check.timer
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
+  - id: qwen38_raw_quality_20261007
+    status: failed
+    evidence:
+      - docs/requirements/QWEN38_QUALIFICATION_SPEC.md
+      - deploy/inference/qwen3-8-27b-q8.candidate.json
+      - docs/PROJECT_STATE.md
+      - docs/en/CPU_AI.md
+      - docs/fa/CPU_AI.md
   - id: local_admin_users_live_offline
     status: partial
     evidence:

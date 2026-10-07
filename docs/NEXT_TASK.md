@@ -1,5 +1,26 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-07, after06:35 UTC**: greedy Q8 completed full16 but failed three
+unchanged semantic gates (upstream assertion, Persian authorized scope, Persian explanatory
+hypothesis). Preserve all five prompt/sampler trials, exact-source CI, finite coding results and
+owned cleanup. Do not deploy, loosen tests, cherry-pick seeds, train on frozen cases or repeat the
+same run. Prompt/sampler-only repairs have not fixed persistent factual/instruction failures.
+Establish a materially evidenced artifact/method strategy with license/integrity/resource/tool
+review before another full finite comparison. Independent/matched app/thinking/privacy/context/
+evidence/WAN/model rollback remain open. Serving35B/public thinking stay unchanged.
+
+کار جاری — **۷ اکتبر ۲۰۲۶، پس از۰۶:۳۵ UTC**: Q8 حریصانه همهٔ شانزده پاسخ را تکمیل کرد،
+اما سه معیار ثابت معنا ناموفق ماند: ادعای بالادست، دامنهٔ مجاز فارسی و فرضیهٔ توضیحی فارسی.
+پنج آزمون دستور/نمونه‌گیری، CI کد دقیق، نتیجهٔ محدود کد و توقف اختصاصی حفظ شوند. استقرار،
+آسان‌کردن معیار، seed موفق، آموزش با پرسش ثابت یا تکرار یکسان انجام نشود. اصلاح دستور و
+نمونه‌گیری به‌تنهایی خطاهای پایدار واقع‌گویی و پیروی از دستور را رفع نکرده‌اند. پیش از
+مقایسهٔ کامل و محدود بعدی، راهبرد متفاوتِ فایل یا روش، با شاهد و بررسی مجوز، صحت، منابع
+و ابزار تعیین شود. معیارهای مستقل، برنامه، استدلال، حریم خصوصی، زمینه، شاهد، WAN و بازگشت
+مدل بازند؛ مدل زندهٔ35B و استدلال عمومی ثابت بمانند.
+
+## Earlier greedy task — historical / کار پیشینِ حریصانه — سابقه
+
+
 Current task — **2026-10-07, after06:10 UTC**: preserve the failed instruct-sampler report:
 nine passed/two failed/five not run, including unsupported English upstream topology and
 TimeoutError on stale evidence. Keep source CI and owned cleanup separate. Verify/capture the
