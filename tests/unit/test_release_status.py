@@ -69,6 +69,7 @@ def test_retained_expanded_profile_is_not_misattributed_to_a_new_serving_model()
         assert serving_commit in {
             "60605d8b98f13d01152fa95881919f01021df902",  # Initial controlled Q8 API.
             "ec1ed325b73d63840e788720364ca9694897422e",  # Bounded capability/source UI.
+            "52e51792e4d06845544bc7ae1be6042890b2ad22",  # Qualified audit repair code.
         }
         assert serving_commit != profile["source_commit"]
         if serving_commit == "ec1ed325b73d63840e788720364ca9694897422e":
@@ -81,6 +82,15 @@ def test_retained_expanded_profile_is_not_misattributed_to_a_new_serving_model()
                 gates = {gate["id"]: gate for gate in status["acceptance_gates"]}
                 assert gates["ocs_ui_app_only_live_20261007"]["status"] == "passed"
                 assert gates["production_acceptance"]["status"] == "not_run"
+        if serving_commit == "52e51792e4d06845544bc7ae1be6042890b2ad22":
+            assert all(
+                status["components"][name]["source_commit"] == serving_commit
+                for name in ("application", "connector", "inference_api")
+            )
+            gates = {gate["id"]: gate for gate in status["acceptance_gates"]}
+            assert gates["audit_repairs_exact_code_live_20261007"]["status"] == "passed"
+            assert gates["repository_main_branch_protection_gov01"]["status"] == "partial"
+            assert gates["production_acceptance"]["status"] == "not_run"
     assert profile["request_reasoning_budget_tokens"] == THINKING_BUDGET_TOKENS
 
 

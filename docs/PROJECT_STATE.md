@@ -1,6 +1,26 @@
 # Project state / وضعیت پروژه
 
-Current source checkpoint, **2026-10-07, audit repairs under qualification**: the owner authorized
+Current checkpoint, **2026-10-07, audit repairs retained live**: exact `52e5179` is selected
+for app, AI API and canonical MCP/source runner; the matching collector is installed on all
+four existing guests. At17:12:47 UTC all-four completion/idle-guard reconciliation passed after
+exact rollback/reapply, actual EN/FA primary/secondary reads, saved resume and durable audit checks.
+Five exact-source CI jobs passed:1509 unit/API,119 browser,60 PG16 and60 PG17. Native Q8/runtime
+PID/configuration, credentials, grants, schema, resources, OCS logo/static login and thinking-off
+limits are unchanged. Twelve source findings are repaired; GOV-01 needs repository administration.
+The preserved failed candidate and all unaccepted model/WAN/VM/load/recovery gates remain explicit.
+See [the bounded live record](requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md).
+
+گام جاری، **۷ اکتبر۲۰۲۶، اصلاح ممیزی تثبیت‌شدهٔ زنده**: برنامه/API مدل/MCP اصلی و runner با
+کد دقیق `52e5179` انتخاب و collector متناظر روی چهار مهمان نصب‌اند. ساعت۱۷:۱۲:۴۷ UTC اثبات
+مشترک/محافظ غیرفعالِ چهار نقش، پس از بازگشت/اعمال دقیق، خواندن واقعی EN/FA منابع اصلی/دوم،
+بازگشایی سابقه و ممیزی ماندگار موفق شد. پنج کار CI با۱۵۰۹ واحد/API،۱۱۹ مرورگر و۶۰ آزمون هر
+پایگاه16/17 موفق‌اند. PID/تنظیم Q8 بومی/runtime، اطلاعات ورود/grant/schema/منابع، نشان/ورود
+ثابت و سقف استدلال خاموش حفظ‌اند. دوازده یافتهٔ کد اصلاح شده؛ GOV-01 مجوز مدیریت مخزن می‌خواهد.
+نامزد ناموفق و معیارهای پذیرفته‌نشدهٔ مدل/WAN/VM/بار/بازیابی باقی‌اند؛ رکورد محدود بالا مرجع است.
+
+## Earlier audit source checkpoint — historical / گام پیشینِ کد ممیزی — سابقه
+
+Earlier source checkpoint, **2026-10-07, audit repairs under qualification**: the owner authorized
 fixing the thirteen audited items and code-only guarded shipping. Native admission/drain, evidence
 redaction, transactional late authorization/read audit, cancelled conversation cleanup, scoped
 counts and five UI state defects are repaired in source. Paired active guides are corrected.
@@ -17,7 +37,7 @@ model quality and existing unaccepted gates are unchanged. See the
 هنوز کد خدمت تغییر نکرده است. پیش از انتشار، CI کد دقیق PostgreSQL16/17 و بازبینی مستقل ابزار
 جدید لازم‌اند. GOV-01 مدیریتی باز است؛ کیفیت مدل و معیارهای پذیرفته‌نشده تغییری ندارند.
 
-Current checkpoint, **2026-10-07, OCS interface retained live**: app `48e3a8a` is selected,
+Earlier checkpoint, **2026-10-07, OCS interface retained live**: app `48e3a8a` was selected,
 active/restarts0 and its rollback timer inactive at12:24:45 UTC. AI API `ec1ed32`, native Q8,
 MCP `2a7c8dc`, their PIDs/configuration and credentials are unchanged. Exact-source five-job CI,
 offline app install, three exact app rollbacks, final real browser and separate fresh smoke passed.

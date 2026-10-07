@@ -2,12 +2,14 @@
 
 ## Current OCS interface: controlled live, 2026-10-07
 
-App `48e3a8a` is retained live with the original company images, static split login and compact
-workspace below. AI API `ec1ed32`, Q8/16K admission/thinking off and MCP remain unchanged.
-Real saved resume/follow-up, secondary monitoring, evidence controls, EN/FA themes/mobile and
-logout/replay passed with durable audit checks and exact app rollback. An intermittent model
-timeout remains; no new model-quality, full-context, WAN or production acceptance is claimed.
-See [the live record](../requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md).
+App/API/MCP `52e5179` is retained live with matching collector repairs, original company images,
+static split login and compact workspace below. Q8/16K admission/thinking off remain unchanged.
+Login-script/storage failure cannot put credentials in a URL. Late responses cannot overwrite a
+new session/chat; evidence filters/cursor, disclosure accessibility and generated Persian labels
+are synchronized. Real saved resume/follow-up, primary/secondary monitoring, EN/FA themes/mobile
+and logout/replay passed with durable audit and exact all-role rollback/reapply. Model-quality,
+full-context, WAN and production gates remain separate; an intermittent model timeout is not cured
+by UI state repair. See [the live record](../requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md).
 
 ## Company-logo login and compact chat: historical source scope, 2026-10-07
 

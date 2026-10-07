@@ -1,6 +1,27 @@
 # Next task / کار بعدی
 
-Current owner-authorized work, **2026-10-07**: qualify and guardedly ship the
+Completed owner-authorized checkpoint, **2026-10-07**: twelve source audit repairs are retained
+as exact `52e5179` on app/API/MCP, with matching existing collectors. Preserve
+[the all-four live qualification](requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md),
+failed v2 records, exact original artifacts and unchanged model/policy/configuration. Do not
+repeat completed deployment or run old migration controllers. Next unfinished work is the bounded
+held-out factual/reliability strategy; GOV-01 requires a repository administrator and must remain
+open without that authority. Model quality, thinking/privacy/full-context, server-WAN/VM/load
+and owner-deferred independent recovery are not passed by this repair. Further infrastructure,
+model or permission changes need their own scope and qualification; live controlled use is not
+full production acceptance.
+
+گام مجازِ کامل‌شده، **۷ اکتبر۲۰۲۶**: دوازده اصلاح کد با `52e5179` روی برنامه/API/MCP و
+collector موجود تثبیت‌اند. رکورد چهار نقش، شکست v2، فایل اصل و ثبات مدل/سیاست/تنظیم حفظ شوند؛
+استقرار کامل‌شده تکرار و controller مهاجرت قدیمی اجرا نشود. کار ناتمام، راهبرد محدودِ کیفیت/
+پایداری با پرسش کنارگذاشته‌شده است؛ GOV-01 به مدیر مخزن نیاز دارد و بی‌مجوز باز می‌ماند.
+کیفیت مدل، استدلال/حریم خصوصی/کل زمینه، WAN/VM/بار و بازیابی مستقلِ در تعویق با این اصلاح
+پذیرفته نمی‌شوند. تغییر زیرساخت/مدل/مجوز دامنه و پذیرش جدا می‌خواهد؛ استفادهٔ کنترل‌شده پذیرش
+کامل production نیست.
+
+## Earlier audit task — historical / کار پیشینِ ممیزی — سابقه
+
+Earlier owner-authorized work, **2026-10-07**: qualify and guardedly ship the
 [audit repairs](requirements/AUDIT_REPAIR_2026-10-07.md), not another UI rebuild or model upgrade.
 Finish exact-source CI (including deployed PostgreSQL16 and17), new publication-tool review and
 offline immutable package preparation. Preserve current credentials/config/schema/native model
@@ -16,7 +37,7 @@ known-code restoration. Leave genuine repository-administration and model-qualit
 بازگشت و اعمال دوبارهٔ دقیق بررسی شوند. controller مهاجرت قبلی اجرا و بازگردانی به خرابی نسخهٔ
 جدید وابسته نشود. محدودیت واقعیِ مدیریت مخزن و کیفیت مدل آشکار بماند.
 
-Current checkpoint, **2026-10-07, app-only OCS rollout complete**: preserve retained app
+Earlier checkpoint, **2026-10-07, app-only OCS rollout complete**: preserve retained app
 `48e3a8a`, unchanged AI API `ec1ed32`/native Q8/MCP and the
 [live qualification](requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md). Do not redo the
 completed UI, real secondary read, saved resume, audit/hash match or exact rollback. Keep the

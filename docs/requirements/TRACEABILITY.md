@@ -1,5 +1,22 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Audit findings UI-01–UI-05, AI-01–AI-03, SEC-01–SEC-03 and DOC-01 map to
+[the bounded repair](AUDIT_REPAIR_2026-10-07.md),
+[actual live qualification](AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md), the current status
+manifest, `test_native_drain.py`, `test_inference_scheduler.py`, `test_evidence_redaction.py`,
+`test_app.py`, `test_source_access_postgresql.py`, `test_conversations_postgresql.py` and
+`test_ui_audit_repairs.py`. Exact app/API/MCP `52e5179` and collectors passed source and bounded
+live audit/rollback/retention checks. GOV-01 remains partial without repository administration;
+raw quality, thinking/privacy/full-context, server-WAN/VM/load and independent recovery are not
+resolved. These are audit-finding identifiers, not invented original-section numbers.
+
+یافته‌های UI-01 تاUI-05، AI-01 تاAI-03، SEC-01 تاSEC-03 و DOC-01 به مشخصات/پذیرش زندهٔ
+بالا، manifest جاری و آزمون‌های مالکیت بومی/ظرفیت/redaction/API/دسترسی منبع/سابقه/رابط ردیابی
+می‌شوند. کد دقیق `52e5179` برنامه/API/MCP و collector، آزمون کد و کنترل محدود زندهٔ ممیزی/
+بازگشت/تثبیت را گذراند. GOV-01 بدون مدیریت مخزن partial است؛ کیفیت خام، استدلال/حریم خصوصی/
+کل زمینه، WAN/VM/بار و بازیابی مستقل حل نشده‌اند. این شناسهٔ یافتهٔ audit است، نه شمارهٔ
+ساخته‌شدهٔ بخش نیاز اولیه.
+
 Sections11–17/20–21: the owner-authorized OCS app-only deployment maps to
 [the live qualification](OCS_UI_LIVE_QUALIFICATION_2026-10-07.md), the source redesign specification,
 EN/FA UI/testing guides, current app manifest and `test_ocs_redesign.py`. App `48e3a8a` retains

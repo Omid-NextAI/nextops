@@ -1,5 +1,26 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Audited code repairs retained live, 2026-10-07
+
+Retain exact `52e5179` app/API/MCP and matching existing collectors after five exact-source CI
+jobs, fresh offline preparation, real bilingual primary/secondary evidence, saved follow-up,
+durable audit/hash verification and exact all-role rollback/reapply. Fix native physical-call
+ownership, secret-text redaction, late authorization/mandatory audit, cancelled-chat cleanup,
+scoped evidence projection and five UI state/accessibility defects. The default primary-source
+provenance mismatch was repaired after a failed candidate and exact restoration. Final all-four
+retention/completion/idle guards passed at17:12:47 UTC. Preserve OCS login, CPU model/runtime,
+credentials, grants and settings. GOV-01 requires repository administration; existing raw model,
+thinking/context/WAN/VM/load/recovery gates are not passes. See
+[the bounded live record](docs/requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md).
+
+برنامه/API/MCP با `52e5179` و collector متناظر، پس از پنج CI دقیق، آماده‌سازی آفلاین، شاهد
+واقعی دوزبانهٔ اصلی/دوم، ادامهٔ سابقه، ممیزی/هش و بازگشت/اعمال همهٔ نقش‌ها تثبیت شدند. مالکیت
+فراخوانی بومی، پالایش متن محرمانه، مجوز دیرهنگام/ممیزی الزامی، لغو سابقه، projection دامنه و
+پنج خطای وضعیت/دسترسی‌پذیری رابط اصلاح‌اند. ناهمخوانی منشأ منبع اصلی پس از نامزد ناموفق و
+بازگردانی دقیق رفع شد. ساعت۱۷:۱۲:۴۷ UTC تثبیت/اثبات/محافظ غیرفعال چهار نقش موفق‌اند. ورود OCS،
+مدل/runtime CPU، اطلاعات ورود/grant/تنظیم حفظ‌اند. GOV-01 مدیر مخزن می‌خواهد؛ معیارهای خام مدل،
+استدلال/زمینه/WAN/VM/بار/بازیابی موفق نیستند. رکورد محدود بالا مرجع است.
+
 ## OCS app-only controlled live rollout, 2026-10-07
 
 Retain app `48e3a8a` with unchanged company images, static login and compact evidence-on-demand

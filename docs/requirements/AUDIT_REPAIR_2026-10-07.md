@@ -1,6 +1,14 @@
 # Audit repair and controlled shipping / اصلاح ممیزی و انتشار کنترل‌شده
 
-Date: 2026-10-07. Status: implementation and qualification in progress, not a deployed release.
+Date: 2026-10-07. Status: twelve source repairs retained live as exact `52e5179`; GOV-01 remains open.
+
+[Final bilingual qualification](AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md) records CI,
+real evidence/audit checks, the preserved failed candidate, exact rollback/reapply and all-four
+retention. This specification preserves the original plan and failure record below.
+
+دوازده اصلاح کد با `52e5179` زنده و تثبیت‌اند؛ GOV-01 مدیریتی باز است. رکورد پذیرش دوزبانهٔ
+بالا، CI، شاهد/ممیزی واقعی، نامزد ناموفق، بازگشت/اعمال دقیق و تثبیت چهار نقش را ثبت می‌کند؛
+طرح و شکستِ تاریخی زیر محفوظ‌اند.
 
 ## English
 

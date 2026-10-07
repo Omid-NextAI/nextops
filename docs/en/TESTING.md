@@ -1,5 +1,17 @@
 # Testing, model evaluation and release evidence
 
+## Audit repairs retained live — 7 October 2026
+
+Exact app/API/MCP `52e5179` and matching existing collectors passed five CI jobs in run37650022276:
+1509 unit/API,119 browser,60 PG16 and60 PG17, plus lint/types/docs/build/dependency/secret checks.
+Offline preparation, actual EN/FA primary/secondary reads, two saved completions/resume, three
+evidence/audit hash matches, exact all-role rollback/reapply and final retention passed. All-four
+code/invariants and common completion/idle guards were reverified at17:12:47 UTC. Native Q8/PID,
+credentials, grants and inference settings are unchanged. The earlier403 candidate and failed
+harness records remain preserved. Twelve source findings are repaired; GOV-01 and existing
+model/WAN/VM/load/recovery limits remain. See
+[actual commands, latencies and boundaries](../requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md).
+
 ## Audit repair source qualification — 7 October 2026
 
 The [bounded repair](../requirements/AUDIT_REPAIR_2026-10-07.md) adds actual API/service and browser
@@ -18,9 +30,9 @@ database. Fixture/source success, exact live package/audit verification and raw 
 are separate results. Publication tools need independent fault-path review; old migration scripts
 are not code-only deployment helpers. No new serving identities are claimed by this section.
 
-## OCS app-only UI retained live — 7 October 2026
+## Historical OCS app-only UI retained live — 7 October 2026
 
-Exact app `48e3a8a` is live; AI API `ec1ed32`, native Q8 and MCP are unchanged. All five
+Exact app `48e3a8a` was live; AI API `ec1ed32`, native Q8 and MCP were unchanged. All five
 exact-source CI jobs in run37616454773 passed, including PostgreSQL16/17 and browser/secret checks.
 Offline app installation, three exact-source rollbacks, final real-browser checks, fresh smoke,
 two conversation audits/one evidence hash pair and unchanged service/PID/config proof passed.
