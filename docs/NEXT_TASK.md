@@ -1,5 +1,23 @@
 # Next task / کار بعدی
 
+Current checkpoint, **2026-10-07, app-only OCS rollout complete**: preserve retained app
+`48e3a8a`, unchanged AI API `ec1ed32`/native Q8/MCP and the
+[live qualification](requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md). Do not redo the
+completed UI, real secondary read, saved resume, audit/hash match or exact rollback. Keep the
+observed inference504 and failed harness reports visible. Next unfinished work is the existing
+bounded held-out factual/reliability strategy; thinking/privacy/full-context/server-WAN/VM/load
+need separate qualification. Do not retry identical model tests or change weights, settings,
+permissions or infrastructure from this completed app-only authorization.
+
+گام جاری، **۷ اکتبر۲۰۲۶، استقرار فقط برنامهٔ OCS کامل**: برنامهٔ تثبیت‌شدهٔ `48e3a8a`،
+API مدل `ec1ed32`/Q8/MCP ثابت و رکورد پذیرش بالا حفظ شوند. رابط، خواندن واقعی منبع دوم،
+بازگشایی سابقه، ممیزی/هش و بازگشت دقیق دوباره اجرا نشوند.504 مشاهده‌شدهٔ مدل و گزارش
+ابزار ناموفق آشکار بمانند. کار ناتمام، راهبرد محدودِ کیفیت/پایداری با پرسش کنارگذاشته‌شده
+است؛ استدلال/حریم خصوصی/کل زمینه/WAN/VM/بار جدا پذیرفته شوند. این مجوزِ کامل‌شدهٔ فقط
+برنامه، مجوز آزمون یکسان مدل یا تغییر وزن/تنظیم/دسترسی/زیرساخت نیست.
+
+## Pre-deployment source task — historical / کار کد پیش از استقرار — سابقه
+
 Current bounded source checkpoint, 2026-10-07: verification/handoff completed for the
 [OCS logo login and compact workspace](requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md).
 Keep approved source/host controls, chats, safe evidence and actual model metadata. Record local
@@ -13,7 +31,9 @@ below are preserved and are not resolved by visual redesign.
 زنده جدا ثبت شود. استقرار یا تغییر مدل/سیاست جزو این کار نیست؛ ترفیع بسته مجوز و پذیرش جدا
 می‌خواهد. معیارهای باقی‌ماندهٔ مدل/آفلاینِ پایین با بازطراحی دیداری حل نمی‌شوند.
 
-Current task — **2026-10-07, source/UI follow-up retained**: do not redo the completed capability
+## Earlier capability task — historical / کار پیشینِ قابلیت — سابقه
+
+Earlier task — **2026-10-07, source/UI follow-up retained**: do not redo the completed capability
 dialog, visible source/host controls, three approved secondary reads, saved resume, audit/hash
 matching or exact app/API source rollback/reapply. `ec1ed32` is serving both roles; native Q8 and
 MCP are unchanged. Keep the failed first revision, manually observed interpretation limits and

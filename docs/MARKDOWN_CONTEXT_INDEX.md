@@ -28,7 +28,7 @@ remaining task-specific sources. The repository skill
 | Local CPU inference | `docs/en/CPU_AI.md`, `OFFLINE_RUNTIME.md`, `TESTING.md`, `docs/requirements/QWEN38_QUALIFICATION_SPEC.md`, `QWEN38_QUALIFICATION_2026-10-05.md`, `QWEN38_FLASH_QUALIFICATION_2026-10-05.md`, `PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md`, pinned model artifact records, systemd model-selection profiles, current state/next task, and Persian pairs when human-facing text changes |
 | AI answer integrity | `docs/requirements/ANSWER_INTEGRITY_SPEC.md`, `docs/en/AI_INTEGRITY.md`, Persian pair, assistant contracts, answer-integrity policy, evaluation corpus, current release manifest, and private live evidence |
 | Conversational frontend and NOC/SOC guidance | `docs/requirements/NOC_SOC_WORKSPACE_SPEC.md`, `docs/en/UI.md`, Persian pair, `DATA_API.md`, assistant/context contracts, static assets, browser tests, integrity guide and current release manifest |
-| Company-logo login and simplified workspace | `docs/requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md`, `docs/en/UI.md`, `REFERENCE_UI.md`, Persian pairs, supplied company images/video, static presentation modules and isolated browser regressions |
+| Company-logo login and simplified workspace | `docs/requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md`, `OCS_UI_LIVE_QUALIFICATION_2026-10-07.md`, `docs/en/UI.md`, `REFERENCE_UI.md`, Persian pairs, supplied company images/video, static presentation modules and isolated browser regressions |
 | Enabled model capabilities and selected Zabbix source | `docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md`, `docs/en/UI.md`, Persian pair, `MCP.md`, readiness/conversation contracts, source catalogue, presentation modules, browser tests and current release manifest |
 | Reference-matched workspace and OCS login | `docs/requirements/REFERENCE_UI_SPEC.md`, `UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md`, `docs/en/REFERENCE_UI.md`, Persian pair, supplied design reference, static presentation/motion modules and isolated browser fixtures |
 | Persistent conversations and local thinking | `docs/en/CONVERSATION_MEMORY_SPEC.md`, `CONVERSATIONS.md`, Persian pairs, ADR 0009, conversation schema/API/tests, expanded-chat candidate profile and current release manifest |
@@ -44,6 +44,7 @@ remaining task-specific sources. The repository skill
 
 ## Complete inventory
 
+- `docs/requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md` — Bilingual authorized app-only rollout, exact artifact identities, preserved failures, real browser/audit checks and unchanged AI/MCP boundaries.
 - `docs/requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md` — Bilingual bounded company-asset/static-login and compact workspace source specification; no new live release or inference change.
 
 - `docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md` — Bilingual bounded capability/source UI specification, exact source tests, guarded package rollout and observed live qualification; native model and MCP unchanged.

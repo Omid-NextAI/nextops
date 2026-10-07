@@ -1,6 +1,15 @@
 # Bilingual operations console and design system
 
-## Company-logo login and compact chat: source candidate, 2026-10-07
+## Current OCS interface: controlled live, 2026-10-07
+
+App `48e3a8a` is retained live with the original company images, static split login and compact
+workspace below. AI API `ec1ed32`, Q8/16K admission/thinking off and MCP remain unchanged.
+Real saved resume/follow-up, secondary monitoring, evidence controls, EN/FA themes/mobile and
+logout/replay passed with durable audit checks and exact app rollback. An intermittent model
+timeout remains; no new model-quality, full-context, WAN or production acceptance is claimed.
+See [the live record](../requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md).
+
+## Company-logo login and compact chat: historical source scope, 2026-10-07
 
 The owner's latest design request replaces the former violet workspace and animated Signal Gate
 with the OCS teal/gold palette and unchanged supplied dark/light company images. Login uses the
@@ -16,7 +25,7 @@ button is absent. Source/time/scope, warnings, safe raw data and audit details r
 
 Busy controls/summary, model identity after saved resume, password locale and theme actions are
 synchronized. Login/session handling, owner isolation and read-only policy are unchanged.
-This is source-only; `ec1ed32` remains the recorded serving app/API. See
+That source-only checkpoint recorded `ec1ed32` as the serving app/API before separate deployment. See
 [scope and brand hashes](../requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md) and
 [preview/checks](REFERENCE_UI.md). Earlier dated visual designs below are historical.
 

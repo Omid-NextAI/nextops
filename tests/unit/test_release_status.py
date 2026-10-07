@@ -72,7 +72,15 @@ def test_retained_expanded_profile_is_not_misattributed_to_a_new_serving_model()
         }
         assert serving_commit != profile["source_commit"]
         if serving_commit == "ec1ed325b73d63840e788720364ca9694897422e":
-            assert status["components"]["application"]["source_commit"] == serving_commit
+            app_commit = status["components"]["application"]["source_commit"]
+            assert app_commit in {
+                serving_commit,
+                "48e3a8a7ec06d25513877085d61a8f7c5ac18e28",  # OCS static-only UI rollout.
+            }
+            if app_commit != serving_commit:
+                gates = {gate["id"]: gate for gate in status["acceptance_gates"]}
+                assert gates["ocs_ui_app_only_live_20261007"]["status"] == "passed"
+                assert gates["production_acceptance"]["status"] == "not_run"
     assert profile["request_reasoning_budget_tokens"] == THINKING_BUDGET_TOKENS
 
 

@@ -1,6 +1,14 @@
 # Reference workspace and OCS login — source and controlled live handoff
 
-## Latest owner redesign: source only, 2026-10-07
+## Current app-only live handoff, 2026-10-07
+
+App `48e3a8a` is retained after separately authorized offline installation, real browser/audit
+checks and exact rollback. AI API `ec1ed32`, model/runtime and MCP are unchanged. See the
+[live record](../requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md) for successes, preserved
+failures and remaining model/offline gates. Real operational captures are protected outside Git;
+the local fixture instructions/screenshots below remain reproducible and are not live evidence.
+
+## Latest owner redesign: historical source-only scope, 2026-10-07
 
 The company-logo/static-login and compact chat candidate supersedes the old Signal Gate and
 violet composition described below. Both supplied JPEGs are unchanged, selected for light/dark

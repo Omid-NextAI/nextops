@@ -1,6 +1,19 @@
 # Testing, model evaluation and release evidence
 
-## Enabled-model UI and secondary source — 7 October 2026
+## OCS app-only UI retained live — 7 October 2026
+
+Exact app `48e3a8a` is live; AI API `ec1ed32`, native Q8 and MCP are unchanged. All five
+exact-source CI jobs in run37616454773 passed, including PostgreSQL16/17 and browser/secret checks.
+Offline app installation, three exact-source rollbacks, final real-browser checks, fresh smoke,
+two conversation audits/one evidence hash pair and unchanged service/PID/config proof passed.
+Final saved initial/follow-up took22.656/22.281s; the fresh secondary count answer took82.094s.
+Copy verification proved Windows CRLF-only conversion. Earlier harness failures and a301.625s
+model504 remain recorded. Real desktop/mobile screenshots were inspected. No fixture fallback,
+TLS bypass or inference change was used. Browser-origin blocking is not server-WAN acceptance.
+See [exact artifacts, observations and limits](../requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md).
+The local source commands below remain applicable; production/model-quality acceptance is separate.
+
+## Earlier enabled-model UI and secondary source — 7 October 2026
 
 Serving app/API source `ec1ed32`, package digest `4dda2131…`; native Q8/PID/configuration and MCP
 unchanged. Source checks:1446 unit/API passed,2 POSIX skips,132 deselected/one existing AnyIO

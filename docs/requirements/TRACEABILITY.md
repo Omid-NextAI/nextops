@@ -1,5 +1,18 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Sections11–17/20–21: the owner-authorized OCS app-only deployment maps to
+[the live qualification](OCS_UI_LIVE_QUALIFICATION_2026-10-07.md), the source redesign specification,
+EN/FA UI/testing guides, current app manifest and `test_ocs_redesign.py`. App `48e3a8a` retains
+AI API `ec1ed32`, native model/MCP and deterministic permissions. Real saved-chat/secondary
+evidence, responsive controls, audit/hash checks and exact app rollback are bounded evidence;
+the recorded inference timeout, raw quality and current WAN/VM/thinking/context limits remain.
+
+بخش‌های۱۱ تا۱۷/۲۰ تا۲۱: استقرار فقط برنامهٔ OCS با مجوز مالک به رکورد زندهٔ بالا، مشخصات
+بازطراحی، راهنمای رابط/آزمون دو زبان، manifest برنامه و آزمون بازطراحی ردیابی می‌شود.
+برنامهٔ `48e3a8a`، API مدل `ec1ed32`، مدل/MCP و مجوز قطعی را حفظ می‌کند. سابقه/شاهد منبع
+دوم، کنترل واکنش‌گرا، ممیزی/هش و بازگشت دقیق، شاهد محدودند؛ پایان مهلت ثبت‌شده، کیفیت خام
+و محدودیت جاری WAN/VM/استدلال/زمینه باقی‌اند.
+
 Sections11–17/20–21: enabled-model presentation and approved secondary inspection map to
 [the UI/source record](UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md), `capabilities.js`, readiness
 contracts, source catalogues, evidence presentation and the EN/FA panel/browser/API tests. Exact

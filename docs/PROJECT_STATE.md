@@ -1,5 +1,27 @@
 # Project state / وضعیت پروژه
 
+Current checkpoint, **2026-10-07, OCS interface retained live**: app `48e3a8a` is selected,
+active/restarts0 and its rollback timer inactive at12:24:45 UTC. AI API `ec1ed32`, native Q8,
+MCP `2a7c8dc`, their PIDs/configuration and credentials are unchanged. Exact-source five-job CI,
+offline app install, three exact app rollbacks, final real browser and separate fresh smoke passed.
+The final browser completed saved initial/follow-up and a fresh secondary Zabbix answer; read-only
+DB checks matched two conversation audits/one evidence hash pair. EN/FA themes, company images,
+responsive controls, evidence selection/copy and logout/replay passed. The failed earlier harness
+reports and one301.625s inference504 are preserved. Existing model-quality/thinking/context/WAN/
+VM/load limits remain unaccepted; live UI is not production acceptance. See the
+[app-only live record](requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md).
+
+گام جاری، **۷ اکتبر۲۰۲۶، رابط OCS تثبیت‌شدهٔ زنده**: ساعت۱۲:۲۴:۴۵ UTC برنامهٔ `48e3a8a`
+انتخاب‌شده و فعال، شروع خودکار صفر و محافظ غیرفعال است. API مدل `ec1ed32`، Q8 بومی و
+MCP با کد `2a7c8dc`، PID/تنظیم/اطلاعات ورود ثابت‌اند. پنج کار CI کد دقیق، نصب آفلاین،
+سه بازگشت دقیق برنامه، مرورگر واقعی نهایی و smoke تازه موفق‌اند. دو پاسخ سابقه/ادامه و
+خواندن تازهٔ منبع دوم کامل، دو ممیزی گفت‌وگو و یک جفت هش شاهد با پایگاه فقط‌خواندنی تطبیق
+شدند. تم/زبان، تصاویر شرکت، واکنش‌گرایی، انتخاب/کپی شاهد و خروج/رد نشست موفق‌اند. شکست
+ابزارهای قبلی و یک504 مدل پس از۳۰۱٫۶۲۵ ثانیه حفظ‌اند. کیفیت/استدلال/زمینه/WAN/VM/بار
+پذیرفته نیستند؛ رابط زنده، پذیرش production نیست. رکورد محدود بالا مرجع است.
+
+## Pre-deployment source checkpoint — historical / گام کد پیش از استقرار — سابقه
+
 Source checkpoint, 2026-10-07: the latest owner-requested OCS-logo/static-login and compact chat
 redesign passed source verification, not deployed:1446 unit/API,101 browser,152 typed files,
 brand/package checks and documentation validators. Base source `775797a`; recorded serving
@@ -12,7 +34,9 @@ choices, not historical deployment acceptance or security/offline requirements.
 `775797a` و برنامه/API ثبت‌شدهٔ زنده `ec1ed32` است؛ مدل و MCP ثابت‌اند.
 رکورد محدودِ بالا جای انتخاب دیداریِ قبلی را می‌گیرد، نه سابقهٔ پذیرش یا الزام امنیت/آفلاین را.
 
-Current checkpoint — **2026-10-07, enabled-model UI and secondary inspection**: app and AI API
+## Earlier capability rollout — historical / استقرار پیشینِ قابلیت — سابقه
+
+Earlier checkpoint — **2026-10-07, enabled-model UI and secondary inspection**: app and AI API
 `ec1ed32` are retained live at09:59:08 UTC after guarded source rollback/reapply. Native Q8/no-BLAS,
 its PID, budgets, units/environment, MCP `2a7c8dc`, credentials and schema are unchanged. The panel
 shows actual model/configuration metadata, visible approved source/host selection and problem/metric

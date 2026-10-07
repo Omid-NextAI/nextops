@@ -2,9 +2,16 @@
 
 [فارسی](../fa/PROJECT_STATUS_BRIEF.md) · [Documentation index](INDEX.md) · [Project state](../PROJECT_STATE.md) · [Next task](../NEXT_TASK.md)
 
-Updated: 2026-10-04
+Updated: 2026-10-07
 
-Current controlled workspace: matched app/AI `7ce9d29` adds narrow diagnostic safeguards while
+Current controlled workspace: app `48e3a8a` is retained with the original OCS images, static login
+and simpler chat. AI API `ec1ed32`, Qwen3.8-27B Q8/CPU and MCP are unchanged. Exact-source CI,
+offline installation, real saved-chat/secondary-Zabbix browser, durable audit and app rollback
+passed. A model timeout remains recorded; thinking/full-context/raw quality/current WAN/VM/load
+are not accepted. [The live record](../requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md) and
+current manifest are authoritative; this is not full production acceptance.
+
+Earlier 2026-10-04 controlled workspace: matched app/AI `7ce9d29` adds narrow diagnostic safeguards while
 retaining 35B/CPU, saved standard chat, themes and OCS branding. Five-job CI, 524 local checks,
 three fresh offline installs, 45 functional cases, 36 text-free audits/nine live hashes, bounded
 queue recovery, exact69 rollback and final re-promotion passed. All four guests denied external

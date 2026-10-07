@@ -7,7 +7,14 @@
 Owner update (2026-09-26): the owner tested an ESXi VM snapshot restore. Its dated result has
 not been reviewed here; independent database backup and restore gates remain unpassed.
 
-Current controlled UI/source follow-up (2026-10-07): app/API **`ec1ed32`** expose actual Qwen3.8
+Current controlled interface (2026-10-07): app **`48e3a8a`** is live with the unchanged company
+images, static OCS login and compact workspace. AI API `ec1ed32`, Qwen3.8-27B Q8/CPU and MCP are
+unchanged; thinking is off. Real saved-chat/secondary-Zabbix, evidence, audit and exact app rollback
+checks passed. One intermittent model timeout and broader quality/offline gates remain open.
+See [the live record](docs/requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md) and
+[usage](docs/en/UI.md). Live controlled use is not full production acceptance.
+
+Earlier controlled UI/source follow-up (2026-10-07): app/API **`ec1ed32`** expose actual Qwen3.8
 metadata, visible approved Zabbix source/host selection and problem/metric filters. The existing
 secondary MCP source passed fresh reads on three approved targets, saved-chat resume, audit/hash
 matching and exact source rollback/reapply. Eight fresh finals passed bounded functionality;

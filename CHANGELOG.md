@@ -1,5 +1,18 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## OCS app-only controlled live rollout, 2026-10-07
+
+Retain app `48e3a8a` with unchanged company images, static login and compact evidence-on-demand
+workspace after offline install, exact rollback, real saved-chat/secondary-monitoring browser and
+durable audit checks. AI API `ec1ed32`, native Q8 and MCP remain unchanged. Preserve the failed
+harness reports and one model timeout; this does not qualify broad model quality or production.
+See [the bounded live record](docs/requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md).
+
+برنامهٔ `48e3a8a` با تصاویر اصلی، ورود ثابت و فضای کار سادهٔ شاهد بازشونده، پس از نصب
+آفلاین، بازگشت دقیق، مرورگر واقعیِ سابقه/پایش منبع دوم و ممیزی تثبیت شد. API مدل
+`ec1ed32`، Q8 بومی و MCP ثابت‌اند. شکست ابزارهای قبلی و پایان مهلت مدل محفوظ‌اند؛ کیفیت
+عمومی یا پذیرش تولید از این کار نتیجه نمی‌شود.
+
 ## OCS company-logo login and compact workspace: source candidate, 2026-10-07
 
 Replace the animated gate with an original-logo split login inspired by the owner-supplied video.
