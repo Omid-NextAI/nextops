@@ -81,6 +81,15 @@ credential rollback is required because neither changes. Retain old immutable re
   one existing warning in27.37s; types151, lint/format157, docs142/39 pairs, status/artifact and
   JS syntax/diff checks passed. Manifest regressions now use the explicit historical API suffix
   and the two recorded Q8 code identities, without relaxing the schema or quality exception.
+- Documentation head `5f9aac8` CI secret scan failed on one `generic-api-key` finding: the public
+  `ec1ed32…` Git source commit compared in a variable named `api_source`, not a credential. The
+  exact commit/path/rule/line fingerprint was reviewed against Git and the status manifest. Rename
+  it `serving_commit`; retain one exact historical fingerprint exception because full-history
+  scanning cannot be repaired by deleting a current line. No rule/path/value-wide exemption or
+  history rewrite. A failed scan is not relabelled passed; subsequent scan results are separate.
+  That head's other four CI jobs passed. The reviewed correction passed34 focused regressions
+  in3.89s, lint/format/docs/diff and the local pinned8.30.1 full-history text scan (264 commits,
+  ~7.77MB, no findings); historical DOCX conversion warnings remain a local coverage limitation.
 
 آزمون کد، ۱٬۴۴۶ مورد موفق، دو مورد مختص POSIX اجرا‌نشده در Windows و ۱۳۲ مورد خارج از
 انتخاب در۴۰٫۶۳ ثانیه دارد؛ هشدار قدیمی AnyIO باقی است. ۹۴ آزمون مرورگر کد اصلاح‌شده در
@@ -93,6 +102,14 @@ diff موفق‌اند. Gitleaks در متنِ اسکن‌شده موردی نی
 موجود در۲۷٫۳۷ ثانیه داشت؛ کنترل نوع۱۵۱ فایل، lint/قالب۱۵۷، اسناد۱۴۲/۳۹ جفت، وضعیت/فایل،
 نحو JS و diff موفق‌اند. آزمون منفیِ وضعیت اکنون پسوند تاریخی API را صریح بررسی می‌کند و
 کنترل Q8 دو شناسهٔ کد ثبت‌شده را می‌پذیرد؛ schema یا استثنای کیفیت آسان‌تر نشده است.
+اسکن اسرار CI کد سندِ `5f9aac8` یک یافتهٔ `generic-api-key` داشت: شناسهٔ عمومی commit برابر
+`ec1ed32…` در مقایسهٔ متغیر `api_source`، نه اطلاعات ورود. اثرانگشت دقیقِ commit/مسیر/قاعده/
+خط با Git و وضعیت انتشار بررسی شد. نام به `serving_commit` تغییر می‌کند؛ فقط همان یافتهٔ
+تاریخی مستثناست، زیرا حذف خط جاری، اسکن کل تاریخچه را اصلاح نمی‌کند. قاعده، مسیر یا مقدار
+به‌طور عمومی مستثنا و تاریخ بازنویسی نمی‌شود؛ اسکن ناموفق، موفق نام نمی‌گیرد و نتیجهٔ بعدی جداست.
+چهار کار دیگر CI آن کد موفق‌اند. اصلاح بازبینی‌شده،۳۴ آزمون محدود در۳٫۸۹ ثانیه، lint/قالب/
+اسناد/diff و اسکن متنِ کل تاریخ با نسخهٔ قفل‌شدهٔ8.30.1 را گذراند:۲۶۴ commit، حدود۷٫۷۷MB
+و بدون یافته. هشدار تبدیل DOCX تاریخی، محدودیت پوشش اسکن محلی باقی است.
 
 ## Live observations / مشاهدات زنده
 
