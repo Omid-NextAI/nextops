@@ -1,5 +1,139 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Documentation-only current-design alignment (2026-10-07) maps the retained audit-repair record
+and current manifest to the EN/FA architecture, stack, C1–C3 diagrams, MCP, development and status
+guides. Seven future diagrams and historical snapshots remain labeled and preserved. No original
+requirement, acceptance identifier, result or deployed capability is removed or newly credited.
+
+هماهنگیِ فقط مستنداتِ طراحی جاری در۷ اکتبر ۲۰۲۶، رکورد تثبیت‌شدهٔ ممیزی و manifest را به
+راهنمای EN/FA معماری، فناوری، نمودار C1 تا C3، MCP، توسعه و وضعیت وصل می‌کند. هفت نمودار
+آینده و سابقهٔ تاریخ‌دار با برچسب حفظ‌اند؛ نیاز اولیه، شناسه/نتیجهٔ پذیرش یا قابلیت مستقر
+حذف یا به‌تازگی پذیرفته نمی‌شود.
+
+Audit findings UI-01–UI-05, AI-01–AI-03, SEC-01–SEC-03 and DOC-01 map to
+[the bounded repair](AUDIT_REPAIR_2026-10-07.md),
+[actual live qualification](AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md), the current status
+manifest, `test_native_drain.py`, `test_inference_scheduler.py`, `test_evidence_redaction.py`,
+`test_app.py`, `test_source_access_postgresql.py`, `test_conversations_postgresql.py` and
+`test_ui_audit_repairs.py`. Exact app/API/MCP `52e5179` and collectors passed source and bounded
+live audit/rollback/retention checks. GOV-01 remains partial without repository administration;
+raw quality, thinking/privacy/full-context, server-WAN/VM/load and independent recovery are not
+resolved. These are audit-finding identifiers, not invented original-section numbers.
+
+یافته‌های UI-01 تاUI-05، AI-01 تاAI-03، SEC-01 تاSEC-03 و DOC-01 به مشخصات/پذیرش زندهٔ
+بالا، manifest جاری و آزمون‌های مالکیت بومی/ظرفیت/redaction/API/دسترسی منبع/سابقه/رابط ردیابی
+می‌شوند. کد دقیق `52e5179` برنامه/API/MCP و collector، آزمون کد و کنترل محدود زندهٔ ممیزی/
+بازگشت/تثبیت را گذراند. GOV-01 بدون مدیریت مخزن partial است؛ کیفیت خام، استدلال/حریم خصوصی/
+کل زمینه، WAN/VM/بار و بازیابی مستقل حل نشده‌اند. این شناسهٔ یافتهٔ audit است، نه شمارهٔ
+ساخته‌شدهٔ بخش نیاز اولیه.
+
+Sections11–17/20–21: the owner-authorized OCS app-only deployment maps to
+[the live qualification](OCS_UI_LIVE_QUALIFICATION_2026-10-07.md), the source redesign specification,
+EN/FA UI/testing guides, current app manifest and `test_ocs_redesign.py`. App `48e3a8a` retains
+AI API `ec1ed32`, native model/MCP and deterministic permissions. Real saved-chat/secondary
+evidence, responsive controls, audit/hash checks and exact app rollback are bounded evidence;
+the recorded inference timeout, raw quality and current WAN/VM/thinking/context limits remain.
+
+بخش‌های۱۱ تا۱۷/۲۰ تا۲۱: استقرار فقط برنامهٔ OCS با مجوز مالک به رکورد زندهٔ بالا، مشخصات
+بازطراحی، راهنمای رابط/آزمون دو زبان، manifest برنامه و آزمون بازطراحی ردیابی می‌شود.
+برنامهٔ `48e3a8a`، API مدل `ec1ed32`، مدل/MCP و مجوز قطعی را حفظ می‌کند. سابقه/شاهد منبع
+دوم، کنترل واکنش‌گرا، ممیزی/هش و بازگشت دقیق، شاهد محدودند؛ پایان مهلت ثبت‌شده، کیفیت خام
+و محدودیت جاری WAN/VM/استدلال/زمینه باقی‌اند.
+
+Sections11–17/20–21: enabled-model presentation and approved secondary inspection map to
+[the UI/source record](UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md), `capabilities.js`, readiness
+contracts, source catalogues, evidence presentation and the EN/FA panel/browser/API tests. Exact
+`ec1ed32` app/API deployment, eight fresh finals, two conversation/five evidence audits and source
+rollback/reapply are bounded functional evidence. Numeric severity/source/time/scope remain DTO
+facts; model-added labels or reachability interpretations are not authoritative. Native/model/MCP
+and permission boundaries are unchanged; no new quality exception or production acceptance.
+
+بخش‌های۱۱ تا۱۷/۲۰ تا۲۱: نمایش مدل فعال و بررسی منبع دومِ مجاز به رکورد رابط/کد بالا، ماژول
+نمایشی، قرارداد آمادگی، فهرست منبع، نمایش شاهد و آزمون پنل/مرورگر/API دو زبان ردیابی می‌شوند.
+استقرار دقیقِ برنامه/API با کد `ec1ed32`، هشت پاسخ تازه، دو ممیزی گفت‌وگو/پنج ممیزی شاهد و
+بازگشت/اعمال کد، شاهد کارکرد محدودند. شدت عددی، منبع، زمان و دامنه از DTO معتبرند؛ برچسب
+افزودهٔ مدل یا تفسیر دسترسی‌پذیری، شاهد معتبر نیست. مدل/runtime/MCP و مرز دسترسی ثابت‌اند؛
+استثنای کیفیت تازه یا پذیرش تولید اضافه نشده است.
+
+Sections11/16–17/20–21: the explicit owner standard-quality exception maps to
+[the controlled cutover](QWEN38_CONTROLLED_CUTOVER_2026-10-07.md), exact Q8 candidate/CPU profiles,
+canonical current release, and `test_qwen38_cutover_exception.py`. Fourteen real final answers,
+two installed-boundary checks, audit/hash matching and exact rollback/reapply/retention are bounded
+evidence, not raw-quality/thinking/max-context/server-WAN/VM/load or full production acceptance.
+An ordinary candidate cannot select itself; the exact exception cannot widen permissions or relabel
+failed gates. The35B expanded profile is preserved historical evidence, not Q8 qualification.
+
+بخش‌های۱۱/۱۶–۱۷/۲۰–۲۱: استثنای صریح مالک برای کیفیتِ حالت معمولی به رکورد گذار بالا،
+نامزد/نمایهٔ دقیق Q8 و CPU، وضعیت اصلی انتشار و آزمون اختصاصی ردیابی می‌شود. چهارده پاسخ
+واقعی، دو کنترل مرز نصب‌شده، تطبیق ممیزی/هش و بازگشت/اعمال/تثبیت دقیق، شاهد محدودند؛ پذیرش
+کیفیت خام، استدلال، زمینهٔ کامل، WAN/VM/بار یا تولید نیستند. نامزد عادی خود را انتخاب
+نمی‌کند؛ استثنای دقیق، مجوز را گسترش نمی‌دهد و معیار ناموفق را موفق نمی‌نامد. نمایهٔ35B
+شاهد تاریخی است، نه پذیرش Q8.
+
+Sections11/16–17/20–21: full greedy Q8 comparison passes13/fails3 unchanged semantic cases
+(main-only); finite coding passes12 boundaries per completed sample. Raw quality stays failed.
+Current status adds the dated failed candidate gate and sampler source tests as evidence, not live
+acceptance. Preserve explicit300 provenance, all five trials and independent/matched later gates.
+
+بخش‌های۱۱/۱۶–۱۷/۲۰–۲۱: مقایسهٔ کامل Q8 حریصانه در بازبینی عامل اصلی۱۳ مورد موفق و۳ مورد
+ناموفق دارد؛ هر نمونهٔ کامل کد دوازده مرز محدود را می‌گذراند. صحت خام هنوز ناموفق است.
+وضعیت ماشین‌خوان، معیار ناموفقِ تاریخ‌دار و آزمون کد نمونه‌گیری را شاهد می‌گیرد، نه پذیرش
+زنده. مهلت صریح۳۰۰، هر پنج آزمون و معیارهای مستقل و برنامهٔ بعدی حفظ شوند.
+
+
+Sections11/16–17/20–21: upstream-sampler native result is nine passed/two failed/five not run
+(main-only). Both completed finite coding samples pass, but unsupported upstream topology and
+stale-evidence timeout block selection. Greedy opt-in/mutual denial/default isolation map to
+configuration/adapter and `test_qwen38_sampling.py`; same full criteria and later gates required.
+
+بخش‌های۱۱/۱۶–۱۷/۲۰–۲۱: نتیجهٔ بومی نمونه‌گیری سازنده در بازبینی عامل اصلی نه موفق، دو
+ناموفق و پنج اجرا‌نشده است. دو نمونهٔ محدود کد موفق‌اند؛ ادعای بالادست و پایان مهلت شاهد
+کهنه مانع انتخاب است. نمایهٔ حریصانه، منع هم‌زمانی و جدایی پیش‌فرض به تنظیم، نگاشت درخواست
+و آزمون بالا متصل‌اند؛ مجموعهٔ کامل ثابت و معیارهای بعدی همچنان لازم‌اند.
+
+
+Sections11/16–17/20–21: the opt-in Qwen3.8 sampler comparison maps to settings, trusted adapter
+payload controls and `test_qwen38_sampling.py`. Default serving isolation, fixed corpus/criteria,
+no private thinking and exact source/profile identity are required; source wiring is not raw or
+live acceptance. See [qualification specification](QWEN38_QUALIFICATION_SPEC.md).
+
+بخش‌های۱۱/۱۶–۱۷/۲۰–۲۱: مقایسهٔ اختیاری نمونه‌گیری Qwen3.8 به تنظیم، نگاشت معتبر درخواست و
+`test_qwen38_sampling.py` ردیابی می‌شود. جدایی پیش‌فرض زنده، پرسش و معیار ثابت، منع استدلال
+خصوصی و هویت دقیق کد و نمایه الزامی‌اند؛ نگاشت کد به معنای پذیرش خام یا زنده نیست.
+
+Raw repair result for sections 11/16–17/20–21: three distinct frozen native trials scored 12/16,
+13/16 and 11/16 (main-only). The regressed third policy was rejected; exact source rollback preserves the
+unqualified `6c3a380` candidate and all failures. Finite guard checks, topology/scope/causal review
+and explicit deadlines remain strict. No model training, serving/thinking selection or acceptance
+is inferred from source CI or application-owned qualifiers. See the qualification specification.
+
+نتیجهٔ اصلاح خام در بخش‌های ۱۱/۱۶–۱۷/۲۰–۲۱: سه آزمون بومی با پرسش‌های ثابت و دستورهای متفاوت
+در بازبینی عامل اصلی به‌ترتیب ۱۲، ۱۳ و ۱۱ از ۱۶ امتیاز گرفتند. دستور سوم رد شد و با بازگشت
+دقیق کد، نامزد تأییدنشدهٔ `6c3a380` و همهٔ شکست‌ها حفظ شدند. کنترل محدود شرط نوع، بازبینی
+توپولوژی، دامنه و رابطهٔ علّی و ثبت صریح مهلت همچنان سخت‌گیرانه باقی‌اند. CI و اطلاعات
+درج‌شده توسط برنامه، به معنای آموزش، انتخاب مدل زنده، فعال‌شدن استدلال یا پذیرش مدل نیستند.
+
+Original sections11/16–17/20–21: the [raw-quality experiment](QWEN38_QUALIFICATION_SPEC.md) maps
+candidate instruction invariants to `inference/qwen38_prompt.py`, `test_qwen38_prompt.py` and
+`test_coding_guidance.py`. Source checks do not replace the unchanged sixteen-case native corpus,
+finite raw-code checker, semantic review or independent/live acceptance. Serving35B is unaffected.
+
+بخش‌های اصلی۱۱/۱۶–۱۷/۲۰–۲۱: آزمایشِ پیوندشده، قواعد دستورِ نامزد را به فایل دستور و دو آزمون
+بالا متصل می‌کند. کنترل کد، جای مجموعهٔ بومیِ ثابتِ شانزده‌پرسشی، کنترل محدود کد خام، بازبینی
+معنایی یا پذیرش مستقل/زنده نیست؛ مدل زندهٔ35B بدون تغییر می‌ماند.
+
+Original sections 11/16–17/20–21: the [answer-integrity source repair](ANSWER_INTEGRITY_SPEC.md)
+maps scoped protocol conclusions and application-owned evidence qualifiers to
+`api/evidence_qualifiers.py`, integrity guards, unit/API tests and
+`tests/browser/test_evidence_qualifiers.py`. Local source/browser fixtures preserve raw metadata,
+canonical evidence, denials, exact technical times and logout clearing. Raw-model quality,
+independent/native/serving/WAN/model-rollback gates remain separate, not inferred passes.
+
+بخش‌های اصلی ۱۱/۱۶–۱۷/۲۰–۲۱: الزامِ پیوندشده، نتیجه‌گیریِ محدود پروتکل و مشخصات شاهدِ درج‌شده
+توسط برنامه را به ماژول فوق، کنترل صحت و آزمون واحد/API/مرورگر متصل می‌کند. شاهد محلیِ کد و
+مرورگر، metadata خام، شاهد کامل، ردِ دسترسی، زمان فنی و پاک‌سازی پس از خروج را کنترل می‌کند؛
+کیفیت خام مدل و پذیرش مستقل/بومی/استقرار/WAN/بازگشت مدل، جدا و نه موفقیت استنتاجی‌اند.
+
 UI-R01–06 controlled app delivery: [dated live record](REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md)
 binds `836b1ea` to exact-source CI, 47 fixture browser tests, real auth/saved-chat/source/evidence
 checks, durable audit/hash matching and tested prior-release rollback. Current-app server-WAN,

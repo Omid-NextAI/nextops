@@ -1,113 +1,92 @@
-# Suggested technology stack
+# Current technology stack and future options
 
-[فارسی](../fa/TECH_STACK.md) · [Index](INDEX.md) · [Diagram atlas](DIAGRAMS.md) · [CPU evaluation](CPU_AI.md)
+[فارسی](../fa/TECH_STACK.md) · [Index](INDEX.md) · [Architecture](ARCHITECTURE.md) · [Diagrams](DIAGRAMS.md) · [CPU evaluation](CPU_AI.md)
 
-> **Architecture recommendation plus a controlled deployed subset.** Python 3.12, `uv`, Pydantic, FastAPI/Uvicorn, PostgreSQL through SQLAlchemy/Alembic/Psycopg, Ruff, mypy and pytest are locked. The current user-testing UI is locally bundled HTML/CSS/JavaScript, not the proposed React/Vite replacement. The pinned llama.cpp/Qwen CPU service, connector, systemd units, Nginx/TLS, application PostgreSQL, and Zabbix path are deployed with scoped evidence; production performance and recovery remain unaccepted. See the [release manifest](../status/current-release.yaml).
+## Deployed controlled slice, 2026-10-07
 
-## Recommended starting combination
+This guide describes the current repository and retained deployment, not a technology replacement
+plan. [Release status](../status/current-release.yaml) owns exact serving identities/artifact pins;
+[pyproject.toml](../../pyproject.toml) and [uv.lock](../../uv.lock) own package definitions and
+resolved versions. App/API/MCP source is `52e5179`. Live controlled use is not production acceptance.
 
-**React + TypeScript + Vite → FastAPI + Pydantic → PostgreSQL + SQLAlchemy + Alembic**, with a bounded durable worker, an independently protected **MCP gateway**, and one local **llama.cpp CPU inference service**.
-
-Build a modular application, not a service per library. The API and worker share domain code; the gateway and connector runners are separated to protect credentials. The browser receives static frontend assets from the reverse proxy. There is no requirement for a production Node.js application server or an external AI provider.
-
-## 1. Core stack and ownership
-
-The table mixes the deployed controlled subset with future choices. Treat an entry as deployed only when the release manifest and project state say so. “Core” means part of the implementation target, not automatic production acceptance. Linked documentation establishes library capabilities, not measured suitability for this server.
-
-| Layer | Suggested choice | Purpose in NextOps | Important constraint |
-|---|---|---|---|
-| Host | Ubuntu 24.04 LTS baseline | Initial single-host environment | Confirm installed OS, support and owner approval; do not reinstall a working host. |
-| Python | Python 3.12 baseline + `uv` | Backend and connector environment; reproducible lock/sync [1] | Lock the interpreter and dependencies after compatibility checks. |
-| API/contracts | FastAPI + Pydantic + Uvicorn | Versioned HTTP API, typed validation and OpenAPI [2] | Validation is not authorization; CPU inference runs outside API workers. |
-| Persistence | PostgreSQL + SQLAlchemy + Alembic | Authoritative state, transactions and migrations [3] | Separate service roles; no shared superuser; use real PostgreSQL in integration tests. |
-| Durable work | PostgreSQL-backed jobs + bounded Python workers | Leases, checkpoints, outbox and reconciliation | Application design, not a ready-made exactly-once guarantee. No web-process-only background jobs. |
-| Generation | Pinned CPU build of `llama.cpp` / `llama-server` | Local quantized generation [4] | Disable accelerator backends/offload; verify CPU execution; no Internet fallback. |
-| Tool protocol | Official MCP Python SDK | Actual protocol lifecycle, tools and transports [5] | Pin the SDK/protocol pair; policy remains trusted application code. |
-| Web app | React + TypeScript + Vite | Typed operational UI and static production bundle [6] | Build with a compatible supported Node.js release; do not expose the Vite development server in production. |
-| UI system | Tailwind CSS + reviewed shadcn/ui components | Shared tokens, forms, tables, dialogs and RTL-aware components [7] | Review copied components; keyboard, contrast and Persian usability still require tests. |
-| Language | i18next + react-i18next | Local Persian/English dictionaries [8] | Bundle translations locally; no hosted translation dependency. |
-| API state | TanStack Query | Query lifecycle, caching and invalidation [9] | Scope cache keys; clear on logout/scope changes; never trust cached approval state. |
-| Edge and deployment | Nginx + Docker Compose; documented systemd alternative | TLS ingress and explicit processes/networks [10] | One failure domain; internal-only database/model/MCP; no Docker socket in the application. |
-| Evidence storage | Restricted local filesystem + PostgreSQL metadata | Content hashes, provenance and permission-scoped retrieval | Redact before model exposure; controlled retention and off-host recovery. |
-| Quality tooling | Ruff, mypy, pytest, HTTPX; Vitest and Playwright | Formatting/types, backend contracts and browser tests [11] | Simulator tests are not device validation; document failed/skipped/unrun tests. |
-
-The original baseline selected Python/FastAPI, PostgreSQL, React/Vite, local CPU inference and MCP. The Python/FastAPI/PostgreSQL stack, a static local panel, native packaging/deployment, local CPU inference, and the narrow Zabbix boundary are implemented for controlled testing. React/Vite and the official MCP SDK remain unevaluated future increments; production packaging acceptance and recovery remain open.
-
-## 2. Visual and interaction stack
-
-Use a small design system before building many screens. Define semantic tokens for spacing, typography, surfaces, focus rings and states: healthy, warning, critical, stale, denied, pending approval, overloaded and unknown outcome. Do not rely on color alone.
-
-The proposed combination is **Tailwind CSS + shadcn/ui + react-i18next**. shadcn/ui documents RTL support [7], but translating labels does not automatically mirror layout correctly. Test navigation, dialogs, menus, tables and keyboard focus in both directions. Keep IP addresses, commands, file paths and model identifiers LTR-isolated. Treat localized dates as display values; store UTC timestamps.
-
-Use TanStack Query for server state, not as a second authorization engine. SSE updates refresh run views through the authenticated API. Use React component state for local interface state before adding another global state library. Design explicit empty, loading, stale, partial, offline and denied states.
-
-**Optional after the topology API exists:** React Flow for interactive asset/dependency views [12]. Render only authorized nodes; start with filtered incident-sized subgraphs, a read-only canvas and a keyboard-accessible table alternative. It is a UI renderer, not the topology database. Do not turn every asset into a continuously animated graph.
-
-All frontend assets must be locally served at runtime. Font licensing and distribution are separate implementation checks. No CDN fonts, hosted icons, analytics or external translation calls are required by this recommendation.
-
-## 3. CPU AI profile
-
-| Workload | Starting approach | Promotion gate |
+| Layer | Current implementation | Important boundary |
 |---|---|---|
-| Parsing, permissions, scheduling and runbooks | Deterministic typed Python | Unit, policy and adversarial tests |
-| Main language generation | One quantized multilingual candidate around 7–9B parameters through local llama.cpp | Persian/English task quality, tool arguments, time to first token, total latency and memory |
-| Lightweight triage | Compare a smaller local model with deterministic classification | Measurable benefit over the simpler baseline |
-| Higher-quality synthesis | Evaluate a roughly 14B candidate after the baseline | Quality gain justifies measured latency; not selected because RAM is available |
-| Retrieval embeddings | One benchmarked multilingual CPU encoder, when retrieval needs it | Persian recall, offline loading, dimensions/versioning and CPU cost |
-| Reranking | Disabled initially | Demonstrated retrieval benefit within the shared resource budget |
+| Physical host and guests | Existing ESXi/G10; four existing Ubuntu 24.04 role guests | One failure domain; Ubuntu is not a replacement ESXi host |
+| Python and packaging | Python 3.12, uv, setuptools; application version 0.1.0 | Frozen reviewed lock and preprovisioned offline wheel bundles |
+| API/contracts | FastAPI, Pydantic, Uvicorn | Typed validation plus independent deterministic authorization |
+| State/migrations | PostgreSQL 16.15, Psycopg, SQLAlchemy, Alembic | Separate restricted NextOps and Zabbix databases; no shared administrator account |
+| Execution | Bounded API use cases, persisted investigations/results/audit and conversation records | Not a deployed generic background-worker/outbox platform |
+| CPU inference | Pinned llama.cpp `v0.4.1` / `b29c606e`, selected Qwen3.8-27B Q8 | Local CPU only; no cloud, GPU dependency or runtime download |
+| MCP | Official Python SDK `mcp==1.30.0`; authenticated Streamable HTTP/TLS | Canonical gateway on the existing connector VM; MCP is not authorization |
+| Runner boundary | Separate gateway/runner identities; bidirectional peer-UID-verified Unix socket | Target credentials and approved LAN routes belong only to the runner |
+| Evidence drivers | Scoped Zabbix JSON-RPC; existing forced-command Linux SSH collectors | Protected source/target catalog, TLS/SSH trust, allowlists, deadlines and response caps |
+| Frontend | Local semantic HTML, CSS and JavaScript in `packages/nextops/api/static/` | No React/Vite/Tailwind/Node production server or new frontend package manager |
+| Brand and localization | Unchanged local OCS dark/light JPEGs, company tokens, EN/FA dictionaries, RTL/LTR and themes | Static company-logo login; no remote fonts, icon CDN or hosted translation |
+| Deployment | Native systemd units, Nginx/TLS, immutable releases and protected stable links | Verified offline import and exact rollback; not automatic deployment on GitHub push |
+| Quality | Ruff, mypy, pytest, HTTPX, Playwright, real PostgreSQL 16/17 integration, Gitleaks and validators | Fixture/source tests and real infrastructure acceptance remain separate |
 
-The existing `Qwen3-8B` and `Qwen3-Embedding-0.6B` examples remain **evaluation candidates from the specification**, not claims that they are the latest or best models. Model licenses, revisions, quantization, tokenizer/templates and checksums must be reviewed separately.
+The official MCP SDK is already deployed, not an unevaluated future dependency. The old HTTP
+connector service is disabled and retained only for exact rollback. The secondary Zabbix server
+is an approved API integration; its separate existing Docker stack is not NextOps's deployment
+technology or a newly managed database.
 
-Begin with one generation service and one active request. Measure queue delay, prompt processing, generation, p50/p95 end-to-end latency, cancellation and pressure under mixed work. Set global CPU/thread limits; do not multiply a 90-thread pool across workers. Prefer explicit overload and deferred batch work to an unbounded queue. See [CPU-only AI](CPU_AI.md).
+## Selected inference profile and its limits
 
-## 4. Add only when the relevant feature needs it
+The retained profile uses 32 workers, one native slot, configured 16K context, six whole saved
+turns, one active/two queued requests and thinking off. Queue/provider/app/proxy budgets remain
+5/300/330/360 seconds. The native memory limit remains 96 GiB. Guest allocations and apparent
+free host RAM are not measurements of model quality, usable concurrency or NUMA locality.
 
-| Optional component | Add when | Keep out of the initial default because |
+Raw model quality remains failed at 13/16 under the recorded owner exception. Thinking/privacy,
+full-window quality and current-source WAN/VM/load qualification remain open. The chosen
+configuration is not a claim that this model is the latest vendor model, universally accurate or
+the fastest CPU option. Compare candidates only with pinned artifacts and measured acceptance;
+see [CPU AI](CPU_AI.md) and [Testing](TESTING.md).
+
+## Frontend and data conventions
+
+Keep the current modular static implementation. `app.js`, `theme.js`, `capabilities.js` and
+`investigation-view.js` use existing API contracts; CSS responsibilities and local assets remain
+separate. `pyproject.toml` includes `static/*` in the wheel. No frontend lockfile is required for
+a package graph that does not exist; adding React merely to satisfy an old proposal would rebuild
+working architecture.
+
+UI state cannot authorize operations or substitute cached evidence for fresh reads. Saved-chat
+data is backend-owned and owner-scoped; visual theme preferences are separate. Keep technical
+identifiers/code LTR within Persian RTL, UTC in storage, readable local font fallbacks, explicit
+failure states, keyboard access and logout-sensitive-state cleanup.
+
+## Retained future options, not installed capabilities
+
+These preserve the earlier design choices without presenting them as today's implementation.
+Each adoption needs a bounded specification, relevant ADR, offline provisioning, bilingual
+acceptance and measured benefit.
+
+| Option | Appropriate trigger | Must preserve |
 |---|---|---|
-| pgvector | Scoped semantic retrieval is justified by bilingual evaluation [13] | Lexical retrieval and reliable evidence provenance come first; vector search does not implement authorization. |
-| Prometheus + Grafana | The first operational slice needs local dashboards and alerts | They observe NextOps; they do not replace security audit or prove connector compatibility. |
-| OpenTelemetry SDK/Collector | Cross-process tracing answers a concrete operational question [14] | Collect only required signals; redact content and keep export local. |
-| Redis | Measured caching/rate-limit contention requires it | PostgreSQL already owns jobs and approvals; Redis must not become a second authority. |
-| React Flow | A reviewed topology feature and bounded graph endpoint exist | Avoid a visualization dependency before the underlying evidence model is useful. |
-| External secrets-manager adapter | An approved on-premises secret service is available | MVP still needs protected credentials and key recovery; never substitute plaintext `.env` storage in production. |
+| General PostgreSQL-backed worker, leases/checkpoints/outbox | A feature needs durable asynchronous execution beyond current bounded use cases | Audit, permission rechecks, idempotency and uncertain-outcome reconciliation |
+| React/TypeScript/Vite; reviewed shadcn/ui/Tailwind/i18next/TanStack Query | A justified frontend migration, not reference reconstruction alone | Local static output, session contracts, owner isolation, EN/FA and accessibility |
+| Local retrieval/pgvector and optional CPU encoder/reranker | Bilingual relevance and authorization filtering prove useful | Document provenance separate from live evidence; no remote embeddings |
+| React Flow/topology | A permitted, bounded topology API exists | Provenance/freshness, keyboard alternatives and read-only starting scope |
+| Local OpenTelemetry/Prometheus/Grafana | A specific operational visibility need | Redaction/local telemetry; security audit remains independent |
+| Redis or another workflow framework | Measurement demonstrates missing functionality | PostgreSQL authority and compatible recovery/approval semantics |
+| Other CPU inference runtimes or replicas | Benchmarks justify migration or added complexity | No cloud fallback/GPU requirement; pinned templates, resources and rollback |
+| Compose inside guests | A separately reviewed deployment need | No-pull offline artifacts, no container socket, equivalent enforced boundaries |
 
-These are feature-gated options, not optional security. Authentication, scoped authorization, audit, approved-target checks, TLS/SSH verification and deny-by-default execution are foundations.
+Broader connectors and controlled remediation remain in the roadmap, not invented active
+integrations. Kubernetes, Kafka, service mesh, remote AI and foundational model training are not
+required to improve the current evidence path.
 
-## 5. Alternatives and explicit non-goals
+## Packaging and release discipline
 
-| Alternative | Decision for this deployment |
-|---|---|
-| Next.js instead of Vite | Revisit only for a demonstrated SSR/server-rendering requirement; keep one backend authority now. |
-| Ollama / OpenVINO CPU / vLLM CPU instead of llama.cpp | Benchmark a replacement only after checking CPU ISA, models, templates and operating cost; never deploy all runtimes by default. |
-| Celery, Temporal or another workflow framework | Revisit for demonstrated workflow complexity or scale; document recovery/approval migration before changing engines. |
-| SQLite or MySQL as NextOps's internal database | Deferred parity work; managed MySQL/MariaDB remains an integration requirement. |
-| Kubernetes, Kafka, service mesh or separate graph/vector services | No initial requirement has been established; require a new ADR and measured need. |
-| Cloud AI / remote GPU services | Not permitted for this deployment, even as a fallback. |
-| Foundation-model training | Not an MVP requirement. Invest first in evidence, retrieval, tool contracts and evaluation. |
+Provision runtime/native libraries, Python wheels, UI/translations/API-documentation assets,
+model/template files and browser test dependencies deliberately. Missing artifacts must fail
+preflight/readiness, not silently download. Keep component/model licenses and hashes, exact source
+and build flags in their existing manifests. Development tools are not automatically runtime
+dependencies.
 
-## 6. Locking, packaging and adoption order
-
-After Phase 0 approval, choose supported compatible versions rather than copying whatever an install command calls `latest`. Commit a backend lockfile and one frontend lockfile; record Node/Python versions, CPU runtime commit/build flags, container digests and model manifests. `uv` supports lock/sync workflows [1]; it does not eliminate offline artifact preparation.
-
-First implement typed domain/policy contracts and denial tests. Next add PostgreSQL migrations, durable state and audit, followed by the local CPU benchmark and read-only Linux/Zabbix slice. Add UI components against reviewed API contracts, then retrieval/topology and optional observability as needed. Full sequencing remains in the [roadmap](ROADMAP.md).
-
-Release artifacts need dependency inventories, licenses and checksums. Prepare model files, wheels/images, frontend assets, local API documentation assets and browser-test binaries in controlled provisioning. Missing runtime artifacts must fail preflight instead of downloading silently. Development tools are not automatically production dependencies.
-
-## Official references
-
-Reviewed 2026-09-20. These document capabilities, not G10 benchmarks or a compatibility lock. Model examples are inherited from the project specification.
-
-[1]: https://docs.astral.sh/uv/concepts/projects/sync/
-[2]: https://fastapi.tiangolo.com/features/
-[3]: https://docs.sqlalchemy.org/en/20/intro.html
-[4]: https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md
-[5]: https://modelcontextprotocol.io/docs/sdk
-[6]: https://vite.dev/guide/
-[7]: https://ui.shadcn.com/docs/rtl
-[8]: https://react.i18next.com/
-[9]: https://tanstack.com/query/latest/docs/framework/react/overview
-[10]: https://docs.docker.com/compose/intro/compose-application-model/
-[11]: https://playwright.dev/docs/intro
-[12]: https://reactflow.dev/learn
-[13]: https://github.com/pgvector/pgvector
-[14]: https://opentelemetry.io/docs/what-is-opentelemetry/
+GitHub CI runs without infrastructure credentials. It covers PostgreSQL 16 (deployed major) and
+17; a green check does not configure branch protection or deploy a release. Follow
+[Development](DEVELOPMENT.md), [Offline runtime](OFFLINE_RUNTIME.md) and
+[the current bounded qualification](../requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md).
+Independent recovery remains owner-deferred, not passed.

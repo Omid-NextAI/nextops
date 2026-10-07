@@ -2,7 +2,17 @@
 
 [فارسی](../fa/SECURITY.md) · [Index](INDEX.md)
 
-**Status: required control set with a tested source-level subset.** Local identity, server-derived scopes, deterministic denial, secret checks, append-restricted audit and inference service authentication are implemented; complete gateway, connector, deployment and remediation controls remain unimplemented. Source: master specification sections 11–14, 18 and 20–21. See also the [repository security policy](../../SECURITY.md).
+**Status: required controls with a qualified bounded read-only deployment, not full production
+acceptance.** Retained `52e5179` includes local identity, server-derived scopes, deterministic
+denial, append-restricted audit, protected CPU inference and the real MCP gateway/isolated runner.
+Native-call ownership, recognized-secret redaction and late authorization/mandatory audit repairs
+have bounded source/live evidence. This does not qualify arbitrary secret formats, out-of-band
+privileged edits, future remediation, all threat scenarios or deferred recovery. See
+[the manifest](../status/current-release.yaml),
+[actual qualification](../requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md) and
+[current architecture](ARCHITECTURE.md). Repository protection GOV-01 still needs administration
+access. Source: master sections 11–14, 18 and 20–21 and the
+[repository security policy](../../SECURITY.md).
 
 ## Trust model
 

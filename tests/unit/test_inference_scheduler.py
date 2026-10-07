@@ -85,7 +85,7 @@ def test_one_active_plus_two_queued_rejects_fourth_and_recovers() -> None:
     asyncio.run(scenario())
 
 
-def test_provider_timeout_releases_capacity() -> None:
+def test_provider_timeout_holds_capacity_until_actual_completion() -> None:
     async def scenario() -> None:
         provider = ControlledProvider()
         service = BoundedInferenceService(
@@ -97,13 +97,18 @@ def test_provider_timeout_releases_capacity() -> None:
             await service.generate(_request())
         assert captured.value.code is ErrorCode.TIMEOUT
         readiness = await service.readiness()
-        assert readiness.active_requests == 0
+        assert readiness.active_requests == 1
+        assert readiness.state is ReadinessState.DEGRADED
         assert readiness.queued_requests == 0
+        provider.release.set()
+        await asyncio.gather(*service._generations)
+        await asyncio.sleep(0)
+        assert (await service.readiness()).active_requests == 0
 
     asyncio.run(scenario())
 
 
-def test_queue_timeout_and_cancellation_both_release_capacity() -> None:
+def test_queue_timeout_cleans_waiter_and_active_cancellation_keeps_native_owner() -> None:
     async def scenario() -> None:
         provider = ControlledProvider()
         service = BoundedInferenceService(
@@ -121,7 +126,12 @@ def test_queue_timeout_and_cancellation_both_release_capacity() -> None:
         with pytest.raises(asyncio.CancelledError):
             await active
         recovered = await service.readiness()
-        assert recovered.active_requests == 0
+        assert recovered.active_requests == 1
+        assert recovered.state is ReadinessState.DEGRADED
         assert recovered.queued_requests == 0
+        provider.release.set()
+        await asyncio.gather(*service._generations)
+        await asyncio.sleep(0)
+        assert (await service.readiness()).active_requests == 0
 
     asyncio.run(scenario())

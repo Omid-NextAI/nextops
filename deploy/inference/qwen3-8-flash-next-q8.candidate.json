@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0.0",
+  "model_id": "nextops-qwen3-8-flash-next-q8-0",
+  "status": "provisioning_unselected",
+  "source_repository": "https://huggingface.co/ggml-org/Qwen3.8-Flash-Next-GGUF",
+  "source_revision": "052beeaca7bec4a303e59cc7bc630c4f3a1b845d",
+  "upstream_repository": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next",
+  "upstream_reference_revision": "de4b8e4d43b917e7706784d8bb445c9af86a3540",
+  "conversion_source_revision_verified": true,
+  "conversion_provenance": "pinned_quantizer_src_sha_and_resolved_official_upstream_revision",
+  "quantized_by": "ggml-org",
+  "quantization": "Q8_0",
+  "total_size_bytes": 162624826784,
+  "shards": [
+    {
+      "filename": "Qwen3.8-Flash-Next-Q8_0-00001-of-00002.gguf",
+      "size_bytes": 10945440,
+      "sha256": "dcee5ef77333d9dd4ff9b9bf569732b2e911a5bc8f2cd984e5b22c8b6af75b6a"
+    },
+    {
+      "filename": "Qwen3.8-Flash-Next-Q8_0-00002-of-00002.gguf",
+      "size_bytes": 162613881344,
+      "sha256": "aab73e5619b2448224cbfd15d4ee260fe8fedb686be51ac42304685cdd787d44"
+    }
+  ],
+  "license": {
+    "identifier": "Qwen-Community-1.0",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/de4b8e4d43b917e7706784d8bb445c9af86a3540/LICENSE",
+    "use_scope": "private_isolated_development_trial",
+    "customer_access_planned": true,
+    "internal_use_exception_for_customer_deployment": false,
+    "customer_deployment_review": "pending_applicability_and_organizational_approval"
+  },
+  "metadata": {
+    "scope": "verified_first_shard_only",
+    "architecture": "qwen4exp",
+    "gguf_version": 3,
+    "split_count": 2,
+    "chat_template_sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041"
+  },
+  "runtime_commit": "b29c606e28a01b1bc8c1351026a0fa6e616bf6c4",
+  "cpu_only_required": true,
+  "gpu_layers": 0,
+  "runtime_download_allowed": false,
+  "deployment_selection_allowed": false,
+  "public_thinking_enabled": false,
+  "private_reasoning_persisted": false,
+  "configured_context_tokens": 16384,
+  "max_output_tokens": 2048,
+  "request_reasoning_budget_tokens": 128,
+  "deadline_seconds": 120,
+  "max_active_requests": 1,
+  "max_queued_requests": 2,
+  "qualification": {
+    "artifact_import": "partial",
+    "actual_first_shard_metadata": "passed",
+    "template_tokenization": "not_run",
+    "cpu_load": "not_run",
+    "standard_semantics": "not_run",
+    "thinking_semantics_privacy": "not_run",
+    "expanded_context_latency": "not_run",
+    "latency_resource_comparison": "not_run",
+    "matched_application": "not_run",
+    "wan_offline": "not_run",
+    "runtime_model_rollback": "not_run",
+    "customer_license_review": "partial"
+  }
+}

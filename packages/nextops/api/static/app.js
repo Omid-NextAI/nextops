@@ -127,6 +127,11 @@ const translations = {
   }
 };
 
+const sessionPreference = {
+  read() { try { return sessionStorage.getItem("nextops-session") || ""; } catch { return ""; } },
+  write(token) { try { sessionStorage.setItem("nextops-session", token); } catch { /* Current-tab memory remains usable. */ } },
+  clear() { try { sessionStorage.removeItem("nextops-session"); } catch { /* No persisted token is available. */ } }
+};
 const state = {
   language: (() => { try { return localStorage.getItem("nextops-language") === "fa" ? "fa" : "en"; } catch { return "en"; } })(),
   answerLocale: "en",
@@ -136,18 +141,21 @@ const state = {
   lastEvidence: null,
   history: [],
   conversationsEnabled: false,
+  savedChatsRequest: 0,
   thinkingEnabled: false,
   conversationId: null,
   pendingMessage: null,
   busy: false,
   epoch: 0,
+  // Session capabilities survive chat resets, but not logout or re-authentication.
+  sessionEpoch: 0,
   actor: null,
   users: [],
   usersOffset: 0,
   usersNext: null,
   usersBusy: false,
   passwordUser: null,
-  token: sessionStorage.getItem("nextops-session") || ""
+  token: sessionPreference.read()
 };
 const byId = id => document.getElementById(id);
 Object.assign(translations.en, {
@@ -240,32 +248,32 @@ function userError(error) {
 
 async function refreshUsers(offset = state.usersOffset) {
   if (state.usersBusy) return false;
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
   setUsersBusy(true); byId("usersError").textContent = "";
   byId("usersStatus").textContent = translations[state.language].usersLoading;
   try {
     const page = await api(`/api/v1/users?offset=${offset}`);
-    if (epoch !== state.epoch) return false;
+    if (epoch !== state.sessionEpoch) return false;
     state.users = page.users; state.usersOffset = offset; state.usersNext = page.next_offset;
     closeUserPassword(); renderUsers();
     byId("usersStatus").textContent = page.users.length ? "" : translations[state.language].usersEmpty;
     return true;
   } catch (error) {
-    if (epoch === state.epoch && state.token) { byId("usersStatus").textContent = ""; userError(error); }
+    if (epoch === state.sessionEpoch && state.token) { byId("usersStatus").textContent = ""; userError(error); }
     return false;
-  } finally { if (epoch === state.epoch) setUsersBusy(false); }
+  } finally { if (epoch === state.sessionEpoch) setUsersBusy(false); }
 }
 
 async function userMutation(path, method, payload) {
   if (state.usersBusy) return;
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
   byId("userCreatePassword").value = ""; byId("userResetPassword").value = "";
   byId("userResetConfirm").checked = false;
   setUsersBusy(true); byId("usersError").textContent = "";
   byId("usersStatus").textContent = translations[state.language].usersSaving;
   try {
     await api(path, { method, body: JSON.stringify(payload) });
-    if (epoch !== state.epoch) return;
+    if (epoch !== state.sessionEpoch) return;
     closeUserPassword(); byId("userCreateForm").reset();
     setUsersBusy(false);
     if (await refreshUsers()) {
@@ -273,8 +281,8 @@ async function userMutation(path, method, payload) {
       byId(path === "/api/v1/users" ? "userCreateName" : "usersRefresh").focus();
     }
   } catch (error) {
-    if (epoch === state.epoch && state.token) { byId("usersStatus").textContent = ""; userError(error); }
-  } finally { if (epoch === state.epoch) setUsersBusy(false); }
+    if (epoch === state.sessionEpoch && state.token) { byId("usersStatus").textContent = ""; userError(error); }
+  } finally { if (epoch === state.sessionEpoch) setUsersBusy(false); }
 }
 
 byId("usersButton").addEventListener("click", () => {
@@ -335,8 +343,8 @@ Object.assign(translations.en, {
   starterFirewall: "Firewalls & VPN", starterSecurity: "Defensive security",
   connectedEvidence: "AVAILABLE EVIDENCE",
   capabilityText: "Live: authorized Zabbix and Linux. Other devices: technical guidance only, not connected access.",
-  welcomeTitle: "What can I help you investigate?",
-  welcomeHelp: "Explain a problem, understand an alert, or plan safe diagnostics. Start with general advice; select a live mode when you need verified observations.",
+  welcomeTitle: "How can I help?",
+  welcomeHelp: "Ask a technical question, or choose live monitoring to inspect your systems.",
   starterTriage: "Triage a service failure", starterTriageHelp: "Safe first checks, before changing anything.",
   starterLatency: "Investigate network latency", starterLatencyHelp: "Separate DNS, routing and application delays.",
   starterAlerts: "Review Zabbix evidence", starterAlertsHelp: "Use fresh, scoped Zabbix evidence.",
@@ -363,8 +371,8 @@ Object.assign(translations.fa, {
   starterFirewall: "فایروال و VPN", starterSecurity: "امنیت دفاعی",
   connectedEvidence: "شواهد در دسترس",
   capabilityText: "دادهٔ زنده: Zabbix و Linux مجاز. برای سایر تجهیزات، فقط راهنمایی فنی ارائه می‌شود؛ اتصال مستقیم وجود ندارد.",
-  welcomeTitle: "چه چیزی را با هم بررسی کنیم؟",
-  welcomeHelp: "مشکل را شرح دهید، هشدار را بهتر بشناسید یا بررسی ایمن را برنامه‌ریزی کنید. برای مشاوره از حالت عمومی و برای مشاهدهٔ تأییدپذیر از حالت دارای شاهد استفاده کنید.",
+  welcomeTitle: "چطور می‌توانم کمک کنم؟",
+  welcomeHelp: "پرسش فنی بپرسید یا برای بررسی سامانه‌ها، پایش زنده را انتخاب کنید.",
   starterTriage: "بررسی خرابی سرویس", starterTriageHelp: "بررسی‌های ایمن اولیه، پیش از هر تغییر.",
   starterLatency: "بررسی تأخیر شبکه", starterLatencyHelp: "تفکیک تأخیر DNS، مسیر و برنامه.",
   starterAlerts: "مرور شواهد Zabbix", starterAlertsHelp: "با شاهد تازه و محدود به دامنهٔ مجاز Zabbix.",
@@ -382,6 +390,31 @@ Object.assign(translations.fa, {
   monitoringChecking: "بررسی دسترسی به دادهٔ Zabbix", monitoringReady: "دادهٔ Zabbix در دسترس است",
   monitoringUnavailable: "دادهٔ Zabbix در دسترس نیست",
   deniedError: "سیاست برنامه این درخواست را مجاز نمی‌داند؛ میزبان مجاز انتخاب کنید یا با مدیر سامانه تماس بگیرید."
+});
+
+Object.assign(translations.en, {
+  loginHeadline: "Welcome back.", loginLead: "Your infrastructure. One clear workspace.",
+  welcome: "Sign in to NextOps", credentialsPrompt: "Use your organization account.",
+  signIn: "Sign in", privacyNote: "Session stays in this browser tab.",
+  workspaceHeadline: "Ask NextOps", savedChats: "Recent conversations",
+  savedPrivacy: "Only you can see these. Avoid sharing secrets.",
+  generalMode: "Chat", monitoringMode: "Live monitoring", incidentMode: "Investigate",
+  questionPlaceholder: "Ask about your systems...",
+  starterTriage: "Servers & services", starterLatency: "Network & DNS",
+  starterAlerts: "Zabbix alerts", starterSecurity: "Security",
+  askAssistant: "Send question"
+});
+Object.assign(translations.fa, {
+  loginHeadline: "خوش آمدید.", loginLead: "زیرساخت شما، در یک محیط روشن و ساده.",
+  welcome: "ورود به NextOps", credentialsPrompt: "با حساب سازمانی خود وارد شوید.",
+  signIn: "ورود", privacyNote: "نشست فقط در این زبانهٔ مرورگر نگه‌داری می‌شود.",
+  workspaceHeadline: "از NextOps بپرسید", savedChats: "گفت‌وگوهای اخیر",
+  savedPrivacy: "فقط برای شما قابل مشاهده‌اند. اطلاعات محرمانه وارد نکنید.",
+  generalMode: "گفت‌وگو", monitoringMode: "پایش زنده", incidentMode: "بررسی رخداد",
+  questionPlaceholder: "دربارهٔ سامانه‌ها بپرسید...",
+  starterTriage: "سرورها و سرویس‌ها", starterLatency: "شبکه و DNS",
+  starterAlerts: "هشدارهای Zabbix", starterSecurity: "امنیت",
+  askAssistant: "ارسال پرسش"
 });
 
 const starters = {
@@ -421,6 +454,7 @@ function clearConversation() {
   byId("assistantError").textContent = "";
   byId("copyStatus").textContent = "";
   byId("requestStatus").textContent = "";
+  window.NextOpsCapabilities?.locale(state.language);
   setContextNotice(state.conversationsEnabled ? "savedContextHelp" : "contextHelp");
   byId("deleteChatButton").classList.add("hidden");
   document.querySelectorAll(".saved-chat-button").forEach(node => node.removeAttribute("aria-current"));
@@ -433,6 +467,7 @@ function setContextNotice(key) {
 
 function setBusy(busy) {
   window.NextOpsView?.busy(busy);
+  window.NextOpsCapabilities?.busy(busy);
   byId("cancelRequest")?.classList.toggle("hidden", !busy);
   state.busy = busy;
   byId("question").readOnly = busy;
@@ -541,19 +576,18 @@ function renderAnswer(text, locale) {
 }
 
 function installBrandIcon() {
-  const background = getComputedStyle(document.querySelector(".ocs-logo")).backgroundImage;
-  if (background.startsWith('url("data:image/jpeg;base64,')) {
-    byId("appIcon").href = background.slice(5, -2);
-  }
+  byId("appIcon").href = "/assets/ocs-logo-light.jpg";
 }
 
 function applyLanguage(language) {
   state.language = language;
   window.NextOpsView?.setLocale(language);
+  window.NextOpsCapabilities?.locale(language);
   try { localStorage.setItem("nextops-language", language); } catch { /* Tab-only preference. */ }
   document.documentElement.lang = language;
   document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
   window.NextOpsTheme.updateControl();
+  window.NextOpsMotion?.update();
   renderUsers();
   byId("copyStatus").textContent = "";
   byId("languageButton").textContent = language === "fa" ? "English" : "فارسی";
@@ -583,6 +617,7 @@ function applyLanguage(language) {
 
 async function api(path, options = {}) {
   const token = state.token;
+  const sessionEpoch = state.sessionEpoch;
   const headers = { "Content-Type": "application/json", ...(options.headers || {}) };
   if (state.token) headers.Authorization = `Bearer ${state.token}`;
   const response = await fetch(path, { ...options, headers, cache: "no-store" });
@@ -592,7 +627,7 @@ async function api(path, options = {}) {
     const error = new Error(body?.error?.message_key || "request.failed");
     error.status = response.status;
     error.code = body?.error?.code || "internal_error";
-    if (response.status === 401 && token && state.token === token) showLogin(translations[state.language].sessionExpired);
+    if (response.status === 401 && token && state.token === token && sessionEpoch === state.sessionEpoch) showLogin(translations[state.language].sessionExpired);
     throw error;
   }
   return body;
@@ -600,9 +635,11 @@ async function api(path, options = {}) {
 
 function showLogin(message = "") {
   window.NextOpsView?.session(null);
+  window.NextOpsCapabilities?.reset();
   window.NextOpsMotion?.reset();
   byId("destinationView").classList.add("hidden");
   state.epoch += 1;
+  state.sessionEpoch += 1;
   state.token = "";
   state.actor = null; state.users = []; state.usersOffset = 0; state.usersNext = null;
   state.usersBusy = false; closeUserPassword(); byId("userCreateForm").reset();
@@ -612,13 +649,15 @@ function showLogin(message = "") {
   state.conversationsEnabled = false;
   state.thinkingEnabled = false;
   state.sourceCatalog = [];
+  state.incidentTargets = [];
+  byId("incidentTarget").replaceChildren();
   byId("monitoringSource").replaceChildren();
   byId("monitoringSourceTarget").replaceChildren();
   byId("sourceSelectionField").classList.add("hidden");
   byId("savedChatsList").replaceChildren();
   byId("savedChatsPanel").classList.add("hidden");
   byId("thinkingField").classList.add("hidden");
-  sessionStorage.removeItem("nextops-session");
+  sessionPreference.clear();
   byId("loginView").classList.remove("hidden");
   byId("workspaceView").classList.add("hidden");
   byId("logoutButton").classList.add("hidden");
@@ -655,9 +694,9 @@ function updateEvidenceBrief() {
 }
 
 async function showWorkspace() {
-  const identityEpoch = state.epoch;
+  const identityEpoch = state.sessionEpoch;
   const actor = await api("/api/v1/me");
-  if (identityEpoch !== state.epoch || !state.token) return;
+  if (identityEpoch !== state.sessionEpoch || !state.token) return;
   state.actor = actor;
   window.NextOpsView?.session(actor);
   byId("usersButton").classList.toggle("hidden", !actor.roles?.includes("admin"));
@@ -669,12 +708,13 @@ async function showWorkspace() {
   checkMonitoring();
   loadIncidentTargets();
   loadSourceCatalog();
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
   try {
     const config = await api("/api/v1/conversations/config");
-    if (epoch !== state.epoch) return;
+    if (epoch !== state.sessionEpoch) return;
     state.conversationsEnabled = config.enabled === true;
     state.thinkingEnabled = config.thinking_enabled === true;
+    window.NextOpsCapabilities?.conversation(config);
     byId("savedChatsPanel").classList.toggle("hidden", !state.conversationsEnabled);
     byId("thinkingField").classList.toggle("hidden", !state.thinkingEnabled || state.answerMode !== "general");
     if (state.conversationsEnabled) {
@@ -682,14 +722,15 @@ async function showWorkspace() {
       await refreshSavedChats();
     }
   } catch (error) {
-    if (epoch === state.epoch && error.status !== 401) setContextNotice("savedChatsUnavailable");
+    if (epoch === state.sessionEpoch && error.status !== 401) setContextNotice("savedChatsUnavailable");
   }
 }
 
 async function refreshSavedChats() {
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
+  const request = ++state.savedChatsRequest;
   const conversations = await api("/api/v1/conversations");
-  if (epoch !== state.epoch) return;
+  if (epoch !== state.sessionEpoch || request !== state.savedChatsRequest) return;
   byId("savedChatsList").replaceChildren();
   conversations.forEach(chat => {
     const button = document.createElement("button");
@@ -785,7 +826,7 @@ function populateSourceTargets() {
   document.querySelector('label[for="monitoringSourceTarget"]').classList.toggle("hidden", !source);
 }
 async function loadSourceCatalog() {
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
   const select = byId("monitoringSource");
   select.replaceChildren();
   const primary = document.createElement("option");
@@ -795,7 +836,7 @@ async function loadSourceCatalog() {
   select.append(primary);
   try {
     const catalog = await api("/api/v1/monitoring/sources");
-    if (epoch !== state.epoch || !state.token) return;
+    if (epoch !== state.sessionEpoch || !state.token) return;
     state.sourceCatalog = catalog.sources || [];
     state.sourceCatalog.forEach(source => {
       const option = document.createElement("option");
@@ -806,7 +847,7 @@ async function loadSourceCatalog() {
     });
     byId("sourceCatalogNotice").dataset.i18n = "approvedCatalogHelp";
   } catch (error) {
-    if (epoch !== state.epoch || !state.token) return;
+    if (epoch !== state.sessionEpoch || !state.token) return;
     state.sourceCatalog = [];
     byId("sourceCatalogNotice").dataset.i18n = "sourceCatalogUnavailable";
   }
@@ -815,16 +856,34 @@ async function loadSourceCatalog() {
   populateSourceTargets();
   window.NextOpsView?.catalog(state.sourceCatalog);
 }
-byId("monitoringSource").addEventListener("change", populateSourceTargets);
+byId("monitoringSource").addEventListener("change", () => {
+  populateSourceTargets();
+  window.NextOpsCapabilities?.sourceSelection();
+  if (!byId("monitoringSource").value) checkMonitoring();
+});
+byId("monitoringSourceTarget").addEventListener("change", () => window.NextOpsCapabilities?.sourceSelection());
+document.addEventListener("nextops:inspect-source", event => {
+  if (state.busy || !state.token) return;
+  const { source_id, target_id } = event.detail || {};
+  const source = state.sourceCatalog.find(item => item.source_id === source_id);
+  if (!source?.targets.some(item => item.target_id === target_id)) return;
+  window.NextOpsView?.navigate("ask", false);
+  setAnswerMode("monitoring");
+  byId("monitoringSource").value = source_id;
+  populateSourceTargets();
+  byId("monitoringSourceTarget").value = target_id;
+  window.NextOpsCapabilities?.sourceSelection();
+  document.querySelector('[data-monitoring-shortcut="problems"]').click();
+});
 
 async function loadIncidentTargets() {
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
   const select = byId("incidentTarget");
   select.disabled = true;
   select.replaceChildren();
   try {
     const response = await api("/api/v1/incidents/targets");
-    if (epoch !== state.epoch || !state.token) return;
+    if (epoch !== state.sessionEpoch || !state.token) return;
     state.incidentTargets = response.targets || [];
     state.incidentTargets.forEach(targetId => {
       const option = document.createElement("option");
@@ -833,27 +892,30 @@ async function loadIncidentTargets() {
       option.dir = "ltr";
       select.append(option);
     });
-    select.disabled = state.incidentTargets.length === 0;
+    select.disabled = state.busy || state.incidentTargets.length === 0;
   } catch (_) {
+    if (epoch !== state.sessionEpoch || !state.token) return;
     state.incidentTargets = [];
   }
 }
 
 async function checkAi() {
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
   const pill = byId("aiStatus");
   try {
     const ready = await api("/api/v1/assistant/ready");
-    if (epoch !== state.epoch || !state.token) return;
+    if (epoch !== state.sessionEpoch || !state.token) return;
     window.NextOpsView?.health("ai", ready);
+    window.NextOpsCapabilities?.ready(ready);
     const ok = ready.state === "ready";
     const statusKey = ok ? "aiReady" : "aiUnavailable";
     pill.className = `status-pill ${ok ? "ready" : "failed"}`;
     pill.querySelector("span").dataset.i18n = statusKey;
     pill.querySelector("span").textContent = translations[state.language][statusKey];
   } catch (_) {
-    if (epoch !== state.epoch || !state.token) return;
+    if (epoch !== state.sessionEpoch || !state.token) return;
     window.NextOpsView?.health("ai", null);
+    window.NextOpsCapabilities?.ready(null);
     pill.className = "status-pill failed";
     pill.querySelector("span").dataset.i18n = "aiUnavailable";
     pill.querySelector("span").textContent = translations[state.language].aiUnavailable;
@@ -861,11 +923,11 @@ async function checkAi() {
 }
 
 async function checkMonitoring() {
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
   const pill = byId("monitoringStatus");
   try {
     const summary = await api("/api/v1/monitoring/summary");
-    if (epoch !== state.epoch || !state.token) return;
+    if (epoch !== state.sessionEpoch || !state.token || byId("monitoringSource").value) return;
     window.NextOpsView?.health("connector", summary);
     const ok = summary.source === "zabbix";
     const statusKey = ok ? "monitoringReady" : "monitoringUnavailable";
@@ -873,7 +935,7 @@ async function checkMonitoring() {
     pill.querySelector("span").dataset.i18n = statusKey;
     pill.querySelector("span").textContent = translations[state.language][statusKey];
   } catch (_) {
-    if (epoch !== state.epoch || !state.token) return;
+    if (epoch !== state.sessionEpoch || !state.token || byId("monitoringSource").value) return;
     window.NextOpsView?.health("connector", null);
     pill.className = "status-pill failed";
     pill.querySelector("span").dataset.i18n = "monitoringUnavailable";
@@ -1123,6 +1185,7 @@ byId("newChatButton").addEventListener("click", () => {
   if (state.busy) return;
   state.epoch += 1;
   clearConversation();
+  window.NextOpsView?.navigate("ask", false);
   byId("question").focus();
 });
 document.querySelectorAll("[data-starter]").forEach(button => button.addEventListener("click", () => {
@@ -1154,8 +1217,9 @@ byId("loginForm").addEventListener("submit", async event => {
   button.setAttribute("aria-busy", "true");
   try {
     const result = await api("/api/v1/login", { method: "POST", body: JSON.stringify({ username: byId("username").value, password: byId("password").value }) });
+    state.sessionEpoch += 1;
     state.token = result.session.access_token;
-    sessionStorage.setItem("nextops-session", state.token);
+    sessionPreference.write(state.token);
     byId("password").value = "";
     await showWorkspace();
   } catch (error) {
@@ -1290,6 +1354,10 @@ byId("assistantForm").addEventListener("submit", async event => {
     if (evidenceBacked) {
       if (incident) renderIncidentEvidence(result.evidence, result.answer_focus || "overview", question);
       else renderEvidence(result.evidence);
+      if (monitoring && payload.source_id) {
+        window.NextOpsCapabilities?.sourceHealth("sourceReady");
+        window.NextOpsView?.health("connector", result.evidence);
+      }
       state.lastEvidence = { evidence: result.evidence, incident, focus: result.answer_focus || "overview", question };
       updateEvidenceBrief();
       byId("evidenceBrief").classList.remove("hidden");
@@ -1311,6 +1379,7 @@ byId("assistantForm").addEventListener("submit", async event => {
       } else rememberGeneralTurn(payload.question, assistant);
     }
     window.NextOpsView?.render(assistant, evidenceBacked ? result : null, payload.question, incident, performance.now() - started);
+    window.NextOpsCapabilities?.locale(state.language);
     byId("conversationWelcome").classList.add("hidden");
     byId("resultCard").classList.remove("hidden");
     byId("question").value = "";
@@ -1329,6 +1398,10 @@ byId("assistantForm").addEventListener("submit", async event => {
     if (error.status === 401) showLogin(translations[state.language].sessionExpired);
     else if (error.message === "incident.target_missing") errorNode.textContent = translations[state.language].noIncidentTargets;
     else errorNode.textContent = error.name === "AbortError" ? window.NextOpsView.t("cancelNotice") : safeRequestError(error);
+    if (state.answerMode === "monitoring" && byId("monitoringSource").value && error.name !== "AbortError" && error.status !== 401) {
+      window.NextOpsCapabilities?.sourceHealth("sourceFailed");
+      window.NextOpsView?.health("source-selection", null);
+    }
     window.NextOpsView?.failed();
   } finally {
     if (activeRequest === requestController) activeRequest = null;
@@ -1341,21 +1414,25 @@ Object.assign(translations.en, {
   unknownIntegrityNotice: "Response integrity was not reported; evidence alone does not prove answer accuracy.",
   aiReady: "Local CPU ready",
   companyName: "Omid Computer Services",
-  loginHeadline: "Operational clarity. Inside your network.",
-  loginLead: "A private workspace for understanding infrastructure, investigating incidents, and working from evidence.",
-  credentialsPrompt: "Use your organization-issued credentials.",
-  workspaceHeadline: "Investigation workspace"
+  loginHeadline: "Welcome back.",
+  loginLead: "Your infrastructure. One clear workspace.",
+  credentialsPrompt: "Use your organization account.",
+  workspaceHeadline: "Ask NextOps"
 });
 Object.assign(translations.fa, {
   unknownIntegrityNotice: "وضعیت کنترل پاسخ گزارش نشده است؛ شاهد به‌تنهایی درستی پاسخ را اثبات نمی‌کند.",
   aiReady: "CPU محلی آماده است",
   companyName: "شرکت رایانه خدمات امید",
-  loginHeadline: "دید روشن بر زیرساخت، درون شبکهٔ شما",
-  loginLead: "فضایی اختصاصی برای پایش زیرساخت، بررسی رخدادها و تصمیم‌گیری بر پایهٔ شواهد.",
-  credentialsPrompt: "اطلاعات ورود صادرشده از سوی سازمان را وارد کنید.",
-  workspaceHeadline: "محیط بررسی رخداد"
+  loginHeadline: "خوش آمدید.",
+  loginLead: "زیرساخت شما، در یک محیط روشن و ساده.",
+  credentialsPrompt: "با حساب سازمانی خود وارد شوید.",
+  workspaceHeadline: "از NextOps بپرسید"
 });
 applyLanguage(state.language);
 installBrandIcon();
 setAnswerMode(state.answerMode);
-if (state.token) showWorkspace().catch(() => showLogin(translations[state.language].sessionExpired));
+byId("loginForm").querySelector("button[type=submit]").disabled = false;
+if (state.token) {
+  const sessionEpoch = state.sessionEpoch;
+  showWorkspace().catch(() => { if (sessionEpoch === state.sessionEpoch) showLogin(translations[state.language].sessionExpired); });
+}

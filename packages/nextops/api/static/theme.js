@@ -24,7 +24,8 @@
     button.setAttribute("aria-label", fa ? "پوستهٔ تیره" : "Dark theme");
     button.title = fa ? (dark ? "استفاده از پوستهٔ روشن" : "استفاده از پوستهٔ تیره")
       : (dark ? "Use light theme" : "Use dark theme");
-    button.querySelector("span").textContent = fa ? "پوستهٔ تیره" : "Dark theme";
+    button.querySelector("span").textContent = button.title;
+    document.dispatchEvent(new Event("nextops-theme-change"));
   }
 
   window.NextOpsTheme = { updateControl };

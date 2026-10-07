@@ -105,7 +105,6 @@ def test_reference_geometry_native_drawer_and_no_external_assets(
             page.set_viewport_size({"width": width, "height": height})
             for selector, dimension, size in [
                 ("#appNav", "width", 238),
-                ("#inspectorSlot", "width", 392),
                 (".topbar", "height", 64),
             ]:
                 box = page.locator(selector).bounding_box()
@@ -141,12 +140,9 @@ def test_motion_static_visibility_password_and_login_error_states(
             )
             assert contrast["text"] >= 4.5
             assert contrast["boundary"] >= 3
-        expect(page.locator("#motionButton")).to_be_disabled()
+        expect(page.locator("#motionButton")).to_have_count(0)
         expect(page.locator("#loginTitle")).to_be_visible()
-        assert (
-            page.locator(".gate-architecture").evaluate("e=>getComputedStyle(e).animationName")
-            == "none"
-        )
+        assert page.locator("#loginView").evaluate("e=>e.getAnimations({subtree:true}).length") == 0
         assert page.locator("#password").get_attribute("autocomplete") == "current-password"
         page.locator("#password").fill("test-password")
         page.locator("#passwordVisibility").click()
@@ -166,10 +162,8 @@ def test_motion_static_visibility_password_and_login_error_states(
             expect(page.locator("#workspaceView")).to_be_hidden()
             page.unroute("**/api/v1/login")
         page.emulate_media(reduced_motion="no-preference")
-        page.locator("#motionButton").click()
-        assert page.evaluate("localStorage.getItem('nextops-motion')") == "paused"
         page.reload()
-        assert page.locator("body").get_attribute("data-motion") == "paused"
+        assert page.locator("#loginView").evaluate("e=>e.getAnimations({subtree:true}).length") == 0
         expect(page.locator("#loginTitle")).to_be_visible()
         browser.close()
 
@@ -187,12 +181,12 @@ def test_login_without_gpu_and_hidden_page_pauses_motion(browser_server: tuple[s
             "Object.defineProperty(document,'hidden',{get:()=>true,configurable:true});"
             "document.dispatchEvent(new Event('visibilitychange'))"
         )
-        expect(page.locator("body")).to_have_attribute("data-motion", "paused")
+        assert page.locator("#loginView").evaluate("e=>e.getAnimations({subtree:true}).length") == 0
         page.evaluate(
             "Object.defineProperty(document,'hidden',{get:()=>false,configurable:true});"
             "document.dispatchEvent(new Event('visibilitychange'))"
         )
-        expect(page.locator("body")).to_have_attribute("data-motion", "playing")
+        assert page.locator("#loginView").evaluate("e=>e.getAnimations({subtree:true}).length") == 0
         browser.close()
 
 
@@ -239,6 +233,7 @@ def test_evidence_rows_tabs_copy_archived_provenance_and_safe_fields(
             page.locator("#question").fill(question)
             page.locator("#askButton").click()
             expect(page.locator("#askedQuestion")).to_have_text(question)
+        page.locator("#conversationHistory .response-evidence > summary").first.click()
         page.locator('#conversationHistory [data-evidence-index="0"]').focus()
         page.keyboard.press("Enter")
         expect(page.locator("#evidenceDialog")).to_be_visible()

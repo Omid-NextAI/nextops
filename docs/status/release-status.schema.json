@@ -73,7 +73,21 @@
       "properties": {
         "application": {"$ref": "#/$defs/releaseComponent"},
         "connector": {"$ref": "#/$defs/releaseComponent"},
-        "inference_api": {"$ref": "#/$defs/releaseComponent"},
+        "inference_api": {
+          "anyOf": [
+            {"$ref": "#/$defs/releaseComponent"},
+            {
+              "description": "Exact isolated Qwen3.8 installation identity; not arbitrary suffixes.",
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["release", "source_commit"],
+              "properties": {
+                "release": {"const": "nextops-0.1.0-60605d8-q38"},
+                "source_commit": {"const": "60605d8b98f13d01152fa95881919f01021df902"}
+              }
+            }
+          ]
+        },
         "inference_runtime": {
           "type": "object",
           "additionalProperties": false,

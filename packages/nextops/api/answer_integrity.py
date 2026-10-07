@@ -10,6 +10,12 @@ import re
 from datetime import datetime
 from decimal import Decimal
 
+from nextops.api.evidence_qualifiers import (
+    incident_qualifiers,
+    monitoring_counts,
+    monitoring_qualifiers,
+    with_evidence_qualifiers,
+)
 from nextops.api.incident_focus import (
     incident_focus,
     monitoring_cpu_focus,
@@ -21,6 +27,26 @@ from nextops.contracts.conversations import ConversationAssistantRequest
 from nextops.contracts.incidents import IncidentEvidence, IncidentInvestigationRequest
 from nextops.contracts.monitoring import MonitoringSummary
 from nextops.inference.contracts import FinishReason
+
+_PROBLEM_COUNT_QUESTION = re.compile(
+    r"(?:\b(?:how many|count|number of)\b|تعداد|چند).{0,80}"
+    r"(?:\b(?:problems?|alerts?)\b|مشکل|هشدار)",
+    re.IGNORECASE,
+)
+_PROBLEM_COUNT_CLAIM = re.compile(
+    r"(\d+)\s+(?:active\s+)?problems?\b|(?P<fa>\d+)\s+مشکل", re.IGNORECASE
+)
+_POSITIVE_HOST_STATUS = re.compile(
+    r"\b(?:host|server|target)\b[^.!?\n]{0,80}\b(?:is|are|was|were|remains?)\s+"
+    r"(?:currently\s+|remotely\s+)?(?:reachable|unreachable|online|offline|healthy|down|up)\b|"
+    r"(?:میزبان|سرور|هدف)[^.!؟\n]{0,80}(?:در\s*دسترس|سالم|قطع|متصل)\s+است",
+    re.IGNORECASE,
+)
+_SEVERITY_LABEL_CLAIM = re.compile(
+    r"\bseverity\s*([0-5])\s*(?:is|=|:|-)?\s*"
+    r"(not classified|information|warning|average|high|disaster)\b",
+    re.IGNORECASE,
+)
 
 _LIVE_QUESTION_MARKERS = re.compile(
     r"(?:\b(?:current|currently|now|today|live|status|state|health|running|available|"
@@ -198,6 +224,34 @@ _SUPPLIED_TLS_OR_NAME_VALIDATION = re.compile(
     r"گواهی.{0,40}نام\s*میزبان",
     re.IGNORECASE,
 )
+_TCP_OBSERVATION = re.compile(r"\bTCP\b", re.IGNORECASE)
+_HTTP_OBSERVATION = re.compile(r"\bHTTPS?\b", re.IGNORECASE)
+_PROTOCOL_CONCLUSION_QUESTION = re.compile(
+    r"\b(?:prov(?:e|es|en)|establish(?:es)?|conclud\w*|unknown|inference)\b|"
+    r"(?:ثابت|نتیجه|استنباط|نامعلوم|چه\s*چیزی.{0,30}معلوم)",
+    re.IGNORECASE,
+)
+_PROTOCOL_ASSERTION = re.compile(
+    r"\b(?:proves?|confirms?|establish(?:es)?|demonstrates?)\b.{0,160}"
+    r"\b(?:TLS|SSL|certificate|upstream|origin|gateway|proxy|load[ -]balancer)\b|"
+    r"\b(?:the|our|your|this|that)\s+(?:upstream(?:\s+origin)?(?:\s+server)?|"
+    r"origin(?:\s+server)?|backend|gateway|(?:reverse\s+)?proxy|load[ -]balancer)\s+"
+    r"(?:(?:is|was|has|had)\s+(?:definitely\s+)?(?:faulty|broken|offline|failed|invalid)|"
+    r"failed\b)|"
+    r"(?:ثابت|تأیید|تایید).{0,160}(?:TLS|گواهی|دروازه|بالادستی|پراکسی)|"
+    r"(?:بالادستی|دروازه|پراکسی|فایروال|سرور|سرویس).{0,70}"
+    r"(?:معیوب|خراب|خاموش|رد\s*کرده|نامعتبر)",
+    re.IGNORECASE,
+)
+_PROTOCOL_QUALIFIER = re.compile(
+    r"\b(?:not|never|cannot|can't|doesn't|isn't|unknown|unproven|may|might|could|"
+    r"if|assuming|possible|potential)\b|"
+    r"(?:نیست|نمی[‌ ]|نامعلوم|اثبات\s*نشده|تأیید\s*نشده|اگر|ممکن|احتمال|شاید)",
+    re.IGNORECASE,
+)
+_PROTOCOL_CLAUSE_BOUNDARY = re.compile(
+    r"[;.!?؛؟\n]+|\b(?:but|however)\b|\s(?:اما|ولی)\s", re.IGNORECASE
+)
 
 
 def assure_general_answer(
@@ -229,6 +283,17 @@ def assure_general_answer(
         supplied_scenario
         and _SUPPLIED_TLS_OR_NAME_VALIDATION.search(request.question)
         and _TLS_SCOPE_QUESTION.search(request.question)
+    )
+    protocol_scope = bool(
+        _TCP_OBSERVATION.search(request.question)
+        and _HTTP_OBSERVATION.search(request.question)
+        and _PROTOCOL_CONCLUSION_QUESTION.search(request.question)
+        and not explicit_current_fact
+        and not _REAL_TARGET_REQUEST.search(request.question)
+    )
+    protocol_overclaim = protocol_scope and any(
+        _PROTOCOL_ASSERTION.search(clause) and not _PROTOCOL_QUALIFIER.search(clause)
+        for clause in _PROTOCOL_CLAUSE_BOUNDARY.split(assistant.answer)
     )
     requires_live_evidence = bool(
         (
@@ -281,6 +346,7 @@ def assure_general_answer(
         and not greeting_mismatch
         and not missing_fresh_scenario
         and not supplied_tls_scope
+        and not protocol_overclaim
     ):
         return assistant.model_copy(
             update={
@@ -317,6 +383,23 @@ def assure_general_answer(
             "success covers only the checks explicitly stated. It does not establish "
             "the DNS resolution method, overall network health, all application components' "
             "readiness or the API error's cause; no live check or change was performed."
+        )
+        integrity_status = "deterministic_fallback"
+        limitations = ("no_live_evidence", "model_output_may_be_incorrect")
+    elif protocol_overclaim and not requires_live_evidence and not unsafe_claim:
+        # Interpret the limits of supplied protocol results, never turn a port
+        # number, status code or model sentence into proof of infrastructure.
+        answer = (
+            "نتیجه‌های بیان‌شدهٔ TCP و HTTP فقط همان بررسی‌ها را پوشش می‌دهند؛ برقراری اتصال "
+            "به‌تنهایی اعتبارسنجی TLS یا پاسخ موفق برنامه را ثابت نمی‌کند. از این نتایج "
+            "به‌تنهایی نمی‌توان توپولوژی واسط، علت خطا یا سلامت کل شبکه را نتیجه گرفت؛ این "
+            "تفسیرِ اطلاعات داده‌شده است، نه بررسی زنده یا اجرای تغییر."
+            if request.locale == "fa"
+            else "The stated TCP and HTTP results apply only to their respective checks; "
+            "a connection result alone does not establish TLS validation or successful "
+            "application service. Intermediary topology, root cause and whole-network health "
+            "are not established by those results alone; this interprets supplied information, "
+            "not a live check or performed change."
         )
         integrity_status = "deterministic_fallback"
         limitations = ("no_live_evidence", "model_output_may_be_incorrect")
@@ -427,6 +510,16 @@ def assure_monitoring_answer(
     assistant: AssistantResponse,
     evidence: MonitoringSummary,
 ) -> AssistantResponse:
+    """Apply existing safeguards and always preserve application-owned qualifiers."""
+    guarded = _assure_monitoring_answer(request, assistant, evidence)
+    return with_evidence_qualifiers(guarded, monitoring_qualifiers(request.locale, evidence))
+
+
+def _assure_monitoring_answer(
+    request: AssistantRequest,
+    assistant: AssistantResponse,
+    evidence: MonitoringSummary,
+) -> AssistantResponse:
     """Accept bounded synthesis only when mandatory monitoring qualifiers survive."""
 
     is_stale = any(metric.stale for metric in evidence.metrics)
@@ -529,6 +622,16 @@ def assure_monitoring_answer(
                 "limitations": (*limitations, "file_listing_unavailable"),
             }
         )
+    if _PROBLEM_COUNT_QUESTION.search(request.question):
+        return assistant.model_copy(
+            update={
+                "answer": monitoring_counts(request.locale, evidence),
+                "evidence_mode": "live_zabbix",
+                "live_monitoring_data": True,
+                "integrity_status": "deterministic_focus",
+                "limitations": limitations,
+            }
+        )
     if monitoring_cpu_focus(request.question):
         answer, available = _cpu_idle_summary(request.locale, evidence)
         return assistant.model_copy(
@@ -551,6 +654,7 @@ def assure_monitoring_answer(
         )
         and assistant.finish_reason == FinishReason.STOP
         and not _is_long_prompt_echo(request.question, assistant.answer)
+        and not _unsupported_monitoring_claim(assistant.answer, evidence)
     )
     return assistant.model_copy(
         update={
@@ -568,11 +672,31 @@ def assure_incident_answer(
     assistant: AssistantResponse,
     evidence: IncidentEvidence,
 ) -> AssistantResponse:
+    """Keep every guarded result attributable without trusting model wording."""
+    guarded = _assure_incident_answer(request, assistant, evidence)
+    return with_evidence_qualifiers(guarded, incident_qualifiers(request.locale, evidence))
+
+
+def _assure_incident_answer(
+    request: IncidentInvestigationRequest,
+    assistant: AssistantResponse,
+    evidence: IncidentEvidence,
+) -> AssistantResponse:
     """Accept bounded synthesis only when both evidence sources remain explicit."""
 
     is_stale = any(metric.stale for metric in evidence.zabbix.summary.metrics)
     limitations = _evidence_limitations(is_partial=evidence.is_partial, is_stale=is_stale)
     focus = incident_focus(request.question)
+    if _PROBLEM_COUNT_QUESTION.search(request.question):
+        return assistant.model_copy(
+            update={
+                "answer": monitoring_counts(request.locale, evidence.zabbix.summary),
+                "evidence_mode": "live_zabbix_linux",
+                "live_monitoring_data": True,
+                "integrity_status": "deterministic_focus",
+                "limitations": limitations,
+            }
+        )
     if focus == "host_status":
         return assistant.model_copy(
             update={
@@ -611,6 +735,7 @@ def assure_incident_answer(
             is_stale=is_stale,
         )
         and evidence.target_id.casefold() in assistant.answer.casefold()
+        and not _unsupported_monitoring_claim(assistant.answer, evidence.zabbix.summary)
     )
     return assistant.model_copy(
         update={
@@ -998,6 +1123,20 @@ def _is_long_prompt_echo(question: str, answer: str) -> bool:
     return len(normalized_question) >= 40 and normalized_answer == normalized_question
 
 
+def _unsupported_monitoring_claim(answer: str, evidence: MonitoringSummary) -> bool:
+    """Reject known lexical counterexamples, not claim general entailment checking."""
+    if _POSITIVE_HOST_STATUS.search(answer):
+        return True  # This contract has neither reachability nor host/engine health.
+    for claim in _PROBLEM_COUNT_CLAIM.finditer(answer):
+        if int(claim.group(1) or claim.group("fa")) != len(evidence.active_problems):
+            return True
+    labels = ("not classified", "information", "warning", "average", "high", "disaster")
+    return any(
+        labels[int(m.group(1))] != m.group(2).casefold()
+        for m in _SEVERITY_LABEL_CLAIM.finditer(answer)
+    )
+
+
 def _is_safe_evidence_answer(
     answer: str,
     *,
@@ -1046,7 +1185,8 @@ def _monitoring_fallback(locale: str, evidence: MonitoringSummary) -> str:
         return (
             "پاسخ کامل و قابل‌اتکایی به پرسش شما تولید نشد. "
             f"دادهٔ ثبت‌شدهٔ Zabbix در {_timestamp(evidence.collected_at)} "
-            f"شامل {len(evidence.active_problems)} مشکل فعال و {len(evidence.metrics)} سنجه است. "
+            f"شامل {len(evidence.active_problems)} ردیفِ دریافتی مشکل فعال "
+            f"و {len(evidence.metrics)} سنجه است. "
             f"{qualification}{freshness}از این نمای ثبت‌شده نمی‌توان علت ریشه‌ای، بازیابی یا انجام‌شدن "
             "هیچ تغییری را نتیجه گرفت. برای پاسخ به پرسش اصلی، جزئیات بخش شواهد را بررسی کنید."
         )
@@ -1063,7 +1203,8 @@ def _monitoring_fallback(locale: str, evidence: MonitoringSummary) -> str:
     return (
         "A complete, reliable answer to your question was not produced. "
         f"The observed Zabbix snapshot collected at {_timestamp(evidence.collected_at)} contains "
-        f"{len(evidence.active_problems)} active problem(s) and {len(evidence.metrics)} metric(s). "
+        f"{len(evidence.active_problems)} returned active problem row(s) "
+        f"and {len(evidence.metrics)} metric(s). "
         f"{qualification}{freshness}This snapshot does not establish a root cause, recovery, or "
         "any performed change. Review the attributable details in the evidence panel."
     )

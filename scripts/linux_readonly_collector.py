@@ -29,8 +29,13 @@ MAX_ROUTES = 16
 MAX_NAMESERVERS = 4
 UNIT_PATTERN = re.compile(r"^[A-Za-z0-9@_.:-]{1,128}\.service$")
 TARGET_PATTERN = re.compile(r"^[a-z][a-z0-9-]{1,31}$")
-SECRET_PATTERN = re.compile(r"(?i)(password|passwd|secret|token|api[_-]?key)\s*[:=]\s*([^\s,;]+)")
-AUTHORIZATION_PATTERN = re.compile(r"(?i)authorization\s*[:=]\s*(?:bearer\s+)?[^\s,;]+")
+# Keep these pure standalone patterns equivalent to nextops.security.evidence.
+SECRET_PATTERN = re.compile(
+    r"""(?i)(["']?(?:password|passwd|secret|(?:client[_-]?)secret|(?:access[_-]?|refresh[_-]?|session[_-]?|auth[_-]?)?token|api[_-]?key)["']?\s*[:=]\s*)(\[REDACTED\]|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[^\s,;}\]]+)"""
+)
+AUTHORIZATION_PATTERN = re.compile(
+    r"""(?i)(["']?authorization["']?\s*[:=]\s*)(\[REDACTED\]|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|(?:basic|bearer)\s+[^\s,;}\]]+|[^\s,;}\]]+)"""
+)
 
 
 class CollectorError(RuntimeError):
@@ -256,8 +261,10 @@ def _journal(units: list[str], reasons: list[str]) -> list[dict[str, Any]]:
 
 def _safe_text(value: str, limit: int) -> str:
     normalized = " ".join(value.replace("\x00", " ").split())
-    redacted = AUTHORIZATION_PATTERN.sub("authorization=[REDACTED]", normalized)
-    redacted = SECRET_PATTERN.sub(lambda match: f"{match.group(1)}=[REDACTED]", redacted)
+    redacted = AUTHORIZATION_PATTERN.sub(lambda match: f"{match.group(1)}[REDACTED]", normalized)
+    redacted = SECRET_PATTERN.sub(lambda match: f"{match.group(1)}[REDACTED]", redacted)
+    if redacted != normalized and len(redacted) > limit:
+        return "[REDACTED]"[:limit]
     return redacted[:limit]
 
 

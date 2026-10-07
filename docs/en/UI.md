@@ -1,12 +1,84 @@
 # Bilingual operations console and design system
 
-## Reference workspace and OCS Signal Gate — source candidate, 2026-10-04
+## Current OCS interface: controlled live, 2026-10-07
+
+App/API/MCP `52e5179` is retained live with matching collector repairs, original company images,
+static split login and compact workspace below. Q8/16K admission/thinking off remain unchanged.
+Login-script/storage failure cannot put credentials in a URL. Late responses cannot overwrite a
+new session/chat; evidence filters/cursor, disclosure accessibility and generated Persian labels
+are synchronized. Real saved resume/follow-up, primary/secondary monitoring, EN/FA themes/mobile
+and logout/replay passed with durable audit and exact all-role rollback/reapply. Model-quality,
+full-context, WAN and production gates remain separate; an intermittent model timeout is not cured
+by UI state repair. See [the live record](../requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md).
+
+## Company-logo login and compact chat: historical source scope, 2026-10-07
+
+The owner's latest design request replaces the former violet workspace and animated Signal Gate
+with the OCS teal/gold palette and unchanged supplied dark/light company images. Login uses the
+video's split-card/geometric composition, with a static logo and no animation, sign-up or invented
+reset flow. The seven destinations and actual model capability dialog remain.
+
+Start in **Ask NextOps**. Chat is uncluttered; choose **Live monitoring** for visible approved
+source/host controls and explicit question shortcuts. **Investigate** retains the approved Linux
+target. **Investigation options** expands inline, not over mode buttons. **Monitoring summary**,
+**Review evidence** and **Request details** open on demand. Selecting evidence opens its inspector.
+Missing structured findings are not rendered as four empty cards. The unsupported attachment
+button is absent. Source/time/scope, warnings, safe raw data and audit details remain available.
+
+Busy controls/summary, model identity after saved resume, password locale and theme actions are
+synchronized. Login/session handling, owner isolation and read-only policy are unchanged.
+That source-only checkpoint recorded `ec1ed32` as the serving app/API before separate deployment. See
+[scope and brand hashes](../requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md) and
+[preview/checks](REFERENCE_UI.md). Earlier dated visual designs below are historical.
+
+## Qwen3.8 capabilities and selected-source inspection — controlled live, 2026-10-07
+
+The repair addresses a generic CPU label, buried source/host controls and a three-row evidence
+limit. It preserves the stack, OCS identity, authentication,
+owner-scoped chats, read-only MCP and exact inference configuration. No new target enrolment,
+credential, write operation, model, thinking enablement or larger budget is included.
+
+`capabilities.js` presents authenticated readiness and conversation metadata: actual model identity,
+configured token ceiling (not full-window qualification), bounded saved context/retention, thinking
+permission and queue admission. Missing metadata is unavailable, never guessed from a model name.
+Readiness adds nullable `configured_context_tokens`; the new app accepts an older provider that
+omits it. Promote app before API; roll back API before app because the old app contract is strict. Model knowledge
+and coding advice are not live infrastructure evidence.
+
+Modes, source and approved host controls stay visible. Connectors/Infrastructure host buttons prepare
+a selected-source question; they never execute collection or remediation silently. Problem, metric
+and status shortcuts prepare drafts. Evidence filters show only returned observations and keep their
+original identifiers, source, times and scope. Empty filtered data does not prove health. A pending
+selected source cannot inherit a primary-source readiness result. Tokens remain runner-only.
+
+Use **Connectors** or **Infrastructure** to choose a registered host, or select **Live monitoring →
+Company Zabbix / SLA → approved host** above the composer. Choose **Inspect active problems**,
+**Inspect current metrics** or **Inspect status and limits**, then explicitly send. The metrics
+shortcut asks for at most two metrics/60 words to keep generation compact; all returned bounded
+observations remain in the evidence panel. Use **Problems**, **Metrics** or **All observations**
+and select a row for raw data, times and scope. Ask a custom question when needed. No group scan,
+automatic remediation or hidden switch to the primary source occurs.
+
+Acceptance covers API/contracts and EN/FA browser tests, RTL/mobile reflow, disabled thinking,
+dialog keyboard/focus, no automatic collection, filtered selection, failure and logout cleanup.
+Fixture screenshots are labelled demo, not live. App/API `ec1ed32` passed offline installation,
+guarded selection, eight fresh finals across initial/source-rollback/final browsers, saved resume,
+five evidence/audit hash pairs and exact source rollback/reapply; retained at09:59:08 UTC. See the
+[record](../requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md). Native model/runtime/config,
+database and MCP remain unchanged. Current model metadata is Qwen3.8-27B Q8,16K admission,
+six saved turns/12,000 characters/30 days and thinking off. Monitoring answers took106–247 seconds
+in these bounded reads, not a latency guarantee. Semantic limits remain: model wording is not
+authoritative evidence, including reachability claims and unverified severity labels. This is
+controlled functionality, not new production or model-quality acceptance. Old releases remain.
+
+## Reference workspace and OCS Signal Gate — historical source candidate, 2026-10-04
 
 The new source-only design preserves the current vanilla stack and working contracts. Navigation,
 profile-based Users, composer options and the evidence inspector are reconstructed from the supplied
 reference; corporate login uses a separate original teal/gold signal gate. Missing API fields remain
 explicitly unavailable, not example facts. See [preview, checks and screenshots](REFERENCE_UI.md).
-This candidate is not deployed; the dated live records below retain their original scope.
+That checkpoint was source-only; later dated live records and the current manifest supersede its
+deployment status while retaining its original scope.
 
 ## Live approved Zabbix selection — 2026-10-04
 

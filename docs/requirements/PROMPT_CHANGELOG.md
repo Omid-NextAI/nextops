@@ -1,5 +1,42 @@
 # Prompt version history / تاریخچهٔ نسخه‌های پرامپت
 
+## Owner raw-quality exception — 2026-10-07
+
+The later explicit request to skip the three remaining raw failures and go live authorizes a
+bounded, reversible standard-mode Qwen3.8 Q8 cutover with known quality limitations. It supersedes
+the quality-before-selection hold only for that controlled use; the13/16 result remains failed.
+Authentication, policy, evidence qualifiers, audit, CPU/offline boundaries, privacy, resource bounds
+and rollback are not waived. Thinking/larger-context and full production acceptance are not implied.
+See [controlled cutover](QWEN38_CONTROLLED_CUTOVER_2026-10-07.md).
+
+دستور تازهٔ مالک برای کنارگذاشتن سه شکست خام و زنده‌کردن مدل، گذار محدود و برگشت‌پذیر به
+Qwen3.8 Q8 بدون استدلال را با محدودیت‌های کیفیت معلوم مجاز می‌کند. فقط شرط کیفیت پیش از
+انتخاب برای این استفادهٔ کنترل‌شده تغییر می‌کند؛ نتیجهٔ۱۳ از۱۶ همچنان ناموفق است. احراز
+هویت، سیاست، قید شاهد، ممیزی، مرز CPU/آفلاین، حریم خصوصی، سقف منابع و بازگشت حذف نمی‌شوند.
+استدلال، زمینهٔ بزرگ‌تر و پذیرش کامل بهره‌برداری از این دستور نتیجه نمی‌شوند.
+
+## Owner bounded response-time amendment — 2026-10-06
+
+The owner explicitly requests longer answering time for actual Qwen3.8. Prospectively allow an
+opt-in 300-second Qwen3.8 candidate deadline, with a 330-second app caller and 360-second
+generation-route proxy budget. This supersedes earlier no-deadline-widening instructions only
+for this new timing profile. Historical 120-second failures remain failed. Preserve the frozen
+questions, semantic requirements, 16K context, output limits, five-second queue wait, one active/
+two queued requests, CPU-only execution, authentication and private-thinking denial. A separate
+watched two-case EN/FA hypothesis diagnostic is permitted on the retained Q5; fourteen other
+cases remain not run in that diagnostic. No quality waiver, model promotion, new VM resources,
+download, public thinking or live timeout change follows from source profiles alone.
+
+مالک صریحاً افزایش زمان پاسخ‌گویی برای Qwen3.8 واقعی را خواست. از این پس، نمایهٔ اختیاریِ
+نامزد Qwen3.8 می‌تواند مهلت ۳۰۰ ثانیه‌ای داشته باشد؛ مهلت فراخوان برنامه ۳۳۰ ثانیه و مهلت
+پراکسیِ مسیر تولید پاسخ ۳۶۰ ثانیه است. دستورهای پیشینِ منع افزایش مهلت، فقط برای این نمایهٔ
+جدید کنار گذاشته می‌شوند؛ شکست‌های تاریخیِ ۱۲۰ ثانیه‌ای همچنان ناموفق‌اند. پرسش‌های ثابت،
+معیار معنایی، زمینهٔ 16K، سقف خروجی، انتظار پنج‌ثانیه‌ای صف، یک درخواست فعال/دو درخواست
+منتظر، اجرای CPU، احراز هویت و منع استدلال خصوصی حفظ می‌شوند. آزمون تشخیصیِ جدا و تحت
+نظارت برای دو پرسش فرضیهٔ انگلیسی/فارسی روی Q5 موجود مجاز است؛ چهارده مورد دیگر در این
+آزمون اجرا نشده‌اند. نمایهٔ کد به‌تنهایی مجوز حذف معیار کیفیت، انتخاب مدل زنده، منابع تازهٔ
+VM، دریافت مدل، استدلال عمومی یا تغییر مهلت سامانهٔ زنده نیست.
+
 ## Owner connector-role clarification — 2026-10-04
 
 The owner specifies that the existing connector VM must fulfil the MCP role from the original

@@ -1,6 +1,6 @@
 # NextOps Markdown context index
 
-Updated: 2026-10-05
+Updated: 2026-10-07
 
 This is the durable inventory and routing map for project-owned Markdown. It lets an agent remember
 that every document exists without flooding each task with every file. The documentation validator
@@ -21,14 +21,16 @@ remaining task-specific sources. The repository skill
 | Task | Read before acting |
 |---|---|
 | Requirements, scope, or acceptance | `docs/requirements/NEXTOPS_MASTER_PROMPT.md`, `PROMPT_CHANGELOG.md`, `TRACEABILITY.md`, relevant amendment, and the archive only for original non-conflicting detail |
-| Architecture or public interfaces | relevant ADRs, `docs/en/ARCHITECTURE.md`, `DATA_API.md`, `MCP.md`, `SECURITY.md`, and their Persian pairs |
+| Architecture or public interfaces | current `docs/en/ARCHITECTURE.md`, `TECH_STACK.md`, C1–C3 in `DIAGRAMS.md`, current manifest, relevant ADRs, `DATA_API.md`, `MCP.md`, `SECURITY.md`, and Persian pairs; distinguish preserved future diagrams from deployed paths |
 | Application or database code | `docs/en/DEVELOPMENT.md`, `DATA_API.md`, `TESTING.md`, current state/next task, source contracts, migrations, and neighboring tests |
 | Authentication or session lifecycle | `docs/requirements/SESSION_TERMINATION_SPEC.md`, `docs/en/SECURITY.md`, `DATA_API.md`, `TESTING.md`, current release manifest, source service/API, and identity integration tests |
 | Certificate lifecycle | `docs/requirements/CERTIFICATE_LIFECYCLE_SPEC.md`, `docs/en/OPERATIONS.md`, Persian operations pair, systemd checker/timer, Nginx profiles, current release manifest, and private rotation/alert evidence |
-| Local CPU inference | `docs/en/CPU_AI.md`, `OFFLINE_RUNTIME.md`, `TESTING.md`, `docs/requirements/QWEN38_QUALIFICATION_SPEC.md`, `QWEN38_QUALIFICATION_2026-10-05.md`, pinned model artifact records, systemd model-selection profiles, current state/next task, and Persian pairs when human-facing text changes |
+| Local CPU inference | `docs/en/CPU_AI.md`, `OFFLINE_RUNTIME.md`, `TESTING.md`, `docs/requirements/QWEN38_QUALIFICATION_SPEC.md`, `QWEN38_QUALIFICATION_2026-10-05.md`, `QWEN38_FLASH_QUALIFICATION_2026-10-05.md`, `PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md`, pinned model artifact records, systemd model-selection profiles, current state/next task, and Persian pairs when human-facing text changes |
 | AI answer integrity | `docs/requirements/ANSWER_INTEGRITY_SPEC.md`, `docs/en/AI_INTEGRITY.md`, Persian pair, assistant contracts, answer-integrity policy, evaluation corpus, current release manifest, and private live evidence |
 | Conversational frontend and NOC/SOC guidance | `docs/requirements/NOC_SOC_WORKSPACE_SPEC.md`, `docs/en/UI.md`, Persian pair, `DATA_API.md`, assistant/context contracts, static assets, browser tests, integrity guide and current release manifest |
-| Reference-matched workspace and OCS login | `docs/requirements/REFERENCE_UI_SPEC.md`, `docs/en/REFERENCE_UI.md`, Persian pair, supplied design reference, static presentation/motion modules and isolated browser fixtures |
+| Company-logo login and simplified workspace | `docs/requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md`, `OCS_UI_LIVE_QUALIFICATION_2026-10-07.md`, `docs/en/UI.md`, `REFERENCE_UI.md`, Persian pairs, supplied company images/video, static presentation modules and isolated browser regressions |
+| Enabled model capabilities and selected Zabbix source | `docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md`, `docs/en/UI.md`, Persian pair, `MCP.md`, readiness/conversation contracts, source catalogue, presentation modules, browser tests and current release manifest |
+| Reference-matched workspace and OCS login | `docs/requirements/REFERENCE_UI_SPEC.md`, `UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md`, `docs/en/REFERENCE_UI.md`, Persian pair, supplied design reference, static presentation/motion modules and isolated browser fixtures |
 | Persistent conversations and local thinking | `docs/en/CONVERSATION_MEMORY_SPEC.md`, `CONVERSATIONS.md`, Persian pairs, ADR 0009, conversation schema/API/tests, expanded-chat candidate profile and current release manifest |
 | Server, storage, or deployment | use `nextops-server-operations`; read the start checklist, matching dossier, installer guide, storage/offline/server guide, and current private change record |
 | Zabbix or connector work | Zabbix guide, integration guide, MCP/security/data contracts, matching dossiers, ZBX/OFF acceptance cases, and target-specific private evidence |
@@ -42,12 +44,27 @@ remaining task-specific sources. The repository skill
 
 ## Complete inventory
 
-- `docs/requirements/QWEN38_QUALIFICATION_SPEC.md` — Bilingual bounded Qwen 3.8 provisioning/qualification, supplied capacity versus guest limits, privacy, tests and rollback.
+- `docs/requirements/AUDIT_REPAIR_2026-10-07.md` — Bilingual bounded audit-repair requirements, regression strategy, multi-role code-only rollout, rollback and retained acceptance limits.
+- `docs/requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md` — Bilingual exact multi-role audit-repair rollout, preserved failed candidate, real EN/FA evidence/audit and all-role rollback proof; native model and unaccepted gates unchanged.
+
+- `docs/requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md` — Bilingual authorized app-only rollout, exact artifact identities, preserved failures, real browser/audit checks and unchanged AI/MCP boundaries.
+- `docs/requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md` — Bilingual bounded company-asset/static-login and compact workspace source specification; no new live release or inference change.
+
+- `docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md` — Bilingual bounded capability/source UI specification, exact source tests, guarded package rollout and observed live qualification; native model and MCP unchanged.
+
+- `docs/requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md` — Bilingual owner raw-quality exception, guarded standard-mode cutover plan and observed execution results; failures are not passes.
+
+- `docs/requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md` — Bilingual failed 48-thread and exact-source Q8 retests, corrected finite coding review, protected/effective-runtime observations, distinct 3.8 Q5 complete-hash/template checkpoint, Apache 122B pins, retained finite CDN records and unrun acceptance gates.
+
+- `docs/requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md` — Bilingual actual resized-guest/new-volume preparation, pinned metadata-only Flash Q8 import, customer-license consideration, frozen regression tools and unrun model gates.
+
+- `docs/requirements/QWEN38_QUALIFICATION_SPEC.md` — Bilingual bounded Qwen 3.8 Q8/Q5 qualification, failed upstream and full13/16 greedy comparisons, preserved failures/rollback, frozen acceptance, capacity and privacy.
 - `docs/requirements/QWEN38_QUALIFICATION_2026-10-05.md` — Bilingual actual 27B Q8 import/load, frozen baseline comparisons, native thinking, failed context/coding gates and unchanged serving model.
 - `docs/requirements/REFERENCE_UI_SPEC.md` — Bilingual bounded reference-workspace and original OCS login specification, security invariants and source rollback.
 - `docs/en/REFERENCE_UI.md` — English UI preview, source verification, controlled live qualification and screenshot handoff.
 - `docs/fa/REFERENCE_UI.md` — Persian UI preview, source verification, controlled live qualification and screenshot handoff.
 - `docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md` — Bilingual exact app UI deployment, preserved failures, browser/audit/rollback evidence and unrun model/offline gates.
+- `docs/requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md` — Bilingual exact responsive/aging UI deployments, retained 70/88 browser records, actual collection-time aging, generation/audit and exact rollback/reapply; model and unrun offline gates unchanged.
 
 - `docs/requirements/USER_MANAGEMENT_SPEC.md` — Bounded local admin account controls, immutable role profiles, audit/revocation and staged acceptance.
 
@@ -91,7 +108,7 @@ Markdown file is added, renamed, or removed.
 - `docs/adr/0007-forced-command-linux-connector.md` — ADR for forced-command, read-only Linux diagnostics.
 - `docs/adr/0008-independent-recovery-repositories.md` — Proposed ADR for separate PostgreSQL and file recovery repositories.
 - `docs/adr/README.md` — ADR status and navigation.
-- `docs/en/ARCHITECTURE.md` — English architecture and repository boundaries.
+- `docs/en/ARCHITECTURE.md` — Current controlled four-role deployment, actual source layout and trust boundaries; future components explicitly separated.
 - `docs/en/BACKUP_RESTORE_SPEC.md` — English bounded specification for independent backup and isolated restore.
 - `docs/en/CONFIGURATION.md` — English configuration contracts and current implemented subset.
 - `docs/en/CPU_AI.md` — English local CPU inference and capacity plan.
@@ -100,7 +117,7 @@ Markdown file is added, renamed, or removed.
 - `docs/en/DATA_API.md` — English durable data, workflow, evidence, and API contracts.
 - `docs/en/DEPLOYMENT_DOSSIERS.md` — English per-server dossier workflow.
 - `docs/en/DEVELOPMENT.md` — English development, CI, GitHub, and release workflow.
-- `docs/en/DIAGRAMS.md` — English architecture diagram atlas.
+- `docs/en/DIAGRAMS.md` — Three current deployment/request/admission diagrams and seven preserved future target views.
 - `docs/en/ENGINEERING_UPGRADE_PLAN.md` — English phased candidate-adoption and modernization plan.
 - `docs/en/ESXI_BASELINE.md` — English ESXi and guest CPU evidence boundaries.
 - `docs/en/GLOSSARY.md` — English product terminology.
@@ -122,12 +139,12 @@ Markdown file is added, renamed, or removed.
 - `docs/en/SERVER_PLAN.md` — English G10 VM plan and Zabbix milestone.
 - `docs/en/SERVER_START_CHECKLIST.md` — English first-server and package-bundle checklist.
 - `docs/en/START_HERE.md` — English onboarding and first milestone.
-- `docs/en/TECH_STACK.md` — English technology choices and constraints.
+- `docs/en/TECH_STACK.md` — Current locked Python/static frontend/official MCP/native CPU stack, with bounded future options.
 - `docs/en/TESTING.md` — English test, evaluation, and release-evidence plan.
 - `docs/en/TROUBLESHOOTING.md` — English fail-closed diagnostic playbook.
 - `docs/en/UI.md` — English bilingual console and design-system requirements.
 - `docs/en/ZABBIX_SERVER.md` — English dedicated Zabbix server design.
-- `docs/fa/ARCHITECTURE.md` — Persian architecture and repository boundaries.
+- `docs/fa/ARCHITECTURE.md` — Persian current controlled deployment, actual source layout and enforceable trust boundaries.
 - `docs/fa/BACKUP_RESTORE_SPEC.md` — Persian bounded specification for independent backup and isolated restore.
 - `docs/fa/CONFIGURATION.md` — Persian configuration contracts and current implemented subset.
 - `docs/fa/CPU_AI.md` — Persian local CPU inference and capacity plan.
@@ -136,7 +153,7 @@ Markdown file is added, renamed, or removed.
 - `docs/fa/DATA_API.md` — Persian durable data, workflow, evidence, and API contracts.
 - `docs/fa/DEPLOYMENT_DOSSIERS.md` — Persian per-server dossier workflow.
 - `docs/fa/DEVELOPMENT.md` — Persian development, CI, GitHub, and release workflow.
-- `docs/fa/DIAGRAMS.md` — Persian architecture diagram atlas.
+- `docs/fa/DIAGRAMS.md` — Persian three current diagrams and seven explicitly preserved future target views.
 - `docs/fa/ENGINEERING_UPGRADE_PLAN.md` — Persian phased candidate-adoption and modernization plan.
 - `docs/fa/ESXI_BASELINE.md` — Persian ESXi and guest CPU evidence boundaries.
 - `docs/fa/GLOSSARY.md` — Persian product terminology.
@@ -158,7 +175,7 @@ Markdown file is added, renamed, or removed.
 - `docs/fa/SERVER_PLAN.md` — Persian G10 VM plan and Zabbix milestone.
 - `docs/fa/SERVER_START_CHECKLIST.md` — Persian first-server and package-bundle checklist.
 - `docs/fa/START_HERE.md` — Persian onboarding and first milestone.
-- `docs/fa/TECH_STACK.md` — Persian technology choices and constraints.
+- `docs/fa/TECH_STACK.md` — Persian current locked/native stack and bounded future technology options.
 - `docs/fa/TESTING.md` — Persian test, evaluation, and release-evidence plan.
 - `docs/fa/TROUBLESHOOTING.md` — Persian fail-closed diagnostic playbook.
 - `docs/fa/UI.md` — Persian bilingual console and design-system requirements.

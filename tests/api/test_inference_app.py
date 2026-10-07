@@ -95,6 +95,7 @@ def test_readiness_is_safe_and_client_provider_fields_are_rejected() -> None:
         "model_id",
         "runtime_version",
         "cpu_only_required",
+        "configured_context_tokens",
         "max_active_requests",
         "max_queued_requests",
         "active_requests",
@@ -150,6 +151,10 @@ class InferenceHttpTransport:
 
 class LocalModelTransport:
     """Only the CPU model completion is synthetic in the complete HTTP path test."""
+
+    async def get_text(self, path: str, headers: dict[str, str], timeout_seconds: float) -> str:
+        assert path == "/metrics"
+        return "llamacpp:requests_processing 0\nllamacpp:requests_deferred 0\n"
 
     def __init__(self, model_id: ModelId = "nextops-qwen3-8b-q4-k-m") -> None:
         self.payload: dict[str, Any] = {}

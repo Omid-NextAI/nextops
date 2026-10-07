@@ -7,7 +7,40 @@
 Owner update (2026-09-26): the owner tested an ESXi VM snapshot restore. Its dated result has
 not been reviewed here; independent database backup and restore gates remain unpassed.
 
-Current controlled repair (2026-10-04): app/AI API `7ce9d29` adds bounded hypothetical-scenario
+Current controlled release (2026-10-07): **`52e5179`** is live for app, AI API and MCP/source
+runner with matching collector repairs. Company images, static OCS login, Qwen3.8-27B Q8/CPU,
+credentials and inference configuration are unchanged; thinking is off. Real saved-chat,
+primary/secondary-Zabbix, audit, exact all-role rollback/reapply and retention checks passed.
+Twelve source findings are repaired; repository protection needs administrator access.
+Model-quality/timeouts and broader offline gates remain open.
+See [the live record](docs/requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md) and
+[usage](docs/en/UI.md). Live controlled use is not full production acceptance.
+
+Current system design: four existing ESXi role guests, a modular FastAPI/PostgreSQL app with
+local static EN/FA UI, isolated CPU inference, and the real MCP gateway/credential-owning runner
+on the connector VM. Approved primary/secondary Zabbix and forced-command Linux reads retain
+source/time/scope and mandatory audit. See [the current architecture](docs/en/ARCHITECTURE.md)
+and [three current diagrams](docs/en/DIAGRAMS.md); future worker/retrieval/topology views are
+explicitly separate. GitHub publication does not redeploy the live services.
+
+Earlier controlled UI/source follow-up (2026-10-07): app/API **`ec1ed32`** expose actual Qwen3.8
+metadata, visible approved Zabbix source/host selection and problem/metric filters. The existing
+secondary MCP source passed fresh reads on three approved targets, saved-chat resume, audit/hash
+matching and exact source rollback/reapply. Eight fresh finals passed bounded functionality;
+unsupported model reachability wording/severity labels remain unaccepted, not live facts.
+Native Q8/configuration/MCP are unchanged; thinking stays off. See the
+[dated UI/source record](docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md) and
+[usage](docs/en/UI.md). This is controlled live functionality, not full production acceptance.
+
+Initial controlled selection (2026-10-07): **Qwen3.8-27B Q8** went live under the owner's explicit
+three-case raw-quality exception. App `3d92b71` stays unchanged; AI `60605d8` uses CPU-only32 workers,
+16K admission,300/330/360-second budgets and thinking off. Fourteen fresh browser finals, saved-chat
+resume, secondary Zabbix EN/FA evidence, audit/hash matching and exact rollback/reapply passed.
+Raw13/16 remains failed; larger-context/thinking/current server-WAN/VM/load are not accepted.
+See [the dated record](docs/requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md). Controlled live
+use is not full production acceptance; verify answers against their qualified evidence.
+
+Earlier controlled repair (2026-10-04): app/AI API `7ce9d29` adds bounded hypothetical-scenario
 and transport/stale-data safeguards while preserving fresh evidence, saved chat and OCS branding.
 Five CI jobs, 524 local checks, three offline installs, 45 functional browser cases, 36 text-free
 audits/nine live hashes, bounded queue recovery, four-guest WAN/proxy denial, process restart,

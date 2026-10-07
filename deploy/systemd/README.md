@@ -13,6 +13,22 @@ the key root-only and connect failure state to an approved local alert before pr
 
 ## Explicit larger-model profiles / پروفایل صریح مدل بزرگ‌تر
 
+The optional candidate-only `model-profiles/qwen38-long-response.env` must be loaded after
+the exact Qwen3.8 Q8/Q5 model profile. It explicitly enables the bounded 300-second provider
+deadline, retains 16K/five-second queue/thinking off, and is not a model-selection authorization.
+The matching `qwen38-long-response-app.env` is **app-only**, with a 330-second caller deadline.
+The separate Nginx snippet replaces the generation location's two timeout directives with
+360 seconds, not duplicate directives or broader routing. Base profiles remain unchanged.
+See [English](../../docs/en/CPU_AI.md) / [فارسی](../../docs/fa/CPU_AI.md) for qualification and
+rollback. These files are repository deployment-source material; no serving installer applied them.
+
+نمایهٔ اختیاری `model-profiles/qwen38-long-response.env` باید پس از نمایهٔ دقیق Q8/Q5 بارگذاری
+شود. مهلت مدل ۳۰۰ ثانیه می‌شود؛ زمینهٔ 16K، انتظار پنج‌ثانیه‌ای صف و خاموشی استدلال حفظ‌اند.
+این فایل مجوز انتخاب مدل نیست. نمایهٔ `qwen38-long-response-app.env` **فقط برای برنامه** با
+مهلت ۳۳۰ ثانیه است. قطعهٔ جداگانهٔ Nginx جایگزین دو دستور زمانِ مسیر تولید با ۳۶۰ ثانیه
+می‌شود، نه دستور تکراری یا مسیر گسترده‌تر. پیش‌فرض‌ها ثابت‌اند. راهنمای دوزبانهٔ بالا، پذیرش
+و بازگشت را توضیح می‌دهد. فایل‌ها در منبع استقرار مخزن هستند و روی سامانهٔ زنده اعمال نشده‌اند.
+
 `model-profiles/qwen3-30b-a3b-*` uses the same exact-command and required-identity-file pattern.
 It is a reviewed source profile, not authorization to select an unqualified model. 32B failed
 its Persian evidence deadline; 30B-A3B passed import but failed Persian terminology and raw

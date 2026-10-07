@@ -48,10 +48,49 @@ def test_release_status_manifest_is_valid_and_matches_ai_artifacts() -> None:
     assert "PASS:" in result.stdout
 
 
-def test_expanded_profile_revision_matches_the_serving_inference_api_record() -> None:
+def test_retained_expanded_profile_is_not_misattributed_to_a_new_serving_model() -> None:
     status = _manifest()
     profile = json.loads((ROOT / "deploy/inference/expanded-chat-profile.json").read_text("utf-8"))
-    assert profile["source_commit"] == status["components"]["inference_api"]["source_commit"]
+    assert profile["record_scope"] == "retained_35b_historical_qualification"
+    assert profile["source_commit"] == "7ce9d2969d6bea8186783c5ce04a1c93be811a97"
+    if status["components"]["model"]["identifier"] == profile["model_id"]:
+        assert profile["source_commit"] == status["components"]["inference_api"]["source_commit"]
+    else:
+        assert status["components"]["model"]["identifier"] == "nextops-qwen3-8-27b-q8-0"
+        candidate = json.loads(
+            (ROOT / "deploy/inference/qwen3-8-27b-q8.candidate.json").read_text("utf-8")
+        )
+        assert candidate["status"] == "controlled_selected_with_quality_exception"
+        assert (
+            _status_module().model_identity_errors(status["components"]["model"], {}, candidate)
+            == []
+        )
+        serving_commit = status["components"]["inference_api"]["source_commit"]
+        assert serving_commit in {
+            "60605d8b98f13d01152fa95881919f01021df902",  # Initial controlled Q8 API.
+            "ec1ed325b73d63840e788720364ca9694897422e",  # Bounded capability/source UI.
+            "52e51792e4d06845544bc7ae1be6042890b2ad22",  # Qualified audit repair code.
+        }
+        assert serving_commit != profile["source_commit"]
+        if serving_commit == "ec1ed325b73d63840e788720364ca9694897422e":
+            app_commit = status["components"]["application"]["source_commit"]
+            assert app_commit in {
+                serving_commit,
+                "48e3a8a7ec06d25513877085d61a8f7c5ac18e28",  # OCS static-only UI rollout.
+            }
+            if app_commit != serving_commit:
+                gates = {gate["id"]: gate for gate in status["acceptance_gates"]}
+                assert gates["ocs_ui_app_only_live_20261007"]["status"] == "passed"
+                assert gates["production_acceptance"]["status"] == "not_run"
+        if serving_commit == "52e51792e4d06845544bc7ae1be6042890b2ad22":
+            assert all(
+                status["components"][name]["source_commit"] == serving_commit
+                for name in ("application", "connector", "inference_api")
+            )
+            gates = {gate["id"]: gate for gate in status["acceptance_gates"]}
+            assert gates["audit_repairs_exact_code_live_20261007"]["status"] == "passed"
+            assert gates["repository_main_branch_protection_gov01"]["status"] == "partial"
+            assert gates["production_acceptance"]["status"] == "not_run"
     assert profile["request_reasoning_budget_tokens"] == THINKING_BUDGET_TOKENS
 
 
@@ -219,6 +258,11 @@ def test_production_claim_requires_all_gates_even_with_asserted_recovery() -> No
     for gate in status["current_application_qualification"]["gates"]:
         gate["status"] = "passed"
     # This in-memory predicate fixture does not call or bypass the real recovery validator.
+    if status["components"]["model"]["identifier"] == "nextops-qwen3-8-27b-q8-0":
+        assert any("owner-excepted" in e for e in module.production_claim_errors(status, True))
+        # Exercise the generic gate policy with a hypothetical ordinary model, not acceptance
+        # of today's owner-excepted Q8. Exact artifact selection is tested independently.
+        status["components"]["model"]["identifier"] = "nextops-qwen3-5-35b-a3b-q4-k-m"
     assert module.production_claim_errors(status, True) == []
 
 

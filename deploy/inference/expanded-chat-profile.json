@@ -1,5 +1,6 @@
 {
   "status": "standard_controlled_thinking_rejected",
+  "record_scope": "retained_35b_historical_qualification",
   "source_commit": "7ce9d2969d6bea8186783c5ce04a1c93be811a97",
   "standard_enabled": true,
   "thinking_enabled": false,

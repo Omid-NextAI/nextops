@@ -13,9 +13,19 @@ The repository now has typed policy/application boundaries, local identity, dura
 PostgreSQL state and audit, a bounded local CPU inference path, a bilingual browser UI,
 and read-only Zabbix/Linux connectors. Controlled releases serve user testing on the four
 existing role guests; the exact identities and gate results are in the
-[release manifest](../status/current-release.yaml). Scoped diagnostic safeguards are deployed,
-but expanded raw-model semantics and thinking remain unaccepted. The additive MCP-01 source
-is locally tested, not deployed; see [MCP](MCP.md).
+[release manifest](../status/current-release.yaml). The recorded deployed baseline on 2026-10-07
+is exact `52e5179` for app, AI API and canonical MCP/source runner, with matching collectors; the
+[all-role live record](../requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md) separates
+the retained release from earlier checkpoints. Scoped diagnostic safeguards and source-scoped
+MCP gateway/runner reads are deployed for controlled testing; local MCP fixture results are
+not their live acceptance. See [MCP](MCP.md). Expanded raw-model semantics, thinking and
+full-context acceptance remain open; current-release WAN/VM/load qualification is separate.
+
+The owner-authorized [audit repair](../requirements/AUDIT_REPAIR_2026-10-07.md) is retained live
+after exact-source CI, real bilingual evidence/saved-chat/audit checks and exact all-role rollback.
+Twelve source findings are repaired; repository protection GOV-01 needs administration access.
+Current source publication and architecture documentation do not redeploy servers or qualify
+failed/unrun model, WAN, VM, load or recovery gates.
 Guarded Ubuntu package-layer scripts and desktop offline-bundle checks exist, but they do
 not grant another serving-host change or production acceptance. Phase 0 architecture was
 accepted on 2026-09-21; later infrastructure operations and acceptance gates remain
@@ -26,7 +36,8 @@ For the current Python slice, install the generated lock with
 before each Ruff, mypy or pytest command. Ruff covers `packages migrations tests scripts
 deploy/installers`; mypy covers `packages tests scripts deploy/installers`. Run
 `pytest -m "not integration and not browser" -q` for the isolated local suite. Including the
-MCP extra is required for protocol-test collection; ordinary deployments still omit that extra.
+MCP extra is required for protocol-test collection and canonical gateway/runner packaging;
+the ordinary app/AI dependency layer need not include it.
 Add `--offline` only after dependencies are provisioned. See [exact checks](TESTING.md).
 Real database acceptance additionally requires an isolated PostgreSQL URL in
 `NEXTOPS_TEST_DATABASE_URL`; a skipped database suite is not a pass. Regenerate `uv.lock`

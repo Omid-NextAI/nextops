@@ -2,6 +2,13 @@
 
 [فارسی](../fa/INDEX.md) · [Home](../../README.md) · [Start here](START_HERE.md)
 
+**Current update: 2026-10-07.** App `48e3a8a` is retained with the OCS static login/compact UI;
+AI API `ec1ed32`, Qwen3.8-27B Q8/CPU and MCP remain unchanged. Real browser, audit and exact app
+rollback passed; an intermittent model timeout and quality/thinking/context/current WAN/VM/load
+gates remain open. Recovery remains owner-deferred, not accepted. See the
+[live record](../requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md) and current manifest.
+The following dated September status is historical, not the current release qualification.
+
 **Updated: 2026-09-26. Status: the controlled bilingual Phase 2 path and deterministic answer-integrity boundary are deployed across four guests.** Four fixed Linux targets, bounded Zabbix history/events, durable local-CPU answers and evidence/audit linkage are live. Earlier controlled campaigns passed source CI, bilingual model evaluation, live API, restart, rollback, WAN denial, authenticated browser, dependency recovery and serial reboot checks. The current app release has narrower, revision-specific qualification: held-out semantics, exact rollback, server-side WAN isolation and cold start remain unrun. Recovery is required again but cannot proceed without an independent destination and isolated restore lab. No local recipient-delivery route is configured. Production acceptance remains open. See the [machine-readable release status](../status/current-release.yaml).
 
 > **Current new-server profile:** three NextOps VMs plus `zabbix-server` (4 vCPU / 16 GiB / 200 GiB) = **4 VMs / 40 vCPU / 184 GiB RAM / 980 GiB virtual disks**. Do not add the earlier small lab VM as well. [START_HERE](START_HERE.md) defines the order and Stage 1A–1E; [ZABBIX_SERVER](ZABBIX_SERVER.md) defines the monitoring VM, LVM and read-only integration.

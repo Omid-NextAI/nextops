@@ -1,8 +1,8 @@
 ---
 $schema: ./release-status.schema.json
 schema_version: 2.2.0
-release_identifier: nextops-reference-ui-controlled-2026-10-05
-observed_at: '2026-10-05'
+release_identifier: nextops-audit-repairs-controlled-2026-10-07
+observed_at: '2026-10-07'
 deployment_status: controlled_user_testing_not_production_accepted
 delivery_scope:
   profile: local_read_only_recovery_deferred
@@ -17,29 +17,29 @@ snapshot_restore_owner_attestation:
 repository:
   remote: Omid-NextAI/nextops
   branch: main  # Canonical integration branch; new source increments require reviewed PRs.
-  inspected_baseline_commit: 625ca80b83fbdb80d0fba4dc4e770b189b6d623c
+  inspected_baseline_commit: fc271cecc215087995f41e61f9cf986e4caeda00
 components:
   application:
-    release: nextops-0.1.0-836b1ea
-    source_commit: 836b1eaa77e09505e2f97bdb4470d9bc101fadf1
+    release: nextops-0.1.0-52e5179
+    source_commit: 52e51792e4d06845544bc7ae1be6042890b2ad22
   connector:
-    release: nextops-0.1.0-2a7c8dc
-    source_commit: 2a7c8dc5dc99ebf203748380b7ab8ea7f89ac690
+    release: nextops-0.1.0-52e5179
+    source_commit: 52e51792e4d06845544bc7ae1be6042890b2ad22
   inference_api:
-    release: nextops-0.1.0-7ce9d29
-    source_commit: 7ce9d2969d6bea8186783c5ce04a1c93be811a97
+    release: nextops-0.1.0-52e5179
+    source_commit: 52e51792e4d06845544bc7ae1be6042890b2ad22
   inference_runtime:
     name: llama.cpp
     source_tag: v0.4.1
     source_commit: b29c606e28a01b1bc8c1351026a0fa6e616bf6c4
-    binary_sha256: dbe5a5cdd4842fe2d498270c1e1df58344e9052e97214e2ba9c9845443a1b0dc
+    binary_sha256: eb53d6eef8bdae6f1227a93af1f6caf58542fb5943b03ccc80d136316e6f5721
     cpu_only: true
   model:
-    identifier: nextops-qwen3-5-35b-a3b-q4-k-m
-    source_revision: 3d2a22d4eb631b9c8fd2be94599dc2fd84b4a595
-    quantization: Q4_K_M
-    size_bytes: 22285080384
-    sha256: 2f2df1e8b2e92b642c1850ea1734b341cc8ca5098c42cc0a8b8c436a8d4751ab
+    identifier: nextops-qwen3-8-27b-q8-0
+    source_revision: 4ca720788d1e01f1bff70c033e0d0028fd02e502
+    quantization: Q8_0
+    size_bytes: 29047086048
+    sha256: a680f44a06920e5d689774823782006aa3acc8db95750323373b24139b67e348
   application_database:
     name: PostgreSQL
     version: '16.15'
@@ -50,19 +50,20 @@ components:
     name: Zabbix
     version: '7.0.31'
 current_application_qualification:
-  release: nextops-0.1.0-836b1ea
-  source_commit: 836b1eaa77e09505e2f97bdb4470d9bc101fadf1
+  release: nextops-0.1.0-52e5179
+  source_commit: 52e51792e4d06845544bc7ae1be6042890b2ad22
   scope: application_revision_sensitive
   gates:
     - id: current_app_bounded_live_functionality
       status: passed
       evidence:
-        - docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md
+        - docs/requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md
         - docs/en/TESTING.md
         - docs/fa/TESTING.md
     - id: current_app_held_out_answer_semantics
       status: partial
       evidence:
+        - docs/requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md
         - docs/en/AI_INTEGRITY.md
         - docs/en/TESTING.md
         - docs/fa/TESTING.md
@@ -70,26 +71,68 @@ current_application_qualification:
     - id: current_app_exact_release_rollback
       status: passed
       evidence:
-        - docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md
+        - docs/requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_server_side_wan_isolation
       status: not_run
       evidence:
-        - docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md
+        - docs/requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_vm_reboot_cold_start
       status: not_run
       evidence:
+        - docs/requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: ocs_company_identity_compact_workspace
+    status: accepted_controlled
+    evidence:
+      - docs/requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md
+      - docs/requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md
+      - docs/en/UI.md
+      - docs/fa/UI.md
+      - tests/browser/test_ocs_redesign.py
+  - id: enabled_model_ui_and_selected_source_inspection
+    status: accepted_controlled
+    evidence:
+      - docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md
+      - packages/nextops/api/static/capabilities.js
+      - packages/nextops/api/static/investigation-view.js
+      - packages/nextops/inference/contracts.py
+      - tests/browser/test_phase2_panel.py
+      - docs/en/UI.md
+      - docs/fa/UI.md
+  - id: qwen38_standard_owner_excepted_selection
+    status: experimental
+    evidence:
+      - docs/requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md
+      - deploy/inference/qwen3-8-27b-q8.candidate.json
+      - deploy/systemd/model-profiles/qwen3-8-27b-q8-runtime.conf
+      - deploy/systemd/model-profiles/qwen3-8-27b-q8.env
+      - tests/unit/test_qwen38_cutover_exception.py
+  - id: permissive_q5_model_trial
+    status: experimental
+    evidence:
+      - docs/requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md
+      - deploy/inference/qwen3-5-122b-a10b-q5-k-m.candidate.json
+      - tests/unit/test_122b_q5_candidate.py
   - id: qwen38_cpu_qualification
     status: experimental
     evidence:
       - docs/requirements/QWEN38_QUALIFICATION_SPEC.md
       - docs/requirements/QWEN38_QUALIFICATION_2026-10-05.md
+      - docs/requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md
+      - deploy/inference/qwen3-8-flash-next-q8.candidate.json
+      - deploy/inference/model-qualification-corpus.json
+      - tests/unit/test_flash_candidate.py
+      - tests/unit/test_gguf_metadata.py
+      - tests/unit/test_model_coding_invariant.py
+      - tests/unit/test_model_trial_review.py
+      - tests/unit/test_qwen38_sampling.py
+      - tests/unit/test_qwen38_deadlines.py
       - deploy/inference/qwen3-8-27b-q8.candidate.json
       - tests/unit/test_expanded_inference.py
       - tests/unit/test_inference_artifacts.py
@@ -100,9 +143,12 @@ capabilities:
     evidence:
       - docs/requirements/REFERENCE_UI_SPEC.md
       - docs/requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md
+      - docs/requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md
       - docs/en/REFERENCE_UI.md
       - docs/fa/REFERENCE_UI.md
       - tests/browser/test_reference_ui.py
+      - tests/browser/test_login_motion_regression.py
+      - tests/browser/test_panel_quality_regression.py
   - id: local_admin_user_management
     status: implemented_unaccepted
     evidence:
@@ -284,6 +330,43 @@ capabilities:
       - deploy/systemd/nextops-certificate-check.timer
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
+  - id: audit_repairs_exact_code_live_20261007
+    status: passed
+    evidence:
+      - docs/requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md
+      - docs/requirements/AUDIT_REPAIR_2026-10-07.md
+  - id: repository_main_branch_protection_gov01
+    status: partial
+    evidence:
+      - docs/requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md
+  - id: ocs_ui_app_only_live_20261007
+    status: passed
+    evidence:
+      - docs/requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md
+  - id: qwen38_source_ui_live_audit_rollback_20261007
+    status: passed
+    evidence:
+      - docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md
+  - id: qwen38_source_ui_interpretation_quality_20261007
+    status: partial
+    evidence:
+      - docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md
+  - id: qwen38_controlled_standard_cutover_20261007
+    status: passed
+    evidence:
+      - docs/requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md
+  - id: qwen38_current_server_wan_and_vm_cold_start
+    status: not_run
+    evidence:
+      - docs/requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md
+  - id: qwen38_raw_quality_20261007
+    status: failed
+    evidence:
+      - docs/requirements/QWEN38_QUALIFICATION_SPEC.md
+      - deploy/inference/qwen3-8-27b-q8.candidate.json
+      - docs/PROJECT_STATE.md
+      - docs/en/CPU_AI.md
+      - docs/fa/CPU_AI.md
   - id: local_admin_users_live_offline
     status: partial
     evidence:

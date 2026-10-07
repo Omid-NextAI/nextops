@@ -1,5 +1,170 @@
 # Testing, model evaluation and release evidence
 
+## Audit repairs retained live — 7 October 2026
+
+Exact app/API/MCP `52e5179` and matching existing collectors passed five CI jobs in run37650022276:
+1509 unit/API,119 browser,60 PG16 and60 PG17, plus lint/types/docs/build/dependency/secret checks.
+Offline preparation, actual EN/FA primary/secondary reads, two saved completions/resume, three
+evidence/audit hash matches, exact all-role rollback/reapply and final retention passed. All-four
+code/invariants and common completion/idle guards were reverified at17:12:47 UTC. Native Q8/PID,
+credentials, grants and inference settings are unchanged. The earlier403 candidate and failed
+harness records remain preserved. Twelve source findings are repaired; GOV-01 and existing
+model/WAN/VM/load/recovery limits remain. See
+[actual commands, latencies and boundaries](../requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md).
+
+## Audit repair source qualification — 7 October 2026
+
+The [bounded repair](../requirements/AUDIT_REPAIR_2026-10-07.md) adds actual API/service and browser
+regressions, not a new model-quality certificate. Native tests cover shielded caller deadlines,
+repeated cancellation, physical-thread ownership/peak1, atomic admission counts and fail-closed
+startup/abnormal-exit metrics. Two fresh zero gauges are required; `/health` is not idle proof.
+API shutdown cannot kill a native thread; socket timeouts remain inactivity limits, and native
+metrics do not enumerate every pending HTTP task. Preserve sole-producer isolation and startup
+reconciliation. No generation is retried by these repairs.
+
+Run `uv run --frozen --extra dev --extra mcp pytest -m "not integration and not browser" -q`,
+`uv run --frozen --extra dev --extra mcp pytest -m browser -q`, and, only on an isolated PostgreSQL
+test database, `uv run --frozen --extra dev --extra mcp pytest -m integration -q`. CI tests16/17.
+The restricted-role tests destructively reset their test database: never point them at a serving
+database. Fixture/source success, exact live package/audit verification and raw model acceptance
+are separate results. Publication tools need independent fault-path review; old migration scripts
+are not code-only deployment helpers. No new serving identities are claimed by this section.
+
+## Historical OCS app-only UI retained live — 7 October 2026
+
+Exact app `48e3a8a` was live; AI API `ec1ed32`, native Q8 and MCP were unchanged. All five
+exact-source CI jobs in run37616454773 passed, including PostgreSQL16/17 and browser/secret checks.
+Offline app installation, three exact-source rollbacks, final real-browser checks, fresh smoke,
+two conversation audits/one evidence hash pair and unchanged service/PID/config proof passed.
+Final saved initial/follow-up took22.656/22.281s; the fresh secondary count answer took82.094s.
+Copy verification proved Windows CRLF-only conversion. Earlier harness failures and a301.625s
+model504 remain recorded. Real desktop/mobile screenshots were inspected. No fixture fallback,
+TLS bypass or inference change was used. Browser-origin blocking is not server-WAN acceptance.
+See [exact artifacts, observations and limits](../requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md).
+The local source commands below remain applicable; production/model-quality acceptance is separate.
+
+## Earlier enabled-model UI and secondary source — 7 October 2026
+
+Serving app/API source `ec1ed32`, package digest `4dda2131…`; native Q8/PID/configuration and MCP
+unchanged. Source checks:1446 unit/API passed,2 POSIX skips,132 deselected/one existing AnyIO
+warning (40.63s);94 browser passed (377.02s);151 files typed. Five exact-source CI jobs in
+run37601040171 passed, including PostgreSQL16/17, browser and secret scanning.
+
+Three fresh TLS-verified real browser contexts passed eight finals: five initial (saved initial/
+resume/follow-up and three approved secondary targets), one restored-source general answer, two
+final secondary EN/FA reads. Source/target/thinking denials, evidence filters/selection, locale,
+mobile, logout/replay and zero external browser requests/page errors passed. Read-only PostgreSQL
+matched two owner conversation audits and five durable evidence/audit hash pairs. Exact offline
+package installation, source rollback/reapply and09:59:08 UTC retention passed. Owned timers are
+inactive; ready/active0/queued0, native PID unchanged and swap0. Browser-origin restriction does
+not qualify server-WAN isolation. Initial metrics timeout and private runner assertion failure
+are retained; unsupported reachability wording and severity labels are semantic limits, not passes.
+See [the record, timings and screenshots](../requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md).
+
+Commands in the existing locked Python environment (Windows use `-X utf8` for bilingual output):
+
+```text
+python -B -X utf8 -m pytest -m "not integration and not browser" -q --tb=short
+python -B -X utf8 -m pytest tests/browser -q --tb=short
+python -B -X utf8 -m pytest tests/unit/test_release_status.py tests/unit/test_qwen38_cutover_exception.py -q
+python -B -X utf8 -m mypy --platform linux packages tests scripts deploy/installers
+python -B -X utf8 -m ruff check packages migrations tests scripts deploy/installers
+python -B -X utf8 -m ruff format --check packages migrations tests scripts deploy/installers
+python -B -X utf8 scripts/check_docs.py
+python -B -X utf8 scripts/check_release_status.py
+python -B -X utf8 scripts/check_inference_artifacts.py
+node --check packages/nextops/api/static/capabilities.js
+node --check packages/nextops/api/static/app.js
+node --check packages/nextops/api/static/investigation-view.js
+git diff --check
+```
+
+Private, already reviewed live runner (no public test credentials or fixtures):
+
+```text
+python -B -X utf8 <protected-source-ui-directory>/browser-check.py first
+python -B -X utf8 <protected-source-ui-directory>/browser-check.py rollback
+python -B -X utf8 <protected-source-ui-directory>/browser-check.py final
+```
+
+The record distinguishes controlled UI functionality from raw/model/thinking/context/recovery/
+load/WAN/VM and production qualification. The exact historical suffixed API release remains a
+negative schema test; the retained35B check admits only the two recorded Q8 API source identities.
+
+## Qwen3.8 controlled cutover — 7 October 2026
+
+Owner-excepted raw13/16 remains failed, not production acceptance. Three fresh real TLS-verified
+browser contexts produced14 finals: initialQ8 six, exact restored35B two, finalQ8 six. Q8 contexts
+passed saved-chat/reload/follow-up, current secondary Zabbix EN/FA evidence/inspector, source denial,
+thinking denial, logout/replay rejection and no external requests/page errors. Read-only PostgreSQL
+checks matched four conversation audits and four durable investigation/evidence hash pairs in total.
+Installed service authentication, public-thinking denial and actual tokenizer over-budget rejection
+passed twice. Exact artifacts/configuration/argv/budgets, rollback/reapply and final retention passed;
+both owned timers are inactive. Current server-WAN isolation, VM cold start, load, full context and
+enabled thinking were not run/accepted. See [the record](../requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md)
+for hashes, latencies, bounded scope and historical-profile separation.
+
+Exact private runner commands, from the existing provisioned project Python environment:
+
+```text
+python -B <protected-cutover-directory>/browser-check.py first
+python -B <protected-cutover-directory>/browser-check.py rollback
+python -B <protected-cutover-directory>/browser-check.py final
+```
+
+The runner reads protected local login credentials without exporting them. No fixture account,
+new token storage, TLS bypass, live stress test or hidden remote AI was added.
+
+## Protocol/provenance source repair — 2026-10-06
+
+This is isolated source/fixture verification, not a model or deployment result. No inference
+prompt/weights/profile, operational credentials, schema or serving configuration changed.
+
+Exact commands from the locked, already provisioned Python 3.12/dev+MCP environment:
+
+```text
+python -I -B -X utf8 -m pytest -q -p no:cacheprovider -m "not integration and not browser"
+python -I -B -X utf8 -m pytest -q -p no:cacheprovider -m browser tests/browser
+python -I -B -X utf8 -m pytest -q -p no:cacheprovider tests/browser/test_evidence_qualifiers.py
+python -I -B -X utf8 -m mypy --platform linux packages tests scripts deploy/installers
+python -I -B -X utf8 -m ruff check packages migrations tests scripts deploy/installers
+python -I -B -X utf8 -m ruff format --check packages migrations tests scripts deploy/installers
+python -I -B -X utf8 scripts/check_docs.py
+python -I -B -X utf8 scripts/check_release_status.py
+python -I -B -X utf8 scripts/check_inference_artifacts.py
+uv build --offline --no-sources --no-build-isolation --wheel --out-dir <private-output>
+python -I -B -X utf8 scripts/compute_app_code_digest.py <private-output>/nextops-0.1.0-py3-none-any.whl
+git diff --check
+```
+
+Final-source results: **1383 passed, two POSIX skips, 130 deselected** in 34.65s; the full browser
+suite passed **92 tests** in 290.70s. The four new guard-to-browser EN/FA 390/1440-width tests also
+passed separately in 15.32s:
+exact qualifiers/copy, safe text rendering, RTL/LTR and logout clearing. External browser
+destinations were denied while loopback stayed available; no external attempt occurred in these
+four cases. This is not native-model or LAN/WAN acceptance. Existing AnyIO deprecation warning
+remains. Linux-target types passed 149 files, lint passed and 155 files were formatted. Docs passed
+140 Markdown/39 pairs; release/inference/diff checks passed. Offline wheel includes the new
+`api/evidence_qualifiers.py`; package-code SHA256:
+`e3610b7800f27c1f78adc46ae6b8b4eb4a12d6c6d4dcef387b5a1c3b46dddece`.
+
+Raw Qwen3.8 coding/network/provenance failures remain failed. Fresh native generation, independent
+semantic review, real database integration for this increment, exact-head hosted CI, serving
+deployment/rollback, thinking/privacy/context and real WAN/cold-start gates are not proved by
+these local results. See [requirements](../requirements/ANSWER_INTEGRITY_SPEC.md).
+
+## Flash preparation and offline regression tools — 2026-10-05
+
+[Current packet](../requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md): actual small-shard
+size/hash/metadata, dedicated blank-volume preparation and bounded transfer checks passed in their
+stated scope; complete Flash import/load/generation/app/WAN/rollback gates are unrun or partial.
+New metadata bounds, immutable shard/license controls, frozen paired corpus and finite non-executing
+coding/trial review tests bring the non-browser suite to **660 passed, 2 skips, 85 deselected** in
+21.16 seconds, with one existing AnyIO warning. Ruff check/format passed 133 files, Linux-target mypy
+passed 132. Actual old baseline/27B EN/FA coding samples remain failed in the private offline review.
+HTTP success and digit-only examples cannot bypass human semantic review or missing acceptance.
+No new browser/PostgreSQL/live Flash qualification or model training is claimed.
+
 ## Actual Qwen 3.8 native/adapter trial — 2026-10-05
 
 [Dated report](../requirements/QWEN38_QUALIFICATION_2026-10-05.md) separates verified import,

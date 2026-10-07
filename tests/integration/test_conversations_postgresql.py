@@ -178,8 +178,16 @@ def test_logout_during_generation_cannot_store_or_return_answer(
     with pytest.raises(ApplicationError) as expired:
         store.complete(token, ticket, assistant(), uuid4())
     assert expired.value.code == ErrorCode.UNAUTHENTICATED
+    # A server-issued nonce can be cleaned up after revocation, but cannot publish.
+    store.fail(token, ticket, uuid4())
     with app_session_factory() as session:
         assert session.scalar(select(func.count()).select_from(ConversationMessage)) == 0
+        stored = session.get(Conversation, chat.conversation_id)
+        assert stored is not None and stored.pending_nonce is None and stored.pending_until is None
+        failed = session.scalar(
+            select(AuditEvent).where(AuditEvent.event_type == "conversation.failed")
+        )
+        assert failed is not None and failed.outcome == "failed"
 
 
 def test_delete_pending_chat_invalidates_late_generation(
@@ -213,6 +221,10 @@ def test_expired_chat_and_generation_nonce_are_not_reused(
         )
     fresh = store.begin(token, chat.conversation_id, ticket.payload, uuid4())
     assert isinstance(fresh, GenerationTicket) and fresh.nonce != ticket.nonce
+    store.fail(token, ticket, uuid4())
+    with app_session_factory() as session:
+        stored = session.get(Conversation, chat.conversation_id)
+        assert stored is not None and stored.pending_nonce == fresh.nonce
     with pytest.raises(ApplicationError):
         store.complete(token, ticket, assistant(), uuid4())
     store.fail(token, fresh, uuid4())

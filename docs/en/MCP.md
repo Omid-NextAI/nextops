@@ -2,7 +2,22 @@
 
 [فارسی](../fa/MCP.md) · [Index](INDEX.md)
 
-**Current controlled deployment, 2026-10-04:** MCP-02 canonical gateway/isolated runner and approved
+**Current retained design, 2026-10-07:** app, AI API and canonical MCP/source runner now share exact
+`52e5179`, with matching existing Linux collectors. The gateway uses official SDK
+`mcp==1.30.0`, authenticated Streamable HTTP/TLS over the verified SSH tunnel, and a peer-UID-checked
+Unix socket to its separate runner. Target tokens/keys remain runner-only. The old HTTP service
+is disabled, not a fallback. Strict default-primary binding, scoped projection, redaction and
+mandatory late user/session/scope/source audit are retained. See
+[the all-role live record](../requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md) and
+[current design](ARCHITECTURE.md). No new credentials, grants, model or production acceptance.
+
+**Historical 7 October UI follow-up:** the existing secondary source is discoverable through visible approved
+source/host controls and problem/metric filters in app/API `ec1ed32`. Three approved targets passed
+fresh reads; five durable evidence/audit hash pairs and exact source rollback/reapply passed.
+The MCP deployment remains `2a7c8dc`; no new token, endpoint, scope or Zabbix-host operation.
+See [the bounded record and interpretation limits](../requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md).
+
+**Historical initial canonical deployment, 2026-10-04:** MCP-02 canonical gateway/isolated runner and approved
 source selection are live in `2a7c8dc`. See the
 [exact qualification and limits](../requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md),
 [bounded discovery plan](../requirements/MCP_LIVE_DISCOVERY_SPEC.md) and ADR 0010 composition addendum.
@@ -28,7 +43,9 @@ source failure isolation and app/connector WAN-blocked restart/rollback passed. 
 service is disabled; full-system cold-start/reboot and broad answer semantics remain separate gates.
 Live service limits: two reads/no queue; client total 65 s, socket 60 s, native HTTPS 12 s and
 runner outer deadline 90 s. Native requests retain admission until actual drain. The source route
-shares the existing bounded 180-second Nginx assistant timeout and 12-requests/minute limiter.
+shares the assistant proxy and 12-requests/minute limiter. The October4 proxy budget was180 seconds;
+the controlled Q8 cutover uses360 seconds, with provider300/app330. MCP transport/runner limits
+above are unchanged. Generation timeout is not automatically a Zabbix transport failure.
 
 **Historical MCP-01 checkpoint:** at that checkpoint the additive source implementation was not
 deployed and HTTP was the live path. The broader future contract below is not all implemented.
@@ -37,6 +54,9 @@ sections 11–15 and 21, [bounded specification](../requirements/MULTI_SOURCE_MC
 [ADR 0010](../adr/0010-source-scoped-zabbix-mcp.md).
 
 ## Placement and migration contract
+
+This is the original migration contract. Canonical placement is now deployed as recorded above;
+do not restart migration or activate the disabled HTTP service based on the future tense below.
 
 The existing `nextops-connectors-ro` VM is the intended MCP gateway/runner host, as required by
 master sections 5 and 12 and reaffirmed by the owner on 2026-10-04. Native MCP becomes its canonical

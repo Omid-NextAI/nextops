@@ -1,5 +1,1331 @@
 # Project state / وضعیت پروژه
 
+Documentation checkpoint, **2026-10-07**: the owner requested GitHub synchronization and the
+current system design. Paired architecture/stack/diagrams/MCP/development/status guides now
+describe retained `52e5179`, actual static UI and the deployed gateway/isolated runner. Three
+current views are separate from seven preserved future diagrams and historical status records.
+This source-only documentation increment leaves serving identities and all acceptance gates
+unchanged; the live checkpoint below remains authoritative.
+
+گام مستندات، **۷ اکتبر ۲۰۲۶**: مالک هماهنگ‌سازی GitHub و طراحی جاری را خواست. راهنمای
+جفت معماری/فناوری/نمودار/MCP/توسعه/وضعیت، `52e5179` تثبیت‌شده، رابط ایستای واقعی و
+درگاه مستقر/اجراکنندهٔ جدا را شرح می‌دهد. سه نمای جاری از هفت نمودار آینده و سابقهٔ وضعیت
+تاریخی جداست. این افزایش فقط کد مستندات است؛ هویت خدمت و معیار پذیرش تغییر نمی‌کند و
+گام زندهٔ زیر مرجع باقی می‌ماند.
+
+Current checkpoint, **2026-10-07, audit repairs retained live**: exact `52e5179` is selected
+for app, AI API and canonical MCP/source runner; the matching collector is installed on all
+four existing guests. At17:12:47 UTC all-four completion/idle-guard reconciliation passed after
+exact rollback/reapply, actual EN/FA primary/secondary reads, saved resume and durable audit checks.
+Five exact-source CI jobs passed:1509 unit/API,119 browser,60 PG16 and60 PG17. Native Q8/runtime
+PID/configuration, credentials, grants, schema, resources, OCS logo/static login and thinking-off
+limits are unchanged. Twelve source findings are repaired; GOV-01 needs repository administration.
+The preserved failed candidate and all unaccepted model/WAN/VM/load/recovery gates remain explicit.
+See [the bounded live record](requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md).
+
+گام جاری، **۷ اکتبر۲۰۲۶، اصلاح ممیزی تثبیت‌شدهٔ زنده**: برنامه/API مدل/MCP اصلی و runner با
+کد دقیق `52e5179` انتخاب و collector متناظر روی چهار مهمان نصب‌اند. ساعت۱۷:۱۲:۴۷ UTC اثبات
+مشترک/محافظ غیرفعالِ چهار نقش، پس از بازگشت/اعمال دقیق، خواندن واقعی EN/FA منابع اصلی/دوم،
+بازگشایی سابقه و ممیزی ماندگار موفق شد. پنج کار CI با۱۵۰۹ واحد/API،۱۱۹ مرورگر و۶۰ آزمون هر
+پایگاه16/17 موفق‌اند. PID/تنظیم Q8 بومی/runtime، اطلاعات ورود/grant/schema/منابع، نشان/ورود
+ثابت و سقف استدلال خاموش حفظ‌اند. دوازده یافتهٔ کد اصلاح شده؛ GOV-01 مجوز مدیریت مخزن می‌خواهد.
+نامزد ناموفق و معیارهای پذیرفته‌نشدهٔ مدل/WAN/VM/بار/بازیابی باقی‌اند؛ رکورد محدود بالا مرجع است.
+
+## Earlier audit source checkpoint — historical / گام پیشینِ کد ممیزی — سابقه
+
+Earlier source checkpoint, **2026-10-07, audit repairs under qualification**: the owner authorized
+fixing the thirteen audited items and code-only guarded shipping. Native admission/drain, evidence
+redaction, transactional late authorization/read audit, cancelled conversation cleanup, scoped
+counts and five UI state defects are repaired in source. Paired active guides are corrected.
+Fresh read-only preflight confirmed the recorded app/API/MCP baseline and original collectors;
+no serving code has yet changed. Exact-source PostgreSQL16/17 CI and independently reviewed new
+publication tools are required before cutover. Repository administration GOV-01 remains open;
+model quality and existing unaccepted gates are unchanged. See the
+[bounded repair specification](requirements/AUDIT_REPAIR_2026-10-07.md).
+
+گام کد، **۷ اکتبر۲۰۲۶، اصلاح ممیزی در حال پذیرش**: مالک رفع سیزده مورد و انتشار محافظت‌شدهٔ
+فقط کد را خواسته است. مالکیت ظرفیت/تخلیهٔ بومی، پالایش شاهد، مجوز و ممیزی خواندن در transaction،
+پاک‌سازی لغو سابقه، شمارش دامنه و پنج خطای وضعیت رابط در source اصلاح شده‌اند؛ راهنمای جفت نیز
+به‌روز است. preflight فقط‌خواندنی تازه، baseline برنامه/API/MCP و collector قبلی را تأیید کرد؛
+هنوز کد خدمت تغییر نکرده است. پیش از انتشار، CI کد دقیق PostgreSQL16/17 و بازبینی مستقل ابزار
+جدید لازم‌اند. GOV-01 مدیریتی باز است؛ کیفیت مدل و معیارهای پذیرفته‌نشده تغییری ندارند.
+
+Earlier checkpoint, **2026-10-07, OCS interface retained live**: app `48e3a8a` was selected,
+active/restarts0 and its rollback timer inactive at12:24:45 UTC. AI API `ec1ed32`, native Q8,
+MCP `2a7c8dc`, their PIDs/configuration and credentials are unchanged. Exact-source five-job CI,
+offline app install, three exact app rollbacks, final real browser and separate fresh smoke passed.
+The final browser completed saved initial/follow-up and a fresh secondary Zabbix answer; read-only
+DB checks matched two conversation audits/one evidence hash pair. EN/FA themes, company images,
+responsive controls, evidence selection/copy and logout/replay passed. The failed earlier harness
+reports and one301.625s inference504 are preserved. Existing model-quality/thinking/context/WAN/
+VM/load limits remain unaccepted; live UI is not production acceptance. See the
+[app-only live record](requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md).
+
+گام جاری، **۷ اکتبر۲۰۲۶، رابط OCS تثبیت‌شدهٔ زنده**: ساعت۱۲:۲۴:۴۵ UTC برنامهٔ `48e3a8a`
+انتخاب‌شده و فعال، شروع خودکار صفر و محافظ غیرفعال است. API مدل `ec1ed32`، Q8 بومی و
+MCP با کد `2a7c8dc`، PID/تنظیم/اطلاعات ورود ثابت‌اند. پنج کار CI کد دقیق، نصب آفلاین،
+سه بازگشت دقیق برنامه، مرورگر واقعی نهایی و smoke تازه موفق‌اند. دو پاسخ سابقه/ادامه و
+خواندن تازهٔ منبع دوم کامل، دو ممیزی گفت‌وگو و یک جفت هش شاهد با پایگاه فقط‌خواندنی تطبیق
+شدند. تم/زبان، تصاویر شرکت، واکنش‌گرایی، انتخاب/کپی شاهد و خروج/رد نشست موفق‌اند. شکست
+ابزارهای قبلی و یک504 مدل پس از۳۰۱٫۶۲۵ ثانیه حفظ‌اند. کیفیت/استدلال/زمینه/WAN/VM/بار
+پذیرفته نیستند؛ رابط زنده، پذیرش production نیست. رکورد محدود بالا مرجع است.
+
+## Pre-deployment source checkpoint — historical / گام کد پیش از استقرار — سابقه
+
+Source checkpoint, 2026-10-07: the latest owner-requested OCS-logo/static-login and compact chat
+redesign passed source verification, not deployed:1446 unit/API,101 browser,152 typed files,
+brand/package checks and documentation validators. Base source `775797a`; recorded serving
+app/API `ec1ed32`, native inference and MCP remain unchanged. The new
+[bounded UI record](requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md) supersedes older visual
+choices, not historical deployment acceptance or security/offline requirements.
+
+گام کد، ۷ اکتبر ۲۰۲۶: ورود ثابت با نشان OCS و گفت‌وگوی سادهٔ درخواستی مالک،۱٬۴۴۶ آزمون واحد/API،
+۱۰۱ مرورگر،۱۵۲ فایل کنترل نوع و بررسی نشان/بسته/اسناد را گذراند؛ مستقر نیست. پایهٔ کد
+`775797a` و برنامه/API ثبت‌شدهٔ زنده `ec1ed32` است؛ مدل و MCP ثابت‌اند.
+رکورد محدودِ بالا جای انتخاب دیداریِ قبلی را می‌گیرد، نه سابقهٔ پذیرش یا الزام امنیت/آفلاین را.
+
+## Earlier capability rollout — historical / استقرار پیشینِ قابلیت — سابقه
+
+Earlier checkpoint — **2026-10-07, enabled-model UI and secondary inspection**: app and AI API
+`ec1ed32` are retained live at09:59:08 UTC after guarded source rollback/reapply. Native Q8/no-BLAS,
+its PID, budgets, units/environment, MCP `2a7c8dc`, credentials and schema are unchanged. The panel
+shows actual model/configuration metadata, visible approved source/host selection and problem/metric
+filters over all returned bounded observations. Three secondary targets passed fresh reads, saved
+reload/follow-up passed and read-only DB checks matched two conversation audits/five evidence hash
+pairs across initial/final contexts. Eight fresh finals include one on the restored source. Both
+owned timers are inactive, services active, automatic restart counters0, swap0 and ready/idle.
+Source verification:1446 unit/API,94 browser,151 typed files and all five exact-source CI jobs pass.
+The first revision's metrics timeout and private rollback-runner assertion failure remain recorded.
+Manual review retains unsupported reachability wording and an unverified severity label as semantic
+limitations, not passes. Thinking is off;16K is configured admission, not full-context acceptance.
+See [the bounded record](requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md).
+Current WAN/VM/load and broad model quality remain unaccepted; no production claim or new waiver.
+
+گام جاری — **۷ اکتبر ۲۰۲۶، رابط مدل فعال و بررسی منبع دوم**: برنامه و API هوش مصنوعیِ
+`ec1ed32` پس از بازگشت/اعمال دقیق کد، ساعت۰۹:۵۹:۰۸ UTC تثبیت شدند. Q8 بومی و ساخت بدون BLAS،
+PID، بودجه‌ها، واحد/محیط، MCP با کد `2a7c8dc`، اطلاعات ورود و پایگاه ثابت‌اند. هویت/تنظیم
+واقعی مدل، انتخاب آشکارِ منبع و میزبان مجاز و فیلتر همهٔ مشاهدات محدودِ دریافتی در پنل دیده
+می‌شوند. سه مقصد منبع دوم، خواندن تازه و گفت‌وگو، بازگشایی/ادامه را گذراندند. بررسی
+فقط‌خواندنیِ پایگاه، دو ممیزی گفت‌وگو و پنج جفت هش شاهد در مرورگر اولیه/نهایی را تطبیق داد.
+هشت پاسخ تازه، شامل یک پاسخ با کد بازگردانده‌شده ثبت است؛ هر دو محافظ غیرفعال، خدمات فعال،
+شمارندهٔ شروع خودکار صفر، swap صفر و مدل آماده و بی‌درخواست‌اند.۱٬۴۴۶ آزمون واحد/API،۹۴
+مرورگر،۱۵۱ فایل کنترل نوع و پنج کار CI کد دقیق موفق‌اند. پایان مهلت سنجهٔ نسخهٔ اول و انتظار
+نادرست ابزار خصوصیِ بازگشت حفظ شده‌اند. ادعای دسترسی‌پذیری و برچسب شدتِ تأییدنشده در
+بازبینی دستی، محدودیت معنایی‌اند، نه موفقیت. استدلال خاموش و16K سقف پذیرش تنظیم‌شده است،
+نه پذیرش زمینهٔ کامل. رکورد بالا مرجع است؛ WAN/VM/بارِ جاری و کیفیت عمومی پذیرفته نیستند.
+ادعای تولید یا استثنای تازه‌ای اضافه نشده است.
+
+## Initial Q8 cutover — historical / گذار اولیهٔ Q8 — سابقه
+
+Current checkpoint — **2026-10-07, owner-excepted Qwen3.8 cutover**: the owner waived only
+three recorded raw-semantic failures. Qwen3.8-27B Q8/no-BLAS build003 is retained live after guarded
+rollback/reapply, AI source `60605d8`; app source `3d92b71`, credentials, MCP, schema and UI are unchanged.
+Thinking is off; context16K is an admission ceiling, budgets300/330/360, native32 workers/one slot,
+one active/two queued and the existing96GiB hard cap. Initial six fresh Q8 browser finals, saved
+resume, secondary EN/FA evidence and two conversation/two evidence audits passed. Actual service
+authentication/thinking denial/token admission passed. Exact35B/code/runtime/config/app-budget
+rollback and two fresh35B answers passed, followed by guarded reapply. Final sixQ8 browser finals,
+two further conversation/two evidence audits and exact-profile/idle retention passed at08:08:37 UTC.
+Both owned timers are inactive; services healthy/restarts0/swap0. [Dated record](requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md) separates
+the quality exception from passing results; raw13/16, thinking/full-context and unrun current WAN/
+VM/load gates are not production acceptance. The previous35B expanded profile is retained history.
+
+گام جاری — **۷ اکتبر ۲۰۲۶، گذار Qwen3.8 با استثنای مالک**: فقط سه شکست معناییِ ثبت‌شده
+کنار گذاشته شده‌اند. Q8 مدل Qwen3.8-27B و ساخت سومِ بدون BLAS، با بازگشت زمان‌دار انتخاب
+و پس از بازگشت/اعمال دقیق تثبیت شده‌اند؛ کد AI برابر `60605d8` است. برنامهٔ `3d92b71`، اطلاعات ورود، MCP، پایگاه و رابط
+تغییر نکرده‌اند. استدلال خاموش است؛16K سقف پذیرش ورودی، مهلت‌ها۳۰۰/۳۳۰/۳۶۰، runtime دارای۳۲
+رشته و یک جایگاه، صف دارای یک فعال/دو منتظر و سقف حافظهٔ قبلی96GiB است. شش پاسخ تازهٔ Q8،
+بازگشایی گفت‌وگو، شاهد منبع دوم در دو زبان و دو ممیزی گفت‌وگو/دو جفت هش شاهد موفق‌اند.
+احراز هویت خدمت، منع استدلال و رد واقعی ورودیِ بزرگ موفق‌اند. بازگشت دقیق مدل/کد/runtime/
+تنظیم35B و مهلت برنامه، با دو پاسخ تازهٔ35B موفق شد و سپس Q8 دوباره اعمال شد. کنترل نهاییِ
+مرورگر با شش پاسخ Q8، دو ممیزی گفت‌وگو/دو جفت هش دیگر و تثبیت دقیق ساعت۰۸:۰۸:۳۷ UTC موفق‌اند.
+بازگشت‌های زمان‌دار غیرفعال، خدمات سالم و شروع مجدد/swap صفرند. نتیجهٔ خام۱۳ از۱۶، استدلال و زمینهٔ کامل پذیرفته
+نیستند؛ قطع WAN/شروع VM/بارِ نسخهٔ جاری اجرا نشده‌اند. نمایهٔ35B، شاهد تاریخیِ محفوظ است.
+
+## Earlier raw-quality checkpoint — historical / گام پیشینِ کیفیت خام — سابقه
+
+Current checkpoint — **2026-10-07, 06:35:53 UTC**: the distinct greedy Q8 trial completed
+all sixteen finals under explicit300 seconds, but main semantic review is **13 passed/3 failed**.
+English networking still asserts an unverified upstream condition; Persian stale evidence omits
+one-authorized-host scope; Persian causality gives uncertainty/two checks without an explanatory
+hypothesis. Both raw code samples pass twelve finite AST boundaries each, not general code approval.
+English stale evidence now completes in65373ms; Persian hypothesis126362ms fits300, not historical120.
+Native SHA `b69e4cf3a9725a344b2eadc92a72bb9ec0090ce971934de5ca051d09ac17926e`.
+Owned stop and separate PID0/inactive/free-port/unchanged ready-idle serving reconciliation passed.
+Exact `60605d8` source:80 focused/1426 unit-API tests plus five CI jobs passed, not raw quality.
+Final source/status-document rerun:1426 passed,2 POSIX skips,130 deselected,one existing warning,
+27.98s; lint/format/Linux-target types/docs/status/artifact/diff checks pass.
+
+Both new sampler profiles remain default-off/unselected. The five retained prompt/sampler trials
+have not completed raw repair; do not repeat identical runs, soften scoring, search lucky seeds,
+train on frozen tests or credit app safeguards as raw improvement. Further work needs a materially
+evidenced artifact/method strategy and applicable review before a new finite full comparison.
+Independent/matched app/thinking/privacy/context/evidence/WAN/model rollback remain open.
+Serving35B and public thinking are unchanged; no new live release or production acceptance.
+
+گام جاری — **۷ اکتبر ۲۰۲۶، ۰۶:۳۵:۵۳ UTC**: آزمون متفاوت Q8 با انتخاب حریصانهٔ توکن، همهٔ
+شانزده پاسخ را در مهلت صریح۳۰۰ثانیه تکمیل کرد؛ بازبینی عامل اصلی **۱۳ مورد موفق و ۳ مورد
+ناموفق** ثبت می‌کند. پاسخ شبکهٔ انگلیسی وضعیت بالادست را بدون شاهد قطعی می‌داند؛ شاهد کهنهٔ
+فارسی دامنهٔ «تنها میزبان مجاز» را حذف می‌کند؛ پاسخ علّی فارسی عدم قطعیت و دو بررسی دارد،
+اما فرضیهٔ توضیحی نمی‌دهد. هر نمونهٔ کد، دوازده حالت محدود AST را گذراند؛ این تأیید عمومی
+کدنویسی نیست. شاهد انگلیسی در۶۵۳۷۳میلی‌ثانیه تکمیل شد؛ فرضیهٔ فارسی با۱۲۶۳۶۲میلی‌ثانیه در
+مهلت۳۰۰ جا دارد، نه۱۲۰ تاریخی. هش بومی بالا، توقف اختصاصی و بررسی جداگانهٔ نبود PID/شنونده
+و آمادگی بی‌درخواستِ مدل زنده حفظ‌اند. کد دقیق `60605d8` با۸۰ آزمون محدود،۱٬۴۲۶ آزمون
+واحد/API و پنج کار CI موفق است؛ این نتیجه صحت پاسخ خام نیست.
+بازاجرای نهایی کد و سند وضعیت:۱٬۴۲۶ موفق، دو مورد ویژهٔ POSIX اجرا‌نشده،۱۳۰ انتخاب‌نشده و
+یک هشدار موجود در۲۷٫۹۸ ثانیه؛ کنترل lint، قالب، type با هدف Linux، سند، وضعیت، فایل و diff
+موفق است.
+
+دو نمایهٔ جدید پیش‌فرض خاموش و انتخاب‌نشده‌اند. پنج آزمون دستور/نمونه‌گیریِ حفظ‌شده، اصلاح
+خام را تکمیل نکرده‌اند. اجرای یکسان تکرار، معیار آسان‌تر، seed موفق جدا انتخاب یا پرسش ثابت
+وارد آموزش نشود؛ کنترل برنامه به مدل امتیاز ندهد. برای آزمون کامل بعدی، راهبرد متفاوتِ فایل
+یا روش، با پشتوانهٔ شاهد و بازبینی لازم تعیین شود. معیارهای مستقل، برنامه، استدلال، حریم
+خصوصی، زمینه، شواهد، WAN و بازگشت مدل بازند. مدل زندهٔ35B و استدلال عمومی ثابت‌اند؛ نسخهٔ
+زندهٔ تازه یا پذیرش عملیاتی اعلام نمی‌شود.
+
+## Earlier greedy-plan checkpoint — historical / گام پیشین برنامهٔ حریصانه — سابقه
+
+
+Current checkpoint — **2026-10-07, 06:10 UTC**: the upstream instruct sampler failed. Ten
+finals completed; main review records nine passed/two failed/five not run. English networking still
+asserts an unverified upstream response; the attempted English stale/partial case raised
+TimeoutError under the explicit300-second limit. Five subsequent cases were not attempted.
+Both completed raw code samples pass twelve finite AST boundaries each, not general code approval.
+Report SHA `79178feeb7f7d4e910bd868d031c20c5383dd64c6a965e8b7d3176e13d35b9de`.
+Owned stop and separate PID0/inactive/free-port/unchanged ready-idle serving checks passed; five CI
+jobs for `da8d61c` passed, not raw quality. Live35B/defaults/public thinking remain unchanged.
+
+Next distinct comparison: candidate-only greedy decoding, explicitly opt-in and mutually exclusive
+with instruct sampling, temperature0/top-k1/top-p1/min-p0/presence0/repeat1/preselected seed0.
+It removes stochastic token selection, not an upstream recommendation or correctness guarantee.
+Same prompt, full sixteen questions, semantic/code scoring, 16K/384/300 and resource/watchdog/
+privacy/cleanup limits; no lucky-seed selection, timeout extension or fallback credit.
+Independent/app/privacy/context/evidence/WAN/model rollback gates remain open.
+
+Greedy source checks:80 focused tests;1,426 unit/API passed,2 POSIX skips,130 deselected,one existing
+warning in27.33s; lint/156-file format/Linux types150/docs140/39/status/artifact/diff checks pass.
+No native greedy result is inferred. An unescaped test regex lint finding was corrected without
+waiving the rule or changing its semantics.
+
+گام جاری — **۷ اکتبر ۲۰۲۶، ۰۶:۱۰ UTC**: نمایهٔ نمونه‌گیری سازنده ناموفق بود. ده پاسخ نهایی
+رسید؛ بازبینی عامل اصلی نه موفق، دو ناموفق و پنج اجرا‌نشده را ثبت می‌کند. پاسخ شبکهٔ انگلیسی
+دریافت پاسخ نامعتبر از بالادست را بدون شاهد قطعی دانست؛ پرسش شاهد کهنه/ناقص انگلیسی در
+نمایهٔ صریح۳۰۰ثانیه با TimeoutError پایان یافت و پنج مورد بعد آزموده نشدند. هر نمونهٔ کامل
+کد، دوازده حالت محدود AST را گذراند؛ این تأیید کدنویسی عمومی نیست. هش گزارش بالا حفظ شود.
+توقف اختصاصی و بررسی جداگانهٔ نبود PID/شنونده و آمادگی بی‌درخواستِ مدل زنده موفق بود؛ پنج
+کار CI کد `da8d61c` صحت خام را ثابت نمی‌کند. مدل زندهٔ35B، پیش‌فرض‌ها و استدلال عمومی ثابت‌اند.
+
+مقایسهٔ متفاوت بعدی: رمزگشایی حریصانه، فقط برای نامزد و با فعال‌سازی صریح؛ با نمونه‌گیری
+سازنده هم‌زمان نمی‌شود. مقادیر ثابت بالا انتخاب تصادفی را حذف می‌کنند، نه اینکه توصیهٔ
+سازنده یا تضمین صحت باشند. دستور، همهٔ شانزده پرسش، معیار معنا و کد، زمینه/خروجی/مهلت،
+منابع، توقف محدود و حریم خصوصی حفظ شوند. seed موفق جدا انتخاب، مهلت بیشتر یا پاسخ جایگزین
+امتیاز داده نشود. معیارهای مستقل، برنامه، حریم خصوصی، زمینه، شاهد، WAN و بازگشت مدل بازند.
+
+کنترل کد حریصانه:۸۰ آزمون محدود؛ ۱٬۴۲۶ آزمون واحد/API موفق، دو مورد ویژهٔ POSIX اجرا‌نشده،
+۱۳۰ انتخاب‌نشده و یک هشدار موجود در۲۷٫۳۳ ثانیه؛ lint، قالب۱۵۶ فایل، type با هدف Linux روی
+۱۵۰ فایل، سند۱۴۰/۳۹ و کنترل وضعیت، فایل و diff موفق‌اند. این شاهد آزمون بومی حریصانه نیست.
+ایراد lint در عبارت منظم آزمون بدون استثناکردن قاعده یا تغییر معنا اصلاح شد.
+
+## Earlier sampler source checkpoint — historical / گام پیشین کد نمونه‌گیری — سابقه
+
+
+Current source experiment — **2026-10-07**: candidate-only opt-in upstream instruct sampling is
+implemented with preselected seed0, default isolation and unchanged restored prompt/frozen corpus.
+It addresses an observed sampler-configuration difference, not a proved raw-quality repair.
+Sixteen sampler boundary cases plus configuration/default/prompt/deadline regressions pass in a
+60-test focused run. Final source suite:1,406 passed/two POSIX skips/130 deselected/one existing
+warning,34.94s; lint/156-file format/Linux-target types150 and docs140/39 passed. Native,
+independent/matched app/privacy/context/evidence/WAN/rollback gates remain separate and not passed
+by that result. Live35B/public thinking stay unchanged.
+
+آزمایش جاری کد — **۷ اکتبر ۲۰۲۶**: نمونه‌گیری اختیاریِ بدون استدلال سازنده، فقط برای نامزد
+و با seed0 ازپیش‌انتخاب‌شده پیاده‌سازی شد. جدایی پیش‌فرض، دستور بازگردانده‌شده و پرسش‌های
+ثابت حفظ‌اند. این کار تفاوت مشاهده‌شدهٔ تنظیم نمونه‌گیری را بررسی می‌کند، نه اینکه رفع خطای
+خام را ثابت کرده باشد. شانزده حالت مرزی نمونه‌گیری و آزمون‌های تنظیم، پیش‌فرض، دستور و مهلت
+در اجرای محدود ۶۰آزمونی موفق‌اند. آزمون نهایی کد:۱٬۴۰۶ موفق، دو مورد ویژهٔ POSIX اجرا‌نشده،
+۱۳۰ انتخاب‌نشده و یک هشدار موجود در۳۴٫۹۴ ثانیه؛ lint، قالب۱۵۶ فایل، type با هدف Linux روی
+۱۵۰ فایل و مستندات۱۴۰/۳۹ موفق‌اند. آزمون بومی، مستقل، برنامه، حریم خصوصی، زمینه، شواهد،
+قطع WAN و بازگشت مدل جدا هستند و این نتیجه آن‌ها را موفق نمی‌کند. مدل زندهٔ 35B و خاموشی
+استدلال عمومی تغییر نکرده‌اند.
+
+## Previous raw-policy checkpoint — historical / گام پیشین دستور خام — سابقه
+
+Current raw checkpoint — **2026-10-06, 14:31 UTC**: three bounded candidate-policy trials do not
+complete the owner's raw coding/reasoning repair. Scores are 12/16 (final 120-second timeout), 13/16
+under explicit 300 seconds, then 11/16 with regressions. The last policy was rejected and its
+prompt/two tests restored to exact `6c3a380`; its 13/16 remains unqualified. Last native SHA
+`0984bfea6235c3b24b2cf464ff7e557fc642e506020f58b436c9c6568b2285ce` and all history are retained.
+Owned cleanup/separate serving35B PID/readiness/idle reconciliation passed; no live change or
+public thinking. Five exact-source CI jobs per experiment do not prove raw quality. Next model
+work requires a justified different strategy, unchanged full criteria and applicable review;
+independent/app/privacy/context/evidence/WAN/model rollback remain open. No training or fake pass.
+
+گام جاری پاسخ خام — **۶ اکتبر ۲۰۲۶، ۱۴:۳۱ UTC**: سه آزمون محدود دستورهای نامزد، اصلاح
+خواسته‌شدهٔ کدنویسی و نتیجه‌گیری خام را تکمیل نکردند. نتایج به‌ترتیب ۱۲ از ۱۶ با پایان‌یافتن
+مهلت ۱۲۰ثانیه‌ای پاسخ آخر، ۱۳ از ۱۶ با مهلت صریح ۳۰۰ ثانیه و سپس ۱۱ از ۱۶ همراه با پسرفت
+بودند. دستور آخر رد شد و فایل دستور و دو آزمون آن به محتوای دقیق `6c3a380` بازگشتند؛ نتیجهٔ
+۱۳ از ۱۶ آن همچنان پذیرفته نیست. هش آخرین گزارش و همهٔ سوابق حفظ شده‌اند. توقف فرایند آزمون
+و بررسی جداگانهٔ شناسهٔ فرایند، آمادگی و نبود درخواست فعال در مدل زندهٔ 35B موفق بود؛ تنظیم
+مدل زنده و وضعیت استدلال عمومی تغییر نکردند. موفقیت پنج کار CI برای هر نسخهٔ کد، صحت پاسخ
+خام را ثابت نمی‌کند. راهبرد بعدی باید متفاوت و مستدل باشد و مجموعهٔ کامل معیارها و بازبینی
+لازم را حفظ کند. بازبینی مستقل و پذیرش برنامه، حریم خصوصی، پنجرهٔ زمینه، شواهد، قطع WAN و
+بازگشت مدل هنوز تکمیل نشده‌اند. آموزش مدل یا موفقیت ساختگی گزارش نمی‌شود.
+
+## Earlier closed-observation preparation — historical / آماده‌سازی پیشینِ مشاهدهٔ محدود — سابقه
+
+Current raw checkpoint — **2026-10-06,14:07 UTC**: full `6c3a380` Q8/300 completed16 finals,
+but **13 main-reviewed passes/three failures** remain: English upstream assumption, Persian
+authorized scope and a missing specific Persian hypothesis. Both finite code samples/English
+stale scope pass; timing alone is not quality repair. Native SHA
+`edfe704360afb2a17b9413c775f7b7730e9f75050340717571d869fac7f18d8c`, owned cleanup/separate unchanged
+ready-idle baseline and five exact-source CI jobs are recorded. Prepare a distinct generic
+closed-observation/scope-first/causal-explanation policy, retaining all corpus/criteria/resources,
+failures and serving35B/public thinking. No raw-model or deployment acceptance yet.
+
+گام جاریِ پاسخ خام — **۶ اکتبر ۲۰۲۶،۱۴:۰۷ UTC**: اجرای کامل Q8/۳۰۰ با کد `6c3a380` شانزده
+پاسخ نهایی دارد، ولی **۱۳ موفقیت/سه شکست در بازبینی عامل اصلی** باقی است: فرضِ بالادست در
+انگلیسی، دامنهٔ مجاز فارسی و نبود فرضیهٔ مشخصِ فارسی. دو کد محدود/دامنهٔ شاهد انگلیسی موفق‌اند؛
+مهلت به‌تنهایی کیفیت را اصلاح نمی‌کند. هش بالا، توقف/بازخوانی جداگانهٔ خط مبنای آماده و
+بی‌درخواست و پنج CI همان کد ثبت‌اند. دستور عمومیِ متفاوتِ مشاهدهٔ محدود/دامنهٔ آغازین/توضیح
+علّی آماده شود؛ مجموعه/معیار/منابع، شکست‌ها و مدل زندهٔ35B/استدلال عمومی محفوظ‌اند. هنوز
+پذیرش کل مدل خام یا استقرار نیست.
+
+## Earlier labelled-policy preparation — historical / آماده‌سازی پیشینِ دستور عنوان‌دار — سابقه
+
+Current raw checkpoint — **2026-10-06,13:43 UTC**: `d401583` Q8 priority rules repair both finite
+raw coding samples and Persian networking, but the full run still fails: **12 main-reviewed
+passes/four failures** (English upstream assertion, both missing authorized scopes, final Persian
+timeout). Native SHA `8a6682fd3d5235fdd7fdf8edfa05ef5ad99b8cba2826424ac19c2e5046ddd6ad`;
+owned cleanup/separate unchanged ready-idle baseline passed. Five exact-source CI jobs passed.
+Prepare a distinct generic labelled-scope/protocol policy and full opt-in300-second corpus;
+do not alter questions/scoring, serving35B or public thinking. See the bounded specification.
+
+گام جاریِ پاسخ خام — **۶ اکتبر ۲۰۲۶،۱۳:۴۳ UTC**: دستور اولویت‌دار Q8 با کد `d401583` دو کد
+خامِ محدود و شبکهٔ فارسی را اصلاح کرد، اما اجرای کامل هنوز ناموفق است: **۱۲ موفقیت/چهار
+شکست در بازبینی عامل اصلی**؛ ادعای بالادست انگلیسی، دامنهٔ حذف‌شده در دو زبان و مهلت فارسی.
+هش بالا، توقف اختصاصی/بازخوانی جداگانهٔ خط مبنای آماده و بی‌درخواست و پنج CI همان کد ثبت‌اند.
+دستور عمومیِ متفاوتِ دامنهٔ عنوان‌دار/پروتکل و مجموعهٔ کاملِ۳۰۰ثانیه آماده شود؛ سؤال/معیار،
+مدل زندهٔ35B و استدلال عمومی تغییر نکنند. الزام محدود، مرجع این کار است.
+
+## Earlier priority-rule source plan — historical / برنامهٔ پیشینِ دستور اولویت‌دار — سابقه
+
+Current candidate source checkpoint — **2026-10-06**: generic locale-native Qwen3.8 instructions
+prioritize type guards, protocol-scoped conclusions and complete source/time/scope qualifiers.
+Frozen questions, finite coding/semantic criteria and serving35B/public thinking-off are unchanged.
+Local source suite: **1383 passed, two POSIX skips,130 deselected**, 27.55s; lint/format/types pass.
+The retained-Q8 full native trial is planned, not a new model pass, training or deployment.
+See [bounded specification](requirements/QWEN38_QUALIFICATION_SPEC.md).
+
+گام جاریِ کد نامزد — **۶ اکتبر ۲۰۲۶**: دستور عمومیِ بومی Qwen3.8 بر شرط نوع، نتیجه‌گیری
+محدودِ پروتکل و مشخصات کامل منبع/زمان/دامنه تأکید می‌کند. سؤال ثابت، معیار کد/معنا، مدل زندهٔ
+35B و خاموشی استدلال عمومی تغییر نکرده‌اند. آزمون محلی: **۱۳۸۳ موفق، دو مورد مخصوص POSIX
+اجرا نشده،۱۳۰ انتخاب‌نشده** در۲۷٫۵۵ ثانیه؛ lint/قالب/type موفق‌اند. آزمون بومی کامل روی Q8
+موجود برنامه‌ریزی شده است؛ هنوز موفقیت مدل، آموزش یا استقرار نیست. الزام پیوندشده مرجع است.
+
+## Previous application-only repair — historical / اصلاح پیشینِ برنامه — سابقه
+
+Current source checkpoint — **2026-10-06**: the owner-requested repair adds a scoped TCP/HTTP
+conclusion safeguard and application-owned source/time/one-host qualifiers to guarded evidence
+answers. Exact technical timestamps, distinct Linux/Zabbix scopes, empty times, hostile labels,
+raw completion metadata, evidence identity and answer bounds are covered by local tests.
+Non-browser suite: **1383 passed, two POSIX skips, 130 deselected** in 34.65s; final-source EN/FA
+desktop/mobile guard-to-browser cases: **4 passed** in 15.32s. The final-source full browser suite
+passed **92 tests** in 290.70s. Linux-target strict
+types passed 149 files; lint/155-file formatting and docs/status/inference checks passed; offline
+wheel includes the new module. Qualified protocol explanations remain unverified model guidance;
+only reviewed affirmative overclaims receive the scoped fallback. The existing raw coding
+regression remains strict and failed model examples remain failed. This is not training, a new
+native-model result or deployment; serving 35B/defaults/thinking-off and release manifest remain
+unchanged. Independent/full 3.8/app/WAN/context/thinking/rollback gates are not passed by application
+fixtures. See [requirements](requirements/ANSWER_INTEGRITY_SPEC.md).
+
+گام جاریِ کد — **۶ اکتبر ۲۰۲۶**: اصلاح خواسته‌شدهٔ مالک، کنترل محدودِ نتیجه‌گیری TCP/HTTP و
+مشخصات منبع/زمان/تنها میزبانِ مجازِ درج‌شده توسط برنامه را به پاسخ دارای شاهد می‌افزاید. زمان
+فنی دقیق، جدایی دامنهٔ Linux/Zabbix، زمان غایب، نام نامعتبر، هویت/پایان خام، شاهد و سقف پاسخ
+آزمون دارند. مجموعهٔ غیرمرورگر: **۱۳۸۳ موفق، دو مورد مخصوص POSIX اجرا نشده، ۱۳۰ انتخاب‌نشده**
+در ۳۴٫۶۵ ثانیه؛ چهار آزمون تازهٔ EN/FA رومیزی/موبایلِ کنترل تا مرورگر روی کد نهایی در ۱۵٫۳۲
+ثانیه موفق‌اند. کل مجموعهٔ مرورگر روی کد نهایی **۹۲ آزمون موفق** در ۲۹۰٫۷۰ ثانیه داشت.
+type با هدف Linux روی ۱۴۹ فایل، lint/قالب ۱۵۵ فایل و کنترل مستندات/وضعیت/
+مدل موفق‌اند؛ wheel آفلاین ماژول تازه را دارد. توضیح درست و محدودِ پروتکل، راهنمای تأییدنشدهٔ
+مدل باقی می‌ماند؛ فقط ادعاهای قطعیِ بررسی‌شده پاسخ جایگزین می‌گیرند. کنترل کد سخت‌گیرانه
+باقی است و مثال ناموفق مدل همچنان ناموفق است. این کار آموزش، نتیجهٔ تازهٔ مدل بومی یا استقرار
+نیست؛ مدل زندهٔ 35B، پیش‌فرض، خاموشی استدلال و manifest ثابت‌اند. شاهد ساختگی، پذیرش مستقل/
+کامل ۳.۸/برنامه/WAN/زمینه/استدلال/بازگشت نیست. الزام پیوندشده، دامنه و محدودیت را ثبت می‌کند.
+
+## Earlier timeout checkpoint — historical / گام پیشینِ مهلت — سابقه
+
+Current checkpoint — **2026-10-06, 11:53:44 UTC**: the owner-authorized retained-Q5
+300-second two-case probe returned EN/FA finals in **88441/145010 ms**, 86/144 completion tokens.
+Both pass the narrow frozen hypothesis criteria in main-only manual review; fourteen other cases
+are not run in this timing profile. Historical quality/deadline failures are retained. Owned
+cleanup and a separate unit/listener/unchanged-ready-idle reread passed; live35B/public thinking-off
+and serving defaults remain unchanged. Native SHA:
+`96813c347b8035d592c941ffc6ead9d1a0250dfa4f9347b730a57ab49e0275c5`.
+Exact `5e15b5c` passed five CI jobs. The review CLI requires explicit `--deadline-seconds 300`
+and a matching recorded Qwen3.8 profile; default120 still rejects the 145-second sample. Source
+regressions: 1340 passed/two POSIX skips/126 deselected, strict Linux types/lint/format passed.
+This is a timing improvement, not repair of topology/coding/provenance or live model acceptance.
+Independent, full-standard, app/proxy, thinking/privacy/context/evidence/WAN/rollback remain open.
+
+گام جاری — **۶ اکتبر ۲۰۲۶، ساعت ۱۱:۵۳:۴۴ UTC**: آزمون دوپرسشیِ Q5 موجود با مهلت مجازِ
+۳۰۰ ثانیه، پاسخ انگلیسی/فارسی را در **۸۸۴۴۱/۱۴۵۰۱۰ میلی‌ثانیه** با ۸۶/۱۴۴ توکن خروجی ثبت
+کرد. هر دو معیار محدودِ فرضیه را در بازبینی دستیِ عامل اصلی گذراندند؛ چهارده مورد دیگر با
+این مهلت اجرا نشده‌اند. شکست‌های گذشته حفظ‌اند. توقف و بازخوانی جداگانهٔ فرایند/نبود listener/
+خط مبنای آماده و بی‌درخواست موفق‌اند؛ مدل زندهٔ35B، خاموشی استدلال و پیش‌فرض‌ها ثابت‌اند.
+هش گزارش بالا ثبت است. پنج کنترل CI کد دقیق `5e15b5c` موفق‌اند. ابزار بازبینی، پارامتر صریح
+بالا و نمایهٔ ثبت‌شدهٔ Qwen3.8 را می‌خواهد؛ پیش‌فرض۱۲۰ همچنان پاسخ۱۴۵ثانیه‌ای را رد می‌کند.
+کنترل کد: ۱۳۴۰ موفق/دو مورد مخصوص POSIX اجرا نشده/۱۲۶ انتخاب‌نشده؛ type/lint/format موفق‌اند.
+این بهبود زمان است، نه رفع توپولوژی/کد/منشأ یا پذیرش مدل زنده. معیار مستقل/استاندارد کامل/
+برنامه‌ـ‌پراکسی/استدلال/حریم خصوصی/زمینه/شاهد/WAN/بازگشت همچنان باز است.
+
+## Earlier timing implementation — historical / پیاده‌سازی پیشینِ زمان — سابقه
+
+Current work — **2026-10-06, 11:40 UTC**: the owner explicitly permits longer Qwen3.8 response
+time. Implement an opt-in candidate-only 300-second provider /330-second app /360-second
+generation-proxy profile. Defaults/live35B are unchanged. A watched retained-Q5 two-case
+hypothesis diagnostic is planned with fixed questions/policy/16K/output/resources/security;
+fourteen other cases are not run in that profile. Historical failures remain failed; semantic
+gates and thinking denial are unchanged. This source work is not live selection or acceptance.
+
+کار جاری — **۶ اکتبر ۲۰۲۶، ساعت ۱۱:۴۰ UTC**: مالک افزایش زمان پاسخ Qwen3.8 را صریحاً مجاز
+کرد. نمایهٔ اختیاریِ مخصوص نامزد با مهلت مدل/برنامه/پراکسیِ تولید ۳۰۰/۳۳۰/۳۶۰ ثانیه پیاده
+می‌شود. پیش‌فرض‌ها و مدل زندهٔ 35B ثابت‌اند. آزمون تحت نظارتِ دو فرضیه روی Q5 موجود با پرسش/
+دستور/زمینهٔ16K/خروجی/منابع/امنیت ثابت برنامه‌ریزی شده؛ چهارده مورد دیگر در آن اجرا نشده‌اند.
+شکست تاریخی ناموفق می‌ماند و معیار معنایی و منع استدلال تغییر نمی‌کند. کد، پذیرش یا انتخاب
+زنده نیست.
+
+## Previous Q8 comparison — historical / مقایسهٔ پیشین Q8 — سابقه
+
+Current checkpoint — **2026-10-06, 11:19:59 UTC**: the distinct retained-Q8/restored-policy/
+no-BLAS comparison returned sixteen finals within unchanged deadlines, but main-only semantic
+review is **12 passed/four failed**. Both networking answers assert unverified topology; Persian
+coding omits the type guard; Persian stale evidence omits explicit authorized scope. English
+coding passes twelve finite AST checks; Persian fails seven guard boundaries, without code
+execution. Both hypothesis cases now pass this narrow main review. No independent, matched-app,
+thinking/privacy, measured long-context, WAN or model rollback acceptance follows.
+Native SHA: `b13ddbcb8e71555c81ff951126a4900eed0b7bf46f200ba7444a847c434a34f8`.
+All owned cleanup and separate unchanged ready-idle rereads passed. Exact `4ac2cf4` passed five
+CI jobs. Preserve all failed models/policies and the rejected 50-word rollback; do not repeat an
+unchanged diagnostic, weaken criteria or select a failed model. Q4 remains metadata only, not an
+import or proven remedy. Actual3.8 is still unqualified/unselected; serving35B/public thinking-off
+remain unchanged. Native offset time was explicitly converted to UTC in the protected review.
+
+گام جاری — **۶ اکتبر ۲۰۲۶، ساعت ۱۱:۱۹:۵۹ UTC**: مقایسهٔ متفاوتِ Q8 موجود/دستور بازگردانده‌شده/
+runtime بدون BLAS شانزده پاسخ در مهلت ثابت ثبت کرد، اما بازبینی معناییِ صرفاً عامل اصلی
+**دوازده موفق/چهار ناموفق** است. هر دو پاسخ شبکه توپولوژی تأییدنشده را ادعا کردند؛ کد فارسی
+شرط بررسی نوع نداشت؛ شاهد کهنهٔ فارسی دامنهٔ مجاز را صریحاً حفظ نکرد. کد انگلیسی دوازده
+بررسی محدود AST را گذراند؛ کد فارسی هفت مرز شرط نوع را نگذراند، بدون اجرای کد. هر دو فرضیه
+اکنون این بازبینی محدودِ عامل اصلی را گذراندند؛ از آن پذیرش مستقل، برنامهٔ هماهنگ، استدلال/
+حریم خصوصی، زمینهٔ بلندِ سنجیده، WAN یا بازگشت مدل نتیجه نمی‌شود. هش گزارش در بالا ثبت است.
+توقف و بازخوانی جداگانهٔ خط مبنای آماده و بی‌درخواست موفق‌اند؛ پنج کنترل CI کد دقیق `4ac2cf4`
+موفق است. همهٔ شکست‌ها و بازگشت آزمایش پنجاه‌واژه‌ای حفظ شوند؛ تشخیص یکسان تکرار، معیار
+آسان یا مدل ناموفق انتخاب نشود. Q4 فقط فراداده است، نه فایل دریافت‌شده یا راه‌حل ثابت‌شده.
+3.8 واقعی هنوز پذیرفته/انتخاب نشده است؛ مدل زندهٔ35B/استدلال خاموش ثابت‌اند. زمان دارای
+اختلاف منطقهٔ زمانی گزارش بومی در بازبینی محافظت‌شده صریحاً به UTC تبدیل شد.
+
+## Previous Q5 result — historical / نتیجهٔ پیشین Q5 — سابقه
+
+Checkpoint — **2026-10-06, 10:47 UTC**: the third full standard diagnostic completed
+sixteen final answers within unchanged deadlines; main semantic review records **11 passed/five
+failed**, not acceptance. Persian coding omitted the type guard and failed seven finite AST
+boundaries. Both networking answers infer unverified topology; Persian stale evidence omits
+authorized scope/collection time; Persian causality proposes no actual causal hypothesis.
+Native SHA: `c8591c1ffa8cda6bbd4df6c165ff56b847e881c9ab419f3e72a7e488a18049dc`.
+Reject the 50-word policy experiment and restore its prompt/tests to exact `7157c3b` bytes.
+All owned units/listeners stopped and a separate reread confirmed unchanged ready-idle baseline.
+Exact `d638667` passed five CI jobs; source rollback passed **1315 tests/two POSIX skips/
+126 deselected, 27.37 s**. These are not native semantic or live application acceptance.
+A read-only upstream lookup identified a 16464440224-byte UD-Q4_K_M artifact at the same pinned
+third-party revision; it has not been downloaded, imported, tested or selected. Lower precision
+reduces weight size, not parameter count, and does not prove better quality. No unchanged rerun,
+criterion/deadline relaxation, live model change or public-thinking enablement.
+
+گام جاری — **۶ اکتبر ۲۰۲۶، ساعت ۱۰:۴۷ UTC**: سومین تشخیص استاندارد کامل، شانزده پاسخ نهایی
+در مهلت‌های ثابت ثبت کرد؛ بازبینی معنایی عامل اصلی **یازده موفق/پنج ناموفق** است، نه پذیرش.
+کد فارسی شرط بررسی نوع را حذف کرد و هفت مرز آزمون محدود AST را نگذراند. هر دو پاسخ شبکه،
+توپولوژی تأییدنشده را استنتاج کردند؛ شاهد کهنهٔ فارسی دامنهٔ مجاز/زمان گردآوری را حذف کرد؛
+پاسخ علّی فارسی فرضیهٔ مشخصی پیشنهاد نداد. هش گزارش در بالا ثبت است. آزمایش هدف پنجاه‌واژه‌ای
+رد و دستور/آزمون‌ها دقیقاً به کد `7157c3b` بازگردانده شدند. خدمات/شنونده‌های متعلق به آزمون
+متوقف و بازخوانی جدا، ثبات خط مبنای آماده و بی‌درخواست را تأیید کرد. پنج کنترل CI کد دقیق
+`d638667` موفق‌اند؛ کد بازگردانده‌شده **۱۳۱۵ آزمون موفق/دو مورد مخصوص POSIX ردشده/
+۱۲۶ انتخاب‌نشده، ۲۷٫۳۷ ثانیه** ثبت کرد، نه پذیرش معنایی مدل یا برنامهٔ زنده. بررسی فقط‌خواندنی
+منبع، فایل UD-Q4_K_M با اندازهٔ ۱۶۴۶۴۴۴۰۲۲۴ بایت در همان نسخهٔ ثابتِ تبدیل‌کنندهٔ ثالث یافت؛
+دریافت، وارد، آزموده یا انتخاب نشده است. کاهش دقت، حجم وزن را کم می‌کند، نه تعداد پارامتر یا
+اثبات بهبود کیفیت. آزمون یکسان تکرار، معیار/مهلت آسان، مدل زنده عوض یا استدلال عمومی فعال نشد.
+
+## Previous policy trial checkpoint — historical / گام پیشینِ آزمایش دستور — سابقه
+
+Checkpoint — **2026-10-06, 10:30 UTC**: the second full standard diagnostic also failed
+at the Persian hypothesis deadline; main review records **12 passed/four failed**. English stale
+scope is now retained; English networking inferred an unverified upstream, Persian networking
+used one sentence rather than two, Persian stale scope was omitted, and the last final timed out.
+Native SHA: `6ac9eef4c0fca09ead8829efc39248fdf4a16eb7c8e76d207e2e84e88525fa2d`.
+Separate two-case 64-worker/56-CPU-equivalent and 16-worker/16-equivalent probes each retained
+one English final and failed the Persian deadline; fourteen other cases were not run in each
+probe. Their English observations were 104321 ms/74 output tokens and 105842 ms/93 tokens;
+different answer lengths and cache histories do not prove an optimum. All owned cleanup and
+separate unchanged ready-idle baseline rereads passed. Exact `7157c3b` passed five CI jobs.
+A distinct source experiment adds a 50-word concision target only for small trusted budgets,
+without permission to omit required facts/code/format/provenance; preserves Latin technical
+timestamps in Persian; and rechecks final sentence count/provenance. Error-code meanings are not
+verified topology. A watched full 32-worker diagnostic is pending. No criterion, deadline,
+sampling, model artifact, serving selection or public-thinking state changed.
+
+گام جاری — **۶ اکتبر ۲۰۲۶، ساعت ۱۰:۳۰ UTC**: تشخیص استانداردِ کاملِ دوم نیز در فرضیهٔ
+فارسی به پایان مهلت رسید؛ بازبینی عامل اصلی **دوازده موفق/چهار ناموفق** ثبت کرد. دامنه در
+پاسخ کهنهٔ انگلیسی حفظ شد؛ پاسخ شبکهٔ انگلیسی بالادستِ تأییدنشده را استنتاج کرد، شبکهٔ فارسی
+به‌جای دو جمله یک جمله داشت، دامنهٔ مجاز در شاهد کهنهٔ فارسی حذف شد و آخرین پاسخ به پایان
+مهلت رسید. هش گزارش در بالا ثبت است. دو بررسی جدا با ۶۴ رشته/سقف ۵۶ معادل CPU و ۱۶ رشته/
+سقف۱۶، هرکدام یک پاسخ انگلیسی ثبت و در فارسی ناموفق شدند؛ چهارده پرسش دیگر در هر بررسی
+اجرا نشده‌اند. پاسخ انگلیسی به‌ترتیب ۱۰۴۳۲۱ میلی‌ثانیه/۷۴ توکن و ۱۰۵۸۴۲ میلی‌ثانیه/۹۳ توکن
+بود؛ تفاوت طول پاسخ و سابقهٔ cache، مقدار بهینه را ثابت نمی‌کند. توقف متعلق به اجرا و
+بازخوانی جداگانهٔ خط مبنای آماده و بی‌درخواست همگی موفق‌اند. پنج کنترل CI کد دقیق `7157c3b`
+موفق است. آزمایش کدِ جدا، تنها برای بودجهٔ خروجی کوچک، هدف پنجاه‌واژه‌ای دارد، نه مجوز حذف
+واقعیت/کد/قالب/منشأ ضروری؛ زمان فنیِ لاتین در فارسی را حفظ و تعداد جمله/منشأ را پیش از پاسخ
+بازبینی می‌کند. معنای کد خطا، اثبات توپولوژی نیست. تشخیص کاملِ ۳۲رشته‌ای تحت نظارت است و
+هنوز پذیرفته نیست؛ معیار، مهلت، نمونه‌گیری، فایل مدل، انتخاب زنده و استدلال عمومی ثابت‌اند.
+
+Correction to first-review wording: its English collection timestamp already matched the
+partial timestamp supplied by the frozen input; no extra date should be invented. That first
+answer still failed for missing explicit authorized scope; its 12/four totals remain unchanged.
+اصلاح عبارت بازبینی نخست: زمان گردآوری انگلیسی با زمانِ داده‌شده در پرسش ثابت برابر بود؛
+تاریخ اضافی نباید ساخته شود. شکست آن پاسخ بابت حذف دامنهٔ مجاز و مجموع دوازده/چهار ثابت‌اند.
+
+## Previous standard diagnostic — historical / تشخیص استانداردِ پیشین — سابقه
+
+Verified 3.8 diagnostic checkpoint — **2026-10-06, 09:53 UTC**: the first locale-native Q5
+standard trial retained 15 finals and failed at the Persian causal-hypothesis deadline. Main-only
+review against the unchanged corpus records **12 passed / 4 failed**: Persian networking inferred
+an unverified upstream topology, both stale/partial answers omitted explicit authorized scope,
+and the last Persian case timed out. Both coding answers passed the existing twelve-case AST
+review without executing generated code. Report SHA-256:
+`3b9574281efb81fe07ac0937ef1dde9f7a3682275adb73d0bd80c037f30de1ab`.
+The owned unit stopped, its listener disappeared, and a separate reread confirmed unchanged
+ready-idle serving PIDs/restarts. Exact `5500a24` passed all five CI jobs; source CI is not model
+acceptance. A compact generic policy now explicitly forbids omitting authorized scope/full times
+and asks for the shortest complete parts. Its distinct watched diagnostic keeps the same frozen
+questions, sampling, 32-thread profile, 16K context, output budget and 120-second deadline. Its
+result is pending, not passed. Revised local suite: **1315 passed / two POSIX skips /
+126 deselected, 35.37 s**; lint/format passed 151 files, Linux-target types passed 145,
+documentation/artifact/status/whitespace checks passed. No training, selection or public-thinking
+change.
+
+گام تأییدشدهٔ تشخیص 3.8 — **۶ اکتبر ۲۰۲۶، ساعت ۰۹:۵۳ UTC**: نخستین آزمون استاندارد Q5 با
+دستور بومی، ۱۵ پاسخ نهایی ثبت کرد و در پرسش فارسیِ فرضیهٔ علّی به پایان مهلت رسید. بازبینی
+عامل اصلی با معیار ثابت، **۱۲ موفق / ۴ ناموفق** ثبت کرد: پاسخ شبکهٔ فارسی، توپولوژی بالادستِ
+تأییدنشده را استنتاج کرد؛ هر دو پاسخ شاهد کهنه/ناقص، دامنهٔ مجاز را صریحاً حفظ نکردند؛ و
+آخرین پرسش فارسی بی‌پاسخ ماند. هر دو پاسخ کد، بررسی دوازده‌حالتی AST را بدون اجرای کد تولیدشده
+گذراندند. هش گزارش در بالا ثبت است. خدمت متعلق به آزمون متوقف و شنونده حذف شد؛ بازخوانی جدا
+ثبات PID/راه‌اندازی مجدد و مدل زندهٔ آماده و بیکار را تأیید کرد. پنج کنترل CI کد دقیق `5500a24`
+موفق‌اند، نه پذیرش مدل. دستور عمومیِ فشرده‌تر اکنون حذف دامنهٔ مجاز/زمان کامل را صریحاً منع
+می‌کند و کوتاه‌ترین پاسخ کامل را می‌خواهد. آزمون جدا و تحت نظارت با همان پرسش، نمونه‌گیری،
+۳۲ رشته، زمینهٔ 16K، بودجه و مهلت ۱۲۰ثانیه ادامه دارد؛ نتیجه هنوز پذیرفته نیست. آزمون محلیِ
+اصلاح‌شده: **۱۳۱۵ موفق / دو مورد مخصوص POSIX ردشده / ۱۲۶ انتخاب‌نشده، ۳۵٫۳۷ ثانیه**؛
+lint/قالبِ ۱۵۱ فایل، نوع‌دهی Linux برای ۱۴۵ فایل و کنترل سند/فایل/وضعیت/فاصله موفق‌اند.
+آموزش، انتخاب مدل یا فعال‌سازی استدلال عمومی رخ نداده است.
+
+## Previous priority checkpoint — historical / گام پیشینِ اولویت — سابقه
+
+Current priority — **2026-10-06**: owner requests autonomous Qwen **3.8** work even with
+fewer parameters. The complete pinned 27B Q5 is the next candidate; 3.5-122B is not a substitute.
+Candidate-only locale-native general instructions and adapter regressions are implemented, not
+deployed or trained. Local suite: **1315 passed, two POSIX skips, 126 deselected, 27.27 s**;
+lint/format passed 146 files, Linux-target types passed 145. An initial suite failed four English
+literal assertions after localization; equivalent EN/FA invariant checks corrected them, without
+changing frozen model questions or semantic criteria. The current native diagnostic is main-only,
+not an independent review, matched application gate or live model acceptance.
+Fresh bounded preflight confirmed unchanged serving PIDs/restarts, ready-idle 35B, unused swap
+and absent trial listener. Serving selection and public thinking remain unchanged. See the
+[bounded specification](requirements/QWEN38_QUALIFICATION_SPEC.md); preserve all earlier failures.
+
+اولویت جاری — **۶ اکتبر ۲۰۲۶**: مالک، انجام مستقلِ کار برای Qwen **3.8** را حتی با پارامتر
+کمتر خواسته است. فایل کامل و ثابتِ 27B Q5 نامزد بعدی است؛ 3.5-122B جایگزین هدف نیست.
+دستور عمومیِ بومی هر زبان، صرفاً برای نامزد، و آزمون رابط پیاده‌سازی شده‌اند؛ نه استقرار یا
+آموزش مدل. آزمون محلی: **۱۳۱۵ موفق، دو مورد مخصوص POSIX ردشده، ۱۲۶ انتخاب‌نشده، ۲۷٫۲۷
+ثانیه**؛ lint/قالبِ ۱۴۶ فایل و نوع‌دهی با هدف Linux برای ۱۴۵ فایل موفق‌اند. اجرای اولیه چهار
+بررسیِ عبارت ثابت انگلیسی را پس از بومی‌سازی ناموفق ثبت کرد؛ کنترل هم‌معنای فارسی/انگلیسی
+اصلاح شد، بدون تغییر پرسش ثابت یا معیار معنایی مدل. تشخیص بومیِ جاری متعلق به عامل اصلی
+است، نه بازبینی مستقل، پذیرش برنامهٔ هماهنگ یا مدل زنده. پیش‌بررسی تازه، ثبات PID/راه‌اندازی
+مجدد، خط مبنای 35B آماده و بیکار، swap بدون مصرف و نبود شنوندهٔ آزمون را تأیید کرد.
+انتخاب زنده و خاموشی استدلال عمومی ثابت‌اند؛ مشخصات بالا و تمام شکست‌های قبلی حفظ شوند.
+
+## Previous transfer checkpoint — historical / گام پیشینِ انتقال — سابقه
+
+Verified checkpoint — **2026-10-06, 08:25 UTC**: three further finite transfer attempts
+failed with actual terminal exit1 and zero imports. Failed bodies remain; owned curl stop,
+closed read handles and unchanged ready-idle reconciliation passed. Totals stay **282 ranges/
+75685225248 bytes**, **14744229504 bytes** remaining, one whole shard verified. Small
+data-discarding HTTPS diagnostics passed but did not predict full-range success; the subsequent
+single-range attempt failed. No further identical retry is justified by another small probe.
+Exact `e95618e` passed all five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37432024392).
+The owner volunteered for independent V3 review; a protected bilingual guide, eight isolated
+check commands and a blank report template are prepared, not executed or accepted by the owner.
+No external bundle handoff, V3 host use, model selection or public-thinking change occurred.
+
+گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۸:۲۵ UTC**: سه تلاش محدودِ دیگر با خروج نهاییِ
+یک و صفر بخش منتقل‌شده ناموفق شدند. بدنه‌های ناموفق حفظ‌اند؛ توقف curl متعلق به اجرا،
+بسته‌شدن handleهای خواندن و ثبات خط مبنای آماده و بی‌درخواست تأیید شد. مجموع **۲۸۲ بخش/
+۷۵۶۸۵۲۲۵۲۴۸ بایت**، باقی‌مانده **۱۴۷۴۴۲۲۹۵۰۴ بایت** و تأیید یک فایل کامل تغییر نکرد.
+بررسی‌های کوچک HTTPS با دورریختن داده موفق بودند، اما موفقیت انتقال کامل را پیش‌بینی
+نکردند؛ تلاش تک‌بخشیِ بعدی شکست خورد. بررسی کوچکِ دوباره، توجیه تکرار همان انتقال نیست.
+پنج کنترل CI کد دقیق `e95618e` در اجرای بالا موفق‌اند. مالک، بازبینی مستقلِ نسخهٔ سوم را
+بر عهده گرفت؛ راهنمای خصوصیِ دوزبانه، هشت فرمان بررسی محلی و الگوی خالیِ گزارش آماده‌اند؛
+اجرای بازبین یا پذیرش آن‌ها ثبت نشده است. بسته بیرون ارسال، ابزار روی میزبان استفاده،
+مدل تازه انتخاب یا استدلال عمومی فعال نشد.
+
+## Earlier transfer checkpoint — historical / گام پیشینِ انتقال — سابقه
+
+Verified checkpoint — **2026-10-06, 07:45 UTC**: two further reviewed V7 windows passed
+actual desktop receipts and terminal exit0, reaching **282 ranges/75685225248 bytes**;
+**14744229504 bytes** remain and only one whole upstream shard is verified. Two distinct
+failed windows imported zero ranges: the first had four partial HTTP206/exit28 responses;
+the later window had two complete and two partial responses, failing all-four verification.
+Failures and bodies remain; curl was reaped, read handles closed and unchanged ready-idle
+reconciliation passed. No partial body was promoted and no timeout was widened. Exact
+`5bf461c` passed all five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37426920560).
+Current official licence pages were reread separately, not as legal approval or updated
+artifact pins. The Apache alternative remains Qwen3.5-122B-A10B, not accepted 3.8. Independent
+V3 review remains not run after subagent quota failures; full-set, native semantics, thinking/
+privacy, measured context and matched operational/rollback gates remain open. No unattended
+transfer/trial remains; the live 35B model and public thinking-off state are unchanged.
+
+گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۷:۴۵ UTC**: دو پنجرهٔ دیگرِ نسخهٔ هفتم با رسید
+واقعی رایانه و خروج نهاییِ صفر موفق شدند؛ مجموع **۲۸۲ بخش/۷۵۶۸۵۲۲۵۲۴۸ بایت** و
+باقی‌مانده **۱۴۷۴۴۲۲۹۵۰۴ بایت** است. فقط یک فایل کامل با هش منبع تأیید شده. دو پنجرهٔ
+ناموفق هیچ بخشی را وارد محل محافظت‌شده نکردند: نخست، چهار پاسخ ناقص HTTP206/خروج۲۸؛
+دومی، دو پاسخ کامل و دو پاسخ ناقص داشت و شرط تأیید هر چهار درخواست را نگذراند.
+شکست‌ها و بدنه‌ها حفظ، فرایند curl جمع‌آوری، handleهای خواندن بسته و ثبات خط مبنای
+آماده و بی‌درخواست تأیید شد. بدنهٔ ناقصی منتشر و مهلتی افزایش داده نشد. پنج کنترل CI
+کد دقیق `5bf461c` در اجرای بالا موفق‌اند. منابع رسمی مجوز جداگانه بازخوانی شدند؛ این
+تأیید حقوقی یا تغییر نسخهٔ ثابت نیست. جایگزین Apache با نام درستِ Qwen3.5-122B-A10B
+ثبت است، نه 3.8 پذیرفته‌شده. پس از خطای سقف استفادهٔ عامل‌ها، بازبینی مستقلِ نسخهٔ سوم
+اجرا نشده؛ معیارهای مجموعهٔ کامل، معنای بومی، استدلال/حریم خصوصی، زمینهٔ سنجیده و
+عملیات/بازگشت بازند. انتقال/آزمون رهاشده‌ای وجود ندارد؛ 35B زنده و خاموشی استدلال عمومی ثابت‌اند.
+
+## Earlier transport checkpoint — historical / گام پیشینِ انتقال — سابقه
+
+Verified transport checkpoint — **2026-10-06, 06:56 UTC**: four further reviewed V7 windows
+passed actual desktop receipts and terminal exit0. Totals: **274 ranges/73537741600 bytes**,
+with **16891713152 bytes** remaining; only one complete upstream shard is verified. All-four
+numeric HTTP206/exit0/size/header/held-identity/hash checks preceded import; bodies remain,
+handles closed and owned-stop/unchanged ready-idle reconciliation passed. The slow fourth
+window took 581062ms of curl time within the unchanged limits, not a model benchmark.
+Exact `940b84d` passed all five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37423271410).
+Independent V3 review remains not run after the three subagent usage-limit errors; no new
+host installation/publication/native trial or model selection follows. Full-set, semantics,
+thinking/privacy, measured context and matched operational/rollback gates remain open.
+The Apache candidate is Qwen3.5-122B-A10B, not an accepted 3.8 model or a maximum-context
+claim. No unattended transfer/trial remains; the live 35B model and public thinking-off stay.
+
+گام انتقالِ تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۶:۵۶ UTC**: چهار پنجرهٔ دیگرِ نسخهٔ هفتم
+با رسید واقعی رایانه و خروج نهاییِ صفر موفق شدند. مجموع **۲۷۴ بخش/۷۳۵۳۷۷۴۱۶۰۰ بایت**
+و باقی‌مانده **۱۶۸۹۱۷۱۳۱۵۲ بایت** است؛ فقط یک فایل کامل با هش منبع تأیید شده. HTTP206
+عددی/خروج صفر/اندازه/سرآیند/هویت نگه‌داشته‌شده/هش هر چهار درخواست، پیش از انتقال به
+محل محافظت‌شده مطابق‌اند؛ بدنه‌ها حفظ و بسته‌شدن handleها/توقف فرایندهای متعلق به اجرا/
+ثبات خط مبنای آماده و بی‌درخواست تأیید است. پنجرهٔ چهارم با دریافتِ ۵۸۱۰۶۲ میلی‌ثانیه
+در مهلت ثابت موفق شد؛ این زمان، سنجهٔ کارایی مدل نیست. پنج کنترل CI کد دقیق `940b84d`
+در اجرای بالا موفق‌اند. پس از خطای سقف استفادهٔ سه عامل، بازبینی مستقلِ نسخهٔ سوم
+هنوز اجرا نشده؛ نصب/انتشار/آزمون بومی یا انتخاب مدل تازه‌ای رخ نداده. معیارهای مجموعهٔ
+کامل، معنا، استدلال/حریم خصوصی، زمینهٔ سنجیده و عملیات/بازگشت بازند. نامزد Apache،
+Qwen3.5-122B-A10B است، نه مدل پذیرفته‌شدهٔ 3.8 یا ادعای بیشترین زمینه. انتقال/آزمون
+رهاشده‌ای وجود ندارد؛ مدل زندهٔ 35B و خاموشی استدلال عمومی ثابت‌اند.
+
+## Earlier transport/CI checkpoint — historical / گام پیشینِ انتقال/CI — سابقه
+
+Transport/CI follow-up — **2026-10-06, 06:18 UTC**: a further reviewed V7 window passed actual
+desktop receipt/terminal exit0 and numeric pre-import/hash/identity/retention/closed-handle/
+unchanged ready-idle checks. Totals: **258 ranges/69242774304 bytes**, **21186680448 bytes**
+remaining; one whole shard verified. Exact `906a081` passed all five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37422445456). The private review
+handoff and main-only V3 checks below do not close independent review or model/operational
+gates. No unattended transport/trial remains at this checkpoint; live35B/thinking-off stay.
+
+پیگیری انتقال/CI — **۶ اکتبر ۲۰۲۶، ساعت ۰۶:۱۸ UTC**: یک پنجرهٔ دیگرِ نسخهٔ هفتم با
+رسید واقعی/خروج صفر و کنترل عددی پیش از دریافت/هش/هویت/حفظ بدنه/بسته‌شدن handleها/
+ثبات خط مبنای آماده و بی‌درخواست موفق شد. مجموع **۲۵۸ بخش/۶۹۲۴۲۷۷۴۳۰۴ بایت** و
+باقی‌مانده **۲۱۱۸۶۶۸۰۴۴۸ بایت** است؛ یک فایل کامل تأیید شده. پنج کنترل CI کد دقیق
+`906a081` در اجرای بالا موفق‌اند. بستهٔ خصوصیِ تحویل بازبینی و کنترل صرفاً اصلیِ نسخهٔ
+سوم در ادامه، بازبینی مستقل یا معیار مدل/عملیات را نمی‌بندند. انتقال/آزمون رهاشده‌ای
+در این گام وجود ندارد؛ 35B زنده/خاموشی استدلال عمومی ثابت‌اند.
+
+## Earlier provisioning/handoff checkpoint — historical / گام پیشینِ آماده‌سازی/تحویل — سابقه
+
+Latest provisioning/review-handoff checkpoint — **2026-10-06, 06:10 UTC**: three further V7
+windows passed actual desktop receipts/terminal exit0, reaching **254 ranges/68169032480 bytes**;
+**22260422272 bytes** remain, one whole upstream shard verified. Numeric HTTP206/exit0,
+all-body pre-import hashes/identities, retained bodies, closed handles and unchanged ready-idle
+reconciliation passed. A private independent-review handoff now binds fourteen freshly rehashed
+V3 source/checker files, pure commands and required failure-boundary findings; its JSON/pins
+check passed, not independent review. Three authorized subagents remain usage-limit errors.
+Exact `8b94d88` passed all five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37419756842).
+No V3 installation/publication/native execution, model selection, thinking enablement or accepted
+maximum context follows. No unattended transport/trial remains at this checkpoint. Preserve all
+earlier completed work/failures and the live35B baseline.
+
+آخرین گام آماده‌سازی/تحویل بازبینی — **۶ اکتبر ۲۰۲۶، ساعت ۰۶:۱۰ UTC**: سه پنجرهٔ دیگرِ
+نسخهٔ هفتم با رسید واقعی/خروج صفر موفق شدند؛ مجموع **۲۵۴ بخش/۶۸۱۶۹۰۳۲۴۸۰ بایت** و
+باقی‌مانده **۲۲۲۶۰۴۲۲۲۷۲ بایت** است؛ یک فایل کامل با هش منبع تأیید شده. HTTP206 عددی/
+خروج صفر، هش/هویت همهٔ بدنه‌ها پیش از دریافت محافظت‌شده، حفظ بدنه/بسته‌شدن handleها/
+ثبات خط مبنای آماده و بی‌درخواست تأیید است. بستهٔ خصوصیِ تحویل بازبینی، چهارده فایل
+کد/آزمون نسخهٔ سوم را با هش تازه، فرمان‌های صرفاً محلی و مرزهای شکست لازم مشخص می‌کند؛
+کنترل JSON/هش آن موفق است، نه بازبینی مستقل. سه عامل مجاز همچنان با خطای سقف استفاده
+متوقف‌اند. پنج کنترل CI کد دقیق `8b94d88` در اجرای بالا موفق‌اند. نصب/انتشار/اجرای بومیِ
+نسخهٔ سوم، انتخاب مدل، فعال‌سازی استدلال یا پذیرش بیشترین زمینه رخ نداده؛ سوابق و 35B
+زنده ثابت‌اند. انتقال/آزمون رهاشده‌ای در این گام وجود ندارد.
+
+## Earlier transport/regression checkpoint — historical / گام پیشینِ انتقال/رگرسیون — سابقه
+
+Latest transport follow-up — **2026-10-06, 05:33 UTC**: three further reviewed windows reached
+**242 ranges/64947807008 bytes**, with **25481647744 bytes** remaining. Actual desktop receipts/
+terminal exit0, all-four numeric checks before import, retained bodies, closed handles and
+unchanged ready-idle reconciliation passed; one whole shard verified. Exact `4e78144` passed five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37417547944); **61 targeted local
+regression tests passed in 5.12s**, not model acceptance. Native/publication independent reviews,
+complete-set/native/thinking/privacy/context/app/operational/rollback gates remain open.
+Live35B/public thinking-off and the correctly labeled unselected Apache 3.5 alternative are unchanged.
+
+آخرین پیگیری انتقال — **۶ اکتبر ۲۰۲۶، ساعت ۰۵:۳۳ UTC**: سه پنجرهٔ بررسی‌شدهٔ دیگر،
+انتقال را به **۲۴۲ بخش/۶۴۹۴۷۸۰۷۰۰۸ بایت** رساندند؛ **۲۵۴۸۱۶۴۷۷۴۴ بایت** باقی است.
+رسید واقعی/خروج صفر، کنترل عددی چهار درخواست پیش از دریافت محافظت‌شده، حفظ بدنه‌ها/
+بسته‌شدن handleها/ثبات خط مبنای آماده و بی‌درخواست تأیید است؛ یک فایل کامل تأیید شده.
+پنج کنترل CI کد دقیق `4e78144` در اجرای بالا و **۶۱ آزمون محلیِ هدفمند در ۵٫۱۲ ثانیه**
+موفق‌اند، نه پذیرش مدل. بازبینی مستقل ابزارهای بومی/انتشار و معیارهای مجموعهٔ کامل/
+معنا/استدلال/حریم خصوصی/زمینه/برنامه/عملیات/بازگشت باز است. 35B زنده/خاموشی استدلال
+عمومی و نام درستِ جایگزین Apache 3.5ِ انتخاب‌نشده ثابت‌اند.
+
+## Earlier directory-durability checkpoint — historical / گام پیشینِ پایداری پوشه — سابقه
+
+Latest verified checkpoint — **2026-10-06, 05:10 UTC; provisioning/local repair only**:
+three further V7 windows reached **230 ranges/61726581536 bytes**, leaving **28702873216 bytes**.
+Main read actual desktop receipts/exit0; numeric HTTP206/exit0, pre-import identity/hash,
+retained bodies, closed handles and unchanged ready-idle checks passed. Only one whole shard
+is verified. Review found that frozen native V2 flushes report contents but not the new report
+directory entry. Distinct V3 adds retained-directory fsync under both identity-checked locks;
+**1869 main assertions/Bash syntax** passed. Its matching trio installer/controller passed
+**227/1022 main assertions**. External V3 reconciliation/controller passed **18403/842 main
+assertions**, including anchored reads/process bounds/mocked cleanup and primary-failure
+preservation. Expanded mocks caught and repaired an unhashable-bytearray process-token bug
+before host use. Counts are assertions, not independent tests; most of 18403 are bounded-scan
+block checks. Independent reviews remain **not_run** after three subagent usage-limit errors.
+None of these V3 tools is installed or operationally executed. Exact `4bb295d` passed five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37414641936).
+Preserve completed metadata installation, first-shard assembly, earlier source checks/failures,
+Apache 3.5 alternative labeling and live35B/public thinking-off. All model acceptance gates remain.
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۵:۱۰ UTC؛ فقط آماده‌سازی/اصلاح محلی**:
+سه پنجرهٔ دیگر، انتقال را به **۲۳۰ بخش/۶۱۷۲۶۵۸۱۵۳۶ بایت** رساندند؛ **۲۸۷۰۲۸۷۳۲۱۶
+بایت** باقی است. بازبین اصلی، رسید واقعی/خروج صفر را خواند؛ HTTP206 عددی/خروج صفر،
+هویت/هش پیش از دریافت محافظت‌شده، حفظ بدنه‌ها، بسته‌شدن handleها و ثبات خط مبنا
+مطابق‌اند. فقط یک فایل کامل تأیید است. نسخهٔ ثابت بومیِ دوم، محتوای گزارش را پایدار
+می‌کند، نه مدخل تازهٔ آن در پوشه. نسخهٔ مستقلِ سوم، fsync پوشهٔ نگه‌داشته‌شده را زیر
+دو قفل با کنترل هویت افزود؛ **۱۸۶۹ کنترل اصلی/نحو Bash** موفق‌اند. ابزار نصب/کنترل‌کنندهٔ
+متناظر، **۲۲۷/۱۰۲۲ کنترل اصلی** و تطبیق بیرونی/کنترل‌کننده، **۱۸۴۰۳/۸۴۲ کنترل اصلی**
+را گذراندند. آزمون‌های گسترش‌یافته، خطای bytearray غیرقابل‌هش در بررسی آرگومان فرایند
+را پیش از اجرای میزبان آشکار و اصلاح کردند. تعدادها کنترل‌اند، نه آزمون مستقل؛ بیشترِ
+۱۸۴۰۳ مربوط به بلوک‌های اسکن محدود است. بازبینی مستقل پس از خطای سقف استفادهٔ سه
+عامل، **اجرا نشده**. هیچ ابزار نسخهٔ سوم نصب یا عملیاتی اجرا نشده. پنج کنترل CI کد
+دقیق `4bb295d` در اجرای بالا موفق‌اند. نصب فراداده/تجمیع فایل اول/سوابق بررسی و شکست،
+نام درستِ جایگزین Apache 3.5 و 35B زنده/خاموشی استدلال عمومی حفظ شوند؛ پذیرش مدل باز است.
+
+## Earlier installer-controller checkpoint — historical / گام پیشینِ کنترل‌کنندهٔ نصب — سابقه
+
+Latest verified checkpoint — **2026-10-06, 04:36 UTC; provisioning/local checks only**:
+four further V7 windows reached **218 ranges/58505356064 bytes**, leaving **31924098688 bytes**.
+Main read actual desktop receipts and terminal exits; all-four numeric HTTP206/exit0 and
+pre-import hash/identity checks passed. Retained bodies, closed handles and the unchanged live
+ready-idle baseline are recorded; only the first whole upstream shard is verified. The distinct
+native-trio installer/controller now passed **227 Python/1022 PowerShell main-only checks**,
+not independent review, installation or execution. Original draft/failures remain historical.
+Publication installer V3's independent review and the external native execution/reconciliation
+boundary remain unfinished. Exact `2838b2a` passed all five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37413048626).
+Do not retry completed staging/first-file inspection/metadata installation. The alternative is
+Apache Qwen3.5-122B-A10B Q5, not Qwen3.8. Failed 3.8 trials, live35B/public thinking-off,
+pending full-file/standard/thinking/privacy/context/app/operational/rollback gates remain.
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۴:۳۶ UTC؛ فقط آماده‌سازی/کنترل محلی**:
+چهار پنجرهٔ دیگر، انتقال را به **۲۱۸ بخش/۵۸۵۰۵۳۵۶۰۶۴ بایت** رساندند؛ **۳۱۹۲۴۰۹۸۶۸۸
+بایت** باقی است. بازبین اصلی، رسیدهای واقعی رایانه و پایان موفق فرایندها را خواند؛
+کد عددی HTTP206/خروج صفرِ چهار درخواست و هش/هویت پیش از دریافت محافظت‌شده مطابق‌اند.
+بدنه‌ها حفظ و بسته‌شدن handleها/ثبات خط مبنای آماده و بی‌درخواست ثبت است؛ فقط فایل کامل
+اول تأیید شده. ابزار نصب/کنترل‌کنندهٔ سه فایل بومی اکنون **۲۲۷ کنترل Python/۱۰۲۲ کنترل
+PowerShellِ صرفاً اصلی** را گذرانده، نه بازبینی مستقل، نصب یا اجرا. پیش‌نویس/شکست‌های
+قبلی حفظ‌اند. بازبینی مستقلِ ابزار نصب انتشار نسخهٔ سوم و مرز اجرای بومی/تطبیق بیرونی
+ناتمام‌اند. پنج کنترل CI کد دقیق `2838b2a` در اجرای بالا موفق‌اند. آماده‌سازی/بررسی فایل
+اول/نصب فرادادهٔ تکمیل‌شده تکرار نشوند. مدل جایگزین Apache، Qwen3.5-122B-A10B Q5 است،
+نه Qwen3.8. شکست‌های 3.8، مدل 35B زنده/خاموشی استدلال عمومی و معیارهای بازِ همهٔ فایل‌ها/
+معنا/استدلال/حریم خصوصی/زمینه/برنامه/عملیات/بازگشت ثابت‌اند.
+
+## Earlier execution-tool checkpoint — historical / گام پیشینِ ابزار اجرا — سابقه
+
+Latest verified checkpoint — **2026-10-06, 04:12 UTC; provisioning and local repair only**:
+transport reached **202 ranges/54210388768 bytes**; **36219065984 transport bytes** remain.
+Two further four-request windows completed; all bodies were verified before import, retained,
+and followed by closed-handle/owned-stop/ready-idle reconciliation. Only one whole shard is
+verified. The native V2 quartet now passed 1478 main/independent preparation checks; publication
+V2's execution pair passed 1646 each-side checks. Neither has run on the host. Actual pinned
+upstream template/license bytes match the first-shard template/protected Apache license;
+static template review is not native privacy/tokenizer/context acceptance. Review subsequently
+rejected publication installer V2's close/receipt failure boundaries. Its distinct V3 passed
+256 Python/989 PowerShell main-only local checks; the unfinished native installer draft was
+repaired and passed 227 main-only checks. Their controllers/independent reviews remain open
+as applicable; all three authorized subagents stopped with usage-limit errors. No unfinished
+review is credited. Exact `2847651` passed all five [CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37403305543).
+Preserve successful earlier metadata-helper installation, original rejected tools/failures,
+staged-not-installed ca1, live 35B/public thinking-off and all open acceptance gates.
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۴:۱۲ UTC؛ فقط آماده‌سازی و اصلاح محلی**:
+انتقال به **۲۰۲ بخش/۵۴۲۱۰۳۸۸۷۶۸ بایت** رسیده و **۳۶۲۱۹۰۶۵۹۸۴ بایت** باقی است. دو
+پنجرهٔ چهاردرخواستیِ دیگر موفق شدند؛ بدنه‌ها پیش از دریافت محافظت‌شده تأیید و سپس حفظ
+شدند؛ بسته‌شدن handleها، توقف فرایندهای متعلق به اجرا و ثبات خط مبنا تأیید است. فقط یک
+فایل کامل با هش منبع اصلی تأیید شده. چهار ابزار بومیِ نسخهٔ دوم، ۱۴۷۸ کنترل اصلی/مستقل
+و جفت ابزار اجرای انتشار، ۱۶۴۶ کنترل در هر بازبینی را گذراندند؛ هیچ‌کدام روی میزبان اجرا
+نشده‌اند. بایت‌های واقعی قالب/مجوزِ نسخهٔ ثابت با هش قالب فایل اول/مجوز Apache محافظت‌شده
+مطابق‌اند؛ بررسی متن قالب، پذیرش حریم خصوصی/توکن‌ها/زمینه نیست. سپس مسیرهای شکستِ بستن
+handle/ثبت رسید، در ابزار نصب انتشارِ نسخهٔ دوم رد شدند. نسخهٔ مستقلِ سوم، ۲۵۶ کنترل
+Python/۹۸۹ کنترل PowerShell و پیش‌نویس اصلاح‌شدهٔ نصب بومی، ۲۲۷ کنترل محلیِ بازبین اصلی
+را گذراندند. کنترل‌کننده یا بازبینی مستقلِ باقی‌مانده هنوز کامل نیست؛ سه عاملِ مجاز به
+دلیل سقف استفاده متوقف شدند و کار ناتمام آن‌ها پذیرفته نشده است. پنج کنترل CI کد دقیق
+`2847651` در اجرای بالا موفق‌اند. نصب موفق قبلیِ ابزار فراداده، ابزارها/شکست‌های ردشده،
+ca1 آماده‌شده/نصب‌نشده، 35B زنده/خاموشی استدلال عمومی و معیارهای باز حفظ‌اند.
+
+## Earlier preparation checkpoint — historical / گام پیشینِ آماده‌سازی — سابقه
+
+Latest verified checkpoint — **2026-10-06, 02:11 UTC; provisioning and preparation only**:
+transport reached **194 ranges/52062905120 canonical bytes**; **38366549632 bytes** remain.
+Only the first complete upstream shard is verified. Three further reviewed four-request windows
+passed with curl times 36766/462562/38860 ms, followed by 461282 ms; variability is not a
+demonstrated speedup. All four bodies were verified before each import; retained data, owned
+stop and live ready-idle baseline checks passed. Exact `9375d49` passed all five
+[CI jobs](https://github.com/Omid-NextAI/nextops/actions/runs/37400813523).
+Local review rejected the original complete-set inspector's child-failure cleanup and the
+original native wrapper's missing retained-lock identity checks/sequential close cleanup.
+The distinct inspector V2 passed 6278 main/independent pure checks; its fixed installer passed
+1020 each-side checks and actual installation in 238 ms with destination-hash/client-stop/root
+receipt checks. It has not inspected the complete set. The separately reviewed publication V2
+passed 3035 each-side pure checks; publication has not run. Native lock repair/review remains
+unfinished. Original failures/artifacts are preserved; ca1 remains staged, not installed.
+Live 35B/public thinking-off, unaccepted advertised context and all remaining model gates stay.
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۲:۱۱ UTC؛ فقط آماده‌سازی و بازبینی**:
+انتقال به **۱۹۴ بخش/۵۲۰۶۲۹۰۵۱۲۰ بایت اصلی** رسید؛ **۳۸۳۶۶۵۴۹۶۳۲ بایت** باقی است.
+هنوز فقط فایل کامل اول با هش منبع اصلی تأیید شده. زمان دریافت چهار پنجرهٔ بعدی برابر
+۳۶۷۶۶/۴۶۲۵۶۲/۳۸۸۶۰/۴۶۱۲۸۲ میلی‌ثانیه بود؛ نوسان زمان، اثبات بهبود عمومی سرعت نیست.
+در هر پنجره، هر چهار بدنه پیش از دریافت محافظت‌شده تأیید شدند؛ حفظ داده، توقف فرایندهای
+متعلق به اجرا و ثبات خط مبنای آماده/بی‌درخواست موفق‌اند. پنج کنترل CI کد دقیق `9375d49`
+در اجرای بالا موفق‌اند. بررسی محلی، مسیر پاک‌سازی پس از شکست فرایند فرزند در ابزار اصلیِ
+مجموعهٔ کامل و نبود تطبیق هویت قفل/پاک‌سازی مستقلِ handleها در ابزار اصلیِ آزمون بومی را
+رد کرد. نسخهٔ مستقلِ دومِ بررسی مجموعه، ۶۲۷۸ کنترل محض اصلی/مستقل و ابزار نصب ثابت آن،
+۱۰۲۰ کنترل در هر بازبینی را گذراند؛ نصب واقعی در ۲۳۸ میلی‌ثانیه، با تأیید هش مقصد/توقف
+فرایند کاربر/تطبیق رسید root کامل شد. بررسی مجموعهٔ کامل هنوز اجرا نشده. نسخهٔ دومِ
+انتشار نیز ۳۰۳۵ کنترل محض در هر بازبینی را گذراند، اما اجرا نشده است. اصلاح و بازبینی
+قفل‌های آزمون بومی ناتمام است. شکست‌ها/فایل‌های اصلی محفوظ‌اند؛ ca1 آماده شده، نه نصب.
+35B زنده/خاموشی استدلال عمومی، زمینهٔ پذیرفته‌نشده و معیارهای باقی‌ماندهٔ مدل ثابت‌اند.
+
+## Earlier expanded metadata checkpoint — historical / گام پیشینِ فرادادهٔ گسترش‌یافته — سابقه
+
+Latest verified checkpoint — **2026-10-06, 01:36 UTC; provisioning only**: transport reached
+178 ranges/47767937824 canonical bytes; 42661516928 bytes remain. One complete upstream shard
+is verified, not the model. A distinct four-request parallel window completed in 463594 ms
+of curl time with all four bodies verified before import; this does not establish a general
+speed improvement. Exact `495b704` passed all five source-CI jobs in
+[run 37397504800](https://github.com/Omid-NextAI/nextops/actions/runs/37397504800).
+The separately installed metadata reader/helper passed preparation and actual first-file
+inspection in 87843 ms. Observed `qwen35moe` fields include 256 experts/8 used, 32 attention
+heads/2 KV heads and EOS/padding IDs 248046/248044. Missing fields remain absent; tokenizer
+arrays/template-control semantics are unreviewed. Advertised 262144 context is not accepted.
+Main independently reread the protected result; owned cleanup and unchanged live readiness
+passed. Original tools, ca1 staged-not-installed status, live 35B and public thinking-off remain.
+Full-set, native semantics, thinking/privacy, measured context and operational gates are open.
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۱:۳۶ UTC؛ فقط آماده‌سازی**: انتقال به
+۱۷۸ بخش/۴۷۷۶۷۹۳۷۸۲۴ بایت اصلی رسید؛ ۴۲۶۶۱۵۱۶۹۲۸ بایت باقی است. فقط یک فایل کامل با
+هش منبع اصلی تأیید شده، نه مدل. پنجرهٔ مستقلِ چهار درخواست هم‌زمان، با زمان دریافت
+۴۶۳۵۹۴ میلی‌ثانیه، هر چهار بدنه را پیش از دریافت محافظت‌شده تأیید کرد؛ بهبود عمومی سرعت
+اثبات نشده است. پنج کنترل CI کد دقیق `495b704` در اجرای بالا موفق‌اند. ابزارهای مستقلِ
+فراداده، کنترل‌های آماده‌سازی و بررسی واقعی فایل اول را در ۸۷۸۴۳ میلی‌ثانیه گذراندند.
+در معماری `qwen35moe`، تعداد expert برابر ۲۵۶ با ۸ expert مورد استفاده، ۳۲ سر توجه/۲ سر KV
+و شناسه‌های EOS/padding برابر ۲۴۸۰۴۶/۲۴۸۰۴۴ مشاهده شد. مقدارهای غایب جایگزین نشده‌اند؛
+آرایه‌های tokenizer و معنای کنترل قالب بررسی نشده‌اند. زمینهٔ اعلام‌شدهٔ ۲۶۲۱۴۴ پذیرفته
+نیست. بازبین اصلی، نتیجهٔ محافظت‌شده را مستقل خواند؛ توقف فرایندهای متعلق به اجرا و ثبات
+آمادگی زنده تأیید شدند. ابزارهای اصلی، وضعیت آماده‌شده/نصب‌نشدهٔ ca1، مدل زندهٔ 35B و
+خاموشی استدلال عمومی حفظ‌اند. مجموعهٔ کامل، معنای بومی، استدلال/حریم خصوصی، زمینهٔ سنجیده
+و معیارهای عملیاتی هنوز پذیرفته نشده‌اند.
+
+## Earlier staging checkpoint — historical / گام پیشینِ آماده‌سازی — سابقه
+
+Latest verified checkpoint — **2026-10-06, after the 00:57 UTC transport window**: 166 ranges/
+44546712352 canonical bytes are verified; 45882742400 transport bytes remain. Only the first
+whole upstream shard is accepted. The distinct wheel-only staging repair passed 1303 main/
+independent preparation checks and actual protected ca1 source/wheel staging, not installation.
+Owned client stop/root reconciliation and unchanged ready-idle baseline passed. Original ACLs,
+failed preflight and live 35B/public thinking-off remain unchanged. Exact `f7d0b35` passed all five
+CI jobs in [run 37396025687](https://github.com/Omid-NextAI/nextops/actions/runs/37396025687).
+Full-model/native/semantic/thinking/context/operational acceptance remains unfinished.
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶، پس از پنجرهٔ انتقال ساعت ۰۰:۵۷ UTC**: مجموع ۱۶۶ بخش/
+۴۴۵۴۶۷۱۲۳۵۲ بایت اصلی تأیید شده و ۴۵۸۸۲۷۴۲۴۰۰ بایت انتقالی باقی است. هنوز فقط فایل کامل
+اول با هش منبع اصلی تأیید است. اصلاح مستقلِ محدود به wheel، ۱۳۰۳ کنترل آماده‌سازی اصلی/
+مستقل و سپس آماده‌سازی واقعیِ محافظت‌شدهٔ کد/wheel مربوط به ca1 را گذراند؛ نصب انجام نشد.
+توقف فرایند کاربر، تطبیق نتیجهٔ root و ثبات خط مبنای آماده/بی‌درخواست موفق‌اند. ACL اصلی،
+شکست نخست و 35B زنده/خاموشی استدلال عمومی ثابت‌اند. پنج کنترل CI کد دقیق `f7d0b35` در
+اجرای بالا موفق‌اند. پذیرش مدل کامل/اجرای بومی/معنا/استدلال/زمینه/عملیات هنوز تکمیل نیست.
+
+## Earlier metadata checkpoint — historical / گام پیشینِ فراداده — سابقه
+
+Verified checkpoint — **2026-10-06, 00:27 UTC; no model cutover**: the first complete
+122B shard passed a fresh full hash and bounded metadata inspection in 89798 ms. Actual
+`qwen35moe`/49 blocks/3072 embedding dimensions/three splits/392 first-file tensors are observed;
+899 aggregate tensors and 262144 context tokens remain advertised, not accepted. Template hash
+and protected receipts are in the [paired report](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+Owned worker/guard stop and independent read-only reconciliation of live readiness passed.
+Serial protected S-drive continuation completed **158 ranges/42399228704 canonical bytes**,
+with **48030226048 transport bytes** missing and only one complete upstream-shard verification.
+Exact `861bf7d` passed all five CI jobs; no package/model deployment follows. Three implemented
+source capabilities were removed from stale missing-work labels; 63 focused source tests passed.
+All-shard identity, template branches, native load/semantics, thinking/privacy, measured context
+and operational gates remain unfinished. Live 35B/public thinking-off and previous failures stay
+unchanged; ca1 is packaged locally, not installed.
+
+At 00:44 UTC, four more ranges advanced transport to 162 ranges/43472970528 bytes;
+46956484224 remain. The ca1 stager then failed only local preflight on the fixed wheel's
+OWNER RIGHTS ACL, before host access; failure/original ACL are preserved. Source-only bounded
+MoE/tokenizer scalar inspection passed 1098 unit tests/two POSIX skips; independent focused
+review passed 211. The installed private reader/ca1 package/live services remain unchanged.
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶، ساعت ۰۰:۲۷ UTC؛ بدون تغییر مدل زنده**: نخستین فایل
+کاملِ 122B، هش کاملِ تازه و بررسی محدود فراداده را در ۸۹۷۹۸ میلی‌ثانیه گذراند. معماری
+`qwen35moe`، ۴۹ بلوک، ابعاد تعبیهٔ ۳۰۷۲، سه فایل و ۳۹۲ تنسورِ فایل اول مشاهده شدند؛
+مجموع ۸۹۹ تنسور و زمینهٔ ۲۶۲۱۴۴ توکنی فقط اعلام‌شده‌اند، نه پذیرفته. هش قالب و رسیدهای
+محافظت‌شده در گزارش بالا ثبت است. توقف فرایندهای متعلق به اجرا و تطبیق مستقلِ
+فقط‌خواندنیِ آمادگی زنده موفق‌اند. انتقال ترتیبیِ محافظت‌شده روی S، **۱۵۸ بخش/
+۴۲۳۹۹۲۲۸۷۰۴ بایت اصلی** را تکمیل کرد؛ **۴۸۰۳۰۲۲۶۰۴۸ بایت انتقالی** باقی است و هنوز فقط
+یک فایل کامل، تأیید منبع اصلی دارد. پنج کنترل CI کد دقیق `861bf7d` موفق‌اند، نه استقرار
+بسته یا مدل. سه قابلیت پیاده‌شده از برچسب‌های قدیمیِ کار ناتمام جدا شدند؛ ۶۳ آزمون کد
+موفق‌اند. هویت همهٔ فایل‌ها، شاخه‌های قالب، بارگذاری/معنای بومی، استدلال/حریم خصوصی،
+زمینهٔ سنجیده و معیارهای عملیاتی هنوز تکمیل نیستند. 35B زنده/خاموشی استدلال عمومی و
+شکست‌های پیشین حفظ‌اند؛ ca1 فقط محلی بسته‌بندی شده، نه نصب.
+
+ساعت ۰۰:۴۴ UTC، چهار بخش تازه، انتقال را به ۱۶۲ بخش/۴۳۴۷۲۹۷۰۵۲۸ بایت رساندند؛
+۴۶۹۵۶۴۸۴۲۲۴ بایت باقی است. سپس آماده‌سازی ca1 فقط در کنترل محلیِ ACL از نوع OWNER RIGHTS
+فایل wheel، پیش از دسترسی به میزبان ناموفق شد؛ شکست/ACL اصلی حفظ‌اند. بررسی محدودِ
+فرادادهٔ MoE/tokenizer در کد، ۱۰۹۸ آزمون واحد/دو مورد POSIX اجرا‌نشده را ثبت کرد؛ بازبینی
+مستقلِ محدود ۲۱۱ آزمون را گذراند. ابزار خصوصیِ نصب‌شده/بستهٔ ca1/خدمات زنده تغییر نکرده‌اند.
+
+## Earlier first-shard checkpoint — historical / گام پیشینِ فایل اول — سابقه
+
+Historical checkpoint — **2026-10-06; no model cutover**: 148 retained transport ranges
+produced the first complete Apache Qwen3.5-122B-A10B Q5 shard: **39714874144 bytes**, upstream
+SHA `d7d5aa3ef843ba3fe5ee27cdaebe17abd8a6a8a03a5c236db9bfe2fc6b88be2e`.
+Protected assembly completed in 480111 ms; owned stop and unchanged live ready/idle baseline
+passed. Two shards/**50714580608 bytes** remain. A three-range window after completed first-shard
+transport but before assembly timed out with zero accepted ranges; its partial bodies are
+preserved, not credited. Metadata, full-model
+load, semantics, thinking/privacy, context and matched operational gates remain unrun for 122B.
+Subsequent one-prefix continuation completed at 23:56:08 UTC: one further 268435456-byte range
+passed independently read protected receipts; 149 ranges/39983309600 canonical bytes and
+50446145152 remaining transport bytes. Original/new bodies are retained; no second full shard
+or model is accepted. Its native identity fixture passed in 2938 ms before the finite window.
+Exact `ca1da27` passed all five CI jobs in
+[run 37384508573](https://github.com/Omid-NextAI/nextops/actions/runs/37384508573);
+its distinct browser rerun passed 88 tests, while the cancelled first attempt remains recorded.
+An offline ca1 archive/wheel build completed in 23046 ms with source/static/dependency parity;
+it is local-only, unsigned and not deployment or WAN acceptance. Source code identity is
+`24353ee100cdf3def9f509703cd6b1f68da49394c69c0bf2a1190d8f13c0cd09`.
+Live 35B/public thinking-off and the failed Qwen3.8 trials are unchanged.
+See the [paired record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+آخرین گام تأییدشده — **۶ اکتبر ۲۰۲۶؛ بدون تغییر مدل زنده**: از ۱۴۸ بخشِ حفظ‌شده، نخستین
+فایل کاملِ Qwen3.5-122B-A10B Q5 با مجوز Apache تجمیع شد: **۳۹۷۱۴۸۷۴۱۴۴ بایت**، مطابق هش
+منبع اصلیِ بالا. تجمیع محافظت‌شده در ۴۸۰۱۱۱ میلی‌ثانیه پایان یافت؛ توقف فرایند متعلق به اجرا
+و ثبات خط مبنای آماده/بی‌درخواست موفق‌اند. دو فایل/**۵۰۷۱۴۵۸۰۶۰۸ بایت** باقی است. پس از
+تکمیل انتقال فایل اول و پیش از تجمیع، پنجرهٔ سه‌بخشی با مهلت‌گذری و صفر بخش پذیرفته‌شده
+ناموفق شد؛ بدنه‌های ناقص حفظ‌اند، نه
+پذیرفته. فراداده، بارگذاری کامل، معنا، استدلال/حریم خصوصی، زمینه و معیارهای عملیاتیِ متناظر
+برای 122B اجرا نشده‌اند.
+ادامهٔ بعدیِ یک پیشوند ساعت ۲۳:۵۶:۰۸ UTC کامل شد؛ یک بخش تازهٔ ۲۶۸۴۳۵۴۵۶ بایتی، رسیدهای
+محافظت‌شدهٔ مستقلاً خوانده‌شده را گذراند: ۱۴۹ بخش/۳۹۹۸۳۳۰۹۶۰۰ بایت اصلی و ۵۰۴۴۶۱۴۵۱۵۲ بایت
+انتقالیِ باقی‌مانده. بدنه‌های اصلی/تازه حفظ‌اند؛ فایل کامل دوم یا مدل پذیرفته نشده است.
+آزمون بومیِ هویت فایل پیش از پنجرهٔ محدود در ۲۹۳۸ میلی‌ثانیه موفق شد.
+پنج کنترل CI کد دقیقِ `ca1da27` در اجرای بالا موفق‌اند؛ اجرای مستقلِ
+بعدیِ مرورگر ۸۸ آزمون را گذراند و تلاش نخستِ لغوشده حفظ است. ساخت آفلاینِ آرشیو/wheel
+کد ca1 در ۲۳۰۴۶ میلی‌ثانیه با برابری کد/دارایی ثابت/وابستگی پایان یافت؛ فقط محلی، بدون
+امضا و نه پذیرش استقرار یا قطع WAN است. هویت کد همان هش بالاست. 35B زنده/خاموشی استدلال
+عمومی و آزمون‌های ناموفق Qwen3.8 تغییر نکرده‌اند؛ گزارش دوزبانهٔ بالا مرجع است.
+
+## Earlier provisioning checkpoints — historical / گام‌های آماده‌سازیِ پیشین — سوابق
+
+Current provisioning checkpoint — **2026-10-06; not model acceptance**: exact `293164e` passed
+all five CI jobs in [run 37378458739](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739).
+The reviewed 122B importer is installed root-owned/mode `0400`, with exact source parity;
+main/independent definition checks passed. The first desktop window
+`resume-20261006-639268346254710321` failed at `remote_begin`, before any range download or root
+start/result record. Read-only reconciliation confirmed stopped transport/absent open handles
+and unchanged serving PIDs 2187/2197, restart counts 0/0 and ready/idle state. Isolated runner
+tests identified the missing `ProgramData` variable; a distinct reviewed v2 desktop helper and
+read-only reconciliation passed. Window `resume-20261006-639268352065353249` **completed one
+range**, index 133/268435456 bytes, with protected receipts, recoverable canonical data,
+verified-duplicate cleanup and unchanged baseline. The subsequent v2 window
+`resume-20261006-639268355159703524` completed indexes **134–137**, each 268435456 bytes;
+root finish/stopped reconciliation and the original ready/idle baseline passed. The current
+canonical total is **138 ranges/37044092928 bytes**, not complete-shard verification; the prior
+134-range snapshot remains historical. The v3 helper passed 430 preparation checks, then its
+first actual window `resume-20261006-639268362479556681` failed at `finite_download`, exit 1,
+zero accepted ranges. Root stopped/baseline reconciliation was reported true; the failed bodies
+are retained and the canonical count is unchanged. No speed gain or import is claimed. The
+distinct serial window `resume-20261006-639268366509946555` completed indexes **138–140**,
+each 268435456 bytes, at **22:40:16 UTC**, with root finish/stopped/baseline checks passed.
+The latest canonical total is **141 ranges/37849399296 bytes**; seven first-shard ranges remain,
+not a complete-shard result. No later range or transfer-performance cause is claimed. The
+protected one-shard assembler and its newly prepared desktop wrapper remain local-only/unrun;
+peer wrapper checks passed 387 mocks, not actual assembly or permission to run. Typed 122B
+source registration is implemented/tested, not deployed or accepted:
+main reported 1094 source passes/two POSIX skips/126 deselected in 25.99 seconds; lint, format and
+Linux-target types passed. The existing AnyIO warning remains recorded. A broad directory secret
+scan included ignored trees and reported 18 findings, not a pass. Main's separate new
+staged-change Gitleaks check passed exit 0, not a clean-directory claim. Keep the protected
+broad-scan report and triage separate from that narrower result and the earlier CI pass.
+Live 35B/public thinking-off remain unchanged. See the [paired record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+گام جاریِ آماده‌سازی — **۶ اکتبر ۲۰۲۶؛ نه پذیرش مدل**: پنج کنترل CI کد دقیقِ `293164e` در
+[اجرای 37378458739](https://github.com/Omid-NextAI/nextops/actions/runs/37378458739) موفق‌اند.
+ابزار بررسی‌شدهٔ دریافت 122B با مالکیت root و حالت `0400`، با برابری دقیقِ کد نصب شده؛
+کنترل‌های تعریفیِ اصلی/مستقل موفق‌اند. نخستین پنجرهٔ رایانهٔ کاربر با شناسهٔ
+`resume-20261006-639268346254710321` در `remote_begin`، پیش از دریافت هر بخش و ایجاد رکورد
+شروع/نتیجهٔ root شکست خورد. تطبیق صرفاً خواندنی، توقف انتقال، نبود handle باز و ثبات
+PIDهای 2187/2197، شمار راه‌اندازی مجدد 0/0 و وضعیت آماده/بی‌درخواست را تأیید کرد. آزمون
+جداگانهٔ محیط اجرا، نبود متغیر `ProgramData` را مشخص کرد؛ ابزار مستقلِ نسخهٔ دوم و تطبیق
+صرفاً خواندنی موفق‌اند. پنجرهٔ `resume-20261006-639268352065353249` **یک بخش** با اندیس
+۱۳۳/۲۶۸۴۳۵۴۵۶ بایت را کامل کرد؛ رسید محافظت‌شده، دادهٔ اصلیِ قابل‌بازیابی، حذف نسخهٔ تکراریِ
+تأییدشده و ثبات خط مبنا ثبت شدند. پنجرهٔ بعدیِ نسخهٔ دوم با شناسهٔ
+`resume-20261006-639268355159703524` اندیس‌های **۱۳۴ تا ۱۳۷**، هر یک ۲۶۸۴۳۵۴۵۶ بایت، را
+کامل کرد؛ پایان root، تطبیق توقف و خط مبنای اصلیِ آماده/بی‌درخواست موفق‌اند. مجموع جاری
+**۱۳۸ بخش/۳۷۰۴۴۰۹۲۹۲۸ بایت** است، نه تأیید فایل کامل؛ ثبتِ ۱۳۴بخشیِ قبلی سابقه است.
+ابزار مستقلِ نسخهٔ سوم، ۴۳۰ کنترل آماده‌سازی را گذراند؛ سپس نخستین پنجرهٔ واقعیِ آن با
+شناسهٔ `resume-20261006-639268362479556681` در `finite_download`، با کد خروج ۱ و صفر بخش
+پذیرفته‌شده شکست خورد. تطبیق root برای توقف/خط مبنا با مقدار درست گزارش شد؛ بدنه‌های
+ناموفق حفظ‌اند و شمار اصلی تغییر نکرد. بهبود سرعت یا دریافت پذیرفته‌شده ادعا نمی‌شود.
+پنجرهٔ سریالِ مستقلِ `resume-20261006-639268366509946555` اندیس‌های **۱۳۸ تا ۱۴۰**، هر یک
+۲۶۸۴۳۵۴۵۶ بایت، را در ساعت **۲۲:۴۰:۱۶ UTC** با پایان root/تطبیق توقف/ثبات خط مبنا کامل
+کرد. مجموع جدید **۱۴۱ بخش/۳۷۸۴۹۳۹۹۲۹۶ بایت** است؛ هفت بخشِ فایل اول باقی‌اند، نه تأیید
+فایل کامل. بخش بعدی یا علت کاراییِ انتقال ادعا نمی‌شود.
+ابزار محافظت‌شدهٔ تجمیع یک فایل و ابزار تازهٔ اجرای رایانهٔ کاربر فقط محلی/اجرا‌نشده‌اند؛
+۳۸۷ کنترل شبیه‌سازیِ ابزار اجرا در بررسی مستقل موفق‌اند، نه تجمیع واقعی یا مجوز اجرا.
+ثبت نوع‌دارِ 122B در کد پیاده‌سازی/آزموده شده، نه مستقر یا پذیرفته:
+بازبین اصلی ۱۰۹۴ موفق/دو مورد POSIX اجرا‌نشده/۱۲۶ انتخاب‌نشده در ۲۵٫۹۹ ثانیه ثبت کرد؛
+کنترل lint، قالب و نوع برای Linux موفق‌اند. هشدار قبلیِ AnyIO حفظ شده است. بررسی گستردهٔ
+اطلاعات محرمانه، درخت‌های ignored را نیز خواند و ۱۸ یافته ثبت کرد، نه نتیجهٔ موفق. بررسی
+مستقلِ تغییرهای staged با Gitleaks در اجرای اصلی با کد خروج صفر موفق شد، نه پاک بودن کل
+پوشه. گزارش محافظت‌شدهٔ بررسی گسترده و تعیین تکلیف آن جدا از نتیجهٔ محدود و CI قبلی حفظ شوند.
+35B زنده و خاموشی استدلال عمومی ثابت‌اند؛ گزارش دوزبانهٔ بالا مرجع است.
+
+Prior native checkpoint — historical / گام بومیِ پیشین — سابقه:
+
+Latest completed native checkpoint, **2026-10-05 at 21:36:41.463473 UTC**: the distinct
+`20261006-q5-b94-ub512-noblas-numa-standard-001` trial failed. Fourteen stopped finals returned;
+English hypothesis timed out at **120001 ms**, Persian hypothesis was not run. Main/independent
+review agree on **nine passes/six failures/one not run**: unsupported network topology, FA coding
+type guards and incomplete stale-evidence provenance/scope remain failures. Load/controller took
+6002/776965 ms. Owned cleanup and unchanged ready/idle 35B baseline passed; numeric guest NUMA
+masks/pages are not physical placement, affinity-success or performance acceptance. Exact
+`7f14ba194668ec2e76696b0d328065b9171dcb22` CI passed all five jobs in
+[run 37376324673](https://github.com/Omid-NextAI/nextops/actions/runs/37376324673), not model acceptance.
+The next bounded Apache-licensed **Qwen3.5-122B-A10B** import-resumption helpers are local and under
+review, not uploaded or run at this checkpoint; retained ranges and storage budgets need fresh
+verification. No standard/thinking gate or model selection was created; live 35B/public thinking-off
+remain unchanged. See the [paired record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+آخرین گام بومیِ پایان‌یافته در **۵ اکتبر ۲۰۲۶، ساعت ۲۱:۳۶:۴۱٫۴۶۳۴۷۳ UTC**: آزمون مستقلِ
+`20261006-q5-b94-ub512-noblas-numa-standard-001` ناموفق شد. چهارده پاسخ نهایی کامل دریافت شد؛
+فرضیهٔ انگلیسی در **۱۲۰۰۰۱ میلی‌ثانیه** از مهلت گذشت و پرسش فارسیِ آن اجرا نشد. بازبینی
+اصلی/مستقل، **نه موفق/شش ناموفق/یک اجرا‌نشده** ثبت کردند: توپولوژی بدون شاهد، کنترل نوعِ
+کدنویسی فارسی و منشأ/دامنهٔ ناکاملِ شاهد کهنه همچنان ناموفق‌اند. بارگذاری/کنترل‌کننده
+۶۰۰۲/۷۷۶۹۶۵ میلی‌ثانیه طول کشید. پاک‌سازی و حفظ خط مبنای آماده/بی‌درخواستِ 35B موفق‌اند؛
+ماسک/صفحهٔ عددی NUMA مهمان، جای‌گیری فیزیکی، موفقیت affinity یا پذیرش کارایی نیست. پنج کنترل
+CI کد دقیقِ بالا در اجرای پیوندشده موفق‌اند، نه پذیرش مدل. ابزار ادامهٔ دریافت محدودِ
+**Qwen3.5-122B-A10B** با مجوز Apache، در این گام فقط محلی و در حال بازبینی است؛ بارگذاری روی
+میزبان یا اجرا نشده و بخش‌های قبلی/بودجهٔ ذخیره‌سازی به بررسی تازه نیاز دارند. مجوز استاندارد/
+استدلال یا انتخاب مدل ساخته نشد؛ 35B زنده و خاموشی استدلال عمومی ثابت‌اند. گزارش دوزبانهٔ بالا مرجع است.
+
+Previous native checkpoint — historical / گام بومیِ پیشین — سابقه:
+
+Latest native checkpoint, 2026-10-05 at 21:14:22 UTC: the distinct exact-`b94a84c` no-BLAS retest
+failed after eleven stopped finals. Persian stale/partial exceeded the unchanged 120-second gate
+at 120234 ms; four later injection/hypothesis cases were not run. Main/independent review agree on
+seven passes/five failures/four not run. EN evidence preserves source/date/collection time now, but
+loses authorized scope; both network answers and FA coding still fail. Startup took 6621 ms,
+controller 567205 ms; owned cleanup, seven actual project libraries/no BLAS and unchanged ready/idle
+baseline passed in their recorded scopes. The earlier `f6cff8f` failure remains preserved. Exact
+`f9a4a83` CI passed all five jobs, including PostgreSQL16/17 and isolated browser checks; this is source
+evidence, not candidate acceptance. Live 35B/public-thinking-off remain unchanged. A separately
+reviewed NUMA comparison started at 21:23:44 UTC, loaded in 6002 ms and is in progress, not accepted. See the
+[paired record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+گام تازهٔ اجرای بومی در ۵ اکتبر ۲۰۲۶، ساعت ۲۱:۱۴:۲۲ UTC: سنجش مستقلِ بدون BLAS با کد
+دقیقِ `b94a84c` پس از یازده پاسخ نهایی کامل ناموفق شد. پرسش فارسیِ شاهد کهنه/ناقص در
+۱۲۰۲۳۴ میلی‌ثانیه از حد ثابتِ ۱۲۰ ثانیه گذشت؛ چهار پرسش بعدیِ تزریق/فرضیه اجرا نشدند.
+بازبینی اصلی/مستقل، هفت موفق/پنج ناموفق/چهار اجرا‌نشده ثبت کردند. پاسخ انگلیسیِ شاهد
+اکنون منبع/تاریخ/زمان گردآوری را حفظ می‌کند، اما دامنهٔ مجاز را حذف می‌کند؛ دو پاسخ شبکه
+و کدنویسی فارسی همچنان ناموفق‌اند. بارگذاری ۶۶۲۱ و اجرای کنترل‌کننده ۵۶۷۲۰۵ میلی‌ثانیه
+طول کشید؛ پاک‌سازی، نگاشت واقعیِ هفت کتابخانه بدون BLAS و حفظ آمادگیِ خط مبنای بی‌درخواست
+در دامنهٔ ثبت‌شده موفق‌اند. شکست قبلیِ `f6cff8f` حفظ است. پنج کنترل CI کد دقیقِ `f9a4a83`،
+شامل PostgreSQL16/17 و بررسی جداگانهٔ مرورگر، موفق شدند؛ این شاهد کد است نه پذیرش نامزد. 35B زنده و خاموشی
+استدلال عمومی ثابت‌اند. مقایسهٔ مستقل و بازبینی‌شدهٔ NUMA ساعت ۲۱:۲۳:۴۴ UTC آغاز و در
+۶۰۰۲ میلی‌ثانیه بارگذاری شد؛ اجرا ادامه دارد و پذیرفته نشده است. گزارش دوزبانهٔ بالا مرجع است.
+
+Previous build checkpoint — historical:
+
+Latest build checkpoint, 2026-10-05 at 20:20:41 UTC: fresh no-BLAS build003 completed all 214
+steps, exit 0, in 130332 ms. Its recorded sandbox, cleanup and unchanged ready/idle baseline
+passed. Read-only inspection of all eight ELF outputs found literal `$ORIGIN` RUNPATHs, with
+no temporary absolute or empty search component. Binary SHA:
+`eb53d6eef8bdae6f1227a93af1f6caf58542fb5943b03ccc80d136316e6f5721`.
+Protected packaging, complete dependency review and native execution remain separate; no model
+selection, thinking or context acceptance follows. Preserve rejected build002 and failed build001.
+
+گام تازهٔ ساخت در ۵ اکتبر ۲۰۲۶، ساعت ۲۰:۲۰:۴۱ UTC: ساخت مستقلِ بدون BLAS شمارهٔ ۰۰۳، هر
+۲۱۴ گام را با کد صفر در ۱۳۰۳۳۲ میلی‌ثانیه کامل کرد. کنترل محیط اجرا، پاک‌سازی و حفظ آمادگیِ
+خط مبنای بدون درخواست موفق‌اند. بررسی صرفاً خواندنیِ هر هشت فایل ELF، مسیر لفظیِ `$ORIGIN`
+را بدون مسیر مطلقِ موقت یا بخش خالی نشان داد؛ هش فایل اجرایی در بالا درج شده است.
+بسته‌بندیِ محافظت‌شده، بررسی کامل وابستگی و اجرای واقعی جدا باقی می‌مانند؛ انتخاب مدل،
+استدلال یا پذیرش زمینه حاصل نشده است. ساخت نپذیرفتهٔ ۰۰۲ و ساخت ناموفقِ ۰۰۱ حفظ شوند.
+
+Previous build checkpoint — historical:
+
+Latest runtime checkpoint, 2026-10-05: isolated no-BLAS build002 compiled successfully in 138380 ms
+with verified CPU/OpenMP/native flags, four-CPU/eight-GiB bounds and network-denied DynamicUser.
+Cleanup and unchanged live baseline passed. Read-only ELF review rejected its temporary absolute
+RUNPATHs and empty path components for relocatable trial packaging. No built runtime was executed
+or installed. Preserve build001's earlier configure/cache-guard failure and build002's outputs;
+review fresh build003 with literal `$ORIGIN` loader paths before artifact/closure verification.
+The opt-in candidate identity verifier preserves original v1.0 behavior/schema and requires separate
+external binary/inventory anchors for v1.1. Main checks: 176 focused/1053 source tests passed, two
+POSIX skips, 126 deselected in 24.99 seconds; lint/format/Linux-target types passed. This is not
+runtime/model acceptance. Exact `23dabae` CI passed all five jobs
+([run](https://github.com/Omid-NextAI/nextops/actions/runs/37360223624)). See the paired record below.
+
+گام تازهٔ runtime در ۵ اکتبر ۲۰۲۶: ساخت مستقلِ بدون BLAS شمارهٔ ۰۰۲ در ۱۳۸۳۸۰ میلی‌ثانیه
+موفق شد؛ تنظیم CPU/OpenMP/native، حدود چهار CPU/هشت GiB و DynamicUser بدون شبکه بررسی شدند.
+پاک‌سازی و حفظ خط مبنای زنده موفق‌اند. بررسی خواندنیِ ELF، مسیر مطلقِ موقت و بخش خالیِ
+RUNPATH را برای بسته‌بندیِ قابل‌انتقال نپذیرفت. runtime ساخته‌شده اجرا یا نصب نشد. شکست
+پیشینِ کنترل cache در ساخت ۰۰۱ و خروجیِ ساخت ۰۰۲ حفظ شوند؛ ساخت تازهٔ ۰۰۳ با مسیر لفظیِ
+`$ORIGIN`، پیش از بررسی فایل/وابستگی بازبینی شود. بازبین صریحِ هویت نامزد، رفتار/schema اصلیِ
+نسخهٔ ۱٫۰ را حفظ و برای نسخهٔ ۱٫۱ دو هش مستقلِ فایل اجرایی/فهرست را الزام می‌کند. کنترل
+اصلی: ۱۷۶ آزمون مرتبط/۱۰۵۳ آزمون کد موفق، دو مورد POSIX اجرا‌نشده و ۱۲۶ مورد خارج از انتخاب
+در ۲۴٫۹۹ ثانیه؛ قالب/lint/نوع با هدف Linux موفق‌اند. این پذیرش runtime/مدل نیست. پنج کنترل
+CI کد دقیقِ `23dabae` در اجرای بالا موفق‌اند. گزارش دوزبانهٔ زیر مرجع است.
+
+Latest isolated Q5 outcome, 2026-10-05 at 18:48 UTC: the distinct passive-wait trial failed after
+two exact format passes. English networking timed out at 120002 ms; thirteen later cases were not
+run. Main/independent review and the offline checker agree. Its owned process/unit/listener are
+absent, baseline PID/restart count and ready/idle state unchanged, no standard/thinking gate created.
+The separately pinned `b94a84c` source archive/wheel/root staging passed code-digest parity and all
+five exact CI jobs ([run](https://github.com/Omid-NextAI/nextops/actions/runs/37356458309)); its native
+retest remains unrun. A no-BLAS build of the same pinned CPU runtime is a reviewed experiment,
+not an accepted optimization or live runtime change. See the [paired record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+تازه‌ترین نتیجهٔ مستقل Q5، در ۵ اکتبر ۲۰۲۶ ساعت ۱۸:۴۸ UTC: آزمون جداگانهٔ انتظار غیرفعال
+پس از دو پاسخ دقیقِ قالب، ناموفق شد. پرسش انگلیسیِ شبکه در ۱۲۰۰۰۲ میلی‌ثانیه از مهلت گذشت؛
+سیزده مورد بعدی اجرا نشد. بازبینی اصلی/مستقل و ابزار آفلاین هم‌نظرند. فرایند، واحد و listener
+آزمون باقی نمانده؛ شناسهٔ فرایند/شمار restart و آمادگیِ بیکار خط مبنا ثابت‌اند و مجوز استاندارد/
+استدلال ساخته نشد. برابری هش کد در بایگانی/بسته/نگهداری محافظت‌شدهٔ `b94a84c` و پنج کنترل CI
+همان کد در اجرای بالا موفق‌اند؛ آزمون بومیِ آن اجرا‌نشده است. ساخت بدون BLAS از همان runtime
+ثابتِ CPU، آزمایشی بررسی‌شده است، نه بهینه‌سازیِ پذیرفته‌شده یا تغییر runtime زنده. گزارش بالا مرجع است.
+
+New source-only detailed-answer repair, 2026-10-05: generic instructions now explicitly preserve
+supplied provenance/limits without claiming independent verification, avoid invented intermediary
+topology, and validate required types before value operations. Short-general and evidence prompts,
+frozen questions, template controls, limits, policy and serving releases are unchanged. Independent
+review found a mutable test-capture gap; deep snapshots plus a mutation regression now cover it.
+Main checks: 118 focused tests and 967 non-browser/non-integration tests passed, two POSIX skips,
+126 deselected in 25.34 seconds; formatting/lint and 142-file Linux-target Mypy passed. This is
+not model training, a native-answer pass or deployment. Preceding exact `2553288` CI passed five
+jobs; CI for this later source increment remains separate. Continue isolated scheduling qualification
+with frozen `f6cff8f`, then a separately pinned comparison of this changed source.
+
+اصلاح تازه و صرفاً کدِ پاسخ تفصیلی، در ۵ اکتبر ۲۰۲۶: راهنمای عمومی اکنون حفظ صریحِ منشأ/
+محدودیت دادهٔ ارسالی، بدون ادعای تأیید مستقل، پرهیز از توپولوژیِ واسطِ ساختگی و کنترل نوع
+پیش از عملیات مقدار را می‌خواهد. راهنمای کوتاهِ عمومی/شاهد، پرسش ثابت، کنترل قالب، حدود،
+سیاست و نسخه‌های زنده تغییر نکردند. بازبین مستقل خلأ ثبت ورودیِ تغییرپذیر در آزمون را یافت؛
+تصویر مستقل از ورودی و آزمون تغییر بعدی آن را پوشش می‌دهند. کنترل اصلی: ۱۱۸ آزمون مرتبط
+و ۹۶۷ آزمون غیرمرورگری/غیرپایگاهی موفق، دو مورد POSIX اجرا‌نشده و ۱۲۶ مورد خارج از انتخاب،
+در ۲۵٫۳۴ ثانیه؛ قالب/lint و mypy با هدف Linux برای ۱۴۲ فایل موفق‌اند. این آموزش مدل، پذیرش
+پاسخ بومی یا استقرار نیست. پنج کنترل CI کد پیشینِ `2553288` موفق‌اند؛ CI این گام بعدی جداست.
+آزمون مستقلِ زمان‌بندی با `f6cff8f` ثابت ادامه یابد، سپس مقایسهٔ جدا با هویت دقیقِ کد تازه انجام شود.
+
+Latest isolated Q5 result, 2026-10-05 at 18:08 UTC: the distinct physical-batch512 trial used the
+same exact `f6cff8f` source, frozen corpus, 32 threads/16K/384 output/120-second deadline and no
+thinking. Eleven finals returned; Persian stale/partial evidence timed out at 120002 ms and four
+subsequent cases were not run. Main and independent review agree: six passes, six failures, four
+not run. Failures include both coding type guards, network scope/format and missing evidence
+provenance. Cleanup passed; baseline PID/readiness stayed unchanged, no unit/listener/timer remains.
+No standard/thinking gate or model selection was created. Exact `ead5e30` CI subsequently passed
+all five jobs ([run](https://github.com/Omid-NextAI/nextops/actions/runs/37351635415)); that source
+result does not qualify the model. A distinct passive OpenMP waiting-policy diagnostic is being
+prepared, not executed or accepted. See the [paired private-evidence summary](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+
+نتیجهٔ تازهٔ آزمون مستقل Q5، در ۵ اکتبر ۲۰۲۶ ساعت ۱۸:۰۸ UTC: آزمون batch فیزیکیِ ۵۱۲ با
+همان کد دقیقِ `f6cff8f`، پرسش ثابت، ۳۲ رشته/زمینهٔ 16K/خروجیِ ۳۸۴/مهلتِ ۱۲۰ ثانیه و
+استدلالِ خاموش اجرا شد. یازده پاسخ نهایی دریافت شد؛ پرسش فارسیِ شاهد کهنه/ناقص در ۱۲۰۰۰۲
+میلی‌ثانیه از مهلت گذشت و چهار مورد بعدی اجرا نشد. بازبینی اصلی و مستقل هم‌نظرند: شش مورد
+موفق، شش مورد ناموفق و چهار مورد اجرا‌نشده. کنترل نوع در هر دو پاسخ کدنویسی، دامنه/قالب
+پاسخ شبکه و حفظ منشأ شاهد ناموفق‌اند. پاک‌سازی موفق و شناسهٔ فرایند/آمادگیِ خط مبنا ثابت است؛
+واحد، listener یا timer باقی نمانده است. مجوز استاندارد/استدلال یا انتخاب مدل ساخته نشد.
+هر پنج کنترل CI کد دقیقِ `ead5e30` در اجرای بالا موفق‌اند؛ موفقیت کد، پذیرش مدل نیست. آزمون
+مستقلِ انتظار غیرفعال OpenMP در حال آماده‌سازی است، نه اجرا یا پذیرش. گزارش دوزبانهٔ بالا مرجع است.
+
+Source-test repair, 2026-10-05 at 17:48 UTC: exact `76b92ec` CI recorded two stale partial-import
+expectation failures and 969 passes; browser, PostgreSQL16/17 and secret jobs passed. The tests now
+construct partial states explicitly and preserve ambiguous-status/selection rejection. Main local
+suite: 966 passed, two POSIX skips, 126 deselected in 26.94 seconds; focused lint/format passed.
+Repair CI is not yet recorded. A distinct physical-batch512 helper is in private preparation, not
+an executed trial. Failed Q5 standard and unrun thinking/context/application/WAN gates remain.
+
+اصلاح آزمون کد در ۵ اکتبر، ساعت ۱۷:۴۸ UTC: CI کد دقیق `76b92ec` دو شکستِ انتظار قدیمیِ
+دریافت ناقص و ۹۶۹ موفق داشت؛ مرورگر، PostgreSQL16/17 و کنترل اطلاعات محرمانه موفق بودند.
+آزمون اکنون حالت ناقص را صریح می‌سازد و رد وضعیت مبهم/انتخاب را حفظ می‌کند. اجرای محلی:
+۹۶۶ موفق، دو مورد POSIX اجرا‌نشده و ۱۲۶ انتخاب‌نشده در ۲۶٫۹۴ ثانیه؛ lint/قالب متمرکز موفق‌اند.
+CI اصلاح هنوز ثبت نشده است. ابزار خصوصیِ batch فیزیکیِ ۵۱۲ در آماده‌سازی است، نه آزمون
+اجراشده. شکست استاندارد Q5 و معیار اجرا‌نشدهٔ استدلال/زمینه/برنامه/WAN باقی‌اند.
+
+Current Q5 checkpoint, 2026-10-05 at 17:29 UTC: all 74 protected transport ranges were assembled;
+the complete 19771509664-byte Qwen3.8-27B UD-Q5_K_M artifact matched its pinned upstream SHA-256.
+An independent root-private reader rehashed it and verified actual GGUF3/qwen35 metadata and the
+9993-byte template; immutable candidate storage is complete, not model selection. The distinct
+32-thread/16K standard trial loaded in 7179 ms and verified protected eight-library mappings,
+but its first `en-format` case failed at 120010 ms without an answer; fifteen cases were not run.
+Cleanup confirmed unit/process/listener absence and unchanged baseline readiness. No standard
+approval or thinking/context/application/offline gate follows. All five exact-`e6af416` CI jobs
+passed; this is source verification, not model acceptance.
+App `3d92b71`, inference `7ce9d29`, serving 35B, public thinking-off and production status are unchanged.
+
+گام جاری Q5 در ۵ اکتبر ۲۰۲۶، ساعت ۱۷:۲۹ UTC: هر ۷۴ بخش انتقال محافظت‌شده به هم پیوستند؛
+فایل کاملِ ۱۹۷۷۱۵۰۹۶۶۴ بایتی Qwen3.8-27B UD-Q5_K_M با SHA-256 ثابتِ منبع اصلی مطابق است.
+خوانندهٔ مستقل و خصوصیِ root، هش کامل، فرادادهٔ واقعی GGUF3/qwen35 و قالب ۹۹۹۳ بایتی را
+بررسی کرد؛ نگهداری نامزدِ محافظت‌شده تکمیل است، نه انتخاب مدل. آزمون مستقل استاندارد با
+۳۲ رشته و زمینهٔ 16K در ۷۱۷۹ میلی‌ثانیه بارگذاری و نگاشت هشت کتابخانهٔ محافظت‌شده بررسی شد؛
+اما نخستین پرسش `en-format` در ۱۲۰۰۱۰ میلی‌ثانیه بدون پاسخ از مهلت گذشت؛ پانزده مورد اجرا
+نشد. پاک‌سازی، نبود واحد/فرایند/listener و آمادگیِ ثابتِ خط مبنا را تأیید کرد. تأیید استاندارد
+یا پذیرش استدلال/زمینه/برنامه/آفلاین حاصل نشده است. هر پنج کنترل CI کد دقیقِ `e6af416` موفق‌اند؛
+این بررسی کد است، نه پذیرش مدل.
+برنامهٔ `3d92b71`، استنتاج `7ce9d29`، مدل زندهٔ 35B، خاموشی استدلال عمومی و وضعیت تولید ثابت‌اند.
+
+New runtime-review source, 2026-10-05: a read-only protected native-tree checker/schema and 90
+explicit filesystem-simulation tests are implemented. Main checks: 962 source tests/two POSIX
+skips, 156 related tests and lint/types/docs passed. Actual Linux-root verification passed nine
+files/fourteen aliases without runtime changes; live 35B stayed idle without restart. Five preceding
+exact-`01637a1` CI jobs passed, not CI for this later source. Tree identity is not build/model/offline/
+deployment acceptance. Q5 remains partial; no public thinking or serving-model change occurred.
+
+کد تازهٔ بررسی runtime در ۵ اکتبر: ابزار/طرح فقط‌خواندنیِ درخت بومی و ۹۰ آزمون صریحِ شبیه‌سازی
+فایل‌سیستم پیاده شدند. کنترل اصلی: ۹۶۲ آزمون کد موفق/دو مورد POSIX اجرا‌نشده، ۱۵۶ آزمون مرتبط
+و lint/نوع/مستندات موفق‌اند. بررسی واقعیِ root در Linux، نه فایل/چهارده پیوند را بدون تغییر
+runtime تأیید کرد؛ 35B بی‌درخواست و بدون restart ماند. پنج کنترل CI پیشینِ کد دقیق `01637a1`
+موفق‌اند، نه CI کد بعدی این گام. هویت درخت، پذیرش ساخت/مدل/آفلاین/استقرار نیست. Q5 ناقص و
+استدلال عمومی/مدل زنده ثابت‌اند.
+
+Latest diagnostic, 2026-10-05: the distinct exact-`f6cff8f` Q8 standard retest failed coding,
+source/scope preservation and the 120-second hypothesis deadline. Fourteen final answers were
+recorded; the final Persian hypothesis was not run. Trial cleanup and unchanged baseline readiness
+passed; no thinking/expanded-context/application acceptance or selection followed. The source
+reviewer now rejects non-string operations before their type guard: 872 tests/two POSIX skips.
+All five earlier exact-`f6cff8f` CI jobs passed; that is not CI or model acceptance for later work.
+Protected Q5 preparation reached 48 canonical ranges (12 GiB), still without a complete hash.
+See the [updated permissive record](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+App `3d92b71`, inference `7ce9d29`, serving 35B, public thinking-off and production status remain unchanged.
+
+بررسی تازه در ۵ اکتبر: آزمون استانداردِ مستقل Q8 با کد دقیقِ `f6cff8f` در کدنویسی، حفظ منبع/
+دامنه و مهلت ۱۲۰ ثانیهٔ فرضیه ناموفق بود. چهارده پاسخ نهایی ثبت شد؛ فرضیهٔ پایانی فارسی اجرا
+نشد. توقف/پاک‌سازی آزمون و آمادگیِ ثابتِ مدل سالم موفق‌اند؛ پذیرش استدلال/زمینهٔ گسترده/برنامه
+یا انتخاب انجام نشد. بازبین کد اکنون عملیات ورودی غیررشته‌ای را پیش از کنترل نوع رد می‌کند:
+۸۷۲ آزمون موفق/دو مورد POSIX اجرا‌نشده. هر پنج کنترل CI پیشین برای `f6cff8f` موفق‌اند؛ این
+پذیرش CI یا مدلِ کار بعدی نیست. آماده‌سازی محافظت‌شدهٔ Q5 به ۴۸ بخش اصلی، برابر ۱۲ GiB رسید؛
+هش کامل هنوز تأیید نیست. گزارش مجوز آزادِ به‌روز در بالا مرجع است. برنامهٔ `3d92b71`، استنتاج
+`7ce9d29`، مدل زندهٔ 35B، خاموشی استدلال عمومی و وضعیت تولید ثابت‌اند.
+
+Source-only follow-up, 2026-10-05: a distinct pinned Apache Qwen3.8-27B UD-Q5_K_M candidate
+and generic defensive-coding guidance are prepared. Main local checks passed 835 non-browser/
+non-integration tests, two POSIX-only skips, Ruff and Linux-target Mypy; independent bilingual
+coding proposals remain ungraded. Complete Q5 import/load/quality is not accepted. The finite 122B
+window ended with 133 canonical transport ranges; first 512-MiB 3.8 Q5 ranges are protected, not a
+full hash. Prioritize this separate trial; retain partial 122B and failed Q8 results.
+See the [permissive packet](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md). Live app
+`3d92b71`, inference API `7ce9d29`, serving 35B, public thinking-off and production status are unchanged.
+
+پیگیری صرفاً کد در ۵ اکتبر: نامزد مستقل و ثابتِ Apache از Qwen3.8-27B UD-Q5_K_M و راهنمای
+عمومیِ کدنویسی دفاعی آماده‌اند. کنترل محلیِ عامل اصلی، ۸۳۵ آزمون غیرمرورگر/غیرintegration
+موفق، دو مورد POSIX اجرا‌نشده، Ruff و Mypy برای Linux داشت؛ پیشنهادهای مستقلِ دوزبانه هنوز
+ارزیابی نشده‌اند. دریافت/بارگذاری/کیفیت کامل Q5 پذیرفته نیست. پنجرهٔ محدود 122B با ۱۳۳ بخشِ
+انتقال پایان یافت؛ ۵۱۲ MiB نخستِ 3.8 Q5 محافظت‌شده است، نه هش کامل. آزمون مستقل آن اولویت
+دارد؛ بخش‌های ناقص 122B و شکست Q8 محفوظ‌اند. گزارش مجوز آزاد
+بالا مرجع است. برنامهٔ زندهٔ `3d92b71`، API استنتاجِ `7ce9d29`، مدل 35B، خاموشی استدلال
+عمومی و وضعیت تولید ثابت‌اند.
+
+Latest controlled app, 2026-10-05: `3d92b71` is serving after the selected-evidence aging/partial labels and contextual accessibility
+announcements passed 88 browser tests; the earlier 87/88 fixture-login failure remains recorded
+with unconfirmed transport cause. Current combined source passed 738 non-browser/non-integration
+tests/two POSIX skips, lint/types and documentation checks. The offline 122B qualification planner
+prepares frozen standard/thinking/16K/conditional-32K tests but runs no model and accepts no capacity.
+See paired [UI guidance](en/REFERENCE_UI.md) / [راهنمای رابط](fa/REFERENCE_UI.md) and the permissive
+packet below. Exact-source CI, offline install, first/final real browser/audit, actual five-minute
+aging and exact `f169875` rollback/reapply passed. Final code/package/unit/readiness checks passed;
+both guards are stopped. Model/public thinking and unrun server-WAN/cold-start gates are unchanged.
+
+انتشار محدودِ تازه در ۵ اکتبر: برنامهٔ `3d92b71` زنده است. سن‌گذاری شاهد انتخاب‌شده، برچسب ناقص و اعلانِ دسترس‌پذیرِ زمینه‌دار،
+۸۸ آزمون مرورگر موفق داشتند؛ شکست پیشینِ ۸۷ از ۸۸ و علت انتقالِ تأییدنشده حفظ است. کد ترکیبی
+جاری ۷۳۸ آزمون غیرمرورگر/غیرintegration موفق، دو مورد POSIX اجرا‌نشده و کنترل lint/نوع/مستندات
+داشت. برنامه‌ریز آفلاین 122B، پرسش ثابتِ پاسخ استاندارد/استدلال/16K/32K مشروط را آماده می‌کند؛
+مدل را اجرا یا ظرفیت را پذیرفته اعلام نمی‌کند. دو راهنمای رابط و گزارش مجوز آزادِ زیر مرجع‌اند.
+CI همان کد، نصب آفلاین، مرورگر/ممیزی واقعیِ نخست/نهایی، گذشت واقعیِ پنج دقیقه و بازگشت دقیق به
+`f169875`/استقرار دوباره موفق‌اند. هویت کد/بسته/واحد و آمادگی تأیید و هر دو محافظ متوقف‌اند.
+مدل، استدلال عمومی و معیارهای اجرا‌نشدهٔ WAN سرور/شروع سرد ثابت‌اند.
+
+Earlier owner-directed UI repair/permissive alternative, 2026-10-05: app `f169875` served after
+70 local browser regressions, 716 non-browser/non-integration tests (two POSIX skips), all five
+exact-source CI jobs and real browser/audit checks. Three actual subagents repaired responsive login
+motion, mobile composer, keyboard/navigation/locale/evidence presentation and reviewed licenses.
+Hidden-DOM logout cleanup and native request-details state passed. Exact `836b1ea` rollback/reapply
+and final identity/unit/readiness checks passed; the final guard is stopped. The [UI repair record](requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md)
+preserves failed harness attempts and separates browser-origin restriction from unrun server-WAN/
+cold-start gates. Connector `2a7c8dc`, inference API `7ce9d29` and serving 35B remain unchanged.
+Qwen3.8 27B's new 48-thread/native-thinking coding sample failed the 120-second deadline at
+120102 ms and was stopped/verified. Pinned Apache Qwen3.5-122B-A10B Q5_K_M remains supervised
+partial provisioning, not loaded/selected; do not label it 3.8 or resume full custom-license Flash
+import. See the [permissive packet](requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md).
+Public thinking, VM resources and full production-acceptance status are unchanged.
+
+گام پیشینِ درخواستی مالک در ۵ اکتبر: برنامهٔ `f169875` پس از ۷۰ آزمون مرورگر محلی، ۷۱۶ آزمون
+غیرمرورگر/غیرintegration (دو مورد POSIX اجرا‌نشده)، پنج کنترل CI همان کد و بررسی واقعی مرورگر/
+ممیزی زنده شد. سه عامل واقعی، حرکت ورودِ واکنش‌گرا، کادر پرسش موبایل، پیمایش/تمرکز/زبان و
+نمایش شاهد را اصلاح و مجوزها را بررسی کردند. پاک‌سازی DOM پنهان هنگام خروج و همگامی جزئیات
+درخواست موفق‌اند. بازگشت دقیق به `836b1ea` و استقرار دوباره، کنترل هویت/واحد/آمادگی نهایی موفق
+و محافظ نهایی متوقف است. گزارش اصلاح رابط در بالا، شکست ابزار و نبود آزمون WAN سرور/شروع
+سرد را جدا نگه می‌دارد. اتصال‌دهندهٔ `2a7c8dc`، API استنتاجِ `7ce9d29` و مدل زندهٔ 35B ثابت‌اند.
+نمونهٔ تازهٔ کدنویسی 27B با ۴۸ رشته و استدلال native در ۱۲۰۱۰۲ میلی‌ثانیه از مهلت گذشت؛ توقف
+آن تأیید شد. Qwen3.5-122B-A10B Q5_K_M با مجوز Apache در دریافت ناقصِ تحت نظارت است، نه
+بارگذاری یا انتخاب؛ 3.8 نامیده نشود و ورود کامل Flash با مجوز اختصاصی ادامه نیابد. گزارش مجوز
+آزادِ بالا مرجع است. استدلال عمومی، منابع ماشین و وضعیت پذیرش کامل تولید تغییر نکرده‌اند.
+
+Flash-Next preparation, 2026-10-05: after the owner-managed resize, direct AI checks show 80 vCPUs,
+three guest NUMA nodes and 257905 MiB usable RAM. Only the identified blank added 400-GiB disk was
+prepared as a separate protected model volume. The pinned Q8 set totals 151.46 GiB; its complete
+small metadata shard passed size/hash/actual metadata checks, and 512 MiB of bounded weight ranges
+was staged. Full import, CPU load, complete memory fit and Flash generations are not run. The
+owner confirms Bank/customer access; custom-license applicability/organizational review is pending.
+Source adds pinned sharded metadata, offline readers/reviewers and frozen EN/FA coding/provenance
+regressions: 660 passed, two skips. Retained baseline/27B coding failures remain failed. See the
+[exact preparation record](requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md). No serving
+model/limits/public thinking/app/AI/connector cutover; baseline is ready, no download/trial remains.
+
+آماده‌سازی Flash-Next در ۵ اکتبر: پس از افزایش دستی منابع، ۸۰ vCPU، سه گرهٔ NUMA مهمان و
+۲۵۷۹۰۵ MiB حافظهٔ قابل‌استفاده مستقیم مشاهده شد. فقط دیسک تازه و خالیِ ۴۰۰ GiB به حجم مستقل
+مدل تبدیل شد. مجموعهٔ Q8 ثابت حدود ۱۵۱٫۴۶ GiB است؛ بخش کوچکِ کامل با اندازه/هش و metadata
+واقعی تأیید و ۵۱۲ MiB از وزن، محدود آماده شد. ورود کامل، بارگذاری CPU، مصرف کامل و پاسخ Flash
+اجرا نشده‌اند. مالک دسترسی کارکنان بانک/مشتری را تأیید کرده؛ بررسی شمول مجوز اختصاصی و تأیید
+سازمانی باقی است. هویت ثابت، ابزار آفلاین و آزمون‌های ثابت دوزبانه افزوده‌اند: ۶۶۰ موفق و دو
+اجرا‌نشده. شکست کدنویسی مدل زنده/27B حفظ است. گزارش دقیق بالا مرجع است؛ مدل/سقف/استدلال عمومی
+و استقرار برنامه/AI/اتصال‌دهنده تغییر نکرده‌اند. مدل سالم آماده و دریافت/آزمون فعالی باقی نیست.
+
 Controlled Qwen 3.8 result, 2026-10-05: pinned 27B Q8 full-file verification, actual GGUF/template
 and isolated CPU loading passed. The [dated trial](requirements/QWEN38_QUALIFICATION_2026-10-05.md)
 records eight fixed-order standard samples per profile, four native-only thinking arithmetic samples,
@@ -37,7 +1363,7 @@ unchanged. No VM resize, production-readiness claim or model-quality acceptance 
 کد افزوده‌اند. برنامهٔ `836b1ea`، AI با `7ce9d29`، مدل 35B و گزینه‌های عمومی ثابت‌اند. افزایش
 ماشین، پذیرش کیفیت مدل یا آمادگی تولید از این گام استنباط نشود.
 
-Current controlled app, 2026-10-05 (Tehran): `836b1ea` serves the reference workspace/OCS login.
+Earlier controlled app, 2026-10-05 (Tehran): `836b1ea` served the reference workspace/OCS login.
 Five exact-code CI jobs and 47 local browser tests passed. Fresh real login/logout, saved-chat
 reload/resume, both Zabbix sources, EN/FA generation, evidence selection and durable hash/audit
 matching passed. Exact `2a7c8dc` rollback/reapply passed; final rollback guard is stopped. The
@@ -48,8 +1374,8 @@ are unchanged. At the earlier pre-import checkpoint, Qwen 3.8 metadata was revie
 the new resource/model increment above supersedes that checkpoint's missing capacity. See the paired
 [CPU guide](en/CPU_AI.md) / [راهنمای CPU](fa/CPU_AI.md). This is not full production acceptance.
 
-برنامهٔ کنترل‌شدهٔ جاری، ۵ اکتبر ۲۰۲۶ به وقت تهران: `836b1ea` محیط مرجع و ورود OCS را ارائه
-می‌کند. پنج کنترل CI همان کد و ۴۷ آزمون مرورگر محلی موفق‌اند. ورود/خروج واقعی، ادامهٔ گفتگو
+برنامهٔ کنترل‌شدهٔ پیشین، ۵ اکتبر ۲۰۲۶ به وقت تهران: `836b1ea` محیط مرجع و ورود OCS را ارائه
+می‌کرد. پنج کنترل CI همان کد و ۴۷ آزمون مرورگر محلی موفق‌اند. ورود/خروج واقعی، ادامهٔ گفتگو
 پس از بارگذاری دوباره، دو منبع زبیکس، تولید دوزبانه، انتخاب شاهد و تطبیق هش/ممیزی موفق بودند.
 بازگشت دقیق به `2a7c8dc` و استقرار دوباره موفق و تایمر نهایی متوقف است. گزارش تاریخ‌دارِ بالا
 شکست‌ها را حفظ و محدودیت شبکهٔ مرورگر را از آزمون اجرا‌نشدهٔ WAN سرور/شروع سرد این نسخه

@@ -18,7 +18,9 @@ ModelId = Literal[
     "nextops-qwen3-32b-q4-k-m",
     "nextops-qwen3-30b-a3b-q4-k-m",
     "nextops-qwen3-5-35b-a3b-q4-k-m",
+    "nextops-qwen3-5-122b-a10b-q5-k-m",
     "nextops-qwen3-8-27b-q8-0",
+    "nextops-qwen3-8-27b-ud-q5-k-m",
 ]
 GenerationPurpose = Literal["general", "evidence_synthesis"]
 
@@ -96,6 +98,8 @@ class ProviderReadiness(FrozenContract):
     model_id: ModelId
     runtime_version: str = Field(pattern=r"^v[0-9]+\.[0-9]+\.[0-9]+$")
     cpu_only_required: Literal[True]
+    # Configuration metadata, not measured full-window quality or hardware capacity.
+    configured_context_tokens: Literal[8192, 16384, 32768] | None = None
 
 
 class InferenceReadiness(ProviderReadiness):

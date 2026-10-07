@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "model_id", "status", "source_repository", "source_revision", "upstream_repository", "upstream_reference_revision", "conversion_source_revision_verified", "conversion_provenance", "quantized_by", "quantization", "total_size_bytes", "shards", "license", "metadata", "runtime_commit", "cpu_only_required", "gpu_layers", "runtime_download_allowed", "deployment_selection_allowed", "public_thinking_enabled", "private_reasoning_persisted", "configured_context_tokens", "max_output_tokens", "request_reasoning_budget_tokens", "deadline_seconds", "max_active_requests", "max_queued_requests", "qualification"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "model_id": {"const": "nextops-qwen3-8-flash-next-q8-0"},
+    "status": {"enum": ["provisioning_unselected", "verified_candidate_unselected"]},
+    "source_repository": {"const": "https://huggingface.co/ggml-org/Qwen3.8-Flash-Next-GGUF"},
+    "source_revision": {"const": "052beeaca7bec4a303e59cc7bc630c4f3a1b845d"},
+    "upstream_repository": {"const": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next"},
+    "upstream_reference_revision": {"const": "de4b8e4d43b917e7706784d8bb445c9af86a3540"},
+    "conversion_source_revision_verified": {"type": "boolean", "const": true},
+    "conversion_provenance": {"const": "pinned_quantizer_src_sha_and_resolved_official_upstream_revision"},
+    "quantized_by": {"const": "ggml-org"},
+    "quantization": {"const": "Q8_0"},
+    "total_size_bytes": {"type": "integer", "const": 162624826784},
+    "shards": {
+      "const": [
+        {"filename": "Qwen3.8-Flash-Next-Q8_0-00001-of-00002.gguf", "size_bytes": 10945440, "sha256": "dcee5ef77333d9dd4ff9b9bf569732b2e911a5bc8f2cd984e5b22c8b6af75b6a"},
+        {"filename": "Qwen3.8-Flash-Next-Q8_0-00002-of-00002.gguf", "size_bytes": 162613881344, "sha256": "aab73e5619b2448224cbfd15d4ee260fe8fedb686be51ac42304685cdd787d44"}
+      ]
+    },
+    "license": {
+      "const": {"identifier": "Qwen-Community-1.0", "source": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/de4b8e4d43b917e7706784d8bb445c9af86a3540/LICENSE", "use_scope": "private_isolated_development_trial", "customer_access_planned": true, "internal_use_exception_for_customer_deployment": false, "customer_deployment_review": "pending_applicability_and_organizational_approval"}
+    },
+    "metadata": {
+      "const": {"scope": "verified_first_shard_only", "architecture": "qwen4exp", "gguf_version": 3, "split_count": 2, "chat_template_sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041"}
+    },
+    "runtime_commit": {"const": "b29c606e28a01b1bc8c1351026a0fa6e616bf6c4"},
+    "cpu_only_required": {"type": "boolean", "const": true},
+    "gpu_layers": {"type": "integer", "const": 0},
+    "runtime_download_allowed": {"type": "boolean", "const": false},
+    "deployment_selection_allowed": {"type": "boolean", "const": false},
+    "public_thinking_enabled": {"type": "boolean", "const": false},
+    "private_reasoning_persisted": {"type": "boolean", "const": false},
+    "configured_context_tokens": {"type": "integer", "const": 16384},
+    "max_output_tokens": {"type": "integer", "const": 2048},
+    "request_reasoning_budget_tokens": {"type": "integer", "const": 128},
+    "deadline_seconds": {"type": "integer", "const": 120},
+    "max_active_requests": {"type": "integer", "const": 1},
+    "max_queued_requests": {"type": "integer", "const": 2},
+    "qualification": {
+      "type": "object", "additionalProperties": false,
+      "required": ["artifact_import", "actual_first_shard_metadata", "template_tokenization", "cpu_load", "standard_semantics", "thinking_semantics_privacy", "expanded_context_latency", "latency_resource_comparison", "matched_application", "wan_offline", "runtime_model_rollback", "customer_license_review"],
+      "properties": {
+        "artifact_import": {"$ref": "#/$defs/gate"},
+        "actual_first_shard_metadata": {"const": "passed"},
+        "template_tokenization": {"$ref": "#/$defs/gate"},
+        "cpu_load": {"$ref": "#/$defs/gate"},
+        "standard_semantics": {"$ref": "#/$defs/gate"},
+        "thinking_semantics_privacy": {"$ref": "#/$defs/gate"},
+        "expanded_context_latency": {"$ref": "#/$defs/gate"},
+        "latency_resource_comparison": {"$ref": "#/$defs/gate"},
+        "matched_application": {"$ref": "#/$defs/gate"},
+        "wan_offline": {"$ref": "#/$defs/gate"},
+        "runtime_model_rollback": {"$ref": "#/$defs/gate"},
+        "customer_license_review": {"const": "partial"}
+      }
+    }
+  },
+  "$defs": {"gate": {"enum": ["passed", "partial", "failed", "not_run"]}},
+  "allOf": [
+    {"if": {"properties": {"status": {"const": "verified_candidate_unselected"}}}, "then": {"properties": {"qualification": {"properties": {"artifact_import": {"const": "passed"}}}}}, "else": {"properties": {"qualification": {"properties": {"artifact_import": {"enum": ["partial", "failed", "not_run"]}}}}}}
+  ]
+}

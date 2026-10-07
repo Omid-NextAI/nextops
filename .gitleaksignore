@@ -4,3 +4,7 @@ d3268e3a93ef6f6bde4ad590c1c2bb4559d532d5:tests/unit/test_contracts_and_policy.py
 # Reviewed false positives: requirements prose about execution/verification outcomes.
 aca8ed11af2bf400b67e37c63c28f217866736c0:docs/requirements/archive/NEXTOPS_MASTER_PROMPT_v2.0.md:generic-api-key:463
 392b8c2f044fae62fe019a950e71ec3a9a6e34b2:docs/requirements/NEXTOPS_MASTER_PROMPT.md:generic-api-key:463
+
+# Reviewed false positive: public Git source_commit ec1ed32 in a comparison, not an API key.
+# Exact historical fingerprint only; renamed serving_commit avoids misleading future key wording.
+5f9aac868e875fec9d3fedef5884214d1745d19e:tests/unit/test_release_status.py:generic-api-key:74

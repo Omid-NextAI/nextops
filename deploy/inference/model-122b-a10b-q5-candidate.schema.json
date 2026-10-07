@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "model_id", "status", "source_repository", "source_revision", "upstream_repository", "upstream_reference_revision", "conversion_source_revision_verified", "conversion_provenance", "quantized_by", "quantization", "expected_architecture", "total_size_bytes", "shards", "license", "runtime_commit", "cpu_only_required", "gpu_layers", "runtime_download_allowed", "deployment_selection_allowed", "public_thinking_enabled", "private_reasoning_persisted", "configured_context_tokens", "max_output_tokens", "request_reasoning_budget_tokens", "deadline_seconds", "max_active_requests", "max_queued_requests", "qualification"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "model_id": {"const": "nextops-qwen3-5-122b-a10b-q5-k-m"},
+    "status": {"enum": ["provisioning_unselected", "verified_candidate_unselected"]},
+    "source_repository": {"const": "https://huggingface.co/bartowski/Qwen_Qwen3.5-122B-A10B-GGUF"},
+    "source_revision": {"const": "fec8b222a2eddc3346d6b6d7f7c85efea93cd6bf"},
+    "upstream_repository": {"const": "https://huggingface.co/Qwen/Qwen3.5-122B-A10B"},
+    "upstream_reference_revision": {"const": "dc4d348443bc740c68e2d77492492c11606384d5"},
+    "conversion_source_revision_verified": {"type": "boolean", "const": false},
+    "conversion_provenance": {"const": "quantizer_declares_base_model_only_exact_conversion_revision_unverified"},
+    "quantized_by": {"const": "bartowski"},
+    "quantization": {"const": "Q5_K_M"},
+    "expected_architecture": {"const": "qwen35moe"},
+    "total_size_bytes": {"type": "integer", "const": 90429454752},
+    "shards": {
+      "const": [
+        {"filename": "Qwen_Qwen3.5-122B-A10B-Q5_K_M/Qwen_Qwen3.5-122B-A10B-Q5_K_M-00001-of-00003.gguf", "size_bytes": 39714874144, "sha256": "d7d5aa3ef843ba3fe5ee27cdaebe17abd8a6a8a03a5c236db9bfe2fc6b88be2e"},
+        {"filename": "Qwen_Qwen3.5-122B-A10B-Q5_K_M/Qwen_Qwen3.5-122B-A10B-Q5_K_M-00002-of-00003.gguf", "size_bytes": 39467759904, "sha256": "9289c968c67237f81f1ffae183cd513b2bc703cfeb47fa4ec7006898622aefca"},
+        {"filename": "Qwen_Qwen3.5-122B-A10B-Q5_K_M/Qwen_Qwen3.5-122B-A10B-Q5_K_M-00003-of-00003.gguf", "size_bytes": 11246820704, "sha256": "452168a4606657975060e78c59cf2a7eeed7d0774d2ff65aa4aa3eba742965ea"}
+      ]
+    },
+    "license": {
+      "const": {"identifier": "Apache-2.0", "source": "https://huggingface.co/Qwen/Qwen3.5-122B-A10B/blob/dc4d348443bc740c68e2d77492492c11606384d5/LICENSE", "size_bytes": 11544, "sha256": "bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a", "scope": "pinned_upstream_weight_license_and_quantizer_declared_license_metadata"}
+    },
+    "runtime_commit": {"const": "b29c606e28a01b1bc8c1351026a0fa6e616bf6c4"},
+    "cpu_only_required": {"type": "boolean", "const": true},
+    "gpu_layers": {"type": "integer", "const": 0},
+    "runtime_download_allowed": {"type": "boolean", "const": false},
+    "deployment_selection_allowed": {"type": "boolean", "const": false},
+    "public_thinking_enabled": {"type": "boolean", "const": false},
+    "private_reasoning_persisted": {"type": "boolean", "const": false},
+    "configured_context_tokens": {"type": "integer", "const": 16384},
+    "max_output_tokens": {"type": "integer", "const": 2048},
+    "request_reasoning_budget_tokens": {"type": "integer", "const": 128},
+    "deadline_seconds": {"type": "integer", "const": 120},
+    "max_active_requests": {"type": "integer", "const": 1},
+    "max_queued_requests": {"type": "integer", "const": 2},
+    "qualification": {
+      "type": "object", "additionalProperties": false,
+      "required": ["artifact_import", "actual_gguf_metadata", "template_tokenization", "cpu_load", "standard_semantics", "thinking_semantics_privacy", "expanded_context_latency", "latency_resource_comparison", "matched_application", "wan_offline", "runtime_model_rollback", "permissive_license_metadata_review"],
+      "properties": {
+        "artifact_import": {"$ref": "#/$defs/gate"},
+        "actual_gguf_metadata": {"$ref": "#/$defs/gate"},
+        "template_tokenization": {"$ref": "#/$defs/gate"},
+        "cpu_load": {"$ref": "#/$defs/gate"},
+        "standard_semantics": {"$ref": "#/$defs/gate"},
+        "thinking_semantics_privacy": {"$ref": "#/$defs/gate"},
+        "expanded_context_latency": {"$ref": "#/$defs/gate"},
+        "latency_resource_comparison": {"$ref": "#/$defs/gate"},
+        "matched_application": {"$ref": "#/$defs/gate"},
+        "wan_offline": {"$ref": "#/$defs/gate"},
+        "runtime_model_rollback": {"$ref": "#/$defs/gate"},
+        "permissive_license_metadata_review": {"const": "passed"}
+      }
+    }
+  },
+  "$defs": {"gate": {"enum": ["passed", "partial", "failed", "not_run"]}},
+  "allOf": [
+    {"if": {"properties": {"status": {"const": "verified_candidate_unselected"}}}, "then": {"properties": {"qualification": {"properties": {"artifact_import": {"const": "passed"}}}}}, "else": {"properties": {"qualification": {"properties": {"artifact_import": {"enum": ["partial", "failed", "not_run"]}}}}}}
+  ]
+}

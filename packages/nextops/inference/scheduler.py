@@ -42,6 +42,31 @@ class BoundedInferenceService:
         self._state_lock = asyncio.Lock()
         self._active_requests = 0
         self._queued_requests = 0
+        self._generations: set[asyncio.Task[InferenceResult]] = set()
+        self._draining: set[asyncio.Task[InferenceResult]] = set()
+
+    def _finished(self, task: asyncio.Task[InferenceResult]) -> None:
+        # All counters are event-loop owned. This transition contains no await:
+        # cancellation cannot interrupt ownership release or split admission counts.
+        self._generations.discard(task)
+        self._draining.discard(task)
+        self._active_requests -= 1
+        self._semaphore.release()
+        if not task.cancelled():
+            task.exception()  # Retrieve errors even after the caller has gone away.
+
+    async def _generate_owned(
+        self, request: InferenceRequest, queued_at: float, started: float
+    ) -> InferenceResult:
+        generation = await self._provider.generate(request)
+        return InferenceResult(
+            **generation.model_dump(),
+            request_id=request.request_id,
+            correlation_id=request.correlation_id,
+            locale=request.locale,
+            queue_ms=elapsed_milliseconds(queued_at, started),
+            cpu_only_required=True,
+        )
 
     async def generate(self, request: InferenceRequest) -> InferenceResult:
         queued_at = monotonic()
@@ -59,11 +84,9 @@ class BoundedInferenceService:
         acquired = False
         try:
             try:
-                await asyncio.wait_for(
-                    self._semaphore.acquire(),
-                    timeout=self._limits.queue_timeout_seconds,
-                )
-                acquired = True
+                async with asyncio.timeout(self._limits.queue_timeout_seconds):
+                    await self._semaphore.acquire()
+                    acquired = True
             except TimeoutError as error:
                 raise ApplicationError(
                     ErrorCode.TIMEOUT,
@@ -71,16 +94,19 @@ class BoundedInferenceService:
                     retryable=True,
                 ) from error
             finally:
-                async with self._state_lock:
-                    self._queued_requests -= 1
-
-            async with self._state_lock:
-                self._active_requests += 1
+                # Atomic queued -> active transfer (no cancellation checkpoint).
+                self._queued_requests -= 1
+                if acquired:
+                    self._active_requests += 1
             started = monotonic()
+            generation_task = asyncio.create_task(self._generate_owned(request, queued_at, started))
+            self._generations.add(generation_task)
+            generation_task.add_done_callback(self._finished)
+            acquired = False  # The retained task now owns the semaphore, not this caller.
             try:
                 try:
-                    generation = await asyncio.wait_for(
-                        self._provider.generate(request),
+                    return await asyncio.wait_for(
+                        asyncio.shield(generation_task),
                         timeout=self._limits.provider_timeout_seconds,
                     )
                 except TimeoutError as error:
@@ -89,20 +115,13 @@ class BoundedInferenceService:
                         "inference.provider_timeout",
                         retryable=True,
                     ) from error
-            finally:
-                async with self._state_lock:
-                    self._active_requests -= 1
-
-            return InferenceResult(
-                **generation.model_dump(),
-                request_id=request.request_id,
-                correlation_id=request.correlation_id,
-                locale=request.locale,
-                queue_ms=elapsed_milliseconds(queued_at, started),
-                cpu_only_required=True,
-            )
+            except (ApplicationError, asyncio.CancelledError):
+                if not generation_task.done():
+                    self._draining.add(generation_task)
+                raise
         finally:
             if acquired:
+                self._active_requests -= 1
                 self._semaphore.release()
 
     async def readiness(self) -> InferenceReadiness:
@@ -121,7 +140,8 @@ class BoundedInferenceService:
             active = self._active_requests
             queued = self._queued_requests
         return InferenceReadiness(
-            **provider_readiness.model_dump(),
+            **provider_readiness.model_dump(exclude={"state"}),
+            state=ReadinessState.DEGRADED if self._draining else provider_readiness.state,
             max_active_requests=1,
             max_queued_requests=2,
             active_requests=active,
