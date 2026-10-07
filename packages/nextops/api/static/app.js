@@ -127,6 +127,11 @@ const translations = {
   }
 };
 
+const sessionPreference = {
+  read() { try { return sessionStorage.getItem("nextops-session") || ""; } catch { return ""; } },
+  write(token) { try { sessionStorage.setItem("nextops-session", token); } catch { /* Current-tab memory remains usable. */ } },
+  clear() { try { sessionStorage.removeItem("nextops-session"); } catch { /* No persisted token is available. */ } }
+};
 const state = {
   language: (() => { try { return localStorage.getItem("nextops-language") === "fa" ? "fa" : "en"; } catch { return "en"; } })(),
   answerLocale: "en",
@@ -136,18 +141,21 @@ const state = {
   lastEvidence: null,
   history: [],
   conversationsEnabled: false,
+  savedChatsRequest: 0,
   thinkingEnabled: false,
   conversationId: null,
   pendingMessage: null,
   busy: false,
   epoch: 0,
+  // Session capabilities survive chat resets, but not logout or re-authentication.
+  sessionEpoch: 0,
   actor: null,
   users: [],
   usersOffset: 0,
   usersNext: null,
   usersBusy: false,
   passwordUser: null,
-  token: sessionStorage.getItem("nextops-session") || ""
+  token: sessionPreference.read()
 };
 const byId = id => document.getElementById(id);
 Object.assign(translations.en, {
@@ -240,32 +248,32 @@ function userError(error) {
 
 async function refreshUsers(offset = state.usersOffset) {
   if (state.usersBusy) return false;
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
   setUsersBusy(true); byId("usersError").textContent = "";
   byId("usersStatus").textContent = translations[state.language].usersLoading;
   try {
     const page = await api(`/api/v1/users?offset=${offset}`);
-    if (epoch !== state.epoch) return false;
+    if (epoch !== state.sessionEpoch) return false;
     state.users = page.users; state.usersOffset = offset; state.usersNext = page.next_offset;
     closeUserPassword(); renderUsers();
     byId("usersStatus").textContent = page.users.length ? "" : translations[state.language].usersEmpty;
     return true;
   } catch (error) {
-    if (epoch === state.epoch && state.token) { byId("usersStatus").textContent = ""; userError(error); }
+    if (epoch === state.sessionEpoch && state.token) { byId("usersStatus").textContent = ""; userError(error); }
     return false;
-  } finally { if (epoch === state.epoch) setUsersBusy(false); }
+  } finally { if (epoch === state.sessionEpoch) setUsersBusy(false); }
 }
 
 async function userMutation(path, method, payload) {
   if (state.usersBusy) return;
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
   byId("userCreatePassword").value = ""; byId("userResetPassword").value = "";
   byId("userResetConfirm").checked = false;
   setUsersBusy(true); byId("usersError").textContent = "";
   byId("usersStatus").textContent = translations[state.language].usersSaving;
   try {
     await api(path, { method, body: JSON.stringify(payload) });
-    if (epoch !== state.epoch) return;
+    if (epoch !== state.sessionEpoch) return;
     closeUserPassword(); byId("userCreateForm").reset();
     setUsersBusy(false);
     if (await refreshUsers()) {
@@ -273,8 +281,8 @@ async function userMutation(path, method, payload) {
       byId(path === "/api/v1/users" ? "userCreateName" : "usersRefresh").focus();
     }
   } catch (error) {
-    if (epoch === state.epoch && state.token) { byId("usersStatus").textContent = ""; userError(error); }
-  } finally { if (epoch === state.epoch) setUsersBusy(false); }
+    if (epoch === state.sessionEpoch && state.token) { byId("usersStatus").textContent = ""; userError(error); }
+  } finally { if (epoch === state.sessionEpoch) setUsersBusy(false); }
 }
 
 byId("usersButton").addEventListener("click", () => {
@@ -467,7 +475,7 @@ function setBusy(busy) {
     node.disabled = busy || (node.id === "incidentTarget" && !state.incidentTargets.length);
   });
   byId("askButton").toggleAttribute("aria-busy", busy);
-  byId("monitoringSource").disabled = busy || !state.sourceCatalog.length;
+  byId("monitoringSource").disabled = busy;
   byId("monitoringSourceTarget").disabled = busy || !byId("monitoringSource").value;
   byId("askButton").querySelector("span").textContent = translations[state.language][busy ? "working" : "askAssistant"];
 }
@@ -609,6 +617,7 @@ function applyLanguage(language) {
 
 async function api(path, options = {}) {
   const token = state.token;
+  const sessionEpoch = state.sessionEpoch;
   const headers = { "Content-Type": "application/json", ...(options.headers || {}) };
   if (state.token) headers.Authorization = `Bearer ${state.token}`;
   const response = await fetch(path, { ...options, headers, cache: "no-store" });
@@ -618,7 +627,7 @@ async function api(path, options = {}) {
     const error = new Error(body?.error?.message_key || "request.failed");
     error.status = response.status;
     error.code = body?.error?.code || "internal_error";
-    if (response.status === 401 && token && state.token === token) showLogin(translations[state.language].sessionExpired);
+    if (response.status === 401 && token && state.token === token && sessionEpoch === state.sessionEpoch) showLogin(translations[state.language].sessionExpired);
     throw error;
   }
   return body;
@@ -630,6 +639,7 @@ function showLogin(message = "") {
   window.NextOpsMotion?.reset();
   byId("destinationView").classList.add("hidden");
   state.epoch += 1;
+  state.sessionEpoch += 1;
   state.token = "";
   state.actor = null; state.users = []; state.usersOffset = 0; state.usersNext = null;
   state.usersBusy = false; closeUserPassword(); byId("userCreateForm").reset();
@@ -639,13 +649,15 @@ function showLogin(message = "") {
   state.conversationsEnabled = false;
   state.thinkingEnabled = false;
   state.sourceCatalog = [];
+  state.incidentTargets = [];
+  byId("incidentTarget").replaceChildren();
   byId("monitoringSource").replaceChildren();
   byId("monitoringSourceTarget").replaceChildren();
   byId("sourceSelectionField").classList.add("hidden");
   byId("savedChatsList").replaceChildren();
   byId("savedChatsPanel").classList.add("hidden");
   byId("thinkingField").classList.add("hidden");
-  sessionStorage.removeItem("nextops-session");
+  sessionPreference.clear();
   byId("loginView").classList.remove("hidden");
   byId("workspaceView").classList.add("hidden");
   byId("logoutButton").classList.add("hidden");
@@ -682,9 +694,9 @@ function updateEvidenceBrief() {
 }
 
 async function showWorkspace() {
-  const identityEpoch = state.epoch;
+  const identityEpoch = state.sessionEpoch;
   const actor = await api("/api/v1/me");
-  if (identityEpoch !== state.epoch || !state.token) return;
+  if (identityEpoch !== state.sessionEpoch || !state.token) return;
   state.actor = actor;
   window.NextOpsView?.session(actor);
   byId("usersButton").classList.toggle("hidden", !actor.roles?.includes("admin"));
@@ -696,10 +708,10 @@ async function showWorkspace() {
   checkMonitoring();
   loadIncidentTargets();
   loadSourceCatalog();
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
   try {
     const config = await api("/api/v1/conversations/config");
-    if (epoch !== state.epoch) return;
+    if (epoch !== state.sessionEpoch) return;
     state.conversationsEnabled = config.enabled === true;
     state.thinkingEnabled = config.thinking_enabled === true;
     window.NextOpsCapabilities?.conversation(config);
@@ -710,14 +722,15 @@ async function showWorkspace() {
       await refreshSavedChats();
     }
   } catch (error) {
-    if (epoch === state.epoch && error.status !== 401) setContextNotice("savedChatsUnavailable");
+    if (epoch === state.sessionEpoch && error.status !== 401) setContextNotice("savedChatsUnavailable");
   }
 }
 
 async function refreshSavedChats() {
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
+  const request = ++state.savedChatsRequest;
   const conversations = await api("/api/v1/conversations");
-  if (epoch !== state.epoch) return;
+  if (epoch !== state.sessionEpoch || request !== state.savedChatsRequest) return;
   byId("savedChatsList").replaceChildren();
   conversations.forEach(chat => {
     const button = document.createElement("button");
@@ -813,7 +826,7 @@ function populateSourceTargets() {
   document.querySelector('label[for="monitoringSourceTarget"]').classList.toggle("hidden", !source);
 }
 async function loadSourceCatalog() {
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
   const select = byId("monitoringSource");
   select.replaceChildren();
   const primary = document.createElement("option");
@@ -823,7 +836,7 @@ async function loadSourceCatalog() {
   select.append(primary);
   try {
     const catalog = await api("/api/v1/monitoring/sources");
-    if (epoch !== state.epoch || !state.token) return;
+    if (epoch !== state.sessionEpoch || !state.token) return;
     state.sourceCatalog = catalog.sources || [];
     state.sourceCatalog.forEach(source => {
       const option = document.createElement("option");
@@ -834,7 +847,7 @@ async function loadSourceCatalog() {
     });
     byId("sourceCatalogNotice").dataset.i18n = "approvedCatalogHelp";
   } catch (error) {
-    if (epoch !== state.epoch || !state.token) return;
+    if (epoch !== state.sessionEpoch || !state.token) return;
     state.sourceCatalog = [];
     byId("sourceCatalogNotice").dataset.i18n = "sourceCatalogUnavailable";
   }
@@ -864,13 +877,13 @@ document.addEventListener("nextops:inspect-source", event => {
 });
 
 async function loadIncidentTargets() {
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
   const select = byId("incidentTarget");
   select.disabled = true;
   select.replaceChildren();
   try {
     const response = await api("/api/v1/incidents/targets");
-    if (epoch !== state.epoch || !state.token) return;
+    if (epoch !== state.sessionEpoch || !state.token) return;
     state.incidentTargets = response.targets || [];
     state.incidentTargets.forEach(targetId => {
       const option = document.createElement("option");
@@ -879,18 +892,19 @@ async function loadIncidentTargets() {
       option.dir = "ltr";
       select.append(option);
     });
-    select.disabled = state.incidentTargets.length === 0;
+    select.disabled = state.busy || state.incidentTargets.length === 0;
   } catch (_) {
+    if (epoch !== state.sessionEpoch || !state.token) return;
     state.incidentTargets = [];
   }
 }
 
 async function checkAi() {
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
   const pill = byId("aiStatus");
   try {
     const ready = await api("/api/v1/assistant/ready");
-    if (epoch !== state.epoch || !state.token) return;
+    if (epoch !== state.sessionEpoch || !state.token) return;
     window.NextOpsView?.health("ai", ready);
     window.NextOpsCapabilities?.ready(ready);
     const ok = ready.state === "ready";
@@ -899,7 +913,7 @@ async function checkAi() {
     pill.querySelector("span").dataset.i18n = statusKey;
     pill.querySelector("span").textContent = translations[state.language][statusKey];
   } catch (_) {
-    if (epoch !== state.epoch || !state.token) return;
+    if (epoch !== state.sessionEpoch || !state.token) return;
     window.NextOpsView?.health("ai", null);
     window.NextOpsCapabilities?.ready(null);
     pill.className = "status-pill failed";
@@ -909,11 +923,11 @@ async function checkAi() {
 }
 
 async function checkMonitoring() {
-  const epoch = state.epoch;
+  const epoch = state.sessionEpoch;
   const pill = byId("monitoringStatus");
   try {
     const summary = await api("/api/v1/monitoring/summary");
-    if (epoch !== state.epoch || !state.token || byId("monitoringSource").value) return;
+    if (epoch !== state.sessionEpoch || !state.token || byId("monitoringSource").value) return;
     window.NextOpsView?.health("connector", summary);
     const ok = summary.source === "zabbix";
     const statusKey = ok ? "monitoringReady" : "monitoringUnavailable";
@@ -921,7 +935,7 @@ async function checkMonitoring() {
     pill.querySelector("span").dataset.i18n = statusKey;
     pill.querySelector("span").textContent = translations[state.language][statusKey];
   } catch (_) {
-    if (epoch !== state.epoch || !state.token || byId("monitoringSource").value) return;
+    if (epoch !== state.sessionEpoch || !state.token || byId("monitoringSource").value) return;
     window.NextOpsView?.health("connector", null);
     pill.className = "status-pill failed";
     pill.querySelector("span").dataset.i18n = "monitoringUnavailable";
@@ -1171,6 +1185,7 @@ byId("newChatButton").addEventListener("click", () => {
   if (state.busy) return;
   state.epoch += 1;
   clearConversation();
+  window.NextOpsView?.navigate("ask", false);
   byId("question").focus();
 });
 document.querySelectorAll("[data-starter]").forEach(button => button.addEventListener("click", () => {
@@ -1202,8 +1217,9 @@ byId("loginForm").addEventListener("submit", async event => {
   button.setAttribute("aria-busy", "true");
   try {
     const result = await api("/api/v1/login", { method: "POST", body: JSON.stringify({ username: byId("username").value, password: byId("password").value }) });
+    state.sessionEpoch += 1;
     state.token = result.session.access_token;
-    sessionStorage.setItem("nextops-session", state.token);
+    sessionPreference.write(state.token);
     byId("password").value = "";
     await showWorkspace();
   } catch (error) {
@@ -1415,4 +1431,8 @@ Object.assign(translations.fa, {
 applyLanguage(state.language);
 installBrandIcon();
 setAnswerMode(state.answerMode);
-if (state.token) showWorkspace().catch(() => showLogin(translations[state.language].sessionExpired));
+byId("loginForm").querySelector("button[type=submit]").disabled = false;
+if (state.token) {
+  const sessionEpoch = state.sessionEpoch;
+  showWorkspace().catch(() => { if (sessionEpoch === state.sessionEpoch) showLogin(translations[state.language].sessionExpired); });
+}

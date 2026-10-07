@@ -28,11 +28,15 @@
       selectedResponse:"مشاهدات پاسخ انتخاب‌شده", archivedResponse:"مشاهدات پاسخ پیشین؛ بدون گردآوری تازه", selectedContextHelp:"این مشاهده از پاسخ مجاز انتخاب‌شده است؛ علت یا مجوز تغییر را اثبات نمی‌کند."
     }
   };
+  Object.assign(copy.en, {systemLoad:"System load",memoryAvailable:"Memory available",filesystemCapacity:"Filesystem capacity",journalEntry:"Journal entry",configuredResolver:"Configured resolver",recordedRoute:"Recorded route",listeningSocket:"Listening socket"});
+  Object.assign(copy.fa, {systemLoad:"بار سامانه",memoryAvailable:"حافظهٔ در دسترس",filesystemCapacity:"ظرفیت فایل‌سیستم",journalEntry:"رکورد ژورنال",configuredResolver:"حل‌کنندهٔ نام پیکربندی‌شده",recordedRoute:"مسیر ثبت‌شده",listeningSocket:"سوکت در حال شنود"});
   let locale = "en", authenticated = false, entries = [], selected = -1, last = null, catalog = [], model = "", returnFocus = null, selectedCard = null, requestFailed = false, connectorAvailable = null;
   let turnEvidence = new WeakMap(), restoreNavFocus = true, destination = "investigations";
   const freshnessWindow = 300000;
   let freshnessTimer = null, pageActive = true;
   const t = key => copy[locale][key] || key;
+  const entryTitle = entry => entry.titleKey ? t(entry.titleKey) : entry.title;
+  const entryMetric = entry => entry.metricKey ? t(entry.metricKey) : entry.metric;
   const safe = value => String(value ?? "").slice(0, 6000).replace(/\b(Bearer\s+)\S+/gi,"$1[redacted]").replace(/((?:password|passwd|secret|api[_-]?token|authorization)\s*[:=]\s*)[^\s,;]+/gi,"$1[redacted]");
   function node(tag, text, className) { const n = document.createElement(tag); if (text !== undefined) n.textContent = safe(text); if (className) n.className = className; return n; }
   function icon(name) { const n = document.createElementNS("http://www.w3.org/2000/svg", "svg"); n.setAttribute("class", "ui-icon"); n.setAttribute("aria-hidden", "true"); const use = document.createElementNS(n.namespaceURI,"use"); use.setAttribute("href",`#i-${name}`); n.append(use); return n; }
@@ -71,11 +75,11 @@
       const z=evidence.zabbix, l=evidence.linux;
       out.push(...(z.events || []).map(e => ({...common,title:e.name,value:e.state,observed:e.occurred_at,severity:e.severity,raw:{event_id:e.event_id,name:e.name,state:e.state,severity:e.severity,occurred_at:e.occurred_at}})));
       const linux={source:`Linux ${l.collector_version}`,host:l.hostname,scope:`Linux / ${evidence.target_id || l.target_id}`,collected:l.collected_at,observed:l.collected_at,partial:!!l.is_partial};
-      const system=[{title:"System load",metric:"load_1m / load_5m / load_15m",value:`${l.load_1m} / ${l.load_5m} / ${l.load_15m}`,raw:{load_1m:l.load_1m,load_5m:l.load_5m,load_15m:l.load_15m}},{title:"Memory available",metric:"memory_available_bytes",value:`${(l.memory_available_bytes/1024**3).toFixed(1)} GiB`,raw:{memory_available_bytes:l.memory_available_bytes,memory_total_bytes:l.memory_total_bytes}}];
+      const system=[{title:"System load",titleKey:"systemLoad",metric:"load_1m / load_5m / load_15m",value:`${l.load_1m} / ${l.load_5m} / ${l.load_15m}`,raw:{load_1m:l.load_1m,load_5m:l.load_5m,load_15m:l.load_15m}},{title:"Memory available",titleKey:"memoryAvailable",metric:"memory_available_bytes",value:`${(l.memory_available_bytes/1024**3).toFixed(1)} GiB`,raw:{memory_available_bytes:l.memory_available_bytes,memory_total_bytes:l.memory_total_bytes}}];
       const services=(l.services || []).map(s => ({title:s.unit,metric:"systemd",value:`${s.active_state} / ${s.sub_state}`,raw:{unit:s.unit,active_state:s.active_state,sub_state:s.sub_state,load_state:s.load_state}}));
-      const files=(l.filesystems || []).map(f => ({title:f.path,metric:"Filesystem capacity",value:`${f.used_percent}%`,raw:{path:f.path,used_percent:f.used_percent,available_bytes:f.available_bytes}}));
-      const journals=(l.journal || []).map(j => ({title:j.unit,metric:"Journal entry",value:j.message,observed:j.observed_at,raw:{unit:j.unit,message:j.message,observed_at:j.observed_at}}));
-      const network=[...(l.nameservers || []).map(n=>({title:n,metric:"Configured resolver",value:n,raw:{resolver:n}})),...(l.routes || []).map(r=>({title:r.destination,metric:"Recorded route",value:`${r.gateway} · ${r.interface}`,raw:{destination:r.destination,gateway:r.gateway,interface:r.interface}})),...(l.listening_sockets || []).map(s=>({title:`${s.address}:${s.port}`,metric:"Listening socket",value:s.family,raw:{address:s.address,port:s.port,family:s.family}}))];
+      const files=(l.filesystems || []).map(f => ({title:f.path,metric:"Filesystem capacity",metricKey:"filesystemCapacity",value:`${f.used_percent}%`,raw:{path:f.path,used_percent:f.used_percent,available_bytes:f.available_bytes}}));
+      const journals=(l.journal || []).map(j => ({title:j.unit,metric:"Journal entry",metricKey:"journalEntry",value:j.message,observed:j.observed_at,raw:{unit:j.unit,message:j.message,observed_at:j.observed_at}}));
+      const network=[...(l.nameservers || []).map(n=>({title:n,metric:"Configured resolver",metricKey:"configuredResolver",value:n,raw:{resolver:n}})),...(l.routes || []).map(r=>({title:r.destination,metric:"Recorded route",metricKey:"recordedRoute",value:`${r.gateway} · ${r.interface}`,raw:{destination:r.destination,gateway:r.gateway,interface:r.interface}})),...(l.listening_sockets || []).map(s=>({title:`${s.address}:${s.port}`,metric:"Listening socket",metricKey:"listeningSocket",value:s.family,raw:{address:s.address,port:s.port,family:s.family}}))];
       let selectedLinux=[...system,...services,...files,...journals,...network];
       if (focus==="file_listing") return []; // Do not replace an unavailable file listing with a data dump.
       if (focus==="filesystems") {out=[]; selectedLinux=files;}
@@ -94,14 +98,18 @@
     return out.map((item,i)=>({...item,id:String(i),category:Number.isInteger(item.severity)?"problems":item.source.startsWith("Zabbix")?"metrics":"diagnostics",raw:Object.fromEntries(Object.entries({...item.raw,source:item.source,host:item.host,scope:item.scope,collected_at:item.collected}).filter(([,value])=>value!==undefined).map(([key,value])=>[key,typeof value==="string"?safe(value):value]))}));
   }
   function renderRows(card) {
-    const list=card.querySelector("[data-evidence-rows]"); list.replaceChildren();
+    const list=card.querySelector("[data-evidence-rows]");
+    const origin=list.contains(returnFocus)?{index:returnFocus.dataset.evidenceIndex,filter:returnFocus.dataset.evidenceFilter}:null;
+    list.replaceChildren();
+    const observations=turnEvidence.get(card) || entries, selectedIndex=card===selectedCard?selected:-1;
     const labels=locale==="fa"?{all:"همهٔ مشاهدات",problems:"مشکلات",metrics:"سنجه‌ها",empty:"در این پاسخ مشاهده‌ای برای این دسته دریافت نشد؛ این به‌معنی نبود مشکل نیست."}:{all:"All observations",problems:"Problems",metrics:"Metrics",empty:"No observations in this category were returned. This does not prove there are no problems."};
     const filter=card.dataset.evidenceFilter || "all";
-    if(entries.length){const group=node("div",undefined,"evidence-filters");group.setAttribute("role","group");group.setAttribute("aria-label",t("evidence"));["all","problems","metrics"].forEach(kind=>{const count=entries.filter(e=>kind==="all"||e.category===kind).length;const b=node("button",`${labels[kind]} (${count})`,"quiet-button");b.type="button";b.dataset.evidenceFilter=kind;b.setAttribute("aria-pressed",String(filter===kind));b.addEventListener("click",()=>{activateTurn(b);card.dataset.evidenceFilter=kind;renderRows(card);card.querySelector(`[data-evidence-filter="${kind}"]`).focus();});group.append(b);});list.append(group);}
-    const rows=entries.map((entry,i)=>({entry,i})).filter(({entry})=>filter==="all"||entry.category===filter);
-    rows.forEach(({entry,i})=>{ const b=node("button",undefined,"evidence-row"); b.type="button"; b.dataset.evidenceIndex=String(i); b.setAttribute("aria-current",String(i===selected)); const n=node("span",String(i+1),"evidence-number"); const label=node("span",`${entry.title} · ${entry.value}`,"evidence-label"); label.dir="auto"; const tm=node("time",time(entry.observed || entry.collected)); if(entry.observed) tm.dateTime=entry.observed; b.append(n,label,tm); list.append(b); });
-    if(entries.length&&!rows.length)list.append(node("p",labels.empty,"rail-help"));
-    card.querySelector('[data-followup="evidence"]').textContent=`${t("reviewEvidence")} (${entries.length})`;
+    if(observations.length){const group=node("div",undefined,"evidence-filters");group.setAttribute("role","group");group.setAttribute("aria-label",t("evidence"));["all","problems","metrics"].forEach(kind=>{const count=observations.filter(e=>kind==="all"||e.category===kind).length;const b=node("button",`${labels[kind]} (${count})`,"quiet-button");b.type="button";b.dataset.evidenceFilter=kind;b.setAttribute("aria-pressed",String(filter===kind));b.addEventListener("click",()=>{const changed=activateTurn(b);card.dataset.evidenceFilter=kind;renderRows(card);const control=card.querySelector(`[data-evidence-filter="${kind}"]`);returnFocus=control;if(changed){if(selected>=0)select(selected);else showEmpty();}control.focus();});group.append(b);});list.append(group);}
+    const rows=observations.map((entry,i)=>({entry,i})).filter(({entry})=>filter==="all"||entry.category===filter);
+    rows.forEach(({entry,i})=>{ const b=node("button",undefined,"evidence-row"); b.type="button"; b.dataset.evidenceIndex=String(i); b.setAttribute("aria-current",String(i===selectedIndex)); const n=node("span",String(i+1),"evidence-number"); const label=node("span",`${entryTitle(entry)} · ${entry.value}`,"evidence-label"); label.dir="auto"; const tm=node("time",time(entry.observed || entry.collected)); if(entry.observed) tm.dateTime=entry.observed; b.append(n,label,tm); list.append(b); });
+    if(observations.length&&!rows.length)list.append(node("p",labels.empty,"rail-help"));
+    card.querySelector('[data-followup="evidence"]').textContent=`${t("reviewEvidence")} (${observations.length})`;
+    if(origin)returnFocus=list.querySelector(origin.index!==undefined?`[data-evidence-index="${origin.index}"]`:`[data-evidence-filter="${origin.filter}"]`) || card.querySelector('[data-followup="evidence"]');
   }
   function renderFindings(card, evidence, incident) {
     // The API has no structured findings contract. Do not fill the view with invented
@@ -114,21 +122,21 @@
     if(!authenticated || !entries[index]) return;
     selected=index; returnFocus=origin || returnFocus;
     const entry=entries[index], state=status(entry), root=el("inspectorContent"); root.replaceChildren();
-    const card=node("section",undefined,"evidence-detail-card"); const badge=node("span",t(state),`freshness ${state}`); if(state==="stale"&&!entry.stale) badge.title=t("older"); card.append(badge,node("h3",entry.title));
+    const card=node("section",undefined,"evidence-detail-card"); const badge=node("span",t(state),`freshness ${state}`); if(state==="stale"&&!entry.stale) badge.title=t("older"); card.append(badge,node("h3",entryTitle(entry)));
     const announcement=node("span",undefined,"sr-only");announcement.id="evidenceFreshnessStatus";announcement.setAttribute("role","status");announcement.setAttribute("aria-live","polite");announcement.setAttribute("aria-atomic","true");card.append(announcement);
-    const dl=node("dl"); [["source",entry.source],["observed",time(entry.observed)],["collected",time(entry.collected)],["host",entry.host],["metric",entry.metric || t("notReported")],["value",entry.value],["threshold",t("notReported")],["severity",Number.isInteger(entry.severity)?String(entry.severity):t("notReported")],["freshness",freshnessLabel(entry)],["scope",entry.scope]].forEach(([key,value])=>{ const dt=node("dt",t(key)),dd=node("dd"); const b=node("bdi",value); b.dir=["host","metric","scope"].includes(key)?"ltr":"auto"; if(key==="freshness")b.dataset.evidenceFreshness=""; dd.append(b); dl.append(dt,dd); }); card.append(dl); root.append(card);
+    const dl=node("dl"); [["source",entry.source],["observed",time(entry.observed)],["collected",time(entry.collected)],["host",entry.host],["metric",entryMetric(entry) || t("notReported")],["value",entry.value],["threshold",t("notReported")],["severity",Number.isInteger(entry.severity)?String(entry.severity):t("notReported")],["freshness",freshnessLabel(entry)],["scope",entry.scope]].forEach(([key,value])=>{ const dt=node("dt",t(key)),dd=node("dd"); const b=node("bdi",value); b.dir=["host","scope"].includes(key)||(key==="metric"&&!entry.metricKey)?"ltr":"auto"; if(key==="freshness")b.dataset.evidenceFreshness=""; dd.append(b); dl.append(dt,dd); }); card.append(dl); root.append(card);
     const raw=el("panel-raw"), actions=node("div",undefined,"raw-actions"), button=node("button",t("copyRaw"),"quiet-button"); button.type="button"; button.id="copyRaw"; button.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(JSON.stringify(entry.raw,null,2));text("rawCopyStatus",t("copied"));}catch(_){text("rawCopyStatus",t("copyFailed"));}}); actions.append(node("span",t("rawNotice")),button); const pre=node("pre"), code=node("code");pre.dir="ltr";pre.tabIndex=0;pre.setAttribute("role","region");pre.setAttribute("aria-label",t("raw"));
     // Values were already bounded/redacted by adapt(). Do not clip the serialized object a
     // second time: that produces invalid JSON and makes the displayed data differ from Copy.
     code.textContent=JSON.stringify(entry.raw,null,2);pre.append(code); const msg=node("p",undefined,"rail-help");msg.id="rawCopyStatus";msg.setAttribute("role","status");raw.replaceChildren(actions,pre,msg);
-    const related=el("panel-related");related.replaceChildren();entries.forEach((item,i)=>{if(i!==index&&item.host===entry.host){const b=node("button",item.title,"evidence-row");b.type="button";b.dataset.evidenceIndex=String(i);related.append(b);}});if(!related.children.length)related.append(node("p",t("noRelated")));
+    const related=el("panel-related");related.replaceChildren();entries.forEach((item,i)=>{if(i!==index&&item.host===entry.host){const b=node("button",entryTitle(item),"evidence-row");b.type="button";b.dataset.evidenceIndex=String(i);related.append(b);}});if(!related.children.length)related.append(node("p",t("noRelated")));
     el("panel-context").replaceChildren(node("p",t("selectedContextHelp")),node("p",selectedCard===el("resultCard")?t("selectedResponse"):t("archivedResponse")),node("p",`${t("scope")}: ${safe(entry.scope)}`),node("p",`${t("collected")}: ${time(entry.collected)}`));
     const chartPanel=el("panel-visualize");chartPanel.replaceChildren();
     if(entry.series?.length>=2){
       const points=[...entry.series].sort((a,b)=>Date.parse(a.time)-Date.parse(b.time));
       const min=Math.min(...points.map(p=>p.value)),max=Math.max(...points.map(p=>p.value)),start=Date.parse(points[0].time),end=Date.parse(points.at(-1).time);
-      if(end>start){const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("viewBox","0 0 320 130");svg.setAttribute("class","evidence-chart");svg.setAttribute("role","img");svg.setAttribute("aria-label",`${entry.title} · ${time(points[0].time)} — ${time(points.at(-1).time)}`);const line=document.createElementNS(svg.namespaceURI,"polyline");line.setAttribute("points",points.map(p=>`${10+(Date.parse(p.time)-start)/(end-start)*300},${115-(p.value-min)/(max-min || 1)*100}`).join(" "));svg.append(line);chartPanel.append(svg);}
-      const table=node("table");const caption=node("caption",entry.title);table.append(caption);points.forEach(p=>{const row=node("tr");row.append(node("th",time(p.time)),node("td",String(p.value)));table.append(row);});chartPanel.append(table);
+      if(end>start){const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("viewBox","0 0 320 130");svg.setAttribute("class","evidence-chart");svg.setAttribute("role","img");svg.setAttribute("aria-label",`${entryTitle(entry)} · ${time(points[0].time)} — ${time(points.at(-1).time)}`);const line=document.createElementNS(svg.namespaceURI,"polyline");line.setAttribute("points",points.map(p=>`${10+(Date.parse(p.time)-start)/(end-start)*300},${115-(p.value-min)/(max-min || 1)*100}`).join(" "));svg.append(line);chartPanel.append(svg);}
+      const table=node("table");const caption=node("caption",entryTitle(entry));table.append(caption);points.forEach(p=>{const row=node("tr");row.append(node("th",time(p.time)),node("td",String(p.value)));table.append(row);});chartPanel.append(table);
     }else chartPanel.append(node("p",t("noChart"))); // No fabricated series, threshold, baseline or confidence.
     text("evidencePosition",`${index+1} / ${entries.length}`); el("evidencePrevious").disabled=index===0;el("evidenceNext").disabled=index===entries.length-1;
     document.querySelectorAll(".conversation-turn [data-evidence-index]").forEach(n=>n.setAttribute("aria-current",String(n.closest(".conversation-turn")===selectedCard && Number(n.dataset.evidenceIndex)===index)));
@@ -211,6 +219,7 @@
       if(previousCard!==el("resultCard")){selectedCard=previousCard;entries=previousEntries;}
       select(previousSelected);
     }
+    document.querySelectorAll(".conversation-turn").forEach(card=>{if(turnEvidence.has(card))renderRows(card);});
     if(authenticated&&!el("destinationView").classList.contains("hidden"))navigate(destination,false);
     window.NextOpsMotion?.update();
   }
@@ -227,8 +236,8 @@
     if(key==="settings"){const b=node("button",el("themeButton").querySelector("span").textContent,"quiet-button");b.type="button";b.dataset.themePreference="";b.addEventListener("click",()=>el("themeButton").click());el("destinationContent").append(b);}
     if(moveFocus)el("destinationTitle").focus();
   }
-  function search() {if(!authenticated)return;const query=el("searchInput").value.toLocaleLowerCase();const root=el("searchResults");root.replaceChildren();document.querySelectorAll(".saved-chat-button").forEach(chat=>{if(chat.textContent.toLocaleLowerCase().includes(query)){const b=node("button",chat.textContent);b.type="button";b.addEventListener("click",()=>{el("searchDialog").close();navigate("ask");chat.click();});root.append(b);}});entries.forEach((entry,i)=>{if(`${entry.title} ${entry.value}`.toLocaleLowerCase().includes(query)){const b=node("button",entry.title);b.type="button";b.addEventListener("click",()=>{el("searchDialog").close();navigate("ask",false);select(i,true,el("globalSearch"));});root.append(b);}});if(!root.children.length)root.append(node("p",t("noMatches")));}
-  function activateTurn(control) {const card=control.closest(".conversation-turn");if(card&&turnEvidence.has(card)){selectedCard=card;entries=turnEvidence.get(card);selected=0;}}
+  function search() {if(!authenticated)return;const query=el("searchInput").value.toLocaleLowerCase();const root=el("searchResults");root.replaceChildren();document.querySelectorAll(".saved-chat-button").forEach(chat=>{if(chat.textContent.toLocaleLowerCase().includes(query)){const b=node("button",chat.textContent);b.type="button";b.addEventListener("click",()=>{el("searchDialog").close();navigate("ask");chat.click();});root.append(b);}});entries.forEach((entry,i)=>{if(`${entryTitle(entry)} ${entry.value}`.toLocaleLowerCase().includes(query)){const b=node("button",entryTitle(entry));b.type="button";b.addEventListener("click",()=>{el("searchDialog").close();navigate("ask",false);select(i,true,el("globalSearch"));});root.append(b);}});if(!root.children.length)root.append(node("p",t("noMatches")));}
+  function activateTurn(control) {const card=control.closest(".conversation-turn");if(card&&card!==selectedCard&&turnEvidence.has(card)){selectedCard=card;entries=turnEvidence.get(card);selected=entries.length?0:-1;return true;}return false;}
   document.addEventListener("click",event=>{const b=event.target.closest("[data-evidence-index]");if(b){activateTurn(b);select(Number(b.dataset.evidenceIndex),true,b);}const nav=event.target.closest("[data-nav]");if(nav)navigate(nav.dataset.nav);const close=event.target.closest("[data-close-dialog]");if(close)el(close.dataset.closeDialog).close();const follow=event.target.closest("[data-followup]");if(follow){if(follow.dataset.followup==="evidence"){activateTurn(follow);select(selected>=0?selected:0,true,follow);}else el("question").focus();}});
   el("evidencePrevious").addEventListener("click",()=>select(selected-1));el("evidenceNext").addEventListener("click",()=>select(selected+1));
   el("evidenceClose").addEventListener("click",()=>{if(el("evidenceDialog").open)el("evidenceDialog").close();else{el("inspectorSlot").classList.add("inspector-closed");(returnFocus || el("resultCard").querySelector('[data-followup="evidence"]')).focus();}});
@@ -245,7 +254,7 @@
   el("shareInvestigation").addEventListener("click",async()=>{if(!last)return;try{await navigator.clipboard.writeText(last.question);text("copyStatus",t("copied"));}catch(_){text("copyStatus",t("copyFailed"));}});
   el("requestDetailsButton").setAttribute("aria-controls","evidenceDetails");
   el("requestDetailsButton").setAttribute("aria-expanded","false");
-  el("evidenceDetails").addEventListener("toggle",()=>el("requestDetailsButton").setAttribute("aria-expanded",String(el("evidenceDetails").open)));
+  document.addEventListener("toggle",event=>{if(event.target===el("evidenceDetails"))el("requestDetailsButton").setAttribute("aria-expanded",String(el("evidenceDetails").open));},true);
   el("requestDetailsButton").addEventListener("click",()=>{const details=el("evidenceDetails");if(!el("resultCard").classList.contains("hidden")){details.open=!details.open;el("requestDetailsButton").setAttribute("aria-expanded",String(details.open));if(details.open){details.tabIndex=-1;details.focus();}}});
   // The current contract has one authorized environment, not a cross-environment switch.
   el("environmentSelect").disabled=true;
