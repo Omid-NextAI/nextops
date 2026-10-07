@@ -128,12 +128,54 @@ only relevant metadata and approved mount observations; displayed focused answer
 The existing read scopes and connector capabilities are unchanged. Release-specific browser/API
 checks passed; full held-out semantic review and exact-release rollback remain open.
 
-An undeployed source increment adds `X-NextOps-App-Code-SHA256` to successful authenticated
-responses from the three answer routes only. It hashes the installed NextOps package source and
+The controlled application recorded in the [current release manifest](../status/current-release.yaml)
+already supplies `X-NextOps-App-Code-SHA256` on successful authenticated answer responses: general,
+primary monitoring, selected-source monitoring, incident investigation and saved-message creation.
+It hashes the installed NextOps package source and
 local UI assets at process startup; unauthenticated responses do not receive the header. The
 private reviewer compares it with the same bounded digest computed from a reviewed wheel. It does
 not identify dependencies, migrations, model files or host state, and it is not an artifact
 signature or production acceptance result.
+
+### 2026-10-07 audit-repair source increment
+
+These repairs describe source behavior, not an additional live acceptance claim. Exact-source
+PostgreSQL 16/17 restricted-role CI and the separately authorized, release-identified rollout must
+pass before deployment is reported. No database migration, role grant or model profile changes.
+
+Investigation creation/replay and completion recheck the bearer session, expiry, active identity,
+credential version and current actor scope inside their persistence transaction. Completion keeps
+session/identity read locks through result/audit commit and rechecks the enabled scoped target and
+selected logical source/target. Revocation completed before this checkpoint blocks publication.
+Selected-source completion access audit and the stored result now share the same transaction.
+
+Direct summary/incident-context reads require user-attributable start and terminal access audits;
+the terminal transaction rechecks permission before evidence is returned. Stored run/evidence reads
+require a current scoped session and an access audit, including scoped denials/not-found decisions.
+Required audit failure blocks return, rather than reporting successful unlogged access. Audit
+details contain bounded identifiers, reasons and hashes, not collected text or bearer credentials.
+
+Explicitly labeled secrets, including quoted password/token fields and Basic/Bearer Authorization
+values, are replaced by `[REDACTED]` before model input, canonical hashing, persistence and public
+evidence responses. The standalone Linux collector and application boundary have matching coverage.
+This is not detection of arbitrary unlabeled secrets. Historical results containing these sensitive
+representations are denied with `run.evidence_redaction_required`; collect new authorized evidence.
+Old stored content, hashes and append-only audit history are not silently rewritten.
+
+Caller cancellation runs bounded, shielded terminal cleanup for saved messages and investigations.
+Saved cleanup clears only the matching server-issued generation nonce and records a text-free failed
+audit; it can perform this cleanup after logout without granting read or generation permission.
+A replacement nonce is never cleared. Audit/database failure remains visible; a process crash still
+requires expiry/recovery reconciliation. Local cancellation is not proof remote inference stopped.
+
+Monitoring prompt projections retain application-computed returned problem counts, whether the
+total is known, and sample counts. Every row omission/meaningful field clipping marks the prompt
+view partial separately from source partiality; the canonical evidence/hash is not changed by
+sampling. Bilingual count answers and provenance report returned rows, an unknown total/lower bound
+when problems are truncated, exact severity labels (`3=Average`, `4=High`), and unknown reachability
+and monitoring-engine health. `deterministic_focus`/`deterministic_fallback` remain distinct from
+model synthesis. Narrow lexical rejection of known false count/status/label claims is not general
+semantic validation of generated prose.
 
 ## Persistence model
 
@@ -180,9 +222,11 @@ RCA output separates symptoms, collected evidence, possible causes, supporting a
 
 ## Implemented and planned API behavior
 
-The implemented routes above use `/api/v1`. Agents, connector/device administration, incidents,
-separate evidence and audit browsing, approvals, user/role administration, settings, streaming,
-pagination, cancellation, and alert ingress remain planned rather than implemented.
+The implemented routes above use `/api/v1`. Fixed-role local user administration and its bounded
+account pagination are implemented and controlled-installed as described above; live account
+mutations remain unaccepted. Agents, connector/device administration, incident lifecycle management,
+separate evidence/audit browsing, approvals, role/scope editing and user deletion, settings,
+streaming, general pagination, an explicit client cancellation API and alert ingress remain planned.
 Preserve old paths through an explicit compatibility decision if existing code is later
 imported. Liveness/readiness endpoints disclose no sensitive public diagnostics.
 

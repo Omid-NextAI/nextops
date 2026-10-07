@@ -2,15 +2,37 @@
 
 [فارسی](../fa/OPERATIONS.md) · [Index](INDEX.md)
 
-## Current app-only UI release — 2026-10-05
+## Recorded controlled release — 2026-10-07
 
-App `836b1ea` serves the reference UI; connector `2a7c8dc` and inference `7ce9d29` are unchanged.
+The [release manifest](../status/current-release.yaml) and
+[project state](../PROJECT_STATE.md) record app `48e3a8a`, AI API `ec1ed32` and connector/MCP
+`2a7c8dc`. The app serves the supplied OCS identity, static login and compact conversation
+workspace. Native Qwen3.8-27B Q8/no-BLAS remains selected with the recorded owner quality
+exception; this interface rollout did not replace its runtime/model, credentials or schema.
+The [OCS live qualification](../requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md) records
+bounded app checks, saved follow-up, fresh secondary evidence and exact app rollback. The
+[earlier capability qualification](../requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md)
+is separate evidence. Failed harness reports and the observed inference 504 remain in those
+records; broad semantics, thinking/privacy/full-context and current WAN/VM/load gates are not
+accepted. Controlled user testing is not production acceptance; independent recovery remains
+owner-deferred, not qualified by VM snapshots.
+
+The owner-authorized [audit repair](../requirements/AUDIT_REPAIR_2026-10-07.md) is source
+implementation and qualification in progress, not a new deployment. Do not substitute its
+fixture results for serving-host checks or reuse a completed window's rollback guard. Any
+promotion needs current preflight, exact artifacts, compatible role ordering and verified
+rollback. For a presentation-only issue, do not roll back the MCP gateway/runner or model.
+
+## Historical app-only UI release — 2026-10-05
+
+On 2026-10-05, app `836b1ea` served the reference UI; connector `2a7c8dc` and inference `7ce9d29`
+were unchanged. These are historical identities, not the recorded current release above.
 The [dated record](../requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md) identifies the
 immutable artifacts and tested app-only `2a7c8dc` rollback. Protected qualification scripts and
 reports are retained; the completed window's rollback timer is stopped. A future rollback requires
 a new authorized window and current checks, not blind reuse of an old timer. Do not perform the
 MCP gateway/runner rollback below for a presentation-only issue. No new migration or policy change
-is required for this UI release. Qwen upgrade remains a separate capacity/qualification checkpoint.
+was required for that UI release. Qwen upgrade was a separate capacity/qualification checkpoint.
 
 ## Controlled MCP operations — 2026-10-04
 

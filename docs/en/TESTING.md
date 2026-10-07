@@ -1,5 +1,23 @@
 # Testing, model evaluation and release evidence
 
+## Audit repair source qualification — 7 October 2026
+
+The [bounded repair](../requirements/AUDIT_REPAIR_2026-10-07.md) adds actual API/service and browser
+regressions, not a new model-quality certificate. Native tests cover shielded caller deadlines,
+repeated cancellation, physical-thread ownership/peak1, atomic admission counts and fail-closed
+startup/abnormal-exit metrics. Two fresh zero gauges are required; `/health` is not idle proof.
+API shutdown cannot kill a native thread; socket timeouts remain inactivity limits, and native
+metrics do not enumerate every pending HTTP task. Preserve sole-producer isolation and startup
+reconciliation. No generation is retried by these repairs.
+
+Run `uv run --frozen --extra dev --extra mcp pytest -m "not integration and not browser" -q`,
+`uv run --frozen --extra dev --extra mcp pytest -m browser -q`, and, only on an isolated PostgreSQL
+test database, `uv run --frozen --extra dev --extra mcp pytest -m integration -q`. CI tests16/17.
+The restricted-role tests destructively reset their test database: never point them at a serving
+database. Fixture/source success, exact live package/audit verification and raw model acceptance
+are separate results. Publication tools need independent fault-path review; old migration scripts
+are not code-only deployment helpers. No new serving identities are claimed by this section.
+
 ## OCS app-only UI retained live — 7 October 2026
 
 Exact app `48e3a8a` is live; AI API `ec1ed32`, native Q8 and MCP are unchanged. All five

@@ -1,5 +1,21 @@
 # Next task / کار بعدی
 
+Current owner-authorized work, **2026-10-07**: qualify and guardedly ship the
+[audit repairs](requirements/AUDIT_REPAIR_2026-10-07.md), not another UI rebuild or model upgrade.
+Finish exact-source CI (including deployed PostgreSQL16 and17), new publication-tool review and
+offline immutable package preparation. Preserve current credentials/config/schema/native model
+and limits. Quiesce/drain for coordinated app/API/MCP code and atomic existing-collector updates;
+verify real bilingual saved/evidence/audit/denial/logout checks plus exact rollback/reapply before
+retention. Do not execute old MCP migration controllers or let candidate unhealthiness block
+known-code restoration. Leave genuine repository-administration and model-quality limits visible.
+
+کار فعلی مجاز، **۷ اکتبر۲۰۲۶**: اصلاح ممیزی بالا پذیرفته و محافظت‌شده منتشر شود، نه بازسازی رابط
+یا ارتقای مدل. CI کد دقیق شامل پایگاه16/17، review ابزار جدید و آماده‌سازی artifact آفلاین کامل
+شود. اطلاعات ورود/تنظیم/schema/مدل بومی و سقف‌ها ثابت بمانند. برای کد برنامه/API/MCP و collector
+موجود، توقف پذیرش و drain هماهنگ لازم است؛ پیش از تثبیت، سابقه/شاهد/ممیزی/رد/خروج دوزبانه و
+بازگشت و اعمال دوبارهٔ دقیق بررسی شوند. controller مهاجرت قبلی اجرا و بازگردانی به خرابی نسخهٔ
+جدید وابسته نشود. محدودیت واقعیِ مدیریت مخزن و کیفیت مدل آشکار بماند.
+
 Current checkpoint, **2026-10-07, app-only OCS rollout complete**: preserve retained app
 `48e3a8a`, unchanged AI API `ec1ed32`/native Q8/MCP and the
 [live qualification](requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md). Do not redo the

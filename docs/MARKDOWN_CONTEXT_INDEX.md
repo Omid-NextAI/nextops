@@ -44,6 +44,8 @@ remaining task-specific sources. The repository skill
 
 ## Complete inventory
 
+- `docs/requirements/AUDIT_REPAIR_2026-10-07.md` — Bilingual bounded audit-repair requirements, regression strategy, multi-role code-only rollout, rollback and retained acceptance limits.
+
 - `docs/requirements/OCS_UI_LIVE_QUALIFICATION_2026-10-07.md` — Bilingual authorized app-only rollout, exact artifact identities, preserved failures, real browser/audit checks and unchanged AI/MCP boundaries.
 - `docs/requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md` — Bilingual bounded company-asset/static-login and compact workspace source specification; no new live release or inference change.
 

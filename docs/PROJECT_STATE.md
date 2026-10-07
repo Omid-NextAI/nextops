@@ -1,5 +1,22 @@
 # Project state / وضعیت پروژه
 
+Current source checkpoint, **2026-10-07, audit repairs under qualification**: the owner authorized
+fixing the thirteen audited items and code-only guarded shipping. Native admission/drain, evidence
+redaction, transactional late authorization/read audit, cancelled conversation cleanup, scoped
+counts and five UI state defects are repaired in source. Paired active guides are corrected.
+Fresh read-only preflight confirmed the recorded app/API/MCP baseline and original collectors;
+no serving code has yet changed. Exact-source PostgreSQL16/17 CI and independently reviewed new
+publication tools are required before cutover. Repository administration GOV-01 remains open;
+model quality and existing unaccepted gates are unchanged. See the
+[bounded repair specification](requirements/AUDIT_REPAIR_2026-10-07.md).
+
+گام کد، **۷ اکتبر۲۰۲۶، اصلاح ممیزی در حال پذیرش**: مالک رفع سیزده مورد و انتشار محافظت‌شدهٔ
+فقط کد را خواسته است. مالکیت ظرفیت/تخلیهٔ بومی، پالایش شاهد، مجوز و ممیزی خواندن در transaction،
+پاک‌سازی لغو سابقه، شمارش دامنه و پنج خطای وضعیت رابط در source اصلاح شده‌اند؛ راهنمای جفت نیز
+به‌روز است. preflight فقط‌خواندنی تازه، baseline برنامه/API/MCP و collector قبلی را تأیید کرد؛
+هنوز کد خدمت تغییر نکرده است. پیش از انتشار، CI کد دقیق PostgreSQL16/17 و بازبینی مستقل ابزار
+جدید لازم‌اند. GOV-01 مدیریتی باز است؛ کیفیت مدل و معیارهای پذیرفته‌نشده تغییری ندارند.
+
 Current checkpoint, **2026-10-07, OCS interface retained live**: app `48e3a8a` is selected,
 active/restarts0 and its rollback timer inactive at12:24:45 UTC. AI API `ec1ed32`, native Q8,
 MCP `2a7c8dc`, their PIDs/configuration and credentials are unchanged. Exact-source five-job CI,
