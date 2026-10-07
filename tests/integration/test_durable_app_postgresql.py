@@ -156,6 +156,7 @@ def _empty_assistant(correlation: UUID, now: datetime) -> AssistantResponse:
 )
 def test_completion_rechecks_authority_inside_persistence_transaction(
     app_session_factory: sessionmaker[Session],
+    migrated_postgres: tuple[str, Engine],
     settings: AppSettings,
     incident: bool,
     revocation: str,
@@ -189,21 +190,29 @@ def test_completion_rechecks_authority_inside_persistence_transaction(
         service.logout(token, uuid4())
     elif revocation == "expiry":
         clock.advance(settings.session_ttl_seconds + 1)
+    elif revocation in {"scope", "target"}:
+        # These edits are unavailable to the application role. Inject protected
+        # state changes with the existing isolated migration/admin fixture only;
+        # all application creation/completion calls still use nextops_app.
+        _, admin_engine = migrated_postgres
+        with admin_engine.begin() as connection:
+            if revocation == "target":
+                target_id = connection.scalar(select(Run.target_id).where(Run.id == run.run_id))
+                connection.execute(
+                    update(Target).where(Target.id == target_id).values(enabled=False)
+                )
+            else:
+                connection.execute(
+                    update(Identity)
+                    .where(Identity.id == actor.subject_id)
+                    .values(scopes=["runs.read"])
+                )
     else:
         with app_session_factory() as session, session.begin():
-            if revocation == "target":
-                session.execute(update(Target).values(enabled=False))
-            else:
-                values = (
-                    {"is_active": False}
-                    if revocation == "disabled"
-                    else {"credential_version": 2}
-                    if revocation == "credential"
-                    else {"scopes": ["runs.read"]}
-                )
-                session.execute(
-                    update(Identity).where(Identity.id == actor.subject_id).values(**values)
-                )
+            values = {"is_active": False} if revocation == "disabled" else {"credential_version": 2}
+            session.execute(
+                update(Identity).where(Identity.id == actor.subject_id).values(**values)
+            )
     with pytest.raises(ApplicationError) as denied:
         if isinstance(evidence, IncidentEvidence):
             service.complete_incident_investigation(
@@ -345,6 +354,9 @@ def test_migration_upgrade_downgrade_and_role_grants(
         )
         assert not connection.scalar(
             text("SELECT has_column_privilege('nextops_app', 'identities', 'scopes', 'UPDATE')")
+        )
+        assert not connection.scalar(
+            text("SELECT has_any_column_privilege('nextops_app', 'targets', 'UPDATE')")
         )
 
     command.downgrade(alembic_config, "base")

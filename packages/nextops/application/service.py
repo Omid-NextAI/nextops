@@ -672,13 +672,11 @@ class DurableAppService:
                     target = session.scalars(target_statement).one_or_none()
                     if target is None:
                         target = session.scalar(
-                            select(Target)
-                            .where(
+                            select(Target).where(
                                 Target.organization_id == actor.organization_id,
                                 Target.environment_id == actor.environment_id,
                                 Target.name == target_name,
                             )
-                            .with_for_update(read=True)
                         )
                     if (
                         target is None
@@ -1040,13 +1038,11 @@ class DurableAppService:
                     target = session.scalars(target_statement).one_or_none()
                     if target is None:
                         target = session.scalar(
-                            select(Target)
-                            .where(
+                            select(Target).where(
                                 Target.organization_id == actor.organization_id,
                                 Target.environment_id == actor.environment_id,
                                 Target.name == target_name,
                             )
-                            .with_for_update(read=True)
                         )
                     if target is None or not target.enabled or target.kind != INCIDENT_TARGET_KIND:
                         raise ApplicationError(
@@ -1716,15 +1712,18 @@ class DurableAppService:
 
     @staticmethod
     def _current_target(session: Session, run: Run) -> None:
+        # Targets have no runtime update/delete API or app-role grant. Read their
+        # protected state here without FOR SHARE, which itself requires UPDATE.
+        # Session/identity locks still serialize runtime revocation through commit.
+        # This is not serialization against out-of-band privileged target edits;
+        # those require quiescence. A future editor needs its own concurrency boundary.
         target = session.scalar(
-            select(Target)
-            .where(
+            select(Target).where(
                 Target.id == run.target_id,
                 Target.organization_id == run.organization_id,
                 Target.environment_id == run.environment_id,
                 Target.enabled.is_(True),
             )
-            .with_for_update(read=True)
         )
         if target is None:
             raise ApplicationError(ErrorCode.POLICY_DENIED, "run.target_unavailable")

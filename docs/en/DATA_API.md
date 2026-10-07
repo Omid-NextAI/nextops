@@ -147,6 +147,9 @@ Investigation creation/replay and completion recheck the bearer session, expiry,
 credential version and current actor scope inside their persistence transaction. Completion keeps
 session/identity read locks through result/audit commit and rechecks the enabled scoped target and
 selected logical source/target. Revocation completed before this checkpoint blocks publication.
+Targets are immutable to the application role (no UPDATE/DELETE grant or runtime editor), so their
+final check is a scoped read, not a PostgreSQL row lock requiring UPDATE. Out-of-band privileged
+target changes require application quiescence; this does not serialize against arbitrary admin SQL.
 Selected-source completion access audit and the stored result now share the same transaction.
 
 Direct summary/incident-context reads require user-attributable start and terminal access audits;
