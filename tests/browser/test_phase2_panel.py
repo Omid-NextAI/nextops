@@ -62,7 +62,7 @@ def test_qwen38_capabilities_and_secondary_problem_inspection(
         expect(page.locator("#monitoringSource")).to_have_value("secondary")
         expect(page.locator("#question")).not_to_be_empty()
         page.locator('[data-monitoring-shortcut="metrics"]').click()
-        expect(page.locator("#question")).to_contain_text("۶۰" if locale == "fa" else "60")
+        assert ("۶۰" if locale == "fa" else "60") in page.locator("#question").input_value()
         assert not app.state.monitoring_requests  # Shortcut prepares; does not execute.
         page.locator("#askButton").click()
         expect(page.locator("#evidenceSource")).to_contain_text("secondary / sla")
