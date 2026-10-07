@@ -17,6 +17,14 @@ LARGER_CANDIDATE = "qwen3-14b-q4-k-m.candidate.json"
 LARGER_32B_CANDIDATE = "qwen3-32b-q4-k-m.candidate.json"
 LARGER_MOE_CANDIDATE = "qwen3-30b-a3b-q4-k-m.candidate.json"
 LARGER_QWEN35_CANDIDATE = "qwen3-5-35b-a3b-q4-k-m.candidate.json"
+QWEN38_OWNER_EXCEPTION = {
+    "authority": "explicit_project_owner_instruction",
+    "received_date": "2026-10-07",
+    "scope": "controlled_standard_only_not_production_accepted",
+    "failed_cases": ["en-network", "fa-stale-partial", "fa-hypothesis"],
+    "raw_trial_sha256": "b69e4cf3a9725a344b2eadc92a72bb9ec0090ce971934de5ca051d09ac17926e",
+    "evidence": "docs/requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md",
+}
 
 
 class ArtifactValidationError(RuntimeError):
@@ -208,7 +216,7 @@ def validate_qwen38_q5_candidate(directory: Path) -> None:
 
 
 def validate_qwen38_candidate(directory: Path) -> None:
-    """Pin the provision-only trial; do not make discovery a serving selection."""
+    """Pin identity; a recorded owner exception is not a passing qualification."""
 
     def unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
         result: dict[str, Any] = {}
@@ -248,7 +256,16 @@ def validate_qwen38_candidate(directory: Path) -> None:
         "max_active_requests": 1,
         "max_queued_requests": 2,
     }
-    if not isinstance(candidate, dict) or set(candidate) != {*expected, "status", "qualification"}:
+    if not isinstance(candidate, dict):
+        raise ArtifactValidationError("Qwen3.8 metadata fields changed")
+    controlled = candidate.get("status") == "controlled_selected_with_quality_exception"
+    fields = {*expected, "status", "qualification"}
+    if controlled:
+        fields.add("owner_quality_exception")
+        expected["deployment_selection_allowed"] = True
+        if candidate.get("owner_quality_exception") != QWEN38_OWNER_EXCEPTION:
+            raise ArtifactValidationError("Qwen3.8 controlled selection lacks its exact exception")
+    if set(candidate) != fields:
         raise ArtifactValidationError("Qwen3.8 metadata fields changed")
     if any(type(candidate[k]) is not type(v) or candidate[k] != v for k, v in expected.items()):
         raise ArtifactValidationError("Qwen3.8 identity or qualification safety boundary changed")
@@ -271,7 +288,21 @@ def validate_qwen38_candidate(directory: Path) -> None:
             for value in qualification.values()
         )
         or not isinstance(candidate["status"], str)
-        or candidate["status"] not in {"provisioning_unselected", "verified_candidate_unselected"}
+        or candidate["status"]
+        not in {
+            "provisioning_unselected",
+            "verified_candidate_unselected",
+            "controlled_selected_with_quality_exception",
+        }
+        or (
+            controlled
+            and (
+                qualification["artifact_import"] != "passed"
+                or qualification["template_tokenization"] != "passed"
+                or qualification["cpu_load"] != "passed"
+                or qualification["standard_semantics"] != "failed"
+            )
+        )
         or (
             candidate["status"] == "verified_candidate_unselected"
             and qualification["artifact_import"] != "passed"

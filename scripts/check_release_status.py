@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import importlib
 import json
 import subprocess
 import sys
@@ -22,6 +23,9 @@ LARGER_MOE_MODEL_MANIFEST = ROOT / "deploy/inference/qwen3-30b-a3b-q4-k-m.candid
 LARGER_QWEN35_MODEL_MANIFEST = ROOT / "deploy/inference/qwen3-5-35b-a3b-q4-k-m.candidate.json"
 QWEN38_Q5_MODEL_ID = "nextops-qwen3-8-27b-ud-q5-k-m"
 QWEN38_Q5_MODEL_MANIFEST = ROOT / "deploy/inference/qwen3-8-27b-ud-q5-k-m.candidate.json"
+QWEN38_Q8_MODEL_ID = "nextops-qwen3-8-27b-q8-0"
+QWEN38_Q8_MODEL_MANIFEST = ROOT / "deploy/inference/qwen3-8-27b-q8.candidate.json"
+QWEN38_CONTROLLED_RUNTIME_SHA = "eb53d6eef8bdae6f1227a93af1f6caf58542fb5943b03ccc80d136316e6f5721"
 RECOVERY_VALIDATOR = ROOT / "scripts/check_recovery_profile.py"
 REQUIRED_CURRENT_APP_GATES = frozenset(
     {
@@ -126,6 +130,8 @@ def production_claim_errors(status: dict[str, Any], recovery_qualified: bool) ->
     errors: list[str] = []
     if not production_passed or deployment_status != "production_accepted":
         errors.append("deployment status and production_acceptance gate must agree")
+    if status.get("components", {}).get("model", {}).get("identifier") == QWEN38_Q8_MODEL_ID:
+        errors.append("owner-excepted Qwen3.8 quality is not full production acceptance")
 
     candidate = status.get("current_application_qualification")
     candidate_gates = candidate.get("gates") if isinstance(candidate, dict) else None
@@ -158,7 +164,24 @@ def model_identity_errors(
     """Verify the entire selected identity without rewriting historical 8B evidence."""
 
     identifier = model.get("identifier")
-    if identifier == QWEN38_Q5_MODEL_ID:
+    if identifier == QWEN38_Q8_MODEL_ID:
+        try:
+            artifact_module = importlib.import_module("check_inference_artifacts")
+        except ModuleNotFoundError:
+            artifact_module = importlib.import_module("scripts.check_inference_artifacts")
+
+        if (
+            larger.get("model_id") != identifier
+            or larger.get("status") != "controlled_selected_with_quality_exception"
+            or larger.get("deployment_selection_allowed") is not True
+            or larger.get("owner_quality_exception") != artifact_module.QWEN38_OWNER_EXCEPTION
+            or larger.get("qualification", {}).get("standard_semantics") != "failed"
+            or larger.get("public_thinking_enabled") is not False
+            or larger.get("private_reasoning_persisted") is not False
+        ):
+            return ["Qwen3.8 Q8 selection requires its exact recorded standard-only exception"]
+        selected = larger
+    elif identifier == QWEN38_Q5_MODEL_ID:
         # Registration permits isolated standard testing, never release selection. The strict
         # artifact validator pins this distinct candidate and keeps conversion provenance open.
         # Even a forged status/boolean cannot promote it through the older Q4 selection branch.
@@ -183,7 +206,8 @@ def model_identity_errors(
     return [
         f"selected model {field} differs from its inference artifact manifest"
         for field in ("source_revision", "quantization", "size_bytes", "sha256")
-        if model.get(field) != selected.get(field)
+        if type(model.get(field)) is not type(selected.get(field))
+        or model.get(field) != selected.get(field)
     ]
 
 
@@ -223,7 +247,12 @@ def main() -> int:
         model = components.get("model", {})
         if runtime.get("source_commit") != inference.get("runtime", {}).get("source_commit"):
             errors.append("runtime source commit differs from the inference artifact manifest")
-        if runtime.get("binary_sha256") != inference.get("runtime", {}).get("binary_sha256"):
+        expected_runtime_sha = (
+            QWEN38_CONTROLLED_RUNTIME_SHA
+            if model.get("identifier") == QWEN38_Q8_MODEL_ID
+            else inference.get("runtime", {}).get("binary_sha256")
+        )
+        if runtime.get("binary_sha256") != expected_runtime_sha:
             errors.append("runtime SHA-256 differs from the inference artifact manifest")
         larger_path = {
             "nextops-qwen3-14b-q4-k-m": LARGER_MODEL_MANIFEST,
@@ -231,6 +260,7 @@ def main() -> int:
             "nextops-qwen3-30b-a3b-q4-k-m": LARGER_MOE_MODEL_MANIFEST,
             "nextops-qwen3-5-35b-a3b-q4-k-m": LARGER_QWEN35_MODEL_MANIFEST,
             QWEN38_Q5_MODEL_ID: QWEN38_Q5_MODEL_MANIFEST,
+            QWEN38_Q8_MODEL_ID: QWEN38_Q8_MODEL_MANIFEST,
         }.get(model.get("identifier"), LARGER_MODEL_MANIFEST)
         larger_model = json.loads(larger_path.read_text(encoding="utf-8"))
         errors.extend(model_identity_errors(model, inference.get("model", {}), larger_model))

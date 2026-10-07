@@ -42,6 +42,8 @@ remaining task-specific sources. The repository skill
 
 ## Complete inventory
 
+- `docs/requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md` — Bilingual owner raw-quality exception, guarded standard-mode cutover plan and observed execution results; failures are not passes.
+
 - `docs/requirements/PERMISSIVE_MODEL_QUALIFICATION_2026-10-05.md` — Bilingual failed 48-thread and exact-source Q8 retests, corrected finite coding review, protected/effective-runtime observations, distinct 3.8 Q5 complete-hash/template checkpoint, Apache 122B pins, retained finite CDN records and unrun acceptance gates.
 
 - `docs/requirements/QWEN38_FLASH_QUALIFICATION_2026-10-05.md` — Bilingual actual resized-guest/new-volume preparation, pinned metadata-only Flash Q8 import, customer-license consideration, frozen regression tools and unrun model gates.

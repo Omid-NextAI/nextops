@@ -1,5 +1,20 @@
 # Prompt version history / تاریخچهٔ نسخه‌های پرامپت
 
+## Owner raw-quality exception — 2026-10-07
+
+The later explicit request to skip the three remaining raw failures and go live authorizes a
+bounded, reversible standard-mode Qwen3.8 Q8 cutover with known quality limitations. It supersedes
+the quality-before-selection hold only for that controlled use; the13/16 result remains failed.
+Authentication, policy, evidence qualifiers, audit, CPU/offline boundaries, privacy, resource bounds
+and rollback are not waived. Thinking/larger-context and full production acceptance are not implied.
+See [controlled cutover](QWEN38_CONTROLLED_CUTOVER_2026-10-07.md).
+
+دستور تازهٔ مالک برای کنارگذاشتن سه شکست خام و زنده‌کردن مدل، گذار محدود و برگشت‌پذیر به
+Qwen3.8 Q8 بدون استدلال را با محدودیت‌های کیفیت معلوم مجاز می‌کند. فقط شرط کیفیت پیش از
+انتخاب برای این استفادهٔ کنترل‌شده تغییر می‌کند؛ نتیجهٔ۱۳ از۱۶ همچنان ناموفق است. احراز
+هویت، سیاست، قید شاهد، ممیزی، مرز CPU/آفلاین، حریم خصوصی، سقف منابع و بازگشت حذف نمی‌شوند.
+استدلال، زمینهٔ بزرگ‌تر و پذیرش کامل بهره‌برداری از این دستور نتیجه نمی‌شوند.
+
 ## Owner bounded response-time amendment — 2026-10-06
 
 The owner explicitly requests longer answering time for actual Qwen3.8. Prospectively allow an
