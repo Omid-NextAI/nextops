@@ -112,6 +112,10 @@ CODING_PROPOSALS = (
 
 
 class PromptTransport:
+    async def get_text(self, path: str, headers: dict[str, str], timeout_seconds: float) -> str:
+        assert path == "/metrics"
+        return "llamacpp:requests_processing 0\nllamacpp:requests_deferred 0\n"
+
     """Deterministic in-memory API fixture, never an inference client."""
 
     def __init__(self, model: ModelId, *, thinking: bool = False) -> None:

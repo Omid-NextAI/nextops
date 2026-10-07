@@ -152,6 +152,10 @@ class InferenceHttpTransport:
 class LocalModelTransport:
     """Only the CPU model completion is synthetic in the complete HTTP path test."""
 
+    async def get_text(self, path: str, headers: dict[str, str], timeout_seconds: float) -> str:
+        assert path == "/metrics"
+        return "llamacpp:requests_processing 0\nllamacpp:requests_deferred 0\n"
+
     def __init__(self, model_id: ModelId = "nextops-qwen3-8b-q4-k-m") -> None:
         self.payload: dict[str, Any] = {}
         self.model_id = model_id

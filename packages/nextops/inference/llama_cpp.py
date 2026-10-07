@@ -22,6 +22,7 @@ from nextops.inference.contracts import (
     ProviderReadiness,
     ReadinessState,
 )
+from nextops.inference.native_idle import MAX_METRICS_BYTES, NativeIdleGuard
 from nextops.inference.qwen38_prompt import general_prompt as qwen38_general_prompt
 from nextops.security.http import NoRedirectHandler
 
@@ -92,6 +93,10 @@ class JsonTransport(Protocol):
     ) -> dict[str, Any]: ...
 
 
+class NativeTransport(JsonTransport, Protocol):
+    async def get_text(self, path: str, headers: dict[str, str], timeout_seconds: float) -> str: ...
+
+
 class UrllibJsonTransport:
     """Small proxy-bypassing transport for one validated loopback origin."""
 
@@ -102,7 +107,7 @@ class UrllibJsonTransport:
     async def get_json(
         self, path: str, headers: dict[str, str], timeout_seconds: float
     ) -> dict[str, Any]:
-        return await asyncio.to_thread(self._request, "GET", path, None, headers, timeout_seconds)
+        return await self._owned_request("GET", path, None, headers, timeout_seconds)
 
     async def post_json(
         self,
@@ -112,14 +117,50 @@ class UrllibJsonTransport:
         timeout_seconds: float,
     ) -> dict[str, Any]:
         body = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
-        return await asyncio.to_thread(
-            self._request,
+        return await self._owned_request(
             "POST",
             path,
             body,
             headers,
             timeout_seconds,
         )
+
+    async def _owned_request(
+        self,
+        method: str,
+        path: str,
+        body: bytes | None,
+        headers: dict[str, str],
+        timeout_seconds: float,
+    ) -> dict[str, Any]:
+        task = asyncio.create_task(
+            asyncio.to_thread(self._request, method, path, body, headers, timeout_seconds)
+        )
+        try:
+            return await asyncio.shield(task)
+        except asyncio.CancelledError:
+            # A cancelled coroutine is not a cancelled socket/thread. Do not let an
+            # owner release admission while this physical request is outstanding.
+            while not task.done():
+                try:
+                    await asyncio.shield(task)
+                except asyncio.CancelledError:
+                    continue
+                except Exception:
+                    break
+            if not task.cancelled():
+                task.exception()
+            raise
+
+    async def get_text(self, path: str, headers: dict[str, str], timeout_seconds: float) -> str:
+        # Text is only admitted through the same bounded, authenticated transport.
+        response = await self._owned_request("GET", path, None, headers, timeout_seconds)
+        text = response.get("_metrics_text")
+        if not isinstance(text, str):
+            raise ApplicationError(
+                ErrorCode.DEPENDENCY_UNAVAILABLE, "inference.provider_response_invalid"
+            )
+        return text
 
     def _request(
         self,
@@ -142,7 +183,8 @@ class UrllibJsonTransport:
         )
         try:
             with self._opener.open(request, timeout=timeout_seconds) as response:
-                raw = response.read(MAX_PROVIDER_RESPONSE_BYTES + 1)
+                limit = MAX_METRICS_BYTES if path == "/metrics" else MAX_PROVIDER_RESPONSE_BYTES
+                raw = response.read(limit + 1)
         except HTTPError as error:
             if error.code == 429:
                 code = ErrorCode.OVERLOADED
@@ -164,13 +206,15 @@ class UrllibJsonTransport:
                 "inference.provider_unavailable",
                 retryable=True,
             ) from error
-        if len(raw) > MAX_PROVIDER_RESPONSE_BYTES:
+        if len(raw) > limit:
             raise ApplicationError(
                 ErrorCode.DEPENDENCY_UNAVAILABLE,
                 "inference.provider_response_invalid",
                 retryable=True,
             )
         try:
+            if path == "/metrics":
+                return {"_metrics_text": raw.decode("utf-8")}
             decoded = json.loads(raw)
         except (UnicodeDecodeError, json.JSONDecodeError) as error:
             raise ApplicationError(
@@ -226,7 +270,7 @@ class LlamaCppProvider:
     def __init__(
         self,
         settings: LlamaCppSettings,
-        transport: JsonTransport | None = None,
+        transport: NativeTransport | None = None,
     ) -> None:
         self._settings = settings
         self._transport = transport or UrllibJsonTransport(settings.base_url)
@@ -235,6 +279,7 @@ class LlamaCppProvider:
             "Content-Type": "application/json",
             "Accept": "application/json",
         }
+        self._idle = NativeIdleGuard(self._transport, self._headers)
 
     async def generate(self, request: InferenceRequest) -> ProviderGeneration:
         if (request.thinking or request.detailed) and (
@@ -414,12 +459,19 @@ class LlamaCppProvider:
             payload["min_p"] = 0.0
         if request.detailed or request.thinking:
             await self._check_context(payload, request.max_output_tokens)
-        raw = await self._transport.post_json(
-            "/v1/chat/completions",
-            payload,
-            self._headers,
-            self._settings.request_timeout_seconds,
-        )
+        await self._idle.reconcile()
+        try:
+            raw = await self._transport.post_json(
+                "/v1/chat/completions",
+                payload,
+                self._headers,
+                self._settings.request_timeout_seconds,
+            )
+        except BaseException:
+            # Socket failure/cancellation is ambiguous remotely. Never retry the
+            # generation; require fresh native reconciliation before future work.
+            self._idle.required = True
+            raise
         completed_at = datetime.now(UTC)
         try:
             parsed = _CompletionResponse.model_validate(raw)
@@ -496,6 +548,8 @@ class LlamaCppProvider:
                 min(self._settings.request_timeout_seconds, 5.0),
             )
             state = ReadinessState.READY if health.get("status") == "ok" else ReadinessState.LOADING
+            if state is ReadinessState.READY:
+                await self._idle.reconcile()
         except ApplicationError:
             state = ReadinessState.UNAVAILABLE
         return ProviderReadiness(

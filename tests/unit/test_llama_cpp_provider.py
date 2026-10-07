@@ -15,6 +15,10 @@ from nextops.inference.llama_cpp import LlamaCppProvider, UrllibJsonTransport
 
 
 class StubTransport:
+    async def get_text(self, path: str, headers: dict[str, str], timeout_seconds: float) -> str:
+        assert path == "/metrics"
+        return "llamacpp:requests_processing 0\nllamacpp:requests_deferred 0\n"
+
     def __init__(self) -> None:
         self.health: dict[str, Any] = {"status": "ok"}
         self.generation: dict[str, Any] = {
