@@ -53,6 +53,8 @@ def _prepare_freshness_case(page: Page, base: str, locale: str, partial: bool = 
     page.locator("#askButton").click()
     expect(page.locator("#resultCard")).to_be_visible()
     page.wait_for_load_state("networkidle")
+    page.locator("#resultCard .response-evidence > summary").click()
+    page.locator('#resultCard [data-followup="evidence"]').click()
 
 
 @pytest.mark.parametrize("locale", ["en", "fa"])
@@ -447,6 +449,7 @@ def test_locale_preserves_selected_evidence_and_empty_details_are_disabled(
         page.locator("#question").fill("Inspect recorded observations only")
         page.locator("#askButton").click()
         expect(page.locator("#requestDetailsButton")).to_be_enabled()
+        page.locator("#resultCard .response-evidence > summary").click()
         page.locator('#resultCard [data-evidence-index="1"]').click()
         expect(page.locator("#evidencePosition")).to_have_text("2 / 10")
         page.locator("#languageButton").click()
@@ -479,9 +482,7 @@ def test_fresh_session_navigation_matches_visible_workspace(
         page.locator("#password").fill("test-password")
         page.locator('#loginForm button[type="submit"]').click()
         expect(page.locator("#workspaceView")).to_be_visible()
-        expect(page.locator('[data-nav="investigations"]')).to_have_attribute(
-            "aria-current", "page"
-        )
+        expect(page.locator('[data-nav="ask"]')).to_have_attribute("aria-current", "page")
         expect(page.locator("#destinationView")).to_be_hidden()
         browser.close()
 
@@ -533,6 +534,7 @@ def test_raw_json_remains_complete_and_copy_matches_after_bounded_redaction(
         page.locator("#question").fill("Inspect all recorded observations")
         page.locator("#askButton").click()
         expect(page.locator("#resultCard")).to_be_visible()
+        page.locator('#resultCard [data-followup="evidence"]').click()
         for _ in range(7):
             page.locator("#evidenceNext").click()
         rendered = page.locator("#panel-raw code").inner_text()
@@ -568,6 +570,7 @@ def test_archived_evidence_context_does_not_claim_fresh_current_collection(
             page.locator("#question").fill(question)
             page.locator("#askButton").click()
             expect(page.locator("#askedQuestion")).to_have_text(question)
+        page.locator("#conversationHistory .response-evidence > summary").first.click()
         page.locator('#conversationHistory [data-evidence-index="0"]').click()
         page.locator("#tab-context").click()
         expect(page.locator("#panel-context")).to_contain_text(

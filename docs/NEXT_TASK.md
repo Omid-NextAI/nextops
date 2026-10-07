@@ -1,5 +1,18 @@
 # Next task / کار بعدی
 
+Current bounded source checkpoint, 2026-10-07: verification/handoff completed for the
+[OCS logo login and compact workspace](requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md).
+Keep approved source/host controls, chats, safe evidence and actual model metadata. Record local
+tests/screenshots separately from live `ec1ed32`:1446 unit/API and101 browser passed. No live deployment or model/policy change is
+included; promotion needs its own authorized package qualification. Remaining model/offline gates
+below are preserved and are not resolved by visual redesign.
+
+گام محدودِ جاری کد، ۷ اکتبر ۲۰۲۶: بررسی و تحویل ورود با نشان OCS و فضای کار ساده کامل شد؛
+۱٬۴۴۶ آزمون واحد/API و۱۰۱ مرورگر موفق‌اند.
+انتخاب منبع/میزبان مجاز، سابقه، شاهد امن و مدل واقعی حفظ‌اند. آزمون/تصویر محلی از `ec1ed32`
+زنده جدا ثبت شود. استقرار یا تغییر مدل/سیاست جزو این کار نیست؛ ترفیع بسته مجوز و پذیرش جدا
+می‌خواهد. معیارهای باقی‌ماندهٔ مدل/آفلاینِ پایین با بازطراحی دیداری حل نمی‌شوند.
+
 Current task — **2026-10-07, source/UI follow-up retained**: do not redo the completed capability
 dialog, visible source/host controls, three approved secondary reads, saved resume, audit/hash
 matching or exact app/API source rollback/reapply. `ec1ed32` is serving both roles; native Q8 and

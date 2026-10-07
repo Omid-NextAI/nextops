@@ -1256,7 +1256,12 @@ def test_panel_is_local_bilingual_and_sets_browser_security_headers() -> None:
     assert 'id="appIcon"' in response.text
     assert "محیط کنترل‌شدهٔ ارزیابی کاربران" in javascript.text
     assert "شرکت رایانه خدمات امید" in javascript.text
-    assert "data:image/jpeg;base64," in stylesheet.text
+    assert "/assets/ocs-logo-light.jpg" in stylesheet.text
+    assert "/assets/ocs-logo-dark.jpg" in stylesheet.text
+    for logo in ("ocs-logo-light.jpg", "ocs-logo-dark.jpg"):
+        logo_response = client.get(f"/assets/{logo}")
+        assert logo_response.status_code == 200
+        assert logo_response.headers["content-type"] == "image/jpeg"
     workspace_css = client.get("/assets/workspace.css")
     assert "margin-inline-start:238px" in workspace_css.text
     assert "grid-template-columns:minmax(0,1fr) 392px" in workspace_css.text

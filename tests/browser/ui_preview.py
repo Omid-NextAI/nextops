@@ -13,6 +13,9 @@ from .test_phase2_panel import STATIC, _fixture_app
 def create_preview() -> FastAPI:
     app = _fixture_app()
     app.state.saved_chats_enabled = True
+    app.state.ready_model = "nextops-qwen3-8-27b-q8-0"
+    app.state.ready_context = 16384
+    app.state.thinking_allowed = False
 
     @app.middleware("http")
     async def design_fixture(request: Request, call_next: Any) -> Response:

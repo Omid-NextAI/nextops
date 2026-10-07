@@ -39,7 +39,7 @@
   function sourceHealth(key){sourceState=key;const pill=el("monitoringStatus");pill.className=`status-pill ${key==="sourceReady"?"ready":key==="sourceFailed"?"failed":"checking"}`;const label=pill.querySelector("span");label.removeAttribute("data-i18n");label.textContent=t(key);}
   window.NextOpsCapabilities={
     ready(value){readiness=value;render();},conversation(value){conversation=value;render();},locale(value){locale=value;render();},
-    sourceHealth,busy(value){actions.querySelectorAll("button").forEach(b=>b.disabled=value);},
+    sourceHealth,busy(value){actions.querySelectorAll("button").forEach(b=>b.disabled=value);render();},
     reset(){readiness=null;conversation=null;sourceState=null;content.replaceChildren();el("modelStatusLabel")?.removeAttribute("aria-label");if(dialog.open)dialog.close();},
     sourceSelection(){sourceState=el("monitoringSource").value?"sourcePending":null;if(sourceState){sourceHealth(sourceState);window.NextOpsView?.health("source-selection",null);}}
   };

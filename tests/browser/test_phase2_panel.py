@@ -66,6 +66,7 @@ def test_qwen38_capabilities_and_secondary_problem_inspection(
         assert not app.state.monitoring_requests  # Shortcut prepares; does not execute.
         page.locator("#askButton").click()
         expect(page.locator("#evidenceSource")).to_contain_text("secondary / sla")
+        page.locator("#resultCard .response-evidence > summary").click()
         page.locator('#resultCard [data-evidence-filter="problems"]').click()
         expect(page.locator("#resultCard .evidence-row")).to_have_count(1)
         page.locator("#resultCard [data-evidence-index]").first.click()
@@ -566,17 +567,19 @@ def browser_server() -> Iterator[tuple[str, FastAPI]]:
 def _login(page: Page, base_url: str) -> None:
     page.set_default_timeout(10000)
     page.goto(base_url, wait_until="networkidle")
-    expect(page.locator(".ocs-logo-header")).to_be_visible()
-    expect(page.get_by_text("Omid Computer Services", exact=True)).to_be_visible()
+    expect(page.locator(".ocs-logo-hero")).to_be_visible()
+    expect(page.locator(".ocs-logo-hero")).to_have_attribute(
+        "aria-label", "Omid Computer Services company logo"
+    )
     logo_background = str(
         page.locator(".ocs-logo-header").evaluate(
             "element => getComputedStyle(element).backgroundImage"
         )
     )
-    assert logo_background.startswith('url("data:image/jpeg;base64,')
+    assert "/assets/ocs-logo-" in logo_background
     icon_href = page.locator("#appIcon").get_attribute("href")
     assert icon_href is not None
-    assert icon_href.startswith("data:image/jpeg;base64,")
+    assert icon_href == "/assets/ocs-logo-light.jpg"
     page.locator("#languageButton").click()
     page.set_viewport_size({"width": 375, "height": 812})
     assert page.locator("html").get_attribute("dir") == "rtl"
@@ -585,8 +588,8 @@ def _login(page: Page, base_url: str) -> None:
     page.set_viewport_size({"width": 1280, "height": 900})
     page.locator("#loginForm").get_by_label("Username").fill("owner")
     page.locator("#loginForm").get_by_label("Password", exact=True).fill("test-password")
-    page.get_by_role("button", name="Sign in securely").click()
-    expect(page.get_by_role("heading", name="Investigation workspace", exact=True)).to_be_visible()
+    page.locator("#loginForm button[type=submit]").click()
+    expect(page.get_by_role("heading", name="Ask NextOps", exact=True)).to_be_visible()
     page.locator("#composerOptions summary").click()
 
 
@@ -757,9 +760,8 @@ def test_theme_toggle_persists_is_keyboard_accessible_and_keeps_brand(
         page.goto(base_url, wait_until="networkidle")
         if locale == "fa":
             page.locator("#languageButton").click()
-        logo = page.locator(".ocs-logo-header").evaluate(
-            "el => getComputedStyle(el).backgroundImage"
-        )
+        logo = page.locator(".ocs-logo-hero").evaluate("el => getComputedStyle(el).backgroundImage")
+        assert logo.endswith('/ocs-logo-light.jpg")')
         switch = page.locator("#themeButton")
         expect(switch).to_have_attribute("aria-pressed", "false")
         switch.focus()
@@ -768,8 +770,9 @@ def test_theme_toggle_persists_is_keyboard_accessible_and_keeps_brand(
         expect(page.locator("html")).to_have_attribute("data-theme", "dark")
         assert page.evaluate("localStorage.getItem('nextops-theme')") == "dark"
         assert (
-            page.locator(".ocs-logo-header").evaluate("el => getComputedStyle(el).backgroundImage")
-            == logo
+            page.locator(".ocs-logo-hero")
+            .evaluate("el => getComputedStyle(el).backgroundImage")
+            .endswith('/ocs-logo-dark.jpg")')
         )
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
         tokens = page.evaluate(
@@ -840,7 +843,7 @@ def test_saved_chat_reload_followup_thinking_delete_and_logout(
         _login(page, base_url)
         expect(page.locator("#savedChatsPanel")).to_be_visible()
         page.get_by_label("Question", exact=True).fill("What is DNS?")
-        page.get_by_role("button", name="Ask assistant", exact=True).click()
+        page.locator("#askButton").click()
         expect(page.locator("#answer")).to_have_text("Local follow-up answer.")
         assert len(app.state.saved_chats) == 1
         first = app.state.general_requests[-1]
@@ -848,9 +851,9 @@ def test_saved_chat_reload_followup_thinking_delete_and_logout(
         _options(page)
         page.get_by_label("Response mode").select_option("thinking")
         page.get_by_label("Question", exact=True).fill("Give an example.")
-        page.get_by_role("button", name="Ask assistant", exact=True).click()
+        page.locator("#askButton").click()
         expect(page.locator("#askedQuestion")).to_have_text("Give an example.")
-        expect(page.get_by_role("button", name="Ask assistant", exact=True)).to_be_enabled()
+        expect(page.locator("#askButton")).to_be_enabled()
         assert app.state.general_requests[-1]["thinking"] is True
         page.reload(wait_until="networkidle")
         page.get_by_role("button", name="What is DNS?", exact=True).click()
@@ -933,7 +936,7 @@ def test_phase2_panel_supports_incident_evidence_and_persian_rtl(
         expect(target).to_be_visible()
         target.select_option("app")
         page.get_by_label("Question", exact=True).fill("Explain the current application condition.")
-        page.get_by_role("button", name="Ask assistant").click()
+        page.locator("#askButton").click()
 
         expect(page.get_by_text("Live Zabbix + Linux evidence")).to_be_visible()
         expect(page.locator("#askedQuestion")).to_have_text(
@@ -967,7 +970,7 @@ def test_phase2_panel_supports_incident_evidence_and_persian_rtl(
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth") is True
 
         _profile_action(page, "#logoutButton")
-        expect(page.get_by_role("button", name="ورود امن")).to_be_visible()
+        expect(page.locator('#loginForm button[type="submit"]')).to_be_visible()
         assert page.evaluate("sessionStorage.getItem('nextops-session')") is None
         assert app.state.logout_requests == 1
         browser.close()
@@ -1045,7 +1048,7 @@ def test_general_fallback_notice_does_not_imply_live_evidence(
         page = browser.new_page(viewport={"width": 1280, "height": 900})
         _login(page, base_url)
         page.get_by_label("Question", exact=True).fill("Hi")
-        page.get_by_role("button", name="Ask assistant").click()
+        page.locator("#askButton").click()
 
         expect(page.locator("#answer")).to_have_text("Hello! How can I help?")
         expect(page.locator("#integrityNotice")).to_contain_text(
@@ -1145,7 +1148,7 @@ def test_file_only_question_hides_unrelated_evidence_until_explicit_expand(
             "Show only system file and filesystem evidence for this host. "
             "Do not include CPU, memory, or unrelated Zabbix data."
         )
-        page.get_by_role("button", name="Ask assistant").click()
+        page.locator("#askButton").click()
 
         expect(page.locator("#answer")).to_contain_text("Approved filesystem capacity only")
         expect(page.locator("#evidenceBrief")).to_contain_text("Approved filesystem mounts only")
@@ -1197,7 +1200,7 @@ def test_network_and_service_focus_hide_unrelated_evidence_until_explicit_expand
         _options(page)
         page.locator(f'.locale-choice[data-locale="{locale}"]').click()
         page.get_by_label("Question", exact=True).fill(question)
-        page.get_by_role("button", name="Ask assistant").click()
+        page.locator("#askButton").click()
 
         expect(page.locator("#evidenceBrief")).to_contain_text(scope)
         expect(page.locator("#integrityNotice")).to_contain_text("deterministic")
@@ -1276,7 +1279,7 @@ def test_monitoring_host_inventory_limit_is_explained_in_browser(
         page.get_by_label("Question", exact=True).fill(
             "Which authorized Zabbix hosts are currently unavailable?"
         )
-        page.get_by_role("button", name="Ask assistant").click()
+        page.locator("#askButton").click()
 
         expect(page.locator("#answer")).to_contain_text("cannot identify unavailable hosts")
         expect(page.locator("#integrityNotice")).to_contain_text(

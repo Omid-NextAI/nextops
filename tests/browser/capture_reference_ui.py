@@ -74,6 +74,10 @@ def capture(base_url: str, output: Path, theme: str = "dark") -> None:
             page.locator("#password").fill("test-password")
             page.locator('#loginForm button[type="submit"]').click()
             page.locator("#workspaceView:not(.hidden)").wait_for()
+            page.wait_for_load_state("networkidle")
+            page.screenshot(
+                path=str(output / f"workspace-empty-{locale}-{width}.png"), full_page=True
+            )
             page.locator("#composerOptions summary").click()
             page.locator('[data-mode="incident"]').click()
             page.locator("#incidentTarget").select_option("app")
@@ -87,8 +91,11 @@ def capture(base_url: str, output: Path, theme: str = "dark") -> None:
             page.locator("#resultCard:not(.hidden)").wait_for()
             page.evaluate("window.scrollTo(0,0)")
             page.screenshot(path=str(output / f"dashboard-{locale}-{width}.png"), full_page=True)
+            page.locator("#resultCard .response-evidence > summary").click()
+            page.locator('#resultCard [data-evidence-index="0"]').click()
+            if width >= 1450:
+                page.screenshot(path=str(output / f"evidence-{locale}-{width}.png"), full_page=True)
             if width < 1450:
-                page.locator('#resultCard [data-evidence-index="0"]').click()
                 # A fixed evidence sheet is a viewport, not the full underlying document.
                 page.screenshot(path=str(output / f"evidence-{locale}-{width}.png"))
                 page.keyboard.press("Escape")

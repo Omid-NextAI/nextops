@@ -1,5 +1,90 @@
 # Reference workspace and OCS login — source and controlled live handoff
 
+## Latest owner redesign: source only, 2026-10-07
+
+The company-logo/static-login and compact chat candidate supersedes the old Signal Gate and
+violet composition described below. Both supplied JPEGs are unchanged, selected for light/dark
+themes. The login takes the supplied video's split glass card and angular background, without
+unsupported sign-up/reset controls. No model, prompt, API policy, schema or live service changed.
+See [bounded requirements](../requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md).
+
+From the reviewed worktree, using already-provisioned Python/browser dependencies:
+
+```powershell
+.venv/Scripts/python.exe -B -X utf8 -m uvicorn tests.browser.ui_preview:create_preview --factory --host 127.0.0.1 --port 8879 --log-level error
+```
+
+Open `http://127.0.0.1:8879/`; isolated fixture credentials are `owner` / `test-password`, never
+production credentials. The visible “Demo data — not live” label cannot be enabled in production.
+Use a different free loopback port if needed; do not stop unrelated previews.
+
+```powershell
+.venv/Scripts/python.exe -B -X utf8 -m pytest -m "not integration and not browser" -q --tb=short
+.venv/Scripts/python.exe -B -X utf8 -m pytest tests/browser -q --tb=short
+.venv/Scripts/python.exe -B -X utf8 scripts/check_docs.py
+.venv/Scripts/python.exe -B -X utf8 scripts/check_release_status.py
+.venv/Scripts/python.exe -B -X utf8 -m tests.browser.capture_reference_ui --base-url http://127.0.0.1:8879 --output artifacts/ocs-redesign/pass-2 --theme dark
+.venv/Scripts/python.exe -B -X utf8 -m tests.browser.capture_reference_ui --base-url http://127.0.0.1:8879 --output artifacts/ocs-redesign/light --theme light
+```
+
+Observed final results: **1446 unit/API tests passed, two existing POSIX-only skips** (30.15s);
+**101 browser tests passed** (326.13s), including seven new redesign cases. Ruff check/format,
+Linux-target typing (152 files), JavaScript syntax, diff whitespace and documentation/status/
+inference/dossier validators passed. Documentation inventory:143 Markdown files/39 EN/FA pairs.
+The existing AnyIO deprecation warning remains; no dependency was changed to hide it.
+PostgreSQL integration, live infrastructure, human assistive-technology review and new CI were not
+run in this source-only change. The zoom test uses a 200%-equivalent CSS viewport, not browser chrome.
+
+An offline local wheel was built with the already-installed backend:
+
+```powershell
+.venv/Scripts/python.exe -B -X utf8 -c "from setuptools.build_meta import build_wheel; print(build_wheel('artifacts/ocs-redesign/wheel'))"
+.venv/Scripts/python.exe -B -X utf8 -m ruff check packages migrations tests scripts deploy/installers
+.venv/Scripts/python.exe -B -X utf8 -m ruff format --check packages migrations tests scripts deploy/installers
+.venv/Scripts/python.exe -B -X utf8 -m mypy --platform linux packages tests scripts deploy/installers
+.venv/Scripts/python.exe -B -X utf8 scripts/check_inference_artifacts.py
+.venv/Scripts/python.exe -B -X utf8 scripts/check_deployment_dossiers.py
+Get-ChildItem packages/nextops/api/static/*.js | ForEach-Object { node --check $_.FullName }
+git diff --check
+```
+
+The wheel contains all12 static assets, both logo hashes match, and test preview files are absent.
+Wheel SHA-256:`bc11414ec968eddea0048baba774b58ee1446f75fd5feb8a887761a178df5554`.
+`pip wheel` was unavailable because this venv has no pip; no installer/network download was added.
+Gitleaks scans of static assets, the new specification and new browser tests passed. A wider
+requirements-directory scan retained one finding in the untouched v2 archive (line463), not
+the new files; no archive edit or broad suppression was introduced.
+
+Screenshots include `login-en-1672.png`,
+`workspace-empty-en-1672.png`, `dashboard-en-1672.png`, `evidence-en-1672.png`, corresponding
+Persian/mobile views and `login-reduced-motion.png`. Capture checks block non-loopback destinations
+while preserving the fixture API, use fresh contexts/fixed times, and report errors/overflow.
+Before/first-pass/refined screenshots were actually inspected. This is local fixture coverage,
+not live integration, server-WAN, VM restart, model accuracy or complete WCAG certification.
+
+Intended deviations: company palette instead of violet; static original logo instead of gate;
+compact chat instead of always-open empty KPIs/inspector/findings; unsupported attachment removed;
+truthful model/source/status metadata preserved. System fonts remain locally available; no remote
+font, new frontend framework or dependency was added. Live promotion requires its own change window.
+
+### Changed files in this source task
+
+Presentation: `packages/nextops/api/static/index.html`, `app.css`, `workspace.css`, `login.css`,
+`app.js`, `investigation-view.js`, `capabilities.js`, `theme.js`, `login-motion.js`,
+`ocs-logo-dark.jpg`, `ocs-logo-light.jpg`. The legacy motion module now only handles password
+visibility; no motion remains. Evidence CSS, inference, policy, schema, lockfiles and deployed pins
+are unchanged.
+
+Verification: `tests/api/test_app.py`, `tests/browser/test_phase2_panel.py`,
+`test_reference_ui.py`, `test_panel_quality_regression.py`, `test_login_motion_regression.py`,
+`test_ocs_redesign.py`, `capture_reference_ui.py`, `ui_preview.py`.
+
+Documentation: paired `docs/en/UI.md`/`docs/fa/UI.md` and `REFERENCE_UI.md`,
+`docs/requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md`, `docs/PROJECT_STATE.md`,
+`docs/NEXT_TASK.md`, `docs/MARKDOWN_CONTEXT_INDEX.md`, `CHANGELOG.md`; `.gitignore` excludes
+generated redesign artifacts. Final dark/light captures are additionally in
+`artifacts/ocs-redesign/final-dark/` and `final-light/`, with `capture-checks.json`.
+
 [فارسی](../fa/REFERENCE_UI.md) · [Specification](../requirements/REFERENCE_UI_SPEC.md) · [UI history](UI.md)
 
 ## Scope and implementation

@@ -1,5 +1,17 @@
 # Project state / وضعیت پروژه
 
+Source checkpoint, 2026-10-07: the latest owner-requested OCS-logo/static-login and compact chat
+redesign passed source verification, not deployed:1446 unit/API,101 browser,152 typed files,
+brand/package checks and documentation validators. Base source `775797a`; recorded serving
+app/API `ec1ed32`, native inference and MCP remain unchanged. The new
+[bounded UI record](requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md) supersedes older visual
+choices, not historical deployment acceptance or security/offline requirements.
+
+گام کد، ۷ اکتبر ۲۰۲۶: ورود ثابت با نشان OCS و گفت‌وگوی سادهٔ درخواستی مالک،۱٬۴۴۶ آزمون واحد/API،
+۱۰۱ مرورگر،۱۵۲ فایل کنترل نوع و بررسی نشان/بسته/اسناد را گذراند؛ مستقر نیست. پایهٔ کد
+`775797a` و برنامه/API ثبت‌شدهٔ زنده `ec1ed32` است؛ مدل و MCP ثابت‌اند.
+رکورد محدودِ بالا جای انتخاب دیداریِ قبلی را می‌گیرد، نه سابقهٔ پذیرش یا الزام امنیت/آفلاین را.
+
 Current checkpoint — **2026-10-07, enabled-model UI and secondary inspection**: app and AI API
 `ec1ed32` are retained live at09:59:08 UTC after guarded source rollback/reapply. Native Q8/no-BLAS,
 its PID, budgets, units/environment, MCP `2a7c8dc`, credentials and schema are unchanged. The panel

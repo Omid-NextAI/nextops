@@ -1,5 +1,19 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## OCS company-logo login and compact workspace: source candidate, 2026-10-07
+
+Replace the animated gate with an original-logo split login inspired by the owner-supplied video.
+Use unchanged local dark/light JPEGs and company teal/gold; simplify chat, reveal evidence on
+demand and keep explicit approved-source controls. Fix options overlap, busy state, resumed model
+label, password locale and theme action synchronization. Existing auth/chats/provenance remain.
+No new live release, model/prompt/configuration change or dependency. See the
+[bounded specification](docs/requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md).
+
+دروازهٔ متحرک با ورود دو‌بخشی و نشان اصلیِ ثابت، الهام‌گرفته از ویدئوی مالک جایگزین می‌شود.
+JPEGهای محلیِ روشن/تیره بدون تغییر و رنگ شرکت حفظ‌اند؛ گفت‌وگو ساده، شاهد بازشونده و منبع
+مجاز آشکار است. هم‌پوشانی گزینه‌ها، وضعیت درخواست، مدل بازگشایی‌شده، زبان رمز و عملِ تم
+اصلاح شدند. ورود/سابقه/منشأ ثابت‌اند؛ انتشار زنده، مدل/پرامپت/تنظیم یا وابستگی تغییر نمی‌کنند.
+
 ## Enabled-model UI and secondary Zabbix inspection — 2026-10-07
 
 App/API `ec1ed32` add authenticated actual-capability metadata, visible approved source/host

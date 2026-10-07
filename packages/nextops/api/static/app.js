@@ -335,8 +335,8 @@ Object.assign(translations.en, {
   starterFirewall: "Firewalls & VPN", starterSecurity: "Defensive security",
   connectedEvidence: "AVAILABLE EVIDENCE",
   capabilityText: "Live: authorized Zabbix and Linux. Other devices: technical guidance only, not connected access.",
-  welcomeTitle: "What can I help you investigate?",
-  welcomeHelp: "Explain a problem, understand an alert, or plan safe diagnostics. Start with general advice; select a live mode when you need verified observations.",
+  welcomeTitle: "How can I help?",
+  welcomeHelp: "Ask a technical question, or choose live monitoring to inspect your systems.",
   starterTriage: "Triage a service failure", starterTriageHelp: "Safe first checks, before changing anything.",
   starterLatency: "Investigate network latency", starterLatencyHelp: "Separate DNS, routing and application delays.",
   starterAlerts: "Review Zabbix evidence", starterAlertsHelp: "Use fresh, scoped Zabbix evidence.",
@@ -363,8 +363,8 @@ Object.assign(translations.fa, {
   starterFirewall: "فایروال و VPN", starterSecurity: "امنیت دفاعی",
   connectedEvidence: "شواهد در دسترس",
   capabilityText: "دادهٔ زنده: Zabbix و Linux مجاز. برای سایر تجهیزات، فقط راهنمایی فنی ارائه می‌شود؛ اتصال مستقیم وجود ندارد.",
-  welcomeTitle: "چه چیزی را با هم بررسی کنیم؟",
-  welcomeHelp: "مشکل را شرح دهید، هشدار را بهتر بشناسید یا بررسی ایمن را برنامه‌ریزی کنید. برای مشاوره از حالت عمومی و برای مشاهدهٔ تأییدپذیر از حالت دارای شاهد استفاده کنید.",
+  welcomeTitle: "چطور می‌توانم کمک کنم؟",
+  welcomeHelp: "پرسش فنی بپرسید یا برای بررسی سامانه‌ها، پایش زنده را انتخاب کنید.",
   starterTriage: "بررسی خرابی سرویس", starterTriageHelp: "بررسی‌های ایمن اولیه، پیش از هر تغییر.",
   starterLatency: "بررسی تأخیر شبکه", starterLatencyHelp: "تفکیک تأخیر DNS، مسیر و برنامه.",
   starterAlerts: "مرور شواهد Zabbix", starterAlertsHelp: "با شاهد تازه و محدود به دامنهٔ مجاز Zabbix.",
@@ -382,6 +382,31 @@ Object.assign(translations.fa, {
   monitoringChecking: "بررسی دسترسی به دادهٔ Zabbix", monitoringReady: "دادهٔ Zabbix در دسترس است",
   monitoringUnavailable: "دادهٔ Zabbix در دسترس نیست",
   deniedError: "سیاست برنامه این درخواست را مجاز نمی‌داند؛ میزبان مجاز انتخاب کنید یا با مدیر سامانه تماس بگیرید."
+});
+
+Object.assign(translations.en, {
+  loginHeadline: "Welcome back.", loginLead: "Your infrastructure. One clear workspace.",
+  welcome: "Sign in to NextOps", credentialsPrompt: "Use your organization account.",
+  signIn: "Sign in", privacyNote: "Session stays in this browser tab.",
+  workspaceHeadline: "Ask NextOps", savedChats: "Recent conversations",
+  savedPrivacy: "Only you can see these. Avoid sharing secrets.",
+  generalMode: "Chat", monitoringMode: "Live monitoring", incidentMode: "Investigate",
+  questionPlaceholder: "Ask about your systems...",
+  starterTriage: "Servers & services", starterLatency: "Network & DNS",
+  starterAlerts: "Zabbix alerts", starterSecurity: "Security",
+  askAssistant: "Send question"
+});
+Object.assign(translations.fa, {
+  loginHeadline: "خوش آمدید.", loginLead: "زیرساخت شما، در یک محیط روشن و ساده.",
+  welcome: "ورود به NextOps", credentialsPrompt: "با حساب سازمانی خود وارد شوید.",
+  signIn: "ورود", privacyNote: "نشست فقط در این زبانهٔ مرورگر نگه‌داری می‌شود.",
+  workspaceHeadline: "از NextOps بپرسید", savedChats: "گفت‌وگوهای اخیر",
+  savedPrivacy: "فقط برای شما قابل مشاهده‌اند. اطلاعات محرمانه وارد نکنید.",
+  generalMode: "گفت‌وگو", monitoringMode: "پایش زنده", incidentMode: "بررسی رخداد",
+  questionPlaceholder: "دربارهٔ سامانه‌ها بپرسید...",
+  starterTriage: "سرورها و سرویس‌ها", starterLatency: "شبکه و DNS",
+  starterAlerts: "هشدارهای Zabbix", starterSecurity: "امنیت",
+  askAssistant: "ارسال پرسش"
 });
 
 const starters = {
@@ -421,6 +446,7 @@ function clearConversation() {
   byId("assistantError").textContent = "";
   byId("copyStatus").textContent = "";
   byId("requestStatus").textContent = "";
+  window.NextOpsCapabilities?.locale(state.language);
   setContextNotice(state.conversationsEnabled ? "savedContextHelp" : "contextHelp");
   byId("deleteChatButton").classList.add("hidden");
   document.querySelectorAll(".saved-chat-button").forEach(node => node.removeAttribute("aria-current"));
@@ -441,7 +467,7 @@ function setBusy(busy) {
     node.disabled = busy || (node.id === "incidentTarget" && !state.incidentTargets.length);
   });
   byId("askButton").toggleAttribute("aria-busy", busy);
-  byId("monitoringSource").disabled = busy;
+  byId("monitoringSource").disabled = busy || !state.sourceCatalog.length;
   byId("monitoringSourceTarget").disabled = busy || !byId("monitoringSource").value;
   byId("askButton").querySelector("span").textContent = translations[state.language][busy ? "working" : "askAssistant"];
 }
@@ -542,10 +568,7 @@ function renderAnswer(text, locale) {
 }
 
 function installBrandIcon() {
-  const background = getComputedStyle(document.querySelector(".ocs-logo")).backgroundImage;
-  if (background.startsWith('url("data:image/jpeg;base64,')) {
-    byId("appIcon").href = background.slice(5, -2);
-  }
+  byId("appIcon").href = "/assets/ocs-logo-light.jpg";
 }
 
 function applyLanguage(language) {
@@ -556,6 +579,7 @@ function applyLanguage(language) {
   document.documentElement.lang = language;
   document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
   window.NextOpsTheme.updateControl();
+  window.NextOpsMotion?.update();
   renderUsers();
   byId("copyStatus").textContent = "";
   byId("languageButton").textContent = language === "fa" ? "English" : "فارسی";
@@ -1374,19 +1398,19 @@ Object.assign(translations.en, {
   unknownIntegrityNotice: "Response integrity was not reported; evidence alone does not prove answer accuracy.",
   aiReady: "Local CPU ready",
   companyName: "Omid Computer Services",
-  loginHeadline: "Operational clarity. Inside your network.",
-  loginLead: "A private workspace for understanding infrastructure, investigating incidents, and working from evidence.",
-  credentialsPrompt: "Use your organization-issued credentials.",
-  workspaceHeadline: "Investigation workspace"
+  loginHeadline: "Welcome back.",
+  loginLead: "Your infrastructure. One clear workspace.",
+  credentialsPrompt: "Use your organization account.",
+  workspaceHeadline: "Ask NextOps"
 });
 Object.assign(translations.fa, {
   unknownIntegrityNotice: "وضعیت کنترل پاسخ گزارش نشده است؛ شاهد به‌تنهایی درستی پاسخ را اثبات نمی‌کند.",
   aiReady: "CPU محلی آماده است",
   companyName: "شرکت رایانه خدمات امید",
-  loginHeadline: "دید روشن بر زیرساخت، درون شبکهٔ شما",
-  loginLead: "فضایی اختصاصی برای پایش زیرساخت، بررسی رخدادها و تصمیم‌گیری بر پایهٔ شواهد.",
-  credentialsPrompt: "اطلاعات ورود صادرشده از سوی سازمان را وارد کنید.",
-  workspaceHeadline: "محیط بررسی رخداد"
+  loginHeadline: "خوش آمدید.",
+  loginLead: "زیرساخت شما، در یک محیط روشن و ساده.",
+  credentialsPrompt: "با حساب سازمانی خود وارد شوید.",
+  workspaceHeadline: "از NextOps بپرسید"
 });
 applyLanguage(state.language);
 installBrandIcon();

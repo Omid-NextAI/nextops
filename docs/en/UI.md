@@ -1,5 +1,25 @@
 # Bilingual operations console and design system
 
+## Company-logo login and compact chat: source candidate, 2026-10-07
+
+The owner's latest design request replaces the former violet workspace and animated Signal Gate
+with the OCS teal/gold palette and unchanged supplied dark/light company images. Login uses the
+video's split-card/geometric composition, with a static logo and no animation, sign-up or invented
+reset flow. The seven destinations and actual model capability dialog remain.
+
+Start in **Ask NextOps**. Chat is uncluttered; choose **Live monitoring** for visible approved
+source/host controls and explicit question shortcuts. **Investigate** retains the approved Linux
+target. **Investigation options** expands inline, not over mode buttons. **Monitoring summary**,
+**Review evidence** and **Request details** open on demand. Selecting evidence opens its inspector.
+Missing structured findings are not rendered as four empty cards. The unsupported attachment
+button is absent. Source/time/scope, warnings, safe raw data and audit details remain available.
+
+Busy controls/summary, model identity after saved resume, password locale and theme actions are
+synchronized. Login/session handling, owner isolation and read-only policy are unchanged.
+This is source-only; `ec1ed32` remains the recorded serving app/API. See
+[scope and brand hashes](../requirements/OCS_UI_SIMPLIFICATION_2026-10-07.md) and
+[preview/checks](REFERENCE_UI.md). Earlier dated visual designs below are historical.
+
 ## Qwen3.8 capabilities and selected-source inspection — controlled live, 2026-10-07
 
 The repair addresses a generic CPU label, buried source/host controls and a three-row evidence
