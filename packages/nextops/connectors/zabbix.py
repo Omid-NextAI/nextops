@@ -26,6 +26,7 @@ from nextops.contracts.monitoring import (
     MonitoringProblem,
     MonitoringSummary,
 )
+from nextops.security.evidence import sanitize_contract
 from nextops.security.http import NoRedirectHandler
 
 MAX_ZABBIX_RESPONSE_BYTES = 1_048_576
@@ -220,7 +221,7 @@ class ZabbixReadClient:
                 self._append_reason(reasons, "events_truncated")
             events = tuple(self._event(event) for event in raw_events[:MAX_INCIDENT_EVENTS])
 
-            return MonitoringIncidentContext(
+            result = MonitoringIncidentContext(
                 source_version=version,
                 host=host,
                 collected_at=collected_at,
@@ -232,6 +233,7 @@ class ZabbixReadClient:
                 is_partial=bool(reasons),
                 partial_reasons=tuple(reasons),
             )
+            return sanitize_contract(result)
         except (AttributeError, KeyError, TypeError, ValueError, ValidationError) as error:
             raise ApplicationError(
                 ErrorCode.DEPENDENCY_UNAVAILABLE,
@@ -321,7 +323,7 @@ class ZabbixReadClient:
             )
             for problem in raw_problems
         )
-        return MonitoringSummary(
+        result = MonitoringSummary(
             source_version=version,
             host=host,
             collected_at=collected_at,
@@ -332,6 +334,7 @@ class ZabbixReadClient:
             ),
             partial_reasons=partial_reasons,
         )
+        return sanitize_contract(result)
 
     @staticmethod
     def _metrics(raw_items: Any, collected_at: datetime) -> tuple[MonitoringMetric, ...]:

@@ -10,7 +10,7 @@ from typing import Literal
 from uuid import UUID, uuid4
 
 from pydantic import ValidationError
-from sqlalchemy import delete, func, select
+from sqlalchemy import delete, func, select, text
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session, sessionmaker
 
@@ -83,20 +83,30 @@ class DurableConversationService:
         self._clock = clock or (lambda: datetime.now(UTC))
 
     @contextmanager
-    def _transaction(self, token: str) -> Iterator[tuple[Session, Identity, datetime]]:
+    def _transaction(
+        self, token: str, *, cleanup: bool = False
+    ) -> Iterator[tuple[Session, Identity, datetime]]:
         try:
             with self._factory() as session, session.begin():
                 now = self._clock()
+                session.execute(text("SET LOCAL lock_timeout = '1500ms'"))
+                session.execute(text("SET LOCAL statement_timeout = '4s'"))
                 # Lock session/identity briefly so logout/recovery and quota checks serialize.
                 identity = session.scalar(
                     select(Identity)
                     .join(SessionModel, SessionModel.identity_id == Identity.id)
                     .where(
                         SessionModel.token_sha256 == hash_opaque_token(token),
-                        SessionModel.revoked_at.is_(None),
-                        SessionModel.expires_at > now,
-                        SessionModel.credential_version == Identity.credential_version,
-                        Identity.is_active.is_(True),
+                        *(
+                            ()
+                            if cleanup
+                            else (
+                                SessionModel.revoked_at.is_(None),
+                                SessionModel.expires_at > now,
+                                SessionModel.credential_version == Identity.credential_version,
+                                Identity.is_active.is_(True),
+                            )
+                        ),
                     )
                     .with_for_update(of=(Identity, SessionModel))
                 )
@@ -177,7 +187,7 @@ class DurableConversationService:
                 actor_id=identity.id,
                 correlation_id=correlation_id,
                 event_type=f"conversation.{event}",
-                outcome="accepted",
+                outcome="failed" if event == "failed" else "accepted",
                 occurred_at=now,
                 details={
                     "conversation_id": str(conversation_id) if conversation_id else None,
@@ -418,7 +428,9 @@ class DurableConversationService:
             return self._message(message)
 
     def fail(self, token: str, ticket: GenerationTicket, correlation_id: UUID) -> None:
-        with self._transaction(token) as (session, identity, now):
+        # Cleanup may remove only this server-issued nonce, even after logout or
+        # credential rotation. It grants no read/generation permission or data.
+        with self._transaction(token, cleanup=True) as (session, identity, now):
             conversation = self._owned(session, identity, ticket.conversation_id, now)
             if conversation.pending_nonce == ticket.nonce:
                 conversation.pending_nonce = None

@@ -257,3 +257,44 @@ def test_required_access_audit_failure_blocks_collection(
         assert gateway.read.await_count == 0
     finally:
         event.remove(app_session_factory, "before_flush", fail)
+
+
+def test_source_completion_audit_and_result_commit_are_atomic(
+    source_app: tuple[TestClient, str, AsyncMock, AsyncMock],
+    app_session_factory: sessionmaker[Session],
+) -> None:
+    client, token, gateway, _ = source_app
+
+    def fail(session: Session, context: Any, instances: Any) -> None:
+        if any(
+            isinstance(obj, AuditEvent) and obj.event_type == "monitoring.source.completed"
+            for obj in session.new
+        ):
+            raise SQLAlchemyError("finite source completion audit outage")
+
+    event.listen(app_session_factory, "before_flush", fail)
+    try:
+        response = client.post(
+            "/api/v1/monitoring/investigate",
+            headers={"Authorization": f"Bearer {token}"},
+            json={
+                "locale": "en",
+                "question": "status",
+                "source_id": "secondary",
+                "target_id": "sla",
+            },
+        )
+        assert response.status_code == 503
+        assert gateway.read.await_count == 1
+        with app_session_factory() as session:
+            run = session.scalar(select(Run))
+            assert run is not None and run.status == "failed" and run.result is None
+            assert not session.scalars(
+                select(AuditEvent).where(
+                    AuditEvent.event_type.in_(
+                        ("monitoring.source.completed", "investigation.completed")
+                    )
+                )
+            ).all()
+    finally:
+        event.remove(app_session_factory, "before_flush", fail)

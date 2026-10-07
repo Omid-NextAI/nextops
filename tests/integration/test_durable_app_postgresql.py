@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from datetime import UTC, datetime, timedelta
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 import pytest
 from alembic import command
 from alembic.config import Config
 from pydantic import SecretStr
-from sqlalchemy import Engine, inspect, select, text, update
+from sqlalchemy import Engine, event, inspect, select, text, update
 from sqlalchemy.exc import DBAPIError
 from sqlalchemy.orm import Session, sessionmaker
 
@@ -23,6 +24,7 @@ from nextops.contracts.durable import (
     LoginRequest,
     RecoveryRequest,
     RunCreateRequest,
+    RunRecord,
     RunStatus,
 )
 from nextops.contracts.errors import ErrorCode
@@ -77,6 +79,232 @@ def bootstrap_request() -> BootstrapRequest:
         admin_username="owner",
         admin_password=ADMIN_PASSWORD,
     )
+
+
+def _empty_evidence(now: datetime, incident: bool) -> MonitoringSummary | IncidentEvidence:
+    summary = MonitoringSummary(
+        source_version="7.0.30",
+        host="AUDIT-HOST",
+        collected_at=now,
+        metrics=(),
+        active_problems=(),
+        is_partial=True,
+        partial_reasons=("no_usable_metrics",),
+    )
+    if not incident:
+        return summary
+    context = MonitoringIncidentContext(
+        source_version=summary.source_version,
+        host=summary.host,
+        collected_at=now,
+        window_started_at=now - timedelta(hours=1),
+        window_ended_at=now,
+        summary=summary,
+        history=(),
+        events=(),
+        is_partial=True,
+        partial_reasons=summary.partial_reasons,
+    )
+    linux = LinuxDiagnosticSnapshot(
+        target_id="app",
+        hostname="audit-app",
+        operating_system="Ubuntu",
+        collected_at=now,
+        uptime_seconds=1,
+        logical_cpu_count=1,
+        load_1m=0,
+        load_5m=0,
+        load_15m=0,
+        memory_total_bytes=1,
+        memory_available_bytes=1,
+        swap_total_bytes=0,
+        swap_free_bytes=0,
+        filesystems=(),
+        processes=(),
+        services=(),
+        journal=(),
+        local_user_count=0,
+        logged_in_user_count=0,
+        installed_package_count=0,
+        listening_sockets=(),
+        routes=(),
+        nameservers=(),
+    )
+    return IncidentEvidence.combine("app", context, linux)
+
+
+def _empty_assistant(correlation: UUID, now: datetime) -> AssistantResponse:
+    return AssistantResponse(
+        request_id=uuid4(),
+        correlation_id=correlation,
+        locale="en",
+        answer="Zabbix partial evidence; current reachability unknown.",
+        model_id="nextops-qwen3-8b-q4-k-m",
+        prompt_tokens=1,
+        completion_tokens=1,
+        finish_reason=FinishReason.STOP,
+        started_at=now,
+        completed_at=now,
+        queue_ms=0,
+        cpu_only_required=True,
+    )
+
+
+@pytest.mark.parametrize("incident", [False, True])
+@pytest.mark.parametrize(
+    "revocation", ["logout", "disabled", "credential", "scope", "expiry", "target"]
+)
+def test_completion_rechecks_authority_inside_persistence_transaction(
+    app_session_factory: sessionmaker[Session],
+    settings: AppSettings,
+    incident: bool,
+    revocation: str,
+) -> None:
+    clock = MutableClock()
+    service = DurableAppService(app_session_factory, settings, clock=clock)
+    bootstrap = service.bootstrap(bootstrap_request(), BOOTSTRAP_SECRET, uuid4())
+    actor = bootstrap.authenticated_session.actor
+    token = bootstrap.authenticated_session.session.access_token
+    correlation = uuid4()
+    if incident:
+        run = service.create_incident_investigation(
+            actor,
+            IncidentInvestigationRequest(
+                target_id="app", locale="en", question="Describe evidence"
+            ),
+            correlation,
+            ("app",),
+            token=token,
+        )
+    else:
+        run = service.create_live_investigation(
+            actor,
+            AssistantRequest(locale="en", question="Describe evidence"),
+            correlation,
+            token=token,
+        )
+    evidence = _empty_evidence(clock(), incident)
+    response = _empty_assistant(correlation, clock())
+    if revocation == "logout":
+        service.logout(token, uuid4())
+    elif revocation == "expiry":
+        clock.advance(settings.session_ttl_seconds + 1)
+    else:
+        with app_session_factory() as session, session.begin():
+            if revocation == "target":
+                session.execute(update(Target).values(enabled=False))
+            else:
+                values = (
+                    {"is_active": False}
+                    if revocation == "disabled"
+                    else {"credential_version": 2}
+                    if revocation == "credential"
+                    else {"scopes": ["runs.read"]}
+                )
+                session.execute(
+                    update(Identity).where(Identity.id == actor.subject_id).values(**values)
+                )
+    with pytest.raises(ApplicationError) as denied:
+        if isinstance(evidence, IncidentEvidence):
+            service.complete_incident_investigation(
+                actor, run.run_id, response, evidence, token=token
+            )
+        else:
+            service.complete_live_investigation(actor, run.run_id, response, evidence, token=token)
+    assert denied.value.code in {ErrorCode.UNAUTHENTICATED, ErrorCode.POLICY_DENIED}
+    with app_session_factory() as session:
+        stored = session.get(Run, run.run_id)
+        assert stored is not None and stored.result is None and stored.status == "running"
+        assert not session.scalars(
+            select(AuditEvent).where(
+                AuditEvent.run_id == run.run_id,
+                AuditEvent.event_type.in_(("investigation.completed", "incident.completed")),
+            )
+        ).all()
+
+
+def test_direct_and_stored_evidence_reads_are_mandatorily_audited(
+    app_session_factory: sessionmaker[Session], settings: AppSettings
+) -> None:
+    service = DurableAppService(app_session_factory, settings)
+    bootstrap = service.bootstrap(bootstrap_request(), BOOTSTRAP_SECRET, uuid4())
+    token = bootstrap.authenticated_session.session.access_token
+    actor = bootstrap.authenticated_session.actor
+    correlation = uuid4()
+    evidence = _empty_evidence(datetime.now(UTC), False)
+    assert isinstance(evidence, MonitoringSummary)
+    service.audit_evidence_access(token, correlation, "summary", "completed", evidence)
+    with pytest.raises(ApplicationError) as missing:
+        service.get_run(actor, uuid4(), token=token, correlation_id=correlation)
+    assert missing.value.code == ErrorCode.NOT_FOUND
+    with app_session_factory() as session:
+        events = session.scalars(
+            select(AuditEvent).where(AuditEvent.correlation_id == correlation)
+        ).all()
+        assert {e.event_type for e in events} == {
+            "monitoring.evidence.summary.completed",
+            "run.evidence.read",
+        }
+        assert any(e.outcome == "denied" for e in events)
+        assert all(
+            "AUDIT-HOST" not in str(e.details) and token not in str(e.details) for e in events
+        )
+
+    def fail_audit(session: Session, context: object, instances: object) -> None:
+        if any(
+            isinstance(obj, AuditEvent)
+            and obj.event_type.startswith(("monitoring.evidence.", "run.evidence.read"))
+            for obj in session.new
+        ):
+            from sqlalchemy.exc import SQLAlchemyError
+
+            raise SQLAlchemyError("finite isolated audit outage")
+
+    event.listen(app_session_factory, "before_flush", fail_audit)
+    try:
+        with pytest.raises(ApplicationError) as failed:
+            service.audit_evidence_access(token, uuid4(), "summary", "completed", evidence)
+        assert failed.value.code == ErrorCode.DEPENDENCY_UNAVAILABLE
+        with pytest.raises(ApplicationError) as failed_read:
+            service.get_run(actor, uuid4(), token=token, correlation_id=uuid4())
+        assert failed_read.value.code == ErrorCode.DEPENDENCY_UNAVAILABLE
+    finally:
+        event.remove(app_session_factory, "before_flush", fail_audit)
+
+
+def test_sensitive_historical_result_is_denied_without_rewriting_hash_or_content(
+    app_session_factory: sessionmaker[Session], settings: AppSettings
+) -> None:
+    service = DurableAppService(app_session_factory, settings)
+    bootstrap = service.bootstrap(bootstrap_request(), BOOTSTRAP_SECRET, uuid4())
+    actor = bootstrap.authenticated_session.actor
+    token = bootstrap.authenticated_session.session.access_token
+    correlation = uuid4()
+    request = AssistantRequest(locale="en", question="Describe evidence")
+    run = service.create_live_investigation(actor, request, correlation, token=token)
+    now = datetime.now(UTC)
+    evidence = _empty_evidence(now, False)
+    assert isinstance(evidence, MonitoringSummary)
+    completed = service.complete_live_investigation(
+        actor, run.run_id, _empty_assistant(correlation, now), evidence, token=token
+    )
+    historical = completed.model_dump(mode="json")
+    historical["evidence"]["host"] = "password=AUDIT_ONLY_CANARY"
+    historical["evidence_sha256"] = service._json_hash(historical["evidence"])
+    # Isolated fixture represents a valid pre-repair row, never an operational edit.
+    with app_session_factory() as session, session.begin():
+        session.execute(update(Run).where(Run.id == run.run_id).values(result=historical))
+    operations: tuple[Callable[[], RunRecord], ...] = (
+        lambda: service.get_run(actor, run.run_id, token=token, correlation_id=uuid4()),
+        lambda: service.create_live_investigation(actor, request, correlation, token=token),
+    )
+    for operation in operations:
+        with pytest.raises(ApplicationError) as denied:
+            operation()
+        assert denied.value.message_key == "run.evidence_redaction_required"
+    with app_session_factory() as session:
+        stored = session.get(Run, run.run_id)
+        assert stored is not None and stored.result == historical
 
 
 def test_migration_upgrade_downgrade_and_role_grants(
@@ -322,7 +550,8 @@ def test_live_investigation_persists_bounded_evidence_result_and_failure_audit(
         max_output_tokens=128,
     )
 
-    created = service.create_live_investigation(actor, request, correlation_id)
+    token = bootstrap.authenticated_session.session.access_token
+    created = service.create_live_investigation(actor, request, correlation_id, token=token)
     assert created.status is RunStatus.RUNNING
 
     evidence = MonitoringSummary(
@@ -363,9 +592,10 @@ def test_live_investigation_persists_bounded_evidence_result_and_failure_audit(
         created.run_id,
         assistant,
         evidence,
+        token=token,
     )
     assert completed.is_partial is True
-    fetched = service.get_run(actor, created.run_id)
+    fetched = service.get_run(actor, created.run_id, token=token, correlation_id=uuid4())
 
     assert fetched.status is RunStatus.SUCCEEDED
     assert fetched.result == completed
@@ -374,7 +604,9 @@ def test_live_investigation_persists_bounded_evidence_result_and_failure_audit(
     assert completed.audit_event_id is not None
 
     failed_correlation_id = uuid4()
-    failed_run = service.create_live_investigation(actor, request, failed_correlation_id)
+    failed_run = service.create_live_investigation(
+        actor, request, failed_correlation_id, token=token
+    )
     service.fail_live_investigation(
         actor,
         failed_run.run_id,
@@ -384,7 +616,7 @@ def test_live_investigation_persists_bounded_evidence_result_and_failure_audit(
             retryable=True,
         ),
     )
-    fetched_failure = service.get_run(actor, failed_run.run_id)
+    fetched_failure = service.get_run(actor, failed_run.run_id, token=token, correlation_id=uuid4())
 
     with app_session_factory() as session:
         target = session.scalar(
@@ -424,6 +656,7 @@ def test_phase2_incident_persists_composite_evidence_and_target_scope(
     service = DurableAppService(app_session_factory, settings)
     bootstrap = service.bootstrap(bootstrap_request(), BOOTSTRAP_SECRET, uuid4())
     actor = bootstrap.authenticated_session.actor
+    token = bootstrap.authenticated_session.session.access_token
     correlation_id = uuid4()
     request = IncidentInvestigationRequest(
         target_id="app",
@@ -435,6 +668,7 @@ def test_phase2_incident_persists_composite_evidence_and_target_scope(
         request,
         correlation_id,
         ("app", "ai", "connector", "zabbix"),
+        token=token,
     )
     summary = MonitoringSummary(
         source_version="7.0.30",
@@ -524,8 +758,9 @@ def test_phase2_incident_persists_composite_evidence_and_target_scope(
         created.run_id,
         assistant,
         evidence,
+        token=token,
     )
-    fetched = service.get_run(actor, created.run_id)
+    fetched = service.get_run(actor, created.run_id, token=token, correlation_id=uuid4())
 
     assert completed.evidence.target_id == "app"
     assert completed.evidence.linux.services[0].unit == "nextops-app.service"

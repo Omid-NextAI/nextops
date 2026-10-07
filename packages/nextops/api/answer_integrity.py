@@ -12,6 +12,7 @@ from decimal import Decimal
 
 from nextops.api.evidence_qualifiers import (
     incident_qualifiers,
+    monitoring_counts,
     monitoring_qualifiers,
     with_evidence_qualifiers,
 )
@@ -26,6 +27,26 @@ from nextops.contracts.conversations import ConversationAssistantRequest
 from nextops.contracts.incidents import IncidentEvidence, IncidentInvestigationRequest
 from nextops.contracts.monitoring import MonitoringSummary
 from nextops.inference.contracts import FinishReason
+
+_PROBLEM_COUNT_QUESTION = re.compile(
+    r"(?:\b(?:how many|count|number of)\b|تعداد|چند).{0,80}"
+    r"(?:\b(?:problems?|alerts?)\b|مشکل|هشدار)",
+    re.IGNORECASE,
+)
+_PROBLEM_COUNT_CLAIM = re.compile(
+    r"(\d+)\s+(?:active\s+)?problems?\b|(?P<fa>\d+)\s+مشکل", re.IGNORECASE
+)
+_POSITIVE_HOST_STATUS = re.compile(
+    r"\b(?:host|server|target)\b[^.!?\n]{0,80}\b(?:is|are|was|were|remains?)\s+"
+    r"(?:currently\s+|remotely\s+)?(?:reachable|unreachable|online|offline|healthy|down|up)\b|"
+    r"(?:میزبان|سرور|هدف)[^.!؟\n]{0,80}(?:در\s*دسترس|سالم|قطع|متصل)\s+است",
+    re.IGNORECASE,
+)
+_SEVERITY_LABEL_CLAIM = re.compile(
+    r"\bseverity\s*([0-5])\s*(?:is|=|:|-)?\s*"
+    r"(not classified|information|warning|average|high|disaster)\b",
+    re.IGNORECASE,
+)
 
 _LIVE_QUESTION_MARKERS = re.compile(
     r"(?:\b(?:current|currently|now|today|live|status|state|health|running|available|"
@@ -601,6 +622,16 @@ def _assure_monitoring_answer(
                 "limitations": (*limitations, "file_listing_unavailable"),
             }
         )
+    if _PROBLEM_COUNT_QUESTION.search(request.question):
+        return assistant.model_copy(
+            update={
+                "answer": monitoring_counts(request.locale, evidence),
+                "evidence_mode": "live_zabbix",
+                "live_monitoring_data": True,
+                "integrity_status": "deterministic_focus",
+                "limitations": limitations,
+            }
+        )
     if monitoring_cpu_focus(request.question):
         answer, available = _cpu_idle_summary(request.locale, evidence)
         return assistant.model_copy(
@@ -623,6 +654,7 @@ def _assure_monitoring_answer(
         )
         and assistant.finish_reason == FinishReason.STOP
         and not _is_long_prompt_echo(request.question, assistant.answer)
+        and not _unsupported_monitoring_claim(assistant.answer, evidence)
     )
     return assistant.model_copy(
         update={
@@ -655,6 +687,16 @@ def _assure_incident_answer(
     is_stale = any(metric.stale for metric in evidence.zabbix.summary.metrics)
     limitations = _evidence_limitations(is_partial=evidence.is_partial, is_stale=is_stale)
     focus = incident_focus(request.question)
+    if _PROBLEM_COUNT_QUESTION.search(request.question):
+        return assistant.model_copy(
+            update={
+                "answer": monitoring_counts(request.locale, evidence.zabbix.summary),
+                "evidence_mode": "live_zabbix_linux",
+                "live_monitoring_data": True,
+                "integrity_status": "deterministic_focus",
+                "limitations": limitations,
+            }
+        )
     if focus == "host_status":
         return assistant.model_copy(
             update={
@@ -693,6 +735,7 @@ def _assure_incident_answer(
             is_stale=is_stale,
         )
         and evidence.target_id.casefold() in assistant.answer.casefold()
+        and not _unsupported_monitoring_claim(assistant.answer, evidence.zabbix.summary)
     )
     return assistant.model_copy(
         update={
@@ -1080,6 +1123,20 @@ def _is_long_prompt_echo(question: str, answer: str) -> bool:
     return len(normalized_question) >= 40 and normalized_answer == normalized_question
 
 
+def _unsupported_monitoring_claim(answer: str, evidence: MonitoringSummary) -> bool:
+    """Reject known lexical counterexamples, not claim general entailment checking."""
+    if _POSITIVE_HOST_STATUS.search(answer):
+        return True  # This contract has neither reachability nor host/engine health.
+    for claim in _PROBLEM_COUNT_CLAIM.finditer(answer):
+        if int(claim.group(1) or claim.group("fa")) != len(evidence.active_problems):
+            return True
+    labels = ("not classified", "information", "warning", "average", "high", "disaster")
+    return any(
+        labels[int(m.group(1))] != m.group(2).casefold()
+        for m in _SEVERITY_LABEL_CLAIM.finditer(answer)
+    )
+
+
 def _is_safe_evidence_answer(
     answer: str,
     *,
@@ -1128,7 +1185,8 @@ def _monitoring_fallback(locale: str, evidence: MonitoringSummary) -> str:
         return (
             "پاسخ کامل و قابل‌اتکایی به پرسش شما تولید نشد. "
             f"دادهٔ ثبت‌شدهٔ Zabbix در {_timestamp(evidence.collected_at)} "
-            f"شامل {len(evidence.active_problems)} مشکل فعال و {len(evidence.metrics)} سنجه است. "
+            f"شامل {len(evidence.active_problems)} ردیفِ دریافتی مشکل فعال "
+            f"و {len(evidence.metrics)} سنجه است. "
             f"{qualification}{freshness}از این نمای ثبت‌شده نمی‌توان علت ریشه‌ای، بازیابی یا انجام‌شدن "
             "هیچ تغییری را نتیجه گرفت. برای پاسخ به پرسش اصلی، جزئیات بخش شواهد را بررسی کنید."
         )
@@ -1145,7 +1203,8 @@ def _monitoring_fallback(locale: str, evidence: MonitoringSummary) -> str:
     return (
         "A complete, reliable answer to your question was not produced. "
         f"The observed Zabbix snapshot collected at {_timestamp(evidence.collected_at)} contains "
-        f"{len(evidence.active_problems)} active problem(s) and {len(evidence.metrics)} metric(s). "
+        f"{len(evidence.active_problems)} returned active problem row(s) "
+        f"and {len(evidence.metrics)} metric(s). "
         f"{qualification}{freshness}This snapshot does not establish a root cause, recovery, or "
         "any performed change. Review the attributable details in the evidence panel."
     )

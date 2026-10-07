@@ -23,11 +23,64 @@ from nextops.contracts.linux import LinuxDiagnosticSnapshot
 from nextops.contracts.monitoring import (
     MonitoringIncidentContext,
     MonitoringMetric,
+    MonitoringProblem,
     MonitoringSummary,
 )
 from nextops.inference.contracts import FinishReason
 
 NOW = datetime(2026, 10, 6, 12, 0, tzinfo=UTC)
+
+
+@pytest.mark.parametrize(
+    "raw",
+    [
+        "Zabbix observed 999 active problems.",
+        "Zabbix: host LAB-AI is remotely reachable.",
+        "Zabbix reported severity 3: High.",
+    ],
+)
+def test_known_unsupported_monitoring_claims_are_not_semantically_validated(raw: str) -> None:
+    result = assure_monitoring_answer(
+        AssistantRequest(locale="en", question="Summarize monitoring"),
+        assistant("en", raw),
+        summary(),
+    )
+    assert result.integrity_status == "deterministic_fallback"
+    assert raw not in result.answer
+
+
+@pytest.mark.parametrize(
+    "locale,question",
+    [("en", "How many active problems are there?"), ("fa", "چند مشکل فعال وجود دارد؟")],
+)
+@pytest.mark.parametrize("truncated", [False, True])
+def test_problem_count_is_application_owned_and_truncated_total_is_unknown(
+    locale: Literal["en", "fa"], question: str, truncated: bool
+) -> None:
+    evidence = summary().model_copy(
+        update={
+            "active_problems": tuple(
+                MonitoringProblem(name=f"problem {i}", severity=3, started_at=NOW) for i in range(9)
+            ),
+            "is_partial": truncated,
+            "partial_reasons": ("problems_truncated",) if truncated else (),
+        }
+    )
+    result = assure_monitoring_answer(
+        AssistantRequest(locale=locale, question=question),
+        assistant(locale, "Zabbix observed 999 active problems; this host is remotely reachable."),
+        evidence,
+    )
+    assert "999" not in result.answer
+    assert "9" in result.answer
+    assert result.integrity_status == "deterministic_focus"
+    assert (
+        "total is unknown" in result.answer
+        if locale == "en"
+        else "تعداد کل نامعلوم" in result.answer
+    ) is truncated
+    assert "Average" in result.answer if locale == "en" else "متوسط" in result.answer
+    assert "unknown" in result.answer if locale == "en" else "نامعلوم" in result.answer
 
 
 def summary(*, stale: bool = False, partial: bool = False) -> MonitoringSummary:

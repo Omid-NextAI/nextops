@@ -18,6 +18,49 @@ from nextops.contracts.monitoring import MonitoringSummary
 Locale = Literal["en", "fa"]
 ANSWER_LIMIT = 16_000
 _BIDI_CONTROLS = "\u061c\u200e\u200f\u202a\u202b\u202c\u202d\u202e\u2066\u2067\u2068\u2069"
+_SEVERITIES = (
+    ("Not classified", "طبقه‌بندی‌نشده"),
+    ("Information", "اطلاعات"),
+    ("Warning", "هشدار"),
+    ("Average", "متوسط"),
+    ("High", "زیاد"),
+    ("Disaster", "فاجعه"),
+)
+
+
+def monitoring_counts(locale: str, evidence: MonitoringSummary) -> str:
+    """Counts/labels come from typed rows, never sampled or generated prose."""
+    count = len(evidence.active_problems)
+    counts = [
+        sum(p.severity == severity for p in evidence.active_problems) for severity in range(6)
+    ]
+    labels = "; ".join(
+        f"{severity}={_SEVERITIES[severity][locale == 'fa']}: {number}"
+        for severity, number in enumerate(counts)
+        if number
+    )
+    truncated = "problems_truncated" in evidence.partial_reasons
+    if locale == "fa":
+        total = (
+            " تعداد کل نامعلوم است؛ این تعداد فقط حد پایینِ نمای دریافتی است." if truncated else ""
+        )
+        return (
+            f"شمارش برنامه در دامنهٔ همین میزبان مجاز: {count} ردیف مشکل فعال دریافت شد؛ "
+            f"{len(evidence.metrics)} سنجه دریافت شد.{total}"
+            + (f" شدت ردیف‌های دریافتی: {labels}." if labels else "")
+            + " دسترسی‌پذیری شبکه و سلامت موتور پایش از این داده نامعلوم است."
+        )
+    total = (
+        " The total is unknown; this is only a lower bound of the returned snapshot."
+        if truncated
+        else ""
+    )
+    return (
+        f"Application counts within this authorized host scope: {count} active problem row(s) "
+        f"returned; {len(evidence.metrics)} metric(s) returned.{total}"
+        + (f" Returned-row severity: {labels}." if labels else "")
+        + " Network reachability and monitoring-engine health are unknown from this data."
+    )
 
 
 def _timestamp(value: datetime) -> str:
@@ -48,7 +91,8 @@ def monitoring_qualifiers(locale: Locale, evidence: MonitoringSummary) -> str:
             f"گردآوری: {_timestamp(evidence.collected_at)}؛ "
             f"زمان‌های مشاهدهٔ سنجه‌ها: {observations}.\n"
             f"پوشش: {coverage}؛ سنجه‌های علامت‌گذاری‌شده به‌عنوان قدیمی: {stale}. "
-            "نبود علامت قدیمی، اثبات سلامت فعلی نیست؛ جزئیات در بخش شواهد است."
+            "نبود علامت قدیمی، اثبات سلامت فعلی نیست؛ جزئیات در بخش شواهد است.\n"
+            + monitoring_counts(locale, evidence)
         )
     observations = observed or "metric observation time unavailable"
     coverage = "partial" if evidence.is_partial else "marked complete by the received contract"
@@ -58,7 +102,8 @@ def monitoring_qualifiers(locale: Locale, evidence: MonitoringSummary) -> str:
         f"collected: {_timestamp(evidence.collected_at)}; "
         f"metric observation times: {observations}.\n"
         f"Coverage: {coverage}; metrics marked stale: {stale}. "
-        "Absence of a stale marker is not proof of current health; see the evidence panel."
+        "Absence of a stale marker is not proof of current health; see the evidence panel.\n"
+        + monitoring_counts(locale, evidence)
     )
 
 

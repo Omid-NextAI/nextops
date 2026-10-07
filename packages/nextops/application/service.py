@@ -10,7 +10,7 @@ from hashlib import sha256
 from typing import Any
 from uuid import UUID, uuid4
 
-from sqlalchemy import delete, func, select, update
+from sqlalchemy import delete, func, select, text, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session, sessionmaker
@@ -40,7 +40,7 @@ from nextops.contracts.durable import (
 from nextops.contracts.errors import ErrorCode
 from nextops.contracts.incidents import IncidentEvidence, IncidentInvestigationRequest
 from nextops.contracts.models import ActorContext, InvestigationRequest, Role, TargetReference
-from nextops.contracts.monitoring import MonitoringSummary
+from nextops.contracts.monitoring import MonitoringIncidentContext, MonitoringSummary
 from nextops.contracts.source_catalog import SourceAssistantRequest
 from nextops.domain.types import RiskClass
 from nextops.persistence.models import (
@@ -56,6 +56,7 @@ from nextops.persistence.models import (
     Session as SessionModel,
 )
 from nextops.policy.authorization import AuthorizationPolicy, PolicyRule
+from nextops.security.evidence import sanitize_contract
 from nextops.security.secrets import (
     PasswordService,
     hash_opaque_token,
@@ -619,6 +620,8 @@ class DurableAppService:
         actor: ActorContext,
         request: AssistantRequest,
         correlation_id: UUID,
+        *,
+        token: str,
     ) -> RunRecord:
         """Persist a scoped live investigation before calling external local services."""
 
@@ -635,6 +638,7 @@ class DurableAppService:
 
         try:
             with self._session_factory() as session, session.begin():
+                self._current_actor(session, token, expected=actor)
                 if FIXTURE_SCOPE not in actor.scopes:
                     self._add_audit(
                         session,
@@ -668,11 +672,13 @@ class DurableAppService:
                     target = session.scalars(target_statement).one_or_none()
                     if target is None:
                         target = session.scalar(
-                            select(Target).where(
+                            select(Target)
+                            .where(
                                 Target.organization_id == actor.organization_id,
                                 Target.environment_id == actor.environment_id,
                                 Target.name == target_name,
                             )
+                            .with_for_update(read=True)
                         )
                     if (
                         target is None
@@ -742,6 +748,12 @@ class DurableAppService:
                             )
 
                     if pending_error is None:
+                        candidate = self._run_record(run)
+                        try:
+                            self._require_safe_stored_result(candidate)
+                        except ApplicationError as error:
+                            pending_error = error
+                    if pending_error is None:
                         self._add_audit(
                             session,
                             organization_id=actor.organization_id,
@@ -754,7 +766,7 @@ class DurableAppService:
                             details={"target_kind": LIVE_INVESTIGATION_TARGET_KIND},
                             occurred_at=now,
                         )
-                        record = self._run_record(run)
+                        record = candidate
                     else:
                         self._add_audit(
                             session,
@@ -786,9 +798,13 @@ class DurableAppService:
         run_id: UUID,
         assistant: AssistantResponse,
         evidence: MonitoringSummary,
+        *,
+        token: str,
     ) -> LiveInvestigationResult:
         """Atomically persist the bounded evidence, model result, and completion audit."""
 
+        evidence = sanitize_contract(evidence)
+        assistant = sanitize_contract(assistant)
         evidence_payload = evidence.model_dump(mode="json")
         evidence_sha256 = self._json_hash(evidence_payload)
         evidence_reference = f"run-evidence:{run_id}"
@@ -796,6 +812,9 @@ class DurableAppService:
 
         try:
             with self._session_factory() as session, session.begin():
+                fresh_actor = self._current_actor(session, token, expected=actor)
+                if FIXTURE_SCOPE not in fresh_actor.scopes:
+                    raise ApplicationError(ErrorCode.POLICY_DENIED, "investigation.scope_denied")
                 run = session.scalar(
                     select(Run)
                     .where(
@@ -811,6 +830,14 @@ class DurableAppService:
                     raise ApplicationError(ErrorCode.NOT_FOUND, "investigation.not_found")
                 if run.status != RunStatus.RUNNING.value:
                     raise ApplicationError(ErrorCode.CONFLICT, "investigation.not_running")
+                self._current_target(session, run)
+                if (
+                    run.parameters.get("source_id") != evidence.source_id
+                    or run.parameters.get("target_id") != evidence.target_id
+                ):
+                    raise ApplicationError(
+                        ErrorCode.POLICY_DENIED, "connector.source_scope_changed"
+                    )
                 if assistant.correlation_id != run.correlation_id or assistant.locale != run.locale:
                     raise ApplicationError(
                         ErrorCode.DEPENDENCY_UNAVAILABLE,
@@ -863,6 +890,24 @@ class DurableAppService:
                     },
                     occurred_at=now,
                 )
+                if evidence.source_id is not None:
+                    self._add_audit(
+                        session,
+                        organization_id=run.organization_id,
+                        environment_id=run.environment_id,
+                        actor_id=run.actor_id,
+                        correlation_id=run.correlation_id,
+                        run_id=run.id,
+                        event_type="monitoring.source.completed",
+                        outcome=AuditOutcome.ACCEPTED,
+                        details={
+                            "source_id": evidence.source_id,
+                            "target_id": evidence.target_id,
+                            "evidence_sha256": evidence_sha256,
+                            "error_code": None,
+                        },
+                        occurred_at=now,
+                    )
                 session.flush()
                 return result
         except ApplicationError:
@@ -886,6 +931,8 @@ class DurableAppService:
         }
         try:
             with self._session_factory() as session, session.begin():
+                session.execute(text("SET LOCAL lock_timeout = '1500ms'"))
+                session.execute(text("SET LOCAL statement_timeout = '4s'"))
                 run = session.scalar(
                     select(Run)
                     .where(
@@ -928,6 +975,8 @@ class DurableAppService:
         request: IncidentInvestigationRequest,
         correlation_id: UUID,
         allowed_target_ids: tuple[str, ...],
+        *,
+        token: str,
     ) -> RunRecord:
         """Persist a target-scoped Phase 2 investigation before evidence collection."""
 
@@ -940,6 +989,7 @@ class DurableAppService:
 
         try:
             with self._session_factory() as session, session.begin():
+                self._current_actor(session, token, expected=actor)
                 missing_scopes = sorted(required_scopes.difference(actor.scopes))
                 if missing_scopes:
                     self._add_audit(
@@ -990,11 +1040,13 @@ class DurableAppService:
                     target = session.scalars(target_statement).one_or_none()
                     if target is None:
                         target = session.scalar(
-                            select(Target).where(
+                            select(Target)
+                            .where(
                                 Target.organization_id == actor.organization_id,
                                 Target.environment_id == actor.environment_id,
                                 Target.name == target_name,
                             )
+                            .with_for_update(read=True)
                         )
                     if target is None or not target.enabled or target.kind != INCIDENT_TARGET_KIND:
                         raise ApplicationError(
@@ -1056,6 +1108,12 @@ class DurableAppService:
                             )
 
                     if pending_error is None:
+                        candidate = self._run_record(run)
+                        try:
+                            self._require_safe_stored_result(candidate)
+                        except ApplicationError as error:
+                            pending_error = error
+                    if pending_error is None:
                         self._add_audit(
                             session,
                             organization_id=actor.organization_id,
@@ -1071,7 +1129,7 @@ class DurableAppService:
                             },
                             occurred_at=now,
                         )
-                        record = self._run_record(run)
+                        record = candidate
                     else:
                         self._add_audit(
                             session,
@@ -1103,9 +1161,13 @@ class DurableAppService:
         run_id: UUID,
         assistant: AssistantResponse,
         evidence: IncidentEvidence,
+        *,
+        token: str,
     ) -> LiveIncidentResult:
         """Persist the exact composite evidence, answer, hash, and completion audit."""
 
+        evidence = sanitize_contract(evidence)
+        assistant = sanitize_contract(assistant)
         evidence_payload = evidence.model_dump(mode="json")
         evidence_sha256 = self._json_hash(evidence_payload)
         evidence_reference = f"run-evidence:{run_id}"
@@ -1113,6 +1175,9 @@ class DurableAppService:
 
         try:
             with self._session_factory() as session, session.begin():
+                fresh_actor = self._current_actor(session, token, expected=actor)
+                if not {FIXTURE_SCOPE, LINUX_READ_SCOPE}.issubset(fresh_actor.scopes):
+                    raise ApplicationError(ErrorCode.POLICY_DENIED, "incident.scope_denied")
                 run = session.scalar(
                     select(Run)
                     .where(
@@ -1128,6 +1193,7 @@ class DurableAppService:
                     raise ApplicationError(ErrorCode.NOT_FOUND, "incident.not_found")
                 if run.status != RunStatus.RUNNING.value:
                     raise ApplicationError(ErrorCode.CONFLICT, "incident.not_running")
+                self._current_target(session, run)
                 if assistant.correlation_id != run.correlation_id or assistant.locale != run.locale:
                     raise ApplicationError(
                         ErrorCode.DEPENDENCY_UNAVAILABLE,
@@ -1212,6 +1278,8 @@ class DurableAppService:
         }
         try:
             with self._session_factory() as session, session.begin():
+                session.execute(text("SET LOCAL lock_timeout = '1500ms'"))
+                session.execute(text("SET LOCAL statement_timeout = '4s'"))
                 run = session.scalar(
                     select(Run)
                     .where(
@@ -1248,13 +1316,17 @@ class DurableAppService:
         except SQLAlchemyError as exc:
             raise self._database_error() from exc
 
-    def get_run(self, actor: ActorContext, run_id: UUID) -> RunRecord:
-        """Read a run only inside the authenticated actor's server-derived scope."""
+    def get_run(
+        self, actor: ActorContext, run_id: UUID, *, token: str, correlation_id: UUID
+    ) -> RunRecord:
+        """Recheck current scope and commit mandatory access audit before serving."""
 
-        if RUN_READ_SCOPE not in actor.scopes:
-            raise ApplicationError(ErrorCode.POLICY_DENIED, "run.read_scope_denied")
+        pending: ApplicationError | None = None
+        record: RunRecord | None = None
+        now = self._now()
         try:
-            with self._session_factory() as session:
+            with self._session_factory() as session, session.begin():
+                actor = self._current_actor(session, token, expected=actor)
                 run = session.scalar(
                     select(Run).where(
                         Run.id == run_id,
@@ -1262,13 +1334,116 @@ class DurableAppService:
                         Run.environment_id == actor.environment_id,
                     )
                 )
-                if run is None:
-                    raise ApplicationError(ErrorCode.NOT_FOUND, "run.not_found")
-                return self._run_record(run)
+                if RUN_READ_SCOPE not in actor.scopes:
+                    pending = ApplicationError(ErrorCode.POLICY_DENIED, "run.read_scope_denied")
+                elif run is None:
+                    pending = ApplicationError(ErrorCode.NOT_FOUND, "run.not_found")
+                else:
+                    record = self._run_record(run)
+                    if isinstance(record.result, (LiveInvestigationResult, LiveIncidentResult)):
+                        scopes = (
+                            {FIXTURE_SCOPE, LINUX_READ_SCOPE}
+                            if isinstance(record.result, LiveIncidentResult)
+                            else {FIXTURE_SCOPE}
+                        )
+                        if not scopes.issubset(actor.scopes):
+                            pending = ApplicationError(
+                                ErrorCode.POLICY_DENIED, "run.read_scope_denied"
+                            )
+                        else:
+                            try:
+                                self._current_target(session, run)
+                            except ApplicationError as error:
+                                pending = error
+                    if isinstance(
+                        record.result, (LiveInvestigationResult, LiveIncidentResult)
+                    ) and (
+                        sanitize_contract(record.result.evidence) != record.result.evidence
+                        or sanitize_contract(record.result.assistant) != record.result.assistant
+                    ):
+                        # Do not rewrite immutable historical evidence/hash or expose it.
+                        pending = ApplicationError(
+                            ErrorCode.DEPENDENCY_UNAVAILABLE, "run.evidence_redaction_required"
+                        )
+                        record = None
+                self._add_audit(
+                    session,
+                    organization_id=actor.organization_id,
+                    environment_id=actor.environment_id,
+                    actor_id=actor.subject_id,
+                    correlation_id=correlation_id,
+                    run_id=run.id if run else None,
+                    event_type="run.evidence.read",
+                    outcome=AuditOutcome.DENIED if pending else AuditOutcome.ACCEPTED,
+                    details={
+                        "requested_run_id": str(run_id),
+                        "reason": pending.message_key if pending else None,
+                        "evidence_sha256": getattr(record.result, "evidence_sha256", None)
+                        if record
+                        else None,
+                    },
+                    occurred_at=now,
+                )
+                session.flush()
         except ApplicationError:
             raise
         except SQLAlchemyError as exc:
             raise self._database_error() from exc
+        if pending:
+            raise pending
+        if record is None:
+            raise ApplicationError(ErrorCode.INTERNAL_ERROR, "run.record_missing")
+        return record
+
+    def audit_evidence_access(
+        self,
+        token: str,
+        correlation_id: UUID,
+        operation: str,
+        outcome: str,
+        evidence: MonitoringSummary | MonitoringIncidentContext | None = None,
+    ) -> ActorContext:
+        """User-attributable direct reads; audit outage/revocation blocks disclosure."""
+        if operation not in {"summary", "incident_context"} or outcome not in {
+            "started",
+            "completed",
+            "failed",
+        }:
+            raise ApplicationError(ErrorCode.INVALID_REQUEST, "monitoring.audit_operation_invalid")
+        pending: ApplicationError | None = None
+        try:
+            with self._session_factory() as session, session.begin():
+                actor = self._current_actor(session, token)
+                if FIXTURE_SCOPE not in actor.scopes:
+                    pending = ApplicationError(ErrorCode.POLICY_DENIED, "monitoring.scope_denied")
+                self._add_audit(
+                    session,
+                    organization_id=actor.organization_id,
+                    environment_id=actor.environment_id,
+                    actor_id=actor.subject_id,
+                    correlation_id=correlation_id,
+                    event_type=f"monitoring.evidence.{operation}.{outcome}",
+                    outcome=AuditOutcome.DENIED
+                    if pending
+                    else AuditOutcome.FAILED
+                    if outcome == "failed"
+                    else AuditOutcome.ACCEPTED,
+                    details={
+                        "source": "zabbix",
+                        "evidence_sha256": self._json_hash(evidence.model_dump(mode="json"))
+                        if evidence
+                        else None,
+                    },
+                    occurred_at=self._now(),
+                )
+                session.flush()
+        except SQLAlchemyError:
+            raise ApplicationError(
+                ErrorCode.DEPENDENCY_UNAVAILABLE, "monitoring.audit_unavailable"
+            ) from None
+        if pending:
+            raise pending
+        return actor
 
     def claim_lease(self, run_id: UUID, owner_id: str) -> LeaseGrant:
         """Atomically claim an unleased or expired run for one bounded worker."""
@@ -1497,6 +1672,74 @@ class DurableAppService:
         except SQLAlchemyError as exc:
             raise self._database_error() from exc
         return record
+
+    @staticmethod
+    def _require_safe_stored_result(record: RunRecord) -> None:
+        if isinstance(record.result, (LiveInvestigationResult, LiveIncidentResult)) and (
+            sanitize_contract(record.result.evidence) != record.result.evidence
+            or sanitize_contract(record.result.assistant) != record.result.assistant
+        ):
+            raise ApplicationError(
+                ErrorCode.DEPENDENCY_UNAVAILABLE, "run.evidence_redaction_required"
+            )
+
+    def _current_actor(
+        self, session: Session, token: str, *, expected: ActorContext | None = None
+    ) -> ActorContext:
+        """Hold shared session/identity locks until this transaction commits.
+
+        Logout, recovery and administration take conflicting update locks; an
+        authorized completion/read is serialized with those changes, not checked
+        in a separate transaction. The token is never persisted in audit.
+        """
+        session.execute(text("SET LOCAL lock_timeout = '1500ms'"))
+        session.execute(text("SET LOCAL statement_timeout = '4s'"))
+        now = self._now()
+        identity = session.scalar(
+            select(Identity)
+            .join(SessionModel, SessionModel.identity_id == Identity.id)
+            .where(
+                SessionModel.token_sha256 == hash_opaque_token(token),
+                SessionModel.revoked_at.is_(None),
+                SessionModel.expires_at > now,
+                SessionModel.credential_version == Identity.credential_version,
+                Identity.is_active.is_(True),
+            )
+            .with_for_update(read=True, of=(Identity, SessionModel))
+        )
+        if identity is None:
+            raise ApplicationError(ErrorCode.UNAUTHENTICATED, "auth.session_invalid")
+        actor = self._actor_from_identity(identity)
+        if expected is not None and actor != expected:
+            raise ApplicationError(ErrorCode.POLICY_DENIED, "auth.scope_changed")
+        return actor
+
+    @staticmethod
+    def _current_target(session: Session, run: Run) -> None:
+        target = session.scalar(
+            select(Target)
+            .where(
+                Target.id == run.target_id,
+                Target.organization_id == run.organization_id,
+                Target.environment_id == run.environment_id,
+                Target.enabled.is_(True),
+            )
+            .with_for_update(read=True)
+        )
+        if target is None:
+            raise ApplicationError(ErrorCode.POLICY_DENIED, "run.target_unavailable")
+        if run.action == LIVE_INVESTIGATION_ACTION:
+            kind = LIVE_INVESTIGATION_TARGET_KIND
+            name = (
+                f"zabbix:{run.parameters['source_id']}/{run.parameters['target_id']}"
+                if run.parameters.get("source_id")
+                else LIVE_INVESTIGATION_TARGET_NAME
+            )
+        else:
+            kind = INCIDENT_TARGET_KIND
+            name = f"{INCIDENT_TARGET_PREFIX}{run.parameters.get('target_id')}"
+        if target.kind != kind or target.name != name:
+            raise ApplicationError(ErrorCode.POLICY_DENIED, "run.target_unavailable")
 
     def _actor_from_identity(self, identity: Identity) -> ActorContext:
         return ActorContext(
