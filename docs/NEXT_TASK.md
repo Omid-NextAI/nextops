@@ -1,5 +1,22 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-07, Q8 retained controlled live**: preserve completed fourteen fresh
+finals, source review, audit/hash matching, exact rollback/reapply and08:08:37 UTC retention. Keep
+the three raw failures and current quality exception visible. The next unfinished work is a bounded,
+materially justified held-out factual-quality strategy and separately scoped privacy/thinking/context/
+server-WAN/VM/load qualification. No identical raw retries, training on frozen questions, new weights
+or infrastructure change is authorized by this checkpoint. Do not enable thinking or expand budgets
+based on this smoke test; no full production claim. Current component/status records are authoritative.
+
+کار جاری — **۷ اکتبر ۲۰۲۶، Q8 در استفادهٔ کنترل‌شدهٔ زنده**: چهارده پاسخ تازه، بازبینی کد،
+تطبیق ممیزی/هش، بازگشت/اعمال دقیق و تثبیت ساعت۰۸:۰۸:۳۷ UTC حفظ شوند؛ سه شکست خام و استثنای
+کیفیت آشکار بمانند. گام ناتمام بعد، راهبرد محدود و مستدل برای کیفیت با پرسش‌های کنارگذاشته‌شده
+و پذیرش جداگانهٔ حریم خصوصی/استدلال/زمینه/WAN/VM/بار است. این گام مجوز تکرار یکسان، آموزش
+با پرسش ثابت، وزن تازه یا تغییر زیرساخت نیست. آزمون محدود، مجوز استدلال، سقف بیشتر یا ادعای
+تولید نمی‌دهد. رکورد جاریِ اجزا/وضعیت مرجع است.
+
+## Earlier raw-quality task — historical / کار پیشینِ کیفیت خام — سابقه
+
 Current task — **2026-10-07, after06:35 UTC**: greedy Q8 completed full16 but failed three
 unchanged semantic gates (upstream assertion, Persian authorized scope, Persian explanatory
 hypothesis). Preserve all five prompt/sampler trials, exact-source CI, finite coding results and

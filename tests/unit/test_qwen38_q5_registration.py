@@ -77,7 +77,15 @@ def test_candidate_identity_is_distinct_and_defaults_remain_unchanged() -> None:
     assert candidate["conversion_source_revision_verified"] is False
     assert candidate["public_thinking_enabled"] is False
     selected = yaml.safe_load((ROOT / "docs/status/current-release.yaml").read_text("utf-8"))
-    assert selected["components"]["model"]["identifier"] == "nextops-qwen3-5-35b-a3b-q4-k-m"
+    identifier = selected["components"]["model"]["identifier"]
+    assert identifier in {"nextops-qwen3-5-35b-a3b-q4-k-m", "nextops-qwen3-8-27b-q8-0"}
+    assert identifier != CANDIDATE_ID
+    if identifier == "nextops-qwen3-8-27b-q8-0":
+        q8 = json.loads((ROOT / "deploy/inference/qwen3-8-27b-q8.candidate.json").read_text())
+        assert (
+            _release_validator().model_identity_errors(selected["components"]["model"], {}, q8)
+            == []
+        )
 
 
 @pytest.mark.parametrize(

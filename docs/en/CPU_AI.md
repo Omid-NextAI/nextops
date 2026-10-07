@@ -1,5 +1,22 @@
 # Local CPU-only AI and capacity planning
 
+## Owner-excepted Qwen3.8 controlled selection — 7 October 2026
+
+The owner explicitly waived three raw-semantic failures, not security or production gates.
+The retained Apache-2.0 **Qwen3.8-27B Q8** is selected with the protected no-BLAS build003 and
+AI wheel `60605d8`; the app remains `3d92b71`. Actual argv/API settings match32 workers, one slot,
+CPU-only,16K admission, greedy standard decoding and300/330/360-second provider/app/proxy budgets.
+Thinking stays off. Existing96GiB memory, loopback-only sandbox, keys and one-active/two-queued
+limits remain. No weights/dependencies/VM/storage were added; the wheel installed without network.
+
+Initial real EN/FA general/saved-chat/Zabbix finals, auth/thinking/token-admission and durable audit
+checks passed. Exact retained35B rollback and fresh answers passed; guarded Q8 reapply completed.
+Final sixQ8 finals, audit/hash matching and exact-profile/idle retention passed; both owned timers
+are inactive. Raw13/16 remains failed; conversion lineage, maximum-window
+quality, thinking and current server-WAN/VM/load acceptance are not claimed. Operators must verify
+answers against qualified evidence. See [the actual cutover record](../requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md).
+The following earlier qualification records remain historical, not today's component selection.
+
 ## Full greedy comparison completed; three semantic failures — 7 October 2026
 
 The `60605d8` Q8/greedy/explicit300 trial completed all sixteen finals at06:35:53 UTC.

@@ -326,6 +326,9 @@ def validate_chat_candidates(directory: Path) -> None:
         raise ArtifactValidationError("chat candidate metadata must be an object")
     expected = {
         "status": "standard_controlled_thinking_rejected",
+        "record_scope": "retained_35b_historical_qualification",
+        "model_id": "nextops-qwen3-5-35b-a3b-q4-k-m",
+        "source_commit": "7ce9d2969d6bea8186783c5ce04a1c93be811a97",
         "standard_enabled": True,
         "thinking_enabled": False,
         "configured_context_tokens": 16384,
@@ -401,8 +404,11 @@ def main() -> int:
             "utf-8"
         )
     )
+    qwen38_q8 = json.loads(
+        (repository_root / "deploy/inference/qwen3-8-27b-q8.candidate.json").read_text("utf-8")
+    )
     print(
-        "PASS: inference candidate metadata is schema-valid; "
+        "PASS: inference candidate metadata is schema-valid; baseline_8b_"
         f"status={document['status']}; runtime_binary_built="
         f"{document['evidence']['runtime_binary_built']}; "
         f"model_imported={document['evidence']['model_imported']}; "
@@ -419,7 +425,10 @@ def main() -> int:
         f"q5_122b_selection_allowed={q5['deployment_selection_allowed']}; "
         f"qwen38_q5_status={qwen38_q5['status']}; "
         f"qwen38_q5_complete_import={qwen38_q5['qualification']['artifact_import']}; "
-        f"qwen38_q5_selection_allowed={qwen38_q5['deployment_selection_allowed']}."
+        f"qwen38_q5_selection_allowed={qwen38_q5['deployment_selection_allowed']}; "
+        f"qwen38_q8_status={qwen38_q8['status']}; "
+        f"qwen38_q8_standard_semantics={qwen38_q8['qualification']['standard_semantics']}; "
+        f"qwen38_q8_selection_allowed={qwen38_q8['deployment_selection_allowed']}."
     )
     return 0
 

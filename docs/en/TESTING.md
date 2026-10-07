@@ -1,5 +1,29 @@
 # Testing, model evaluation and release evidence
 
+## Qwen3.8 controlled cutover — 7 October 2026
+
+Owner-excepted raw13/16 remains failed, not production acceptance. Three fresh real TLS-verified
+browser contexts produced14 finals: initialQ8 six, exact restored35B two, finalQ8 six. Q8 contexts
+passed saved-chat/reload/follow-up, current secondary Zabbix EN/FA evidence/inspector, source denial,
+thinking denial, logout/replay rejection and no external requests/page errors. Read-only PostgreSQL
+checks matched four conversation audits and four durable investigation/evidence hash pairs in total.
+Installed service authentication, public-thinking denial and actual tokenizer over-budget rejection
+passed twice. Exact artifacts/configuration/argv/budgets, rollback/reapply and final retention passed;
+both owned timers are inactive. Current server-WAN isolation, VM cold start, load, full context and
+enabled thinking were not run/accepted. See [the record](../requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md)
+for hashes, latencies, bounded scope and historical-profile separation.
+
+Exact private runner commands, from the existing provisioned project Python environment:
+
+```text
+python -B <protected-cutover-directory>/browser-check.py first
+python -B <protected-cutover-directory>/browser-check.py rollback
+python -B <protected-cutover-directory>/browser-check.py final
+```
+
+The runner reads protected local login credentials without exporting them. No fixture account,
+new token storage, TLS bypass, live stress test or hidden remote AI was added.
+
 ## Protocol/provenance source repair — 2026-10-06
 
 This is isolated source/fixture verification, not a model or deployment result. No inference

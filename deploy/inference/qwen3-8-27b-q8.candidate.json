@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "status": "verified_candidate_unselected",
+  "status": "controlled_selected_with_quality_exception",
   "model_id": "nextops-qwen3-8-27b-q8-0",
   "source_repository": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF",
   "source_revision": "4ca720788d1e01f1bff70c033e0d0028fd02e502",
@@ -16,7 +16,15 @@
   "runtime_commit": "b29c606e28a01b1bc8c1351026a0fa6e616bf6c4",
   "cpu_only_required": true,
   "runtime_download_allowed": false,
-  "deployment_selection_allowed": false,
+  "deployment_selection_allowed": true,
+  "owner_quality_exception": {
+    "authority": "explicit_project_owner_instruction",
+    "received_date": "2026-10-07",
+    "scope": "controlled_standard_only_not_production_accepted",
+    "failed_cases": ["en-network", "fa-stale-partial", "fa-hypothesis"],
+    "raw_trial_sha256": "b69e4cf3a9725a344b2eadc92a72bb9ec0090ce971934de5ca051d09ac17926e",
+    "evidence": "docs/requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md"
+  },
   "public_thinking_enabled": false,
   "private_reasoning_persisted": false,
   "max_active_requests": 1,
@@ -29,6 +37,6 @@
     "thinking_semantics_privacy": "partial",
     "latency_resource_comparison": "failed",
     "wan_offline": "partial",
-    "runtime_model_rollback": "not_run"
+    "runtime_model_rollback": "passed"
   }
 }

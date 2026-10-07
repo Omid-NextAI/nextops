@@ -6,6 +6,8 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+import yaml
+from jsonschema import Draft202012Validator
 
 from scripts.check_inference_artifacts import (
     QWEN38_OWNER_EXCEPTION,
@@ -15,6 +17,23 @@ from scripts.check_inference_artifacts import (
 from scripts.check_release_status import model_identity_errors, production_claim_errors
 
 ROOT = Path(__file__).resolve().parents[2]
+
+
+def test_exact_installed_source_suffix_does_not_allow_other_releases_or_source_mismatch() -> None:
+    schema = json.loads((ROOT / "docs/status/release-status.schema.json").read_text())
+    validator = Draft202012Validator(schema)
+    status = yaml.safe_load((ROOT / "docs/status/current-release.yaml").read_text())
+    assert not list(validator.iter_errors(status))
+    for release, commit in (
+        ("nextops-0.1.0-60605d8-arbitrary", "60605d8b98f13d01152fa95881919f01021df902"),
+        ("nextops-0.1.0-60605d8-q38", "7ce9d2969d6bea8186783c5ce04a1c93be811a97"),
+    ):
+        changed = copy.deepcopy(status)
+        changed["components"]["inference_api"] = {"release": release, "source_commit": commit}
+        assert list(validator.iter_errors(changed))
+    changed = copy.deepcopy(status)
+    changed["components"]["application"] = copy.deepcopy(status["components"]["inference_api"])
+    assert list(validator.iter_errors(changed))
 
 
 def candidate() -> dict[str, Any]:

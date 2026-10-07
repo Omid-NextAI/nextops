@@ -1,8 +1,8 @@
 ---
 $schema: ./release-status.schema.json
 schema_version: 2.2.0
-release_identifier: nextops-ui-freshness-controlled-2026-10-05
-observed_at: '2026-10-05'
+release_identifier: nextops-qwen38-controlled-2026-10-07
+observed_at: '2026-10-07'
 deployment_status: controlled_user_testing_not_production_accepted
 delivery_scope:
   profile: local_read_only_recovery_deferred
@@ -26,20 +26,20 @@ components:
     release: nextops-0.1.0-2a7c8dc
     source_commit: 2a7c8dc5dc99ebf203748380b7ab8ea7f89ac690
   inference_api:
-    release: nextops-0.1.0-7ce9d29
-    source_commit: 7ce9d2969d6bea8186783c5ce04a1c93be811a97
+    release: nextops-0.1.0-60605d8-q38
+    source_commit: 60605d8b98f13d01152fa95881919f01021df902
   inference_runtime:
     name: llama.cpp
     source_tag: v0.4.1
     source_commit: b29c606e28a01b1bc8c1351026a0fa6e616bf6c4
-    binary_sha256: dbe5a5cdd4842fe2d498270c1e1df58344e9052e97214e2ba9c9845443a1b0dc
+    binary_sha256: eb53d6eef8bdae6f1227a93af1f6caf58542fb5943b03ccc80d136316e6f5721
     cpu_only: true
   model:
-    identifier: nextops-qwen3-5-35b-a3b-q4-k-m
-    source_revision: 3d2a22d4eb631b9c8fd2be94599dc2fd84b4a595
-    quantization: Q4_K_M
-    size_bytes: 22285080384
-    sha256: 2f2df1e8b2e92b642c1850ea1734b341cc8ca5098c42cc0a8b8c436a8d4751ab
+    identifier: nextops-qwen3-8-27b-q8-0
+    source_revision: 4ca720788d1e01f1bff70c033e0d0028fd02e502
+    quantization: Q8_0
+    size_bytes: 29047086048
+    sha256: a680f44a06920e5d689774823782006aa3acc8db95750323373b24139b67e348
   application_database:
     name: PostgreSQL
     version: '16.15'
@@ -85,6 +85,14 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: qwen38_standard_owner_excepted_selection
+    status: experimental
+    evidence:
+      - docs/requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md
+      - deploy/inference/qwen3-8-27b-q8.candidate.json
+      - deploy/systemd/model-profiles/qwen3-8-27b-q8-runtime.conf
+      - deploy/systemd/model-profiles/qwen3-8-27b-q8.env
+      - tests/unit/test_qwen38_cutover_exception.py
   - id: permissive_q5_model_trial
     status: experimental
     evidence:
@@ -302,6 +310,14 @@ capabilities:
       - deploy/systemd/nextops-certificate-check.timer
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
+  - id: qwen38_controlled_standard_cutover_20261007
+    status: passed
+    evidence:
+      - docs/requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md
+  - id: qwen38_current_server_wan_and_vm_cold_start
+    status: not_run
+    evidence:
+      - docs/requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md
   - id: qwen38_raw_quality_20261007
     status: failed
     evidence:

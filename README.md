@@ -7,7 +7,15 @@
 Owner update (2026-09-26): the owner tested an ESXi VM snapshot restore. Its dated result has
 not been reviewed here; independent database backup and restore gates remain unpassed.
 
-Current controlled repair (2026-10-04): app/AI API `7ce9d29` adds bounded hypothetical-scenario
+Current controlled selection (2026-10-07): **Qwen3.8-27B Q8** is live under the owner's explicit
+three-case raw-quality exception. App `3d92b71` stays unchanged; AI `60605d8` uses CPU-only32 workers,
+16K admission,300/330/360-second budgets and thinking off. Fourteen fresh browser finals, saved-chat
+resume, secondary Zabbix EN/FA evidence, audit/hash matching and exact rollback/reapply passed.
+Raw13/16 remains failed; larger-context/thinking/current server-WAN/VM/load are not accepted.
+See [the dated record](docs/requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md). Controlled live
+use is not full production acceptance; verify answers against their qualified evidence.
+
+Earlier controlled repair (2026-10-04): app/AI API `7ce9d29` adds bounded hypothetical-scenario
 and transport/stale-data safeguards while preserving fresh evidence, saved chat and OCS branding.
 Five CI jobs, 524 local checks, three offline installs, 45 functional browser cases, 36 text-free
 audits/nine live hashes, bounded queue recovery, four-guest WAN/proxy denial, process restart,

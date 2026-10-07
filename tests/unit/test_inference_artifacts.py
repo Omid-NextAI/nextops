@@ -44,6 +44,10 @@ def test_qwen38_trial_cannot_silently_change_identity_or_promote(
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     candidate = json.loads((MANIFEST.parent / "qwen3-8-27b-q8.candidate.json").read_text("utf-8"))
+    # An ordinary candidate cannot borrow a later owner's explicitly bounded exception.
+    candidate.pop("owner_quality_exception", None)
+    candidate["status"] = "verified_candidate_unselected"
+    candidate["deployment_selection_allowed"] = False
     candidate[field] = incorrect
     (tmp_path / "qwen3-8-27b-q8.candidate.json").write_text(json.dumps(candidate), encoding="utf-8")
     with pytest.raises(module.ArtifactValidationError):
@@ -67,6 +71,8 @@ def test_qwen38_duplicate_identity_and_unproved_import_are_rejected(tmp_path: Pa
     with pytest.raises(module.ArtifactValidationError, match="cannot parse"):
         module.validate_qwen38_candidate(tmp_path)
     candidate = json.loads(original)
+    candidate.pop("owner_quality_exception", None)
+    candidate["deployment_selection_allowed"] = False
     candidate["status"] = "verified_candidate_unselected"
     candidate["qualification"]["artifact_import"] = "not_run"
     path.write_text(json.dumps(candidate), encoding="utf-8")

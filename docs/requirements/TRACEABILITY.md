@@ -1,5 +1,20 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Sections11/16–17/20–21: the explicit owner standard-quality exception maps to
+[the controlled cutover](QWEN38_CONTROLLED_CUTOVER_2026-10-07.md), exact Q8 candidate/CPU profiles,
+canonical current release, and `test_qwen38_cutover_exception.py`. Fourteen real final answers,
+two installed-boundary checks, audit/hash matching and exact rollback/reapply/retention are bounded
+evidence, not raw-quality/thinking/max-context/server-WAN/VM/load or full production acceptance.
+An ordinary candidate cannot select itself; the exact exception cannot widen permissions or relabel
+failed gates. The35B expanded profile is preserved historical evidence, not Q8 qualification.
+
+بخش‌های۱۱/۱۶–۱۷/۲۰–۲۱: استثنای صریح مالک برای کیفیتِ حالت معمولی به رکورد گذار بالا،
+نامزد/نمایهٔ دقیق Q8 و CPU، وضعیت اصلی انتشار و آزمون اختصاصی ردیابی می‌شود. چهارده پاسخ
+واقعی، دو کنترل مرز نصب‌شده، تطبیق ممیزی/هش و بازگشت/اعمال/تثبیت دقیق، شاهد محدودند؛ پذیرش
+کیفیت خام، استدلال، زمینهٔ کامل، WAN/VM/بار یا تولید نیستند. نامزد عادی خود را انتخاب
+نمی‌کند؛ استثنای دقیق، مجوز را گسترش نمی‌دهد و معیار ناموفق را موفق نمی‌نامد. نمایهٔ35B
+شاهد تاریخی است، نه پذیرش Q8.
+
 Sections11/16–17/20–21: full greedy Q8 comparison passes13/fails3 unchanged semantic cases
 (main-only); finite coding passes12 boundaries per completed sample. Raw quality stays failed.
 Current status adds the dated failed candidate gate and sampler source tests as evidence, not live

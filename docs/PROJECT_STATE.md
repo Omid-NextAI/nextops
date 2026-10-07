@@ -1,5 +1,32 @@
 # Project state / وضعیت پروژه
 
+Current checkpoint — **2026-10-07, owner-excepted Qwen3.8 cutover**: the owner waived only
+three recorded raw-semantic failures. Qwen3.8-27B Q8/no-BLAS build003 is retained live after guarded
+rollback/reapply, AI source `60605d8`; app source `3d92b71`, credentials, MCP, schema and UI are unchanged.
+Thinking is off; context16K is an admission ceiling, budgets300/330/360, native32 workers/one slot,
+one active/two queued and the existing96GiB hard cap. Initial six fresh Q8 browser finals, saved
+resume, secondary EN/FA evidence and two conversation/two evidence audits passed. Actual service
+authentication/thinking denial/token admission passed. Exact35B/code/runtime/config/app-budget
+rollback and two fresh35B answers passed, followed by guarded reapply. Final sixQ8 browser finals,
+two further conversation/two evidence audits and exact-profile/idle retention passed at08:08:37 UTC.
+Both owned timers are inactive; services healthy/restarts0/swap0. [Dated record](requirements/QWEN38_CONTROLLED_CUTOVER_2026-10-07.md) separates
+the quality exception from passing results; raw13/16, thinking/full-context and unrun current WAN/
+VM/load gates are not production acceptance. The previous35B expanded profile is retained history.
+
+گام جاری — **۷ اکتبر ۲۰۲۶، گذار Qwen3.8 با استثنای مالک**: فقط سه شکست معناییِ ثبت‌شده
+کنار گذاشته شده‌اند. Q8 مدل Qwen3.8-27B و ساخت سومِ بدون BLAS، با بازگشت زمان‌دار انتخاب
+و پس از بازگشت/اعمال دقیق تثبیت شده‌اند؛ کد AI برابر `60605d8` است. برنامهٔ `3d92b71`، اطلاعات ورود، MCP، پایگاه و رابط
+تغییر نکرده‌اند. استدلال خاموش است؛16K سقف پذیرش ورودی، مهلت‌ها۳۰۰/۳۳۰/۳۶۰، runtime دارای۳۲
+رشته و یک جایگاه، صف دارای یک فعال/دو منتظر و سقف حافظهٔ قبلی96GiB است. شش پاسخ تازهٔ Q8،
+بازگشایی گفت‌وگو، شاهد منبع دوم در دو زبان و دو ممیزی گفت‌وگو/دو جفت هش شاهد موفق‌اند.
+احراز هویت خدمت، منع استدلال و رد واقعی ورودیِ بزرگ موفق‌اند. بازگشت دقیق مدل/کد/runtime/
+تنظیم35B و مهلت برنامه، با دو پاسخ تازهٔ35B موفق شد و سپس Q8 دوباره اعمال شد. کنترل نهاییِ
+مرورگر با شش پاسخ Q8، دو ممیزی گفت‌وگو/دو جفت هش دیگر و تثبیت دقیق ساعت۰۸:۰۸:۳۷ UTC موفق‌اند.
+بازگشت‌های زمان‌دار غیرفعال، خدمات سالم و شروع مجدد/swap صفرند. نتیجهٔ خام۱۳ از۱۶، استدلال و زمینهٔ کامل پذیرفته
+نیستند؛ قطع WAN/شروع VM/بارِ نسخهٔ جاری اجرا نشده‌اند. نمایهٔ35B، شاهد تاریخیِ محفوظ است.
+
+## Earlier raw-quality checkpoint — historical / گام پیشینِ کیفیت خام — سابقه
+
 Current checkpoint — **2026-10-07, 06:35:53 UTC**: the distinct greedy Q8 trial completed
 all sixteen finals under explicit300 seconds, but main semantic review is **13 passed/3 failed**.
 English networking still asserts an unverified upstream condition; Persian stale evidence omits
