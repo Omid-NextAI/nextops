@@ -4,6 +4,7 @@ import asyncio
 import json
 from datetime import UTC, datetime, timedelta
 from typing import cast
+from unittest.mock import AsyncMock
 from uuid import UUID, uuid4
 
 import pytest
@@ -15,6 +16,7 @@ from nextops.api.app import APP_CODE_SHA256, _grounded_prompt, _incident_prompt,
 from nextops.api.release_identity import HEADER_NAME
 from nextops.application.conversations import DurableConversationService, GenerationTicket
 from nextops.application.errors import ApplicationError
+from nextops.application.source_access import DurableSourceAccess
 from nextops.contracts.assistant import (
     AssistantRequest,
     AssistantResponse,
@@ -59,6 +61,8 @@ from nextops.contracts.monitoring import (
     MonitoringProblem,
     MonitoringSummary,
 )
+from nextops.contracts.source_catalog import SourceAssistantRequest, SourceCatalog
+from nextops.contracts.sources import SourceEvidence, SourceReadBinding, SourceReadRequest
 from nextops.inference.contracts import FinishReason, InferenceReadiness, ReadinessState
 
 NOW = datetime(2026, 9, 21, 9, 0, tzinfo=UTC)
@@ -67,6 +71,125 @@ ENV_ID = UUID("20000000-0000-4000-8000-000000000001")
 ACTOR_ID = UUID("30000000-0000-4000-8000-000000000001")
 TARGET_ID = UUID("40000000-0000-4000-8000-000000000001")
 RUN_ID = UUID("50000000-0000-4000-8000-000000000001")
+
+
+@pytest.mark.parametrize("mismatch", [None, "source_id", "target_id", "binding_sha256", "scope"])
+def test_default_mcp_investigation_uses_only_exact_catalog_bound_primary(
+    mismatch: str | None,
+) -> None:
+    class BoundService(FakeService):
+        primary_request: SourceAssistantRequest | None = None
+
+        def create_live_investigation(
+            self,
+            actor: ActorContext,
+            request: AssistantRequest,
+            correlation_id: UUID,
+            *,
+            token: str,
+        ) -> RunRecord:
+            assert isinstance(request, SourceAssistantRequest)
+            self.primary_request = request
+            return super().create_live_investigation(actor, request, correlation_id, token=token)
+
+    service = BoundService()
+
+    class Access:
+        def record(
+            self, token: str, correlation_id: UUID, outcome: str, binding: SourceReadBinding
+        ) -> ActorContext:
+            actor = service.authenticate(token)
+            if (binding.organization_id, binding.environment_id) != (
+                actor.organization_id,
+                actor.environment_id,
+            ):
+                raise ApplicationError(ErrorCode.POLICY_DENIED, "connector.source_scope_denied")
+            return actor
+
+    catalog = SourceCatalog.model_validate(
+        {
+            "sources": [
+                {
+                    "source_id": "primary",
+                    "label": "Primary fixture",
+                    "organization_id": str(uuid4() if mismatch == "scope" else ORG_ID),
+                    "environment_id": str(ENV_ID),
+                    "targets": [
+                        {
+                            "target_id": "zabbix",
+                            "label": "Approved fixture",
+                            "binding_sha256": "a" * 64,
+                        }
+                    ],
+                }
+            ]
+        }
+    )
+    gateway = AsyncMock()
+
+    async def read(request: SourceReadRequest) -> SourceEvidence:
+        summary = await FakeMonitoringGateway().summary()
+        stamped = summary.model_copy(
+            update={"source_id": "primary", "target_id": "zabbix", "host_group_ids": ("23",)}
+        )
+        envelope = SourceEvidence(
+            source_id="primary",
+            target_id="zabbix",
+            correlation_id=request.correlation_id,
+            operation="summary",
+            binding_sha256="a" * 64,
+            host_group_ids=("23",),
+            evidence=stamped,
+        )
+        return (
+            envelope.model_copy(
+                update={mismatch: "b" * 64 if mismatch == "binding_sha256" else "other"}
+            )
+            if mismatch and mismatch != "scope"
+            else envelope
+        )
+
+    gateway.read.side_effect = read
+    inference = FakeInferenceGateway()
+    correlation = uuid4()
+    with TestClient(
+        create_app(
+            service,
+            inference,
+            source_gateway=gateway,
+            source_catalog=catalog,
+            source_access=cast(DurableSourceAccess, Access()),
+        )
+    ) as client:
+        response = client.post(
+            "/api/v1/investigate",
+            headers={
+                "Authorization": "Bearer valid-bearer-token-that-is-long-enough",
+                "X-Correlation-ID": str(correlation),
+            },
+            json={
+                "locale": "fa",
+                "question": "How many active problems?",
+                "max_output_tokens": 128,
+            },
+        )
+    assert response.status_code == (403 if mismatch == "scope" else 503 if mismatch else 200)
+    if mismatch:
+        assert inference.last_request is None
+        assert gateway.read.await_count == (0 if mismatch == "scope" else 1)
+        return
+    assert service.primary_request is not None
+    assert (
+        service.primary_request.source_id == "primary"
+        and service.primary_request.target_id == "zabbix"
+    )
+    assert service.primary_request.question == "How many active problems?"
+    assert (
+        service.primary_request.locale == "fa" and service.primary_request.max_output_tokens == 128
+    )
+    assert service.live_correlation_id == correlation
+    assert response.json()["evidence"]["source_id"] == "primary"
+    assert response.json()["evidence"]["target_id"] == "zabbix"
 
 
 @pytest.mark.parametrize("count", [0, 9, 25])

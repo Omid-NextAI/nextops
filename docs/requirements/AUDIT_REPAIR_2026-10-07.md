@@ -68,6 +68,23 @@ the old release. Do not disarm an owned rollback guard before restoration and ve
 Document every item as passed, failed, partial or not_run. A raw model-quality exception is not an
 authorization/audit waiver or general correctness certificate.
 
+### First candidate qualification failure
+
+Candidate `3cdd3c0` passed exact-source CI:1504 unit/API,119 browser and53 real PostgreSQL tests
+on each of majors16/17. Offline preparation and guarded selection of app/API/MCP code and existing
+collector scripts passed. Real login, two saved turns and reload/resume passed. The fresh primary
+Persian evidence request then returned403 `connector.source_scope_changed`; retention was blocked.
+The default request persisted no source/target tags while the deployed MCP primary summary includes
+protected `primary/zabbix` provenance. Fixture summaries without those tags missed this mismatch.
+
+Repair the default API route using its configured trusted catalog and existing exact named-source
+workflow, not a permissive completion exception. Preserve the no-catalog legacy contract and add
+cross-boundary positive and mismatch regressions. Keep the failed candidate/reports intact, restore
+the exact previous code/collectors, and qualify a fresh immutable candidate before retaining it.
+An earlier browser attempt also failed a harness-only assertion expecting the answer-digest header
+on login; the header contract covers successful answers, not authentication or readiness responses.
+Correcting that assertion is not a change to authentication and does not waive answer identity checks.
+
 ## فارسی
 
 مالک رفع موارد ممیزی و انتشار تغییر پذیرفته‌شده روی مهمان‌های موجود را خواسته است. ممیزی کد
@@ -103,3 +120,19 @@ collector مستقل با جایگزینی اتمی فقط script منتشر ش�
 نامعلوم تطبیق می‌خواهد، نه تکرار کور. بازگشت فقط artifact یا script دقیق قبلی است؛ schema/data
 حذف نشود. خرابی candidate نباید بازگرداندن نسخهٔ قدیم را متوقف کند و guard پیش از تأیید بازگشت
 غیرفعال نشود. هر مورد passed/failed/partial/not_run ثبت شود؛ استثنای کیفیت، حذف امنیت نیست.
+
+### شکست پذیرش نامزد نخست
+
+نامزد `3cdd3c0` در CI کد دقیق،۱۵۰۴ آزمون واحد/API،۱۱۹ مرورگر و۵۳ آزمون واقعی PostgreSQL
+برای هر یک از نسخه‌های16/17 را گذراند. آماده‌سازی آفلاین و انتخاب محافظت‌شدهٔ کد برنامه/API/MCP
+و script موجود collector موفق بود. ورود واقعی، دو نوبت سابقه و بازگشایی پس از reload موفق شدند؛
+ولی درخواست تازهٔ فارسی منبع اصلی403 با `connector.source_scope_changed` داد و تثبیت متوقف شد.
+درخواست پیش‌فرض برچسب منبع/هدف ذخیره نمی‌کرد، اما خلاصهٔ واقعی MCP دارای provenance محافظت‌شدهٔ
+`primary/zabbix` است. fixture فاقد برچسب این تفاوت را پوشش نداده بود.
+
+مسیر API پیش‌فرض با catalog معتبر تنظیم‌شده و گردش‌کار موجود منبع مشخص اصلاح شود، نه استثنای
+آسان‌گیرِ تکمیل. قرارداد قدیمی بدون catalog و آزمون مثبت/ردِ ناهمخوانی حفظ شوند. نامزد و گزارش
+ناموفق نگه‌داری، کد/collector قبلی دقیق بازگردانده و نامزد immutable تازه پیش از تثبیت پذیرفته شود.
+تلاش مرورگر قبلی نیز فقط به‌علت assertion اشتباه ابزار دربارهٔ header هش پاسخ روی login شکست خورد؛
+قرارداد header برای پاسخ موفق است، نه ورود یا readiness. اصلاح ابزار، تغییر ورود یا حذف کنترل
+هویت پاسخ نیست.

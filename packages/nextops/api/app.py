@@ -696,6 +696,17 @@ def create_app(
         actor: Annotated[ActorContext, Depends(current_actor)],
         token: Annotated[str, Depends(current_token)],
     ) -> InvestigationResponse:
+        if source_catalog is not None:
+            # The MCP default is the protected catalogue's exact primary/zabbix
+            # binding, not a provenance-less legacy run or an evidence-supplied
+            # identity. Reuse all named-source authorization and atomic audit.
+            return await source_investigation(
+                request,
+                SourceAssistantRequest(
+                    **payload.model_dump(), source_id="primary", target_id="zabbix"
+                ),
+                token,
+            )
         correlation_id = _correlation_id(request)
         run = await run_in_threadpool(
             service.create_live_investigation, actor, payload, correlation_id, token=token
