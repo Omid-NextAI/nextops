@@ -607,7 +607,10 @@ def test_live_investigation_persists_bounded_evidence_result_and_failure_audit(
         token=token,
     )
     assert completed.is_partial is True
-    fetched = service.get_run(actor, created.run_id, token=token, correlation_id=uuid4())
+    completed_read_correlation = uuid4()
+    fetched = service.get_run(
+        actor, created.run_id, token=token, correlation_id=completed_read_correlation
+    )
 
     assert fetched.status is RunStatus.SUCCEEDED
     assert fetched.result == completed
@@ -628,20 +631,19 @@ def test_live_investigation_persists_bounded_evidence_result_and_failure_audit(
             retryable=True,
         ),
     )
-    fetched_failure = service.get_run(actor, failed_run.run_id, token=token, correlation_id=uuid4())
+    failed_read_correlation = uuid4()
+    fetched_failure = service.get_run(
+        actor, failed_run.run_id, token=token, correlation_id=failed_read_correlation
+    )
 
     with app_session_factory() as session:
         target = session.scalar(
             select(Target).where(Target.name == "zabbix-live", Target.kind == "zabbix")
         )
         stored_failure = session.get(Run, failed_run.run_id)
-        event_types = set(
-            session.scalars(
-                select(AuditEvent.event_type).where(
-                    AuditEvent.run_id.in_((created.run_id, failed_run.run_id))
-                )
-            ).all()
-        )
+        events = session.scalars(
+            select(AuditEvent).where(AuditEvent.run_id.in_((created.run_id, failed_run.run_id)))
+        ).all()
 
     assert target is not None
     assert stored_failure is not None
@@ -655,10 +657,34 @@ def test_live_investigation_persists_bounded_evidence_result_and_failure_audit(
     assert fetched_failure.error is not None
     assert fetched_failure.error.code is ErrorCode.DEPENDENCY_UNAVAILABLE
     assert fetched_failure.error.message_key == "connector.summary_unavailable"
-    assert event_types == {
+    assert {event.event_type for event in events} == {
         "investigation.started",
         "investigation.completed",
         "investigation.failed",
+        "run.evidence.read",
+    }
+    read_events = [event for event in events if event.event_type == "run.evidence.read"]
+    assert len(read_events) == 2
+    assert all(
+        event.actor_id == actor.subject_id and event.outcome == "accepted" for event in read_events
+    )
+    assert {event.correlation_id: (event.run_id, event.details) for event in read_events} == {
+        completed_read_correlation: (
+            created.run_id,
+            {
+                "requested_run_id": str(created.run_id),
+                "reason": None,
+                "evidence_sha256": completed.evidence_sha256,
+            },
+        ),
+        failed_read_correlation: (
+            failed_run.run_id,
+            {
+                "requested_run_id": str(failed_run.run_id),
+                "reason": None,
+                "evidence_sha256": None,
+            },
+        ),
     }
 
 
@@ -772,7 +798,8 @@ def test_phase2_incident_persists_composite_evidence_and_target_scope(
         evidence,
         token=token,
     )
-    fetched = service.get_run(actor, created.run_id, token=token, correlation_id=uuid4())
+    read_correlation = uuid4()
+    fetched = service.get_run(actor, created.run_id, token=token, correlation_id=read_correlation)
 
     assert completed.evidence.target_id == "app"
     assert completed.evidence.linux.services[0].unit == "nextops-app.service"
@@ -781,13 +808,25 @@ def test_phase2_incident_persists_composite_evidence_and_target_scope(
         target = session.scalar(
             select(Target).where(Target.name == "incident:app", Target.kind == "linux-zabbix")
         )
-        events = set(
-            session.scalars(
-                select(AuditEvent.event_type).where(AuditEvent.run_id == created.run_id)
-            ).all()
-        )
+        events = session.scalars(
+            select(AuditEvent).where(AuditEvent.run_id == created.run_id)
+        ).all()
     assert target is not None
-    assert events == {"incident.started", "incident.completed"}
+    assert {event.event_type for event in events} == {
+        "incident.started",
+        "incident.completed",
+        "run.evidence.read",
+    }
+    read_events = [event for event in events if event.event_type == "run.evidence.read"]
+    assert len(read_events) == 1
+    assert read_events[0].actor_id == actor.subject_id
+    assert read_events[0].correlation_id == read_correlation
+    assert read_events[0].outcome == "accepted"
+    assert read_events[0].details == {
+        "requested_run_id": str(created.run_id),
+        "reason": None,
+        "evidence_sha256": completed.evidence_sha256,
+    }
 
 
 def test_phase2_scope_migration_is_reversible_for_existing_admin(
