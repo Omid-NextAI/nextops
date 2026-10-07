@@ -4,6 +4,49 @@
 
 Updated: 2026-10-07
 
+## Current executive summary: retained audit-repair release
+
+As recorded on 2026-10-07, exact `52e5179` is selected for app, AI API and canonical MCP/source
+runner, with the matching existing collector on all four guests. The
+[release manifest](../status/current-release.yaml) and
+[all-role qualification](../requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md) are
+authoritative. This is live controlled user testing, not full production acceptance.
+
+| Area | Current design and measured status |
+|---|---|
+| User workspace | Static local EN/FA HTML/CSS/JavaScript, original OCS images, static logo login, compact chat and evidence on demand |
+| Identity and memory | Existing local authentication, current-user policy, owner-scoped PostgreSQL conversations, bounded follow-ups/resume and sensitive-view cleanup |
+| Inference | Unchanged Qwen3.8-27B Q8 CPU runtime; 32 workers, one slot, 16K configured context, six saved turns, thinking off, one active/two queued |
+| Monitoring | Real MCP gateway and isolated credential-owning runner on the existing connector VM; protected two-source/seven-target catalog, with three secondary targets qualified for bounded reads |
+| Evidence/security | Source/time/scope, deterministic counts/coverage, secret-text redaction, physical-call admission ownership and late authorization/mandatory audit fixes |
+| Deployment | Four existing role guests on one ESXi/G10; separate NextOps/Zabbix PostgreSQL; native systemd, private TLS, restricted tunnels and immutable artifacts |
+| Latest verified checks | Five exact-source CI jobs: 1509 unit/API, 119 browser, 60 PostgreSQL 16 and 60 PostgreSQL 17 tests, plus secret scan; actual EN/FA primary/secondary, saved resume, durable audit/hash and exact all-role rollback/reapply |
+| Remaining limits | Raw model 13/16 remains failed; thinking/privacy/full-window, current-source server-WAN, VM cold-start and sustained load remain unqualified; GOV-01 needs repository administration |
+
+Existing queue/provider/app/proxy budgets remain 5/300/330/360 seconds. Configured context is not
+full-window quality acceptance. Earlier raw-model exceptions do not waive authentication, audit,
+privacy, resource bounds or offline safeguards. Recognized-secret redaction is defense in depth,
+not a guarantee for arbitrary secret formats.
+
+The old HTTP connector is disabled, not a fallback. Approved-source listing is not automatic
+discovery or proof of monitoring-engine health; fresh reads and their exact scope matter.
+Local user-management source remains implemented but unaccepted, not a newly qualified
+administration feature. No broad retrieval, topology, general worker or remediation system is
+claimed. Independent recovery remains owner-deferred; snapshots do not establish independent
+PostgreSQL/WAL/PITR or host-loss recovery.
+
+Current design is documented in [Architecture](ARCHITECTURE.md), [Diagrams](DIAGRAMS.md),
+[Technology stack](TECH_STACK.md), [MCP](MCP.md) and [UI](UI.md).
+[Next task](../NEXT_TASK.md) retains the unfinished held-out factual/reliability strategy.
+This documentation update does not operate or redeploy any server.
+
+## Historical status snapshots: preserved, not current acceptance
+
+Everything below retains earlier presentation/qualification records. Versions, counts, readiness
+statements and “current” wording inside these dated snapshots apply only to their original
+checkpoint; they do not override the current summary or manifest above. Earlier WAN, reboot,
+load, restore and model results must not be transferred to `52e5179`.
+
 Current controlled workspace: app `48e3a8a` is retained with the original OCS images, static login
 and simpler chat. AI API `ec1ed32`, Qwen3.8-27B Q8/CPU and MCP are unchanged. Exact-source CI,
 offline installation, real saved-chat/secondary-Zabbix browser, durable audit and app rollback
@@ -50,7 +93,7 @@ protection against loss of the serving host or storage is unproven. Recovery wor
 gates remain unpassed and full production acceptance is not claimed. The next work is the serving
 app's held-out bilingual answer review and other non-recovery release/security gates.
 
-## Executive position
+### Executive position
 
 NextOps has reached a controlled user-testing checkpoint. The first complete read-only path is live
 across the four Ubuntu 24.04 servers: a user signs in through the private TLS application panel,
@@ -87,7 +130,7 @@ Earlier application release `nextops-0.1.0-2397581` and AI application release
 explicitly unverified; current infrastructure state requires live evidence; evidence answers retain
 provenance, freshness and limitations; unsupported live claims fail closed to a bounded fallback.
 
-## Status at a glance
+### Status at a glance
 
 Recovery entries in the table retain the full-production evidence contract; they are deferred
 from the present local-delivery work queue, not passed or deleted.
@@ -101,7 +144,7 @@ from the present local-delivery work queue, not passed or deleted.
 | Read-only connector | Live and least-privilege | Rootless loopback service, protected Zabbix credential, strict TLS, four distinct forced-command Linux keys and bounded composite evidence; denial, restart, rollback, guarded WAN and dependency-recovery cases passed | Complete production monitoring and independent recovery sign-off |
 | End-to-end user path | Controlled user testing | Current-source fresh EN/FA answers, saved UI reloads, evidence/audit hashes, exact rollback and server WAN/process restart passed | Complete broad held-out semantics, current-source VM/full cold start, context/thinking qualification and operational sign-off; independent recovery remains deferred |
 
-## Delivered user-testing capability
+### Delivered user-testing capability
 
 - A private HTTPS panel with English left-to-right and Persian right-to-left interfaces.
 - Protected local sign-in; no infrastructure credential is exposed to the browser or model.
@@ -115,7 +158,7 @@ from the present local-delivery work queue, not passed or deleted.
   configuration and credentials, loopback backends, private TLS and host firewalls.
 - Separate restricted SSH tunnels from the application server to the AI and connector services.
 
-## Acceptance evidence
+### Acceptance evidence
 
 - Repository checks passed: Ruff formatting and lint, strict mypy, documentation, deployment,
   inference and release-status validators, 160 unit/API tests, PostgreSQL 16 and 17 CI,
@@ -139,7 +182,7 @@ from the present local-delivery work queue, not passed or deleted.
   The later rollback-protected maintenance applied the pending packages and Zabbix `7.0.31`;
   current checks show zero failed units, pending packages or reboot markers on all four guests.
 
-## Security posture
+### Security posture
 
 The current slice deliberately limits authority. Zabbix credentials exist only on the connector;
 the connector API is loopback-only; its API role permits exactly `host.get`, `item.get`,
@@ -149,7 +192,7 @@ host identity and one forced command. The model receives normalized evidence, no
 credentials, and has no change or approval capability. Only SSH and the intended private HTTPS
 endpoint are allowed by the relevant host firewalls.
 
-## Remaining non-recovery work and deferred risk
+### Remaining non-recovery work and deferred risk
 
 The owner confirmed that the following inputs do not yet exist. Item 1 is deferred from this local
 delivery; items 2–4 and the current-release qualification gates remain active:
@@ -167,7 +210,7 @@ delivery; items 2–4 and the current-release qualification gates remain active:
 Further production hosts and connector methods require separate scope review; they are not needed
 to resolve these four present blockers.
 
-## Presentation conclusion
+### Presentation conclusion
 
 NextOps now has a functioning, security-bounded product slice rather than only prepared
 infrastructure. It is ready for supervised user testing of the bilingual, read-only investigation

@@ -2,7 +2,14 @@
 
 [فارسی](../fa/OFFLINE_RUNTIME.md) · [Index](INDEX.md) · [Technology stack](TECH_STACK.md) · [CPU-only AI](CPU_AI.md)
 
-**Requirement confirmed by the owner: 2026-09-20. Current status: controlled Stage 1 acceptance, not production acceptance.** Four-guest WAN isolation, a fresh WAN-denied browser, server/API requests, serial clean reboots, artifact rollback, failure recovery, sustained bounded load and logical isolated restore passed. Independent backup, WAL/PITR and disaster recovery remain open. See the [release manifest](../status/current-release.yaml), [test evidence](TESTING.md) and [Stage 1 report](STAGE_1_COMPLETION_REPORT.md).
+**Requirement confirmed by the owner: 2026-09-20. Current release: controlled `52e5179`, not
+production accepted.** Current-source server-WAN isolation, VM reboot/cold start and sustained
+load remain unqualified. Fresh browser WAN-denial checks do not prove server offline acceptance.
+Earlier four-guest isolation, restarts, load and logical restore are dated historical evidence;
+do not transfer them to this source. Independent backup/WAL/PITR/recovery remain owner-deferred,
+not passed. See the [release manifest](../status/current-release.yaml),
+[current qualification](../requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md),
+[Testing](TESTING.md) and the historical [Stage 1 report](STAGE_1_COMPLETION_REPORT.md).
 
 The four-guest WAN-denial results are controlled tests with a temporary egress policy, not a claim
 that host-wide egress is permanently blocked. As checked on 2026-09-26, administrator shells on all
@@ -77,7 +84,11 @@ Run only in an authorized isolated lab or approved maintenance window with a rec
 
 Block external access for both the server workload and the test browser while allowing required loopback and explicitly approved LAN routes. Cover IPv4/IPv6 and any configured proxy/tunnel paths. Merely breaking public DNS is not an adequate test. Record process-scoped network attempts as well as successful connections; a blocked unwanted request is still a dependency/privacy defect.
 
-The table below remains the normative acceptance suite. Current outcomes are recorded in the release manifest and test evidence: the server/API portions of OFF-01 and OFF-05 pass, the reboot/startup evidence covers a bounded part of OFF-02, and OFF-03 remains partial because the browser process was not independently WAN-isolated. All other unrecorded portions remain `not_run`. Define numeric sustained-test targets before execution and report samples rather than inferred performance.
+The table below remains the normative suite, not a current pass ledger. Consult the current-source
+gates in the manifest and dated test evidence. Historical Stage 1 OFF-01/02/03/05 results apply to
+their tested profile only; `52e5179` server-WAN and VM gates are `not_run`. A fresh browser
+without WAN access is a separate bounded check, not server isolation. Every unrecorded applicable
+portion remains `not_run`; define sustained-test targets before execution and report actual samples.
 
 | ID | Scenario | Required evidence |
 |---|---|---|

@@ -16,6 +16,13 @@ Model-quality/timeouts and broader offline gates remain open.
 See [the live record](docs/requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md) and
 [usage](docs/en/UI.md). Live controlled use is not full production acceptance.
 
+Current system design: four existing ESXi role guests, a modular FastAPI/PostgreSQL app with
+local static EN/FA UI, isolated CPU inference, and the real MCP gateway/credential-owning runner
+on the connector VM. Approved primary/secondary Zabbix and forced-command Linux reads retain
+source/time/scope and mandatory audit. See [the current architecture](docs/en/ARCHITECTURE.md)
+and [three current diagrams](docs/en/DIAGRAMS.md); future worker/retrieval/topology views are
+explicitly separate. GitHub publication does not redeploy the live services.
+
 Earlier controlled UI/source follow-up (2026-10-07): app/API **`ec1ed32`** expose actual Qwen3.8
 metadata, visible approved Zabbix source/host selection and problem/metric filters. The existing
 secondary MCP source passed fresh reads on three approved targets, saved-chat resume, audit/hash

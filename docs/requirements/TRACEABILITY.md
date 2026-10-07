@@ -1,5 +1,15 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Documentation-only current-design alignment (2026-10-07) maps the retained audit-repair record
+and current manifest to the EN/FA architecture, stack, C1–C3 diagrams, MCP, development and status
+guides. Seven future diagrams and historical snapshots remain labeled and preserved. No original
+requirement, acceptance identifier, result or deployed capability is removed or newly credited.
+
+هماهنگیِ فقط مستنداتِ طراحی جاری در۷ اکتبر ۲۰۲۶، رکورد تثبیت‌شدهٔ ممیزی و manifest را به
+راهنمای EN/FA معماری، فناوری، نمودار C1 تا C3، MCP، توسعه و وضعیت وصل می‌کند. هفت نمودار
+آینده و سابقهٔ تاریخ‌دار با برچسب حفظ‌اند؛ نیاز اولیه، شناسه/نتیجهٔ پذیرش یا قابلیت مستقر
+حذف یا به‌تازگی پذیرفته نمی‌شود.
+
 Audit findings UI-01–UI-05, AI-01–AI-03, SEC-01–SEC-03 and DOC-01 map to
 [the bounded repair](AUDIT_REPAIR_2026-10-07.md),
 [actual live qualification](AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md), the current status

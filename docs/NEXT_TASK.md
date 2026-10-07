@@ -19,6 +19,17 @@ collector موجود تثبیت‌اند. رکورد چهار نقش، شکست 
 پذیرفته نمی‌شوند. تغییر زیرساخت/مدل/مجوز دامنه و پذیرش جدا می‌خواهد؛ استفادهٔ کنترل‌شده پذیرش
 کامل production نیست.
 
+## Documentation follow-up / پیگیری مستندات
+
+The owner-requested GitHub/current-design documentation refresh is a bounded source-only
+increment. It does not restart deployment or replace the first unfinished factual/reliability
+checkpoint above. Preserve dated acceptance records and consult the current architecture/diagrams
+instead of treating target worker/retrieval/React examples as deployed.
+
+به‌روزرسانیِ درخواستی مالک برای GitHub/طراحی جاری، افزایش محدودِ فقط مستندات است؛ استقرار
+را از نو آغاز و نخستین گام ناتمامِ کیفیت/پایداری بالا را عوض نمی‌کند. رکورد تاریخ‌دار پذیرش
+حفظ و معماری/نمودار جاری خوانده شود؛ نمونهٔ آیندهٔ worker/بازیابی/React مستقر نیست.
+
 ## Earlier audit task — historical / کار پیشینِ ممیزی — سابقه
 
 Earlier owner-authorized work, **2026-10-07**: qualify and guardedly ship the

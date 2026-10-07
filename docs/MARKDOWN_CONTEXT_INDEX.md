@@ -21,7 +21,7 @@ remaining task-specific sources. The repository skill
 | Task | Read before acting |
 |---|---|
 | Requirements, scope, or acceptance | `docs/requirements/NEXTOPS_MASTER_PROMPT.md`, `PROMPT_CHANGELOG.md`, `TRACEABILITY.md`, relevant amendment, and the archive only for original non-conflicting detail |
-| Architecture or public interfaces | relevant ADRs, `docs/en/ARCHITECTURE.md`, `DATA_API.md`, `MCP.md`, `SECURITY.md`, and their Persian pairs |
+| Architecture or public interfaces | current `docs/en/ARCHITECTURE.md`, `TECH_STACK.md`, C1–C3 in `DIAGRAMS.md`, current manifest, relevant ADRs, `DATA_API.md`, `MCP.md`, `SECURITY.md`, and Persian pairs; distinguish preserved future diagrams from deployed paths |
 | Application or database code | `docs/en/DEVELOPMENT.md`, `DATA_API.md`, `TESTING.md`, current state/next task, source contracts, migrations, and neighboring tests |
 | Authentication or session lifecycle | `docs/requirements/SESSION_TERMINATION_SPEC.md`, `docs/en/SECURITY.md`, `DATA_API.md`, `TESTING.md`, current release manifest, source service/API, and identity integration tests |
 | Certificate lifecycle | `docs/requirements/CERTIFICATE_LIFECYCLE_SPEC.md`, `docs/en/OPERATIONS.md`, Persian operations pair, systemd checker/timer, Nginx profiles, current release manifest, and private rotation/alert evidence |
@@ -108,7 +108,7 @@ Markdown file is added, renamed, or removed.
 - `docs/adr/0007-forced-command-linux-connector.md` — ADR for forced-command, read-only Linux diagnostics.
 - `docs/adr/0008-independent-recovery-repositories.md` — Proposed ADR for separate PostgreSQL and file recovery repositories.
 - `docs/adr/README.md` — ADR status and navigation.
-- `docs/en/ARCHITECTURE.md` — English architecture and repository boundaries.
+- `docs/en/ARCHITECTURE.md` — Current controlled four-role deployment, actual source layout and trust boundaries; future components explicitly separated.
 - `docs/en/BACKUP_RESTORE_SPEC.md` — English bounded specification for independent backup and isolated restore.
 - `docs/en/CONFIGURATION.md` — English configuration contracts and current implemented subset.
 - `docs/en/CPU_AI.md` — English local CPU inference and capacity plan.
@@ -117,7 +117,7 @@ Markdown file is added, renamed, or removed.
 - `docs/en/DATA_API.md` — English durable data, workflow, evidence, and API contracts.
 - `docs/en/DEPLOYMENT_DOSSIERS.md` — English per-server dossier workflow.
 - `docs/en/DEVELOPMENT.md` — English development, CI, GitHub, and release workflow.
-- `docs/en/DIAGRAMS.md` — English architecture diagram atlas.
+- `docs/en/DIAGRAMS.md` — Three current deployment/request/admission diagrams and seven preserved future target views.
 - `docs/en/ENGINEERING_UPGRADE_PLAN.md` — English phased candidate-adoption and modernization plan.
 - `docs/en/ESXI_BASELINE.md` — English ESXi and guest CPU evidence boundaries.
 - `docs/en/GLOSSARY.md` — English product terminology.
@@ -139,12 +139,12 @@ Markdown file is added, renamed, or removed.
 - `docs/en/SERVER_PLAN.md` — English G10 VM plan and Zabbix milestone.
 - `docs/en/SERVER_START_CHECKLIST.md` — English first-server and package-bundle checklist.
 - `docs/en/START_HERE.md` — English onboarding and first milestone.
-- `docs/en/TECH_STACK.md` — English technology choices and constraints.
+- `docs/en/TECH_STACK.md` — Current locked Python/static frontend/official MCP/native CPU stack, with bounded future options.
 - `docs/en/TESTING.md` — English test, evaluation, and release-evidence plan.
 - `docs/en/TROUBLESHOOTING.md` — English fail-closed diagnostic playbook.
 - `docs/en/UI.md` — English bilingual console and design-system requirements.
 - `docs/en/ZABBIX_SERVER.md` — English dedicated Zabbix server design.
-- `docs/fa/ARCHITECTURE.md` — Persian architecture and repository boundaries.
+- `docs/fa/ARCHITECTURE.md` — Persian current controlled deployment, actual source layout and enforceable trust boundaries.
 - `docs/fa/BACKUP_RESTORE_SPEC.md` — Persian bounded specification for independent backup and isolated restore.
 - `docs/fa/CONFIGURATION.md` — Persian configuration contracts and current implemented subset.
 - `docs/fa/CPU_AI.md` — Persian local CPU inference and capacity plan.
@@ -153,7 +153,7 @@ Markdown file is added, renamed, or removed.
 - `docs/fa/DATA_API.md` — Persian durable data, workflow, evidence, and API contracts.
 - `docs/fa/DEPLOYMENT_DOSSIERS.md` — Persian per-server dossier workflow.
 - `docs/fa/DEVELOPMENT.md` — Persian development, CI, GitHub, and release workflow.
-- `docs/fa/DIAGRAMS.md` — Persian architecture diagram atlas.
+- `docs/fa/DIAGRAMS.md` — Persian three current diagrams and seven explicitly preserved future target views.
 - `docs/fa/ENGINEERING_UPGRADE_PLAN.md` — Persian phased candidate-adoption and modernization plan.
 - `docs/fa/ESXI_BASELINE.md` — Persian ESXi and guest CPU evidence boundaries.
 - `docs/fa/GLOSSARY.md` — Persian product terminology.
@@ -175,7 +175,7 @@ Markdown file is added, renamed, or removed.
 - `docs/fa/SERVER_PLAN.md` — Persian G10 VM plan and Zabbix milestone.
 - `docs/fa/SERVER_START_CHECKLIST.md` — Persian first-server and package-bundle checklist.
 - `docs/fa/START_HERE.md` — Persian onboarding and first milestone.
-- `docs/fa/TECH_STACK.md` — Persian technology choices and constraints.
+- `docs/fa/TECH_STACK.md` — Persian current locked/native stack and bounded future technology options.
 - `docs/fa/TESTING.md` — Persian test, evaluation, and release-evidence plan.
 - `docs/fa/TROUBLESHOOTING.md` — Persian fail-closed diagnostic playbook.
 - `docs/fa/UI.md` — Persian bilingual console and design-system requirements.

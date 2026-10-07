@@ -1,5 +1,21 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Current system design documentation, 2026-10-07
+
+Align paired architecture, technology, diagram, MCP, development, security, offline and status guides with retained
+`52e5179`: native four-role deployment, actual static frontend, official SDK/MCP runner boundary,
+source-scoped evidence, owner-scoped saved chat and unchanged CPU profile. Add three actual
+deployment/investigation/admission views; label and retain the seven future target views and dated
+status history. Update README/context routes. Documentation-only: no server, model, credential,
+grant, schema, dependency-lock or acceptance-result change.
+
+راهنمای جفت معماری، فناوری، نمودار، MCP، توسعه و وضعیت با `52e5179` تثبیت‌شده هماهنگ شد:
+استقرار بومی چهار نقش، رابط ایستای واقعی، SDK رسمی/مرز اجراکنندهٔ MCP، شاهد دامنه‌دار،
+سابقهٔ مخصوص مالک و نمایهٔ CPU ثابت. سه نمای واقعیِ استقرار/بررسی/ظرفیت اضافه و هفت نمای
+آینده و سابقهٔ وضعیت تاریخ‌دار با برچسب روشن حفظ شدند. README و مسیر context به‌روز شدند.
+این تغییر فقط مستندات است؛ سرور، مدل، اطلاعات ورود، grant، schema، قفل وابستگی یا نتیجهٔ
+پذیرش تغییر نمی‌کند.
+
 ## Audited code repairs retained live, 2026-10-07
 
 Retain exact `52e5179` app/API/MCP and matching existing collectors after five exact-source CI

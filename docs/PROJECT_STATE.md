@@ -1,5 +1,18 @@
 # Project state / وضعیت پروژه
 
+Documentation checkpoint, **2026-10-07**: the owner requested GitHub synchronization and the
+current system design. Paired architecture/stack/diagrams/MCP/development/status guides now
+describe retained `52e5179`, actual static UI and the deployed gateway/isolated runner. Three
+current views are separate from seven preserved future diagrams and historical status records.
+This source-only documentation increment leaves serving identities and all acceptance gates
+unchanged; the live checkpoint below remains authoritative.
+
+گام مستندات، **۷ اکتبر ۲۰۲۶**: مالک هماهنگ‌سازی GitHub و طراحی جاری را خواست. راهنمای
+جفت معماری/فناوری/نمودار/MCP/توسعه/وضعیت، `52e5179` تثبیت‌شده، رابط ایستای واقعی و
+درگاه مستقر/اجراکنندهٔ جدا را شرح می‌دهد. سه نمای جاری از هفت نمودار آینده و سابقهٔ وضعیت
+تاریخی جداست. این افزایش فقط کد مستندات است؛ هویت خدمت و معیار پذیرش تغییر نمی‌کند و
+گام زندهٔ زیر مرجع باقی می‌ماند.
+
 Current checkpoint, **2026-10-07, audit repairs retained live**: exact `52e5179` is selected
 for app, AI API and canonical MCP/source runner; the matching collector is installed on all
 four existing guests. At17:12:47 UTC all-four completion/idle-guard reconciliation passed after
