@@ -1,5 +1,36 @@
 # Project state / وضعیت پروژه
 
+Current checkpoint — **2026-10-07, enabled-model UI and secondary inspection**: app and AI API
+`ec1ed32` are retained live at09:59:08 UTC after guarded source rollback/reapply. Native Q8/no-BLAS,
+its PID, budgets, units/environment, MCP `2a7c8dc`, credentials and schema are unchanged. The panel
+shows actual model/configuration metadata, visible approved source/host selection and problem/metric
+filters over all returned bounded observations. Three secondary targets passed fresh reads, saved
+reload/follow-up passed and read-only DB checks matched two conversation audits/five evidence hash
+pairs across initial/final contexts. Eight fresh finals include one on the restored source. Both
+owned timers are inactive, services active, automatic restart counters0, swap0 and ready/idle.
+Source verification:1446 unit/API,94 browser,151 typed files and all five exact-source CI jobs pass.
+The first revision's metrics timeout and private rollback-runner assertion failure remain recorded.
+Manual review retains unsupported reachability wording and an unverified severity label as semantic
+limitations, not passes. Thinking is off;16K is configured admission, not full-context acceptance.
+See [the bounded record](requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md).
+Current WAN/VM/load and broad model quality remain unaccepted; no production claim or new waiver.
+
+گام جاری — **۷ اکتبر ۲۰۲۶، رابط مدل فعال و بررسی منبع دوم**: برنامه و API هوش مصنوعیِ
+`ec1ed32` پس از بازگشت/اعمال دقیق کد، ساعت۰۹:۵۹:۰۸ UTC تثبیت شدند. Q8 بومی و ساخت بدون BLAS،
+PID، بودجه‌ها، واحد/محیط، MCP با کد `2a7c8dc`، اطلاعات ورود و پایگاه ثابت‌اند. هویت/تنظیم
+واقعی مدل، انتخاب آشکارِ منبع و میزبان مجاز و فیلتر همهٔ مشاهدات محدودِ دریافتی در پنل دیده
+می‌شوند. سه مقصد منبع دوم، خواندن تازه و گفت‌وگو، بازگشایی/ادامه را گذراندند. بررسی
+فقط‌خواندنیِ پایگاه، دو ممیزی گفت‌وگو و پنج جفت هش شاهد در مرورگر اولیه/نهایی را تطبیق داد.
+هشت پاسخ تازه، شامل یک پاسخ با کد بازگردانده‌شده ثبت است؛ هر دو محافظ غیرفعال، خدمات فعال،
+شمارندهٔ شروع خودکار صفر، swap صفر و مدل آماده و بی‌درخواست‌اند.۱٬۴۴۶ آزمون واحد/API،۹۴
+مرورگر،۱۵۱ فایل کنترل نوع و پنج کار CI کد دقیق موفق‌اند. پایان مهلت سنجهٔ نسخهٔ اول و انتظار
+نادرست ابزار خصوصیِ بازگشت حفظ شده‌اند. ادعای دسترسی‌پذیری و برچسب شدتِ تأییدنشده در
+بازبینی دستی، محدودیت معنایی‌اند، نه موفقیت. استدلال خاموش و16K سقف پذیرش تنظیم‌شده است،
+نه پذیرش زمینهٔ کامل. رکورد بالا مرجع است؛ WAN/VM/بارِ جاری و کیفیت عمومی پذیرفته نیستند.
+ادعای تولید یا استثنای تازه‌ای اضافه نشده است.
+
+## Initial Q8 cutover — historical / گذار اولیهٔ Q8 — سابقه
+
 Current checkpoint — **2026-10-07, owner-excepted Qwen3.8 cutover**: the owner waived only
 three recorded raw-semantic failures. Qwen3.8-27B Q8/no-BLAS build003 is retained live after guarded
 rollback/reapply, AI source `60605d8`; app source `3d92b71`, credentials, MCP, schema and UI are unchanged.

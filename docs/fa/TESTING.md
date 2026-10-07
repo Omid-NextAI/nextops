@@ -2,6 +2,54 @@
 
 # آزمون، ارزیابی مدل و شواهد انتشار
 
+## رابط مدل فعال و منبع دوم — ۷ اکتبر ۲۰۲۶
+
+کد زندهٔ برنامه/API برابر `ec1ed32` و هش بسته `4dda2131…` است؛ Q8 بومی/PID/تنظیم و MCP
+ثابت‌اند. کنترل کد:۱٬۴۴۶ آزمون واحد/API موفق، دو مورد مختص POSIX اجرا‌نشده،۱۳۲ انتخاب‌نشده
+و یک هشدار موجود AnyIO در۴۰٫۶۳ ثانیه؛۹۴ مرورگر در۳۷۷٫۰۲ ثانیه و۱۵۱ فایل کنترل نوع موفق‌اند.
+پنج کار CI همان کد، با شناسهٔ37601040171، شامل PostgreSQL16/17، مرورگر و اسکن اسرار موفق‌اند.
+
+سه مرورگر واقعی و تازه با TLS معتبر، هشت پاسخ کامل داشتند: پنج پاسخ اولیه شامل ذخیره/
+بازگشایی/ادامه و سه مقصد مجازِ منبع دوم؛ یک پاسخ عمومی با کد بازگردانده‌شده؛ دو خواندن
+نهاییِ منبع دوم در دو زبان. منع منبع/مقصد/استدلال، فیلتر/انتخاب شاهد، زبان، موبایل، خروج
+و رد نشست قبلی موفق و درخواست بیرونی/خطای صفحه صفر بود. بررسی فقط‌خواندنی PostgreSQL،
+دو ممیزی گفت‌وگوی مالک و پنج جفت هش شاهد/ممیزی ماندگار را تطبیق داد. نصب آفلاین دقیق،
+بازگشت/اعمال کد و تثبیت ساعت۰۹:۵۹:۰۸ UTC موفق‌اند. محافظ‌ها غیرفعال، آمادگی بدون درخواست/
+صف، PID بومی ثابت و swap صفر است. محدودکردن مبدأ مرورگر، پذیرش WAN سرورها نیست. پایان
+مهلت اولیه و انتظار نادرست ابزار خصوصی حفظ‌اند؛ ادعای دسترسی‌پذیری و برچسب شدتِ تأییدنشده،
+محدودیت معنایی‌اند، نه موفقیت.
+[رکورد، زمان‌ها و تصویرها](../requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md) مرجع‌اند.
+
+فرمان‌ها در محیط موجود و قفل‌شدهٔ Python؛ در Windows گزینهٔ `-X utf8` برای خروجی دوزبانه:
+
+```text
+python -B -X utf8 -m pytest -m "not integration and not browser" -q --tb=short
+python -B -X utf8 -m pytest tests/browser -q --tb=short
+python -B -X utf8 -m pytest tests/unit/test_release_status.py tests/unit/test_qwen38_cutover_exception.py -q
+python -B -X utf8 -m mypy --platform linux packages tests scripts deploy/installers
+python -B -X utf8 -m ruff check packages migrations tests scripts deploy/installers
+python -B -X utf8 -m ruff format --check packages migrations tests scripts deploy/installers
+python -B -X utf8 scripts/check_docs.py
+python -B -X utf8 scripts/check_release_status.py
+python -B -X utf8 scripts/check_inference_artifacts.py
+node --check packages/nextops/api/static/capabilities.js
+node --check packages/nextops/api/static/app.js
+node --check packages/nextops/api/static/investigation-view.js
+git diff --check
+```
+
+ابزار زندهٔ خصوصیِ ازپیش‌بازبینی‌شده؛ بدون اطلاعات ورود عمومی یا شاهد ساختگی:
+
+```text
+python -B -X utf8 <protected-source-ui-directory>/browser-check.py first
+python -B -X utf8 <protected-source-ui-directory>/browser-check.py rollback
+python -B -X utf8 <protected-source-ui-directory>/browser-check.py final
+```
+
+رکورد، کارکرد کنترل‌شدهٔ رابط را از پذیرش خام/مدل/استدلال/زمینه/بازیابی/بار/WAN/VM و تولید
+جدا می‌کند. انتشار تاریخیِ API با پسوند خاص همچنان آزمون منفی schema است؛ کنترل سابقهٔ35B
+فقط دو شناسهٔ ثبت‌شدهٔ کد Q8 را می‌پذیرد.
+
 ## گذار کنترل‌شدهٔ Qwen3.8 — ۷ اکتبر ۲۰۲۶
 
 استثنای مالک، نتیجهٔ خام۱۳ از۱۶ را موفق یا تولید را پذیرفته نمی‌کند. سه مرورگر تازه با TLS

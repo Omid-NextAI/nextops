@@ -32,7 +32,12 @@ def test_exact_installed_source_suffix_does_not_allow_other_releases_or_source_m
         changed["components"]["inference_api"] = {"release": release, "source_commit": commit}
         assert list(validator.iter_errors(changed))
     changed = copy.deepcopy(status)
-    changed["components"]["application"] = copy.deepcopy(status["components"]["inference_api"])
+    # Test the historical API-only suffix explicitly. A later ordinary matched app/API
+    # release must not make this negative test depend on the current serving pair.
+    changed["components"]["application"] = {
+        "release": "nextops-0.1.0-60605d8-q38",
+        "source_commit": "60605d8b98f13d01152fa95881919f01021df902",
+    }
     assert list(validator.iter_errors(changed))
 
 

@@ -10,7 +10,15 @@ investigations now use the existing durable run and append-only audit model.
 
 ## Implemented durable subset
 
-Local user administration is a source-only candidate, not deployed. `GET /api/v1/users?offset=0`
+Authenticated readiness adds nullable `configured_context_tokens` in source `ec1ed32`. It reports
+the configured input-admission ceiling, not a measured full-window quality result. Older providers
+may omit it. Deploy the accepting app before the API; roll back API before app because the old app
+contract rejects extra fields. This metadata does not authorize thinking or alter inference limits.
+See [the bounded UI/source record](../requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md).
+
+Local user administration has a controlled installation recorded in the
+[MCP qualification](../requirements/MCP_LIVE_QUALIFICATION_2026-10-04.md); live account mutations
+remain unaccepted. `GET /api/v1/users?offset=0`
 returns at most 50 same-organization/environment accounts and `next_offset`. `POST /api/v1/users`
 accepts `{username,password,role}` with role viewer/operator/engineer. `PATCH
 /api/v1/users/{identity_id}` accepts `{is_active,expected_version}`; `POST

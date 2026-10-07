@@ -1,5 +1,20 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Sections11–17/20–21: enabled-model presentation and approved secondary inspection map to
+[the UI/source record](UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md), `capabilities.js`, readiness
+contracts, source catalogues, evidence presentation and the EN/FA panel/browser/API tests. Exact
+`ec1ed32` app/API deployment, eight fresh finals, two conversation/five evidence audits and source
+rollback/reapply are bounded functional evidence. Numeric severity/source/time/scope remain DTO
+facts; model-added labels or reachability interpretations are not authoritative. Native/model/MCP
+and permission boundaries are unchanged; no new quality exception or production acceptance.
+
+بخش‌های۱۱ تا۱۷/۲۰ تا۲۱: نمایش مدل فعال و بررسی منبع دومِ مجاز به رکورد رابط/کد بالا، ماژول
+نمایشی، قرارداد آمادگی، فهرست منبع، نمایش شاهد و آزمون پنل/مرورگر/API دو زبان ردیابی می‌شوند.
+استقرار دقیقِ برنامه/API با کد `ec1ed32`، هشت پاسخ تازه، دو ممیزی گفت‌وگو/پنج ممیزی شاهد و
+بازگشت/اعمال کد، شاهد کارکرد محدودند. شدت عددی، منبع، زمان و دامنه از DTO معتبرند؛ برچسب
+افزودهٔ مدل یا تفسیر دسترسی‌پذیری، شاهد معتبر نیست. مدل/runtime/MCP و مرز دسترسی ثابت‌اند؛
+استثنای کیفیت تازه یا پذیرش تولید اضافه نشده است.
+
 Sections11/16–17/20–21: the explicit owner standard-quality exception maps to
 [the controlled cutover](QWEN38_CONTROLLED_CUTOVER_2026-10-07.md), exact Q8 candidate/CPU profiles,
 canonical current release, and `test_qwen38_cutover_exception.py`. Fourteen real final answers,

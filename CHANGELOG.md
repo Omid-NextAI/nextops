@@ -1,5 +1,24 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## Enabled-model UI and secondary Zabbix inspection — 2026-10-07
+
+App/API `ec1ed32` add authenticated actual-capability metadata, visible approved source/host
+selection, explicit read-only question shortcuts and filters over all returned bounded evidence.
+Preserve native Q8/configuration, MCP, credentials, schema, OCS branding, saved chats and local
+assets. Source tests1446 unit/API,94 browser and five exact-source CI jobs passed. Guarded offline
+install, eight fresh finals, two conversation/five evidence-hash audits, exact package rollback/
+reapply and retention passed. The first metrics timeout and runner assertion failure remain
+recorded; interpretation limitations, raw13/16 and thinking/full-context/WAN/VM/load are not passes.
+See [the bounded record](docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md).
+
+برنامه/API با کد `ec1ed32`، فرادادهٔ احرازهویت‌شدهٔ قابلیت واقعی، انتخاب آشکار منبع/میزبان
+مجاز، میان‌بر صریحِ پرسش فقط‌خواندنی و فیلتر همهٔ مشاهدات محدودِ دریافتی را اضافه می‌کنند.
+Q8 بومی/تنظیم، MCP، اطلاعات ورود، پایگاه، هویت OCS، گفت‌وگو و فایل‌های محلی ثابت‌اند.
+۱٬۴۴۶ آزمون واحد/API،۹۴ مرورگر و پنج کار CI کد دقیق موفق‌اند. نصب آفلاینِ زمان‌دار، هشت
+پاسخ تازه، دو ممیزی گفت‌وگو/پنج جفت هش شاهد، بازگشت/اعمال دقیق بسته و تثبیت موفق‌اند.
+پایان مهلت اولیه و انتظار نادرست ابزار حفظ شده‌اند؛ محدودیت تفسیر، نتیجهٔ خام۱۳ از۱۶ و
+استدلال/کل زمینه/WAN/VM/بار موفق نام نمی‌گیرند. رکورد محدودِ بالا مرجع است.
+
 ## Retained Qwen 3.8 Q8 comparison: quality still failed — 2026-10-06
 
 Reused the retained Q8 artifact, restored locale-native policy and reviewed no-BLAS runtime in

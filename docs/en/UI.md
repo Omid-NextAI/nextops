@@ -1,16 +1,17 @@
 # Bilingual operations console and design system
 
-## Qwen3.8 capabilities and selected-source inspection — 2026-10-07 source
+## Qwen3.8 capabilities and selected-source inspection — controlled live, 2026-10-07
 
-Problem: the serving Q8 model is hidden behind a generic CPU label; source/host controls are buried
-and only three evidence rows are visible. Preserve the stack, OCS identity, authentication,
+The repair addresses a generic CPU label, buried source/host controls and a three-row evidence
+limit. It preserves the stack, OCS identity, authentication,
 owner-scoped chats, read-only MCP and exact inference configuration. No new target enrolment,
 credential, write operation, model, thinking enablement or larger budget is included.
 
 `capabilities.js` presents authenticated readiness and conversation metadata: actual model identity,
 configured token ceiling (not full-window qualification), bounded saved context/retention, thinking
 permission and queue admission. Missing metadata is unavailable, never guessed from a model name.
-Readiness adds nullable `configured_context_tokens`; older peers remain compatible. Model knowledge
+Readiness adds nullable `configured_context_tokens`; the new app accepts an older provider that
+omits it. Promote app before API; roll back API before app because the old app contract is strict. Model knowledge
 and coding advice are not live infrastructure evidence.
 
 Modes, source and approved host controls stay visible. Connectors/Infrastructure host buttons prepare
@@ -19,20 +20,34 @@ and status shortcuts prepare drafts. Evidence filters show only returned observa
 original identifiers, source, times and scope. Empty filtered data does not prove health. A pending
 selected source cannot inherit a primary-source readiness result. Tokens remain runner-only.
 
+Use **Connectors** or **Infrastructure** to choose a registered host, or select **Live monitoring →
+Company Zabbix / SLA → approved host** above the composer. Choose **Inspect active problems**,
+**Inspect current metrics** or **Inspect status and limits**, then explicitly send. The metrics
+shortcut asks for at most two metrics/60 words to keep generation compact; all returned bounded
+observations remain in the evidence panel. Use **Problems**, **Metrics** or **All observations**
+and select a row for raw data, times and scope. Ask a custom question when needed. No group scan,
+automatic remediation or hidden switch to the primary source occurs.
+
 Acceptance covers API/contracts and EN/FA browser tests, RTL/mobile reflow, disabled thinking,
 dialog keyboard/focus, no automatic collection, filtered selection, failure and logout cleanup.
-Fixture screenshots are labelled demo, not live. Deployment requires exact offline wheel identities,
-guarded app/API promotion, fresh secondary reads, audit/hash verification and exact source rollback.
-Preserve old releases; native model/runtime/config, database and MCP remain unchanged. Source tests
-do not infer operational outcomes or waive existing quality failures.
+Fixture screenshots are labelled demo, not live. App/API `ec1ed32` passed offline installation,
+guarded selection, eight fresh finals across initial/source-rollback/final browsers, saved resume,
+five evidence/audit hash pairs and exact source rollback/reapply; retained at09:59:08 UTC. See the
+[record](../requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md). Native model/runtime/config,
+database and MCP remain unchanged. Current model metadata is Qwen3.8-27B Q8,16K admission,
+six saved turns/12,000 characters/30 days and thinking off. Monitoring answers took106–247 seconds
+in these bounded reads, not a latency guarantee. Semantic limits remain: model wording is not
+authoritative evidence, including reachability claims and unverified severity labels. This is
+controlled functionality, not new production or model-quality acceptance. Old releases remain.
 
-## Reference workspace and OCS Signal Gate — source candidate, 2026-10-04
+## Reference workspace and OCS Signal Gate — historical source candidate, 2026-10-04
 
 The new source-only design preserves the current vanilla stack and working contracts. Navigation,
 profile-based Users, composer options and the evidence inspector are reconstructed from the supplied
 reference; corporate login uses a separate original teal/gold signal gate. Missing API fields remain
 explicitly unavailable, not example facts. See [preview, checks and screenshots](REFERENCE_UI.md).
-This candidate is not deployed; the dated live records below retain their original scope.
+That checkpoint was source-only; later dated live records and the current manifest supersede its
+deployment status while retaining its original scope.
 
 ## Live approved Zabbix selection — 2026-10-04
 

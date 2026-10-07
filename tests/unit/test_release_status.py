@@ -65,9 +65,14 @@ def test_retained_expanded_profile_is_not_misattributed_to_a_new_serving_model()
             _status_module().model_identity_errors(status["components"]["model"], {}, candidate)
             == []
         )
-        assert status["components"]["inference_api"]["source_commit"] == (
-            "60605d8b98f13d01152fa95881919f01021df902"
-        )
+        api_source = status["components"]["inference_api"]["source_commit"]
+        assert api_source in {
+            "60605d8b98f13d01152fa95881919f01021df902",  # Initial controlled Q8 API.
+            "ec1ed325b73d63840e788720364ca9694897422e",  # Bounded capability/source UI.
+        }
+        assert api_source != profile["source_commit"]
+        if api_source == "ec1ed325b73d63840e788720364ca9694897422e":
+            assert status["components"]["application"]["source_commit"] == api_source
     assert profile["request_reasoning_budget_tokens"] == THINKING_BUDGET_TOKENS
 
 

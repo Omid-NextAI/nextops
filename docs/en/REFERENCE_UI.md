@@ -4,10 +4,16 @@
 
 ## Scope and implementation
 
+The 7 October follow-up adds enabled-model metadata, visible approved source/host selection and
+problem/metric filters without changing OCS branding, login motion or the underlying reference
+layout. Its [qualification record](../requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md)
+and the current release manifest supersede historical component identities below.
+
 Branch: `codex/reference-dashboard`, inspected main baseline `625ca80`, 2026-10-04.
-The owner subsequently authorized deployment: repaired app `3d92b71` is serving, while connector
-`2a7c8dc` and AI/model remain unchanged. The [latest live repair record](../requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md)
-records the latest 88-browser/738-non-browser follow-up, exact-source CI, real aging/browser/audit
+The owner subsequently authorized deployment: repaired app `3d92b71` was serving on5 October,
+while connector `2a7c8dc` and AI/model were unchanged within that UI change.
+The [5 October repair record](../requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md)
+records the 88-browser/738-non-browser follow-up, exact-source CI, real aging/browser/audit
 and `f169875` rollback/reapply, preserving the earlier 70-test repair and `836b1ea` rollback. The [earlier UI record](../requirements/REFERENCE_UI_LIVE_QUALIFICATION_2026-10-05.md)
 retains the original 47-test deployment and repaired failures. Model quality, server-WAN/cold-start,
 reboot, recovery and production gates are not closed by this visual release.
@@ -28,7 +34,7 @@ retrieval and fresh infrastructure evidence remain distinct.
 
 ## Use and preview
 
-### Evidence aging follow-up — controlled live `3d92b71`
+### Evidence aging follow-up — historical controlled `3d92b71`
 
 The selected observation now ages from its original collection time without another request.
 One visibility-aware deadline timer stops on close, unmount, hidden page, account view and logout;
@@ -51,7 +57,7 @@ external requests or aging-triggered queries were recorded. Main review inspecte
 light captures. Automated status/keyboard checks do not replace human screen-reader review.
 Asset versions are `20261005-freshness`. Exact-source CI, offline install, guarded real browser/audit
 and `f169875` rollback/reapply passed; both trials verified actual five-minute aging without changing
-the browser clock. The verified app is `3d92b71`; the final rollback guard is stopped. See the live
+the browser clock. The app verified in that record was `3d92b71`; its final rollback guard was stopped. See the live
 record above for identity/latencies and preserved unrun server-WAN/model gates.
 
 ### Motion and panel repair checkpoint — 2026-10-05

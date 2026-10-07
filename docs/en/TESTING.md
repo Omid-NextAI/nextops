@@ -1,5 +1,53 @@
 # Testing, model evaluation and release evidence
 
+## Enabled-model UI and secondary source — 7 October 2026
+
+Serving app/API source `ec1ed32`, package digest `4dda2131…`; native Q8/PID/configuration and MCP
+unchanged. Source checks:1446 unit/API passed,2 POSIX skips,132 deselected/one existing AnyIO
+warning (40.63s);94 browser passed (377.02s);151 files typed. Five exact-source CI jobs in
+run37601040171 passed, including PostgreSQL16/17, browser and secret scanning.
+
+Three fresh TLS-verified real browser contexts passed eight finals: five initial (saved initial/
+resume/follow-up and three approved secondary targets), one restored-source general answer, two
+final secondary EN/FA reads. Source/target/thinking denials, evidence filters/selection, locale,
+mobile, logout/replay and zero external browser requests/page errors passed. Read-only PostgreSQL
+matched two owner conversation audits and five durable evidence/audit hash pairs. Exact offline
+package installation, source rollback/reapply and09:59:08 UTC retention passed. Owned timers are
+inactive; ready/active0/queued0, native PID unchanged and swap0. Browser-origin restriction does
+not qualify server-WAN isolation. Initial metrics timeout and private runner assertion failure
+are retained; unsupported reachability wording and severity labels are semantic limits, not passes.
+See [the record, timings and screenshots](../requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md).
+
+Commands in the existing locked Python environment (Windows use `-X utf8` for bilingual output):
+
+```text
+python -B -X utf8 -m pytest -m "not integration and not browser" -q --tb=short
+python -B -X utf8 -m pytest tests/browser -q --tb=short
+python -B -X utf8 -m pytest tests/unit/test_release_status.py tests/unit/test_qwen38_cutover_exception.py -q
+python -B -X utf8 -m mypy --platform linux packages tests scripts deploy/installers
+python -B -X utf8 -m ruff check packages migrations tests scripts deploy/installers
+python -B -X utf8 -m ruff format --check packages migrations tests scripts deploy/installers
+python -B -X utf8 scripts/check_docs.py
+python -B -X utf8 scripts/check_release_status.py
+python -B -X utf8 scripts/check_inference_artifacts.py
+node --check packages/nextops/api/static/capabilities.js
+node --check packages/nextops/api/static/app.js
+node --check packages/nextops/api/static/investigation-view.js
+git diff --check
+```
+
+Private, already reviewed live runner (no public test credentials or fixtures):
+
+```text
+python -B -X utf8 <protected-source-ui-directory>/browser-check.py first
+python -B -X utf8 <protected-source-ui-directory>/browser-check.py rollback
+python -B -X utf8 <protected-source-ui-directory>/browser-check.py final
+```
+
+The record distinguishes controlled UI functionality from raw/model/thinking/context/recovery/
+load/WAN/VM and production qualification. The exact historical suffixed API release remains a
+negative schema test; the retained35B check admits only the two recorded Q8 API source identities.
+
 ## Qwen3.8 controlled cutover — 7 October 2026
 
 Owner-excepted raw13/16 remains failed, not production acceptance. Three fresh real TLS-verified

@@ -1,5 +1,27 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-07, source/UI follow-up retained**: do not redo the completed capability
+dialog, visible source/host controls, three approved secondary reads, saved resume, audit/hash
+matching or exact app/API source rollback/reapply. `ec1ed32` is serving both roles; native Q8 and
+MCP are unchanged. Keep the failed first revision, manually observed interpretation limits and
+the earlier three-case raw-quality exception visible. The next unfinished work is a bounded
+held-out factual-quality strategy, including scope/reachability and severity-label discipline;
+separately qualify thinking/privacy/full-context/server-WAN/VM/load. Do not treat fresh evidence
+retrieval as correct model interpretation, retry identical raw trials, change weights/configuration
+or widen permissions from this UI checkpoint. Current status and the
+[source/UI record](requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md) are authoritative.
+
+کار جاری — **۷ اکتبر ۲۰۲۶، پیگیریِ رابط/کد تثبیت‌شده**: پنجرهٔ قابلیت، کنترل آشکار منبع/
+میزبان، خواندن سه مقصد مجاز منبع دوم، بازگشایی گفت‌وگو، تطبیق ممیزی/هش و بازگشت/اعمال دقیق
+برنامه/API تکرار نشوند. هر دو نقش، کد `ec1ed32` دارند؛ Q8 بومی و MCP ثابت‌اند. نسخهٔ اولِ
+ناموفق، محدودیت معناییِ مشاهده‌شده و استثنای پیشینِ سه شکست خام حفظ شوند. کار ناتمام بعدی،
+راهبرد محدودِ کیفیت با پرسش‌های کنارگذاشته‌شده، به‌ویژه دامنه/دسترسی‌پذیری و برچسب شدت است؛
+استدلال، حریم خصوصی، کل زمینه، WAN/VM/بار جدا پذیرفته شوند. گردآوری تازه را درستیِ تفسیر مدل
+ندانید؛ این گام مجوز تکرار آزمون خام یکسان، تغییر وزن/تنظیم یا افزایش دسترسی نیست. وضعیت
+انتشار و رکورد رابط/کد بالا مرجع‌اند.
+
+## Initial retained Q8 task — historical / کار اولیهٔ Q8 تثبیت‌شده — سابقه
+
 Current task — **2026-10-07, Q8 retained controlled live**: preserve completed fourteen fresh
 finals, source review, audit/hash matching, exact rollback/reapply and08:08:37 UTC retention. Keep
 the three raw failures and current quality exception visible. The next unfinished work is a bounded,

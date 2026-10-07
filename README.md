@@ -7,7 +7,16 @@
 Owner update (2026-09-26): the owner tested an ESXi VM snapshot restore. Its dated result has
 not been reviewed here; independent database backup and restore gates remain unpassed.
 
-Current controlled selection (2026-10-07): **Qwen3.8-27B Q8** is live under the owner's explicit
+Current controlled UI/source follow-up (2026-10-07): app/API **`ec1ed32`** expose actual Qwen3.8
+metadata, visible approved Zabbix source/host selection and problem/metric filters. The existing
+secondary MCP source passed fresh reads on three approved targets, saved-chat resume, audit/hash
+matching and exact source rollback/reapply. Eight fresh finals passed bounded functionality;
+unsupported model reachability wording/severity labels remain unaccepted, not live facts.
+Native Q8/configuration/MCP are unchanged; thinking stays off. See the
+[dated UI/source record](docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md) and
+[usage](docs/en/UI.md). This is controlled live functionality, not full production acceptance.
+
+Initial controlled selection (2026-10-07): **Qwen3.8-27B Q8** went live under the owner's explicit
 three-case raw-quality exception. App `3d92b71` stays unchanged; AI `60605d8` uses CPU-only32 workers,
 16K admission,300/330/360-second budgets and thinking off. Fourteen fresh browser finals, saved-chat
 resume, secondary Zabbix EN/FA evidence, audit/hash matching and exact rollback/reapply passed.

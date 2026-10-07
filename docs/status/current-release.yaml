@@ -1,7 +1,7 @@
 ---
 $schema: ./release-status.schema.json
 schema_version: 2.2.0
-release_identifier: nextops-qwen38-controlled-2026-10-07
+release_identifier: nextops-qwen38-source-ui-controlled-2026-10-07
 observed_at: '2026-10-07'
 deployment_status: controlled_user_testing_not_production_accepted
 delivery_scope:
@@ -20,14 +20,14 @@ repository:
   inspected_baseline_commit: 625ca80b83fbdb80d0fba4dc4e770b189b6d623c
 components:
   application:
-    release: nextops-0.1.0-3d92b71
-    source_commit: 3d92b71d6456d95a530142424fbb69ae0d0d29d8
+    release: nextops-0.1.0-ec1ed32
+    source_commit: ec1ed325b73d63840e788720364ca9694897422e
   connector:
     release: nextops-0.1.0-2a7c8dc
     source_commit: 2a7c8dc5dc99ebf203748380b7ab8ea7f89ac690
   inference_api:
-    release: nextops-0.1.0-60605d8-q38
-    source_commit: 60605d8b98f13d01152fa95881919f01021df902
+    release: nextops-0.1.0-ec1ed32
+    source_commit: ec1ed325b73d63840e788720364ca9694897422e
   inference_runtime:
     name: llama.cpp
     source_tag: v0.4.1
@@ -50,19 +50,21 @@ components:
     name: Zabbix
     version: '7.0.31'
 current_application_qualification:
-  release: nextops-0.1.0-3d92b71
-  source_commit: 3d92b71d6456d95a530142424fbb69ae0d0d29d8
+  release: nextops-0.1.0-ec1ed32
+  source_commit: ec1ed325b73d63840e788720364ca9694897422e
   scope: application_revision_sensitive
   gates:
     - id: current_app_bounded_live_functionality
       status: passed
       evidence:
+        - docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md
         - docs/requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md
         - docs/en/TESTING.md
         - docs/fa/TESTING.md
     - id: current_app_held_out_answer_semantics
       status: partial
       evidence:
+        - docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md
         - docs/en/AI_INTEGRITY.md
         - docs/en/TESTING.md
         - docs/fa/TESTING.md
@@ -70,12 +72,14 @@ current_application_qualification:
     - id: current_app_exact_release_rollback
       status: passed
       evidence:
+        - docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md
         - docs/requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
     - id: current_app_server_side_wan_isolation
       status: not_run
       evidence:
+        - docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md
         - docs/requirements/UI_REPAIR_LIVE_QUALIFICATION_2026-10-05.md
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
@@ -85,6 +89,16 @@ current_application_qualification:
         - docs/en/TESTING.md
         - docs/NEXT_TASK.md
 capabilities:
+  - id: enabled_model_ui_and_selected_source_inspection
+    status: accepted_controlled
+    evidence:
+      - docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md
+      - packages/nextops/api/static/capabilities.js
+      - packages/nextops/api/static/investigation-view.js
+      - packages/nextops/inference/contracts.py
+      - tests/browser/test_phase2_panel.py
+      - docs/en/UI.md
+      - docs/fa/UI.md
   - id: qwen38_standard_owner_excepted_selection
     status: experimental
     evidence:
@@ -310,6 +324,14 @@ capabilities:
       - deploy/systemd/nextops-certificate-check.timer
       - tests/unit/test_certificate_expiry.py
 acceptance_gates:
+  - id: qwen38_source_ui_live_audit_rollback_20261007
+    status: passed
+    evidence:
+      - docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md
+  - id: qwen38_source_ui_interpretation_quality_20261007
+    status: partial
+    evidence:
+      - docs/requirements/UI_QWEN38_SOURCE_QUALIFICATION_2026-10-07.md
   - id: qwen38_controlled_standard_cutover_20261007
     status: passed
     evidence:
