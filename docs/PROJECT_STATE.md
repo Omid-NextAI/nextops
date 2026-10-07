@@ -1,5 +1,48 @@
 # Project state / وضعیت پروژه
 
+Current checkpoint — **2026-10-07, 06:10 UTC**: the upstream instruct sampler failed. Ten
+finals completed; main review records nine passed/two failed/five not run. English networking still
+asserts an unverified upstream response; the attempted English stale/partial case raised
+TimeoutError under the explicit300-second limit. Five subsequent cases were not attempted.
+Both completed raw code samples pass twelve finite AST boundaries each, not general code approval.
+Report SHA `79178feeb7f7d4e910bd868d031c20c5383dd64c6a965e8b7d3176e13d35b9de`.
+Owned stop and separate PID0/inactive/free-port/unchanged ready-idle serving checks passed; five CI
+jobs for `da8d61c` passed, not raw quality. Live35B/defaults/public thinking remain unchanged.
+
+Next distinct comparison: candidate-only greedy decoding, explicitly opt-in and mutually exclusive
+with instruct sampling, temperature0/top-k1/top-p1/min-p0/presence0/repeat1/preselected seed0.
+It removes stochastic token selection, not an upstream recommendation or correctness guarantee.
+Same prompt, full sixteen questions, semantic/code scoring, 16K/384/300 and resource/watchdog/
+privacy/cleanup limits; no lucky-seed selection, timeout extension or fallback credit.
+Independent/app/privacy/context/evidence/WAN/model rollback gates remain open.
+
+Greedy source checks:80 focused tests;1,426 unit/API passed,2 POSIX skips,130 deselected,one existing
+warning in27.33s; lint/156-file format/Linux types150/docs140/39/status/artifact/diff checks pass.
+No native greedy result is inferred. An unescaped test regex lint finding was corrected without
+waiving the rule or changing its semantics.
+
+گام جاری — **۷ اکتبر ۲۰۲۶، ۰۶:۱۰ UTC**: نمایهٔ نمونه‌گیری سازنده ناموفق بود. ده پاسخ نهایی
+رسید؛ بازبینی عامل اصلی نه موفق، دو ناموفق و پنج اجرا‌نشده را ثبت می‌کند. پاسخ شبکهٔ انگلیسی
+دریافت پاسخ نامعتبر از بالادست را بدون شاهد قطعی دانست؛ پرسش شاهد کهنه/ناقص انگلیسی در
+نمایهٔ صریح۳۰۰ثانیه با TimeoutError پایان یافت و پنج مورد بعد آزموده نشدند. هر نمونهٔ کامل
+کد، دوازده حالت محدود AST را گذراند؛ این تأیید کدنویسی عمومی نیست. هش گزارش بالا حفظ شود.
+توقف اختصاصی و بررسی جداگانهٔ نبود PID/شنونده و آمادگی بی‌درخواستِ مدل زنده موفق بود؛ پنج
+کار CI کد `da8d61c` صحت خام را ثابت نمی‌کند. مدل زندهٔ35B، پیش‌فرض‌ها و استدلال عمومی ثابت‌اند.
+
+مقایسهٔ متفاوت بعدی: رمزگشایی حریصانه، فقط برای نامزد و با فعال‌سازی صریح؛ با نمونه‌گیری
+سازنده هم‌زمان نمی‌شود. مقادیر ثابت بالا انتخاب تصادفی را حذف می‌کنند، نه اینکه توصیهٔ
+سازنده یا تضمین صحت باشند. دستور، همهٔ شانزده پرسش، معیار معنا و کد، زمینه/خروجی/مهلت،
+منابع، توقف محدود و حریم خصوصی حفظ شوند. seed موفق جدا انتخاب، مهلت بیشتر یا پاسخ جایگزین
+امتیاز داده نشود. معیارهای مستقل، برنامه، حریم خصوصی، زمینه، شاهد، WAN و بازگشت مدل بازند.
+
+کنترل کد حریصانه:۸۰ آزمون محدود؛ ۱٬۴۲۶ آزمون واحد/API موفق، دو مورد ویژهٔ POSIX اجرا‌نشده،
+۱۳۰ انتخاب‌نشده و یک هشدار موجود در۲۷٫۳۳ ثانیه؛ lint، قالب۱۵۶ فایل، type با هدف Linux روی
+۱۵۰ فایل، سند۱۴۰/۳۹ و کنترل وضعیت، فایل و diff موفق‌اند. این شاهد آزمون بومی حریصانه نیست.
+ایراد lint در عبارت منظم آزمون بدون استثناکردن قاعده یا تغییر معنا اصلاح شد.
+
+## Earlier sampler source checkpoint — historical / گام پیشین کد نمونه‌گیری — سابقه
+
+
 Current source experiment — **2026-10-07**: candidate-only opt-in upstream instruct sampling is
 implemented with preselected seed0, default isolation and unchanged restored prompt/frozen corpus.
 It addresses an observed sampler-configuration difference, not a proved raw-quality repair.

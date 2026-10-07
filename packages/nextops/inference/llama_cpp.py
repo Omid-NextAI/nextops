@@ -366,7 +366,19 @@ class LlamaCppProvider:
                 "enable_thinking": False,
                 "preserve_thinking": False,
             }
-            if self._settings.qwen38_instruct_sampling_enabled:
+            if self._settings.qwen38_greedy_decoding_enabled:
+                # Isolated greedy comparison after the failed instruct sampler.
+                # Fixed inputs are not cross-hardware determinism or correctness.
+                payload.update(
+                    temperature=0.0,
+                    top_p=1.0,
+                    top_k=1,
+                    min_p=0.0,
+                    presence_penalty=0.0,
+                    repeat_penalty=1.0,
+                    seed=0,
+                )
+            elif self._settings.qwen38_instruct_sampling_enabled:
                 # Explicit unselected profile, not a silent serving/default change.
                 # Qwen's non-thinking controls; seed fixed before qualification,
                 # not an upstream recommendation or universal determinism claim.

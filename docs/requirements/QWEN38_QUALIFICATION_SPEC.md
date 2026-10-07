@@ -6,6 +6,32 @@ other workloads. [CPU guide](../en/CPU_AI.md) / [راهنمای CPU](../fa/CPU_A
 
 ## English
 
+### Instruct result and greedy-decoding plan — 2026-10-07, 06:10 UTC
+
+The exact `da8d61c` instruct-sampler trial completed ten finals, then TimeoutError on English
+stale/partial evidence under300. Main-only accounting: nine passed/two failed/five not run;
+English networking asserts an unverified upstream condition. Both completed coding samples pass
+twelve finite AST boundaries. Native SHA
+`79178feeb7f7d4e910bd868d031c20c5383dd64c6a965e8b7d3176e13d35b9de`; owned stop and separate
+baseline reconciliation passed. Five exact-source CI jobs passed, not native quality.
+
+Problem: stochastic instruct sampling did not cure factual instruction following and introduced
+a retained timeout. A distinct greedy comparison removes stochastic choice; it is not upstream
+guidance, training or guaranteed correctness. Explicit `NEXTOPS_QWEN38_GREEDY_DECODING_ENABLED=1`
+requires an expanded exact Q8/Q5 candidate; temperature0/top-k1/top-p1/min-p0/presence0/repeat1/
+preselected seed0. Both sampler flags default off; enabling both fails closed. Do not widen
+thinking, context, deadlines, queues, output or any authorization boundary.
+
+Plan/tasks: source default/mutual-exclusion/security tests, exact committed full16 capture,
+bounded controller review, fresh artifact/resource/idle preflight, full raw trial and unchanged
+semantic/code scoring. Same retained Q8/no-BLAS/32 workers/48GiB/16K/384/300/global watchdog;
+all previous failures retained. No question matching, prompt change, downloads, lucky-seed
+selection, fallback credit or private-reasoning retention. Repetition/truncation from greedy
+decoding is a failure, not a waiver. Independent and matched app/privacy/context/evidence/WAN/
+model-rollback gates follow only after full standard correctness. Source rollback is reverting
+the greedy field/wiring/tests to the parent and stopping only the owned unit; live35B is untouched.
+Update paired guides, project state, next task and traceability with actual outcomes.
+
 ### Candidate sampler comparison — 2026-10-07
 
 Problem: repeated instruction-following failures persist across three prompt policies. The
@@ -297,6 +323,29 @@ this index entry. Preserve the prior failed-thinking and UI deployment records. 
 release manifest only for an actually accepted identity change, not source registration.
 
 ## فارسی
+
+### نتیجهٔ نمونه‌گیری سازنده و برنامهٔ رمزگشایی حریصانه — ۷ اکتبر ۲۰۲۶، ۰۶:۱۰ UTC
+
+آزمون نمایهٔ سازنده از کد دقیق `da8d61c` ده پاسخ نهایی داد و شاهد کهنه/ناقص انگلیسی در
+مهلت۳۰۰ثانیه با TimeoutError پایان یافت. بازبینی عامل اصلی نه موفق، دو ناموفق و پنج
+اجرا‌نشده را ثبت می‌کند؛ پاسخ شبکهٔ انگلیسی وضعیت بالادست را بدون شاهد قطعی می‌داند.
+هر نمونهٔ کامل کد، دوازده حالت محدود AST را گذراند. هش بومی بالا، توقف اختصاصی و بررسی
+جداگانهٔ خط مبنا حفظ‌اند. پنج کار CI همان کد صحت خام را ثابت نمی‌کند.
+
+مسئله: نمونه‌گیری تصادفیِ سازنده پیروی از دستور واقع‌محور را اصلاح نکرد و مهلت یک پاسخ
+پایان یافت. مقایسهٔ متفاوتِ حریصانه انتخاب تصادفی را حذف می‌کند؛ توصیهٔ سازنده، آموزش یا
+تضمین صحت نیست. فعال‌سازی صریح `NEXTOPS_QWEN38_GREEDY_DECODING_ENABLED=1` فقط برای نامزد
+دقیق Q8/Q5 با نمایهٔ expanded است و مقادیر ثابت بالا را دارد. دو نمایه پیش‌فرض خاموش و
+هم‌زمانی آن‌ها مردود است. استدلال، زمینه، مهلت، صف، خروجی یا مجوز گسترده‌تر نشود.
+
+گام‌ها: آزمون جدایی و منع هم‌زمانی و امنیت کد؛ ثبت شانزده درخواست از کد دقیق؛ بازبینی
+کنترل‌کنندهٔ محدود؛ بررسی تازهٔ فایل، منابع و آمادگی بی‌درخواست؛ آزمون کامل خام با معیار
+معنا و کدِ ثابت. فایل Q8، runtime بدون BLAS، منابع و سقف‌های بالا حفظ شوند. همهٔ شکست‌های
+پیشین نگه‌داری شوند. تطبیق پرسش، تغییر دستور، دانلود، seed موفق، امتیاز پاسخ جایگزین یا
+نگه‌داری استدلال خصوصی مجاز نیست. تکرار یا بریدگی پاسخ حریصانه شکست است، نه استثنا.
+پذیرش مستقل و برنامه/حریم خصوصی/زمینه/شاهد/WAN/بازگشت مدل پس از موفقیت کامل استاندارد است.
+بازگشت کد، حذف تغییر حریصانه به محتوای parent و توقف فقط واحد اختصاصی است؛ مدل زندهٔ35B
+ثابت می‌ماند. راهنمای دو زبان، وضعیت، کار بعد و ردیابی با نتیجهٔ واقعی به‌روز شوند.
 
 ### مقایسهٔ نمونه‌گیری نامزد — ۷ اکتبر ۲۰۲۶
 

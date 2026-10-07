@@ -1,5 +1,16 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+Sections11/16–17/20–21: upstream-sampler native result is nine passed/two failed/five not run
+(main-only). Both completed finite coding samples pass, but unsupported upstream topology and
+stale-evidence timeout block selection. Greedy opt-in/mutual denial/default isolation map to
+configuration/adapter and `test_qwen38_sampling.py`; same full criteria and later gates required.
+
+بخش‌های۱۱/۱۶–۱۷/۲۰–۲۱: نتیجهٔ بومی نمونه‌گیری سازنده در بازبینی عامل اصلی نه موفق، دو
+ناموفق و پنج اجرا‌نشده است. دو نمونهٔ محدود کد موفق‌اند؛ ادعای بالادست و پایان مهلت شاهد
+کهنه مانع انتخاب است. نمایهٔ حریصانه، منع هم‌زمانی و جدایی پیش‌فرض به تنظیم، نگاشت درخواست
+و آزمون بالا متصل‌اند؛ مجموعهٔ کامل ثابت و معیارهای بعدی همچنان لازم‌اند.
+
+
 Sections11/16–17/20–21: the opt-in Qwen3.8 sampler comparison maps to settings, trusted adapter
 payload controls and `test_qwen38_sampling.py`. Default serving isolation, fixed corpus/criteria,
 no private thinking and exact source/profile identity are required; source wiring is not raw or

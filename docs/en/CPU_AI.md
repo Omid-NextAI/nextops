@@ -1,5 +1,23 @@
 # Local CPU-only AI and capacity planning
 
+## Instruct sampler failed; bounded greedy comparison — 7 October 2026
+
+The upstream-profile diagnostic returned ten finals, then TimeoutError on English stale/partial
+evidence under explicit300 seconds. Main-only full accounting: **nine passed/two failed/five not
+run**; English networking still invents an upstream condition. Both completed code samples pass
+twelve finite AST boundaries, not whole-model qualification. Native SHA:
+`79178feeb7f7d4e910bd868d031c20c5383dd64c6a965e8b7d3176e13d35b9de`.
+Owned stop/separate serving reconciliation and five exact-source CI jobs passed, not raw quality.
+
+A distinct diagnostic opts into `NEXTOPS_QWEN38_GREEDY_DECODING_ENABLED=1`: temperature0/top-k1/
+top-p1/min-p0/presence0/repeat1/seed0, exact expanded Q8/Q5 only. It removes stochastic choice,
+not an upstream recommendation or guaranteed/cross-hardware determinism. Enabling both sampling
+flags fails closed; both default off. Same frozen full corpus, restored prompt, 16K/384/300 and
+CPU/memory/watchdog/privacy/cleanup limits. No altered scoring, time extension, new download,
+fallback credit or lucky-seed selection. Preserve all failures; no live selection or thinking
+until raw and subsequent independent/app/privacy/context/evidence/WAN/model-rollback gates pass.
+
+
 ## Opt-in Qwen3.8 sampler comparison — 2026-10-07
 
 The candidate profile `NEXTOPS_QWEN38_INSTRUCT_SAMPLING_ENABLED=1` applies explicit upstream

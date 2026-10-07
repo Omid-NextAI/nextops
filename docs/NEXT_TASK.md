@@ -1,5 +1,25 @@
 # Next task / کار بعدی
 
+Current task — **2026-10-07, after06:10 UTC**: preserve the failed instruct-sampler report:
+nine passed/two failed/five not run, including unsupported English upstream topology and
+TimeoutError on stale evidence. Keep source CI and owned cleanup separate. Verify/capture the
+new committed greedy candidate profile; main-review the exact bounded controller and fresh
+preflight, then run one full unchanged sixteen-case comparison. No altered prompt/questions/
+criteria/budget/deadline, new weights, identical retry or lucky-seed selection. Do not deploy while
+any required raw or later independent/app/privacy/context/evidence/WAN/model-rollback gate fails
+or is not run. Keep serving35B/public thinking unchanged.
+
+کار جاری — **۷ اکتبر ۲۰۲۶، پس از۰۶:۱۰ UTC**: گزارش شکست نمونه‌گیری سازنده، با نه موفق، دو
+ناموفق و پنج اجرا‌نشده حفظ شود؛ ادعای بالادست انگلیسی و TimeoutError شاهد کهنه باقی‌اند.
+CI و توقف اختصاصی جدا ثبت شوند. کد دقیق نمایهٔ اختیاری حریصانه بررسی و درخواستش ثبت شود؛
+کنترل‌کنندهٔ محدود و بررسی تازه بازبینی و یک مقایسهٔ کامل با شانزده پرسش ثابت اجرا شود.
+دستور، پرسش، معیار، بودجه و مهلت تغییر نکند؛ فایل مدل تازه، تکرار یکسان یا seed موفق انتخاب
+نشود. تا موفقیت واقعی همهٔ معیارهای خام و مستقل/برنامه/حریم خصوصی/زمینه/شاهد/WAN/بازگشت مدل
+استقرار انجام نشود. مدل زندهٔ35B و استدلال عمومی ثابت بمانند.
+
+## Earlier sampler task — historical / کار پیشین نمونه‌گیری — سابقه
+
+
 Current task — **2026-10-07**: verify the opt-in upstream instruct-sampling source, capture exact
 committed requests with all sixteen unchanged cases, review the bounded controller, and run one
 fresh-preflight retained-Q8 CPU diagnostic. Keep deadlines/scoring/history, no fallback credit or

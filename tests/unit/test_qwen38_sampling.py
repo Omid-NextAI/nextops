@@ -88,12 +88,18 @@ def request(**changes: Any) -> InferenceRequest:
 @pytest.mark.parametrize("locale", ["en", "fa"])
 @pytest.mark.parametrize("purpose", ["general", "evidence_synthesis"])
 @pytest.mark.parametrize("temperature", [0.0, 2.0])
+@pytest.mark.parametrize("profile", ["instruct", "greedy"])
 def test_explicit_candidate_sampler_is_trusted_and_preserves_boundaries(
-    model: ModelId, locale: str, purpose: GenerationPurpose, temperature: float
+    model: ModelId, locale: str, purpose: GenerationPurpose, temperature: float, profile: str
 ) -> None:
     async def scenario() -> None:
         transport = CaptureTransport(model)
-        configured = settings(model, qwen38_instruct_sampling_enabled=True)
+        flag = (
+            "qwen38_instruct_sampling_enabled"
+            if profile == "instruct"
+            else "qwen38_greedy_decoding_enabled"
+        )
+        configured = settings(model, **{flag: True})
         submitted = request(
             locale=locale,
             purpose=purpose,
@@ -102,9 +108,15 @@ def test_explicit_candidate_sampler_is_trusted_and_preserves_boundaries(
         )
         await LlamaCppProvider(configured, transport).generate(submitted)
         payload = transport.calls[-1][1]
-        assert payload["temperature"] == 0.7
-        assert payload["top_p"] == 0.8 and payload["top_k"] == 20
-        assert payload["min_p"] == 0.0 and payload["presence_penalty"] == 1.5
+        if profile == "instruct":
+            assert payload["temperature"] == 0.7
+            assert payload["top_p"] == 0.8 and payload["top_k"] == 20
+            assert payload["presence_penalty"] == 1.5
+        else:
+            assert payload["temperature"] == 0.0
+            assert payload["top_p"] == 1.0 and payload["top_k"] == 1
+            assert payload["presence_penalty"] == 0.0
+        assert payload["min_p"] == 0.0
         assert payload["repeat_penalty"] == 1.0 and payload["seed"] == 0
         assert payload["max_tokens"] == 384 and payload["stream"] is False
         assert payload["messages"][-1] == {"role": "user", "content": submitted.prompt}
@@ -129,6 +141,7 @@ def test_opt_out_keeps_existing_sampler_payload(model: ModelId) -> None:
         transport = CaptureTransport(model)
         configured = settings(model)
         assert not configured.qwen38_instruct_sampling_enabled
+        assert not configured.qwen38_greedy_decoding_enabled
         await LlamaCppProvider(configured, transport).generate(request(temperature=0.3))
         payload = transport.calls[-1][1]
         assert payload["temperature"] == 0.3 and payload["top_p"] == 0.8
@@ -154,12 +167,47 @@ def test_sampling_opt_in_requires_expanded_profile_without_relaxing_limits() -> 
             settings(CANDIDATES[0], qwen38_instruct_sampling_enabled=True, **change)
 
 
-def test_sampling_environment_opt_in_is_explicit(monkeypatch: pytest.MonkeyPatch) -> None:
+@pytest.mark.parametrize(
+    "model", ["nextops-qwen3-5-35b-a3b-q4-k-m", "nextops-qwen3-5-122b-a10b-q5-k-m"]
+)
+def test_greedy_opt_in_denies_unrelated_models(model: ModelId) -> None:
+    with pytest.raises(ValueError, match="greedy decoding"):
+        settings(model, qwen38_greedy_decoding_enabled=True)
+
+
+def test_greedy_opt_in_keeps_limits_and_denies_ambiguous_profiles() -> None:
+    for change in (
+        {"expanded_chat_enabled": False},
+        {"thinking_enabled": True},
+        {"context_tokens": 32768},
+        {"request_timeout_seconds": 121},
+    ):
+        with pytest.raises(ValueError):
+            settings(CANDIDATES[0], qwen38_greedy_decoding_enabled=True, **change)
+    with pytest.raises(ValueError, match="mutually exclusive"):
+        settings(
+            CANDIDATES[0],
+            qwen38_greedy_decoding_enabled=True,
+            qwen38_instruct_sampling_enabled=True,
+        )
+
+
+@pytest.mark.parametrize(
+    "flag,attribute",
+    [
+        ("NEXTOPS_QWEN38_INSTRUCT_SAMPLING_ENABLED", "qwen38_instruct_sampling_enabled"),
+        ("NEXTOPS_QWEN38_GREEDY_DECODING_ENABLED", "qwen38_greedy_decoding_enabled"),
+    ],
+)
+def test_sampling_environment_opt_in_is_explicit(
+    monkeypatch: pytest.MonkeyPatch, flag: str, attribute: str
+) -> None:
     for name in (
         "CREDENTIALS_DIRECTORY",
         "NEXTOPS_LLAMA_API_KEY_FILE",
         "NEXTOPS_INFERENCE_SERVICE_SECRET_FILE",
         "NEXTOPS_QWEN38_INSTRUCT_SAMPLING_ENABLED",
+        "NEXTOPS_QWEN38_GREEDY_DECODING_ENABLED",
         "NEXTOPS_QWEN38_EXTENDED_TIMEOUT_ENABLED",
         "NEXTOPS_THINKING_ENABLED",
     ):
@@ -174,12 +222,12 @@ def test_sampling_environment_opt_in_is_explicit(monkeypatch: pytest.MonkeyPatch
         "NEXTOPS_INFERENCE_TIMEOUT_SECONDS": "120",
     }.items():
         monkeypatch.setenv(name, value)
-    assert not LlamaCppSettings.from_environment().qwen38_instruct_sampling_enabled
-    monkeypatch.setenv("NEXTOPS_QWEN38_INSTRUCT_SAMPLING_ENABLED", "1")
-    assert LlamaCppSettings.from_environment().qwen38_instruct_sampling_enabled
-    monkeypatch.setenv("NEXTOPS_QWEN38_INSTRUCT_SAMPLING_ENABLED", "true")
-    assert not LlamaCppSettings.from_environment().qwen38_instruct_sampling_enabled
-    monkeypatch.setenv("NEXTOPS_QWEN38_INSTRUCT_SAMPLING_ENABLED", "1")
+    assert not getattr(LlamaCppSettings.from_environment(), attribute)
+    monkeypatch.setenv(flag, "1")
+    assert getattr(LlamaCppSettings.from_environment(), attribute)
+    monkeypatch.setenv(flag, "true")
+    assert not getattr(LlamaCppSettings.from_environment(), attribute)
+    monkeypatch.setenv(flag, "1")
     monkeypatch.setenv("NEXTOPS_MODEL_ID", "nextops-qwen3-5-35b-a3b-q4-k-m")
-    with pytest.raises(ValueError, match="instruct sampling"):
+    with pytest.raises(ValueError, match=r"instruct sampling|greedy decoding"):
         LlamaCppSettings.from_environment()
