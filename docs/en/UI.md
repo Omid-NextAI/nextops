@@ -1,5 +1,31 @@
 # Bilingual operations console and design system
 
+## Qwen3.8 capabilities and selected-source inspection — 2026-10-07 source
+
+Problem: the serving Q8 model is hidden behind a generic CPU label; source/host controls are buried
+and only three evidence rows are visible. Preserve the stack, OCS identity, authentication,
+owner-scoped chats, read-only MCP and exact inference configuration. No new target enrolment,
+credential, write operation, model, thinking enablement or larger budget is included.
+
+`capabilities.js` presents authenticated readiness and conversation metadata: actual model identity,
+configured token ceiling (not full-window qualification), bounded saved context/retention, thinking
+permission and queue admission. Missing metadata is unavailable, never guessed from a model name.
+Readiness adds nullable `configured_context_tokens`; older peers remain compatible. Model knowledge
+and coding advice are not live infrastructure evidence.
+
+Modes, source and approved host controls stay visible. Connectors/Infrastructure host buttons prepare
+a selected-source question; they never execute collection or remediation silently. Problem, metric
+and status shortcuts prepare drafts. Evidence filters show only returned observations and keep their
+original identifiers, source, times and scope. Empty filtered data does not prove health. A pending
+selected source cannot inherit a primary-source readiness result. Tokens remain runner-only.
+
+Acceptance covers API/contracts and EN/FA browser tests, RTL/mobile reflow, disabled thinking,
+dialog keyboard/focus, no automatic collection, filtered selection, failure and logout cleanup.
+Fixture screenshots are labelled demo, not live. Deployment requires exact offline wheel identities,
+guarded app/API promotion, fresh secondary reads, audit/hash verification and exact source rollback.
+Preserve old releases; native model/runtime/config, database and MCP remain unchanged. Source tests
+do not infer operational outcomes or waive existing quality failures.
+
 ## Reference workspace and OCS Signal Gate — source candidate, 2026-10-04
 
 The new source-only design preserves the current vanilla stack and working contracts. Navigation,

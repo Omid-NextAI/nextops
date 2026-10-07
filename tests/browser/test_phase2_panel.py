@@ -23,6 +23,80 @@ from playwright.sync_api import Page, expect, sync_playwright
 from nextops.api.incident_focus import incident_focus
 
 pytestmark = pytest.mark.browser
+
+
+@pytest.mark.parametrize("locale", ["en", "fa"])
+def test_qwen38_capabilities_and_secondary_problem_inspection(
+    browser_server: tuple[str, FastAPI], locale: str
+) -> None:
+    """Sanitized fixtures: no live model, connector or quality qualification."""
+    base_url, app = browser_server
+    app.state.ready_model = "nextops-qwen3-8-27b-q8-0"
+    app.state.ready_context = 16384
+    app.state.saved_chats_enabled = True
+    app.state.thinking_allowed = False
+    app.state.source_problems = [
+        {"name": "Demo agent unavailable", "severity": 4, "started_at": NOW}
+    ]
+    with sync_playwright() as p:
+        browser = _launch_browser(p)
+        page = browser.new_page(viewport={"width": 1440, "height": 900})
+        _login(page, base_url)
+        if locale == "fa":
+            page.locator("#languageButton").click()
+        expect(page.locator("#modelStatusLabel")).to_contain_text("Qwen3.8-27B")
+        page.locator("#modelStatusLabel").click()
+        expect(page.locator("#modelCapabilitiesDialog")).to_be_visible()
+        expect(page.locator("#capabilitiesContent")).to_contain_text(
+            "۱۶٬۳۸۴" if locale == "fa" else "16,384"
+        )
+        expect(page.locator("#capabilitiesContent")).to_contain_text(
+            "غیرفعال" if locale == "fa" else "Disabled"
+        )
+        page.keyboard.press("Escape")
+        expect(page.locator("#modelStatusLabel")).to_be_focused()
+        page.locator('[data-nav="connectors"]').click()
+        page.locator('[data-inspect-source="secondary"]').first.click()
+        expect(page.locator("#composerOptions")).not_to_have_attribute("open", "")
+        expect(page.locator("#monitoringSource")).to_be_visible()
+        expect(page.locator("#monitoringSource")).to_have_value("secondary")
+        expect(page.locator("#question")).not_to_be_empty()
+        assert not app.state.monitoring_requests  # Shortcut prepares; does not execute.
+        page.locator("#askButton").click()
+        expect(page.locator("#evidenceSource")).to_contain_text("secondary / sla")
+        page.locator('#resultCard [data-evidence-filter="problems"]').click()
+        expect(page.locator("#resultCard .evidence-row")).to_have_count(1)
+        page.locator("#resultCard [data-evidence-index]").first.click()
+        expect(page.locator("#panel-raw")).to_contain_text("Demo agent unavailable")
+        expect(page.locator("#panel-raw")).to_contain_text('"severity": 4')
+        page.locator("#evidenceClose").click()
+        page.locator('#resultCard [data-evidence-filter="metrics"]').click()
+        expect(page.locator("#resultCard .evidence-row")).to_have_count(1)
+        page.set_viewport_size({"width": 390, "height": 844})
+        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+        expect(page.locator("#monitoringSource")).to_be_visible()
+        screenshot_root = Path("artifacts/q38-ui-sync")
+        screenshot_root.mkdir(parents=True, exist_ok=True)
+        page.evaluate("""() => {
+            const note=document.createElement('p');
+            note.textContent='Demo data — not live'; note.id='fixtureNotice';
+            document.querySelector('.topbar').append(note);
+        }""")
+        page.screenshot(path=str(screenshot_root / f"secondary-{locale}-mobile.png"))
+        page.locator("#workspaceInputControls").scroll_into_view_if_needed()
+        page.screenshot(path=str(screenshot_root / f"controls-{locale}-mobile.png"))
+        page.set_viewport_size({"width": 1672, "height": 941})
+        page.screenshot(path=str(screenshot_root / f"secondary-{locale}-desktop.png"))
+        page.locator("#modelStatusLabel").click()
+        page.screenshot(path=str(screenshot_root / f"capabilities-{locale}-desktop.png"))
+        page.keyboard.press("Escape")
+        _profile_action(page, "#logoutButton")
+        expect(page.locator("#loginView")).to_be_visible()
+        expect(page.locator("#capabilitiesContent")).to_be_empty()
+        assert page.locator("#modelStatusLabel").get_attribute("aria-label") is None
+        browser.close()
+
+
 STATIC = Path(__file__).resolve().parents[2] / "packages" / "nextops" / "api" / "static"
 NOW = "2026-09-23T10:00:00Z"
 
@@ -194,6 +268,10 @@ def _fixture_app() -> FastAPI:
     app.state.general_integrity = "deterministic_fallback"
     app.state.general_delay = 0.0
     app.state.monitoring_requests = []
+    app.state.ready_model = "nextops-qwen3-8b-q4-k-m"
+    app.state.ready_context = 8192
+    app.state.thinking_allowed = True
+    app.state.source_problems = []
     app.state.source_failed = False
     app.state.source_delay = 0.0
     app.state.saved_chats_enabled = False
@@ -255,10 +333,13 @@ def _fixture_app() -> FastAPI:
         return dict(user)
 
     @app.get("/api/v1/conversations/config")
-    async def chat_config() -> dict[str, bool]:
+    async def chat_config() -> dict[str, Any]:
         return {
             "enabled": app.state.saved_chats_enabled,
-            "thinking_enabled": app.state.saved_chats_enabled,
+            "thinking_enabled": app.state.saved_chats_enabled and app.state.thinking_allowed,
+            "context_turns": 6,
+            "context_characters": 12000,
+            "retention_days": 30,
         }
 
     @app.get("/api/v1/conversations")
@@ -340,7 +421,8 @@ def _fixture_app() -> FastAPI:
     async def ready() -> dict[str, Any]:
         return {
             "state": "ready",
-            "model_id": "nextops-qwen3-8b-q4-k-m",
+            "model_id": app.state.ready_model,
+            "configured_context_tokens": app.state.ready_context,
             "runtime_version": "v0.4.1",
             "cpu_only_required": True,
             "max_active_requests": 1,
@@ -430,6 +512,7 @@ def _fixture_app() -> FastAPI:
         result["evidence"].update(
             source_id=payload["source_id"], target_id=payload["target_id"], host_group_ids=["23"]
         )
+        result["evidence"]["active_problems"] = app.state.source_problems
         return result
 
     @app.get("/api/v1/incidents/targets")

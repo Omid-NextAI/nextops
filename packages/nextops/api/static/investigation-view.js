@@ -91,11 +91,16 @@
       }
       out.push(...selectedLinux.map(s=>({...linux,...s})));
     }
-    return out.map((item,i)=>({...item,id:String(i),raw:Object.fromEntries(Object.entries({...item.raw,source:item.source,host:item.host,scope:item.scope,collected_at:item.collected}).filter(([,value])=>value!==undefined).map(([key,value])=>[key,typeof value==="string"?safe(value):value]))}));
+    return out.map((item,i)=>({...item,id:String(i),category:Number.isInteger(item.severity)?"problems":item.source.startsWith("Zabbix")?"metrics":"diagnostics",raw:Object.fromEntries(Object.entries({...item.raw,source:item.source,host:item.host,scope:item.scope,collected_at:item.collected}).filter(([,value])=>value!==undefined).map(([key,value])=>[key,typeof value==="string"?safe(value):value]))}));
   }
   function renderRows(card) {
     const list=card.querySelector("[data-evidence-rows]"); list.replaceChildren();
-    entries.slice(0,3).forEach((entry,i)=>{ const b=node("button",undefined,"evidence-row"); b.type="button"; b.dataset.evidenceIndex=String(i); b.setAttribute("aria-current",String(i===selected)); const n=node("span",String(i+1),"evidence-number"); const label=node("span",`${entry.title} · ${entry.value}`,"evidence-label"); label.dir="auto"; const tm=node("time",time(entry.observed || entry.collected)); if(entry.observed) tm.dateTime=entry.observed; b.append(n,label,tm); list.append(b); });
+    const labels=locale==="fa"?{all:"همهٔ مشاهدات",problems:"مشکلات",metrics:"سنجه‌ها",empty:"در این پاسخ مشاهده‌ای برای این دسته دریافت نشد؛ این به‌معنی نبود مشکل نیست."}:{all:"All observations",problems:"Problems",metrics:"Metrics",empty:"No observations in this category were returned. This does not prove there are no problems."};
+    const filter=card.dataset.evidenceFilter || "all";
+    if(entries.length){const group=node("div",undefined,"evidence-filters");group.setAttribute("role","group");group.setAttribute("aria-label",t("evidence"));["all","problems","metrics"].forEach(kind=>{const count=entries.filter(e=>kind==="all"||e.category===kind).length;const b=node("button",`${labels[kind]} (${count})`,"quiet-button");b.type="button";b.dataset.evidenceFilter=kind;b.setAttribute("aria-pressed",String(filter===kind));b.addEventListener("click",()=>{activateTurn(b);card.dataset.evidenceFilter=kind;renderRows(card);card.querySelector(`[data-evidence-filter="${kind}"]`).focus();});group.append(b);});list.append(group);}
+    const rows=entries.map((entry,i)=>({entry,i})).filter(({entry})=>filter==="all"||entry.category===filter);
+    rows.forEach(({entry,i})=>{ const b=node("button",undefined,"evidence-row"); b.type="button"; b.dataset.evidenceIndex=String(i); b.setAttribute("aria-current",String(i===selected)); const n=node("span",String(i+1),"evidence-number"); const label=node("span",`${entry.title} · ${entry.value}`,"evidence-label"); label.dir="auto"; const tm=node("time",time(entry.observed || entry.collected)); if(entry.observed) tm.dateTime=entry.observed; b.append(n,label,tm); list.append(b); });
+    if(entries.length&&!rows.length)list.append(node("p",labels.empty,"rail-help"));
     card.querySelector('[data-followup="evidence"]').textContent=`${t("reviewEvidence")} (${entries.length})`;
   }
   function renderFindings(card, evidence, incident) {
@@ -148,7 +153,7 @@
     entries=adapt(evidence,incident,result?.answer_focus || "overview",question); selected=entries.length?0:-1;
     const card=el("resultCard");
     card.querySelector(".user-message").dataset.userInitial=el("profileInitial").textContent;
-    selectedCard=card;turnEvidence.set(card,entries);renderFindings(card,evidence,incident);renderRows(card);
+    selectedCard=card;turnEvidence.set(card,entries);delete card.dataset.evidenceFilter;renderFindings(card,evidence,incident);renderRows(card);
     const summaryForHeader=evidence?(incident?evidence.zabbix.summary:evidence):null;
     text("openedTime",`${t(summaryForHeader?"collected":"completed")} · ${time(summaryForHeader?.collected_at || assistant.completed_at)}`);
     text("sourceContext",summaryForHeader?`${incident?"Zabbix + Linux":"Zabbix"} · ${summaryForHeader.source_id || "primary"} / ${incident?evidence.target_id:summaryForHeader.target_id || summaryForHeader.host}`:t("noLive"));
@@ -161,6 +166,7 @@
     card.querySelector('[data-followup="evidence"]').disabled=!entries.length;
     if(selected>=0)select(selected);else showEmpty();renderTrace(assistant,result,elapsed,saved);
     el("modelStatusLabel").textContent=t("localModel");el("modelStatusLabel").title=assistant.model_id || t("localModel");
+    window.NextOpsCapabilities?.locale(locale);
   }
   function clear() {
     stopFreshnessTimer();
@@ -188,6 +194,7 @@
     el("searchDialog").querySelector("[data-close-dialog]").setAttribute("aria-label",t("closeSearch"));
     el("modelStatusLabel").textContent=t("localModel");
     el("modelStatusLabel").title=model || t("localModel");
+    window.NextOpsCapabilities?.locale(lang);
     if(last)render(last.assistant,last.result,last.question,last.incident,last.elapsed,last.saved);
     else clear();
     if(connectorAvailable!==null){
@@ -212,7 +219,7 @@
     const existing=["investigations","ask","overview"].includes(key);el("workspaceView").classList.toggle("hidden",!existing);el("destinationView").classList.toggle("hidden",existing);
     if(existing){if(moveFocus){if(key==="ask")el("question").focus();else el("workspaceHeading").focus();}return;}
     text("destinationTitle",t(key));let help=t("noCapability");if(key==="knowledge")help=t("knowledgeHelp");if(key==="settings")help=t("settingsHelp");if(key==="support")help=t("supportHelp");if(["infrastructure","connectors"].includes(key))help=t("catalogHelp");text("destinationHelp",help);el("destinationContent").replaceChildren();
-    if(["infrastructure","connectors"].includes(key))catalog.forEach(source=>{const c=node("section",undefined,"destination-card");c.append(node("h2",source.label),node("p",`${source.source_id} · ${t("catalogHelp")}`));if(key==="infrastructure")source.targets.forEach(target=>c.append(node("p",`${target.label} · ${target.target_id}`)));el("destinationContent").append(c);});
+    if(["infrastructure","connectors"].includes(key))catalog.forEach(source=>{const c=node("section",undefined,"destination-card");c.append(node("h2",source.label),node("p",`${source.source_id} · ${t("catalogHelp")}`));source.targets.forEach(target=>{const b=node("button",`${t("reviewEvidence")} · ${target.label}`,"quiet-button");b.type="button";b.dataset.inspectSource=source.source_id;b.dataset.inspectTarget=target.target_id;b.addEventListener("click",()=>document.dispatchEvent(new CustomEvent("nextops:inspect-source",{detail:{source_id:source.source_id,target_id:target.target_id}})));c.append(b);});el("destinationContent").append(c);});
     if(key==="settings"){const b=node("button",el("themeButton").querySelector("span").textContent,"quiet-button");b.type="button";b.addEventListener("click",()=>{el("themeButton").click();b.textContent=el("themeButton").querySelector("span").textContent;});el("destinationContent").append(b);}
     if(moveFocus)el("destinationTitle").focus();
   }
@@ -238,12 +245,12 @@
   el("requestDetailsButton").addEventListener("click",()=>{const details=el("evidenceDetails");if(!el("resultCard").classList.contains("hidden")){details.open=!details.open;el("requestDetailsButton").setAttribute("aria-expanded",String(details.open));if(details.open){details.tabIndex=-1;details.focus();}}});
   // The current contract has one authorized environment, not a cross-environment switch.
   el("environmentSelect").disabled=true;
-  document.addEventListener("click",event=>{if(!event.target.closest("#composerOptions"))el("composerOptions").open=false;if(!event.target.closest("#profileMenu, #usersBack"))el("profileMenu").open=false;});
+  document.addEventListener("click",event=>{if(!event.target.closest("#workspaceInputControls"))el("composerOptions").open=false;if(!event.target.closest("#profileMenu, #usersBack"))el("profileMenu").open=false;});
   document.addEventListener("keydown",event=>{if(event.key==="Escape" && el("composerOptions").open){el("composerOptions").open=false;el("composerOptions").querySelector("summary").focus();}});
   el("usersButton").addEventListener("click",()=>el("destinationView").classList.add("hidden"));
   matchMedia("(min-width:1450px)").addEventListener("change",event=>{if(event.matches&&el("evidenceDialog").open)el("evidenceDialog").close();refreshFreshness();});
   matchMedia("(min-width:1101px)").addEventListener("change",event=>{if(event.matches&&el("navDialog").open)el("navDialog").close();});
-  const modelLabel=node("span",t("localModel"),"model-status-label");modelLabel.id="modelStatusLabel";el("assistantForm").querySelector(".prompt-footer").prepend(modelLabel);
+  const modelLabel=node("button",t("localModel"),"model-status-label");modelLabel.type="button";modelLabel.setAttribute("aria-haspopup","dialog");modelLabel.id="modelStatusLabel";el("assistantForm").querySelector(".prompt-footer").prepend(modelLabel);
   const attachment=node("button",undefined,"icon-button attachment-control");attachment.type="button";attachment.disabled=true;attachment.title=t("attachmentUnavailable");attachment.setAttribute("aria-label",t("attachmentUnavailable"));attachment.append(icon("plus"));el("assistantForm").prepend(attachment);
   document.addEventListener("visibilitychange",refreshFreshness);
   window.addEventListener("pagehide",()=>{pageActive=false;stopFreshnessTimer();});
@@ -255,8 +262,8 @@
   freshnessVisibility.observe(el("inspectorSlot"),{attributes:true,attributeFilter:["class"],childList:true});
   freshnessVisibility.observe(el("evidenceDialog"),{attributes:true,attributeFilter:["open"],childList:true});
   window.NextOpsView={session,setLocale,render,clear,navigate,t,namedUnits,networkGroups,
-    catalog(sources){if(authenticated)catalog=sources;},
-    health(kind,ready){if(!authenticated)return;if(kind==="ai"){model=ready?.model_id || "";el("modelStatusLabel").textContent=t("localModel");el("modelStatusLabel").title=model || t("localModel");}else{connectorAvailable=!!ready;text("connectorValue",t(ready?"reachable":"unavailable"));text("connectorValueHelp",t("engineUnknown"));}},
+    catalog(sources){if(authenticated){catalog=sources;if(["infrastructure","connectors"].includes(destination))navigate(destination,false);}},
+    health(kind,ready){if(!authenticated)return;if(kind==="ai"){model=ready?.model_id || "";el("modelStatusLabel").textContent=t("localModel");el("modelStatusLabel").title=model || t("localModel");}else if(kind==="source-selection"){connectorAvailable=null;text("connectorValue",t("notAvailable"));text("connectorValueHelp",t("catalogHelp"));}else{connectorAvailable=!!ready;text("connectorValue",t(ready?"reachable":"unavailable"));text("connectorValueHelp",t("engineUnknown"));}},
     busy(value){if(value)requestFailed=false;document.body.dataset.requestBusy=String(value);text("investigationState",t(value?"collecting":requestFailed?"failed":last?"completed":"readyToAsk"));},
     failed(){requestFailed=true;text("investigationState",t("failed"));text("investigationValue",t("failed"));},
     archive(original,clone){if(turnEvidence.has(original))turnEvidence.set(clone,turnEvidence.get(original));},

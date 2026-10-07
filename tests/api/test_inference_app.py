@@ -95,6 +95,7 @@ def test_readiness_is_safe_and_client_provider_fields_are_rejected() -> None:
         "model_id",
         "runtime_version",
         "cpu_only_required",
+        "configured_context_tokens",
         "max_active_requests",
         "max_queued_requests",
         "active_requests",

@@ -503,4 +503,5 @@ class LlamaCppProvider:
             model_id=self._settings.model_id,
             runtime_version=self._settings.runtime_version,
             cpu_only_required=True,
+            configured_context_tokens=self._settings.context_tokens,
         )

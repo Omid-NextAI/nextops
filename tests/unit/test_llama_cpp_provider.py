@@ -125,6 +125,7 @@ def test_provider_rejects_wrong_model_and_reports_safe_readiness() -> None:
         readiness = await provider.readiness()
         assert readiness.state is ReadinessState.READY
         assert readiness.cpu_only_required is True
+        assert readiness.configured_context_tokens == 8192
 
     asyncio.run(scenario())
 

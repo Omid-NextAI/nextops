@@ -1,4 +1,21 @@
 /* Product chrome is deliberately independent of OCS corporate brand tokens. */
+.workspace-input-controls{margin-block:16px 8px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);min-width:0}
+.workspace-input-controls .mode-field{margin:0}.workspace-input-controls .mode-help{margin-block:8px 0}
+.workspace-input-controls .choice{min-height:44px}
+.workspace-input-controls .composer-options{position:static;display:block;margin-block-start:8px}
+.workspace-input-controls .composer-options>summary{position:static;width:auto;justify-content:flex-start;min-height:40px}
+.workspace-input-controls .composer-options>summary span{display:inline;position:static;clip:auto;width:auto;height:auto;overflow:visible}
+.workspace-input-controls :is(button,select,summary,input){scroll-margin-block-start:80px}
+.workspace-input-controls .composer-option-panel{position:static;width:100%;max-width:none;max-height:none;margin-block-start:8px}
+.workspace-input-controls .locale-row{position:static;margin-block:0 8px}
+.workspace-input-controls .target-field{margin-block:12px 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.workspace-input-controls .target-field label{grid-row:1}.workspace-input-controls .target-field select{grid-row:2;min-width:0;width:100%;min-height:40px}
+.workspace-input-controls .target-field p,.monitoring-shortcuts{grid-column:1/-1;margin:0}
+.monitoring-shortcuts,.evidence-filters{display:flex;flex-wrap:wrap;gap:8px}.monitoring-shortcuts button{min-height:40px}
+.capabilities-dialog{max-width:min(560px,calc(100% - 24px))}.capabilities-dialog dl{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-block:20px}.capabilities-dialog dd{margin:0;overflow-wrap:anywhere}.capabilities-dialog p{line-height:1.6}.capabilities-dialog h3{font-size:14px;margin-block:16px 4px}
+button.model-status-label{cursor:pointer;background:transparent;border:1px solid var(--line);border-radius:6px;padding:5px 8px;max-width:260px;overflow-wrap:anywhere}
+.evidence-rows{max-height:320px;overflow:auto}.evidence-filters{position:sticky;inset-block-start:0;background:var(--surface);padding-block:8px;z-index:1}.evidence-filters [aria-pressed="true"]{border-color:var(--product-accent);color:var(--product-accent-text)}
+@media(max-width:600px){.workspace-input-controls{padding:10px}.workspace-input-controls .target-field{grid-template-columns:minmax(0,1fr)}.workspace-input-controls .target-field label,.workspace-input-controls .target-field select{grid-row:auto}.capabilities-dialog dl{grid-template-columns:minmax(0,1fr)}.capabilities-dialog dd{margin-block-end:8px}.monitoring-shortcuts button{min-height:44px}}
 body[data-authenticated="true"] {
   --product-accent:#6350D6; --product-accent-text:#5741BD; --product-blue:#356ECA;
   --product-soft:#EFECFC; --focus:#6350D6;

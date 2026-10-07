@@ -433,6 +433,7 @@ function setContextNotice(key) {
 
 function setBusy(busy) {
   window.NextOpsView?.busy(busy);
+  window.NextOpsCapabilities?.busy(busy);
   byId("cancelRequest")?.classList.toggle("hidden", !busy);
   state.busy = busy;
   byId("question").readOnly = busy;
@@ -550,6 +551,7 @@ function installBrandIcon() {
 function applyLanguage(language) {
   state.language = language;
   window.NextOpsView?.setLocale(language);
+  window.NextOpsCapabilities?.locale(language);
   try { localStorage.setItem("nextops-language", language); } catch { /* Tab-only preference. */ }
   document.documentElement.lang = language;
   document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
@@ -600,6 +602,7 @@ async function api(path, options = {}) {
 
 function showLogin(message = "") {
   window.NextOpsView?.session(null);
+  window.NextOpsCapabilities?.reset();
   window.NextOpsMotion?.reset();
   byId("destinationView").classList.add("hidden");
   state.epoch += 1;
@@ -675,6 +678,7 @@ async function showWorkspace() {
     if (epoch !== state.epoch) return;
     state.conversationsEnabled = config.enabled === true;
     state.thinkingEnabled = config.thinking_enabled === true;
+    window.NextOpsCapabilities?.conversation(config);
     byId("savedChatsPanel").classList.toggle("hidden", !state.conversationsEnabled);
     byId("thinkingField").classList.toggle("hidden", !state.thinkingEnabled || state.answerMode !== "general");
     if (state.conversationsEnabled) {
@@ -815,7 +819,25 @@ async function loadSourceCatalog() {
   populateSourceTargets();
   window.NextOpsView?.catalog(state.sourceCatalog);
 }
-byId("monitoringSource").addEventListener("change", populateSourceTargets);
+byId("monitoringSource").addEventListener("change", () => {
+  populateSourceTargets();
+  window.NextOpsCapabilities?.sourceSelection();
+  if (!byId("monitoringSource").value) checkMonitoring();
+});
+byId("monitoringSourceTarget").addEventListener("change", () => window.NextOpsCapabilities?.sourceSelection());
+document.addEventListener("nextops:inspect-source", event => {
+  if (state.busy || !state.token) return;
+  const { source_id, target_id } = event.detail || {};
+  const source = state.sourceCatalog.find(item => item.source_id === source_id);
+  if (!source?.targets.some(item => item.target_id === target_id)) return;
+  window.NextOpsView?.navigate("ask", false);
+  setAnswerMode("monitoring");
+  byId("monitoringSource").value = source_id;
+  populateSourceTargets();
+  byId("monitoringSourceTarget").value = target_id;
+  window.NextOpsCapabilities?.sourceSelection();
+  document.querySelector('[data-monitoring-shortcut="problems"]').click();
+});
 
 async function loadIncidentTargets() {
   const epoch = state.epoch;
@@ -846,6 +868,7 @@ async function checkAi() {
     const ready = await api("/api/v1/assistant/ready");
     if (epoch !== state.epoch || !state.token) return;
     window.NextOpsView?.health("ai", ready);
+    window.NextOpsCapabilities?.ready(ready);
     const ok = ready.state === "ready";
     const statusKey = ok ? "aiReady" : "aiUnavailable";
     pill.className = `status-pill ${ok ? "ready" : "failed"}`;
@@ -854,6 +877,7 @@ async function checkAi() {
   } catch (_) {
     if (epoch !== state.epoch || !state.token) return;
     window.NextOpsView?.health("ai", null);
+    window.NextOpsCapabilities?.ready(null);
     pill.className = "status-pill failed";
     pill.querySelector("span").dataset.i18n = "aiUnavailable";
     pill.querySelector("span").textContent = translations[state.language].aiUnavailable;
@@ -865,7 +889,7 @@ async function checkMonitoring() {
   const pill = byId("monitoringStatus");
   try {
     const summary = await api("/api/v1/monitoring/summary");
-    if (epoch !== state.epoch || !state.token) return;
+    if (epoch !== state.epoch || !state.token || byId("monitoringSource").value) return;
     window.NextOpsView?.health("connector", summary);
     const ok = summary.source === "zabbix";
     const statusKey = ok ? "monitoringReady" : "monitoringUnavailable";
@@ -873,7 +897,7 @@ async function checkMonitoring() {
     pill.querySelector("span").dataset.i18n = statusKey;
     pill.querySelector("span").textContent = translations[state.language][statusKey];
   } catch (_) {
-    if (epoch !== state.epoch || !state.token) return;
+    if (epoch !== state.epoch || !state.token || byId("monitoringSource").value) return;
     window.NextOpsView?.health("connector", null);
     pill.className = "status-pill failed";
     pill.querySelector("span").dataset.i18n = "monitoringUnavailable";
@@ -1290,6 +1314,10 @@ byId("assistantForm").addEventListener("submit", async event => {
     if (evidenceBacked) {
       if (incident) renderIncidentEvidence(result.evidence, result.answer_focus || "overview", question);
       else renderEvidence(result.evidence);
+      if (monitoring && payload.source_id) {
+        window.NextOpsCapabilities?.sourceHealth("sourceReady");
+        window.NextOpsView?.health("connector", result.evidence);
+      }
       state.lastEvidence = { evidence: result.evidence, incident, focus: result.answer_focus || "overview", question };
       updateEvidenceBrief();
       byId("evidenceBrief").classList.remove("hidden");
@@ -1311,6 +1339,7 @@ byId("assistantForm").addEventListener("submit", async event => {
       } else rememberGeneralTurn(payload.question, assistant);
     }
     window.NextOpsView?.render(assistant, evidenceBacked ? result : null, payload.question, incident, performance.now() - started);
+    window.NextOpsCapabilities?.locale(state.language);
     byId("conversationWelcome").classList.add("hidden");
     byId("resultCard").classList.remove("hidden");
     byId("question").value = "";
@@ -1329,6 +1358,10 @@ byId("assistantForm").addEventListener("submit", async event => {
     if (error.status === 401) showLogin(translations[state.language].sessionExpired);
     else if (error.message === "incident.target_missing") errorNode.textContent = translations[state.language].noIncidentTargets;
     else errorNode.textContent = error.name === "AbortError" ? window.NextOpsView.t("cancelNotice") : safeRequestError(error);
+    if (state.answerMode === "monitoring" && byId("monitoringSource").value && error.name !== "AbortError" && error.status !== 401) {
+      window.NextOpsCapabilities?.sourceHealth("sourceFailed");
+      window.NextOpsView?.health("source-selection", null);
+    }
     window.NextOpsView?.failed();
   } finally {
     if (activeRequest === requestController) activeRequest = null;
