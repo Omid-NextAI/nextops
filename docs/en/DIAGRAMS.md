@@ -70,17 +70,17 @@ sequenceDiagram
         API->>AI: Question + sanitized evidence + bounded budget
         AI-->>API: Successful final answer
         API->>API: Deterministic answer-integrity checks
-        API->>DB: Recheck current access; atomically commit result/hash/audit
+        API->>DB: Recheck current access and atomically commit result/hash/audit
         alt Current access and mandatory audit commit succeed
             DB-->>API: Committed authorized result
             API-->>User: Answer + source/time/scope and limitations
         else Access revoked or required audit fails
             DB-->>API: Denial or dependency failure
-            API-->>User: Explicit error; no result disclosure
+            API-->>User: Explicit error without result disclosure
         end
     else Missing/denied/failed dependency
         API->>DB: Mandatory bounded failure audit
-        API-->>User: Explicit limitation/error; no invented healthy evidence
+        API-->>User: Explicit limitation/error without invented healthy evidence
     end
 ```
 
