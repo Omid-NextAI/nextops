@@ -1,6 +1,6 @@
 # NextOps Markdown context index
 
-Updated: 2026-10-07
+Updated: 2026-10-31
 
 This is the durable inventory and routing map for project-owned Markdown. It lets an agent remember
 that every document exists without flooding each task with every file. The documentation validator
@@ -20,6 +20,7 @@ remaining task-specific sources. The repository skill
 
 | Task | Read before acting |
 |---|---|
+| Active Splunk/Zabbix monitoring with webhooks | `docs/requirements/ACTIVE_MONITORING_WEBHOOK_SPEC.md`, paired `ACTIVE_MONITORING_WEBHOOKS.md`, current architecture/MCP/security/offline/data contracts and private source handoff; proposed documentation only, no active receiver or deployment |
 | Requirements, scope, or acceptance | `docs/requirements/NEXTOPS_MASTER_PROMPT.md`, `PROMPT_CHANGELOG.md`, `TRACEABILITY.md`, relevant amendment, and the archive only for original non-conflicting detail |
 | Architecture or public interfaces | current `docs/en/ARCHITECTURE.md`, `TECH_STACK.md`, C1–C3 in `DIAGRAMS.md`, current manifest, relevant ADRs, `DATA_API.md`, `MCP.md`, `SECURITY.md`, and Persian pairs; distinguish preserved future diagrams from deployed paths |
 | Application or database code | `docs/en/DEVELOPMENT.md`, `DATA_API.md`, `TESTING.md`, current state/next task, source contracts, migrations, and neighboring tests |
@@ -43,6 +44,10 @@ remaining task-specific sources. The repository skill
 | Release or GitHub workflow | `CONTRIBUTING.md`, `CHANGELOG.md`, `SECURITY.md`, `docs/en/DEVELOPMENT.md`, test guide, and GitHub templates |
 
 ## Complete inventory
+
+- `docs/requirements/ACTIVE_MONITORING_WEBHOOK_SPEC.md` — Bilingual proposed active-monitoring requirements, work packages and 32 explicitly not-run runtime gates.
+- `docs/en/ACTIVE_MONITORING_WEBHOOKS.md` — Detailed proposed Splunk/Zabbix team handoff, ingress/MCP boundaries, payload/authentication, durability, reconciliation, limits, runbooks and rollback.
+- `docs/fa/ACTIVE_MONITORING_WEBHOOKS.md` — Persian counterpart and team-facing active-monitoring handoff; no implementation or deployment claim.
 
 - `docs/requirements/AUDIT_REPAIR_2026-10-07.md` — Bilingual bounded audit-repair requirements, regression strategy, multi-role code-only rollout, rollback and retained acceptance limits.
 - `docs/requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md` — Bilingual exact multi-role audit-repair rollout, preserved failed candidate, real EN/FA evidence/audit and all-role rollback proof; native model and unaccepted gates unchanged.

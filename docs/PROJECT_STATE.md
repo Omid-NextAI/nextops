@@ -1,5 +1,21 @@
 # Project state / وضعیت پروژه
 
+Documentation-only checkpoint, **2026-10-31**: the owner requested a complete Git-hosted team handoff
+for active Splunk/Zabbix monitoring with webhooks. Paired [EN](en/ACTIVE_MONITORING_WEBHOOKS.md)/
+[FA](fa/ACTIVE_MONITORING_WEBHOOKS.md) guides and the [feature packet](requirements/ACTIVE_MONITORING_WEBHOOK_SPEC.md)
+define proposed source authentication, ingress/MCP isolation, canonical events, atomic inbox/audit/jobs,
+reconciliation, bounded shared inference, EN/FA incidents and rollback. All 32 runtime gates are
+`not_run`; no receiver, Splunk adapter, worker, migration, credentials, source actions, server/model
+change or live acceptance is delivered. Historical deployment records and the release manifest are
+unchanged. This documentation branch is based on published main, not an experimental source branch.
+
+گام **فقط مستندات، ۳۱ اکتبر ۲۰۲۶**: به درخواست مالک، سند تحویل کامل تیم برای پایش فعال با
+Webhookهای Splunk/Zabbix در Git آماده شد. دو راهنمای بالا و پروندهٔ نیازمندی، احراز منبع، مرز
+ورودی/MCP، رخداد استاندارد، ثبت اتمی inbox/ممیزی/کار، تطبیق، سقف مدل مشترک، پنل دوزبانه و بازگشت
+را پیشنهاد می‌کنند. هر ۳۲ معیار زمان اجرا `not_run` است؛ گیرنده، adapter، worker، migration،
+اعتبارنامه، action منبع یا تغییر سرور/مدل و پذیرش زنده تحویل نشده است. سابقه و manifest ثابت‌اند؛
+شاخهٔ مستندات از main منتشرشده ساخته شده، نه شاخهٔ کد آزمایشی.
+
 Documentation checkpoint, **2026-10-07**: the owner requested GitHub synchronization and the
 current system design. Paired architecture/stack/diagrams/MCP/development/status guides now
 describe retained `52e5179`, actual static UI and the deployed gateway/isolated runner. Three
