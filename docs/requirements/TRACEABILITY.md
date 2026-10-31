@@ -1,5 +1,20 @@
 # Original-requirement traceability / ردیابی نیازهای اولیه
 
+## Active-monitoring design handoff, 2026-10-31 / تحویل طراحی پایش فعال
+
+The owner-requested webhook handoff maps the active master specification's durable workflow,
+MCP/source boundaries, typed data/API, offline operation, observability and testing requirements to
+[AW-R01–AW-R12 and AW-01–AW-32](ACTIVE_MONITORING_WEBHOOK_SPEC.md), with paired
+[EN](../en/ACTIVE_MONITORING_WEBHOOKS.md)/[FA](../fa/ACTIVE_MONITORING_WEBHOOKS.md) implementation guidance.
+This is proposed documentation only. All feature runtime gates remain `not_run`; existing acceptance,
+source permissions, releases, model caps and recovery status are unchanged.
+
+سند درخواستی مالک، الزامات گردش‌کار ماندگار، مرز MCP/منبع، داده/API دارای نوع، آفلاین، مشاهده‌پذیری
+و آزمون پرامپت فعال را به شناسه‌های بالا و راهنمای جفت متصل می‌کند. فقط طراحی پیشنهادی است؛
+همهٔ معیارهای زمان اجرای قابلیت `not_run`، و پذیرش، مجوز، انتشار، سقف مدل و بازیابی موجود ثابت‌اند.
+
+## Earlier traceability records / سوابق پیشین ردیابی
+
 Documentation-only current-design alignment (2026-10-07) maps the retained audit-repair record
 and current manifest to the EN/FA architecture, stack, C1–C3 diagrams, MCP, development and status
 guides. Seven future diagrams and historical snapshots remain labeled and preserved. No original

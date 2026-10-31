@@ -1,5 +1,20 @@
 # Next task / کار بعدی
 
+Active-monitoring documentation handoff, **2026-10-31**: the requested design is in the paired
+[team guide](en/ACTIVE_MONITORING_WEBHOOKS.md) / [راهنمای تیم](fa/ACTIVE_MONITORING_WEBHOOKS.md) and
+[bounded packet](requirements/ACTIVE_MONITORING_WEBHOOK_SPEC.md). The next checkpoint for this feature
+is AW-P0: obtain the source teams' private version/endpoint/authentication/data-scope handoff and
+resolve the proposed budgets, ownership and pilot decisions. Implementation, migrations, network,
+source actions and deployment need separately scoped authorization and the AW-01–AW-32 evidence.
+Do not activate sample routes or treat documentation checks as runtime acceptance. This supplement
+does not cancel the unfinished model/security/recovery tasks recorded below.
+
+تحویل مستندات پایش فعال، **۳۱ اکتبر ۲۰۲۶**: طراحی در دو راهنما و پروندهٔ بالا است. گام بعد این
+قابلیت AW-P0 است: نسخه/endpoint/احراز/دامنهٔ خصوصی از تیم‌ها گرفته و بودجه، مسئول‌ها و pilot
+تعیین شوند. پیاده‌سازی، migration، شبکه، action منبع و استقرار، مجوز محدود جدا و شاهد معیارهای
+AW-01 تا AW-32 می‌خواهند. مسیر نمونه فعال و نتیجهٔ بررسی سند، پذیرش زمان اجرا تلقی نشود.
+این پیوست، کار ناتمام مدل/امنیت/بازیابیِ پایین را حذف نمی‌کند.
+
 Completed owner-authorized checkpoint, **2026-10-07**: twelve source audit repairs are retained
 as exact `52e5179` on app/API/MCP, with matching existing collectors. Preserve
 [the all-four live qualification](requirements/AUDIT_REPAIR_LIVE_QUALIFICATION_2026-10-07.md),

@@ -2,6 +2,11 @@
 
 [فارسی](../fa/INDEX.md) · [Home](../../README.md) · [Start here](START_HERE.md)
 
+**New design handoff, 2026-10-31:** [active monitoring with Splunk/Zabbix webhooks](ACTIVE_MONITORING_WEBHOOKS.md)
+covers source-team prerequisites, authentication, message contracts, durable work, MCP enrichment,
+limits, qualification and rollback. It is a proposed design, not a deployed capability or a new
+release-status claim. [Shared requirements and gates](../requirements/ACTIVE_MONITORING_WEBHOOK_SPEC.md).
+
 **Current update: 2026-10-07.** App `48e3a8a` is retained with the OCS static login/compact UI;
 AI API `ec1ed32`, Qwen3.8-27B Q8/CPU and MCP remain unchanged. Real browser, audit and exact app
 rollback passed; an intermittent model timeout and quality/thinking/context/current WAN/VM/load
